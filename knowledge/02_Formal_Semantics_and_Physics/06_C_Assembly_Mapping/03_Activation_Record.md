@@ -482,6 +482,68 @@ void safe(char *input) {
 - [x] 包含常见陷阱及解决方案
 - [x] 引用System V ABI和Intel SDM
 
+### 6.3 尾调用优化
+
+```c
+// 尾调用优化（TCO）
+// 函数最后操作是调用另一个函数时，可以复用当前栈帧
+
+// 无尾调用优化
+int factorial_recursive(int n) {
+    if (n <= 1) return 1;
+    return n * factorial_recursive(n - 1);  // 需要保存n
+}
+
+// 尾递归形式
+int factorial_tail(int n, int acc) {
+    if (n <= 1) return acc;
+    return factorial_tail(n - 1, n * acc);  // 尾调用
+}
+
+// 汇编对比（尾调用优化后）
+/*
+无优化：
+    push rbp
+    mov rbp, rsp
+    sub rsp, 16
+    ...
+    call factorial_recursive
+    add rsp, 16
+    pop rbp
+    ret
+
+有TCO：
+    ; 复用当前栈帧
+    mov edi, n-1
+    mov esi, n*acc
+    jmp factorial_tail  ; 不是call！
+*/
+```
+
+### 6.4 栈帧大小的确定
+
+```c
+// 编译器如何计算栈帧大小
+
+void example_frame(void) {
+    int a;           // 4字节，偏移 -4
+    double b;        // 8字节，偏移 -16（对齐到8字节）
+    char c;          // 1字节，偏移 -17
+    int d[10];       // 40字节，偏移 -64（对齐到16字节）
+    // 填充：7字节到 -64
+
+    // 总栈帧大小：64字节（16字节对齐）
+    // 加上保存的寄存器：
+    // - 返回地址：8字节
+    // - 旧RBP：8字节
+    // - 被调用者保存寄存器：按需
+}
+
+// GCC可以输出栈使用量
+// -fstack-usage
+// 生成.su文件显示每个函数的栈使用
+```
+
 ---
 
 > **更新记录**

@@ -396,6 +396,72 @@ if (status == STATUS_COMPLETED) {
 - [x] 包含常见陷阱及解决方案
 - [x] 引用认知心理学和软件工程权威文献
 
+### 5.3 代码可读性度量
+
+```c
+// 代码可读性评估工具
+
+typedef struct {
+    int line_count;
+    int comment_ratio;      // 注释行数/总行数
+    int avg_identifier_len; // 平均标识符长度
+    int nesting_depth;      // 最大嵌套深度
+    int function_count;     // 函数数量
+    int cyclomatic;         // 圈复杂度
+} ReadabilityMetrics;
+
+// 计算可读性分数
+double calculate_readability(ReadabilityMetrics *m) {
+    double score = 100.0;
+
+    // 行数惩罚
+    if (m->line_count > 500) score -= 10;
+    if (m->line_count > 1000) score -= 20;
+
+    // 注释比例（理想：15-30%）
+    if (m->comment_ratio < 10) score -= 15;
+    if (m->comment_ratio > 40) score -= 5;
+
+    // 嵌套深度惩罚
+    if (m->nesting_depth > 4) score -= (m->nesting_depth - 4) * 5;
+
+    // 圈复杂度惩罚
+    if (m->cyclomatic > 10) score -= (m->cyclomatic - 10) * 2;
+
+    return score < 0 ? 0 : score;
+}
+```
+
+### 5.4 心智模型验证
+
+```c
+// 验证代码是否符合预期心智模型
+
+// 代码走查检查清单
+typedef struct {
+    const char *check;
+    bool passed;
+    const char *notes;
+} ModelCheck;
+
+ModelCheck mental_model_checks[] = {
+    {"函数名准确描述功能", false, ""},
+    {"参数顺序符合直觉", false, ""},
+    {"返回值语义清晰", false, ""},
+    {"错误处理可预测", false, ""},
+    {"资源生命周期明确", false, ""},
+    {"并发行为可理解", false, ""},
+};
+
+// 新团队成员快速理解测试
+void new_developer_test(void) {
+    // 1. 给新成员API文档（无实现代码）
+    // 2. 让他们预测函数行为
+    // 3. 对比实际实现
+    // 4. 偏差 = 心智模型不匹配
+}
+```
+
 ---
 
 > **更新记录**

@@ -483,6 +483,80 @@ TwoQubitState state = { .amp = {1, 0, 0, 0} };  // |00⟩
 - [x] 包含常见陷阱及解决方案
 - [x] 引用Nielsen & Chuang等权威教材
 
+### 5.5 量子傅里叶变换(QFT)
+
+```c
+// 量子傅里叶变换实现
+// QFT是Shor算法的核心组件
+
+void apply_qft(Qubit *qubits, int n) {
+    for (int i = 0; i < n; i++) {
+        // Hadamard门
+        apply_hadamard(&qubits[i]);
+
+        // 控制旋转门
+        for (int j = i + 1; j < n; j++) {
+            double angle = M_PI / (1 << (j - i));
+            apply_controlled_rotation(&qubits[i], &qubits[j], angle);
+        }
+    }
+
+    // 反转量子比特顺序
+    for (int i = 0; i < n / 2; i++) {
+        swap_qubits(&qubits[i], &qubits[n - 1 - i]);
+    }
+}
+
+// 逆QFT
+void apply_inverse_qft(Qubit *qubits, int n) {
+    // 先反转
+    for (int i = 0; i < n / 2; i++) {
+        swap_qubits(&qubits[i], &qubits[n - 1 - i]);
+    }
+
+    // 应用共轭转置
+    for (int i = n - 1; i >= 0; i--) {
+        for (int j = n - 1; j > i; j--) {
+            double angle = -M_PI / (1 << (j - i));
+            apply_controlled_rotation(&qubits[i], &qubits[j], angle);
+        }
+        apply_hadamard(&qubits[i]);
+    }
+}
+```
+
+### 5.6 量子纠缠与贝尔不等式
+
+```c
+// 贝尔态测试
+// 验证量子纠缠的非定域性
+
+void bell_inequality_test(void) {
+    int counts[4][4] = {0};  // 四种测量设置的结果
+
+    for (int trial = 0; trial < 10000; trial++) {
+        // 创建贝尔态
+        TwoQubitState bell = create_bell_state();
+
+        // Alice和Bob的随机测量角度
+        double theta_a = (rand() % 4) * M_PI / 4;  // 0, 45, 90, 135度
+        double theta_b = (rand() % 4) * M_PI / 4;
+
+        // 模拟测量（简化）
+        int result_a = measure_at_angle(&bell, 0, theta_a);
+        int result_b = measure_at_angle(&bell, 1, theta_b);
+
+        // 记录结果
+        counts[(int)(theta_a * 4 / M_PI)][(int)(theta_b * 4 / M_PI)]++;
+    }
+
+    // 计算CHSH值
+    // S = |E(a,b) - E(a,b') + E(a',b) + E(a',b')|
+    // 量子力学预测：S = 2√2 ≈ 2.828
+    // 经典界限：S ≤ 2
+}
+```
+
 ---
 
 > **更新记录**

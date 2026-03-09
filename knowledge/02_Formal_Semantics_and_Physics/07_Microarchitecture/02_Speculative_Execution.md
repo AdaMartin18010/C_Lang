@@ -115,7 +115,7 @@ void vulnerable_function(size_t index, uint8_t *data) {
     if (index < array_size) {
         // 推测执行：即使index越界，也可能执行
         uint8_t value = data[index];  // 越界读取
-        
+
         // 访问模式依赖于越界读取的值
         // 导致secret_data被加载到缓存
         temp &= public_data[value * 4096];
@@ -201,9 +201,9 @@ set_up_target:
 void meltdown_exploit(void *kernel_addr) {
     // 权限检查与内存加载并行执行
     // 权限检查失败，但加载结果已进入缓存
-    
+
     uint8_t value = *(uint8_t *)kernel_addr;  // 权限错误，但...
-    
+
     // 利用缓存侧信道提取value
     temp &= probe_array[value * 4096];
 }
@@ -239,11 +239,11 @@ int constant_time_memcmp(const void *a, const void *b, size_t len) {
     const uint8_t *pa = a;
     const uint8_t *pb = b;
     uint8_t result = 0;
-    
+
     for (size_t i = 0; i < len; i++) {
         result |= pa[i] ^ pb[i];  // 始终访问所有字节
     }
-    
+
     return result;  // 0表示相等，非0表示不等
 }
 
@@ -289,7 +289,7 @@ uint8_t copy_then_access(uint8_t *arr, size_t len, size_t index) {
     uint8_t local[256] = {0};
     size_t copy_len = len < 256 ? len : 256;
     memcpy(local, arr, copy_len);
-    
+
     if (index < 256) {
         return local[index];  // 总是安全的
     }
@@ -338,7 +338,7 @@ void spectre_safe_check(void) {
     if (atomic_load_explicit(&flag, memory_order_acquire)) {
         // 确保之前的所有操作完成
         _mm_lfence();  // 额外保护
-        
+
         // 现在安全地访问secret
         use(secret);
     }
@@ -421,6 +421,59 @@ void safe_example(int *ptr) {
 - [x] 包含屏障指令和序列化
 - [x] 包含常见陷阱及解决方案
 - [x] 引用Kocher等Spectre论文和Intel文档
+
+### 5.3 编译器防护选项
+
+```c
+// GCC/Clang防护选项
+
+// -mspeculative-load-hardening
+// 自动为所有加载添加推测屏障
+
+// -mindirect-branch=thunk
+// 使用跳转thunk防止Spectre V2
+
+// -mindirect-branch-loop
+// 禁用间接分支的推测执行
+
+// 示例：使用编译器属性防护特定函数
+__attribute__((speculative_load_hardening))
+void critical_function(const uint8_t *data, size_t len, size_t offset) {
+    if (offset < len) {
+        // 编译器自动插入防护代码
+        process(data[offset]);
+    }
+}
+```
+
+### 5.4 微码更新检测
+
+```c
+// 检查CPU微码版本和缓解状态
+
+#include <cpuid.h>
+
+void check_mitigation_status(void) {
+    // 检查IBPB (Indirect Branch Predictor Barrier)
+    // 检查IBRS (Indirect Branch Restricted Speculation)
+    // 检查STIBP (Single Thread Indirect Branch Predictors)
+
+    uint32_t eax, ebx, ecx, edx;
+
+    // 检查ARCH_CAPABILITIES MSR
+    __get_cpuid(7, &eax, &ebx, &ecx, &edx);
+    bool has_arch_caps = edx & (1 << 29);
+
+    if (has_arch_caps) {
+        printf("CPU支持ARCH_CAPABILITIES MSR\n");
+        // 可以查询具体的缓解能力
+    }
+}
+
+// Linux下查看缓解状态
+// $ cat /proc/cpuinfo | grep bugs
+// bugs : cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs
+```
 
 ---
 

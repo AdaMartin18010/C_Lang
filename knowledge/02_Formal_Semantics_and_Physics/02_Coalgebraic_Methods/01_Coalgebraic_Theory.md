@@ -403,6 +403,174 @@ Stream *nats_from(int n) {
 - [x] 包含Mermaid概念关系图
 - [x] 引用Rutten、Jacobs等权威文献
 
+### 4.3 模态逻辑的Coalgebraic语义
+
+```c
+// Hennessy-Milner逻辑作为余代数
+
+// 模态公式
+typedef struct Formula {
+    enum {
+        FORM_TRUE,
+        FORM_FALSE,
+        FORM_AND,
+        FORM_OR,
+        FORM_NOT,
+        FORM_DIAMOND,  // <a>φ
+        FORM_BOX       // [a]φ
+    } type;
+    union {
+        struct { struct Formula *left; struct Formula *right; } binary;
+        struct Formula *unary;
+        struct { char *action; struct Formula *inner; } modal;
+    } data;
+} Formula;
+
+// 满足关系检查
+bool satisfies(LTSState *state, Formula *formula) {
+    switch (formula->type) {
+        case FORM_TRUE:  return true;
+        case FORM_FALSE: return false;
+        case FORM_AND:
+            return satisfies(state, formula->data.binary.left) &&
+                   satisfies(state, formula->data.binary.right);
+        case FORM_OR:
+            return satisfies(state, formula->data.binary.left) ||
+                   satisfies(state, formula->data.binary.right);
+        case FORM_NOT:
+            return !satisfies(state, formula->data.unary);
+        case FORM_DIAMOND: {
+            // <a>φ : 存在a转移到达满足φ的状态
+            char *a = formula->data.modal.action;
+            Formula *phi = formula->data.modal.inner;
+            for (LTSTransition *t = state->transitions; t; t = t->next) {
+                if (strcmp(t->action, a) == 0 && satisfies(t->target, phi)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        case FORM_BOX: {
+            // [a]φ : 所有a转移都到达满足φ的状态
+            char *a = formula->data.modal.action;
+            Formula *phi = formula->data.modal.inner;
+            for (LTSTransition *t = state->transitions; t; t = t->next) {
+                if (strcmp(t->action, a) == 0 && !satisfies(t->target, phi)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+    return false;
+}
+```
+
+### 4.4 余代数与同构不变性
+
+```c
+// 行为等价性的应用
+
+// 优化保持语义：如果两个程序行为等价，可以安全替换
+bool safe_to_replace(LTSState *p, LTSState *q, Formula *spec) {
+    // 检查是否行为等价
+    if (!bisimilar(p, q)) return false;
+
+    // 检查是否满足相同规格
+    return satisfies(p, spec) == satisfies(q, spec);
+}
+
+// 程序变换正确性
+void apply_semantics_preserving_transform(LTSState *program) {
+    // 应用已知保持行为等价的变换
+    // 如：死代码消除、常量传播等
+}
+```
+
+### 4.5 余代数在类型系统中的应用
+
+```c
+// 递归类型作为余代数
+
+// 列表类型作为余代数
+// List(A) = 1 + A × List(A)
+
+typedef struct List List;
+struct List {
+    bool is_nil;
+    union {
+        struct { int head; List *tail; } cons;
+    } data;
+};
+
+// 观察函数（余代数结构）
+typedef struct {
+    bool is_empty;
+    int head;
+    List *tail;
+} ListObservation;
+
+ListObservation observe_list(List *list) {
+    ListObservation obs;
+    obs.is_empty = list->is_nil;
+    if (!list->is_nil) {
+        obs.head = list->data.cons.head;
+        obs.tail = list->data.cons.tail;
+    }
+    return obs;
+}
+
+// 余代数展开
+void unfold_list(List **result,
+                 void *state,
+                 ListObservation (*step)(void *)) {
+    ListObservation obs = step(state);
+    if (obs.is_empty) {
+        *result = NULL;
+    } else {
+        List *node = malloc(sizeof(List));
+        node->is_nil = false;
+        node->data.cons.head = obs.head;
+        unfold_list(&node->data.cons.tail, obs.tail, step);
+        *result = node;
+    }
+}
+```
+
+### 4.6 余代数与函数式编程
+
+```c
+// 余代数模式在C中的函数式实现
+
+// Anamorphism（展开）
+typedef struct {
+    void *(*coalgebra)(void *);
+    void *seed;
+} Unfold;
+
+// Catamorphism（折叠）
+typedef struct {
+    void *(*algebra)(void *, void *);
+    void *initial;
+} Fold;
+
+// 结合两者：Hylomorphism
+void *hylo(Fold *fold, Unfold *unfold) {
+    // 先展开再折叠，不构建中间结构
+    void *state = unfold->seed;
+    void *acc = fold->initial;
+
+    while (1) {
+        void *next = unfold->coalgebra(state);
+        if (next == NULL) break;
+        acc = fold->algebra(acc, next);
+        state = next;
+    }
+
+    return acc;
+}
+```
+
 ---
 
 > **更新记录**

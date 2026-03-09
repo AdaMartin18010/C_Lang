@@ -456,6 +456,88 @@ void process_all_files_good(FileList *files) {
 - [x] 包含常见陷阱及解决方案
 - [x] 引用具身认知和调试研究的权威文献
 
+### 5.3 调试工具链设计
+
+```c
+// 完整的调试支持基础设施
+
+// 断点管理
+typedef struct {
+    void *address;
+    uint8_t saved_byte;  // 保存的原始指令
+    bool enabled;
+} Breakpoint;
+
+// 设置断点（INT 3指令，0xCC）
+bool set_breakpoint(Breakpoint *bp) {
+    uint8_t int3 = 0xCC;
+    // 保存原字节
+    bp->saved_byte = *(uint8_t *)bp->address;
+    // 写入INT 3
+    memcpy(bp->address, &int3, 1);
+    bp->enabled = true;
+    return true;
+}
+
+// 移除断点
+bool remove_breakpoint(Breakpoint *bp) {
+    if (!bp->enabled) return false;
+    // 恢复原字节
+    memcpy(bp->address, &bp->saved_byte, 1);
+    bp->enabled = false;
+    return true;
+}
+
+// 单步执行实现（x86 EFLAGS.TF）
+void enable_single_step(void) {
+    __asm__ volatile(
+        "pushf\n\t"
+        "orl $0x100, (%rsp)\n\t"  // 设置陷阱标志
+        "popf\n\t"
+    );
+}
+```
+
+### 5.4 认知辅助调试
+
+```c
+// 帮助理解程序状态的工具
+
+// 内存变化追踪
+void track_memory_changes(void *addr, size_t size, const char *name) {
+    static uint8_t snapshot[1024];
+    memcpy(snapshot, addr, size);
+
+    // 后续检查变化
+    for (size_t i = 0; i < size; i++) {
+        if (snapshot[i] != ((uint8_t *)addr)[i]) {
+            printf("%s[%zu]: 0x%02x -> 0x%02x\n",
+                   name, i, snapshot[i], ((uint8_t *)addr)[i]);
+        }
+    }
+}
+
+// 执行路径记录
+#define MAX_TRACE 10000
+typedef struct {
+    const char *func;
+    const char *file;
+    int line;
+    double timestamp;
+} TraceEntry;
+
+TraceEntry execution_trace[MAX_TRACE];
+int trace_index = 0;
+
+#define TRACE() do { \
+    if (trace_index < MAX_TRACE) { \
+        execution_trace[trace_index++] = (TraceEntry){ \
+            __func__, __FILE__, __LINE__, get_timestamp() \
+        }; \
+    } \
+} while(0)
+```
+
 ---
 
 > **更新记录**
