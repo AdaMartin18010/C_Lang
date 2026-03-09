@@ -62,7 +62,7 @@ int square(int x) __attribute__((pure));
 int max(int a, int b) __attribute__((const));
 
 // 格式化检查
-void log_message(const char *fmt, ...) 
+void log_message(const char *fmt, ...)
     __attribute__((format(printf, 1, 2)));
 
 // 已废弃
@@ -157,7 +157,7 @@ static inline int atomic_xchg(int *ptr, int newval) {
 #define memory_barrier() __asm__ __volatile__ ("" ::: "memory")
 
 // CPUID
-static inline void cpuid(uint32_t *eax, uint32_t *ebx, 
+static inline void cpuid(uint32_t *eax, uint32_t *ebx,
                          uint32_t *ecx, uint32_t *edx) {
     __asm__ (
         "cpuid"
@@ -327,4 +327,5 @@ __asm__("movl %[in], %[out]"
 ---
 
 > **更新记录**
+>
 > - 2025-03-09: 初版创建

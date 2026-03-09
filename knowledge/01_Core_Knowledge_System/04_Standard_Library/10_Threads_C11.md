@@ -57,16 +57,16 @@ int worker_thread(void *arg) {
 int main(void) {
     thrd_t threads[4];
     int ids[4] = {0, 1, 2, 3};
-    
+
     for (int i = 0; i < 4; i++) {
         thrd_create(&threads[i], worker_thread, &ids[i]);
     }
-    
+
     for (int i = 0; i < 4; i++) {
         int result;
         thrd_join(threads[i], &result);
     }
-    
+
     return 0;
 }
 ```
@@ -125,4 +125,5 @@ int producer(void *arg) {
 ---
 
 > **更新记录**
+>
 > - 2025-03-09: 初版创建

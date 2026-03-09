@@ -61,7 +61,7 @@ struct Pair {      // bool × bool = 4种值
     bool second;
 };
 
-// 和类型: A + B  
+// 和类型: A + B
 // 基数 = |A| + |B|
 enum EitherTag { LEFT, RIGHT };
 struct Either {    // bool + char = 2 + 256 = 258
@@ -162,7 +162,7 @@ struct Tree {
 
 // 四个可能的函数:
 bool f1(bool x) { return true; }   // const true
-bool f2(bool x) { return false; }  // const false  
+bool f2(bool x) { return false; }  // const false
 bool f3(bool x) { return x; }      // identity
 bool f4(bool x) { return !x; }     // negation
 
@@ -219,4 +219,5 @@ union IntOrFloat {
 ---
 
 > **更新记录**
+>
 > - 2025-03-09: 初版创建

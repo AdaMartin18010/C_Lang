@@ -1,9 +1,9 @@
 # Coq形式化验证基础
 
-> **层级定位**: 05 Deep Structure MetaPhysics / 03 Verification Energy  
-> **对应标准**: Coq 8.18+, Mathematical Components  
-> **难度级别**: L6 创造  
-> **预估学习时间**: 30+ 小时  
+> **层级定位**: 05 Deep Structure MetaPhysics / 03 Verification Energy
+> **对应标准**: Coq 8.18+, Mathematical Components
+> **难度级别**: L6 创造
+> **预估学习时间**: 30+ 小时
 
 ---
 
@@ -173,10 +173,10 @@ Theorem and_comm : forall P Q : Prop, P /\ Q -> Q /\ P.
 Proof.
   (* 引入假设 *)
   intros P Q H.
-  
+
   (* 分解合取 *)
   destruct H as [HP HQ].
-  
+
   (* 构造合取 *)
   split.
   - apply HQ.  (* 证明Q *)
@@ -568,7 +568,7 @@ Instance nat_eq : Eq nat :=
 Class Ord (A : Type) `{Eq A} : Type :=
   { leb : A -> A -> bool;
     leb_total : forall x y, leb x y = true \/ leb y x = true;
-    leb_trans : forall x y z, 
+    leb_trans : forall x y z,
       leb x y = true -> leb y z = true -> leb x z = true }.
 
 Instance nat_ord : Ord nat.
@@ -663,7 +663,7 @@ Inductive slist : Type :=
             (forall y, In y (to_list xs) -> x <= y) -> slist
 with to_list : slist -> list nat :=
   | tl_nil : to_list snil = []
-  | tl_cons : forall x xs H, 
+  | tl_cons : forall x xs H,
       to_list (scons x xs H) = x :: to_list xs.
 
 (* 插入保持有序性 *)
@@ -672,9 +672,9 @@ Fixpoint sinsert (x : nat) (xs : slist) : slist :=
   | snil => scons x snil (fun y H => match H with end)
   | scons y ys Hy =>
     match le_dec x y with
-    | left Hxy => 
+    | left Hxy =>
       scons x (scons y ys Hy)
-        (fun z Hz => 
+        (fun z Hz =>
           match Hz with
           | or_introl Hz' => eq_ind y (fun w => x <= w) Hxy z Hz'
           | or_intror Hz' => Nat.le_trans x y z Hxy (Hy z Hz')
@@ -701,11 +701,11 @@ Extract Inductive nat => "int" [ "0" "succ" ]
 Recursive Extraction sinsert.
 
 (* 生成的OCaml代码大致如下:
-   
+
    type slist =
    | Snil
    | Scons of int * slist
-   
+
    let rec sinsert x xs =
      match xs with
      | Snil -> Scons (x, Snil)
@@ -786,7 +786,7 @@ Inductive vector (A : Type) : nat -> Type :=
   | vcons : forall n, A -> vector A n -> vector A (S n).
 
 (* 连接两个向量需要复杂的类型级计算 *)
-Fixpoint vappend {A n m} (v1 : vector A n) (v2 : vector A m) 
+Fixpoint vappend {A n m} (v1 : vector A n) (v2 : vector A m)
   : vector A (n + m) :=
   match v1 with
   | vnil => v2
@@ -794,9 +794,9 @@ Fixpoint vappend {A n m} (v1 : vector A n) (v2 : vector A m)
   end.
 
 (* 证明关于vappend的性质很复杂，因为涉及Nat.add的性质 *)
-Lemma vappend_assoc : forall A n m p (v1 : vector A n) 
+Lemma vappend_assoc : forall A n m p (v1 : vector A n)
   (v2 : vector A m) (v3 : vector A p),
-  vappend v1 (vappend v2 v3) = 
+  vappend v1 (vappend v2 v3) =
   eq_rect _ (vector A) (vappend (vappend v1 v2) v3) _ (Nat.add_assoc n m p).
 Proof.
   (* 需要处理等式证明转换 *)

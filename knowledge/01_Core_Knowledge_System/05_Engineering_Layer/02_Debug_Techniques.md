@@ -86,12 +86,12 @@ python
 class MatrixPrinter:
     def __init__(self, val):
         self.val = val
-    
+
     def to_string(self):
         rows = self.val['rows']
         cols = self.val['cols']
         return f"Matrix({rows}x{cols})"
-    
+
     def children(self):
         data = self.val['data']
         for i in range(int(self.val['rows'])):
@@ -208,27 +208,27 @@ void log_init(const char *filename, LogLevel level) {
 void log_message(LogLevel level, const char *file, int line,
                  const char *func, const char *fmt, ...) {
     if (level < g_log_level) return;
-    
+
     const char *level_str[] = {"DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
-    
+
     // 时间戳
     time_t now = time(NULL);
     struct tm *tm_info = localtime(&now);
     char time_str[26];
     strftime(time_str, 26, "%Y-%m-%d %H:%M:%S", tm_info);
-    
+
     // 输出到文件
     fprintf(g_log_file, "[%s] [%s] %s:%d (%s) ",
             time_str, level_str[level], file, line, func);
-    
+
     va_list args;
     va_start(args, fmt);
     vfprintf(g_log_file, fmt, args);
     va_end(args);
-    
+
     fprintf(g_log_file, "\n");
     fflush(g_log_file);
-    
+
     // 致命错误终止程序
     if (level == LOG_LEVEL_FATAL) {
         abort();
@@ -295,4 +295,5 @@ void log_message(LogLevel level, const char *file, int line,
 ---
 
 > **更新记录**
+>
 > - 2025-03-09: 初版创建
