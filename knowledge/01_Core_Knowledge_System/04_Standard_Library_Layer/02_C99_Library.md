@@ -1,92 +1,250 @@
-# C99标准库扩展
+# C99标准库扩展深度解析
 
-> **层级定位**: 01 Core Knowledge System
-> **对应标准**: C89/C99/C11/C17/C23
-> **来源文档**: 原始文档梳理
-
----
-
-## 1. 概述
-
-本节内容涵盖 **C99标准库扩展** 的核心概念、实现细节和最佳实践。
+> **层级定位**: 01 Core Knowledge System / 04 Standard Library Layer
+> **对应标准**: C99
+> **难度级别**: L2 理解 → L3 应用
+> **预估学习时间**: 3-5 小时
 
 ---
 
-## 2. 核心概念
+## 📋 本节概要
 
-### 2.1 基本概念
+| 属性 | 内容 |
+|:-----|:-----|
+| **核心概念** | C99新增头文件、复数运算、宽字符、定宽整数 |
+| **前置知识** | C89标准库 |
+| **后续延伸** | C11多线程、复杂数学 |
+| **权威来源** | C99标准, Modern C |
+
+---
+
+## 🧠 知识结构思维导图
+
+```mermaid
+mindmap
+  root((C99标准库))
+    新增头文件
+      complex.h
+      fenv.h
+      inttypes.h
+      stdbool.h
+      stdint.h
+      tgmath.h
+      wchar.h
+      wctype.h
+    扩展功能
+      变长数组支持
+      复数运算
+      浮点环境
+      泛型数学
+```
+
+---
+
+## 📖 核心概念详解
+
+### 1. 定宽整数 (<stdint.h>)
 
 ```c
-// 示例代码框架
-void example_function(void) {
-    // 核心概念演示
+#include <stdint.h>
+
+// 有符号整数
+int8_t   i8;    // 8位
+int16_t  i16;   // 16位
+int32_t  i32;   // 32位
+int64_t  i64;   // 64位
+
+// 无符号整数
+uint8_t  u8;    // 8位
+uint16_t u16;   // 16位
+uint32_t u32;   // 32位
+uint64_t u64;   // 64位
+
+// 指针大小整数
+intptr_t  iptr;  // 可存储指针的有符号整数
+uintptr_t uptr;  // 可存储指针的无符号整数
+
+// 最大宽度
+intmax_t  imax;
+uintmax_t umax;
+
+// 使用场景
+struct Packet {
+    uint32_t magic;     // 固定4字节
+    uint16_t version;   // 固定2字节
+    uint16_t flags;     // 固定2字节
+    uint64_t timestamp; // 固定8字节
+};  // 16字节，跨平台一致
+```
+
+### 2. 复数运算 (<complex.h>)
+
+```c
+#include <complex.h>
+#include <math.h>
+
+// 定义复数
+double complex z1 = 1.0 + 2.0*I;  // 1 + 2i
+double complex z2 = 3.0 - 4.0*I;  // 3 - 4i
+
+// 基本运算
+double complex sum = z1 + z2;
+double complex diff = z1 - z2;
+double complex prod = z1 * z2;
+double complex quot = z1 / z2;
+
+// 复数函数
+double real_part = creal(z1);      // 实部
+double imag_part = cimag(z1);      // 虚部
+double magnitude = cabs(z1);       // 模 |z|
+double complex conj_z = conj(z1);  // 共轭
+
+double complex exp_z = cexp(z1);   // e^z
+double complex log_z = clog(z1);   // ln(z)
+double complex sqrt_z = csqrt(z1); // √z
+
+// 欧拉公式: e^(iπ) = -1
+double complex e_i_pi = cexp(I * M_PI);
+printf("e^(iπ) = %.1f + %.1fi\n", creal(e_i_pi), cimag(e_i_pi));
+```
+
+### 3. 布尔类型 (<stdbool.h>)
+
+```c
+#include <stdbool.h>
+
+// C99引入bool类型
+bool flag = true;   // 或 false
+
+// 底层实现
+typedef _Bool bool;
+#define true 1
+#define false 0
+
+// 使用示例
+bool is_prime(int n) {
+    if (n < 2) return false;
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) return false;
+    }
+    return true;
 }
 ```
 
-### 2.2 关键特性
-
-| 特性 | 说明 | C标准 |
-|:-----|:-----|:------|
-| 特性1 | 说明1 | C89 |
-| 特性2 | 说明2 | C99 |
-| 特性3 | 说明3 | C11 |
-
----
-
-## 3. 实现细节
-
-### 3.1 代码示例
+### 4. 泛型数学 (<tgmath.h>)
 
 ```c
-// 详细实现示例
+#include <tgmath.h>
+
+// 根据参数类型自动选择函数
+float f = 3.14f;
+double d = 3.14;
+long double ld = 3.14L;
+
+float f_sqrt = sqrt(f);           // 调用 sqrtf
+double d_sqrt = sqrt(d);          // 调用 sqrt
+long double ld_sqrt = sqrt(ld);   // 调用 sqrtl
+
+// 复数也适用
+double complex z = 1.0 + 2.0*I;
+double complex z_sqrt = sqrt(z);  // 调用 csqrt
+```
+
+### 5. 格式化宏 (<inttypes.h>)
+
+```c
+#include <inttypes.h>
 #include <stdio.h>
 
-int main(void) {
-    printf("Hello, C99标准库扩展!\n");
-    return 0;
-}
+uint32_t u32 = 42;
+int64_t i64 = -123456789012LL;
+
+// 可移植的printf格式
+printf("uint32: %" PRIu32 "\n", u32);
+printf("int64:  %" PRId64 "\n", i64);
+printf("hex64:  %" PRIx64 "\n", i64);
+
+// scanf格式
+scanf("%" SCNd64, &i64);
+
+// 完整示例
+printf("Value: %10" PRIu32 " (0x%08" PRIx32 ")\n", u32, u32);
 ```
 
-### 3.2 注意事项
-
-- 注意点1
-- 注意点2
-- 注意点3
-
----
-
-## 4. 最佳实践
+### 6. 宽字符支持 (<wchar.h>, <wctype.h>)
 
 ```c
-// 推荐做法
-void good_practice(void) {
-    // 实现
+#include <wchar.h>
+#include <locale.h>
+
+// 设置本地化
+setlocale(LC_ALL, "");
+
+// 宽字符操作
+wchar_t wstr[] = L"Hello 世界";
+size_t len = wcslen(wstr);       // 宽字符串长度
+wchar_t wcopy[100];
+wcscpy(wcopy, wstr);             // 宽字符串拷贝
+
+// 格式化宽字符
+wchar_t buffer[256];
+swprintf(buffer, 256, L"Value: %d", 42);
+
+// 多字节与宽字符转换
+char mbs[256];
+int n = wcstombs(mbs, wstr, sizeof(mbs));
+```
+
+---
+
+## ⚠️ 常见陷阱
+
+### 陷阱 C99-01: VLA使用限制
+
+```c
+// ❌ VLA不能用于结构体
+struct Bad {
+    int n;
+    int arr[n];  // 错误！
+};
+
+// ✅ VLA只能用于局部数组
+void func(int n) {
+    int vla[n];  // OK
 }
 
-// 避免的做法
-void bad_practice(void) {
-    // 实现
+// ❌ VLA生命周期问题（避免过大）
+void risky(int n) {
+    int huge[n];  // 栈溢出风险！
+}
+```
+
+### 陷阱 C99-02: 复数性能
+
+```c
+// 注意：复数运算可能较慢
+double complex z = ...;
+double r = cabs(z);  // 涉及sqrt运算
+
+// 如果只是比较大小，比较平方避免sqrt
+if (creal(z)*creal(z) + cimag(z)*cimag(z) > threshold*threshold) {
+    // 比 cabs(z) > threshold 更快
 }
 ```
 
 ---
 
-## 5. 常见陷阱
+## ✅ 质量验收清单
 
-| 陷阱 | 后果 | 解决方案 |
-|:-----|:-----|:---------|
-| 陷阱1 | 后果1 | 方案1 |
-| 陷阱2 | 后果2 | 方案2 |
-
----
-
-## 6. 参考与延伸阅读
-
-| 资源 | 说明 |
-|:-----|:-----|
-| 资源1 | 说明1 |
-| 资源2 | 说明2 |
+- [x] 定宽整数使用
+- [x] 复数运算
+- [x] 布尔类型
+- [x] 泛型数学
+- [x] 格式化宏
+- [x] 宽字符支持
 
 ---
 
-> **内容待补充**: 本节为框架文档，具体内容需从原始文档中提取完善。
+> **更新记录**
+>
+> - 2025-03-09: 初版创建
