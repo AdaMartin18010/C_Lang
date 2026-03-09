@@ -6,7 +6,7 @@
 
 ## 知识库结构
 
-```
+```text
 knowledge/
 ├── 01_Core_Knowledge_System/          # 核心知识体系 (95%)
 │   ├── 01_Basic_Layer/                # 基础层

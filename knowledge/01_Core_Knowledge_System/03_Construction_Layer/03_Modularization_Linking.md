@@ -239,7 +239,7 @@ _Thread_local int thread_local_var;  // 每个线程独立
 
 ### 4. 编译模型
 
-```
+```text
 源文件 (.c) ──┐
               ├── 预处理 (cpp) ── 翻译单元 (.i)
               │
@@ -254,7 +254,7 @@ _Thread_local int thread_local_var;  // 每个线程独立
 
 ### 5. 多文件项目组织
 
-```
+```text
 project/
 ├── include/          # 公共头文件
 │   ├── utils.h
