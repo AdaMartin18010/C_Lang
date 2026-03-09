@@ -84,6 +84,17 @@
 
 ---
 
+### 08_Debugging_Tools - 调试工具
+
+程序调试与内存分析工具。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_GDB_Debugging.md](./08_Debugging_Tools/01_GDB_Debugging.md) | GDB调试 | L2-L4 | GDB Manual |
+| [02_Valgrind_Memory.md](./08_Debugging_Tools/02_Valgrind_Memory.md) | Valgrind内存 | L2-L4 | Valgrind Manual |
+
+---
+
 ## 知识结构关系
 
 ```mermaid
@@ -186,3 +197,7 @@ graph TB
 ---
 
 > **最后更新**: 2025-03-09
+>
+> **新增内容**:
+>
+> - 08_Debugging_Tools: GDB调试技术、Valgrind内存检测

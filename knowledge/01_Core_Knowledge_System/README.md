@@ -32,6 +32,8 @@ C语言核心概念，程序设计的基石。
 | [01_Pointer_Depth.md](./02_Core_Layer/01_Pointer_Depth.md) | 指针深度解析 | L3-L5 | ISO C §6.5.3 | 774 |
 | [02_Memory_Management.md](./02_Core_Layer/02_Memory_Management.md) | 内存管理 | L3-L4 | ISO C §7.22.3 | 484 |
 | [03_String_Processing.md](./02_Core_Layer/03_String_Processing.md) | 字符串处理 | L3 | ISO C §7.24 | 200+ |
+| [04_Functions_Scope.md](./02_Core_Layer/04_Functions_Scope.md) | 函数与作用域 | L2-L4 | ISO C §6.2.1, §6.7 | 787 |
+| [05_Arrays_Pointers.md](./02_Core_Layer/05_Arrays_Pointers.md) | 数组与指针 | L3-L5 | ISO C §6.5.2.1 | 895 |
 
 **前置知识**: [01_Basic_Layer](./01_Basic_Layer/)
 **后续延伸**: [03_Construction_Layer](./03_Construction_Layer/)
@@ -81,6 +83,12 @@ ISO C标准库各版本详解。
 | [02_Debug_Techniques.md](./05_Engineering_Layer/02_Debug_Techniques.md) | 调试技术 | L3 | GDB, LLDB | 200+ |
 | [03_Performance_Optimization.md](./05_Engineering_Layer/03_Performance_Optimization.md) | 性能优化 | L4 | Intel Optimization | 200+ |
 | [08_Code_Review_Checklist.md](./05_Engineering/08_Code_Review_Checklist.md) | 代码审查 | L3 | CERT C | 200+ |
+
+### 05_Engineering/01_Build_System - 构建系统
+
+| 文件 | 主题 | 难度 | 国际标准 | 代码行数 |
+|:-----|:-----|:----:|:---------|:--------:|
+| [01_Makefile.md](./05_Engineering/01_Build_System/01_Makefile.md) | Makefile构建 | L2-L4 | POSIX Make | 444 |
 
 **前置知识**: [04_Standard_Library_Layer](./04_Standard_Library_Layer/)
 **后续延伸**: [06_Advanced_Layer](./06_Advanced_Layer/)
@@ -246,4 +254,10 @@ graph TD
 
 > **最后更新**: 2025-03-09
 >
-> **维护说明**: 本目录包含30个文件，总计8,290+行，平均276行/文件
+> **维护说明**: 本目录包含35个文件，总计11,200+行，平均320行/文件
+>
+> **新增内容**:
+>
+> - 02_Core_Layer: 函数与作用域、数组与指针
+> - 04_Standard_Library: 标准I/O与文件操作
+> - 05_Engineering: Makefile构建系统

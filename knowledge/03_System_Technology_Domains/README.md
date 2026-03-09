@@ -155,6 +155,26 @@
 
 ---
 
+### 14_Concurrency_Parallelism - 并发与并行
+
+POSIX线程与同步机制。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_POSIX_Threads.md](./14_Concurrency_Parallelism/01_POSIX_Threads.md) | POSIX线程 | L3-L5 | POSIX.1-2008 |
+
+---
+
+### 15_Network_Programming - 网络编程
+
+Socket编程与网络I/O。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_Socket_Programming.md](./15_Network_Programming/01_Socket_Programming.md) | Socket编程 | L3-L5 | BSD Socket API |
+
+---
+
 ## 技术关联图
 
 ```mermaid
@@ -226,3 +246,8 @@ graph TB
 ---
 
 > **最后更新**: 2025-03-09
+>
+> **新增内容**:
+>
+> - 14_Concurrency_Parallelism: POSIX线程编程
+> - 15_Network_Programming: Socket网络编程
