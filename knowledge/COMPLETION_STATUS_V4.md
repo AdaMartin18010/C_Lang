@@ -25,7 +25,7 @@
 |:---------|:-----|:----:|:----:|:---------|
 | 02_Core_Layer/04_Functions_Scope.md | 函数与作用域 | 787 | L2-L4 | ISO C §6.2.1, §6.7 |
 | 02_Core_Layer/05_Arrays_Pointers.md | 数组与指针 | 895 | L3-L5 | ISO C §6.5.2.1 |
-| 04_Standard_Library/01_Standard_IO/01_stdio_File_IO.md | 标准I/O | 817 | L2-L4 | ISO C §7.21 |
+| 04_Standard_Library_Layer/01_Standard_IO/01_stdio_File_IO.md | 标准I/O | 817 | L2-L4 | ISO C §7.21 |
 | 05_Engineering/01_Build_System/01_Makefile.md | Makefile | 444 | L2-L4 | POSIX Make |
 
 ### 03_System_Technology_Domains - 系统技术领域
@@ -107,12 +107,12 @@
 
 当前存在的目录命名冲突：
 
-- `04_Standard_Library` vs `04_Standard_Library_Layer`
+- ~~`04_Standard_Library` vs `04_Standard_Library_Layer`~~ (已合并)
 - `09_Performance_Logging` vs `09_High_Performance_Log`
-- `10_Rust_Interop` vs `10_Rust_Interoperability`
+- ~~`10_Rust_Interop` vs `11_Rust_Interoperability`~~ (已合并)
 - `11_In_Memory_Database` 重复
 - `12_RDMA_Networking` vs `12_RDMA_Network`
-- `07_DNA_Storage` 重复
+- `07_DNA_Storage` 已合并到 `09_DNA_Storage`
 - `09_Space_Computing` 重复
 
 建议后续合并重复目录。

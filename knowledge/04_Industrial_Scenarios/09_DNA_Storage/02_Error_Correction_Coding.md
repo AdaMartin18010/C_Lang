@@ -1,6 +1,6 @@
 # DNA存储纠错编码
 
-> **层级定位**: 04 Industrial Scenarios / 07 DNA Storage
+> **层级定位**: 04 Industrial Scenarios / 09 DNA Storage
 > **对应标准**: Reed-Solomon, LDPC, Tornado Codes
 > **难度级别**: L5 综合
 > **预估学习时间**: 10-15 小时

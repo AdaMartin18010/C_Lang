@@ -89,7 +89,7 @@
 | 07_Hardware_Security | 2 | TPM2 TSS、密钥密封 |
 | 08_Distributed_Consensus | 2 | Raft核心、Leader选举 |
 | 09_Performance_Logging | 2 | 无锁环形缓冲、结构化日志 |
-| 10_Rust_Interop | 2 | C ABI、Rust FFI |
+| 11_Rust_Interoperability | 2 | C ABI、Rust FFI |
 | 11_In_Memory_Database | 2 | B+树、LRU缓存 |
 | 12_RDMA_Networking | 2 | Verbs API、单边RDMA |
 
@@ -105,7 +105,7 @@
 | 04_5G_Baseband | 2 | SIMD向量化、DMA卸载 |
 | 05_Game_Engine | 2 | GPU内存管理、原子操作 |
 | 06_Quantum_Computing | 2 | 量子-经典接口、表面码解码 |
-| 07_DNA_Storage | 2 | DNA合成、纠错编码 |
+| 09_DNA_Storage | 2 | DNA合成、纠错编码 |
 | 08_Neuromorphic | 2 | SNN控制、STDP学习 |
 | 09_Space_Computing | 2 | EDAC内存、TMR表决 |
 | 10_Deep_Sea | 2 | 声调制解调器、能量感知调度 |

@@ -66,7 +66,7 @@ mindmap
 // 向量加法示例
 void vector_add_avx(float *a, float *b, float *c, int n) {
     int i = 0;
-    
+
     // 使用256位AVX（8个float）
     for (; i <= n - 8; i += 8) {
         __m256 va = _mm256_loadu_ps(&a[i]);  // 加载8个float
@@ -74,7 +74,7 @@ void vector_add_avx(float *a, float *b, float *c, int n) {
         __m256 vc = _mm256_add_ps(va, vb);   // 向量加法
         _mm256_storeu_ps(&c[i], vc);         // 存储结果
     }
-    
+
     // 处理剩余元素
     for (; i < n; i++) {
         c[i] = a[i] + b[i];
@@ -84,25 +84,25 @@ void vector_add_avx(float *a, float *b, float *c, int n) {
 // 点积计算
 float dot_product_avx(const float *a, const float *b, int n) {
     __m256 sum_vec = _mm256_setzero_ps();  // 初始化累加向量为0
-    
+
     int i = 0;
     for (; i <= n - 8; i += 8) {
         __m256 va = _mm256_loadu_ps(&a[i]);
         __m256 vb = _mm256_loadu_ps(&b[i]);
         sum_vec = _mm256_fmadd_ps(va, vb, sum_vec);  // 乘加融合
     }
-    
+
     // 水平求和
     float sum[8];
     _mm256_storeu_ps(sum, sum_vec);
     float result = sum[0] + sum[1] + sum[2] + sum[3] +
                    sum[4] + sum[5] + sum[6] + sum[7];
-    
+
     // 处理剩余
     for (; i < n; i++) {
         result += a[i] * b[i];
     }
-    
+
     return result;
 }
 
@@ -112,13 +112,13 @@ void matmul_avx(float *C, const float *A, const float *B,
     for (int i = 0; i < M; i++) {
         for (int j = 0; j < N; j += 8) {
             __m256 c_vec = _mm256_setzero_ps();
-            
+
             for (int k = 0; k < K; k++) {
                 __m256 a_val = _mm256_broadcast_ss(&A[i*K + k]);
                 __m256 b_vec = _mm256_loadu_ps(&B[k*N + j]);
                 c_vec = _mm256_fmadd_ps(a_val, b_vec, c_vec);
             }
-            
+
             _mm256_storeu_ps(&C[i*N + j], c_vec);
         }
     }
@@ -178,12 +178,12 @@ void parallel_sum(const float *a, const float *b, float *c, int n) {
 // 归约操作
 float parallel_dot(const float *a, const float *b, int n) {
     float sum = 0.0f;
-    
+
     #pragma omp parallel for reduction(+:sum) schedule(static)
     for (int i = 0; i < n; i++) {
         sum += a[i] * b[i];
     }
-    
+
     return sum;
 }
 
@@ -211,10 +211,10 @@ void task_parallel(void) {
         {
             #pragma omp task
             process_chunk(data1);
-            
+
             #pragma omp task
             process_chunk(data2);
-            
+
             #pragma omp taskwait
         }
     }
@@ -226,7 +226,7 @@ void set_affinity(void) {
     {
         int thread_id = omp_get_thread_num();
         int cpu_id = thread_id % omp_get_num_procs();
-        
+
         // 绑定到特定CPU（平台相关）
         // Linux: sched_setaffinity
     }
@@ -369,4 +369,5 @@ for (int i = 0; i < 1000; i++) {
 ---
 
 > **更新记录**
+>
 > - 2025-03-09: 初版创建

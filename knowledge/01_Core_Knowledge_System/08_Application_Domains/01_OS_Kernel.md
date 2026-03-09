@@ -136,7 +136,7 @@ struct buddy_allocator {
 void buddy_init(struct buddy_allocator *ba, void *start, size_t size) {
     ba->memory_start = start;
     ba->memory_size = size;
-    
+
     // 初始时整个内存是一个大的空闲块
     int max_order = __fls(size / MIN_BLOCK_SIZE);
     list_add(&initial_block->list, &ba->free_area[max_order].free_list);
@@ -146,7 +146,7 @@ void buddy_init(struct buddy_allocator *ba, void *start, size_t size) {
 // 分配
 void *buddy_alloc(struct buddy_allocator *ba, size_t size) {
     int order = __fls((size + MIN_BLOCK_SIZE - 1) / MIN_BLOCK_SIZE - 1) + 1;
-    
+
     // 找到合适大小的块
     for (int i = order; i < MAX_ORDER; i++) {
         if (!list_empty(&ba->free_area[i].free_list)) {
@@ -209,7 +209,7 @@ struct kmem_cache *kmem_cache_create(
 void *kmem_cache_alloc(struct kmem_cache *cache) {
     struct slab *slab;
     void *obj = NULL;
-    
+
     // 优先从partial slab分配
     if (!list_empty(&cache->partial)) {
         slab = list_entry(cache->partial.next, struct slab, list);
@@ -222,16 +222,16 @@ void *kmem_cache_alloc(struct kmem_cache *cache) {
         slab = alloc_new_slab(cache);
         list_add(&slab->list, &cache->partial);
     }
-    
+
     // 从slab分配对象
     obj = slab->freelist;
     slab->freelist = *(void **)obj;
     slab->inuse++;
-    
+
     if (slab->inuse == objects_per_slab(cache)) {
         list_move(&slab->list, &cache->full);
     }
-    
+
     return obj;
 }
 ```
@@ -259,17 +259,17 @@ struct task_struct {
     int prio;                    // 优先级 (0-139, 越低越优先)
     int static_prio;             // 静态优先级
     int nice;                    // nice值 (-20 to 19)
-    
+
     struct list_head run_list;   // 运行队列链表
     struct list_head tasks;      // 所有任务链表
-    
+
     uint64_t utime;              // 用户态时间
     uint64_t stime;              // 内核态时间
     uint64_t start_time;         // 启动时间
-    
+
     struct mm_struct *mm;        // 内存描述符
     struct thread_info *thread_info;
-    
+
     // 上下文
     struct cpu_context cpu_context;
 };
@@ -285,11 +285,11 @@ void schedule(void) {
     struct task_struct *prev = current;
     struct task_struct *next;
     struct runqueue *rq = &cpu_rq(smp_processor_id());
-    
+
     // 选择下一个任务（O(1)调度）
     int prio = sched_find_first_bit(rq->bitmap);
     next = list_entry(rq->queue[prio].next, struct task_struct, run_list);
-    
+
     if (prev != next) {
         context_switch(prev, next);
     }
@@ -387,12 +387,12 @@ __attribute__((naked)) void interrupt_handler_entry(void) {
 // C语言中断处理
 void do_interrupt_handler(struct pt_regs *regs) {
     int irq = regs->irq;
-    
+
     // 发送EOI（结束中断）给PIC/APIC
     if (irq >= 32) {
         lapic_eoi();
     }
-    
+
     // 调用注册的处理函数
     if (irq_handlers[irq]) {
         irq_handlers[irq](regs);
@@ -468,4 +468,5 @@ void locked_inc(void) {
 ---
 
 > **更新记录**
+>
 > - 2025-03-09: 初版创建

@@ -27,7 +27,7 @@
 
 | 目录 | 文件数 | 不足文件数 | 比例 | 状态 |
 |------|--------|-----------|------|------|
-| `01_Core_Knowledge_System/04_Standard_Library` | 1 | 1 | 100% | 🔴 |
+| `01_Core_Knowledge_System/04_Standard_Library_Layer` | 6 | 6 | 100% | ✅ |
 | `01_Core_Knowledge_System/05_Engineering` | 1 | 1 | 100% | 🔴 |
 | `02_Formal_Semantics_and_Physics` | 1 | 1 | 100% | 🔴 |
 | `02_Formal_Semantics_and_Physics/03_Compiler_Optimization` | 1 | 1 | 100% | 🔴 |
@@ -62,7 +62,7 @@
 | 文件路径 | 行数 | 大小 | 建议 |
 |---------|------|------|------|
 | `06_Thinking_Representation/06_Learning_Paths/01_Beginner_to_Advanced.md` | 123 | 3.19KB | 建议扩充至250行 |
-| `01_Core_Knowledge_System/04_Standard_Library/10_Threads_C11.md` | 129 | 2.27KB | 建议扩充至300行 |
+| `01_Core_Knowledge_System/04_Standard_Library_Layer/10_Threads_C11.md` | 129 | 2.27KB | 建议扩充至300行 |
 | `03_System_Technology_Domains/11_In_Memory_Database/01_B_Tree_Index.md` | 139 | 3.12KB | 建议扩充至300行 |
 | `06_Thinking_Representation/05_Concept_Mappings/06_Standards_Mapping.md` | 143 | 4.85KB | 建议扩充至250行 |
 | `06_Thinking_Representation/05_Concept_Mappings/03_Concurrency_Safety_Layers.md` | 149 | 5.45KB | 建议扩充至250行 |

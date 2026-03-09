@@ -43,7 +43,7 @@
 | 02_Preprocessor.md | 预处理器 | L3 | 宏、条件编译、头文件保护 | 200+ |
 | 03_Modularization_Linking.md | 模块化与链接 | L4 | 静态/动态链接、符号解析 | 200+ |
 
-#### 标准库层 (04_Standard_Library / 04_Standard_Library_Layer)
+#### 标准库层 (04_Standard_Library_Layer)
 
 | 文件 | 主题 | 难度 | 关键概念 | 行数 |
 |:-----|:-----|:----:|:---------|:----:|
@@ -243,7 +243,7 @@
 | 02_Async_Logging.md | 异步日志 | L4 | spdlog | 200+ |
 | 03_Structured_Logging.md | 结构化日志 | L3 | JSON、Protobuf | 200+ |
 
-#### Rust互操作 (10_Rust_Interop / 10_Rust_Interoperability)
+#### Rust互操作 (11_Rust_Interoperability)
 
 | 文件 | 主题 | 难度 | 关键概念 | 行数 |
 |:-----|:-----|:----:|:---------|:----:|
@@ -325,7 +325,7 @@
 |:-----|:-----|:----:|:---------|:----:|
 | 01_Quantum_Simulation_C.md | 量子模拟 | L5 | 态矢量、门操作 | 200+ |
 
-#### DNA存储 (07_DNA_Storage / 09_DNA_Storage)
+#### DNA存储 (09_DNA_Storage)
 
 | 文件 | 主题 | 难度 | 关键概念 | 行数 |
 |:-----|:-----|:----:|:---------|:----:|
@@ -487,7 +487,7 @@
 - 01_Basic_Layer/02_Data_Type_System.md
 - 01_Basic_Layer/03_Operators_Expressions.md
 - 01_Basic_Layer/04_Control_Flow.md
-- 01_Core/04_Standard_Library/01_stdio_File_IO.md
+- 01_Core/04_Standard_Library_Layer/01_Standard_IO/01_stdio_File_IO.md
 - 01_Core/05_Engineering/01_Makefile.md
 
 ### L3 - 中级 (开发者)

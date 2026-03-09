@@ -134,19 +134,19 @@ void Reset_Handler(void) {
     while (dst < &_edata) {
         *dst++ = *src++;
     }
-    
+
     // 2. 清零BSS段
     dst = &_sbss;
     while (dst < &_ebss) {
         *dst++ = 0;
     }
-    
+
     // 3. 初始化系统时钟（可选）
     SystemInit();
-    
+
     // 4. 调用主函数
     main();
-    
+
     // 5. 主函数不应返回，如果返回则陷入死循环
     while (1);
 }
@@ -169,10 +169,10 @@ void HardFault_Handler(void) __attribute__((weak, alias("Default_Handler")));
 MEMORY
 {
     RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 128K
-    
+
     /* Flash */
     FLASH (rx) : ORIGIN = 0x08000000, LENGTH = 1024K
-    
+
     /* CCM RAM (Cortex-M4特有) */
     CCM (rwx) : ORIGIN = 0x10000000, LENGTH = 64K
 }
@@ -187,21 +187,21 @@ SECTIONS
     {
         . = ALIGN(4);
         _stext = .;
-        
+
         /* 向量表 */
         KEEP(*(.isr_vector))
-        
+
         /* 代码 */
         *(.text*)
         *(.rodata*)
-        
+
         . = ALIGN(4);
         _etext = .;
     } > FLASH
-    
+
     /* 初始化数据段（Flash中） */
     _sidata = LOADADDR(.data);
-    
+
     /* 数据段（RAM中） */
     .data :
     {
@@ -211,7 +211,7 @@ SECTIONS
         . = ALIGN(4);
         _edata = .;
     } > RAM AT > FLASH
-    
+
     /* BSS段 */
     .bss :
     {
@@ -222,7 +222,7 @@ SECTIONS
         . = ALIGN(4);
         _ebss = .;
     } > RAM
-    
+
     /* 栈底 */
     __stack_bottom = _estack - 0x10000;  /* 64KB栈 */
 }
@@ -270,7 +270,7 @@ void nvic_set_priority(uint8_t irqn, uint8_t priority) {
 void TIM2_IRQHandler(void) {
     if (TIM2->SR & TIM_SR_UIF) {  // 更新中断标志
         TIM2->SR &= ~TIM_SR_UIF;   // 清除标志
-        
+
         // 用户代码
         g_tick_count++;
     }
@@ -307,10 +307,10 @@ typedef enum {
 // 进入睡眠模式
 void enter_sleep_mode(void) {
     // 配置唤醒源（中断或事件）
-    
+
     // 执行WFI（等待中断）
     __asm__ volatile ("wfi");
-    
+
     // 从中断返回后继续执行
 }
 
@@ -318,19 +318,19 @@ void enter_sleep_mode(void) {
 void enter_stop_mode(void) {
     // 1. 保存外设状态
     save_peripheral_state();
-    
+
     // 2. 关闭非必要外设
     disable_unused_peripherals();
-    
+
     // 3. 配置唤醒源
     enable_wakeup_source();
-    
+
     // 4. 设置停止模式
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
-    
+
     // 5. 执行WFI
     __asm__ volatile ("wfi");
-    
+
     // 6. 唤醒后恢复
     SCB->SCR &= ~SCB_SCR_SLEEPDEEP_Msk;
     restore_peripheral_state();
@@ -341,7 +341,7 @@ void optimize_clocks(void) {
     // 禁用未使用外设的时钟
     RCC->AHB1ENR &= ~(RCC_AHB1ENR_GPIOBEN |  // 如果GPIOB不用
                       RCC_AHB1ENR_GPIOCEN);  // 如果GPIOC不用
-    
+
     // 降低总线时钟
     // 仅在高性能操作时提升时钟
 }
@@ -399,11 +399,11 @@ void bad_init(void) {
 // ✅ 正确：先使能时钟
 void good_init(void) {
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;  // 使能GPIOA时钟
-    
+
     // 插入延时等待时钟稳定（某些MCU需要）
     volatile uint32_t dummy = RCC->AHB1ENR;
     (void)dummy;
-    
+
     GPIOA->MODER = 0x01;
 }
 ```
@@ -421,4 +421,5 @@ void good_init(void) {
 ---
 
 > **更新记录**
+>
 > - 2025-03-09: 初版创建

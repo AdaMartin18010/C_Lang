@@ -65,7 +65,7 @@ ISO C标准库各版本详解。
 | [02_C99_Library.md](./04_Standard_Library_Layer/02_C99_Library.md) | C99标准库 | L3 | ISO/IEC 9899:1999 | 200+ |
 | [03_C11_Library.md](./04_Standard_Library_Layer/03_C11_Library.md) | C11标准库 | L4 | ISO/IEC 9899:2011 | 200+ |
 | [04_C17_C23_Library.md](./04_Standard_Library_Layer/04_C17_C23_Library.md) | C17/C23标准库 | L4 | ISO/IEC 9899:2018 | 200+ |
-| [10_Threads_C11.md](./04_Standard_Library/10_Threads_C11.md) | C11线程库 | L4 | ISO C §7.26 | 200+ |
+| [10_Threads_C11.md](./04_Standard_Library_Layer/10_Threads_C11.md) | C11线程库 | L4 | ISO C §7.26 | 200+ |
 
 **前置知识**: [03_Construction_Layer](./03_Construction_Layer/)
 **后续延伸**: [05_Engineering_Layer](./05_Engineering_Layer/)
@@ -259,5 +259,5 @@ graph TD
 > **新增内容**:
 >
 > - 02_Core_Layer: 函数与作用域、数组与指针
-> - 04_Standard_Library: 标准I/O与文件操作
+> - 04_Standard_Library_Layer: 标准I/O与文件操作
 > - 05_Engineering: Makefile构建系统

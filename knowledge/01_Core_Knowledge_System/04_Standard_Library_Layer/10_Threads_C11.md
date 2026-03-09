@@ -1,6 +1,6 @@
 # C11线程库详解
 
-> **层级定位**: 01 Core Knowledge System / 04 Standard Library
+> **层级定位**: 01 Core Knowledge System / 04 Standard Library Layer
 > **对应标准**: ISO C11 <threads.h>
 > **难度级别**: L4 分析
 > **预估学习时间**: 3-4 小时

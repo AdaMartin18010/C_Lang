@@ -1,6 +1,6 @@
 # 标准I/O与文件操作
 
-> **层级定位**: 01 Core Knowledge System / 04 Standard_Library / 01 Standard_IO
+> **层级定位**: 01 Core Knowledge System / 04 Standard Library Layer / 01 Standard_IO
 > **对应标准**: ISO C §7.21, POSIX §stdio.h
 > **难度级别**: L2-L4
 > **预估学习时间**: 6-8小时
