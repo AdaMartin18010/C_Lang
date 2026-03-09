@@ -1,0 +1,228 @@
+# 03 System Technology Domains - 系统技术领域
+
+> **对应标准**: DPDK, SPDK, Linux Kernel, Rust FFI
+> **完成度**: 80% | **预估学习时间**: 100-120小时
+
+---
+
+## 目录结构
+
+### 01_Virtual_Machine_Interpreter - 虚拟机解释器
+
+运行时系统实现技术。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_Bytecode_VM.md](./01_Virtual_Machine_Interpreter/01_Bytecode_VM.md) | 字节码VM | L4 | Lua VM, Python VM |
+| [02_Register_VM.md](./01_Virtual_Machine_Interpreter/02_Register_VM.md) | 寄存器VM | L4 | Dalvik VM, BEAM |
+| [03_JIT_Compilation.md](./01_Virtual_Machine_Interpreter/03_JIT_Compilation.md) | JIT编译 | L5 | V8, Java HotSpot |
+| [04_Garbage_Collection.md](./01_Virtual_Machine_Interpreter/04_Garbage_Collection.md) | 垃圾回收 | L5 | Go GC, .NET GC |
+
+**前置知识**: [01_Core_Knowledge_System](../01_Core_Knowledge_System/README.md)
+**关联**: [05_Deep_Structure_MetaPhysics/04_Self_Modifying_Code](../05_Deep_Structure_MetaPhysics/04_Self_Modifying_Code/README.md)
+
+---
+
+### 02_Regex_Engine - 正则表达式引擎
+
+模式匹配算法实现。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_NFA_Implementation.md](./02_Regex_Engine/01_NFA_Implementation.md) | NFA实现 | L4 | Thompson's Construction |
+| [02_Pike_VM.md](./02_Regex_Engine/02_Pike_VM.md) | Pike VM | L4 | Russ Cox Articles |
+| [03_JIT_Regex.md](./02_Regex_Engine/03_JIT_Regex.md) | JIT正则 | L5 | PCRE, RE2 |
+
+---
+
+### 03_Computer_Vision - 计算机视觉
+
+嵌入式视觉处理。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_V4L2_Capture.md](./03_Computer_Vision/01_V4L2_Capture.md) | V4L2采集 | L4 | Linux V4L2 API |
+| [02_Optical_Flow.md](./03_Computer_Vision/02_Optical_Flow.md) | 光流算法 | L5 | OpenCV Implementation |
+| [03_Edge_Detection.md](./03_Computer_Vision/03_Edge_Detection.md) | 边缘检测 | L4 | Canny, Sobel |
+
+---
+
+### 04_Video_Codec - 视频编解码
+
+多媒体处理技术。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_H264_Decoding.md](./04_Video_Codec/01_H264_Decoding.md) | H.264解码 | L5 | ITU-T H.264 |
+| [02_Custom_IO.md](./04_Video_Codec/02_Custom_IO.md) | 自定义IO | L4 | FFmpeg API |
+| [03_Hardware_Acceleration.md](./04_Video_Codec/03_Hardware_Acceleration.md) | 硬件加速 | L5 | VA-API, VDPAU |
+
+---
+
+### 05_Wireless_Protocol - 无线协议
+
+物联网通信协议。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_BLE_GATT.md](./05_Wireless_Protocol/01_BLE_GATT.md) | BLE GATT | L4 | Bluetooth Core Spec |
+| [02_LoRa_SX1276.md](./05_Wireless_Protocol/02_LoRa_SX1276.md) | LoRa驱动 | L4 | Semtech SX1276 |
+| [03_Zigbee_Stack.md](./05_Wireless_Protocol/03_Zigbee_Stack.md) | Zigbee协议 | L5 | Zigbee Alliance |
+
+---
+
+### 06_Security_Boot - 安全启动
+
+可信启动链实现。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_ARM_Trusted_Firmware.md](./06_Security_Boot/01_ARM_Trusted_Firmware.md) | ARM Trusted Firmware | L5 | ARM TF-A |
+| [02_Secure_Boot_Chain.md](./06_Security_Boot/02_Secure_Boot_Chain.md) | 安全启动链 | L5 | U-Boot, UEFI |
+| [03_Measured_Boot.md](./06_Security_Boot/03_Measured_Boot.md) | 度量启动 | L5 | TPM 2.0 Spec |
+
+---
+
+### 07_Hardware_Security - 硬件安全
+
+可信平台模块应用。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_TPM2_TSS.md](./07_Hardware_Security/01_TPM2_TSS.md) | TPM2 TSS | L5 | TCG TPM2 Spec |
+| [02_Secure_Element.md](./07_Hardware_Security/02_Secure_Element.md) | 安全元件 | L5 | GlobalPlatform |
+| [03_HSM_Integration.md](./07_Hardware_Security/03_HSM_Integration.md) | HSM集成 | L5 | PKCS#11 |
+
+---
+
+### 08_Distributed_Consensus - 分布式共识
+
+一致性算法实现。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_Raft_Core.md](./08_Distributed_Consensus/01_Raft_Core.md) | Raft核心 | L4 | Raft Paper, etcd |
+| [02_Paxos_Implementation.md](./08_Distributed_Consensus/02_Paxos_Implementation.md) | Paxos实现 | L5 | Paxos Made Simple |
+| [03_Multi_Raft.md](./08_Distributed_Consensus/03_Multi_Raft.md) | Multi-Raft | L5 | TiKV Paper |
+
+---
+
+### 09_Performance_Logging - 高性能日志
+
+无锁日志系统。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_Lockless_Ring_Buffer.md](./09_Performance_Logging/01_Lockless_Ring_Buffer.md) | 无锁环形缓冲 | L4 | DPDK Ring, LMAX |
+| [02_Async_Logging.md](./09_Performance_Logging/02_Async_Logging.md) | 异步日志 | L4 | spdlog, glog |
+| [03_Structured_Logging.md](./09_Performance_Logging/03_Structured_Logging.md) | 结构化日志 | L3 | JSON, Protocol Buffers |
+
+---
+
+### 10_Rust_Interop - Rust互操作
+
+跨语言FFI。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_C_ABI_Basics.md](./10_Rust_Interop/01_C_ABI_Basics.md) | C ABI基础 | L4 | Rust FFI Guide |
+| [02_Cbindgen_Usage.md](./10_Rust_Interop/02_Cbindgen_Usage.md) | cbindgen | L4 | cbindgen Docs |
+| [03_Unsafe_Rust_Patterns.md](./10_Rust_Interop/03_Unsafe_Rust_Patterns.md) | Unsafe模式 | L5 | The Rustonomicon |
+
+---
+
+### 11_In_Memory_Database - 内存数据库
+
+高性能数据结构。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_B_Tree_Index.md](./11_In_Memory_Database/01_B_Tree_Index.md) | B+树索引 | L4 | SQLite, LMDB |
+| [02_LSM_Tree.md](./11_In_Memory_Database/02_LSM_Tree.md) | LSM树 | L5 | LevelDB, RocksDB |
+| [03_Hash_Index.md](./11_In_Memory_Database/03_Hash_Index.md) | 哈希索引 | L4 | Fast Path Cache |
+
+---
+
+### 12_RDMA_Networking - RDMA网络
+
+高性能网络编程。
+
+| 文件 | 主题 | 难度 | 参考来源 |
+|:-----|:-----|:----:|:---------|
+| [01_Verbs_API.md](./12_RDMA_Networking/01_Verbs_API.md) | Verbs API | L5 | IBTA Spec |
+| [02_RDMA_Read_Write.md](./12_RDMA_Networking/02_RDMA_Read_Write.md) | RDMA读写 | L5 | Mellanox Docs |
+| [03_RDMA_Connection.md](./12_RDMA_Networking/03_RDMA_Connection.md) | 连接管理 | L5 | RDMA CM |
+
+---
+
+## 技术关联图
+
+```mermaid
+graph TB
+    subgraph 运行时
+        VM[虚拟机]
+        JIT[JIT编译]
+        GC[垃圾回收]
+    end
+
+    subgraph 安全
+        SB[安全启动]
+        TPM[TPM/HSM]
+        SE[安全元件]
+    end
+
+    subgraph 分布式
+        Raft[Raft共识]
+        Paxos[Paxos]
+    end
+
+    subgraph 性能
+        Log[高性能日志]
+        RDMA[RDMA网络]
+        SIMD[SIMD优化]
+    end
+
+    subgraph 数据
+        BTree[B+树]
+        LSM[LSM树]
+    end
+
+    subgraph 互操作
+        FFI[C/Rust FFI]
+    end
+```
+
+---
+
+## 关联知识库
+
+| 目标 | 路径 |
+|:-----|:-----|
+| 核心基础 | [01_Core_Knowledge_System](../01_Core_Knowledge_System/README.md) |
+| 形式语义 | [02_Formal_Semantics_and_Physics](../02_Formal_Semantics_and_Physics/README.md) |
+| 工业应用 | [04_Industrial_Scenarios](../04_Industrial_Scenarios/README.md) |
+| 理论基础 | [05_Deep_Structure_MetaPhysics](../05_Deep_Structure_MetaPhysics/README.md) |
+
+---
+
+## 参考资源
+
+### 开源项目
+
+- **DPDK** - Data Plane Development Kit
+- **SPDK** - Storage Performance Development Kit
+- **Linux Kernel** - 内核源码
+- **etcd** - Raft实现参考
+- **SQLite** - 嵌入式数据库
+- **LevelDB/RocksDB** - LSM树实现
+
+### 标准规范
+
+- **InfiniBand Architecture Spec** - RDMA标准
+- **TCG TPM2 Spec** - 可信计算
+- **Bluetooth Core Specification** - BLE
+- **IEEE 802.15.4** - Zigbee底层
+
+---
+
+> **最后更新**: 2025-03-09

@@ -1,92 +1,478 @@
-# 安全启动链验证
+# 安全启动链实现
 
-> **层级定位**: 03 System Technology Domains  
-> **对应标准**: C89/C99/C11/C17/C23  
-> **来源文档**: 原始文档梳理
-
----
-
-## 1. 概述
-
-本节内容涵盖 **安全启动链验证** 的核心概念、实现细节和最佳实践。
+> **层级定位**: 03 System Technology Domains / 06 Security Boot
+> **对应标准**: U-Boot, UEFI Secure Boot, Trusted Computing
+> **难度级别**: L5 综合
+> **预估学习时间**: 6-8 小时
 
 ---
 
-## 2. 核心概念
+## 📋 本节概要
 
-### 2.1 基本概念
+| 属性 | 内容 |
+|:-----|:-----|
+| **核心概念** | 启动链验证, 密钥管理, 测量启动, 信任根 |
+| **前置知识** | 嵌入式启动流程, 密码学基础 |
+| **后续延伸** | TPM/TEE, 远程证明 |
+| **权威来源** | U-Boot Docs, UEFI Spec, TCG TPM |
 
-```c
-// 示例代码框架
-void example_function(void) {
-    // 核心概念演示
-}
+---
+
+## 🧠 知识结构思维导图
+
+```mermaid
+mindmap
+  root((安全启动链))
+    信任根
+      Boot ROM
+      公钥哈希
+      OTP/eFuse
+    启动阶段
+      BL1
+      BL2
+      BL33
+    验证机制
+      签名验证
+      哈希链
+      测量
+    密钥管理
+      PKI
+      密钥轮换
+      吊销
 ```
 
-### 2.2 关键特性
-
-| 特性 | 说明 | C标准 |
-|:-----|:-----|:------|
-| 特性1 | 说明1 | C89 |
-| 特性2 | 说明2 | C99 |
-| 特性3 | 说明3 | C11 |
-
 ---
 
-## 3. 实现细节
+## 📖 核心概念详解
 
-### 3.1 代码示例
+### 1. 安全启动链架构
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      信任根 (Root of Trust)                   │
+│  ┌─────────────┐  ┌──────────────┐  ┌─────────────────────┐ │
+│  │ Boot ROM    │  │ 公钥哈希(OTP) │  │ 不可变代码          │ │
+│  │ (只读)      │  │              │  │                     │ │
+│  └──────┬──────┘  └──────────────┘  └─────────────────────┘ │
+└─────────┼───────────────────────────────────────────────────┘
+          │ 验证并加载
+          ▼
+┌─────────────────┐
+│ BL1 (Trusted)   │ ← 验证BL2签名
+│ 第一阶段加载器   │
+└────────┬────────┘
+         │ 验证并加载
+         ▼
+┌─────────────────┐
+│ BL2 (Trusted)   │ ← 验证BL3x签名
+│ 第二阶段加载器   │
+└────────┬────────┘
+         │ 验证并加载
+         ▼
+┌─────────────────┐
+│ BL31 (EL3)      │ ← Secure Monitor
+│ BL32 (OP-TEE)   │ ← Trusted OS
+│ BL33 (U-Boot)   │ ← 正常世界引导
+└─────────────────┘
+```
+
+### 2. 镜像签名验证
 
 ```c
-// 详细实现示例
-#include <stdio.h>
+#include <openssl/rsa.h>
+#include <openssl/pem.h>
+#include <openssl/sha.h>
 
-int main(void) {
-    printf("Hello, 安全启动链验证!\n");
+// 镜像头部（带签名）
+typedef struct {
+    uint32_t magic;           // 镜像魔数
+    uint32_t version;         // 版本
+    uint32_t flags;           // 标志位
+    uint32_t code_size;       // 代码大小
+    uint32_t data_size;       // 数据大小
+    uint8_t  code_hash[32];   // 代码SHA256哈希
+
+    // 签名（位于头部之后）
+    // uint8_t signature[256]; // RSA-2048签名
+} BootImageHeader;
+
+// 验证镜像签名
+int verify_image_signature(const uint8_t *image, size_t image_size,
+                           RSA *public_key) {
+    BootImageHeader *hdr = (BootImageHeader*)image;
+
+    // 验证魔数
+    if (hdr->magic != BOOT_IMAGE_MAGIC) {
+        printf("Invalid magic: 0x%08x\n", hdr->magic);
+        return -1;
+    }
+
+    // 计算代码哈希
+    uint8_t computed_hash[SHA256_DIGEST_LENGTH];
+    SHA256(image + sizeof(BootImageHeader), hdr->code_size, computed_hash);
+
+    if (memcmp(computed_hash, hdr->code_hash, SHA256_DIGEST_LENGTH) != 0) {
+        printf("Hash mismatch!\n");
+        return -1;
+    }
+
+    // 验证签名
+    const uint8_t *signature = image + sizeof(BootImageHeader) + hdr->code_size;
+
+    uint8_t hash[SHA256_DIGEST_LENGTH];
+    SHA256((const unsigned char*)hdr, sizeof(BootImageHeader), hash);
+
+    int ret = RSA_verify(NID_sha256, hash, SHA256_DIGEST_LENGTH,
+                         signature, 256, public_key);
+
+    if (ret != 1) {
+        printf("Signature verification failed!\n");
+        return -1;
+    }
+
+    printf("Image verification passed\n");
+    return 0;
+}
+
+// 从OTP读取公钥哈希并验证
+int verify_public_key_hash(RSA *public_key, const uint8_t *otp_hash) {
+    uint8_t key_der[512];
+    uint8_t computed_hash[SHA256_DIGEST_LENGTH];
+
+    // 序列化公钥
+    int len = i2d_RSAPublicKey(public_key, NULL);
+    unsigned char *p = key_der;
+    i2d_RSAPublicKey(public_key, &p);
+
+    // 计算哈希
+    SHA256(key_der, len, computed_hash);
+
+    if (memcmp(computed_hash, otp_hash, SHA256_DIGEST_LENGTH) != 0) {
+        printf("Public key hash mismatch!\n");
+        return -1;
+    }
+
     return 0;
 }
 ```
 
-### 3.2 注意事项
-
-- 注意点1
-- 注意点2
-- 注意点3
-
----
-
-## 4. 最佳实践
+### 3. 链式验证
 
 ```c
-// 推荐做法
-void good_practice(void) {
-    // 实现
+// 启动阶段上下文
+typedef struct {
+    uint32_t stage;           // 当前阶段
+    uint8_t  next_hash[32];   // 下一阶段公钥哈希
+    void    *load_addr;       // 加载地址
+} BootContext;
+
+// 链式验证启动
+int chain_load(BootContext *ctx, const char *image_name, uint32_t stage) {
+    // 从存储加载镜像
+    uint8_t *image = load_from_storage(image_name);
+    size_t image_size = get_image_size(image_name);
+
+    // 验证镜像
+    if (verify_image(image, image_size, ctx->next_hash) != 0) {
+        printf("Stage %u verification failed!\n", stage);
+        enter_recovery_mode();
+        return -1;
+    }
+
+    // 提取下一阶段公钥哈希
+    BootImageHeader *hdr = (BootImageHeader*)image;
+    memcpy(ctx->next_hash, hdr->next_stage_hash, 32);
+
+    // 解压并执行
+    void *exec_addr = decompress_image(image, ctx->load_addr);
+
+    printf("Loading stage %u at %p\n", stage, exec_addr);
+
+    // 跳转到下一阶段
+    boot_jump(exec_addr, ctx);
+
+    return 0;  // 不会到达这里
 }
 
-// 避免的做法
-void bad_practice(void) {
-    // 实现
+// 完整启动链
+void secure_boot_chain(void) {
+    BootContext ctx = {0};
+
+    // 阶段1: BL1 (Boot ROM加载)
+    ctx.stage = 1;
+    memcpy(ctx.next_hash, read_otp_bl2_hash(), 32);
+    chain_load(&ctx, "bl2.bin", 1);
+
+    // 阶段2: BL2
+    ctx.stage = 2;
+    // BL2哈希已在chain_load中更新
+    chain_load(&ctx, "bl31.bin", 2);
+
+    // 阶段3: BL31/32/33
+    ctx.stage = 3;
+    chain_load(&ctx, "bl33.bin", 3);
+}
+```
+
+### 4. 测量启动 (Measured Boot)
+
+```c
+// TPM PCR扩展
+#include <tss2/tss2_esys.h>
+
+// 测量启动上下文
+typedef struct {
+    ESYS_CONTEXT *tpm_ctx;
+    TPMI_DH_PCR pcr_index;
+} MeasureContext;
+
+// 测量镜像并扩展PCR
+int measure_image(MeasureContext *ctx, const uint8_t *image, size_t size,
+                  const char *description) {
+    // 计算镜像哈希
+    uint8_t hash[SHA256_DIGEST_LENGTH];
+    SHA256(image, size, hash);
+
+    printf("Measuring: %s\n", description);
+    printf("  Hash: ");
+    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
+        printf("%02x", hash[i]);
+    }
+    printf("\n");
+
+    // TPM PCR扩展
+    TPM2B_DIGEST digest = {
+        .size = SHA256_DIGEST_LENGTH,
+    };
+    memcpy(digest.buffer, hash, SHA256_DIGEST_LENGTH);
+
+    ESYS_TR pcr_handle = ctx->pcr_index;
+
+    TSS2_RC rc = Esys_PCR_Extend(ctx->tpm_ctx, pcr_handle,
+                                  ESYS_TR_PASSWORD, ESYS_TR_NONE, ESYS_TR_NONE,
+                                  &digest);
+
+    if (rc != TSS2_RC_SUCCESS) {
+        printf("PCR Extend failed: 0x%x\n", rc);
+        return -1;
+    }
+
+    // 记录到启动日志
+    log_boot_event(description, hash, ctx->pcr_index);
+
+    return 0;
+}
+
+// 测量整个启动链
+void measured_boot_chain(void) {
+    MeasureContext ctx = {
+        .tpm_ctx = init_tpm(),
+        .pcr_index = 10,  // 用于启动测量的PCR
+    };
+
+    // 测量Boot ROM (静态值，通常由TPM厂商提供)
+    // ...
+
+    // 测量BL1
+    uint8_t *bl1 = load_image("bl1.bin");
+    measure_image(&ctx, bl1, get_size("bl1.bin"), "BL1");
+
+    // 测量BL2
+    uint8_t *bl2 = load_image("bl2.bin");
+    measure_image(&ctx, bl2, get_size("bl2.bin"), "BL2");
+
+    // 测量设备树
+    uint8_t *dtb = load_image(".dtb");
+    measure_image(&ctx, dtb, get_size(".dtb"), "Device Tree");
+
+    // 测量内核
+    uint8_t *kernel = load_image("zImage");
+    measure_image(&ctx, kernel, get_size("zImage"), "Kernel");
+
+    // 生成启动日志摘要并扩展到另一个PCR
+    finalize_boot_log(&ctx);
+}
+```
+
+### 5. U-Boot安全启动
+
+```c
+// U-Boot FIT镜像 (Flattened Image Tree)
+
+// FIT镜像结构
+// /images {
+//     kernel@1 {
+//         data = /incbin/("zImage");
+//         hash@1 { algo = "sha256"; };
+//         signature@1 {
+//             algo = "rsa,sha256";
+//             key-name-hint = "dev";
+//         };
+//     };
+//     fdt@1 {
+//         data = /incbin/("board.dtb");
+//         hash@1 { algo = "sha256"; };
+//     };
+// };
+// /configurations {
+//     default = "conf@1";
+//     conf@1 {
+//         kernel = "kernel@1";
+//         fdt = "fdt@1";
+//         signature@1 {
+//             algo = "rsa,sha256";
+//             key-name-hint = "dev";
+//             sign-images = "kernel", "fdt";
+//         };
+//     };
+// };
+
+// U-Boot验证回调
+int fit_image_verify(void *fit, int noffset, const void *data,
+                     size_t size) {
+    // 获取配置的公钥
+    const char *key_name = fdt_getprop(fit, noffset, "key-name-hint", NULL);
+
+    // 从DTB或存储加载公钥
+    RSA *pubkey = load_public_key(key_name);
+
+    // 验证哈希
+    uint8_t hash[SHA256_DIGEST_LENGTH];
+    SHA256(data, size, hash);
+
+    // 验证签名
+    const uint8_t *sig = fdt_getprop(fit, noffset, "value", NULL);
+    int sig_len = fdt_getprop_u32(fit, noffset, "value-len", 0);
+
+    return RSA_verify(NID_sha256, hash, SHA256_DIGEST_LENGTH,
+                      sig, sig_len, pubkey);
+}
+
+// U-Boot启动命令
+// setenv verify on
+// bootm ${kernel_addr} - ${fdt_addr}
+```
+
+### 6. 密钥管理
+
+```c
+// 密钥存储结构
+typedef struct {
+    uint32_t key_version;     // 密钥版本
+    uint32_t valid_from;      // 生效时间
+    uint32_t valid_until;     // 过期时间
+    uint8_t  revoked;         // 吊销标志
+    uint8_t  key_hash[32];    // 公钥哈希
+} KeyMetadata;
+
+// 密钥吊销列表 (CRL)
+typedef struct {
+    uint32_t version;
+    uint32_t entry_count;
+    uint32_t revoked_keys[32];  // 吊销的密钥版本
+} RevocationList;
+
+// 验证密钥有效性
+int verify_key_valid(const KeyMetadata *key, const RevocationList *crl) {
+    // 检查吊销
+    for (int i = 0; i < crl->entry_count; i++) {
+        if (crl->revoked_keys[i] == key->key_version) {
+            printf("Key version %u revoked!\n", key->key_version);
+            return -1;
+        }
+    }
+
+    // 检查有效期
+    uint32_t current_time = get_current_timestamp();
+    if (current_time < key->valid_from || current_time > key->valid_until) {
+        printf("Key outside validity period\n");
+        return -1;
+    }
+
+    return 0;
+}
+
+// 安全密钥更新
+int update_public_key(uint32_t key_version, const uint8_t *new_key_hash,
+                      const uint8_t *signature) {
+    // 验证更新签名（使用当前密钥）
+    if (!verify_update_signature(key_version, new_key_hash, signature)) {
+        return -1;
+    }
+
+    // 写入OTP（一次性）或安全存储
+    write_otp_key_hash(key_version, new_key_hash);
+
+    return 0;
 }
 ```
 
 ---
 
-## 5. 常见陷阱
+## ⚠️ 常见陷阱
 
-| 陷阱 | 后果 | 解决方案 |
-|:-----|:-----|:---------|
-| 陷阱1 | 后果1 | 方案1 |
-| 陷阱2 | 后果2 | 方案2 |
+### 陷阱 SEC01: TOCTOU攻击
+
+```c
+// 错误：验证和使用之间存在时间窗口
+verify_image(path);
+// <-- 攻击者可能在这里替换文件
+load_and_execute(path);
+
+// 正确：原子操作，验证后立即使用
+int verify_and_load(const uint8_t *image, size_t size) {
+    if (verify_image(image, size) != 0) return -1;
+    return execute_in_place(image);  // 直接执行已验证的内存
+}
+```
+
+### 陷阱 SEC02: 回滚攻击
+
+```c
+// 必须防止加载旧版本（有已知漏洞）的固件
+// 解决方案：安全版本号计数器
+
+int check_anti_rollback(uint32_t new_version) {
+    uint32_t current_version = read_security_counter();
+
+    if (new_version < current_version) {
+        printf("Rollback detected! Current: %u, New: %u\n",
+               current_version, new_version);
+        return -1;
+    }
+
+    // 更新安全计数器（单调递增）
+    if (new_version > current_version) {
+        increment_security_counter();
+    }
+
+    return 0;
+}
+```
 
 ---
 
-## 6. 参考与延伸阅读
+## 参考标准
 
-| 资源 | 说明 |
-|:-----|:-----|
-| 资源1 | 说明1 |
-| 资源2 | 说明2 |
+- **U-Boot Documentation** - doc/uImage.FIT/
+- **UEFI Specification** - Secure Boot Chapter
+- **TCG TPM 2.0 Library Specification**
+- **ARM Trusted Firmware** - Trusted Board Boot
 
 ---
 
-> **内容待补充**: 本节为框架文档，具体内容需从原始文档中提取完善。
+## ✅ 质量验收清单
+
+- [x] 安全启动链架构
+- [x] 镜像签名验证
+- [x] 链式验证实现
+- [x] 测量启动 (TPM)
+- [x] U-Boot FIT集成
+- [x] 密钥管理
+- [x] 防回滚保护
+
+---
+
+> **更新记录**
+>
+> - 2025-03-09: 初版创建
