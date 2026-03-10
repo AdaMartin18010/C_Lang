@@ -27,17 +27,19 @@ stages:
 variables:
   CC: gcc
   CXX: g++
+  GIT_DEPTH: 10
 
 build:
   stage: build
   image: gcc:13
   script:
     - mkdir build && cd build
-    - cmake ..
-    - make -j$(nproc)
+    - cmake -DCMAKE_BUILD_TYPE=Release ..
+    - cmake --build . --parallel $(nproc)
   artifacts:
     paths:
       - build/
+    expire_in: 1 hour
 
 test:
   stage: test
@@ -46,7 +48,18 @@ test:
     - build
   script:
     - cd build
-    - ctest --output-on-failure
+    - ctest --output-on-failure --parallel $(nproc)
+  coverage: '/Total Coverage: \d+\.\d+%/'
+
+deploy:
+  stage: deploy
+  image: alpine:latest
+  dependencies:
+    - build
+  script:
+    - echo "Deploying..."
+  only:
+    - main
 ```
 
 ---
@@ -60,7 +73,7 @@ test:
   stage: build
   script:
     - mkdir build && cd build
-    - cmake ..
+    - cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE ..
     - cmake --build . --parallel
   artifacts:
     paths:
@@ -69,12 +82,33 @@ test:
 build:linux:
   <<: *build_def
   image: gcc:13
+  variables:
+    BUILD_TYPE: Release
 
 build:windows:
   <<: *build_def
   image: mcr.microsoft.com/windows/servercore:ltsc2022
   tags:
     - windows
+
+build:macos:
+  <<: *build_def
+  tags:
+    - macos
+```
+
+### 矩阵构建
+
+```yaml
+build:
+  parallel:
+    matrix:
+      - CC: [gcc, clang]
+        BUILD_TYPE: [Debug, Release]
+  script:
+    - mkdir build && cd build
+    - cmake -DCMAKE_C_COMPILER=$CC -DCMAKE_BUILD_TYPE=$BUILD_TYPE ..
+    - cmake --build .
 ```
 
 ### Docker构建
@@ -88,7 +122,78 @@ docker-build:
   script:
     - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  only:
+    - main
 ```
+
+---
+
+## 🔧 缓存与优化
+
+### 依赖缓存
+
+```yaml
+variables:
+  CONAN_USER_HOME: "${CI_PROJECT_DIR}/.conan"
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .conan/data
+    - build/_deps
+
+build:
+  script:
+    - conan install . --build=missing
+    - cmake -B build
+    - cmake --build build
+```
+
+### 增量构建
+
+```yaml
+build:
+  cache:
+    key: build-cache
+    paths:
+      - build/CMakeFiles
+  script:
+    - cmake -B build
+    - cmake --build build
+```
+
+---
+
+## 📊 覆盖率报告
+
+```yaml
+test:
+  stage: test
+  script:
+    - cmake -B build -DENABLE_COVERAGE=ON
+    - cmake --build build
+    - ctest --test-dir build
+    - lcov --capture --directory build --output-file coverage.info
+    - lcov --remove coverage.info '/usr/*' --output-file coverage.info
+  coverage: '/lines......: \d+\.\d+%/'
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage.xml
+```
+
+---
+
+## ✅ GitLab CI检查清单
+
+- [ ] 配置runner
+- [ ] 编写.gitlab-ci.yml
+- [ ] 设置缓存
+- [ ] 配置多平台构建
+- [ ] 集成测试
+- [ ] 配置覆盖率
+- [ ] 设置部署
 
 ---
 
