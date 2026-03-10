@@ -101,8 +101,8 @@
 | 文件 | 主题 | 内容 |
 |:-----|:-----|:-----|
 | [01_Knowledge_Graph.md](./07_Knowledge_Graph/01_Knowledge_Graph.md) | 全局知识图谱 | 主题依赖/覆盖矩阵 | -->
-<!-- | [02_Learning_Paths.md](./07_Knowledge_Graph/02_Learning_Paths.md) | 学习路径 | 从入门到专家 | -->
-<!-- | [03_Prerequisite_Chains.md](./07_Knowledge_Graph/03_Prerequisite_Chains.md) | 前置依赖链 | 知识依赖关系 | -->
+| [02_Learning_Paths.md](./07_Knowledge_Graph/02_Learning_Paths.md) | 学习路径 | 从入门到专家 |
+| [03_Prerequisite_Chains.md](./07_Knowledge_Graph/03_Prerequisite_Chains.md) | 前置依赖链 | 知识依赖关系 |
 
 ---
 
