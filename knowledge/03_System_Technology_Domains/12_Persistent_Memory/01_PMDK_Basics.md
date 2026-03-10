@@ -43,7 +43,8 @@ mindmap
 
 ## 1. 概述
 
-持久内存（Persistent Memory, PM）结合了内存的字节寻址性能和存储的非易失特性。PMDK（Persistent Memory Development Kit）是Intel开发的开源库集合，简化持久内存编程。
+持久内存（Persistent Memory, PM）结合了内存的字节寻址性能和存储的非易失特性。
+PMDK（Persistent Memory Development Kit）是Intel开发的开源库集合，简化持久内存编程。
 
 **关键挑战：**
 

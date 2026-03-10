@@ -1,123 +1,37 @@
 ﻿================================================================================
   Knowledge Directory Analysis Report
-  Generated: 2026-03-09 21:41:47
+  Generated: 2026-03-10 11:49:47
 ================================================================================
 
 ## 任务1: 内容少于100行的.md文件 (0 个)
 --------------------------------------------------------------------------------
 ✓ 所有.md文件内容均超过100行
 
-## 任务2: README.md中的失效内部链接 (83 个)
+## 任务2: README.md中的失效内部链接 (0 个)
 --------------------------------------------------------------------------------
-
-SourceReadme                              BrokenLink                                                  SuggestedAction
-------------                              ----------                                                  ---------------
-.\03_System_Technology_Domains\README.md  ./01_Virtual_Machine_Interpreter/03_JIT_Compilation.md      文件不存在          
-.\03_System_Technology_Domains\README.md  ./01_Virtual_Machine_Interpreter/04_Garbage_Collection.md   文件不存在          
-.\03_System_Technology_Domains\README.md  ./02_Regex_Engine/01_NFA_Implementation.md                  文件不存在          
-.\03_System_Technology_Domains\README.md  ./02_Regex_Engine/03_JIT_Regex.md                           文件不存在          
-.\03_System_Technology_Domains\README.md  ./03_Computer_Vision/03_Edge_Detection.md                   文件不存在          
-.\03_System_Technology_Domains\README.md  ./04_Video_Codec/03_Hardware_Acceleration.md                文件不存在          
-.\03_System_Technology_Domains\README.md  ./05_Wireless_Protocol/03_Zigbee_Stack.md                   文件不存在          
-.\03_System_Technology_Domains\README.md  ./06_Security_Boot/03_Measured_Boot.md                      文件不存在          
-.\03_System_Technology_Domains\README.md  ./07_Hardware_Security/02_Secure_Element.md                 文件不存在          
-.\03_System_Technology_Domains\README.md  ./07_Hardware_Security/03_HSM_Integration.md                文件不存在          
-.\03_System_Technology_Domains\README.md  ./08_Distributed_Consensus/02_Paxos_Implementation.md       文件不存在          
-.\03_System_Technology_Domains\README.md  ./08_Distributed_Consensus/03_Multi_Raft.md                 文件不存在          
-.\03_System_Technology_Domains\README.md  ./11_Rust_Interoperability/02_Cbindgen_Usage.md             文件不存在          
-.\03_System_Technology_Domains\README.md  ./11_Rust_Interoperability/03_Unsafe_Rust_Patterns.md       文件不存在          
-.\03_System_Technology_Domains\README.md  ./11_In_Memory_Database/02_LSM_Tree.md                      文件不存在          
-.\03_System_Technology_Domains\README.md  ./11_In_Memory_Database/03_Hash_Index.md                    文件不存在          
-.\03_System_Technology_Domains\README.md  ./13_RDMA_Network/02_RDMA_Read_Write.md                     文件不存在          
-.\03_System_Technology_Domains\README.md  ./13_RDMA_Network/03_RDMA_Connection.md                     文件不存在          
-.\04_Industrial_Scenarios\README.md       ./01_Automotive_ECU/01_CAN_Bus_Protocol.md                  文件不存在          
-.\04_Industrial_Scenarios\README.md       ./01_Automotive_ECU/02_Autosar_Architecture.md              文件不存在          
-.\04_Industrial_Scenarios\README.md       ./01_Automotive_ECU/03_Functional_Safety.md                 文件不存在          
-.\04_Industrial_Scenarios\README.md       ./01_Automotive_ECU/04_OBD_Diagnostics.md                   文件不存在          
-.\04_Industrial_Scenarios\README.md       ./02_Avionics_Systems/01_ARINC_429.md                       文件不存在          
-.\04_Industrial_Scenarios\README.md       ./02_Avionics_Systems/02_DO_178C.md                         文件不存在          
-.\04_Industrial_Scenarios\README.md       ./02_Avionics_Systems/03_Flight_Control.md                  文件不存在          
-.\04_Industrial_Scenarios\README.md       ./03_High_Frequency_Trading/02_Lock_Free_Queues.md          文件不存在          
-.\04_Industrial_Scenarios\README.md       ./03_High_Frequency_Trading/03_Kernel_Bypass.md             文件不存在          
-.\04_Industrial_Scenarios\README.md       ./04_5G_Baseband/03_MIMO_Detection.md                       文件不存在          
-.\04_Industrial_Scenarios\README.md       ./05_Game_Engine/03_Entity_Component_System.md              文件不存在          
-.\04_Industrial_Scenarios\README.md       ./06_Quantum_Computing/03_Shor_Algorithm.md                 文件不存在          
-.\04_Industrial_Scenarios\README.md       ./08_Neuromorphic/01_SNN_Simulation.md                      文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./01_Formal_Semantics/02_Axiomatic_Semantics.md             文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./01_Formal_Semantics/03_Denotational_Semantics.md          文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./01_Formal_Semantics/04_Semantic_Equivalence.md            文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./01_Formal_Semantics/05_Type_Semantics.md                  文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./03_Verification_Energy/README.md                          文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./02_Algebraic_Topology/02_Cartesian_Closed_Categories.md   文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./02_Algebraic_Topology/03_Homotopy_Type_Theory.md          文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./02_Algebraic_Topology/04_Dependent_Types.md               文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./01_Formal_Semantics/README.md                             文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./03_Verification_Energy/02_Isabelle_HOL.md                 文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./03_Verification_Energy/03_CBMC_Model_Checking.md          文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./03_Verification_Energy/04_Separation_Logic.md             文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./01_Formal_Semantics/README.md                             文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./04_Self_Modifying_Code/02_Tracing_JIT.md                  文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./04_Self_Modifying_Code/03_Binary_Translation.md           文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./04_Self_Modifying_Code/04_Sandboxing.md                   文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./05_Computational_Complexity/01_Complexity_Classes.md      文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./05_Computational_Complexity/02_P_vs_NP.md                 文件不存在          
-.\05_Deep_Structure_MetaPhysics\README.md ./05_Computational_Complexity/03_Algorithm_Lower_Bounds.md  文件不存在          
-.\06_Thinking_Representation\README.md    ./01_Decision_Trees/01_Memory_Leak_Diagnosis.md             文件不存在          
-.\06_Thinking_Representation\README.md    ./01_Decision_Trees/02_Segfault_Troubleshooting.md          文件不存在          
-.\06_Thinking_Representation\README.md    ./01_Decision_Trees/03_Performance_Bottleneck.md            文件不存在          
-.\06_Thinking_Representation\README.md    ./01_Decision_Trees/04_Compilation_Error.md                 文件不存在          
-.\06_Thinking_Representation\README.md    ./01_Decision_Trees/05_Concurrency_Debug.md                 文件不存在          
-.\06_Thinking_Representation\README.md    ./02_Comparison_Matrices/01_Type_Storage_Matrix.md          文件不存在          
-.\06_Thinking_Representation\README.md    ./02_Comparison_Matrices/02_Synchronization_Matrix.md       文件不存在          
-.\06_Thinking_Representation\README.md    ./02_Comparison_Matrices/03_IO_Methods_Matrix.md            文件不存在          
-.\06_Thinking_Representation\README.md    ./02_Comparison_Matrices/04_Memory_Allocation_Matrix.md     文件不存在          
-.\06_Thinking_Representation\README.md    ./02_Comparison_Matrices/05_Compiler_Optimization_Matrix.md 文件不存在          
-.\06_Thinking_Representation\README.md    ./03_Mind_Maps/02_Memory_Model_Map.md                       文件不存在          
-.\06_Thinking_Representation\README.md    ./03_Mind_Maps/03_Pointer_Concepts_Map.md                   文件不存在          
-.\06_Thinking_Representation\README.md    ./03_Mind_Maps/04_Concurrent_Programming_Map.md             文件不存在          
-.\06_Thinking_Representation\README.md    ./04_Case_Studies/01_Network_Server.md                      文件不存在          
-.\06_Thinking_Representation\README.md    ./04_Case_Studies/02_Database_Engine.md                     文件不存在          
-.\06_Thinking_Representation\README.md    ./04_Case_Studies/03_Operating_System.md                    文件不存在          
-.\06_Thinking_Representation\README.md    ./04_Case_Studies/04_Compiler_Frontend.md                   文件不存在          
-.\06_Thinking_Representation\README.md    ./04_Case_Studies/05_Embedded_Firmware.md                   文件不存在          
-.\06_Thinking_Representation\README.md    ./05_Concept_Mappings/04_Storage_Duration_Lifetime.md       文件不存在          
-.\06_Thinking_Representation\README.md    ./05_Concept_Mappings/05_Compilation_Pipeline_Mapping.md    文件不存在          
-.\06_Thinking_Representation\README.md    ./06_Application_Scenarios/01_Embedded_Systems.md           文件不存在          
-.\06_Thinking_Representation\README.md    ./06_Application_Scenarios/02_Systems_Programming.md        文件不存在          
-.\06_Thinking_Representation\README.md    ./06_Application_Scenarios/03_High_Performance_Computing.md 文件不存在          
-.\06_Thinking_Representation\README.md    ./06_Application_Scenarios/04_Network_Programming.md        文件不存在          
-.\06_Thinking_Representation\README.md    ./06_Application_Scenarios/05_Database_Implementation.md    文件不存在          
-.\06_Thinking_Representation\README.md    ./06_Application_Scenarios/06_Compiler_Construction.md      文件不存在          
-.\06_Thinking_Representation\README.md    ./06_Application_Scenarios/07_Security_Sensitive.md         文件不存在          
-.\06_Thinking_Representation\README.md    ./07_Knowledge_Graph/01_Knowledge_Graph.md                  文件不存在          
-.\06_Thinking_Representation\README.md    ./07_Knowledge_Graph/02_Learning_Paths.md                   文件不存在          
-.\06_Thinking_Representation\README.md    ./07_Knowledge_Graph/03_Prerequisite_Chains.md              文件不存在          
-.\06_Thinking_Representation\README.md    ./08_Index/02_Standard_Reference.md                         文件不存在          
-.\06_Thinking_Representation\README.md    ./08_Index/03_API_Quick_Reference.md                        文件不存在          
-.\06_Thinking_Representation\README.md    ./07_Knowledge_Graph/02_Learning_Paths.md                   文件不存在          
-
-
-
+✓ 所有内部链接均有效
 
 ## 任务3: 主要目录文件统计
 --------------------------------------------------------------------------------
 ### 01_Core_Knowledge_System
   - 子目录数: 9
-  - Markdown文件总数: 34
-  - 总行数: 10274
-  - 平均行数/文件: 302.2
+  - Markdown文件总数: 38
+  - 总行数: 15316
+  - 平均行数/文件: 403.1
   - 行数分布:
     * < 50 行:   0 个
     * 50-100 行: 0 个
-    * 100-200行: 7 个
+    * 100-200行: 9 个
     * 200-500行: 24 个
-    * > 500 行:  3 个
+    * > 500 行:  5 个
   - 文件列表:
 
 RelativePath                                                 Lines SizeKB
 ------------                                                 ----- ------
-04_Standard_Library_Layer\10_Threads_C11.md                    100   2.28
-05_Engineering\08_Code_Review_Checklist.md                     126   3.21
+01_Basic_Layer\README.md                                       106   6.24
+02_Core_Layer\README.md                                        133   8.49
+03_Construction_Layer\README.md                                156   8.31
+04_Standard_Library_Layer\README.md                            185  10.51
 04_Standard_Library_Layer\02_C99_Library.md                    191   5.03
 06_Advanced_Layer\03_Portability.md                            192   5.34
 05_Engineering\01_Build_System\01_Makefile.md                  193   4.35
@@ -129,8 +43,8 @@ README.md                                                      195  10.07
 03_Construction_Layer\02_Preprocessor.md                       225   5.65
 04_Standard_Library_Layer\03_C11_Library.md                    228   5.86
 05_Engineering_Layer\02_Debug_Techniques.md                    237   7.21
-01_Basic_Layer\03_Operators_Expressions.md                     259   6.56
 04_Standard_Library_Layer\01_C89_Library.md                    259   7.26
+01_Basic_Layer\03_Operators_Expressions.md                     259   6.56
 03_Construction_Layer\03_Modularization_Linking.md             260   6.85
 06_Advanced_Layer\01_Language_Extensions.md                    261   7.22
 01_Basic_Layer\01_Syntax_Elements.md                           266   7.22
@@ -150,27 +64,33 @@ README.md                                                      195  10.07
 01_Basic_Layer\02_Data_Type_System.md                          696  25.25
 08_Application_Domains\03_Infrastructure_Software.md           702  21.16
 02_Core_Layer\01_Pointer_Depth.md                              774  25.09
+04_Standard_Library_Layer\10_Threads_C11.md                   1917  62.91
+05_Engineering\08_Code_Review_Checklist.md                    2771  86.84
 
 
 
 
 ### 02_Formal_Semantics_and_Physics
-  - 子目录数: 12
-  - Markdown文件总数: 21
-  - 总行数: 8479
-  - 平均行数/文件: 403.8
+  - 子目录数: 11
+  - Markdown文件总数: 25
+  - 总行数: 8992
+  - 平均行数/文件: 359.7
   - 行数分布:
     * < 50 行:   0 个
     * 50-100 行: 0 个
-    * 100-200行: 2 个
+    * 100-200行: 6 个
     * 200-500行: 17 个
     * > 500 行:  2 个
   - 文件列表:
 
 RelativePath                                                  Lines SizeKB
 ------------                                                  ----- ------
+01_Game_Semantics\README.md                                     108   5.38
+06_C_Assembly_Mapping\README.md                                 127   6.67
 README.md                                                       131   7.52
+09_Physical_Machine_Layer\README.md                             147   6.87
 03_Compiler_Optimization\04_Auto_Vectorization.md               155   3.74
+10_ISA_Machine_Code\README.md                                   157   8.91
 07_Microarchitecture\01_Cycle_Accurate_Semantics.md             211   6.02
 06_C_Assembly_Mapping\01_Compilation_Functor.md                 313   9.13
 04_Cognitive_Representation\01_Mental_Models.md                 362  11.25
@@ -189,39 +109,44 @@ README.md                                                       131   7.52
 01_Game_Semantics\02_C11_Memory_Model.md                        474  15.35
 10_ISA_Machine_Code\01_Instruction_Set_Architecture.md          490   16.2
 02_Coalgebraic_Methods\02_Bisimulation.md                       538  17.82
-09_Physical_Machine_Layer\01_Digital_Logic_Gates.md             568  16.61
+09_Physical_Machine_Layer\01_Digital_Logic_Gates.md             542  16.55
 
 
 
 
 ### 03_System_Technology_Domains
   - 子目录数: 15
-  - Markdown文件总数: 33
-  - 总行数: 14221
-  - 平均行数/文件: 430.9
+  - Markdown文件总数: 49
+  - 总行数: 23041
+  - 平均行数/文件: 470.2
   - 行数分布:
     * < 50 行:   0 个
     * 50-100 行: 0 个
-    * 100-200行: 2 个
+    * 100-200行: 7 个
     * 200-500行: 27 个
-    * > 500 行:  4 个
+    * > 500 行:  15 个
   - 文件列表:
 
 RelativePath                                                 Lines SizeKB
 ------------                                                 ----- ------
-11_In_Memory_Database\01_B_Tree_Index.md                       112   3.12
-README.md                                                      176   8.71
+01_Virtual_Machine_Interpreter\README.md                       138   5.37
+11_In_Memory_Database\README.md                                159    7.6
+02_Regex_Engine\README.md                                      164   6.24
+06_Security_Boot\README.md                                     173   7.19
+README.md                                                      176   8.13
+08_Distributed_Consensus\README.md                             180   7.12
+07_Hardware_Security\README.md                                 185   8.08
 14_Concurrency_Parallelism\01_POSIX_Threads.md                 227   6.17
 15_Network_Programming\01_Socket_Programming.md                232   6.92
 02_Regex_Engine\02_Pike_VM.md                                  265   8.09
 02_Regex_Engine\01_Thompson_NFA.md                             296   7.73
 09_High_Performance_Log\03_Lockless_Ring_Buffer_SPSC_MPMC.md   298   9.96
 08_Distributed_Consensus\01_Raft_Core.md                       329  10.58
-12_Persistent_Memory\01_PMDK_Basics.md                         336  11.12
+12_Persistent_Memory\01_PMDK_Basics.md                         337  11.12
 11_Rust_Interoperability\01_C_ABI_Basics.md                    340   8.77
 06_Security_Boot\01_ARM_Trusted_Firmware.md                    344  12.71
-01_Virtual_Machine_Interpreter\02_Register_VM.md               362  12.16
-11_Rust_Interoperability\01_Rust_Call_C.md                     373  10.12
+01_Virtual_Machine_Interpreter\02_Register_VM.md               363  12.16
+11_Rust_Interoperability\01_Rust_Call_C.md                     373  10.13
 04_Video_Codec\01_H264_Decoding.md                             377  12.23
 06_Security_Boot\02_Secure_Boot_Chain.md                       381     13
 01_Virtual_Machine_Interpreter\01_Bytecode_VM.md               387  10.69
@@ -234,34 +159,50 @@ README.md                                                      176   8.71
 11_Rust_Interoperability\02_C_Call_Rust.md                     433  12.53
 07_Hardware_Security\01_TPM2_TSS.md                            439  16.13
 11_In_Memory_Database\02_LRU_Cache.md                          440  12.91
-04_Video_Codec\02_Custom_IO.md                                 458  15.71
 05_Wireless_Protocol\02_LoRa_SX1276.md                         458  15.29
+04_Video_Codec\02_Custom_IO.md                                 458  15.71
 13_RDMA_Network\01_Verbs_API.md                                464  13.85
 07_Hardware_Security\02_Key_Sealing.md                         493  17.88
+01_Virtual_Machine_Interpreter\03_JIT_Compilation.md           503  16.36
 09_High_Performance_Log\02_Structured_Binary_Log.md            514  16.84
+02_Regex_Engine\01_NFA_Implementation.md                       517   18.6
 11_In_Memory_Database\01_RESP_Protocol.md                      517  16.59
 08_Distributed_Consensus\02_Leader_Election.md                 538  18.47
+06_Security_Boot\03_Measured_Boot.md                           543  19.17
+03_Computer_Vision\03_Edge_Detection.md                        560  20.33
+04_Video_Codec\03_Hardware_Acceleration.md                     561  20.15
+08_Distributed_Consensus\02_Paxos_Implementation.md            594  23.43
+07_Hardware_Security\02_Secure_Element.md                      611  22.18
+11_In_Memory_Database\02_LSM_Tree.md                           637  22.02
+05_Wireless_Protocol\03_Zigbee_Stack.md                        662  24.93
+07_Hardware_Security\03_HSM_Integration.md                    1209  52.89
+11_In_Memory_Database\01_B_Tree_Index.md                      1534  58.51
 13_RDMA_Network\01_Verbs_API_Detailed.md                      2163  69.87
 
 
 
 
 ### 04_Industrial_Scenarios
-  - 子目录数: 11
-  - Markdown文件总数: 26
-  - 总行数: 12800
-  - 平均行数/文件: 492.3
+  - 子目录数: 13
+  - Markdown文件总数: 39
+  - 总行数: 19195
+  - 平均行数/文件: 492.2
   - 行数分布:
     * < 50 行:   0 个
     * 50-100 行: 0 个
-    * 100-200行: 1 个
-    * 200-500行: 17 个
-    * > 500 行:  8 个
+    * 100-200行: 5 个
+    * 200-500行: 18 个
+    * > 500 行:  16 个
   - 文件列表:
 
 RelativePath                                                 Lines SizeKB
 ------------                                                 ----- ------
-README.md                                                      136   6.45
+README.md                                                      136   6.18
+01_Automotive_ECU\README.md                                    151    9.9
+02_Linux_Kernel\README.md                                      166    9.1
+03_High_Frequency_Trading\README.md                            166   9.08
+02_Avionics_Systems\README.md                                  185  10.33
+06_Quantum_Computing\README.md                                 201   9.79
 04_5G_Baseband\01_SIMD_Vectorization.md                        241   8.18
 11_Cryogenic_Superconducting\01_Cryo_Serial_Interface.md       272  11.02
 05_Game_Engine\01_GPU_Memory_Management.md                     303  10.51
@@ -271,7 +212,7 @@ README.md                                                      136   6.45
 06_Quantum_Computing\01_Quantum_Simulation_C.md                347   11.9
 11_Cryogenic_Superconducting\02_Subthreshold_Optimization.md   347  14.23
 10_Deep_Sea\02_Energy_Aware_Scheduling.md                      348   11.9
-03_High_Frequency_Trading\02_Cache_Line_Optimization.md        353  13.58
+03_High_Frequency_Trading\02_Cache_Line_Optimization.md        353  13.59
 05_Game_Engine\01_ECS_Architecture.md                          356  11.79
 10_Deep_Sea\01_Acoustic_Modem.md                               358  14.01
 09_Space_Computing\02_TMR_Voting.md                            380  13.63
@@ -280,93 +221,124 @@ README.md                                                      136   6.45
 08_Neuromorphic\02_STDP_Learning.md                            460  16.16
 08_Neuromorphic\01_SNN_Control.md                              497  17.32
 06_Quantum_Computing\02_Surface_Code_Decoder.md                617  24.65
+01_Automotive_ECU\01_CAN_Bus_Protocol.md                       620  22.42
+01_Automotive_ECU\03_Functional_Safety.md                      630  20.21
 09_DNA_Storage\01_DNA_Synthesis.md                             638  26.73
 09_DNA_Storage\02_Error_Correction_Coding.md                   647  23.75
+02_Avionics_Systems\01_ARINC_429.md                            653  22.02
+01_Automotive_ECU\02_Autosar_Architecture.md                   674  25.82
 01_Automotive_ABS\02_Hard_RealTime.md                          676  23.96
+06_Quantum_Computing\03_Shor_Algorithm.md                      687   22.6
 02_Linux_Kernel\02_Cache_Coherence.md                          706  25.63
 06_Quantum_Computing\01_Quantum_Classical_Interface.md         716  30.06
 01_Automotive_ABS\01_ABS_System.md                             732  31.23
-04_5G_Baseband\02_DMA_Offload.md                              1889  72.88
+03_High_Frequency_Trading\02_Lock_Free_Queues.md               738  24.89
+09_Space_Computing\01_SNN_Simulation.md                        742  27.28
+02_Avionics_Systems\02_DO_178C.md                              781  28.15
+04_5G_Baseband\02_DMA_Offload.md                              1890  72.88
 
 
 
 
 ### 05_Deep_Structure_MetaPhysics
-  - 子目录数: 13
-  - Markdown文件总数: 21
-  - 总行数: 10761
-  - 平均行数/文件: 512.4
+  - 子目录数: 12
+  - Markdown文件总数: 28
+  - 总行数: 14007
+  - 平均行数/文件: 500.2
   - 行数分布:
     * < 50 行:   0 个
     * 50-100 行: 0 个
-    * 100-200行: 4 个
-    * 200-500行: 4 个
-    * > 500 行:  13 个
+    * 100-200行: 6 个
+    * 200-500行: 5 个
+    * > 500 行:  17 个
   - 文件列表:
 
 RelativePath                                                 Lines SizeKB
 ------------                                                 ----- ------
 08_Debugging_Tools\02_Valgrind_Memory.md                       130   3.38
-README.md                                                      149   6.96
+README.md                                                      149   6.42
+01_Formal_Semantics\README.md                                  164   8.68
 02_Algebraic_Topology\01_Type_Algebra.md                       178   4.56
+04_Self_Modifying_Code\README.md                               184   8.99
 08_Debugging_Tools\01_GDB_Debugging.md                         199   4.83
 01_Formal_Semantics\01_Operational_Semantics.md                225   6.91
-07_Computability_Theory\01_Turing_Machines.md                  421  14.15
+01_Formal_Semantics\02_Axiomatic_Semantics.md                  340  10.39
+07_Computability_Theory\01_Turing_Machines.md                  392  14.01
 01_Linking_Algebraic_Topology\01_Relocation_Group_Action.md    491  15.79
 01_Linking_Algebraic_Topology\02_Homology_Groups.md            499  17.37
+01_Formal_Semantics\03_Denotational_Semantics.md               506   15.4
 03_Heterogeneous_Memory\01_CUDA_Unified_Memory.md              518  17.17
 04_Formal_Verification_Energy\02_Separation_Logic_Entropy.md   521  14.61
 05_Self_Modifying_Code\01_Von_Neumann_Reflectivity.md          531  16.18
+04_Self_Modifying_Code\02_Tracing_JIT.md                       580     19
 04_Formal_Verification_Energy\01_WP_Energy_Landscape.md        602  18.16
 06_Standard_Library_Physics\02_Memcpy_SIMD.md                  605  17.77
 06_Standard_Library_Physics\01_Malloc_Physics.md               614  18.59
 03_Heterogeneous_Memory\02_OpenMP_Offload.md                   642  20.46
 04_Self_Modifying_Code\01_JIT_Basics.md                        656  20.59
+02_Algebraic_Topology\02_Cartesian_Closed_Categories.md        658  18.55
 05_Self_Modifying_Code\02_JIT_Physical_Constraints.md          661  22.22
 06_Standard_Library_Physics\03_Qsort_Branch_Prediction.md      671  19.94
 03_Verification_Energy\01_Coq_Verification.md                  700  19.81
 02_Debug_Info_Encoding\02_CFI_Stack_Reconstruction.md          741  26.13
+03_Verification_Energy\04_Separation_Logic.md                  843  27.81
 02_Debug_Info_Encoding\01_DWARF_Deserialization.md            1007  36.32
 
 
 
 
 ### 06_Thinking_Representation
-  - 子目录数: 8
-  - Markdown文件总数: 14
-  - 总行数: 3184
-  - 平均行数/文件: 227.4
+  - 子目录数: 12
+  - Markdown文件总数: 30
+  - 总行数: 14106
+  - 平均行数/文件: 470.2
   - 行数分布:
     * < 50 行:   0 个
     * 50-100 行: 0 个
-    * 100-200行: 9 个
-    * 200-500行: 4 个
-    * > 500 行:  1 个
+    * 100-200行: 12 个
+    * 200-500行: 7 个
+    * > 500 行:  11 个
   - 文件列表:
 
 RelativePath                                                           Lines SizeKB
 ------------                                                           ----- ------
+01_Decision_Trees\README.md                                              100   5.33
 05_Concept_Mappings\06_Standards_Mapping.md                              109   4.85
+02_Comparison_Matrices\README.md                                         123    8.5
 04_Case_Studies\07_Performance_Optimization.md                           123   3.15
 05_Concept_Mappings\03_Concurrency_Safety_Layers.md                      126   5.45
 05_Concept_Mappings\02_Type_System_Matrix.md                             129   4.61
 05_Concept_Mappings\01_Pointer_Memory_Mapping.md                         139   6.75
-README.md                                                                152    9.8
+07_Knowledge_Graph\02_Learning_Paths.md                                  139   5.79
+README.md                                                                152   7.92
 04_Case_Studies\06_Embedded_System_Design.md                             162   3.98
-01_Mind_Maps\01_Knowledge_System_MindMap.md                              172  19.24
-02_Multidimensional_Matrix\01_Standards_Comparison_Matrix.md             178   8.81
+04_Case_Studies\README.md                                                169   6.88
+01_Mind_Maps\01_Knowledge_System_MindMap.md                              172  19.25
+05_Concept_Mappings\README.md                                            228  10.87
 04_Application_Scenario_Trees\01_Industry_Application_Scenario_Tree.md   266   8.17
 05_Concept_Mappings\07_Topic_Dependency_Graph.md                         266   5.89
 03_Decision_Trees\01_Learning_Path_Decision_Tree.md                      301   9.93
 08_Index\01_Global_Index.md                                              436  23.71
+01_Decision_Trees\02_Segfault_Troubleshooting.md                         465  16.72
+07_Knowledge_Graph\01_Knowledge_Graph.md                                 484  18.74
+02_Comparison_Matrices\01_Type_Storage_Matrix.md                         611  22.84
+03_Mind_Maps\02_Memory_Model_Map.md                                      613   42.5
 06_Learning_Paths\01_Beginner_to_Advanced.md                             625  25.72
+01_Decision_Trees\03_Performance_Bottleneck.md                           629  23.95
+01_Decision_Trees\01_Memory_Leak_Diagnosis.md                            642  19.54
+07_Knowledge_Graph\03_Prerequisite_Chains.md                             699  28.25
+04_Case_Studies\01_Network_Server.md                                     725  26.67
+04_Case_Studies\03_Operating_System.md                                   869  41.33
+04_Case_Studies\02_Database_Engine.md                                    958  41.27
+02_Comparison_Matrices\02_Synchronization_Matrix.md                     1158  39.09
+02_Multidimensional_Matrix\01_Standards_Comparison_Matrix.md            2488  78.15
 
 
 
 
 ## 总结
 --------------------------------------------------------------------------------
-- Markdown文件总数: 161
+- Markdown文件总数: 226
 - 内容不足文件数 (<100行): 0
-- 失效链接数: 83
-- 总代码行数: 61960
+- 失效链接数: 0
+- 总代码行数: 99489

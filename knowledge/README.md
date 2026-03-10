@@ -113,9 +113,12 @@
       - [方式2: 提交Pull Request](#方式2-提交pull-request)
     - [10.2 文档规范](#102-文档规范)
       - [文件格式](#文件格式)
-    - [代码示例](#代码示例)
-  - [相关文档](#相关文档)
-  - [参考](#参考)
+      - [内容质量标准](#内容质量标准)
+    - [10.3 社区准则](#103-社区准则)
+      - [行为准则](#行为准则)
+      - [审核流程](#审核流程)
+  - [十一、许可与致谢](#十一许可与致谢)
+    - [11.1 许可协议](#111-许可协议)
     - [11.2 致谢](#112-致谢)
       - [主要贡献者](#主要贡献者)
       - [参考资源](#参考资源)
@@ -1282,46 +1285,46 @@ Issue模板：
 #### 文件格式
 
 ```markdown
-# 文档标题
+    # 文档标题
 
-> **层级**: Lx | **难度**: ⭐⭐⭐ | **建议时长**: X小时
+    > **层级**: Lx | **难度**: ⭐⭐⭐ | **建议时长**: X小时
 
-## 目录
+    ## 目录
 
-1. [章节1](#章节1)
-2. [章节2](#章节2)
+    1. [章节1](#章节1)
+    2. [章节2](#章节2)
 
-## 章节1
+    ## 章节1
 
-### 小节1.1
+    ### 小节1.1
 
-内容...使用Mermaid图表说明。
+    内容...使用Mermaid图表说明。
 
-```mermaid
-graph LR
-    A --> B
-```
+    ```mermaid
+    graph LR
+        A --> B
+    ```
 
-### 代码示例
+    ### 代码示例
 
-```c
-// 完整可编译的代码示例
-#include <stdio.h>
+    ```c
+    // 完整可编译的代码示例
+    #include <stdio.h>
 
-int main() {
-    printf("Hello, World!\n");
-    return 0;
-}
-```
+    int main() {
+        printf("Hello, World!\n");
+        return 0;
+    }
+    ```
 
-## 相关文档
+    ## 相关文档
 
-- [上一篇](./prev.md)
-- [下一篇](./next.md)
+    - [返回知识库根目录](../README.md)
+    - [全局索引](00_INDEX.md)
 
-## 参考
+    ## 参考
 
-- [1] 权威来源引用
+    - [1] 权威来源引用
 
 ```
 
@@ -1386,12 +1389,14 @@ Copyright (c) 2025 C Language Knowledge Base Contributors
 本知识库参考了以下权威来源：
 
 **标准与规范**:
+
 - ISO/IEC 9899:2018 (C17标准)
 - IEEE 1364/1076 (Verilog/VHDL)
 - Intel SDM (软件开发者手册)
 - ARM Architecture Reference Manual
 
 **经典著作**:
+
 - K&R 《C程序设计语言》
 - Bryant & O'Hallaron 《深入理解计算机系统》
 - Patterson & Hennessy 《计算机组成与设计》
@@ -1400,6 +1405,7 @@ Copyright (c) 2025 C Language Knowledge Base Contributors
 - Tanenbaum 《Structured Computer Organization》
 
 **研究论文**:
+
 - Turing (1936) "On Computable Numbers"
 - Church (1936) Lambda Calculus
 - Leroy et al. CompCert验证编译器
@@ -1407,6 +1413,7 @@ Copyright (c) 2025 C Language Knowledge Base Contributors
 #### 工具与平台
 
 感谢以下开源工具和平台：
+
 - GCC/Clang编译器
 - GDB调试器
 - Valgrind内存检测

@@ -33,7 +33,7 @@ mindmap
       结构体
     内存安全
       unsafe块
-      生命周期
+      生命周期text
       Drop trait
 ```
 

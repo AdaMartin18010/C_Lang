@@ -21,11 +21,11 @@
 
 | 文件名 | 案例主题 | 核心知识点 |
 |--------|----------|------------|
-| [01_Network_Server.md](./01_Network_Server.md) | 网络服务器实现 | I/O多路复用、事件驱动、并发模型、协议解析 |
-| [02_Database_Engine.md](./02_Database_Engine.md) | 数据库引擎设计 | B+树索引、事务管理、缓存策略、存储引擎 |
-| [03_Operating_System.md](./03_Operating_System.md) | 操作系统内核 | 进程调度、内存管理、中断处理、系统调用 |
-| [04_Compiler_Frontend.md](./04_Compiler_Frontend.md) | 编译器前端 | 词法分析、语法分析、AST、符号表 |
-| [05_Embedded_Firmware.md](./05_Embedded_Firmware.md) | 嵌入式固件 | 寄存器操作、中断服务、低功耗、实时性 |
+| ~~01_Network_Server.md~~ | 网络服务器实现 | (计划中) |
+| ~~02_Database_Engine.md~~ | 数据库引擎设计 | (计划中) |
+| ~~03_Operating_System.md~~ | 操作系统内核 | (计划中) |
+| ~~04_Compiler_Frontend.md~~ | 编译器前端 | (计划中) |
+| ~~05_Embedded_Firmware.md~~ | 嵌入式固件 | (计划中) |
 | [06_Embedded_System_Design.md](./06_Embedded_System_Design.md) | 嵌入式系统设计 | 硬件抽象、驱动架构、资源受限编程 |
 | [07_Performance_Optimization.md](./07_Performance_Optimization.md) | 性能优化实战 | Profiling、算法优化、缓存优化、SIMD |
 
@@ -118,7 +118,7 @@ typedef struct BPTreeNode {
 ```text
 目标: 实现一个简单语言的编译器
 
-参考 [编译器前端案例](./04_Compiler_Frontend.md):
+参考 ~~编译器前端案例~~ (计划中):
 
 实现阶段:
 阶段1: 词法分析 (Lexer)
@@ -142,7 +142,7 @@ typedef struct BPTreeNode {
 ```text
 场景: 开发一个基于STM32的传感器采集系统
 
-参考 [嵌入式固件案例](./05_Embedded_Firmware.md):
+参考 ~~嵌入式固件案例~~ (计划中):
 
 设计要点:
 1. 时钟配置
@@ -212,11 +212,11 @@ typedef struct BPTreeNode {
 
 | 想学习的技能 | 重点案例 |
 |-------------|----------|
-| 高并发网络编程 | [网络服务器](./01_Network_Server.md) |
-| 存储引擎设计 | [数据库引擎](./02_Database_Engine.md) |
-| 底层系统原理 | [操作系统](./03_Operating_System.md) |
-| 语言处理技术 | [编译器前端](./04_Compiler_Frontend.md) |
-| 硬件编程 | [嵌入式固件](./05_Embedded_Firmware.md) |
+| 高并发网络编程 | ~~网络服务器~~ (计划中) |
+| 存储引擎设计 | ~~数据库引擎~~ (计划中) |
+| 底层系统原理 | ~~操作系统~~ (计划中) |
+| 语言处理技术 | ~~编译器前端~~ (计划中) |
+| 硬件编程 | ~~嵌入式固件~~ (计划中) |
 | 系统架构设计 | [嵌入式系统设计](./06_Embedded_System_Design.md) |
 | 性能调优方法 | [性能优化实战](./07_Performance_Optimization.md) |
 

@@ -10,11 +10,13 @@
 本目录介绍C语言中用于**组织复杂数据**和**构建大型程序**的关键机制。掌握这些内容是从编写小程序过渡到开发工程级项目的重要一步。
 
 构造层包含三个核心主题：
+
 - **结构体与联合体**: 自定义复合数据类型、位域、对齐与填充、自引用结构
 - **预处理器**: 宏定义、条件编译、头文件管理、预定义宏的高级应用
 - **模块化与链接**: 多文件编程、外部链接、头文件保护、编译单元管理
 
 这些机制让你能够：
+
 - 创建复杂的自定义数据类型（如链表节点、二叉树节点）
 - 编写可移植、可配置的代码
 - 组织大型项目，实现代码复用和团队协作
@@ -32,6 +34,7 @@
 ### 详细内容速查
 
 #### 01_Structures_Unions.md - 结构体与联合体
+
 - **结构体基础**: 定义语法、成员访问、初始化方法
 - **结构体内存布局**: 成员对齐、填充字节、`#pragma pack`
 - **位域(Bit-Field)**: 定义语法、布局规则、可移植性问题
@@ -43,6 +46,7 @@
 - **柔性数组成员**: C99 FAM、动态大小结构体
 
 #### 02_Preprocessor.md - 预处理器
+
 - **翻译阶段**: 预处理在编译流程中的位置
 - **宏定义**: 对象宏、函数宏、多行宏、变参宏(C99)
 - **宏展开规则**: 替换机制、字符串化`#`、连接`##`
@@ -55,6 +59,7 @@
 - **现代替代**: `const`、`inline`、`enum`替代宏的场景
 
 #### 03_Modularization_Linking.md - 模块化与链接
+
 - **翻译单元**: 编译单元概念、单定义规则(ODR)
 - **声明 vs 定义**: `extern`声明、定义式声明的区别
 - **链接属性**: 外部链接、内部链接、无链接
@@ -113,6 +118,7 @@
 ### 关键技能点
 
 #### 结构体设计最佳实践
+
 ```c
 // 良好的结构体设计示例
 typedef struct {
@@ -133,6 +139,7 @@ typedef struct {
 ```
 
 #### 头文件模板规范
+
 ```c
 // filename.h - 标准头文件模板
 #ifndef FILENAME_H
@@ -156,24 +163,29 @@ extern "C" {
 ## 关联链接
 
 ### 向上导航
+
 - [← 返回父目录: 核心知识体系](../README.md)
 - [← 返回根目录: 知识库首页](../../README.md)
 
 ### 前置知识
+
 - **[← 01 Basic Layer: 基础层](../01_Basic_Layer/)** - 语法、类型、控制流基础
 - **[← 02 Core Layer: 核心层](../02_Core_Layer/)** - 指针、内存管理是理解结构体的前提
 
 ### 后续延伸
+
 - **[→ 04 Standard Library Layer: 标准库层](../04_Standard_Library_Layer/)** - 标准库数据结构和函数
 - **[→ 05 Engineering Layer: 工程层](../05_Engineering_Layer/)** - Makefile、构建系统
 - **[→ 03 System Technology: 内存数据库](../../03_System_Technology_Domains/11_In_Memory_Database/)** - B+树等高级数据结构
 
 ### 横向关联
+
 - **[→ 02 Formal Semantics: 链接加载拓扑](../../02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/)** - 深入理解链接机制
 - **[→ 06 Thinking: 概念映射](../../06_Thinking_Representation/05_Concept_Mappings/)** - 可视化知识结构
 - **[→ 03 System: 数据结构实现](../../03_System_Technology_Domains/)** - 实际应用结构体
 
 ### 工业场景应用
+
 - **[→ 04 Industrial: 汽车ABS](../../04_Industrial_Scenarios/01_Automotive_ABS/)** - 结构体在实时系统中的应用
 - **[→ 04 Industrial: 游戏引擎](../../04_Industrial_Scenarios/05_Game_Engine/)** - ECS架构中的结构体设计
 

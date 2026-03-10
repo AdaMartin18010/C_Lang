@@ -24,8 +24,8 @@
 | [01_Pointer_Memory_Mapping.md](./01_Pointer_Memory_Mapping.md) | 指针与内存映射 | 指针、地址、内存布局、堆栈、引用 |
 | [02_Type_System_Matrix.md](./02_Type_System_Matrix.md) | 类型系统矩阵 | 基本类型、复合类型、类型转换、兼容性 |
 | [03_Concurrency_Safety_Layers.md](./03_Concurrency_Safety_Layers.md) | 并发安全层级 | 原子操作、互斥锁、信号量、内存序、线程安全 |
-| [04_Storage_Duration_Lifetime.md](./04_Storage_Duration_Lifetime.md) | 存储期与生命周期 | 自动、静态、动态存储期、作用域、可见性 |
-| [05_Compilation_Pipeline_Mapping.md](./05_Compilation_Pipeline_Mapping.md) | 编译流程映射 | 预处理、编译、汇编、链接、符号解析 |
+| ~~04_Storage_Duration_Lifetime.md~~ | 存储期与生命周期 | (计划中) |
+| ~~05_Compilation_Pipeline_Mapping.md~~ | 编译流程映射 | (计划中) |
 
 ---
 
@@ -158,7 +158,7 @@ C类型系统层次:
 ### 示例4：存储期与生命周期
 
 ```text
-阅读 [存储期与生命周期映射](./04_Storage_Duration_Lifetime.md)
+~~阅读 存储期与生命周期映射~~ (计划中)
 
 变量生命周期完整映射:
 
@@ -195,7 +195,7 @@ C类型系统层次:
 ### 示例5：编译流程理解
 
 ```text
-阅读 [编译流程映射](./05_Compilation_Pipeline_Mapping.md)
+~~阅读 编译流程映射~~ (计划中)
 
 完整编译流程:
 
@@ -280,8 +280,8 @@ C类型系统层次:
 | 指针的本质和用法 | [指针与内存](./01_Pointer_Memory_Mapping.md) |
 | C类型体系全景 | [类型系统](./02_Type_System_Matrix.md) |
 | 多线程编程基础 | [并发安全](./03_Concurrency_Safety_Layers.md) |
-| 变量的生命周期 | [存储期与生命周期](./04_Storage_Duration_Lifetime.md) |
-| 编译和链接过程 | [编译流程](./05_Compilation_Pipeline_Mapping.md) |
+| 变量的生命周期 | ~~存储期与生命周期~~ (计划中) |
+| 编译和链接过程 | ~~编译流程~~ (计划中) |
 
 ---
 

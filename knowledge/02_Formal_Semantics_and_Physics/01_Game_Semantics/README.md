@@ -11,6 +11,7 @@
 ### 博弈语义学的核心思想
 
 博弈语义学将程序执行视为**策略博弈**，其中：
+
 - **Proponent (P)**：代表程序/系统，主动执行操作
 - **Opponent (O)**：代表环境/上下文，提供输入并响应
 
@@ -22,6 +23,7 @@
 
 **定义 (Arena博弈)**:
 一个arena是一个三元组 $A = (M_A, \lambda_A, \vdash_A)$，其中：
+
 - $M_A$：移动(move)的集合
 - $\lambda_A: M_A \rightarrow \{O, P\} \times \{Q, A\}$：极性函数，标记每个移动的参与者与类型(问题/答案)
 - $\vdash_A \subseteq M_A \times M_A$：可接受性关系，表示合法移动序列
@@ -35,7 +37,7 @@ $$\forall i \in [1,n-1], (m_i, m_{i+1}) \in \vdash_A$$
 $$A \otimes B = (M_A \cup M_B, \lambda_{A \otimes B}, \vdash_{A \otimes B})$$
 
 其中：
-$$\lambda_{A \otimes B}(m) = \begin{cases} 
+$$\lambda_{A \otimes B}(m) = \begin{cases}
 \lambda_A(m) & m \in M_A \\
 \lambda_B(m) & m \in M_B
 \end{cases}$$
@@ -85,11 +87,11 @@ $$\text{Write}(x, v, mo) : \mathbb{V} \rightarrow \text{Unit}$$
 
 ### 经典论文
 
-1. **Abramsky, S., & McCusker, G.** (1999). *Game Semantics*. In 
+1. **Abramsky, S., & McCusker, G.** (1999). *Game Semantics*. In
    _Computational Logic: Proceedings of the 1997 Marktoberdorf Summer School_,
    Springer. (博弈语义学奠基性综述)
 
-2. **Abramsky, S., Jagadeesan, R., & Malacaria, P.** (2000). 
+2. **Abramsky, S., Jagadeesan, R., & Malacaria, P.** (2000).
    *Full Abstraction for PCF*. Information and Computation, 163(2), 409-470.
    (PCF语言的完全抽象定理)
 
@@ -101,19 +103,19 @@ $$\text{Write}(x, v, mo) : \mathbb{V} \rightarrow \text{Unit}$$
 
 ### 内存模型相关
 
-5. **Lamport, L.** (1979). *How to Make a Multiprocessor Computer That 
+5. **Lamport, L.** (1979). *How to Make a Multiprocessor Computer That
    Correctly Executes Multiprocess Programs*. IEEE TC, 28(9), 690-691.
    (顺序一致性奠基)
 
 6. **Manson, J., Pugh, W., & Adve, S. V.** (2005). *The Java Memory Model*.
    In POPL '05. (Java内存模型，C11参考基础)
 
-7. **Boehm, H. J., & Adve, S. V.** (2012). *Foundations of the C++ 
+7. **Boehm, H. J., & Adve, S. V.** (2012). *Foundations of the C++
    Concurrency Memory Model*. In PLDI '12. (C++内存模型理论基础)
 
 ### 专著
 
-8. **Abramsky, S., & Ghica, D. R.** (2000). *Game Semantics and 
+8. **Abramsky, S., & Ghica, D. R.** (2000). *Game Semantics and
    Compilation*. Lecture Notes. (博弈语义与编译)
 
 9. **Winskel, G.** (1993). *The Formal Semantics of Programming Languages*.

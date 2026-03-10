@@ -27,19 +27,19 @@ graph TB
         Voltage[电压/电流]
         Electron[电子迁移]
     end
-    
+
     subgraph Logic[逻辑层]
         Gate[逻辑门]
         Boolean[布尔函数]
         Algebra[布尔代数]
     end
-    
+
     subgraph Math[数学层]
         Function[真值函数]
         AlgebraLaws[代数定律]
         Completeness[功能完备性]
     end
-    
+
     Transistor --> Gate
     Voltage --> Boolean
     Gate --> Function
@@ -56,38 +56,43 @@ graph TB
 布尔代数是一个代数系统 $(B, +, \cdot, \overline{\ }, 0, 1)$，满足以下公理：
 
 **交换律**
-```
+
+```text
 a + b = b + a
 a · b = b · a
 ```
 
 **结合律**
-```
+
+```text
 a + (b + c) = (a + b) + c
 a · (b · c) = (a · b) · c
 ```
 
 **分配律**
-```
+
+```text
 a · (b + c) = a·b + a·c
 a + (b · c) = (a + b) · (a + c)  ← 布尔代数特有
 ```
 
 **恒等律**
-```
+
+```text
 a + 0 = a
 a · 1 = a
 ```
 
 **补律**
-```
+
+```text
 a + ā = 1
 a · ā = 0
 ```
 
 ### 1.2 德摩根定律（De Morgan's Laws）
 
-```
+```text
 ¬(a ∧ b) = ¬a ∨ ¬b
 ¬(a ∨ b) = ¬a ∧ ¬b
 ```
@@ -101,6 +106,7 @@ a · ā = 0
 **证明**：任何n变量布尔函数都可以用真值表表示，真值表的每一行对应一个最小项，函数是最小项的OR。
 
 **更小的完备集**：
+
 - {NAND} 单独完备
 - {NOR} 单独完备
 
@@ -257,13 +263,15 @@ uint32_t calculate_path_delay(GateDelay *gates, int count) {
 ### 3.1 逻辑函数的标准形式
 
 **积之和（Sum of Products, SOP）**
-```
-f(a,b,c) = Σm(1,3,5,6) 
+
+```text
+f(a,b,c) = Σm(1,3,5,6)
          = a'b'c + a'bc + ab'c + abc'
 ```
 
 **和之积（Product of Sums, POS）**
-```
+
+```text
 f(a,b,c) = ΠM(0,2,4,7)
          = (a+b+c)(a+b'+c)(a'+b+c)(a'+b'+c')
 ```
@@ -283,11 +291,11 @@ f(a,b,c) = ΠM(0,2,4,7)
 Bool kmap_function(Bool a, Bool b, Bool c) {
     // 简化结果：a'c + bc' + ab'c
     // 或者：c(a'+b') + abc'
-    
+
     Bool term1 = !a && c;      // a'c
     Bool term2 = b && !c;      // bc'  ← 修正：应为bc'
     Bool term3 = a && !b && c;  // ab'c
-    
+
     return term1 || term2 || term3;
 }
 ```
@@ -303,12 +311,12 @@ Bool kmap_function(Bool a, Bool b, Bool c) {
 Bool optimized_function(Bool a, Bool b, Bool c, Bool d) {
     // 原始实现：4个AND + 4输入OR = 5级延迟
     // Bool f1 = (a && b) || (a && c) || (a && d) || (b && c && d);
-    
+
     // 优化实现：提取a，减少门数
     Bool common = b || c || d;
     Bool term1 = a && common;
     Bool term2 = b && c && d;
-    
+
     return term1 || term2;  // 3级延迟
 }
 ```
@@ -341,14 +349,14 @@ typedef struct {
 
 FullAdderResult full_adder(Bool a, Bool b, Bool cin) {
     FullAdderResult r;
-    
+
     // 两级半加器构成全加器
     HalfAdderResult ha1 = half_adder(a, b);
     HalfAdderResult ha2 = half_adder(ha1.sum, cin);
-    
+
     r.sum = ha2.sum;
     r.carry = ha1.carry || ha2.carry;
-    
+
     return r;
 }
 ```
@@ -365,17 +373,17 @@ typedef struct {
 
 AddererResult ripple_carry_adder(uint32_t a, uint32_t b, Bool cin, int n_bits) {
     AdderResult result = {0, cin};
-    
+
     for (int i = 0; i < n_bits; i++) {
         Bool bit_a = (a >> i) & 1;
         Bool bit_b = (b >> i) & 1;
-        
+
         FullAdderResult fa = full_adder(bit_a, bit_b, result.carry_out);
-        
+
         result.sum |= (fa.sum << i);
         result.carry_out = fa.carry;
     }
-    
+
     return result;
 }
 
@@ -403,11 +411,11 @@ typedef struct {
 
 CLA4Result cla4(uint8_t a, uint8_t b, Bool c_in) {
     CLA4Result r = {0};
-    
+
     Bool g[4], p[4];  // 每位生成和传播
     Bool c[5];        // 进位链
     c[0] = c_in;
-    
+
     // 计算每位的G和P
     for (int i = 0; i < 4; i++) {
         Bool ai = (a >> i) & 1;
@@ -415,27 +423,27 @@ CLA4Result cla4(uint8_t a, uint8_t b, Bool c_in) {
         g[i] = ai && bi;  // 生成
         p[i] = ai ^ bi;   // 传播（实际上是XOR）
     }
-    
+
     // 超前进位计算（并行）
     c[1] = g[0] || (p[0] && c[0]);
     c[2] = g[1] || (p[1] && g[0]) || (p[1] && p[0] && c[0]);
-    c[3] = g[2] || (p[2] && g[1]) || (p[2] && p[1] && g[0]) || 
+    c[3] = g[2] || (p[2] && g[1]) || (p[2] && p[1] && g[0]) ||
            (p[2] && p[1] && p[0] && c[0]);
     c[4] = g[3] || (p[3] && g[2]) || (p[3] && p[2] && g[1]) ||
            (p[3] && p[2] && p[1] && g[0]) ||
            (p[3] && p[2] && p[1] && p[0] && c[0]);
-    
+
     // 计算和
     for (int i = 0; i < 4; i++) {
         Bool sum_bit = p[i] ^ c[i];  // S_i = P_i ⊕ C_i
         r.sum |= (sum_bit << i);
     }
-    
+
     r.c_out = c[4];
     r.g_out = g[3] || (p[3] && g[2]) || (p[3] && p[2] && g[1]) ||
               (p[3] && p[2] && p[1] && g[0]);
     r.p_out = p[3] && p[2] && p[1] && p[0];
-    
+
     return r;
 }
 
@@ -483,10 +491,10 @@ double example_power() {
         .activity = 0.2     // 20%开关活动
     };
     double i_leak = 1e-6;  // 1uA漏电流
-    
+
     double p_dyn = dynamic_power(&p);   // ~0.2mW
     double p_static = static_power(i_leak, p.vdd);  // ~1uW
-    
+
     return p_dyn + p_static;
 }
 ```
@@ -503,7 +511,7 @@ typedef struct {
 } TimingConstraint;
 
 // 时序分析
-Bool check_setup_time(uint32_t data_arrival, uint32_t clock_edge, 
+Bool check_setup_time(uint32_t data_arrival, uint32_t clock_edge,
                        uint32_t t_setup) {
     // 数据必须在时钟沿前t_setup时间到达
     return (clock_edge - data_arrival) >= t_setup;
@@ -554,13 +562,13 @@ Bool output_logic(State current, uint8_t input) {
 void fsm_implementation(Bool *state_ff, Bool input, Bool *output) {
     // 状态寄存器（D触发器）
     State current = (state_ff[1] << 1) | state_ff[0];
-    
+
     // 组合逻辑计算次态
     State next = next_state_logic(current, input);
-    
+
     // 输出逻辑
     *output = output_logic(current, input);
-    
+
     // 下一时钟沿更新状态
     state_ff[0] = next & 1;
     state_ff[1] = (next >> 1) & 1;
@@ -571,7 +579,7 @@ void fsm_implementation(Bool *state_ff, Bool input, Bool *output) {
 
 **关键洞察**：有限状态机 + 无限存储 = 图灵完备
 
-```
+```text
 有限状态控制器（逻辑门实现）
     ↓ 控制
 无限存储阵列（地址可无限扩展）
@@ -595,11 +603,11 @@ void execute_cycle(StoredProgramComputer *cpu) {
     // 取指
     cpu->ir = cpu->memory[cpu->pc];
     cpu->pc++;
-    
+
     // 译码和执行（组合逻辑实现）
     uint8_t opcode = (cpu->ir >> 4) & 0x0F;
     uint8_t operand = cpu->ir & 0x0F;
-    
+
     switch (opcode) {
         case 0: // LOAD
             cpu->acc = cpu->memory[operand];
@@ -664,16 +672,19 @@ Bool final2 = buffered;  // 扇出=10
 ## 📚 参考资源
 
 ### 经典教材
+
 - **Tanenbaum, A.S.** - "Structured Computer Organization" (7th Ed.), Pearson
 - **Hennessy, J.L. & Patterson, D.A.** - "Computer Organization and Design", Morgan Kaufmann
 - **Katz, R.H. & Borriello, G.** - "Contemporary Logic Design", 2nd Ed.
 
 ### IEEE标准
+
 - **IEEE 1364-2005** - Verilog Hardware Description Language
 - **IEEE 1076-2008** - VHDL Language Reference Manual
 - **IEEE 1800-2017** - SystemVerilog Unified Hardware Design
 
 ### 在线资源
+
 - **NAND2Tetris** - From NAND gates to Tetris (Hebrew University)
 - **Logisim-evolution** - Digital logic simulator
 
@@ -697,4 +708,5 @@ Bool final2 = buffered;  // 扇出=10
 ---
 
 > **更新记录**
+>
 > - 2025-03-09: 创建，填补物理层基础空白

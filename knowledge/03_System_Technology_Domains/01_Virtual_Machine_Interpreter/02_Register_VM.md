@@ -41,7 +41,8 @@ mindmap
 
 ## 1. 概述
 
-寄存器式虚拟机（Register-Based VM）与栈式VM相比，指令直接操作寄存器而非操作数栈，减少了指令数量和内存访问次数。现代高性能VM如Lua 5.0+、Dalvik（Android）、WebAssembly均采用寄存器架构。
+寄存器式虚拟机（Register-Based VM）与栈式VM相比，指令直接操作寄存器而非操作数栈，减少了指令数量和内存访问次数。
+现代高性能VM如Lua 5.0+、Dalvik（Android）、WebAssembly均采用寄存器架构。
 
 **核心优势：**
 

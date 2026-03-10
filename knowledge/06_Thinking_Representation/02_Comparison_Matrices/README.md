@@ -23,9 +23,9 @@
 |--------|------|----------|
 | [01_Type_Storage_Matrix.md](./01_Type_Storage_Matrix.md) | 数据类型存储对比 | 大小、对齐、范围、精度、平台差异 |
 | [02_Synchronization_Matrix.md](./02_Synchronization_Matrix.md) | 同步机制对比 | 性能、复杂度、适用场景、可移植性 |
-| [03_IO_Methods_Matrix.md](./03_IO_Methods_Matrix.md) | I/O方法对比 | 缓冲机制、性能、灵活性、线程安全 |
-| [04_Memory_Allocation_Matrix.md](./04_Memory_Allocation_Matrix.md) | 内存分配对比 | 速度、碎片、生命周期、错误处理 |
-| [05_Compiler_Optimization_Matrix.md](./05_Compiler_Optimization_Matrix.md) | 编译优化对比 | 优化级别、调试友好性、代码大小、执行速度 |
+| ~~03_IO_Methods_Matrix.md~~ | I/O方法对比 | (计划中) |
+| ~~04_Memory_Allocation_Matrix.md~~ | 内存分配对比 | (计划中) |
+| ~~05_Compiler_Optimization_Matrix.md~~ | 编译优化对比 | (计划中) |
 
 ---
 
@@ -73,7 +73,7 @@
 
 ```c
 // 需要实现高性能文件读取
-// → 参考 [I/O方法对比矩阵](./03_IO_Methods_Matrix.md)
+// → ~~参考 I/O方法对比矩阵~~ (计划中)
 
 ┌───────────────┬──────────┬────────────┬─────────────────────┐
 │ 方法           │ 吞吐量    │ 复杂度      │ 推荐场景            │
@@ -92,7 +92,7 @@
 
 ```c
 // 高频小对象分配，需要优化性能
-// → 参考 [内存分配对比矩阵](./04_Memory_Allocation_Matrix.md)
+// → ~~参考 内存分配对比矩阵~~ (计划中)
 
 ┌───────────────┬──────────┬────────────┬─────────────────────┐
 │ 分配器         │ 分配速度  │ 碎片程度    │ 适用场景            │
@@ -159,9 +159,9 @@
 |----------|----------|
 | 选择整数/浮点类型 | [数据类型存储对比](./01_Type_Storage_Matrix.md) |
 | 选择线程同步方式 | [同步机制对比](./02_Synchronization_Matrix.md) |
-| 选择文件I/O方案 | [I/O方法对比](./03_IO_Methods_Matrix.md) |
-| 选择内存分配策略 | [内存分配对比](./04_Memory_Allocation_Matrix.md) |
-| 选择编译优化级别 | [编译优化对比](./05_Compiler_Optimization_Matrix.md) |
+| 选择文件I/O方案 | ~~I/O方法对比~~ (计划中) |
+| 选择内存分配策略 | ~~内存分配对比~~ (计划中) |
+| 选择编译优化级别 | ~~编译优化对比~~ (计划中) |
 
 ---
 

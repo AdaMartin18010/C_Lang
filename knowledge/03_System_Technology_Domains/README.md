@@ -15,8 +15,8 @@
 |:-----|:-----|:----:|:---------|
 | [01_Bytecode_VM.md](./01_Virtual_Machine_Interpreter/01_Bytecode_VM.md) | 字节码VM | L4 | Lua VM, Python VM |
 | [02_Register_VM.md](./01_Virtual_Machine_Interpreter/02_Register_VM.md) | 寄存器VM | L4 | Dalvik VM, BEAM |
-| [03_JIT_Compilation.md](./01_Virtual_Machine_Interpreter/03_JIT_Compilation.md) | JIT编译 | L5 | V8, Java HotSpot |
-| [04_Garbage_Collection.md](./01_Virtual_Machine_Interpreter/04_Garbage_Collection.md) | 垃圾回收 | L5 | Go GC, .NET GC |
+| ~~03_JIT_Compilation.md~~ | JIT编译 | L5 | V8, Java HotSpot (计划中) |
+| ~~04_Garbage_Collection.md~~ | 垃圾回收 | L5 | Go GC, .NET GC (计划中) |
 
 **前置知识**: [01_Core_Knowledge_System](../01_Core_Knowledge_System/README.md)
 **关联**: [05_Deep_Structure_MetaPhysics/04_Self_Modifying_Code](../05_Deep_Structure_MetaPhysics/04_Self_Modifying_Code/README.md)
@@ -29,9 +29,9 @@
 
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
-| [01_NFA_Implementation.md](./02_Regex_Engine/01_NFA_Implementation.md) | NFA实现 | L4 | Thompson's Construction |
+| [01_Thompson_NFA.md](./02_Regex_Engine/01_Thompson_NFA.md) | Thompson NFA | L4 | Thompson's Construction |
 | [02_Pike_VM.md](./02_Regex_Engine/02_Pike_VM.md) | Pike VM | L4 | Russ Cox Articles |
-| [03_JIT_Regex.md](./02_Regex_Engine/03_JIT_Regex.md) | JIT正则 | L5 | PCRE, RE2 |
+| ~~03_JIT_Regex.md~~ | JIT正则 | L5 | PCRE, RE2 (计划中) |
 
 ---
 
@@ -43,7 +43,7 @@
 |:-----|:-----|:----:|:---------|
 | [01_V4L2_Capture.md](./03_Computer_Vision/01_V4L2_Capture.md) | V4L2采集 | L4 | Linux V4L2 API |
 | [02_Optical_Flow.md](./03_Computer_Vision/02_Optical_Flow.md) | 光流算法 | L5 | OpenCV Implementation |
-| [03_Edge_Detection.md](./03_Computer_Vision/03_Edge_Detection.md) | 边缘检测 | L4 | Canny, Sobel |
+| ~~03_Edge_Detection.md~~ | 边缘检测 | L4 | Canny, Sobel (计划中) |
 
 ---
 
@@ -55,7 +55,7 @@
 |:-----|:-----|:----:|:---------|
 | [01_H264_Decoding.md](./04_Video_Codec/01_H264_Decoding.md) | H.264解码 | L5 | ITU-T H.264 |
 | [02_Custom_IO.md](./04_Video_Codec/02_Custom_IO.md) | 自定义IO | L4 | FFmpeg API |
-| [03_Hardware_Acceleration.md](./04_Video_Codec/03_Hardware_Acceleration.md) | 硬件加速 | L5 | VA-API, VDPAU |
+| ~~03_Hardware_Acceleration.md~~ | 硬件加速 | L5 | VA-API, VDPAU (计划中) |
 
 ---
 
@@ -67,7 +67,7 @@
 |:-----|:-----|:----:|:---------|
 | [01_BLE_GATT.md](./05_Wireless_Protocol/01_BLE_GATT.md) | BLE GATT | L4 | Bluetooth Core Spec |
 | [02_LoRa_SX1276.md](./05_Wireless_Protocol/02_LoRa_SX1276.md) | LoRa驱动 | L4 | Semtech SX1276 |
-| [03_Zigbee_Stack.md](./05_Wireless_Protocol/03_Zigbee_Stack.md) | Zigbee协议 | L5 | Zigbee Alliance |
+| ~~03_Zigbee_Stack.md~~ | Zigbee协议 | L5 | Zigbee Alliance (计划中) |
 
 ---
 
@@ -79,7 +79,7 @@
 |:-----|:-----|:----:|:---------|
 | [01_ARM_Trusted_Firmware.md](./06_Security_Boot/01_ARM_Trusted_Firmware.md) | ARM Trusted Firmware | L5 | ARM TF-A |
 | [02_Secure_Boot_Chain.md](./06_Security_Boot/02_Secure_Boot_Chain.md) | 安全启动链 | L5 | U-Boot, UEFI |
-| [03_Measured_Boot.md](./06_Security_Boot/03_Measured_Boot.md) | 度量启动 | L5 | TPM 2.0 Spec |
+| ~~03_Measured_Boot.md~~ | 度量启动 | L5 | TPM 2.0 Spec (计划中) |
 
 ---
 
@@ -90,8 +90,8 @@
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
 | [01_TPM2_TSS.md](./07_Hardware_Security/01_TPM2_TSS.md) | TPM2 TSS | L5 | TCG TPM2 Spec |
-| [02_Secure_Element.md](./07_Hardware_Security/02_Secure_Element.md) | 安全元件 | L5 | GlobalPlatform |
-| [03_HSM_Integration.md](./07_Hardware_Security/03_HSM_Integration.md) | HSM集成 | L5 | PKCS#11 |
+| [02_Key_Sealing.md](./07_Hardware_Security/02_Key_Sealing.md) | 密钥密封 | L5 | TPM 2.0 Key Sealing |
+| ~~03_HSM_Integration.md~~ | HSM集成 | L5 | PKCS#11 (计划中) |
 
 ---
 
@@ -102,8 +102,8 @@
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
 | [01_Raft_Core.md](./08_Distributed_Consensus/01_Raft_Core.md) | Raft核心 | L4 | Raft Paper, etcd |
-| [02_Paxos_Implementation.md](./08_Distributed_Consensus/02_Paxos_Implementation.md) | Paxos实现 | L5 | Paxos Made Simple |
-| [03_Multi_Raft.md](./08_Distributed_Consensus/03_Multi_Raft.md) | Multi-Raft | L5 | TiKV Paper |
+| [02_Leader_Election.md](./08_Distributed_Consensus/02_Leader_Election.md) | Leader选举 | L5 | Raft Leader Election |
+| ~~03_Multi_Raft.md~~ | Multi-Raft | L5 | TiKV Paper (计划中) |
 
 ---
 
@@ -126,8 +126,8 @@
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
 | [01_C_ABI_Basics.md](./11_Rust_Interoperability/01_C_ABI_Basics.md) | C ABI基础 | L4 | Rust FFI Guide |
-| [02_Cbindgen_Usage.md](./11_Rust_Interoperability/02_Cbindgen_Usage.md) | cbindgen | L4 | cbindgen Docs |
-| [03_Unsafe_Rust_Patterns.md](./11_Rust_Interoperability/03_Unsafe_Rust_Patterns.md) | Unsafe模式 | L5 | The Rustonomicon |
+| ~~02_Cbindgen_Usage.md~~ | cbindgen | L4 | cbindgen Docs (计划中) |
+| ~~03_Unsafe_Rust_Patterns.md~~ | Unsafe模式 | L5 | The Rustonomicon (计划中) |
 
 ---
 
@@ -139,7 +139,7 @@
 |:-----|:-----|:----:|:---------|
 | [01_B_Tree_Index.md](./11_In_Memory_Database/01_B_Tree_Index.md) | B+树索引 | L4 | SQLite, LMDB |
 | [02_LSM_Tree.md](./11_In_Memory_Database/02_LSM_Tree.md) | LSM树 | L5 | LevelDB, RocksDB |
-| [03_Hash_Index.md](./11_In_Memory_Database/03_Hash_Index.md) | 哈希索引 | L4 | Fast Path Cache |
+| ~~03_Hash_Index.md~~ | 哈希索引 | L4 | Fast Path Cache (计划中) |
 
 ---
 
@@ -151,8 +151,8 @@
 |:-----|:-----|:----:|:---------|
 | [01_Verbs_API.md](./13_RDMA_Network/01_Verbs_API.md) | Verbs API | L5 | IBTA Spec |
 | [01_Verbs_API_Detailed.md](./13_RDMA_Network/01_Verbs_API_Detailed.md) | Verbs API 详细版 | L5 | IBTA Spec |
-| [02_RDMA_Read_Write.md](./13_RDMA_Network/02_RDMA_Read_Write.md) | RDMA读写 | L5 | Mellanox Docs |
-| [03_RDMA_Connection.md](./13_RDMA_Network/03_RDMA_Connection.md) | 连接管理 | L5 | RDMA CM |
+| [02_One_Sided_RDMA.md](./13_RDMA_Network/02_One_Sided_RDMA.md) | 单边RDMA | L5 | Mellanox Docs |
+| ~~03_RDMA_Connection.md~~ | 连接管理 | L5 | RDMA CM (计划中) |
 
 ---
 

@@ -23,8 +23,8 @@
 | [01_Memory_Leak_Diagnosis.md](./01_Memory_Leak_Diagnosis.md) | 内存泄漏诊断 | 程序内存持续增长、OOM异常、valgrind报告问题 |
 | [02_Segfault_Troubleshooting.md](./02_Segfault_Troubleshooting.md) | 段错误排查 | 程序崩溃、SIGSEGV信号、空指针访问、数组越界 |
 | [03_Performance_Bottleneck.md](./03_Performance_Bottleneck.md) | 性能瓶颈分析 | CPU占用高、响应延迟、吞吐量不足、资源竞争 |
-| [04_Compilation_Error.md](./04_Compilation_Error.md) | 编译错误处理 | 编译失败、链接错误、头文件问题、类型不匹配 |
-| [05_Concurrency_Debug.md](./05_Concurrency_Debug.md) | 并发问题调试 | 死锁、竞态条件、数据竞争、线程同步异常 |
+| ~~04_Compilation_Error.md~~ | 编译错误处理 | (计划中) |
+| ~~05_Concurrency_Debug.md~~ | 并发问题调试 | (计划中) |
 
 ---
 
@@ -62,7 +62,7 @@
 步骤1: 启用 core dump
     $ ulimit -c unlimited
     $ ./program
-    
+
 步骤2: 使用 gdb 分析
     $ gdb ./program core
     (gdb) bt          # 查看调用栈
@@ -72,7 +72,7 @@
 ### 示例3：编译错误分类处理
 
 ```
-gcc 报错 → 进入 [编译错误处理决策树](./04_Compilation_Error.md)
+gcc 报错 → ~~编译错误处理决策树~~ (计划中)
 
 错误类型判断:
 ├── 语法错误 (error: expected ';')
@@ -126,10 +126,10 @@ gcc 报错 → 进入 [编译错误处理决策树](./04_Compilation_Error.md)
 | 程序内存不断增长 | [内存泄漏诊断](./01_Memory_Leak_Diagnosis.md) |
 | 程序突然崩溃/段错误 | [段错误排查](./02_Segfault_Troubleshooting.md) |
 | 程序运行缓慢 | [性能瓶颈分析](./03_Performance_Bottleneck.md) |
-| 编译不通过 | [编译错误处理](./04_Compilation_Error.md) |
-| 多线程异常/死锁 | [并发问题调试](./05_Concurrency_Debug.md) |
+| 编译不通过 | ~~编译错误处理~~ (计划中) |
+| 多线程异常/死锁 | ~~并发问题调试~~ (计划中) |
 
 ---
 
-**← [返回上级目录](../README.md)**  
+**← [返回上级目录](../README.md)**
 **← [返回知识库根目录](../../README.md)**
