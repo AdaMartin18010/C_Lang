@@ -124,13 +124,13 @@ int __wrap_external_api(void) {
 
 static void test_with_mock(void **state) {
     (void) state;
-    
+
     // 设置mock返回值
     will_return(__wrap_external_api, 42);
-    
+
     // 调用被测函数
     int result = function_under_test();
-    
+
     assert_int_equal(result, 42);
 }
 ```
@@ -177,7 +177,7 @@ ParameterizedTest(int *params, math, add_param) {
 
 ### 测试目录结构
 
-```
+```text
 tests/
 ├── CMakeLists.txt
 ├── test_main.c        # 主测试入口
