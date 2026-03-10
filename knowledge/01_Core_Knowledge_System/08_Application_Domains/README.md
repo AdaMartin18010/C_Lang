@@ -20,6 +20,7 @@
 | 01 | [01_OS_Kernel.md](./01_OS_Kernel.md) | 操作系统内核 | ⭐⭐⭐⭐⭐ | 系统调用、进程管理、内存管理、驱动程序 | 50+ |
 | 02 | [02_Embedded_Systems.md](./02_Embedded_Systems.md) | 嵌入式系统 | ⭐⭐⭐⭐ | MCU编程、启动代码、外设驱动、中断 | 45+ |
 | 02b | [02_Embedded_Physical_Control.md](./02_Embedded_Physical_Control.md) | 物理嵌入式控制 | ⭐⭐⭐⭐⭐ | 工控、电子电器、电机控制、传感器 | 60+ |
+| 02c | [02_Embedded_Multiplatform_Protocols.md](./02_Embedded_Multiplatform_Protocols.md) | 多平台协议栈 | ⭐⭐⭐⭐⭐ | STM32/ESP32/RP2040、I2C/SPI/UART/WiFi | 80+ |
 | 03 | [03_Infrastructure_Software.md](./03_Infrastructure_Software.md) | 基础设施软件 | ⭐⭐⭐⭐ | 数据库、Web服务器、网络协议栈 | 40+ |
 | 04 | [04_High_Performance_Computing.md](./04_High_Performance_Computing.md) | 高性能计算 | ⭐⭐⭐⭐⭐ | SIMD优化、并行计算、缓存优化 | 50+ |
 
