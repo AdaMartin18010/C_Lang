@@ -21,6 +21,7 @@
 | 02 | [02_Embedded_Systems.md](./02_Embedded_Systems.md) | 嵌入式系统 | ⭐⭐⭐⭐ | MCU编程、启动代码、外设驱动、中断 | 45+ |
 | 02b | [02_Embedded_Physical_Control.md](./02_Embedded_Physical_Control.md) | 物理嵌入式控制 | ⭐⭐⭐⭐⭐ | 工控、电子电器、电机控制、传感器 | 60+ |
 | 02c | [02_Embedded_Multiplatform_Protocols.md](./02_Embedded_Multiplatform_Protocols.md) | 多平台协议栈 | ⭐⭐⭐⭐⭐ | STM32/ESP32/RP2040、I2C/SPI/UART/WiFi | 80+ |
+| 02d | [02_Embedded_Industrial_Advanced.md](./02_Embedded_Industrial_Advanced.md) | 工业级高级开发 | ⭐⭐⭐⭐⭐ | 全系列ESP32、工业总线、RTOS、安全、FOC | 100+ |
 | 03 | [03_Infrastructure_Software.md](./03_Infrastructure_Software.md) | 基础设施软件 | ⭐⭐⭐⭐ | 数据库、Web服务器、网络协议栈 | 40+ |
 | 04 | [04_High_Performance_Computing.md](./04_High_Performance_Computing.md) | 高性能计算 | ⭐⭐⭐⭐⭐ | SIMD优化、并行计算、缓存优化 | 50+ |
 
@@ -219,5 +220,4 @@
 ---
 
 > **提示**: 应用领域文档强调实践。建议配合开发板（如STM32）进行实验，将理论知识转化为实际技能。
-
 > **最后更新**: 2026-03-10
