@@ -29,19 +29,19 @@ graph TB
         CPU[处理器]
         RAM[存储器]
     end
-    
+
     subgraph Abstract[抽象模型]
         TM[图灵机]
         UTM[通用图灵机]
         Lambda[λ演算]
     end
-    
+
     subgraph Mathematical[数学基础]
         Recursive[递归函数]
         Combinatory[组合子逻辑]
         SetTheory[集合论]
     end
-    
+
     Circuit --> TM
     CPU --> UTM
     TM --> Recursive
@@ -61,6 +61,7 @@ graph TB
 $$M = (Q, \Sigma, \Gamma, \delta, q_0, q_{accept}, q_{reject})$$
 
 其中：
+
 - $Q$：有限状态集合
 - $\Sigma$：输入字母表（不含空白符 ⊔）
 - $\Gamma$：磁带字母表，$\Sigma \subset \Gamma$ 且 ⊔ ∈ $\Gamma$
@@ -84,10 +85,10 @@ $$M = (Q, \Sigma, \Gamma, \delta, q_0, q_{accept}, q_{reject})$$
 #define MAX_TRANSITIONS 500
 
 typedef enum { LEFT = -1, RIGHT = 1 } Direction;
-typedef enum { 
+typedef enum {
     STATE_NORMAL = 0,
-    STATE_ACCEPT = 1, 
-    STATE_REJECT = 2 
+    STATE_ACCEPT = 1,
+    STATE_REJECT = 2
 } StateType;
 
 // 转移函数条目
@@ -121,7 +122,7 @@ void tm_init(TuringMachine *tm, const char *input) {
 }
 
 // 添加转移函数
-void tm_add_transition(TuringMachine *tm, int from, char read, 
+void tm_add_transition(TuringMachine *tm, int from, char read,
                         int to, char write, Direction dir) {
     Transition *t = &tm->transitions[tm->num_transitions++];
     t->from_state = from;
@@ -134,29 +135,29 @@ void tm_add_transition(TuringMachine *tm, int from, char read,
 // 单步执行
 bool tm_step(TuringMachine *tm) {
     char current_symbol = tm->tape[tm->head];
-    
+
     // 查找匹配的转移
     for (int i = 0; i < tm->num_transitions; i++) {
         Transition *t = &tm->transitions[i];
-        if (t->from_state == tm->current_state && 
+        if (t->from_state == tm->current_state &&
             t->read_symbol == current_symbol) {
-            
+
             // 执行转移
             tm->tape[tm->head] = t->write_symbol;
             tm->current_state = t->to_state;
             tm->head += t->move;
             tm->step_count++;
-            
+
             // 检查边界
             if (tm->head < 0 || tm->head >= TAPE_SIZE) {
                 fprintf(stderr, "Error: Head out of bounds\n");
                 return false;
             }
-            
+
             return true;
         }
     }
-    
+
     // 无匹配转移，停机
     return false;
 }
@@ -171,12 +172,12 @@ int tm_run(TuringMachine *tm, int max_steps) {
         if (tm->state_types[tm->current_state] == STATE_REJECT) {
             return -1;  // 拒绝
         }
-        
+
         if (!tm_step(tm)) {
             return 0;  // 停机（无定义转移）
         }
     }
-    
+
     return -2;  // 超过最大步数（可能不停机）
 }
 ```
@@ -193,7 +194,7 @@ int tm_run(TuringMachine *tm, int max_steps) {
 
 TuringMachine* create_0n1n_machine() {
     TuringMachine *tm = calloc(1, sizeof(TuringMachine));
-    
+
     // 状态定义：
     // 0: 初始，寻找第一个0
     // 1: 找到0，替换为X，向右寻找1
@@ -202,39 +203,39 @@ TuringMachine* create_0n1n_machine() {
     // 4: 检查是否还有未匹配的1
     // 5: 接受状态
     // 6: 拒绝状态
-    
+
     tm->num_states = 7;
     tm->state_types[5] = STATE_ACCEPT;
     tm->state_types[6] = STATE_REJECT;
-    
+
     // 状态0：初始状态
     tm_add_transition(tm, 0, '0', 1, 'X', RIGHT);  // 找到0，标记X
     tm_add_transition(tm, 0, 'Y', 4, 'Y', RIGHT);  // 已匹配部分，检查剩余
     tm_add_transition(tm, 0, '_', 5, '_', RIGHT);  // 空输入，接受
-    
+
     // 状态1：寻找对应的1
     tm_add_transition(tm, 1, '0', 1, '0', RIGHT);  // 跳过其他0
     tm_add_transition(tm, 1, 'Y', 1, 'Y', RIGHT);  // 跳过已匹配的1
     tm_add_transition(tm, 1, '1', 2, 'Y', LEFT);   // 找到1，标记Y，返回
     tm_add_transition(tm, 1, '_', 6, '_', RIGHT);  // 未找到1，拒绝
-    
+
     // 状态2：返回寻找下一个0
     tm_add_transition(tm, 2, '0', 2, '0', LEFT);
     tm_add_transition(tm, 2, 'Y', 2, 'Y', LEFT);
     tm_add_transition(tm, 2, 'X', 0, 'X', RIGHT);  // 回到状态0
-    
+
     // 状态4：验证没有剩余的0
     tm_add_transition(tm, 4, 'Y', 4, 'Y', RIGHT);  // 跳过Y
     tm_add_transition(tm, 4, '_', 5, '_', RIGHT);  // 到达末尾，接受
     tm_add_transition(tm, 4, '0', 6, '0', RIGHT);  // 发现0，拒绝（0在1后）
-    
+
     return tm;
 }
 
 // 测试
 void test_0n1n() {
     TuringMachine *tm = create_0n1n_machine();
-    
+
     const char *test_cases[] = {
         "",           // ε - 接受
         "01",         // n=1 - 接受
@@ -246,16 +247,16 @@ void test_0n1n() {
         "001",        // 拒绝
         "011",        // 拒绝
     };
-    
+
     for (int i = 0; i < 9; i++) {
         tm_init(tm, test_cases[i]);
         int result = tm_run(tm, 1000);
-        printf("Input: %-8s -> %s\n", 
+        printf("Input: %-8s -> %s\n",
                test_cases[i],
-               result == 1 ? "ACCEPT" : 
+               result == 1 ? "ACCEPT" :
                result == -1 ? "REJECT" : "UNKNOWN");
     }
-    
+
     free(tm);
 }
 ```
@@ -269,19 +270,19 @@ void test_0n1n() {
 
 TuringMachine* create_binary_adder() {
     TuringMachine *tm = calloc(1, sizeof(TuringMachine));
-    
+
     // 算法：从右向左逐位相加，处理进位
     // 状态较复杂，这里给出简化版本的核心逻辑
-    
+
     // 找到#符号，然后逐位相加
     // 使用额外的符号表示中间状态
-    
+
     tm->num_states = 20;  // 足够多的状态
     tm->state_types[19] = STATE_ACCEPT;
-    
+
     // 简化的转移逻辑...
     // 实际实现需要处理所有进位组合
-    
+
     return tm;
 }
 ```
@@ -325,16 +326,16 @@ void parse_tm_description(UniversalTM *utm) {
 void utm_execute(UniversalTM *utm) {
     // 1. 解析被模拟的图灵机M
     parse_tm_description(utm);
-    
+
     // 2. 在工作磁带上初始化M的配置
     // 复制输入到工作磁带
-    
+
     // 3. 模拟M的执行
     // 每一步：
     //   - 读取工作磁带的当前符号
     //   - 在描述中查找匹配的转移
     //   - 执行转移（写符号、移动、改状态）
-    
+
     // 4. 直到M停机
 }
 ```
@@ -356,6 +357,7 @@ void utm_execute(UniversalTM *utm) {
 ```
 
 **证据**：
+
 - 所有已知的计算模型都已被证明与图灵机等价
 - 没有发现有物理过程能计算图灵机不能计算的函数
 - 量子计算在计算能力上也不超越图灵机（只是效率提升）
@@ -397,10 +399,10 @@ void utm_execute(UniversalTM *utm) {
 void paradoxical_program(void (*analyzer)(void(*)(), int*), int *result) {
     // analyzer是一个声称能判定停机的函数
     // result是analyzer的输出位置
-    
+
     // 1. 询问analyzer：我（paradoxical_program）会停机吗？
     analyzer(paradoxical_program, result);
-    
+
     // 2. 如果analyzer说我停机，我就无限循环
     if (*result == 1) {  // 预测会停机
         while (1) {}     // 实际不停机
@@ -480,15 +482,18 @@ void paradoxical_program(void (*analyzer)(void(*)(), int*), int *result) {
 ## 📚 参考资源
 
 ### 原始论文
+
 - **Turing, A.M. (1936)** - "On Computable Numbers, with an Application to the Entscheidungsproblem"
 - **Church, A. (1936)** - "An Unsolvable Problem of Elementary Number Theory"
 
 ### 教材
+
 - **Sipser, M.** - "Introduction to the Theory of Computation" (3rd Ed.)
 - **Hopcroft, J.E., Motwani, R., & Ullman, J.D.** - "Introduction to Automata Theory, Languages, and Computation"
 - **Boolos, G.S., Burgess, J.P., & Jeffrey, R.C.** - "Computability and Logic"
 
 ### 扩展阅读
+
 - **Penrose, R.** - "The Emperor's New Mind" (关于物理和计算的哲学)
 - **Deutsch, D.** - "Quantum theory, the Church-Turing principle and the universal quantum computer"
 
@@ -510,4 +515,5 @@ void paradoxical_program(void (*analyzer)(void(*)(), int*), int *result) {
 ---
 
 > **更新记录**
+>
 > - 2025-03-09: 创建，建立计算理论物理基础
