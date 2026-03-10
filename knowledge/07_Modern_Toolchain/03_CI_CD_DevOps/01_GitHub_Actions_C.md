@@ -1,0 +1,430 @@
+# GitHub Actions C项目CI/CD指南
+
+> **层级定位**: 07 Modern Toolchain / 03 CI/CD DevOps
+> **难度级别**: L3 应用
+> **预估学习时间**: 4-6小时
+
+---
+
+## 📋 本节概要
+
+| 属性 | 内容 |
+|:-----|:-----|
+| **核心概念** | GitHub Actions、工作流、矩阵构建、自动化测试 |
+| **前置知识** | Git基础、YAML语法 |
+| **后续延伸** | DevSecOps、高级部署策略 |
+| **权威来源** | GitHub Actions官方文档 |
+
+---
+
+## 🎯 为什么需要CI/CD
+
+### 传统开发流程的问题
+
+```
+开发 → 本地测试通过 → 提交 → 他人拉取 → 编译失败 → 回滚 → 混乱
+   ↑___________________________________________________________|
+```
+
+### CI/CD解决的问题
+
+```
+开发 → 提交 → 自动构建测试 → 自动检查 → 自动部署 → 发布
+   ↑_________________________________________________________|
+                      ↓
+               失败则阻止合并，保护主分支
+```
+
+### C语言项目的特殊需求
+
+1. **多平台编译**: Linux/macOS/Windows
+2. **多编译器测试**: GCC/Clang/MSVC
+3. **内存安全检查**: Valgrind/Sanitizers
+4. **代码质量**: 静态分析、格式化检查
+
+---
+
+## 🚀 快速开始
+
+### 基础工作流模板
+
+创建文件: `.github/workflows/ci.yml`
+
+```yaml
+name: C CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake gcc clang
+
+    - name: Configure
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: cmake --build build --parallel
+
+    - name: Test
+      run: ctest --test-dir build --output-on-failure
+```
+
+---
+
+## 📚 完整工作流示例
+
+### 1. 多平台矩阵构建
+
+```yaml
+name: Multi-Platform Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        compiler: [gcc, clang]
+        exclude:
+          - os: windows-latest
+            compiler: clang
+        include:
+          - os: ubuntu-latest
+            compiler: gcc
+            cc: gcc
+            cxx: g++
+          - os: ubuntu-latest
+            compiler: clang
+            cc: clang
+            cxx: clang++
+          - os: macos-latest
+            compiler: clang
+            cc: clang
+            cxx: clang++
+
+    runs-on: ${{ matrix.os }}
+
+    env:
+      CC: ${{ matrix.cc }}
+      CXX: ${{ matrix.cxx }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup (Ubuntu)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake ninja-build
+
+    - name: Setup (macOS)
+      if: matrix.os == 'macos-latest'
+      run: brew install cmake ninja
+
+    - name: Setup (Windows)
+      if: matrix.os == 'windows-latest'
+      run: choco install cmake ninja
+
+    - name: Configure
+      run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Test
+      run: ctest --test-dir build
+```
+
+### 2. 内存安全检查工作流
+
+```yaml
+name: Memory Safety Check
+
+on: [push, pull_request]
+
+jobs:
+  sanitizers:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        sanitizer: [address, undefined, thread]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake clang
+
+    - name: Configure with Sanitizer
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DCMAKE_C_COMPILER=clang \
+          -DCMAKE_CXX_FLAGS="-fsanitize=${{ matrix.sanitizer }} -fno-omit-frame-pointer -g" \
+          -DCMAKE_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }}"
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Test with Sanitizer
+      run: ctest --test-dir build --output-on-failure
+      env:
+        ASAN_OPTIONS: detect_leaks=1
+
+  valgrind:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Valgrind
+      run: sudo apt-get install -y valgrind cmake
+
+    - name: Configure
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Debug
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Run Valgrind
+      run: |
+        valgrind --leak-check=full --error-exitcode=1 \
+          ./build/your_test_executable
+```
+
+### 3. 代码质量检查
+
+```yaml
+name: Code Quality
+
+on: [push, pull_request]
+
+jobs:
+  formatting:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install clang-format
+      run: sudo apt-get install -y clang-format
+
+    - name: Check formatting
+      run: |
+        find . -name '*.c' -o -name '*.h' | xargs clang-format -i
+        git diff --exit-code
+
+  static-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cppcheck clang-tools cmake
+
+    - name: Run cppcheck
+      run: |
+        cppcheck --enable=all --error-exitcode=1 \
+          --suppress=missingIncludeSystem \
+          -I include src/
+
+    - name: Run Clang Static Analyzer
+      run: |
+        cmake -B build \
+          -DCMAKE_C_COMPILER=clang \
+          -DCMAKE_CXX_COMPILER=clang++
+        scan-build cmake --build build
+
+  code-coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake gcovr lcov
+
+    - name: Configure with coverage
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DCMAKE_C_FLAGS="--coverage" \
+          -DCMAKE_CXX_FLAGS="--coverage"
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Test
+      run: ctest --test-dir build
+
+    - name: Generate coverage report
+      run: |
+        lcov --capture --directory build --output-file coverage.info
+        lcov --remove coverage.info '/usr/*' --output-file coverage.info
+
+    - name: Upload coverage
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./coverage.info
+```
+
+### 4. 发布自动化
+
+```yaml
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-release:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            asset_name: linux-amd64
+          - os: macos-latest
+            asset_name: macos-amd64
+          - os: windows-latest
+            asset_name: windows-amd64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Build
+      run: |
+        cmake -B build -DCMAKE_BUILD_TYPE=Release
+        cmake --build build --config Release
+
+    - name: Package (Unix)
+      if: matrix.os != 'windows-latest'
+      run: |
+        tar czvf myapp-${{ matrix.asset_name }}.tar.gz -C build myapp
+
+    - name: Package (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        Compress-Archive -Path build/Release/myapp.exe -DestinationPath myapp-${{ matrix.asset_name }}.zip
+
+    - name: Upload Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          myapp-*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+---
+
+## 🔧 高级技巧
+
+### 缓存加速
+
+```yaml
+- name: Cache CMake build
+  uses: actions/cache@v3
+  with:
+    path: build
+    key: ${{ runner.os }}-cmake-${{ hashFiles('**/CMakeLists.txt') }}
+    restore-keys: |
+      ${{ runner.os }}-cmake-
+
+- name: Cache vcpkg
+  uses: actions/cache@v3
+  with:
+    path: vcpkg
+    key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
+```
+
+### Docker构建
+
+```yaml
+build-docker:
+  runs-on: ubuntu-latest
+
+  steps:
+  - uses: actions/checkout@v4
+
+  - name: Build Docker image
+    run: docker build -t myapp:${{ github.sha }} .
+
+  - name: Run tests in container
+    run: docker run myapp:${{ github.sha }} ./run_tests
+```
+
+### 条件执行
+
+```yaml
+- name: Deploy to staging
+  if: github.ref == 'refs/heads/develop'
+  run: ./deploy.sh staging
+
+- name: Deploy to production
+  if: github.ref == 'refs/heads/main'
+  run: ./deploy.sh production
+```
+
+---
+
+## 📁 模板库
+
+查看 [05_CI_CD_Templates](./05_CI_CD_Templates/) 目录获取即用模板:
+
+- `basic-ci.yml` - 基础CI模板
+- `multi-platform.yml` - 多平台构建
+- `memory-safety.yml` - 内存安全检查
+- `code-quality.yml` - 代码质量检查
+- `release.yml` - 发布自动化
+
+---
+
+## ✅ 质量检查清单
+
+- [ ] 工作流在提交时触发
+- [ ] 多平台构建通过
+- [ ] 测试自动运行
+- [ ] 代码格式化检查
+- [ ] 静态分析集成
+- [ ] 安全检查(Sanitizers)
+- [ ] 覆盖率报告
+- [ ] 发布自动化
+
+---
+
+## 🔗 相关资源
+
+- [GitHub Actions官方文档](https://docs.github.com/en/actions)
+- [GitHub Actions C/C++模板](https://github.com/actions/starter-workflows/tree/main/ci)
+- [Docker容器化指南](./02_Docker_C_Development.md)
+
+---
+
+**← [返回工具链主页](../README.md)**
+**← [返回CI/CD目录](./README.md)**
