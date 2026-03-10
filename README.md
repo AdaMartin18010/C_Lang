@@ -22,7 +22,7 @@
 
 ## 📂 目录结构
 
-```
+```text
 knowledge/
 ├── 00_INDEX.md                      # 📖 全局索引（从这里开始）
 ├── 01_Core_Knowledge_System/        # 📘 核心知识体系
@@ -109,7 +109,7 @@ knowledge/
 
 ### 推荐学习路径
 
-```
+```text
 初学者:  01_Core_Knowledge_System/01_Basic_Layer/ → ... → 08_Application_Domains/
 进阶者:  02_Formal_Semantics_and_Physics/ → 03_System_Technology_Domains/
 专家:    04_Industrial_Scenarios/ → 05_Deep_Structure_MetaPhysics/
