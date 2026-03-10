@@ -89,14 +89,14 @@ class MyProject(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeDeps", "CMakeToolchain"
     exports_sources = "CMakeLists.txt", "src/*", "include/*"
-    
+
     # 定义选项
     options = {
         "shared": [True, False],
         "fPIC": [True, False],
         "with_ssl": [True, False]
     }
-    
+
     # 默认选项值
     default_options = {
         "shared": False,
@@ -335,38 +335,38 @@ jobs:
     strategy:
       matrix:
         build_type: [Release, Debug]
-        
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Setup Conan
       uses: conan-io/setup-conan@v1
       with:
         version: 2.0.0
-    
+
     - name: Configure Conan
       run: |
         conan profile detect --force
         conan remote add myrepo ${{ secrets.ARTIFACTORY_URL }}
         conan remote login myrepo ${{ secrets.ARTIFACTORY_USER }} -p ${{ secrets.ARTIFACTORY_PASS }}
-    
+
     - name: Cache Conan packages
       uses: actions/cache@v3
       with:
         path: ~/.conan2/p
         key: conan-${{ hashFiles('conanfile.py') }}
-    
+
     - name: Install dependencies
       run: conan install . --build=missing -s build_type=${{ matrix.build_type }}
-    
+
     - name: Build
       run: |
         cmake --preset conan-${{ matrix.build_type == 'Release' && 'release' || 'debug' }}
         cmake --build --preset conan-${{ matrix.build_type == 'Release' && 'release' || 'debug' }}
-    
+
     - name: Test
       run: ctest --preset conan-${{ matrix.build_type == 'Release' && 'release' || 'debug' }}
-    
+
     - name: Upload package
       if: github.ref == 'refs/heads/main'
       run: |
