@@ -56,22 +56,25 @@ Linux内核不保证内部API的稳定性：
 
 Linux内核定义了自己的内存模型：
 
-- **内存屏障类型**: 
-  - `smp_mb()`: 通用内存屏障
-  - `smp_wmb()`: 写内存屏障
-  - `smp_rmb()`: 读内存屏障
-  - `dma_wmb()`: DMA写屏障
-  - `dma_rmb()`: DMA读屏障
+**内存屏障类型**:
 
-- **原子操作**: 
-  - `atomic_t`和`atomic64_t`
-  - 原子读、写、加、减、交换、比较交换
+- `smp_mb()`: 通用内存屏障
+- `smp_wmb()`: 写内存屏障
+- `smp_rmb()`: 读内存屏障
+- `dma_wmb()`: DMA写屏障
+- `dma_rmb()`: DMA读屏障
 
-- **锁原语**:
-  - `spinlock_t`: 自旋锁
-  - `mutex`: 互斥锁
-  - `rw_semaphore`: 读写信号量
-  - `rcu`: 读-复制-更新机制
+**原子操作**:
+
+- `atomic_t`和`atomic64_t`
+- 原子读、写、加、减、交换、比较交换
+
+**锁原语**:
+
+- `spinlock_t`: 自旋锁
+- `mutex`: 互斥锁
+- `rw_semaphore`: 读写信号量
+- `rcu`: 读-复制-更新机制
 
 ### 内核文档
 
@@ -83,6 +86,7 @@ Linux内核自带大量文档：
 - **Documentation/x86/x86_64/mm.txt**: x86内存管理
 - **Documentation/arm64/memory.rst**: ARM64内存管理
 - **Documentation/vm/**: 虚拟内存子系统
+- **Documentation/process/**: 开发流程文档
 
 ## 学习前置要求
 
@@ -111,7 +115,7 @@ Linux内核自带大量文档：
 
 ### 进阶知识
 
-4. **内存管理专题**
+1. **内存管理专题**
    - 虚拟地址空间布局
    - 页表结构和遍历
    - TLB原理和刷新
@@ -119,14 +123,14 @@ Linux内核自带大量文档：
    - 页面分配器（Buddy System）
    - Slab分配器
 
-5. **并发编程**
+2. **并发编程**
    - 竞态条件和临界区
    - 死锁和活锁
    - 锁粒度设计
    - 无锁编程技术
    - RCU机制原理
 
-6. **编译原理**
+3. **编译原理**
    - GCC扩展语法
    - 编译器优化级别
    - 链接脚本（Linker Script）
@@ -134,15 +138,16 @@ Linux内核自带大量文档：
 
 ### 开发环境
 
-7. **内核开发工具**
+1. **内核开发工具**
    - 交叉编译器（gcc-arm-linux-gnueabi等）
    - QEMU（模拟器测试）
    - GDB（kgdb内核调试）
    - perf（性能分析）
    - ftrace（内核跟踪）
    - Kernelshark（可视化跟踪）
+   - bpftrace（eBPF跟踪）
 
-8. **版本控制和协作**
+2. **版本控制和协作**
    - Git高级用法（rebase、cherry-pick、bisect）
    - 邮件列表工作流程
    - 补丁格式（diff、format-patch）
@@ -166,12 +171,14 @@ Linux内核自带大量文档：
   - LWN.net（Linux Weekly News）
   - Kernel Newbies（内核新手社区）
   - Linux Foundation YouTube频道
+  - Kernel Recipes会议演讲
 
 - **实践项目**：
   - 编写简单的内核模块
   - 为内核贡献补丁（从清理工作开始）
   - 分析内核源码（从调度器或内存管理子系统开始）
   - 使用QEMU调试内核
+  - 编写eBPF程序进行系统跟踪
 
 ## 内容导航
 
@@ -192,6 +199,8 @@ Linux内核自带大量文档：
 - 中断上下文中不能睡眠（不可调用可能阻塞的函数）
 - 注意并发访问，正确使用锁或原子操作
 - 充分测试，包括压力测试和竞态条件测试
+- 仔细阅读和维护相关的内核文档
+- 参与社区讨论前务必做好充分调研
 
 ---
 
