@@ -443,7 +443,7 @@ bool lsm_put(lsm_tree_t *lsm, const uint8_t *key, uint32_t key_len,
         lsm->memtable = memtable_create();
 
         /* 触发后台刷盘（简化：同步执行） */
-        /* TODO: 创建SSTable并放入Level 0 */
+        lsm_flush_memtable(lsm);
     }
 
     return true;
@@ -485,7 +485,40 @@ bool lsm_get(lsm_tree_t *lsm, const uint8_t *key, uint32_t key_len,
         }
     }
 
-    /* TODO: 查询SSTable各层级 */
+    /* 查询各层级SSTable */
+    for (uint32_t level = 0U; level < LSM_MAX_LEVELS; level++) {
+        for (uint32_t i = 0U; i < lsm->level_file_count[level]; i++) {
+            lsm_sstable_t *sst = lsm->levels[level][i];
+            if (sst == NULL) continue;
+
+            /* 布隆过滤器快速判断 */
+            if (!bloom_check(&sst->meta, key, key_len)) {
+                continue;
+            }
+
+            /* 范围检查 */
+            if ((key_len < sst->meta.smallest_key_len) &&
+                (memcmp(key, sst->meta.smallest_key, key_len) < 0)) {
+                continue;
+            }
+            if ((key_len > sst->meta.largest_key_len) &&
+                (memcmp(key, sst->meta.largest_key, key_len) > 0)) {
+                continue;
+            }
+
+            /* 从SSTable文件读取 */
+            uint8_t sst_value[LSM_MAX_VALUE_SIZE];
+            uint32_t sst_value_len = LSM_MAX_VALUE_SIZE;
+            if (sstable_get(sst, key, key_len, sst_value, &sst_value_len)) {
+                if ((value != NULL) && (*value_len >= sst_value_len)) {
+                    (void)memcpy(value, sst_value, sst_value_len);
+                }
+                *value_len = sst_value_len;
+                lsm->total_read_bytes += key_len + sst_value_len;
+                return true;
+            }
+        }
+    }
 
     return false;
 }
@@ -495,6 +528,232 @@ bool lsm_delete(lsm_tree_t *lsm, const uint8_t *key, uint32_t key_len)
 {
     return lsm_put(lsm, key, key_len, NULL, 0U) ||
            memtable_insert(lsm->memtable, key, key_len, NULL, 0U, LSM_OP_DELETE);
+}
+
+/* 构建布隆过滤器 */
+static void bloom_build(lsm_sstable_meta_t *meta, lsm_memtable_t *mt)
+{
+    if ((meta == NULL) || (mt == NULL)) return;
+
+    /* 计算布隆过滤器大小 */
+    meta->bloom_size = (mt->entry_count * LSM_BLOOM_BITS_PER_KEY + 63) / 64;
+    meta->bloom_filter = (uint64_t*)calloc(meta->bloom_size, sizeof(uint64_t));
+    if (meta->bloom_filter == NULL) {
+        meta->bloom_size = 0;
+        return;
+    }
+
+    /* 插入所有键 */
+    lsm_entry_t *entry = mt->head;
+    while (entry != NULL) {
+        for (uint32_t i = 0U; i < 3U; i++) {
+            const uint32_t hash = bloom_hash(entry->key, entry->key_len, i * 0x9E3779B9U);
+            const uint32_t bit = hash % (meta->bloom_size * 64U);
+            const uint32_t word = bit >> 6U;
+            const uint32_t bit_mask = 1UL << (bit & 0x3FU);
+            meta->bloom_filter[word] |= bit_mask;
+        }
+        entry = entry->next;
+    }
+}
+
+/* SSTable文件格式：
+ * [Header]
+ * [Bloom Filter]
+ * [Index Block]
+ * [Data Blocks]
+ * [Footer]
+ */
+
+/* 将MemTable刷盘为SSTable */
+static bool lsm_flush_memtable(lsm_tree_t *lsm)
+{
+    if ((lsm == NULL) || (lsm->immutable == NULL) ||
+        (lsm->level_file_count[0] >= LSM_MAX_FILES_PER_LEVEL)) {
+        return false;
+    }
+
+    /* 分配SSTable结构 */
+    lsm_sstable_t *sst = (lsm_sstable_t*)calloc(1, sizeof(lsm_sstable_t));
+    if (sst == NULL) return false;
+
+    /* 设置元数据 */
+    sst->meta.file_id = lsm->next_file_id++;
+    sst->meta.level = 0;
+    sst->meta.entry_count = lsm->immutable->entry_count;
+
+    /* 获取键范围 */
+    if (lsm->immutable->head != NULL) {
+        lsm_entry_t *first = lsm->immutable->head;
+        lsm_entry_t *last = lsm->immutable->tail;
+        sst->meta.smallest_key_len = first->key_len;
+        sst->meta.largest_key_len = last->key_len;
+        (void)memcpy(sst->meta.smallest_key, first->key, first->key_len);
+        (void)memcpy(sst->meta.largest_key, last->key, last->key_len);
+    }
+
+    /* 构建布隆过滤器 */
+    bloom_build(&sst->meta, lsm->immutable);
+
+    /* 构建数据块（内存表示） */
+    uint32_t total_size = 0;
+    lsm_entry_t *entry = lsm->immutable->head;
+    while (entry != NULL) {
+        /* 格式: key_len(4) | value_len(4) | key | value */
+        total_size += 8 + entry->key_len + entry->value_len;
+        entry = entry->next;
+    }
+
+    uint8_t *data_block = (uint8_t*)malloc(total_size);
+    if (data_block == NULL) {
+        free(sst->meta.bloom_filter);
+        free(sst);
+        return false;
+    }
+
+    /* 序列化数据 */
+    uint32_t offset = 0;
+    entry = lsm->immutable->head;
+    while (entry != NULL) {
+        (void)memcpy(&data_block[offset], &entry->key_len, 4);
+        offset += 4;
+        (void)memcpy(&data_block[offset], &entry->value_len, 4);
+        offset += 4;
+        (void)memcpy(&data_block[offset], entry->key, entry->key_len);
+        offset += entry->key_len;
+        if (entry->value_len > 0) {
+            (void)memcpy(&data_block[offset], entry->value, entry->value_len);
+            offset += entry->value_len;
+        }
+        entry = entry->next;
+    }
+
+    /* 写入文件 */
+    char filename[256];
+    (void)snprintf(filename, sizeof(filename), "%s/%06u.sst",
+                   lsm->db_path, sst->meta.file_id);
+    FILE *fp = fopen(filename, "wb");
+    if (fp == NULL) {
+        free(data_block);
+        free(sst->meta.bloom_filter);
+        free(sst);
+        return false;
+    }
+
+    /* 写入头部 */
+    uint32_t header[8] = {
+        0x53535431,  /* "SST1" magic */
+        sst->meta.file_id,
+        sst->meta.level,
+        sst->meta.entry_count,
+        sst->meta.smallest_key_len,
+        sst->meta.largest_key_len,
+        sst->meta.bloom_size,
+        total_size
+    };
+    (void)fwrite(header, sizeof(header), 1, fp);
+    (void)fwrite(sst->meta.smallest_key, sst->meta.smallest_key_len, 1, fp);
+    (void)fwrite(sst->meta.largest_key, sst->meta.largest_key_len, 1, fp);
+
+    /* 写入布隆过滤器 */
+    if (sst->meta.bloom_size > 0) {
+        (void)fwrite(sst->meta.bloom_filter, sizeof(uint64_t), sst->meta.bloom_size, fp);
+    }
+
+    /* 写入数据 */
+    (void)fwrite(data_block, total_size, 1, fp);
+    (void)fclose(fp);
+
+    sst->meta.file_size = sizeof(header) + sst->meta.smallest_key_len +
+                          sst->meta.largest_key_len +
+                          (sst->meta.bloom_size * sizeof(uint64_t)) + total_size;
+
+    /* 保存数据块用于内存查询 */
+    sst->index_block = data_block;
+    sst->index_size = total_size;
+
+    /* 放入Level 0 */
+    uint32_t idx = lsm->level_file_count[0]++;
+    lsm->levels[0][idx] = sst;
+
+    /* 释放Immutable MemTable */
+    memtable_destroy(lsm->immutable);
+    lsm->immutable = NULL;
+
+    return true;
+}
+
+/* 从SSTable读取 */
+static bool sstable_get(lsm_sstable_t *sst, const uint8_t *key, uint32_t key_len,
+                        uint8_t *value, uint32_t *value_len)
+{
+    if ((sst == NULL) || (key == NULL) || (value_len == NULL)) {
+        return false;
+    }
+
+    /* 在内存数据块中线性搜索（简化实现） */
+    uint32_t offset = 0;
+    while (offset < sst->index_size) {
+        uint32_t entry_key_len, entry_value_len;
+        (void)memcpy(&entry_key_len, &sst->index_block[offset], 4);
+        offset += 4;
+        (void)memcpy(&entry_value_len, &sst->index_block[offset], 4);
+        offset += 4;
+
+        if ((entry_key_len == key_len) &&
+            (memcmp(&sst->index_block[offset], key, key_len) == 0)) {
+            /* 找到键 */
+            offset += entry_key_len;
+            if (entry_value_len == 0) {
+                /* 删除标记 */
+                return false;
+            }
+            if ((value != NULL) && (*value_len >= entry_value_len)) {
+                (void)memcpy(value, &sst->index_block[offset], entry_value_len);
+            }
+            *value_len = entry_value_len;
+            return true;
+        }
+
+        offset += entry_key_len + entry_value_len;
+    }
+
+    return false;
+}
+
+/* Compaction - 合并层级 */
+void lsm_compact(lsm_tree_t *lsm, uint32_t level)
+{
+    if ((lsm == NULL) || (level >= LSM_MAX_LEVELS - 1) ||
+        (lsm->level_file_count[level] < LSM_MAX_FILES_PER_LEVEL)) {
+        return;
+    }
+
+    /* 简化实现：当Level 0满时，合并到Level 1 */
+    if ((level == 0) && (lsm->level_file_count[1] < LSM_MAX_FILES_PER_LEVEL)) {
+        /* 选择要合并的文件（这里简化：合并所有Level 0文件） */
+        for (uint32_t i = 0; i < lsm->level_file_count[0]; i++) {
+            lsm_sstable_t *sst = lsm->levels[0][i];
+            if (sst == NULL) continue;
+
+            /* 移动到Level 1 */
+            uint32_t new_idx = lsm->level_file_count[1]++;
+            sst->meta.level = 1;
+            lsm->levels[1][new_idx] = sst;
+            lsm->levels[0][i] = NULL;
+
+            /* 重命名文件 */
+            char old_name[256], new_name[256];
+            (void)snprintf(old_name, sizeof(old_name), "%s/%06u.sst",
+                           lsm->db_path, sst->meta.file_id);
+            (void)snprintf(new_name, sizeof(new_name), "%s/L1_%06u.sst",
+                           lsm->db_path, sst->meta.file_id);
+            (void)rename(old_name, new_name);
+        }
+        lsm->level_file_count[0] = 0;
+
+        printf("Compaction: Level 0 -> Level 1 completed\n");
+    }
 }
 ```
 
