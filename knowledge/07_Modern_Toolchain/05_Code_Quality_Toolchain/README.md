@@ -125,7 +125,7 @@ typedef struct {
 ManagedArray* create_array_fixed(size_t size) {
     ManagedArray* arr = calloc(1, sizeof(ManagedArray));
     if (!arr) return NULL;
-    
+
     arr->data = calloc(size, sizeof(int));
     if (!arr->data) {
         free(arr);
@@ -169,7 +169,7 @@ void modern_style_function(void) {
 # CMakeLists.txt
 find_program(CLANG_TIDY_EXE NAMES clang-tidy)
 if(CLANG_TIDY_EXE)
-    set(CMAKE_C_CLANG_TIDY 
+    set(CMAKE_C_CLANG_TIDY
         ${CLANG_TIDY_EXE};
         -format-style=file;
         -header-filter=.;
@@ -469,11 +469,11 @@ class CMetricsAnalyzer:
     def __init__(self, source_dir):
         self.source_dir = Path(source_dir)
         self.metrics = defaultdict(dict)
-    
+
     def analyze_complexity(self, content):
         """计算圈复杂度"""
         complexity = 1
-        
+
         # 条件语句
         complexity += len(re.findall(r'\bif\s*\(', content))
         complexity += len(re.findall(r'\belse\s+if\s*\(', content))
@@ -482,13 +482,13 @@ class CMetricsAnalyzer:
         complexity += len(re.findall(r'\bfor\s*\(', content))
         complexity += len(re.findall(r'\bwhile\s*\(', content))
         complexity += len(re.findall(r'\?\s*', content))  # 三元运算符
-        
+
         # 逻辑运算符
         complexity += len(re.findall(r'\|\|', content))
         complexity += len(re.findall(r'&&', content))
-        
+
         return complexity
-    
+
     def analyze_function(self, func_content):
         """分析单个函数"""
         metrics = {
@@ -499,17 +499,17 @@ class CMetricsAnalyzer:
             'comments': len(re.findall(r'(//|/\*)', func_content)),
         }
         return metrics
-    
+
     def extract_functions(self, content):
         """提取函数定义"""
         pattern = r'(?P<func>(?:static\s+)?(?:inline\s+)?\w+\s+\w+\s*\([^)]*\)\s*\{)'
         functions = []
-        
+
         for match in re.finditer(pattern, content):
             start = match.start()
             brace_count = 0
             end = start
-            
+
             for i, char in enumerate(content[start:]):
                 if char == '{':
                     brace_count += 1
@@ -518,59 +518,59 @@ class CMetricsAnalyzer:
                     if brace_count == 0:
                         end = start + i + 1
                         break
-            
+
             func_name = re.search(r'\w+\s*\(', match.group('func')).group()[:-1].strip()
             functions.append((func_name, content[start:end]))
-        
+
         return functions
-    
+
     def analyze_file(self, filepath):
         """分析单个文件"""
         content = filepath.read_text(encoding='utf-8', errors='ignore')
-        
+
         file_metrics = {
             'total_lines': len(content.split('\n')),
             'code_lines': len([l for l in content.split('\n') if l.strip() and not l.strip().startswith('//')]),
             'comment_lines': len([l for l in content.split('\n') if '//' in l or '/*' in l]),
             'functions': {},
         }
-        
+
         for func_name, func_content in self.extract_functions(content):
             file_metrics['functions'][func_name] = self.analyze_function(func_content)
-        
+
         return file_metrics
-    
+
     def generate_report(self):
         """生成度量报告"""
         for c_file in self.source_dir.rglob('*.c'):
             self.metrics[str(c_file)] = self.analyze_file(c_file)
-        
+
         print("# 代码度量分析报告\n")
         print("| 文件 | 总行数 | 代码行 | 注释行 | 函数数 |")
         print("|------|--------|--------|--------|--------|")
-        
+
         total_lines = 0
         total_functions = 0
         complexity_warnings = []
-        
+
         for filepath, file_metrics in self.metrics.items():
             func_count = len(file_metrics['functions'])
             total_lines += file_metrics['code_lines']
             total_functions += func_count
-            
+
             print(f"| {filepath} | {file_metrics['total_lines']} | "
                   f"{file_metrics['code_lines']} | {file_metrics['comment_lines']} | "
                   f"{func_count} |")
-            
+
             for func_name, func_metrics in file_metrics['functions'].items():
                 if func_metrics['complexity'] > 10:
                     complexity_warnings.append(
                         f"警告: {filepath}:{func_name} 圈复杂度过高 ({func_metrics['complexity']})"
                     )
-        
+
         print(f"\n总计: {total_lines} 行代码, {total_functions} 个函数")
         print(f"平均函数行数: {total_lines // max(total_functions, 1)}")
-        
+
         if complexity_warnings:
             print("\n## 复杂度警告")
             for warning in complexity_warnings:
@@ -596,22 +596,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Install tools
         run: |
           sudo apt-get update
           sudo apt-get install -y clang-tidy cppcheck clang-format
-      
+
       - name: Run clang-tidy
         run: |
           find src -name "*.c" | xargs clang-tidy -- \
             -Isrc -Iinclude -std=c11
-      
+
       - name: Run cppcheck
         run: |
           cppcheck --enable=all --error-exitcode=1 \
             --suppress=missingIncludeSystem src/
-      
+
       - name: Check formatting
         run: |
           find src -name "*.c" -o -name "*.h" | \
@@ -621,12 +621,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      
+
       - name: Run metrics analysis
         run: |
           python3 scripts/metrics_analysis.py src/
