@@ -1,566 +1,250 @@
-# 工作流与状态机
+# 工作流与状态机 (Workflow & State Machines)
 
 ## 概述
 
-工作流与状态机是描述和控制复杂系统行为的核心抽象。状态机通过定义有限状态和转移规则来管理对象生命周期，而工作流引擎则协调多步骤业务流程的执行。在C语言系统编程中，这两种模式广泛应用于协议实现、业务逻辑编排和设备控制。
+状态机和工作流是管理软件复杂行为的强大工具。
+状态机通过定义有限的状态和转换规则来建模系统行为，而工作流引擎则协调复杂业务流程的执行。
+理解这些模式对于构建可维护、可靠的软件系统至关重要。
+
+## 目录
+
+- [工作流与状态机 (Workflow \& State Machines)](#工作流与状态机-workflow--state-machines)
+  - [概述](#概述)
+  - [目录](#目录)
+  - [状态机模式](#状态机模式)
+    - [状态机基础概念](#状态机基础概念)
+    - [状态机实现模式对比](#状态机实现模式对比)
+    - [实现模式详解](#实现模式详解)
+      - [模式 1: switch-case 状态机](#模式-1-switch-case-状态机)
+      - [模式 2: 表驱动状态机](#模式-2-表驱动状态机)
+      - [模式 3: 分层状态机 (Hierarchical State Machine)](#模式-3-分层状态机-hierarchical-state-machine)
+  - [工作流引擎](#工作流引擎)
+    - [工作流引擎核心概念](#工作流引擎核心概念)
+    - [工作流引擎架构](#工作流引擎架构)
+    - [工作流引擎实现](#工作流引擎实现)
+    - [工作流模式示例](#工作流模式示例)
+  - [规则引擎](#规则引擎)
+    - [规则引擎概述](#规则引擎概述)
+    - [规则引擎架构](#规则引擎架构)
+    - [Rete 算法实现](#rete-算法实现)
+    - [简单规则引擎实现](#简单规则引擎实现)
+  - [事件驱动架构](#事件驱动架构)
+    - [事件驱动架构概述](#事件驱动架构概述)
+    - [事件驱动架构模式](#事件驱动架构模式)
+    - [事件总线实现](#事件总线实现)
+    - [Saga 事件协调](#saga-事件协调)
+    - [事件溯源实现](#事件溯源实现)
+  - [总结](#总结)
 
 ---
 
-## 1. 状态机模式 (State Machine Pattern)
+## 状态机模式
 
-### 1.1 状态机分类
+### 状态机基础概念
 
-```
+有限状态机 (Finite State Machine, FSM) 由以下要素组成：
+
+| 要素 | 描述 | 示例 |
+|-----|------|------|
+| 状态 (State) | 系统在特定时刻的情况 | 空闲、运行、暂停 |
+| 事件 (Event) | 触发状态转换的信号 | 启动、停止、暂停 |
+| 转换 (Transition) | 从一个状态到另一个状态的变化 | 空闲→运行 |
+| 动作 (Action) | 状态转换时执行的操作 | 记录日志、发送通知 |
+| 守卫 (Guard) | 控制转换能否发生的条件 | 权限检查、参数验证 |
+
+### 状态机实现模式对比
+
+| 实现方式 | 优点 | 缺点 | 适用场景 |
+|---------|------|------|---------|
+| switch-case | 简单直接 | 难以维护，扩展性差 | 简单状态机 |
+| 状态表 | 清晰，易于修改 | 需要额外查找 | 中等复杂度 |
+| 面向对象 | 封装性好 | 类爆炸 | 复杂状态机 |
+| 函数指针表 | 高性能，灵活 | 类型不安全 | 性能敏感 |
+| 状态机框架 | 功能完整 | 学习成本 | 企业级应用 |
+
+```text
 状态机类型:
 
 ┌─────────────────────────────────────────────────────────────┐
 │                                                             │
 │   有限状态机 (FSM)                                           │
 │        │                                                    │
-│   ┌────┴────┬────────────────┐                             │
-│   │         │                │                             │
-│   ▼         ▼                ▼                             │
-│  Mealy    Moore           层次状态机                        │
-│  米利型   摩尔型          (Hierarchical)                    │
-│  输出依赖  输出仅依赖      支持子状态机                      │
-│  输入和状态 当前状态                                      │
+│   ┌────┴────┬────────────────┐                              │
+│   │         │                │                              │
+│   ▼         ▼                ▼                              │
+│  Mealy    Moore           层次状态机                         │
+│  米利型   摩尔型          (Hierarchical)                     │
+│  输出依赖  输出仅依赖      支持子状态机                        │
+│  输入和状态 当前状态                                         │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### 1.2 经典状态机实现
+### 实现模式详解
+
+#### 模式 1: switch-case 状态机
 
 ```c
-/* state_machine.h - 通用状态机框架 */
-#ifndef STATE_MACHINE_H
-#define STATE_MACHINE_H
+// 简单的 switch-case 状态机
+typedef enum {
+    STATE_IDLE,
+    STATE_RUNNING,
+    STATE_PAUSED,
+    STATE_STOPPED,
+    STATE_COUNT
+} state_t;
 
-#include <stdint.h>
-#include <stdbool.h>
+typedef enum {
+    EVENT_START,
+    EVENT_PAUSE,
+    EVENT_RESUME,
+    EVENT_STOP,
+    EVENT_COUNT
+} event_t;
 
-/* 状态句柄前向声明 */
-typedef struct state_machine state_machine_t;
-typedef struct state state_t;
-
-/* 事件类型 */
-typedef uint32_t event_t;
-
-/* 动作函数类型 */
-typedef void (*action_t)(state_machine_t *sm, void *ctx);
-typedef bool (*guard_t)(state_machine_t *sm, void *ctx);
-
-/* 状态结构 */
-struct state {
-    const char *name;
-    uint32_t id;
-
-    /* 进入/退出动作 */
-    action_t on_entry;
-    action_t on_exit;
-
-    /* 状态活动 (持续执行) */
-    action_t on_run;
-
-    /* 父状态 (层次状态机) */
-    state_t *parent;
-
-    /* 子状态机入口 */
-    state_t *initial_substate;
-};
-
-/* 状态转移 */
-typedef struct {
-    state_t *source;
-    state_t *target;
-    event_t event;
-    guard_t guard;          /* 守卫条件 */
-    action_t action;        /* 转移动作 */
-} transition_t;
-
-/* 状态机 */
-struct state_machine {
-    const char *name;
-    state_t *current_state;
-    state_t *previous_state;
-
-    /* 状态表 */
-    state_t **states;
-    uint32_t state_count;
-    uint32_t state_capacity;
-
-    /* 转移表 */
-    transition_t **transitions;
-    uint32_t trans_count;
-    uint32_t trans_capacity;
-
-    /* 历史记录 (用于恢复) */
-    state_t *history[16];
-    uint32_t history_index;
-
-    /* 用户上下文 */
-    void *user_ctx;
-
-    /* 状态机数据 */
-    uint32_t event_queue[32];
-    uint32_t queue_head;
-    uint32_t queue_tail;
-};
-
-/* API */
-state_machine_t *sm_create(const char *name, void *user_ctx);
-void sm_destroy(state_machine_t *sm);
-
-int sm_add_state(state_machine_t *sm, state_t *state);
-int sm_add_transition(state_machine_t *sm, transition_t *trans);
-int sm_set_initial_state(state_machine_t *sm, state_t *state);
-
-int sm_start(state_machine_t *sm);
-int sm_dispatch(state_machine_t *sm, event_t event, void *ctx);
-int sm_run(state_machine_t *sm);
-
-state_t *sm_get_current_state(state_machine_t *sm);
-const char *sm_get_current_state_name(state_machine_t *sm);
-
-#endif /* STATE_MACHINE_H */
+void fsm_handle_event(state_t* current, event_t event) {
+    switch (*current) {
+        case STATE_IDLE:
+            if (event == EVENT_START) {
+                *current = STATE_RUNNING;
+            }
+            break;
+        case STATE_RUNNING:
+            if (event == EVENT_PAUSE) {
+                *current = STATE_PAUSED;
+            } else if (event == EVENT_STOP) {
+                *current = STATE_STOPPED;
+            }
+            break;
+        case STATE_PAUSED:
+            if (event == EVENT_RESUME) {
+                *current = STATE_RUNNING;
+            } else if (event == EVENT_STOP) {
+                *current = STATE_STOPPED;
+            }
+            break;
+        case STATE_STOPPED:
+            if (event == EVENT_START) {
+                *current = STATE_RUNNING;
+            }
+            break;
+    }
+}
 ```
 
+#### 模式 2: 表驱动状态机
+
 ```c
-/* state_machine.c - 状态机核心实现 */
-#include "state_machine.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+// 表驱动状态机 - 将转换逻辑分离到表中
+typedef void (*action_fn_t)(void* context);
+typedef bool (*guard_fn_t)(void* context);
 
-state_machine_t *sm_create(const char *name, void *user_ctx) {
-    state_machine_t *sm = calloc(1, sizeof(state_machine_t));
-    if (!sm) return NULL;
+typedef struct {
+    state_t from_state;
+    event_t event;
+    state_t to_state;
+    guard_fn_t guard;
+    action_fn_t action;
+    const char* description;
+} transition_t;
 
-    sm->name = name;
-    sm->user_ctx = user_ctx;
+static const transition_t transitions[] = {
+    {STATE_IDLE,    EVENT_START,  STATE_RUNNING, NULL,       on_start,   "开始运行"},
+    {STATE_RUNNING, EVENT_PAUSE,  STATE_PAUSED,  can_pause,  on_pause,   "暂停"},
+    {STATE_RUNNING, EVENT_STOP,   STATE_STOPPED, NULL,       on_stop,    "停止"},
+    {STATE_PAUSED,  EVENT_RESUME, STATE_RUNNING, NULL,       on_resume,  "恢复"},
+    {STATE_PAUSED,  EVENT_STOP,   STATE_STOPPED, NULL,       on_stop,    "从暂停停止"},
+    {STATE_STOPPED, EVENT_START,  STATE_RUNNING, can_restart, on_restart, "重新启动"},
+};
 
-    /* 初始化状态表 */
-    sm->state_capacity = 16;
-    sm->states = calloc(sm->state_capacity, sizeof(state_t *));
-
-    /* 初始化转移表 */
-    sm->trans_capacity = 32;
-    sm->transitions = calloc(sm->trans_capacity, sizeof(transition_t *));
-
-    return sm;
-}
-
-int sm_add_state(state_machine_t *sm, state_t *state) {
-    if (!sm || !state) return -1;
-
-    if (sm->state_count >= sm->state_capacity) {
-        /* 扩容 */
-        size_t new_cap = sm->state_capacity * 2;
-        state_t **new_states = realloc(sm->states, new_cap * sizeof(state_t *));
-        if (!new_states) return -1;
-        sm->states = new_states;
-        sm->state_capacity = new_cap;
-    }
-
-    sm->states[sm->state_count++] = state;
-    return 0;
-}
-
-int sm_add_transition(state_machine_t *sm, transition_t *trans) {
-    if (!sm || !trans) return -1;
-
-    if (sm->trans_count >= sm->trans_capacity) {
-        size_t new_cap = sm->trans_capacity * 2;
-        transition_t **new_trans = realloc(sm->transitions, new_cap * sizeof(transition_t *));
-        if (!new_trans) return -1;
-        sm->transitions = new_trans;
-        sm->trans_capacity = new_cap;
-    }
-
-    sm->transitions[sm->trans_count++] = trans;
-    return 0;
-}
-
-/* 查找匹配的转移 */
-static transition_t *find_transition(state_machine_t *sm, event_t event) {
-    for (uint32_t i = 0; i < sm->trans_count; i++) {
-        transition_t *trans = sm->transitions[i];
-        if (trans->source == sm->current_state && trans->event == event) {
-            /* 检查守卫条件 */
-            if (!trans->guard || trans->guard(sm, sm->user_ctx)) {
-                return trans;
-            }
+const transition_t* find_transition(state_t from, event_t event) {
+    for (size_t i = 0; i < sizeof(transitions)/sizeof(transition_t); i++) {
+        if (transitions[i].from_state == from &&
+            transitions[i].event == event) {
+            return &transitions[i];
         }
     }
     return NULL;
 }
-
-/* 执行状态转移 */
-static int execute_transition(state_machine_t *sm, transition_t *trans, void *ctx) {
-    printf("[%s] %s --[%u]--> %s\n",
-           sm->name,
-           trans->source->name,
-           trans->event,
-           trans->target->name);
-
-    /* 执行源状态退出动作 */
-    if (trans->source->on_exit) {
-        trans->source->on_exit(sm, ctx);
-    }
-
-    /* 执行转移动作 */
-    if (trans->action) {
-        trans->action(sm, ctx);
-    }
-
-    /* 记录历史 */
-    sm->previous_state = sm->current_state;
-    sm->history[sm->history_index++ % 16] = sm->current_state;
-
-    /* 切换状态 */
-    sm->current_state = trans->target;
-
-    /* 执行目标状态进入动作 */
-    if (trans->target->on_entry) {
-        trans->target->on_entry(sm, ctx);
-    }
-
-    return 0;
-}
-
-int sm_dispatch(state_machine_t *sm, event_t event, void *ctx) {
-    if (!sm || !sm->current_state) return -1;
-
-    transition_t *trans = find_transition(sm, event);
-    if (trans) {
-        return execute_transition(sm, trans, ctx);
-    }
-
-    /* 未找到匹配转移，可能在父状态中处理 */
-    printf("[%s] Event %u not handled in state %s\n",
-           sm->name, event, sm->current_state->name);
-    return -1;
-}
-
-int sm_run(state_machine_t *sm) {
-    if (!sm || !sm->current_state) return -1;
-
-    /* 执行当前状态的活动 */
-    if (sm->current_state->on_run) {
-        sm->current_state->on_run(sm, sm->user_ctx);
-    }
-
-    /* 处理事件队列 */
-    while (sm->queue_head != sm->queue_tail) {
-        event_t event = sm->event_queue[sm->queue_head++ % 32];
-        sm_dispatch(sm, event, sm->user_ctx);
-    }
-
-    return 0;
-}
 ```
 
-### 1.3 TCP连接状态机实例
+#### 模式 3: 分层状态机 (Hierarchical State Machine)
 
 ```c
-/* tcp_state_machine.h */
-#ifndef TCP_STATE_MACHINE_H
-#define TCP_STATE_MACHINE_H
+// 分层状态机 - 支持状态嵌套和继承
+typedef struct hsm_state {
+    const char* name;
+    struct hsm_state* parent;
+    void (*on_entry)(void* context);
+    void (*on_exit)(void* context);
+    int (*handle)(void* context, int event);
+} hsm_state_t;
 
-#include "state_machine.h"
-
-/* TCP状态 */
-typedef enum {
-    TCP_CLOSED = 0,
-    TCP_LISTEN,
-    TCP_SYN_SENT,
-    TCP_SYN_RECEIVED,
-    TCP_ESTABLISHED,
-    TCP_FIN_WAIT_1,
-    TCP_FIN_WAIT_2,
-    TCP_CLOSE_WAIT,
-    TCP_CLOSING,
-    TCP_LAST_ACK,
-    TCP_TIME_WAIT
-} tcp_state_id_t;
-
-/* TCP事件 */
-typedef enum {
-    TCP_EVT_OPEN = 1,
-    TCP_EVT_SEND,
-    TCP_EVT_RECEIVE,
-    TCP_EVT_CLOSE,
-    TCP_EVT_TIMEOUT,
-    TCP_EVT_SYN,
-    TCP_EVT_SYN_ACK,
-    TCP_EVT_ACK,
-    TCP_EVT_FIN,
-    TCP_EVT_RST
-} tcp_event_t;
-
-/* TCP上下文 */
 typedef struct {
-    uint32_t local_seq;
-    uint32_t remote_seq;
-    uint32_t local_port;
-    uint32_t remote_port;
-    uint32_t retransmit_count;
-    void *socket;
-} tcp_context_t;
+    hsm_state_t* current;
+    void* context;
+} hsm_t;
 
-/* 创建TCP状态机 */
-state_machine_t *tcp_state_machine_create(tcp_context_t *ctx);
-
-#endif /* TCP_STATE_MACHINE_H */
-```
-
-```c
-/* tcp_state_machine.c */
-#include "tcp_state_machine.h"
-#include <stdio.h>
-
-/* 状态定义 */
-static state_t state_closed = {
-    .name = "CLOSED",
-    .id = TCP_CLOSED,
-    .on_entry = NULL,
-    .on_exit = NULL,
-    .on_run = NULL
-};
-
-static state_t state_listen = {
-    .name = "LISTEN",
-    .id = TCP_LISTEN,
-    .on_entry = lambda(void, (state_machine_t *sm, void *ctx), {
-        printf("TCP: Entering LISTEN state\n");
-    }),
-    .on_exit = NULL
-};
-
-static state_t state_syn_sent = {
-    .name = "SYN_SENT",
-    .id = TCP_SYN_SENT
-};
-
-static state_t state_syn_received = {
-    .name = "SYN_RECEIVED",
-    .id = TCP_SYN_RECEIVED
-};
-
-static state_t state_established = {
-    .name = "ESTABLISHED",
-    .id = TCP_ESTABLISHED,
-    .on_entry = lambda(void, (state_machine_t *sm, void *ctx), {
-        printf("TCP: Connection established!\n");
-        tcp_context_t *tcp = (tcp_context_t *)ctx;
-        tcp->retransmit_count = 0;
-    })
-};
-
-static state_t state_fin_wait_1 = {
-    .name = "FIN_WAIT_1",
-    .id = TCP_FIN_WAIT_1
-};
-
-static state_t state_fin_wait_2 = {
-    .name = "FIN_WAIT_2",
-    .id = TCP_FIN_WAIT_2
-};
-
-static state_t state_close_wait = {
-    .name = "CLOSE_WAIT",
-    .id = TCP_CLOSE_WAIT
-};
-
-static state_t state_closing = {
-    .name = "CLOSING",
-    .id = TCP_CLOSING
-};
-
-static state_t state_last_ack = {
-    .name = "LAST_ACK",
-    .id = TCP_LAST_ACK
-};
-
-static state_t state_time_wait = {
-    .name = "TIME_WAIT",
-    .id = TCP_TIME_WAIT,
-    .on_entry = lambda(void, (state_machine_t *sm, void *ctx), {
-        printf("TCP: Entering TIME_WAIT (2MSL timeout)\n");
-    })
-};
-
-/* 守卫函数 */
-static bool guard_seq_valid(state_machine_t *sm, void *ctx) {
-    /* 检查序列号是否有效 */
-    tcp_context_t *tcp = (tcp_context_t *)ctx;
-    return tcp->retransmit_count < 5;
+// 事件分发 - 支持事件冒泡
+int hsm_dispatch(hsm_t* hsm, int event) {
+    for (hsm_state_t* s = hsm->current; s; s = s->parent) {
+        if (s->handle) {
+            int result = s->handle(hsm->context, event);
+            if (result == 0) return 0;  // 已处理
+        }
+    }
+    return -1;  // 未处理
 }
-
-/* 转移定义 */
-static transition_t trans_closed_to_syn_sent = {
-    .source = &state_closed,
-    .target = &state_syn_sent,
-    .event = TCP_EVT_OPEN,
-    .guard = NULL,
-    .action = lambda(void, (state_machine_t *sm, void *ctx), {
-        printf("TCP: Sending SYN\n");
-    })
-};
-
-static transition_t trans_closed_to_listen = {
-    .source = &state_closed,
-    .target = &state_listen,
-    .event = TCP_EVT_OPEN,
-    .guard = NULL,
-    .action = lambda(void, (state_machine_t *sm, void *ctx), {
-        printf("TCP: Starting to listen\n");
-    })
-};
-
-static transition_t trans_listen_to_syn_received = {
-    .source = &state_listen,
-    .target = &state_syn_received,
-    .event = TCP_EVT_SYN,
-    .action = lambda(void, (state_machine_t *sm, void *ctx), {
-        printf("TCP: Received SYN, sending SYN-ACK\n");
-    })
-};
-
-static transition_t trans_syn_sent_to_established = {
-    .source = &state_syn_sent,
-    .target = &state_established,
-    .event = TCP_EVT_SYN_ACK,
-    .action = lambda(void, (state_machine_t *sm, void *ctx), {
-        printf("TCP: Received SYN-ACK, sending ACK\n");
-    })
-};
-
-static transition_t trans_syn_received_to_established = {
-    .source = &state_syn_received,
-    .target = &state_established,
-    .event = TCP_EVT_ACK,
-    .action = NULL
-};
-
-static transition_t trans_established_to_fin_wait_1 = {
-    .source = &state_established,
-    .target = &state_fin_wait_1,
-    .event = TCP_EVT_CLOSE,
-    .action = lambda(void, (state_machine_t *sm, void *ctx), {
-        printf("TCP: Active close - sending FIN\n");
-    })
-};
-
-static transition_t trans_established_to_close_wait = {
-    .source = &state_established,
-    .target = &state_close_wait,
-    .event = TCP_EVT_FIN,
-    .action = lambda(void, (state_machine_t *sm, void *ctx), {
-        printf("TCP: Passive close - received FIN\n");
-    })
-};
-
-static transition_t trans_fin_wait_1_to_fin_wait_2 = {
-    .source = &state_fin_wait_1,
-    .target = &state_fin_wait_2,
-    .event = TCP_EVT_ACK,
-    .action = NULL
-};
-
-static transition_t trans_fin_wait_1_to_closing = {
-    .source = &state_fin_wait_1,
-    .target = &state_closing,
-    .event = TCP_EVT_FIN,
-    .action = NULL
-};
-
-static transition_t trans_fin_wait_2_to_time_wait = {
-    .source = &state_fin_wait_2,
-    .target = &state_time_wait,
-    .event = TCP_EVT_FIN,
-    .action = lambda(void, (state_machine_t *sm, void *ctx), {
-        printf("TCP: Sending final ACK\n");
-    })
-};
-
-static transition_t trans_close_wait_to_last_ack = {
-    .source = &state_close_wait,
-    .target = &state_last_ack,
-    .event = TCP_EVT_CLOSE,
-    .action = lambda(void, (state_machine_t *sm, void *ctx), {
-        printf("TCP: Sending FIN\n");
-    })
-};
-
-static transition_t trans_last_ack_to_closed = {
-    .source = &state_last_ack,
-    .target = &state_closed,
-    .event = TCP_EVT_ACK,
-    .action = lambda(void, (state_machine_t *sm, void *ctx), {
-        printf("TCP: Connection closed\n");
-    })
-};
-
-static transition_t trans_time_wait_to_closed = {
-    .source = &state_time_wait,
-    .target = &state_closed,
-    .event = TCP_EVT_TIMEOUT,
-    .action = NULL
-};
-
-state_machine_t *tcp_state_machine_create(tcp_context_t *ctx) {
-    state_machine_t *sm = sm_create("TCP", ctx);
-    if (!sm) return NULL;
-
-    /* 添加所有状态 */
-    sm_add_state(sm, &state_closed);
-    sm_add_state(sm, &state_listen);
-    sm_add_state(sm, &state_syn_sent);
-    sm_add_state(sm, &state_syn_received);
-    sm_add_state(sm, &state_established);
-    sm_add_state(sm, &state_fin_wait_1);
-    sm_add_state(sm, &state_fin_wait_2);
-    sm_add_state(sm, &state_close_wait);
-    sm_add_state(sm, &state_closing);
-    sm_add_state(sm, &state_last_ack);
-    sm_add_state(sm, &state_time_wait);
-
-    /* 添加所有转移 */
-    sm_add_transition(sm, &trans_closed_to_syn_sent);
-    sm_add_transition(sm, &trans_closed_to_listen);
-    sm_add_transition(sm, &trans_listen_to_syn_received);
-    sm_add_transition(sm, &trans_syn_sent_to_established);
-    sm_add_transition(sm, &trans_syn_received_to_established);
-    sm_add_transition(sm, &trans_established_to_fin_wait_1);
-    sm_add_transition(sm, &trans_established_to_close_wait);
-    sm_add_transition(sm, &trans_fin_wait_1_to_fin_wait_2);
-    sm_add_transition(sm, &trans_fin_wait_1_to_closing);
-    sm_add_transition(sm, &trans_fin_wait_2_to_time_wait);
-    sm_add_transition(sm, &trans_close_wait_to_last_ack);
-    sm_add_transition(sm, &trans_last_ack_to_closed);
-    sm_add_transition(sm, &trans_time_wait_to_closed);
-
-    sm_set_initial_state(sm, &state_closed);
-
-    return sm;
-}
-
-/* Lambda宏定义 */
-#define lambda(return_type, params, body) ({ \
-    return_type lambda_func params body; \
-    lambda_func; \
-})
 ```
 
 ---
 
-## 2. 工作流引擎 (Workflow Engine)
+## 工作流引擎
 
-### 2.1 工作流核心概念
+### 工作流引擎核心概念
 
-```
+工作流引擎负责协调和管理业务流程的执行：
+
+| 组件 | 功能 | 示例 |
+|-----|------|------|
+| 流程定义 | 描述业务步骤和流转规则 | BPMN 图、流程配置 |
+| 任务 | 流程中的单个工作单元 | 审批、数据处理 |
+| 网关 | 控制流程分支和合并 | 并行网关、排他网关 |
+| 事件 | 触发流程流转的信号 | 消息事件、定时事件 |
+| 参与者 | 执行任务的实体 | 用户、系统服务 |
+
+### 工作流引擎架构
+
+```text
 ┌─────────────────────────────────────────────────────────────┐
-│                     工作流引擎架构                           │
+│                    工作流引擎架构                            │
+└─────────────────────────────────────────────────────────────┘
+                              │
+        ┌─────────────────────┼─────────────────────┐
+        │                     │                     │
+        ▼                     ▼                     ▼
+┌───────────────┐     ┌───────────────┐     ┌───────────────┐
+│   流程定义层   │     │   执行引擎层   │     │   运行时层    │
+├───────────────┤     ├───────────────┤     ├───────────────┤
+│ - 流程建模    │     │ - 流程实例化  │     │ - 任务管理    │
+│ - 版本控制    │     │ - 状态机驱动  │     │ - 定时调度    │
+│ - 验证校验    │     │ - 事务管理    │     │ - 事件监听    │
+└───────────────┘     └───────────────┘     └───────────────┘
+        │                     │                     │
+        └─────────────────────┼─────────────────────┘
+                              │
+                              ▼
+                    ┌─────────────────┐
+                    │   持久化层      │
+                    │ - 流程定义存储  │
+                    │ - 实例状态存储  │
+                    │ - 历史数据存储  │
+                    └─────────────────┘
+```
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│                     工作流引擎架构组件                        │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐  │
@@ -577,407 +261,545 @@ state_machine_t *tcp_state_machine_create(tcp_context_t *ctx) {
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### 2.2 工作流引擎C语言实现
+### 工作流引擎实现
 
 ```c
-/* workflow_engine.h */
-#ifndef WORKFLOW_ENGINE_H
-#define WORKFLOW_ENGINE_H
+// 工作流引擎核心数据结构
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <time.h>
-
-/* 任务状态 */
-typedef enum {
-    TASK_PENDING = 0,
-    TASK_RUNNING,
-    TASK_COMPLETED,
-    TASK_FAILED,
-    TASK_CANCELLED,
-    TASK_WAITING    /* 等待外部事件 */
-} task_state_t;
-
-/* 任务类型 */
-typedef enum {
-    TASK_TYPE_SIMPLE = 0,   /* 简单任务 */
-    TASK_TYPE_SCRIPT,       /* 脚本任务 */
-    TASK_TYPE_SERVICE,      /* 服务调用 */
-    TASK_TYPE_USER,         /* 用户任务 */
-    TASK_TYPE_SUBPROCESS,   /* 子流程 */
-    TASK_TYPE_PARALLEL,     /* 并行网关 */
-    TASK_TYPE_EXCLUSIVE,    /* 排他网关 */
-    TASK_TYPE_INCLUSIVE,    /* 包容网关 */
-    TASK_TYPE_EVENT         /* 事件任务 */
-} task_type_t;
-
-/* 前向声明 */
-typedef struct workflow_task workflow_task_t;
-typedef struct workflow workflow_t;
-typedef struct workflow_instance workflow_instance_t;
-
-/* 任务处理函数 */
-typedef int (*task_handler_t)(workflow_task_t *task, workflow_instance_t *inst, void *ctx);
-typedef bool (*condition_evaluator_t)(workflow_task_t *task, workflow_instance_t *inst);
-
-/* 任务定义 */
-struct workflow_task {
+// 流程定义
+typedef struct {
     char id[64];
-    char name[128];
-    task_type_t type;
-    task_state_t state;
+    char name[256];
+    int version;
+    wf_node_t* nodes;
+    size_t node_count;
+    wf_transition_t* transitions;
+    size_t transition_count;
+} workflow_definition_t;
 
-    /* 执行配置 */
-    task_handler_t handler;
-    condition_evaluator_t condition;
-    uint32_t retry_count;
-    uint32_t retry_delay_ms;
-    uint32_t timeout_ms;
+// 节点类型
+typedef enum {
+    NODE_START,      // 开始节点
+    NODE_END,        // 结束节点
+    NODE_TASK,       // 任务节点
+    NODE_GATEWAY,    // 网关节点
+    NODE_EVENT,      // 事件节点
+    NODE_SUBPROCESS  // 子流程
+} node_type_t;
 
-    /* 连接 */
-    workflow_task_t **incoming;
-    uint32_t incoming_count;
-    workflow_task_t **outgoing;
-    uint32_t outgoing_count;
-
-    /* 并行/网关配置 */
-    uint32_t min_complete;  /* 最少完成数 */
-    uint32_t max_complete;  /* 最多完成数 */
-
-    /* 用户数据 */
-    void *user_data;
-};
-
-/* 流程定义 */
-struct workflow {
+// 工作流节点
+typedef struct {
     char id[64];
-    char name[128];
-    char version[16];
+    node_type_t type;
+    char name[256];
+    void (*execute)(wf_instance_t* inst, wf_node_t* node);
+    // 任务特定配置
+    union {
+        struct {
+            char assignee[128];
+            char candidate_group[128];
+            int timeout_seconds;
+        } task;
+        struct {
+            int gateway_type;  // 排他/并行/包含
+        } gateway;
+    } config;
+} wf_node_t;
 
-    workflow_task_t **tasks;
-    uint32_t task_count;
-    uint32_t task_capacity;
-
-    workflow_task_t *start_task;
-    workflow_task_t **end_tasks;
-    uint32_t end_task_count;
-
-    /* 变量定义 */
-    char **variable_names;
-    uint32_t variable_count;
-};
-
-/* 流程实例 */
-struct workflow_instance {
-    char instance_id[64];
-    workflow_t *workflow;
-
-    /* 运行时状态 */
-    task_state_t *task_states;
-    workflow_task_t **active_tasks;
-    uint32_t active_task_count;
-
-    /* 变量存储 */
-    void **variables;
-
-    /* 执行上下文 */
-    void *user_ctx;
+// 流程实例
+typedef struct {
+    char id[64];
+    workflow_definition_t* definition;
+    wf_instance_state_t state;
+    wf_node_t* current_nodes[16];  // 当前活动节点 (支持并行)
+    size_t current_node_count;
+    hash_table_t* variables;        // 流程变量
     time_t start_time;
     time_t end_time;
+} wf_instance_t;
 
-    /* 持久化标记 */
-    bool dirty;
-    uint64_t version;  /* 乐观锁 */
-};
+// 创建工作流实例
+wf_instance_t* workflow_create_instance(workflow_definition_t* def) {
+    wf_instance_t* inst = calloc(1, sizeof(wf_instance_t));
+    uuid_generate(inst->id);
+    inst->definition = def;
+    inst->state = WF_STATE_ACTIVE;
+    inst->variables = hash_table_create();
+    inst->start_time = time(NULL);
 
-/* 引擎配置 */
-typedef struct {
-    uint32_t max_concurrent_instances;
-    uint32_t thread_pool_size;
-    uint32_t poll_interval_ms;
-    bool enable_persistence;
-    const char *storage_path;
-} workflow_engine_config_t;
-
-/* 工作流引擎 */
-typedef struct workflow_engine workflow_engine_t;
-
-/* API */
-workflow_engine_t *we_create(const workflow_engine_config_t *config);
-void we_destroy(workflow_engine_t *engine);
-
-/* 流程定义 */
-workflow_t *we_define_workflow(workflow_engine_t *engine, const char *id, const char *name);
-int we_add_task(workflow_t *wf, workflow_task_t *task);
-int we_connect_tasks(workflow_t *wf, const char *from_id, const char *to_id);
-int we_set_start_task(workflow_t *wf, const char *task_id);
-
-/* 实例管理 */
-workflow_instance_t *we_create_instance(workflow_engine_t *engine,
-                                         const char *workflow_id,
-                                         void *user_ctx);
-int we_start_instance(workflow_engine_t *engine, workflow_instance_t *inst);
-int we_signal_instance(workflow_engine_t *engine,
-                       workflow_instance_t *inst,
-                       const char *task_id,
-                       void *signal_data);
-int we_cancel_instance(workflow_engine_t *engine, workflow_instance_t *inst);
-
-/* 执行 */
-int we_step(workflow_engine_t *engine);
-int we_run_blocking(workflow_engine_t *engine, workflow_instance_t *inst);
-
-#endif /* WORKFLOW_ENGINE_H */
-```
-
-```c
-/* workflow_engine.c */
-#include "workflow_engine.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <pthread.h>
-
-struct workflow_engine {
-    workflow_engine_config_t config;
-
-    /* 流程定义存储 */
-    workflow_t **workflows;
-    uint32_t workflow_count;
-    uint32_t workflow_capacity;
-
-    /* 实例存储 */
-    workflow_instance_t **instances;
-    uint32_t instance_count;
-    uint32_t instance_capacity;
-    pthread_mutex_t instances_lock;
-
-    /* 执行队列 */
-    workflow_instance_t **run_queue;
-    uint32_t queue_head;
-    uint32_t queue_tail;
-    uint32_t queue_size;
-    pthread_mutex_t queue_lock;
-    pthread_cond_t queue_cond;
-
-    /* 工作线程 */
-    pthread_t *workers;
-    bool shutdown;
-};
-
-workflow_engine_t *we_create(const workflow_engine_config_t *config) {
-    workflow_engine_t *engine = calloc(1, sizeof(workflow_engine_t));
-    if (!engine) return NULL;
-
-    if (config) {
-        engine->config = *config;
-    } else {
-        /* 默认配置 */
-        engine->config.max_concurrent_instances = 1000;
-        engine->config.thread_pool_size = 4;
-        engine->config.poll_interval_ms = 100;
+    // 找到开始节点
+    for (size_t i = 0; i < def->node_count; i++) {
+        if (def->nodes[i].type == NODE_START) {
+            workflow_enter_node(inst, &def->nodes[i]);
+            break;
+        }
     }
 
-    /* 初始化存储 */
-    engine->workflow_capacity = 64;
-    engine->workflows = calloc(engine->workflow_capacity, sizeof(workflow_t *));
-
-    engine->instance_capacity = engine->config.max_concurrent_instances;
-    engine->instances = calloc(engine->instance_capacity, sizeof(workflow_instance_t *));
-    pthread_mutex_init(&engine->instances_lock, NULL);
-
-    /* 初始化队列 */
-    engine->queue_size = engine->instance_capacity;
-    engine->run_queue = calloc(engine->queue_size, sizeof(workflow_instance_t *));
-    pthread_mutex_init(&engine->queue_lock, NULL);
-    pthread_cond_init(&engine->queue_cond, NULL);
-
-    return engine;
+    return inst;
 }
 
-workflow_task_t *we_create_task(const char *id, const char *name, task_type_t type) {
-    workflow_task_t *task = calloc(1, sizeof(workflow_task_t));
-    if (!task) return NULL;
+// 进入节点
+void workflow_enter_node(wf_instance_t* inst, wf_node_t* node) {
+    printf("Entering node: %s (%s)\n", node->name, node->id);
 
-    strncpy(task->id, id, sizeof(task->id) - 1);
-    strncpy(task->name, name, sizeof(task->name) - 1);
-    task->type = type;
-    task->state = TASK_PENDING;
-    task->retry_count = 3;
-    task->timeout_ms = 30000;
+    // 添加到当前活动节点
+    inst->current_nodes[inst->current_node_count++] = node;
 
-    return task;
-}
-
-workflow_t *we_define_workflow(workflow_engine_t *engine, const char *id, const char *name) {
-    if (!engine || !id) return NULL;
-
-    workflow_t *wf = calloc(1, sizeof(workflow_t));
-    if (!wf) return NULL;
-
-    strncpy(wf->id, id, sizeof(wf->id) - 1);
-    strncpy(wf->name, name, sizeof(wf->name) - 1);
-    strncpy(wf->version, "1.0", sizeof(wf->version) - 1);
-
-    wf->task_capacity = 64;
-    wf->tasks = calloc(wf->task_capacity, sizeof(workflow_task_t *));
-
-    /* 添加到引擎 */
-    if (engine->workflow_count >= engine->workflow_capacity) {
-        /* 扩容 */
-    }
-    engine->workflows[engine->workflow_count++] = wf;
-
-    return wf;
-}
-
-int we_add_task(workflow_t *wf, workflow_task_t *task) {
-    if (!wf || !task) return -1;
-
-    if (wf->task_count >= wf->task_capacity) {
-        size_t new_cap = wf->task_capacity * 2;
-        workflow_task_t **new_tasks = realloc(wf->tasks, new_cap * sizeof(workflow_task_t *));
-        if (!new_tasks) return -1;
-        wf->tasks = new_tasks;
-        wf->task_capacity = new_cap;
+    // 执行节点
+    if (node->execute) {
+        node->execute(inst, node);
     }
 
-    wf->tasks[wf->task_count++] = task;
-    return 0;
+    // 自动流转 (非等待节点)
+    if (node->type != NODE_TASK && node->type != NODE_EVENT) {
+        workflow_leave_node(inst, node);
+    }
 }
 
-/* 任务执行 */
-static int execute_task(workflow_engine_t *engine, workflow_instance_t *inst,
-                        workflow_task_t *task) {
-    printf("[Workflow %s] Executing task: %s (%s)\n",
-           inst->instance_id, task->name, task->id);
-
-    task->state = TASK_RUNNING;
-    inst->task_states[task - inst->workflow->tasks[0]] = TASK_RUNNING;
-
-    int result = -1;
-
-    switch (task->type) {
-        case TASK_TYPE_SIMPLE:
-        case TASK_TYPE_SCRIPT:
-            if (task->handler) {
-                result = task->handler(task, inst, inst->user_ctx);
-            }
+// 离开节点
+void workflow_leave_node(wf_instance_t* inst, wf_node_t* node) {
+    // 从当前节点移除
+    for (size_t i = 0; i < inst->current_node_count; i++) {
+        if (inst->current_nodes[i] == node) {
+            inst->current_nodes[i] =
+                inst->current_nodes[--inst->current_node_count];
             break;
-
-        case TASK_TYPE_PARALLEL:
-            /* 启动所有出边任务 */
-            for (uint32_t i = 0; i < task->outgoing_count; i++) {
-                /* 添加到活跃任务 */
-            }
-            result = 0;
-            break;
-
-        case TASK_TYPE_EXCLUSIVE:
-            /* 评估条件，选择分支 */
-            for (uint32_t i = 0; i < task->outgoing_count; i++) {
-                workflow_task_t *next = task->outgoing[i];
-                if (!next->condition || next->condition(next, inst)) {
-                    /* 选择此分支 */
-                    break;
-                }
-            }
-            result = 0;
-            break;
-
-        case TASK_TYPE_USER:
-            /* 等待用户输入 */
-            task->state = TASK_WAITING;
-            result = 0;
-            break;
-
-        default:
-            break;
+        }
     }
 
-    if (result == 0) {
-        task->state = TASK_COMPLETED;
-        inst->task_states[task - inst->workflow->tasks[0]] = TASK_COMPLETED;
-    } else {
-        task->state = TASK_FAILED;
-        inst->task_states[task - inst->workflow->tasks[0]] = TASK_FAILED;
-    }
-
-    return result;
-}
-
-/* 推进流程 */
-static int advance_workflow(workflow_engine_t *engine, workflow_instance_t *inst) {
-    bool progress = true;
-
-    while (progress) {
-        progress = false;
-
-        for (uint32_t i = 0; i < inst->workflow->task_count; i++) {
-            workflow_task_t *task = inst->workflow->tasks[i];
-            task_state_t state = inst->task_states[i];
-
-            if (state != TASK_PENDING && state != TASK_COMPLETED) {
-                continue;
-            }
-
-            /* 检查前置条件 */
-            bool ready = true;
-            for (uint32_t j = 0; j < task->incoming_count; j++) {
-                workflow_task_t *prev = task->incoming[j];
-                int prev_idx = prev - inst->workflow->tasks[0];
-                if (inst->task_states[prev_idx] != TASK_COMPLETED) {
-                    ready = false;
-                    break;
-                }
-            }
-
-            if (ready && state == TASK_PENDING) {
-                int result = execute_task(engine, inst, task);
-                progress = true;
-
-                if (result != 0) {
-                    /* 处理失败 */
-                    return -1;
+    // 查找并执行后续转换
+    for (size_t i = 0; i < inst->definition->transition_count; i++) {
+        wf_transition_t* trans = &inst->definition->transitions[i];
+        if (strcmp(trans->from_node_id, node->id) == 0) {
+            // 检查条件
+            if (trans->condition == NULL ||
+                evaluate_condition(inst, trans->condition)) {
+                wf_node_t* next = find_node(inst->definition, trans->to_node_id);
+                if (next) {
+                    workflow_enter_node(inst, next);
                 }
             }
         }
     }
 
-    return 0;
+    // 检查是否结束
+    if (inst->current_node_count == 0) {
+        inst->state = WF_STATE_COMPLETED;
+        inst->end_time = time(NULL);
+    }
 }
 
-int we_start_instance(workflow_engine_t *engine, workflow_instance_t *inst) {
-    if (!engine || !inst) return -1;
+// 完成任务
+void workflow_complete_task(wf_instance_t* inst, const char* node_id,
+                            const char* user_id) {
+    wf_node_t* node = find_node(inst->definition, node_id);
+    if (!node || node->type != NODE_TASK) return;
 
-    inst->start_time = time(NULL);
-
-    /* 初始化任务状态 */
-    inst->task_states = calloc(inst->workflow->task_count, sizeof(task_state_t));
-
-    /* 从起始任务开始 */
-    if (inst->workflow->start_task) {
-        int idx = 0; /* 需要查找正确索引 */
-        inst->task_states[idx] = TASK_PENDING;
+    // 验证权限
+    if (!can_complete_task(inst, node, user_id)) {
+        printf("Permission denied for user: %s\n", user_id);
+        return;
     }
 
-    /* 添加到运行队列 */
-    pthread_mutex_lock(&engine->queue_lock);
-    engine->run_queue[engine->queue_tail++ % engine->queue_size] = inst;
-    pthread_cond_signal(&engine->queue_cond);
-    pthread_mutex_unlock(&engine->queue_lock);
+    printf("Task completed by: %s\n", user_id);
+    workflow_leave_node(inst, node);
+}
 
-    return 0;
+// 任务节点执行示例
+void task_node_execute(wf_instance_t* inst, wf_node_t* node) {
+    printf("Creating task: %s\n", node->name);
+    printf("  Assignee: %s\n", node->config.task.assignee);
+    printf("  Timeout: %d seconds\n", node->config.task.timeout_seconds);
+
+    // 创建任务记录
+    task_record_t* task = create_task(inst, node);
+
+    // 发送通知
+    if (strlen(node->config.task.assignee) > 0) {
+        notify_user(node->config.task.assignee, task);
+    }
+}
+
+// 网关节点执行示例
+void gateway_node_execute(wf_instance_t* inst, wf_node_t* node) {
+    switch (node->config.gateway.gateway_type) {
+        case GATEWAY_EXCLUSIVE:
+            // 排他网关：选择第一个满足条件的分支
+            execute_exclusive_gateway(inst, node);
+            break;
+        case GATEWAY_PARALLEL:
+            // 并行网关：同时激活所有分支
+            execute_parallel_gateway(inst, node);
+            break;
+        case GATEWAY_INCLUSIVE:
+            // 包含网关：激活所有满足条件的分支
+            execute_inclusive_gateway(inst, node);
+            break;
+    }
+}
+
+// 并行网关实现
+void execute_parallel_gateway(wf_instance_t* inst, wf_node_t* node) {
+    // 找到所有出边
+    wf_transition_t* outgoing[16];
+    size_t outgoing_count = 0;
+
+    for (size_t i = 0; i < inst->definition->transition_count; i++) {
+        if (strcmp(inst->definition->transitions[i].from_node_id,
+                   node->id) == 0) {
+            outgoing[outgoing_count++] = &inst->definition->transitions[i];
+        }
+    }
+
+    // 创建同步令牌
+    sync_token_t* token = create_sync_token(inst, node->id, outgoing_count);
+
+    // 同时激活所有分支
+    for (size_t i = 0; i < outgoing_count; i++) {
+        wf_node_t* next = find_node(inst->definition,
+                                    outgoing[i]->to_node_id);
+        if (next) {
+            // 将令牌传递给子分支
+            set_variable(inst, "sync_token", token);
+            workflow_enter_node(inst, next);
+        }
+    }
+}
+```
+
+### 工作流模式示例
+
+```c
+// 审批流程定义示例
+workflow_definition_t* create_approval_workflow() {
+    workflow_definition_t* def = calloc(1, sizeof(workflow_definition_t));
+    strcpy(def->id, "approval_flow_v1");
+    strcpy(def->name, "费用报销审批流程");
+    def->version = 1;
+
+    // 定义节点
+    def->nodes = calloc(6, sizeof(wf_node_t));
+    def->node_count = 6;
+
+    // 开始节点
+    def->nodes[0] = (wf_node_t){
+        .id = "start",
+        .type = NODE_START,
+        .name = "开始",
+        .execute = start_node_execute
+    };
+
+    // 提交申请
+    def->nodes[1] = (wf_node_t){
+        .id = "submit",
+        .type = NODE_TASK,
+        .name = "提交报销申请",
+        .execute = task_node_execute,
+        .config.task.assignee = "#{applicant}",
+        .config.task.timeout_seconds = 86400
+    };
+
+    // 经理审批网关
+    def->nodes[2] = (wf_node_t){
+        .id = "manager_gateway",
+        .type = NODE_GATEWAY,
+        .name = "经理审批",
+        .execute = gateway_node_execute,
+        .config.gateway.gateway_type = GATEWAY_EXCLUSIVE
+    };
+
+    // 财务审批
+    def->nodes[3] = (wf_node_t){
+        .id = "finance_approve",
+        .type = NODE_TASK,
+        .name = "财务审批",
+        .execute = task_node_execute,
+        .config.task.candidate_group = "finance_dept"
+    };
+
+    // 支付处理
+    def->nodes[4] = (wf_node_t){
+        .id = "payment",
+        .type = NODE_TASK,
+        .name = "支付处理",
+        .execute = task_node_execute,
+        .config.task.candidate_group = "payment_system"
+    };
+
+    // 结束节点
+    def->nodes[5] = (wf_node_t){
+        .id = "end",
+        .type = NODE_END,
+        .name = "流程结束",
+        .execute = end_node_execute
+    };
+
+    // 定义转换
+    def->transitions = calloc(5, sizeof(wf_transition_t));
+    def->transition_count = 5;
+
+    def->transitions[0] = (wf_transition_t){"start", "submit", NULL};
+    def->transitions[1] = (wf_transition_t){"submit", "manager_gateway", NULL};
+    def->transitions[2] = (wf_transition_t){"manager_gateway", "finance_approve",
+                                            "#{amount} < 10000"};
+    def->transitions[3] = (wf_transition_t){"finance_approve", "payment", NULL};
+    def->transitions[4] = (wf_transition_t){"payment", "end", NULL};
+
+    return def;
 }
 ```
 
 ---
 
-## 3. 事件驱动架构
+## 规则引擎
 
-### 3.1 事件驱动模型
+### 规则引擎概述
 
+规则引擎将业务规则从应用程序代码中分离出来，使得业务规则可以独立管理和修改。
+
+### 规则引擎架构
+
+| 组件 | 职责 | 实现方式 |
+|-----|------|---------|
+| 规则定义 | 描述业务规则 | DSL、配置文件 |
+| 事实对象 | 规则操作的数据 | 数据结构、对象 |
+| 模式匹配 | 识别满足条件的规则 | Rete 算法、线性扫描 |
+| 执行引擎 | 执行匹配的规则 | 顺序执行、优先级调度 |
+| 工作内存 | 存储事实对象 | 哈希表、对象池 |
+
+### Rete 算法实现
+
+```c
+// Rete 网络节点类型
+typedef enum {
+    RETE_ROOT,           // 根节点
+    RETE_TYPE,           // 类型节点
+    RETE_ALPHA,          // Alpha 节点 (单条件测试)
+    RETE_BETA,           // Beta 节点 (连接节点)
+    RETE_TERMINAL        // 终端节点 (规则)
+} rete_node_type_t;
+
+// Rete 网络节点
+typedef struct rete_node {
+    rete_node_type_t type;
+    char name[128];
+
+    // Alpha 节点：条件测试
+    struct {
+        char field[64];
+        int op;           // EQ, GT, LT, NE, etc.
+        value_t value;
+    } alpha_test;
+
+    // Beta 节点：连接条件
+    struct {
+        struct rete_node* left_input;
+        struct rete_node* right_input;
+        join_constraint_t* constraints;
+    } beta_join;
+
+    // 子节点
+    struct rete_node** children;
+    size_t child_count;
+
+    // 记忆
+    token_list_t* tokens;  // Beta 记忆
+    fact_list_t* facts;    // Alpha 记忆
+} rete_node_t;
+
+// 事实
+typedef struct {
+    char type[64];
+    char id[64];
+    hash_table_t* fields;
+    time_t timestamp;
+} fact_t;
+
+// 规则
+typedef struct {
+    char name[128];
+    int salience;           // 优先级
+    condition_t* conditions;
+    size_t condition_count;
+    action_t* actions;
+    size_t action_count;
+    rete_node_t* terminal_node;
+} rule_t;
+
+// 创建 Rete 网络
+rete_network_t* rete_create(void) {
+    rete_network_t* net = calloc(1, sizeof(rete_network_t));
+    net->root = calloc(1, sizeof(rete_node_t));
+    net->root->type = RETE_ROOT;
+    return net;
+}
+
+// 添加规则到网络
+void rete_add_rule(rete_network_t* net, rule_t* rule) {
+    rete_node_t* current = net->root;
+
+    // 为每个条件创建/复用 Alpha 节点
+    for (size_t i = 0; i < rule->condition_count; i++) {
+        condition_t* cond = &rule->conditions[i];
+
+        // 查找或创建类型节点
+        rete_node_t* type_node = find_or_create_type_node(current, cond->fact_type);
+
+        // 查找或创建 Alpha 节点
+        rete_node_t* alpha_node = find_or_create_alpha_node(type_node, cond);
+
+        // 创建 Beta 节点 (除第一个条件外)
+        if (i > 0) {
+            rete_node_t* beta_node = create_beta_node(current, alpha_node, cond);
+            current = beta_node;
+        } else {
+            current = alpha_node;
+        }
+    }
+
+    // 创建终端节点
+    rete_node_t* terminal = create_terminal_node(current, rule);
+    rule->terminal_node = terminal;
+}
+
+// 插入事实
+void rete_assert_fact(rete_network_t* net, fact_t* fact) {
+    // 找到对应的类型节点
+    rete_node_t* type_node = find_type_node(net->root, fact->type);
+    if (!type_node) return;
+
+    // 传播到所有子 Alpha 节点
+    for (size_t i = 0; i < type_node->child_count; i++) {
+        rete_node_t* alpha = type_node->children[i];
+
+        // 测试 Alpha 条件
+        if (evaluate_alpha_test(alpha, fact)) {
+            // 添加到 Alpha 记忆
+            add_to_alpha_memory(alpha, fact);
+
+            // 传播到子节点
+            propagate_to_children(alpha, fact);
+        }
+    }
+}
+
+// Beta 节点连接
+void beta_join(rete_node_t* beta_node, token_t* left_token, fact_t* right_fact) {
+    // 测试连接约束
+    for (size_t i = 0; i < beta_node->beta_join.constraint_count; i++) {
+        if (!evaluate_join_constraint(&beta_node->beta_join.constraints[i],
+                                       left_token, right_fact)) {
+            return;
+        }
+    }
+
+    // 创建新 token
+    token_t* new_token = create_token(left_token, right_fact);
+    add_to_beta_memory(beta_node, new_token);
+
+    // 传播到子节点
+    for (size_t i = 0; i < beta_node->child_count; i++) {
+        rete_node_t* child = beta_node->children[i];
+        if (child->type == RETE_TERMINAL) {
+            // 触发规则
+            activate_rule(child->rule, new_token);
+        } else if (child->type == RETE_BETA) {
+            // 继续连接
+            for (size_t j = 0; j < child->beta_join.right_input->fact_count; j++) {
+                beta_join(child, new_token, child->beta_join.right_input->facts[j]);
+            }
+        }
+    }
+}
 ```
+
+### 简单规则引擎实现
+
+```c
+// 简化版规则引擎 - 适合中小规模应用
+
+typedef bool (*condition_fn_t)(fact_t* facts, size_t fact_count);
+typedef void (*action_fn_t)(fact_t* facts, size_t fact_count, void* context);
+
+typedef struct {
+    char name[128];
+    int priority;
+    condition_fn_t when;
+    action_fn_t then;
+} simple_rule_t;
+
+typedef struct {
+    simple_rule_t* rules;
+    size_t rule_count;
+    fact_t* facts;
+    size_t fact_count;
+    void* context;
+} simple_engine_t;
+
+// 执行规则引擎
+void engine_execute(simple_engine_t* engine) {
+    bool any_fired = true;
+
+    while (any_fired) {
+        any_fired = false;
+
+        // 按优先级排序评估规则
+        for (size_t i = 0; i < engine->rule_count; i++) {
+            simple_rule_t* rule = &engine->rules[i];
+
+            if (rule->when(engine->facts, engine->fact_count)) {
+                printf("Rule fired: %s\n", rule->name);
+                rule->then(engine->facts, engine->fact_count, engine->context);
+                any_fired = true;
+
+                // 重新评估 (事实可能已改变)
+                break;
+            }
+        }
+    }
+}
+
+// 示例：折扣规则
+bool discount_condition(fact_t* facts, size_t count) {
+    // 查找订单事实
+    fact_t* order = find_fact_by_type(facts, count, "Order");
+    if (!order) return false;
+
+    double amount = get_fact_double(order, "amount");
+    return amount > 1000;
+}
+
+void discount_action(fact_t* facts, size_t count, void* context) {
+    fact_t* order = find_fact_by_type(facts, count, "Order");
+    double amount = get_fact_double(order, "amount");
+    double discount = amount * 0.1;  // 10% 折扣
+
+    set_fact_double(order, "discount", discount);
+    set_fact_double(order, "final_amount", amount - discount);
+
+    printf("Applied 10%% discount: %.2f\n", discount);
+}
+```
+
+---
+
+## 事件驱动架构
+
+### 事件驱动架构概述
+
+事件驱动架构 (EDA) 通过事件的发布和订阅来实现组件间的松耦合通信。
+
+### 事件驱动架构模式
+
+| 模式 | 描述 | 适用场景 |
+|-----|------|---------|
+| 发布-订阅 | 多个订阅者接收同一事件 | 广播通知 |
+| 事件溯源 | 存储事件序列作为真相源 | 审计、回滚 |
+| CQRS | 读写分离，读模型基于事件构建 | 高读性能 |
+| Saga | 通过事件协调分布式事务 | 微服务事务 |
+| 事件总线 | 中央事件路由 | 企业集成 |
+
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                    事件驱动架构                              │
 ├─────────────────────────────────────────────────────────────┤
@@ -1003,92 +825,318 @@ int we_start_instance(workflow_engine_t *engine, workflow_instance_t *inst) {
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### 3.2 事件总线实现
+### 事件总线实现
 
 ```c
-/* event_bus.h */
-#ifndef EVENT_BUS_H
-#define EVENT_BUS_H
+// 事件总线核心组件
 
-#include <stdint.h>
-#include <stdbool.h>
-
-typedef uint32_t event_type_t;
-typedef uint64_t event_id_t;
-
-/* 事件结构 */
-typedef struct {
-    event_id_t id;
-    event_type_t type;
-    uint64_t timestamp;
-    uint32_t source_id;
-    void *payload;
+typedef struct event {
+    char type[128];
+    char id[64];
+    void* payload;
     size_t payload_size;
-    uint32_t priority;  /* 0-255, 数值越小优先级越高 */
+    time_t timestamp;
+    char source[128];
 } event_t;
 
-/* 事件处理器 */
-typedef void (*event_handler_t)(const event_t *event, void *user_ctx);
-typedef bool (*event_filter_t)(const event_t *event, void *user_ctx);
+typedef void (*event_handler_t)(event_t* event, void* context);
 
-/* 订阅 */
 typedef struct {
-    event_type_t type;
+    char event_type[128];
     event_handler_t handler;
-    event_filter_t filter;
-    void *user_ctx;
-    uint32_t priority;
-    bool async;         /* 是否异步处理 */
+    void* context;
+    int priority;
 } subscription_t;
 
-/* 事件总线 */
-typedef struct event_bus event_bus_t;
+typedef struct {
+    subscription_t* subscriptions;
+    size_t subscription_count;
+    pthread_mutex_t lock;
 
-event_bus_t *eb_create(void);
-void eb_destroy(event_bus_t *bus);
+    // 异步处理
+    queue_t* event_queue;
+    pthread_t* worker_threads;
+    size_t worker_count;
+    bool running;
+} event_bus_t;
 
-/* 订阅管理 */
-int eb_subscribe(event_bus_t *bus, const subscription_t *sub);
-int eb_unsubscribe(event_bus_t *bus, event_type_t type, event_handler_t handler);
+// 创建事件总线
+event_bus_t* event_bus_create(size_t worker_count) {
+    event_bus_t* bus = calloc(1, sizeof(event_bus_t));
+    bus->subscriptions = calloc(64, sizeof(subscription_t));
+    pthread_mutex_init(&bus->lock, NULL);
 
-/* 事件发布 */
-int eb_publish(event_bus_t *bus, const event_t *event);
-int eb_publish_sync(event_bus_t *bus, const event_t *event);  /* 同步等待处理完成 */
+    // 创建事件队列
+    bus->event_queue = queue_create(1024);
+    bus->worker_count = worker_count;
+    bus->worker_threads = calloc(worker_count, sizeof(pthread_t));
+    bus->running = true;
 
-/* 批处理 */
-int eb_publish_batch(event_bus_t *bus, event_t *events, size_t count);
+    // 启动工作线程
+    for (size_t i = 0; i < worker_count; i++) {
+        pthread_create(&bus->worker_threads[i], NULL,
+                       event_worker_thread, bus);
+    }
 
-/* 查询 */
-size_t eb_get_pending_count(event_bus_t *bus);
-int eb_process_events(event_bus_t *bus, uint32_t max_events);
+    return bus;
+}
 
-#endif /* EVENT_BUS_H */
+// 订阅事件
+void event_bus_subscribe(event_bus_t* bus, const char* event_type,
+                         event_handler_t handler, void* context,
+                         int priority) {
+    pthread_mutex_lock(&bus->lock);
+
+    subscription_t* sub = &bus->subscriptions[bus->subscription_count++];
+    strncpy(sub->event_type, event_type, 127);
+    sub->handler = handler;
+    sub->context = context;
+    sub->priority = priority;
+
+    pthread_mutex_unlock(&bus->lock);
+}
+
+// 发布事件
+void event_bus_publish(event_bus_t* bus, event_t* event) {
+    // 复制事件到队列
+    event_t* event_copy = copy_event(event);
+    queue_enqueue(bus->event_queue, event_copy);
+}
+
+// 工作线程
+void* event_worker_thread(void* arg) {
+    event_bus_t* bus = (event_bus_t*)arg;
+
+    while (bus->running) {
+        event_t* event = queue_dequeue_timeout(bus->event_queue, 100);
+        if (!event) continue;
+
+        // 查找匹配的订阅者
+        pthread_mutex_lock(&bus->lock);
+
+        // 按优先级排序处理
+        subscription_t matching[64];
+        size_t match_count = 0;
+
+        for (size_t i = 0; i < bus->subscription_count; i++) {
+            if (strcmp(bus->subscriptions[i].event_type, event->type) == 0 ||
+                strcmp(bus->subscriptions[i].event_type, "*") == 0) {
+                matching[match_count++] = bus->subscriptions[i];
+            }
+        }
+
+        pthread_mutex_unlock(&bus->lock);
+
+        // 按优先级排序
+        qsort(matching, match_count, sizeof(subscription_t),
+              compare_subscription_priority);
+
+        // 调用处理器
+        for (size_t i = 0; i < match_count; i++) {
+            matching[i].handler(event, matching[i].context);
+        }
+
+        free_event(event);
+    }
+
+    return NULL;
+}
 ```
 
----
+### Saga 事件协调
 
-## 4. 设计模式对比
+```c
+// 使用事件协调的 Saga 实现
 
-| 模式 | 适用场景 | 复杂度 | 可扩展性 |
-|------|----------|--------|----------|
-| **状态机** | 明确的状态流转、协议实现 | 中 | 高 |
-| **工作流** | 业务流程编排、审批流程 | 高 | 高 |
-| **事件驱动** | 松耦合系统、实时处理 | 中 | 极高 |
-| **规则引擎** | 复杂业务规则、决策系统 | 高 | 中 |
+typedef enum {
+    SAGA_EVENT_STARTED,
+    SAGA_EVENT_STEP_COMPLETED,
+    SAGA_EVENT_STEP_FAILED,
+    SAGA_EVENT_COMPENSATION_COMPLETED,
+    SAGA_EVENT_COMPLETED
+} saga_event_type_t;
 
----
+typedef struct {
+    saga_event_type_t type;
+    char saga_id[64];
+    int step_index;
+    char error_message[256];
+} saga_event_t;
 
-## 5. 学习资源
+// Saga 协调器
+typedef struct {
+    char id[64];
+    saga_definition_t* definition;
+    saga_status_t status;
+    int current_step;
+    event_bus_t* event_bus;
+} saga_orchestrator_t;
 
-| 资源 | 类型 | 说明 |
-|------|------|------|
-| libfsm | C库 | 有限状态机实现 |
-| libtask | C库 | 协程/任务调度 |
-| Activiti/Java | 参考 | BPMN工作流引擎 |
-| Redis事件循环 | 源码 | 高效事件驱动实现 |
+// 启动 Saga
+void saga_start(saga_orchestrator_t* orchestrator) {
+    saga_event_t event = {
+        .type = SAGA_EVENT_STARTED,
+        .saga_id = orchestrator->id,
+        .step_index = 0
+    };
+    event_bus_publish(orchestrator->event_bus, &event);
+
+    // 执行第一步
+    saga_execute_step(orchestrator, 0);
+}
+
+// 执行步骤
+void saga_execute_step(saga_orchestrator_t* orchestrator, int step_index) {
+    saga_step_t* step = &orchestrator->definition->steps[step_index];
+
+    // 发送执行命令事件
+    command_event_t cmd = {
+        .type = step->action_command,
+        .saga_id = orchestrator->id,
+        .step_index = step_index,
+        .payload = step->context
+    };
+    event_bus_publish(orchestrator->event_bus, &cmd);
+}
+
+// Saga 事件处理器
+void saga_event_handler(event_t* event, void* context) {
+    saga_orchestrator_t* orchestrator = (saga_orchestrator_t*)context;
+    saga_event_t* saga_event = (saga_event_t*)event->payload;
+
+    switch (saga_event->type) {
+        case SAGA_EVENT_STEP_COMPLETED:
+            if (saga_event->step_index == orchestrator->current_step) {
+                orchestrator->current_step++;
+
+                if (orchestrator->current_step < orchestrator->definition->step_count) {
+                    // 执行下一步
+                    saga_execute_step(orchestrator, orchestrator->current_step);
+                } else {
+                    // Saga 完成
+                    saga_event_t completed = {
+                        .type = SAGA_EVENT_COMPLETED,
+                        .saga_id = orchestrator->id
+                    };
+                    event_bus_publish(orchestrator->event_bus, &completed);
+                    orchestrator->status = SAGA_COMPLETED;
+                }
+            }
+            break;
+
+        case SAGA_EVENT_STEP_FAILED:
+            // 开始补偿
+            orchestrator->status = SAGA_COMPENSATING;
+            saga_start_compensation(orchestrator, saga_event->step_index);
+            break;
+
+        case SAGA_EVENT_COMPENSATION_COMPLETED:
+            if (orchestrator->compensation_index >= 0) {
+                saga_continue_compensation(orchestrator);
+            } else {
+                orchestrator->status = SAGA_FAILED;
+            }
+            break;
+    }
+}
+```
+
+### 事件溯源实现
+
+```c
+// 事件溯源存储
+
+typedef struct {
+    char aggregate_id[64];
+    char aggregate_type[64];
+    int version;
+    event_t* events;
+    size_t event_count;
+} event_stream_t;
+
+typedef struct {
+    // 事件存储
+    int (*append)(const char* stream_id, event_t* events, size_t count);
+    event_stream_t* (*read)(const char* stream_id, int from_version);
+
+    // 快照
+    int (*save_snapshot)(const char* stream_id, void* snapshot, int version);
+    void* (*load_snapshot)(const char* stream_id, int* version);
+} event_store_t;
+
+// 聚合根
+typedef struct {
+    char id[64];
+    int version;
+    void* state;
+    event_t* uncommitted_events;
+    size_t uncommitted_count;
+} aggregate_root_t;
+
+// 应用事件到聚合
+void aggregate_apply(aggregate_root_t* aggregate, event_t* event);
+
+// 加载聚合
+aggregate_root_t* aggregate_load(event_store_t* store, const char* id,
+                                  void (*apply_fn)(void*, event_t*)) {
+    // 尝试加载快照
+    int snapshot_version = 0;
+    void* snapshot = store->load_snapshot(id, &snapshot_version);
+
+    aggregate_root_t* aggregate = calloc(1, sizeof(aggregate_root_t));
+    strcpy(aggregate->id, id);
+    aggregate->version = snapshot_version;
+    aggregate->state = snapshot ? snapshot : create_initial_state();
+
+    // 加载快照后的事件
+    event_stream_t* stream = store->read(id, snapshot_version + 1);
+
+    // 重放事件
+    for (size_t i = 0; i < stream->event_count; i++) {
+        apply_fn(aggregate->state, &stream->events[i]);
+        aggregate->version++;
+    }
+
+    return aggregate;
+}
+
+// 保存聚合
+void aggregate_save(event_store_t* store, aggregate_root_t* aggregate) {
+    if (aggregate->uncommitted_count == 0) return;
+
+    // 乐观并发控制
+    for (size_t i = 0; i < aggregate->uncommitted_count; i++) {
+        aggregate->uncommitted_events[i].expected_version = aggregate->version + i;
+    }
+
+    // 追加到事件存储
+    int result = store->append(aggregate->id, aggregate->uncommitted_events,
+                               aggregate->uncommitted_count);
+
+    if (result == CONCURRENCY_CONFLICT) {
+        // 处理冲突
+        handle_concurrency_conflict(aggregate);
+    } else {
+        aggregate->version += aggregate->uncommitted_count;
+        aggregate->uncommitted_count = 0;
+
+        // 可选：创建快照
+        if (aggregate->version % SNAPSHOT_FREQUENCY == 0) {
+            store->save_snapshot(aggregate->id, aggregate->state, aggregate->version);
+        }
+    }
+}
+```
 
 ---
 
 ## 总结
 
-状态机、工作流引擎和事件驱动架构是构建复杂系统的三大支柱。状态机适合管理有明确生命周期的对象，工作流引擎擅长业务流程编排，事件驱动架构则提供了最佳的松耦合和可扩展性。在实际项目中，这三种模式往往结合使用，共同构建健壮的业务系统。
+状态机和工作流模式为复杂业务逻辑提供了结构化的解决方案：
+
+1. **状态机模式** 适用于具有明确状态和转换的系统
+2. **工作流引擎** 适合协调多步骤业务流程
+3. **规则引擎** 将业务规则与应用程序分离
+4. **事件驱动架构** 实现组件间的松耦合
+
+选择合适的模式取决于业务复杂度、性能要求和团队熟悉度。

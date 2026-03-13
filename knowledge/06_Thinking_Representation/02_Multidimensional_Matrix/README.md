@@ -12,7 +12,7 @@
 
 技能矩阵从多个维度评估C语言相关能力：
 
-```
+```text
                     技能深度
                        │
          入门          │           精通
@@ -346,7 +346,7 @@ skill_item_t c_optimization_skills[] = {
 
 ### 2.1 T型能力模型
 
-```
+```text
 T型能力模型可视化:
 
 深度 (Specialization)
@@ -364,7 +364,7 @@ T型能力模型可视化:
 
 ### 2.2 π型能力模型
 
-```
+```text
 π型能力模型 (双专业深度):
 
     │    ┌───┐      ┌───┐
@@ -424,7 +424,7 @@ gap_analysis_item_t *analyze_gaps(skill_matrix_t *matrix,
 
 ### 3.1 艾森豪威尔矩阵 (紧急-重要)
 
-```
+```text
             紧急程度
        高 ╔═══════════╦═══════════╗
          ║  立即学习  ║   计划    ║
@@ -601,7 +601,7 @@ void print_learning_path(skill_item_t **path, uint32_t length) {
 
 ### 4.1 热力图表示
 
-```
+```text
 技能掌握热力图:
 
           语法  标准库  系统  工具  调试  优化  架构  测试  安全

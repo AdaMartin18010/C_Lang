@@ -146,4 +146,253 @@
 
 ---
 
+## 七、锁机制深度解析
+
+### 7.1 互斥锁实现原理
+
+```c
+#include <threads.h>
+
+// C11 标准互斥锁
+typedef struct {
+    mtx_t mutex;
+    int data;
+} ProtectedData;
+
+void increment(ProtectedData *pd) {
+    mtx_lock(&pd->mutex);
+    pd->data++;  // 临界区
+    mtx_unlock(&pd->mutex);
+}
+
+// 底层实现示意 (Linux futex)
+typedef struct {
+    atomic_int state;  // 0=unlocked, 1=locked, 2=contended
+} Mutex;
+
+void mutex_lock(Mutex *m) {
+    int expected = 0;
+    if (!atomic_compare_exchange_strong(&m->state, &expected, 1)) {
+        // 竞争发生，进入内核等待
+        futex_wait(&m->state, 1);
+    }
+}
+```
+
+### 7.2 读写锁机制
+
+```c
+// 读者优先 vs 写者优先
+typedef struct {
+    atomic_int readers;
+    atomic_int writers_waiting;
+    mtx_t write_lock;
+} RWLock;
+
+void rwlock_read_lock(RWLock *rw) {
+    while (atomic_load(&rw->writers_waiting) > 0) {
+        // 写者优先：等待写者完成
+        thrd_yield();
+    }
+    atomic_fetch_add(&rw->readers, 1);
+}
+
+void rwlock_write_lock(RWLock *rw) {
+    atomic_fetch_add(&rw->writers_waiting, 1);
+    mtx_lock(&rw->write_lock);
+    while (atomic_load(&rw->readers) > 0) {
+        // 等待所有读者退出
+    }
+    atomic_fetch_sub(&rw->writers_waiting, 1);
+}
+```
+
+### 7.3 自旋锁与互斥锁选择
+
+```c
+// 自旋锁 - 适合极短临界区
+typedef atomic_flag SpinLock;
+
+void spin_lock(SpinLock *lock) {
+    while (atomic_flag_test_and_set(lock)) {
+        // 忙等 - 消耗CPU
+        // 可添加退避策略
+        for (int i = 0; i < 100; i++) __asm__("pause");
+    }
+}
+
+// 自适应锁 - 先自旋，后阻塞
+typedef struct {
+    atomic_int state;
+    mtx_t mutex;
+} AdaptiveLock;
+
+void adaptive_lock(AdaptiveLock *lock) {
+    // 先尝试自旋一段时间
+    for (int spin = 0; spin < 1000; spin++) {
+        int expected = 0;
+        if (atomic_compare_exchange_weak(&lock->state, &expected, 1)) {
+            return;  // 获得锁
+        }
+        __asm__("pause");
+    }
+    // 自旋失败，进入内核阻塞
+    mtx_lock(&lock->mutex);
+}
+```
+
+---
+
+## 八、原子操作与内存序
+
+### 8.1 C11 原子操作示例
+
+```c
+#include <stdatomic.h>
+
+// 原子计数器
+atomic_int counter = ATOMIC_VAR_INIT(0);
+
+void increment(void) {
+    atomic_fetch_add(&counter, 1);  // 原子+=1
+}
+
+// 原子标志 - 最简单同步
+atomic_flag flag = ATOMIC_FLAG_INIT;
+
+void signal(void) {
+    atomic_flag_clear(&flag);
+}
+
+void wait(void) {
+    while (atomic_flag_test_and_set(&flag)) {
+        // 等待信号
+    }
+}
+
+// 显式内存序
+atomic_int data = 0;
+atomic_int ready = 0;
+
+void producer(void) {
+    atomic_store_explicit(&data, 42, memory_order_relaxed);
+    atomic_store_explicit(&ready, 1, memory_order_release);  // 发布
+}
+
+void consumer(void) {
+    while (atomic_load_explicit(&ready, memory_order_acquire) != 1) {
+        // 等待
+    }
+    int value = atomic_load_explicit(&data, memory_order_relaxed);  // 获取
+    // value 保证是42
+}
+```
+
+### 8.2 内存序可视化
+
+```
+Release-Acquire 同步示例:
+
+线程A (生产者)              线程B (消费者)
+─────────────               ─────────────
+store X, 1                  load ready → 1 (acquire)
+store ready, 1 (release)    ↓
+                            load X → 必须看到1
+
+同步点: ready的release-acquire对
+```
+
+---
+
+## 九、无锁数据结构
+
+### 9.1 无锁栈 (Treiber Stack)
+
+```c
+typedef struct Node {
+    void *data;
+    _Atomic(struct Node *) next;
+} Node;
+
+typedef struct {
+    _Atomic(Node *) head;
+} LockFreeStack;
+
+void push(LockFreeStack *stack, Node *node) {
+    Node *old_head;
+    do {
+        old_head = atomic_load(&stack->head);
+        atomic_store(&node->next, old_head);
+    } while (!atomic_compare_exchange_weak(
+        &stack->head, &old_head, node));
+}
+
+Node* pop(LockFreeStack *stack) {
+    Node *old_head;
+    do {
+        old_head = atomic_load(&stack->head);
+        if (old_head == NULL) return NULL;
+        Node *new_head = atomic_load(&old_head->next);
+    } while (!atomic_compare_exchange_weak(
+        &stack->head, &old_head, new_head));
+    return old_head;
+}
+```
+
+### 9.2 无锁队列 (MPSC)
+
+```c
+typedef struct {
+    _Atomic(void *) buffer[QUEUE_SIZE];
+    atomic_int head;
+    atomic_int tail;
+} MPSCQueue;
+
+// 多生产者入队
+bool enqueue(MPSCQueue *q, void *item) {
+    int tail = atomic_fetch_add(&q->tail, 1);
+    if (tail - atomic_load(&q->head) >= QUEUE_SIZE) {
+        // 队列满
+        atomic_fetch_sub(&q->tail, 1);
+        return false;
+    }
+    atomic_store_explicit(&q->buffer[tail % QUEUE_SIZE],
+                         item, memory_order_release);
+    return true;
+}
+
+// 单消费者出队
+void* dequeue(MPSCQueue *q) {
+    int head = atomic_load(&q->head);
+    if (head == atomic_load(&q->tail)) {
+        return NULL;  // 空队列
+    }
+    void *item = atomic_load_explicit(
+        &q->buffer[head % QUEUE_SIZE], memory_order_acquire);
+    atomic_fetch_add(&q->head, 1);
+    return item;
+}
+```
+
+---
+
+## 十、死锁预防策略
+
+| 策略 | 描述 | 实现方法 |
+|:-----|:-----|:---------|
+| **锁顺序** | 全局定义获取顺序 | 按内存地址排序 |
+| **超时** | 获取锁设置时限 | try_lock_for(timeout) |
+| **死锁检测** | 运行时检测循环等待 | 等待图算法 |
+| **无锁设计** | 避免使用锁 | 原子操作 |
+| **资源分级** | 按优先级分配资源 | 银行家算法 |
+
+---
+
 > **使用建议**: 在选择并发同步机制时，从底层向上检查需求，选择最低满足需求的层次以获得最佳性能。
+
+---
+
+> **更新记录**
+>
+> - 2025-03-09: 初版创建
+> - 2026-03-13: 扩展锁机制、原子操作、无锁数据结构

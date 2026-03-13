@@ -157,4 +157,186 @@ Level 1: 危险代码
 
 ---
 
+## 六、语言类型系统对比矩阵
+
+### 6.1 C vs C++ vs Rust vs Zig 类型系统对比
+
+| 特性 | C | C++ | Rust | Zig |
+|:-----|:--|:----|:-----|:----|
+| **类型推导** | ❌ (C23 auto) | ✅ (auto) | ✅ (let) | ✅ (var/const) |
+| **泛型支持** | ❌ (宏模拟) | ✅ (模板) | ✅ (泛型) | ✅ (comptime) |
+| **类型安全** | 低 | 中 | 高 | 高 |
+| **空值处理** | NULL指针 | nullptr | Option<T> | ?T (可选类型) |
+| **错误处理** | 返回码 | 异常/返回码 | Result<T,E> | !T (错误联合) |
+| **内存安全** | 手动 | RAII/手动 | 所有权系统 | 显式分配 |
+| **编译时计算** | 有限 | 模板元编程 | const fn | comptime |
+| **类型别名** | typedef | using/typedef | type | using |
+
+### 6.2 整数类型跨语言对比
+
+| 类型 | C (stdint) | C++ | Rust | Zig | 说明 |
+|:-----|:-----------|:----|:-----|:----|:-----|
+| 8位有符号 | int8_t | int8_t | i8 | i8 | 固定大小 |
+| 8位无符号 | uint8_t | uint8_t | u8 | u8 | 字节类型 |
+| 16位有符号 | int16_t | int16_t | i16 | i16 | 短整数 |
+| 16位无符号 | uint16_t | uint16_t | u16 | u16 | Unicode码点 |
+| 32位有符号 | int32_t | int32_t | i32 | i32 | 通用整数 |
+| 32位无符号 | uint32_t | uint32_t | u32 | u32 | 大正数 |
+| 64位有符号 | int64_t | int64_t | i64 | i64 | 大整数 |
+| 64位无符号 | uint64_t | uint64_t | u64 | u64 | 地址/大小 |
+| 指针大小 | intptr_t | intptr_t | isize | isize | 有符号指针 |
+| 无符号指针 | uintptr_t | uintptr_t | usize | usize | 地址/索引 |
+
+### 6.3 浮点类型对比
+
+| 特性 | C | C++ | Rust | Zig |
+|:-----|:--|:----|:-----|:----|
+| 单精度 | float | float | f32 | f32 |
+| 双精度 | double | double | f64 | f64 |
+| 扩展精度 | long double | long double | f128 (不稳定) | f128 |
+| 标准符合 | IEEE 754 | IEEE 754 | IEEE 754 | IEEE 754 |
+| NaN处理 | 宏 | std::numeric_limits | 内置方法 | std.math |
+| 无穷大 | 宏 | 常量 | 内置常量 | std.math |
+
+---
+
+## 七、类型系统高级主题
+
+### 7.1 类型双关 (Type Punning)
+
+```c
+// ❌ 违反严格别名规则
+float x = 1.0f;
+int i = *(int*)&x;  // UB!
+
+// ✅ 使用联合体 (C99合法)
+union FloatInt {
+    float f;
+    int i;
+};
+union FloatInt fi = { .f = 1.0f };
+int i = fi.i;  // OK
+
+// ✅ 使用memcpy (最安全)
+float x = 1.0f;
+int i;
+memcpy(&i, &x, sizeof(i));
+```
+
+### 7.2 对齐与填充
+
+```c
+#include <stdalign.h>
+
+// 默认对齐
+struct Default {
+    char c;   // 1 byte + 3 padding
+    int i;    // 4 bytes
+    short s;  // 2 bytes + 2 padding
+};  // 总计 12 bytes
+
+// 手动对齐
+struct Aligned {
+    alignas(64) char buffer[64];  // 64字节对齐（缓存行）
+};
+
+// 紧凑排列
+struct Packed {
+    char c;
+    int i;
+    short s;
+} __attribute__((packed));  // 总计 7 bytes
+```
+
+### 7.3 复数类型 (C99)
+
+```c
+#include <complex.h>
+
+double complex z = 1.0 + 2.0*I;
+double real_part = creal(z);
+double imag_part = cimag(z);
+double magnitude = cabs(z);
+double complex conj_z = conj(z);
+```
+
+### 7.4 类型泛化编程
+
+```c
+// 使用_Generic实现类型泛化
+#define max(a, b) _Generic((a), \
+    int: max_int, \
+    double: max_double, \
+    default: max_generic \
+)(a, b)
+
+int max_int(int a, int b) { return a > b ? a : b; }
+double max_double(double a, double b) { return a > b ? a : b; }
+
+// 使用
+int i = max(1, 2);        // 调用 max_int
+double d = max(1.0, 2.0); // 调用 max_double
+```
+
+---
+
+## 八、平台ABI类型差异
+
+| 平台 | int | long | 指针 | long long | 说明 |
+|:-----|:---:|:----:|:----:|:---------:|:-----|
+| x86-64 Linux | 32 | 64 | 64 | 64 | LP64 |
+| x86-64 Windows | 32 | 32 | 64 | 64 | LLP64 |
+| ARM64 | 32 | 64 | 64 | 64 | LP64 |
+| RISC-V64 | 32 | 64 | 64 | 64 | LP64 |
+| x86 32-bit | 32 | 32 | 32 | 64 | ILP32 |
+| wasm32 | 32 | 32 | 32 | 64 | ILP32 |
+
+---
+
+## 九、类型转换规则详解
+
+### 9.1 整型提升规则
+
+```c
+// 整型提升顺序
+char → int
+short → int
+// 如果int能表示原类型所有值，则提升为int
+// 否则提升为unsigned int
+
+void example() {
+    char c = 'A';
+    // c 在使用时提升为 int
+    int x = c + 1;  // c 先提升为 int
+
+    // 混合类型运算
+    short s = 10;
+    long l = s + 1;  // s → int → long
+}
+```
+
+### 9.2 隐式转换的陷阱
+
+```c
+// 有符号/无符号混合运算
+unsigned int u = 10;
+int s = -1;
+if (s < u) {  // s 被转换为 unsigned int
+    // 永远不会执行！因为 -1 变成 UINT_MAX
+}
+
+// 浮点精度丢失
+float f = 16777216.0f;  // 2^24
+f = f + 1;  // f 不变！精度不足以表示
+```
+
+---
+
 > **使用建议**: 在设计数据结构或选择类型时，参考此矩阵进行决策。
+
+---
+
+> **更新记录**
+>
+> - 2025-03-09: 初版创建
+> - 2026-03-13: 扩展语言对比、类型双关、对齐主题、泛化编程

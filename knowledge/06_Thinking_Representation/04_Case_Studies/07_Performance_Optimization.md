@@ -14,7 +14,7 @@
 | **核心概念** | 性能分析、瓶颈识别、优化策略、验证 |
 | **前置知识** | 性能分析工具、算法复杂度 |
 | **后续延伸** | 持续优化、自动化调优 |
-| **权威来源** | CSAPP, Software Optimization |
+| **权威来源** | CSAPP, Software Optimization
 
 ---
 
@@ -147,15 +147,354 @@ double benchmark_get(HashTable *ht, uint64_t *keys, int n) {
 
 ---
 
+## 🔧 Profiling 技术深度解析
+
+### 2.1 Perf 工具链详解
+
+Linux perf 是性能分析的强大工具集，提供硬件级性能监控能力：
+
+```bash
+# 基本采样
+perf record -g ./program
+perf report --sort=dso,symbol
+
+# 特定事件计数
+perf stat -e cycles,instructions,cache-misses,branch-misses ./program
+
+# 火焰图生成
+perf record -F 99 -g ./program
+perf script | stackcollapse-perf.pl | flamegraph.pl > flame.svg
+
+# 缓存分析
+perf stat -e L1-dcache-loads,L1-dcache-load-misses,L1-icache-load-misses ./program
+```
+
+### 2.2 Cachegrind 缓存分析
+
+Valgrind 的 Cachegrind 工具模拟 CPU 缓存层次：
+
+```bash
+# 运行分析
+valgrind --tool=cachegrind --cache-sim=yes ./program
+
+# 生成详细报告
+cg_annotate cachegrind.out.<pid>
+
+# 关键指标解读：
+# - I1 cache miss: 指令缓存未命中
+# - D1 cache miss: 数据缓存未命中
+# - LL cache miss: 最后一级缓存未命中
+```
+
+### 2.3 编译器内置分析
+
+现代编译器提供内置分析支持：
+
+```c
+// GCC/Clang 函数级分析
+void __attribute__((noinline)) hot_function(void) {
+    // 关键代码
+}
+
+// 分支预测提示
+if (__builtin_expect(ptr != NULL, 1)) {
+    // 预期执行路径
+}
+
+// 编译时分析
+#pragma GCC optimize("O3")
+#pragma GCC target("avx2")
+```
+
+---
+
+## 💾 缓存优化策略
+
+### 3.1 数据局部性优化
+
+缓存友好的数据布局是性能优化的核心：
+
+```c
+// ❌ 数组结构体 - 缓存不友好
+typedef struct {
+    int x;
+    int y;
+    int z;
+} Point;
+
+Point points[1000];
+
+// 计算所有点的和
+int sum_x = 0;
+for (int i = 0; i < 1000; i++) {
+    sum_x += points[i].x;  // 每次跳过12字节
+}
+
+// ✅ 结构体数组 - SoA (Structure of Arrays)
+typedef struct {
+    int *x;
+    int *y;
+    int *z;
+} Points;
+
+Points ps = {
+    .x = malloc(1000 * sizeof(int)),
+    .y = malloc(1000 * sizeof(int)),
+    .z = malloc(1000 * sizeof(int))
+};
+
+// 连续访问
+for (int i = 0; i < 1000; i++) {
+    sum_x += ps.x[i];  // 完全顺序访问
+}
+```
+
+### 3.2 循环优化技术
+
+```c
+// ❌ 原始循环 - 多重嵌套
+for (int i = 0; i < N; i++) {
+    for (int j = 0; j < M; j++) {
+        for (int k = 0; k < P; k++) {
+            C[i][j] += A[i][k] * B[k][j];
+        }
+    }
+}
+
+// ✅ 循环分块 (Loop Tiling) - 提高缓存命中率
+#define BLOCK 32
+for (int ii = 0; ii < N; ii += BLOCK) {
+    for (int jj = 0; jj < M; jj += BLOCK) {
+        for (int kk = 0; kk < P; kk += BLOCK) {
+            for (int i = ii; i < min(ii + BLOCK, N); i++) {
+                for (int j = jj; j < min(jj + BLOCK, M); j++) {
+                    for (int k = kk; k < min(kk + BLOCK, P); k++) {
+                        C[i][j] += A[i][k] * B[k][j];
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ✅ 循环展开减少开销
+for (int i = 0; i < N; i += 4) {
+    sum += arr[i];
+    sum += arr[i+1];
+    sum += arr[i+2];
+    sum += arr[i+3];
+}
+```
+
+### 3.3 预取技术
+
+```c
+// 软件预取提示
+#include <immintrin.h>
+
+void process_array(int *arr, int n) {
+    for (int i = 0; i < n; i++) {
+        // 预取未来数据
+        if (i + 16 < n) {
+            _mm_prefetch((const char*)&arr[i + 16], _MM_HINT_T0);
+        }
+        process(arr[i]);
+    }
+}
+```
+
+---
+
+## 🚀 高级优化案例
+
+### 4.1 矩阵转置优化
+
+```c
+// ❌ 朴素实现 - 大量缓存未命中
+void transpose_naive(float *dst, const float *src, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            dst[j * n + i] = src[i * n + j];
+        }
+    }
+}
+
+// ✅ 分块转置 - 缓存友好
+#define BLOCK_SIZE 32
+void transpose_blocked(float *dst, const float *src, int n) {
+    for (int ii = 0; ii < n; ii += BLOCK_SIZE) {
+        for (int jj = 0; jj < n; jj += BLOCK_SIZE) {
+            for (int i = ii; i < min(ii + BLOCK_SIZE, n); i++) {
+                for (int j = jj; j < min(jj + BLOCK_SIZE, n); j++) {
+                    dst[j * n + i] = src[i * n + j];
+                }
+            }
+        }
+    }
+}
+```
+
+### 4.2 内存池分配器
+
+```c
+typedef struct Pool {
+    char *memory;
+    size_t used;
+    size_t capacity;
+    size_t block_size;
+} Pool;
+
+// 快速分配 - O(1)
+void* pool_alloc(Pool *pool) {
+    if (pool->used + pool->block_size > pool->capacity) {
+        return NULL;  // 池耗尽
+    }
+    void *ptr = pool->memory + pool->used;
+    pool->used += pool->block_size;
+    return ptr;
+}
+
+// 批量释放 - O(1)
+void pool_reset(Pool *pool) {
+    pool->used = 0;
+}
+```
+
+### 4.3 SIMD 向量化
+
+```c
+#include <immintrin.h>
+
+// ❌ 标量版本
+float dot_product_scalar(const float *a, const float *b, int n) {
+    float sum = 0.0f;
+    for (int i = 0; i < n; i++) {
+        sum += a[i] * b[i];
+    }
+    return sum;
+}
+
+// ✅ AVX2 向量化版本
+float dot_product_avx2(const float *a, const float *b, int n) {
+    __m256 sum_vec = _mm256_setzero_ps();
+
+    for (int i = 0; i < n; i += 8) {
+        __m256 a_vec = _mm256_loadu_ps(&a[i]);
+        __m256 b_vec = _mm256_loadu_ps(&b[i]);
+        sum_vec = _mm256_fmadd_ps(a_vec, b_vec, sum_vec);
+    }
+
+    // 水平求和
+    float result[8];
+    _mm256_storeu_ps(result, sum_vec);
+    float sum = 0.0f;
+    for (int i = 0; i < 8; i++) sum += result[i];
+    return sum;
+}
+```
+
+---
+
+## 📊 Benchmark 方法论
+
+### 5.1 科学 Benchmark 原则
+
+```c
+#include <stdint.h>
+#include <time.h>
+
+// 高精度计时
+static inline uint64_t rdtsc(void) {
+    unsigned int lo, hi;
+    __asm__ __volatile__ ("rdtsc" : "=a" (lo), "=d" (hi));
+    return ((uint64_t)hi << 32) | lo;
+}
+
+typedef struct {
+    double min;
+    double max;
+    double mean;
+    double stddev;
+} BenchmarkResult;
+
+BenchmarkResult benchmark(void (*func)(void), int iterations) {
+    double *times = malloc(iterations * sizeof(double));
+
+    // 预热
+    for (int i = 0; i < 3; i++) func();
+
+    // 正式测试
+    for (int i = 0; i < iterations; i++) {
+        uint64_t start = rdtsc();
+        func();
+        uint64_t end = rdtsc();
+        times[i] = (double)(end - start);
+    }
+
+    // 统计分析
+    BenchmarkResult result = {0};
+    // 计算min, max, mean, stddev...
+
+    free(times);
+    return result;
+}
+```
+
+### 5.2 A/B 测试框架
+
+```c
+typedef struct {
+    const char *name;
+    void (*impl)(void);
+} Variant;
+
+void ab_test(Variant *variants, int num_variants, int iterations) {
+    printf("A/B Test Results:\n");
+    printf("%-20s %12s %12s %12s\n", "Variant", "Mean", "Min", "Max");
+
+    for (int i = 0; i < num_variants; i++) {
+        BenchmarkResult r = benchmark(variants[i].impl, iterations);
+        printf("%-20s %12.2f %12.2f %12.2f\n",
+               variants[i].name, r.mean, r.min, r.max);
+    }
+}
+```
+
+---
+
+## ⚠️ 性能优化常见陷阱
+
+| 陷阱 | 描述 | 避免方法 |
+|:-----|:-----|:---------|
+| **过早优化** | 在没有profiling的情况下优化 | 先测量，再优化 |
+| **过度优化** | 牺牲可读性和维护性 | 权衡复杂度与收益 |
+| **平台依赖** | 针对特定CPU的优化 | 保持可移植性 |
+| **编译器对抗** | 与编译器优化器作对 | 使用编译器提示 |
+| **假阳性** | 测试数据不具有代表性 | 使用真实数据 |
+
+---
+
 ## ✅ 质量验收清单
 
 - [x] 原始实现分析
 - [x] 性能瓶颈识别
 - [x] 优化策略应用
 - [x] Benchmark验证
+- [x] 缓存分析完成
+- [x] 向量化优化
+- [x] 内存布局优化
+
+---
+
+## 🔗 延伸阅读
+
+- [CSAPP: Optimizing Program Performance](http://csapp.cs.cmu.edu/)
+- [Agner Fog's Optimization Manuals](https://agner.org/optimize/)
+- [Ulrich Drepper's "What Every Programmer Should Know About Memory"](https://akkadia.org/drepper/cpumemory.pdf)
 
 ---
 
 > **更新记录**
 >
 > - 2025-03-09: 初版创建
+> - 2026-03-13: 扩展 Profiling、缓存优化、SIMD优化内容

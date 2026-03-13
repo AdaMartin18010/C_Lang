@@ -6,7 +6,7 @@
 
 ## 📋 目录结构
 
-```
+```text
 templates/
 ├── README.md                     # 本文件：模板总览
 ├── kb-article-template.md        # 知识库文章模板
@@ -19,7 +19,7 @@ templates/
 
 ### 为什么需要标准化模板
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                    标准化模板的价值                          │
 ├─────────────────────────────────────────────────────────────┤
@@ -80,6 +80,7 @@ graph TB
 ```
 
 ### 3.2 接口设计
+
 [关键接口定义]
 
 | 接口 | 输入 | 输出 | 说明 |
@@ -87,19 +88,23 @@ graph TB
 | func() | - | - | - |
 
 ### 3.3 数据模型
+
 [数据结构设计]
 
 ### 3.4 算法设计
+
 [关键算法描述]
 
 ## 4. 实现计划
 
 ### 4.1 里程碑
+
 - [ ] 阶段一：核心功能
 - [ ] 阶段二：边界处理
 - [ ] 阶段三：性能优化
 
 ### 4.2 风险评估
+
 | 风险 | 影响 | 缓解措施 |
 |-----|------|---------|
 | - | - | - |
@@ -107,12 +112,15 @@ graph TB
 ## 5. 测试策略
 
 ### 5.1 测试范围
+
 ### 5.2 测试方法
 
 ## 6. 附录
 
 ### 6.1 参考资料
+
 ### 6.2 术语表
+
 ```
 
 ### 2. 故障排查文档模板
@@ -124,7 +132,9 @@ graph TB
 
 ### 错误信息
 ```
+
 [完整的错误日志或报错信息]
+
 ```
 
 ### 影响范围
@@ -149,14 +159,17 @@ void problematic_function() {
 ## 解决方案
 
 ### 方案一：[推荐方案]
+
 **适用场景：**
 **操作步骤：**
+
 1. 步骤一
 2. 步骤二
 
 **验证方法：**
 
 ### 方案二：[备选方案]
+
 ...
 
 ## 预防措施
@@ -169,6 +182,7 @@ void problematic_function() {
 
 - 案例 #1234
 - 案例 #5678
+
 ```
 
 ---
@@ -184,12 +198,12 @@ void problematic_function() {
  * @author    [作者]
  * @date      [创建日期]
  * @version   [版本号]
- * 
+ *
  * @copyright Copyright (c) [年份]
- * 
- * @details   
+ *
+ * @details
  * [详细描述文件功能、设计思路、使用注意事项等]
- * 
+ *
  * @par 修改日志:
  * <table>
  * <tr><th>Date       <th>Version <th>Author  <th>Description
@@ -210,7 +224,7 @@ void problematic_function() {
  * @note   [使用注意事项]
  * @warning [警告信息]
  * @see    [相关函数或文档]
- * 
+ *
  * @par 示例:
  * @code
  * int result = function_name(arg1, arg2);
@@ -228,9 +242,9 @@ int function_name(int param1, const char *param2);
 /**
  * @struct data_structure
  * @brief  [结构体功能描述]
- * 
+ *
  * [详细说明结构体的用途和设计考虑]
- * 
+ *
  * @par 内存布局:
  * @code
  *  0-3:   field1  (4 bytes)
@@ -251,10 +265,10 @@ struct data_structure {
 /**
  * @def MAX_BUFFER_SIZE
  * @brief 最大缓冲区大小
- * 
+ *
  * 定义了内部缓冲区的最大字节数。
  * 此值影响内存使用和最大处理能力。
- * 
+ *
  * @note 修改此值需要重新编译所有依赖模块
  */
 #define MAX_BUFFER_SIZE 4096
@@ -263,9 +277,9 @@ struct data_structure {
  * @def SAFE_FREE(ptr)
  * @brief 安全释放内存宏
  * @param ptr 要释放的指针
- * 
+ *
  * 释放指针指向的内存，并将指针置为NULL，防止悬空指针。
- * 
+ *
  * @par 使用示例:
  * @code
  * char *buffer = malloc(100);
@@ -305,6 +319,7 @@ struct data_structure {
 ```
 
 ### Hello World
+
 ```c
 #include "module.h"
 
@@ -317,6 +332,7 @@ int main() {
 ## 核心概念
 
 ### 概念一：[概念名称]
+
 [概念解释]
 
 ```
@@ -324,6 +340,7 @@ int main() {
 ```
 
 ### 概念二：[概念名称]
+
 ...
 
 ## API参考
@@ -333,6 +350,7 @@ int main() {
 #### function_name()
 
 **函数签名：**
+
 ```c
 return_type function_name(param_type param);
 ```
@@ -352,6 +370,7 @@ return_type function_name(param_type param);
 | -2 | 内存不足 |
 
 **示例：**
+
 ```c
 // 代码示例
 ```
@@ -394,10 +413,12 @@ return_type function_name(param_type param);
 ## 最佳实践
 
 ### Do
+
 - [推荐做法1]
 - [推荐做法2]
 
 ### Don't
+
 - [避免做法1]
 - [避免做法2]
 
@@ -410,8 +431,10 @@ A: [解答]
 ## 更新日志
 
 ### v1.0.0 (2024-01-01)
+
 - 初始版本
 - 功能列表
+
 ```
 
 ### 2. RESTful API文档模板
@@ -461,6 +484,7 @@ Content-Type: application/json
 | param | string | 是 | 参数描述 |
 
 **请求示例:**
+
 ```json
 {
     "param": "value"
@@ -475,6 +499,7 @@ Content-Type: application/json
 | data | object | 响应数据 |
 
 **响应示例:**
+
 ```json
 {
     "code": 0,
@@ -494,12 +519,14 @@ Content-Type: application/json
 | 500 | 服务器内部错误 |
 
 **错误示例:**
+
 ```json
 {
     "code": 1001,
     "message": "参数错误：name不能为空"
 }
 ```
+
 ```
 
 ---
@@ -509,12 +536,14 @@ Content-Type: application/json
 ### 文档命名规范
 
 ```
+
 [类型]_[主题]_[日期].[扩展名]
 
 示例：
 design_memory_allocator_20240115.md
 api_network_module_v2.md
 incident_memory_leak_20240110.md
+
 ```
 
 ### 版本控制规范

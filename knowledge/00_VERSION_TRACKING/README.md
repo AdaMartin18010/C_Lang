@@ -12,7 +12,7 @@
 
 本知识库采用 **MAJOR.MINOR.PATCH** 格式的语义化版本控制：
 
-```
+```text
 版本格式：MAJOR.MINOR.PATCH
 示例：v2.1.3
 
@@ -34,7 +34,7 @@ PATCH (修订号)：问题修复和细节优化
 
 ### 预发布版本标识
 
-```
+```text
 alpha  (α)：内部测试版本，知识结构可能大幅调整
 beta   (β)：公开预览版本，核心内容已稳定
 rc     (Release Candidate)：发布候选版本，待最终验证
@@ -47,7 +47,7 @@ v2.0.0-rc.1       # 第一个发布候选版本
 
 ### 日期版本标签
 
-```
+```text
 格式：v{MAJOR}.{MINOR}.{PATCH}-{YYYYMMDD}
 示例：v2.1.3-20260313
 
@@ -100,17 +100,17 @@ version_info:
   current_version: "2.1.3"
   release_date: "2026-03-13"
   codename: "Precision"
-  
+
   compatibility:
     previous_compatible: ">=1.5.0"
     breaking_changes: false
     migration_guide: "docs/migration/v1-to-v2.md"
-  
+
   statistics:
     total_documents: 156
     total_code_examples: 423
     total_lines_of_code: 28750
-    
+
   contributors:
     - name: "知识库维护团队"
       commits: 892
@@ -124,7 +124,7 @@ version_info:
 
 ### 更新触发条件
 
-```
+```text
 自动更新触发器：
 ├─ 定时更新 (Weekly)
 │  └─ 代码示例语法检查
@@ -179,7 +179,7 @@ echo "=== 验证完成 ==="
 
 ### 层级导航结构
 
-```
+```text
 knowledge/
 ├── 00_VERSION_TRACKING/          # 版本控制与导航入口
 ├── 01_Core_Knowledge_System/      # 核心知识体系
@@ -254,7 +254,7 @@ related_docs:
 
 #### 初学者路径 (Beginner Track)
 
-```
+```text
 Week 1-2: C 语言基础
 ├── 01_Basic_Layer/
 │   ├── 数据类型与变量
@@ -277,7 +277,7 @@ Week 5-6: 构造与标准库
 
 #### 进阶路径 (Advanced Track)
 
-```
+```text
 阶段 1: 系统编程
 ├── 06_Advanced_Layer/
 ├── 02_Formal_Semantics_and_Physics/
@@ -375,6 +375,7 @@ int main(void) {
 
 - [标准文档]
 - [学术论文]
+
 ```
 
 ---
@@ -384,6 +385,7 @@ int main(void) {
 ### 路线图 (Roadmap)
 
 ```
+
 v2.2.0 (计划 2026-Q2)
 ├── 新增：嵌入式系统深入专题
 ├── 扩展：Rust 互操作内容
@@ -398,6 +400,7 @@ v3.0.0 (计划 2026-Q4)
 ├── 重大：知识体系重构
 ├── 新增：C23 完整支持
 └── 改进：多语言版本
+
 ```
 
 ---

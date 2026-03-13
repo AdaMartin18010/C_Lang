@@ -10,7 +10,7 @@
 
 ### 1.1 标准目录结构
 
-```
+```text
 my_c_project/
 ├── .github/
 │   └── workflows/              # GitHub Actions CI配置

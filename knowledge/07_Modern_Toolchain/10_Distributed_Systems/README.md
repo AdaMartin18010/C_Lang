@@ -1,839 +1,1031 @@
-# 分布式系统基础
+# 分布式系统 (Distributed Systems)
 
 ## 概述
 
-分布式系统是由多台独立计算机通过网络连接协同工作的系统。与单机系统相比，分布式系统提供了更高的可用性、可扩展性和容错能力，但也引入了网络延迟、分区容错、一致性等复杂挑战。
+分布式系统是由多个独立计算机组成的系统，这些计算机通过网络进行通信和协调，对外表现为一个统一的整体。理解分布式系统的核心概念对于构建可靠的现代软件系统至关重要。
+
+## 目录
+
+- [分布式系统 (Distributed Systems)](#分布式系统-distributed-systems)
+  - [概述](#概述)
+  - [目录](#目录)
+  - [分布式共识](#分布式共识)
+    - [什么是分布式共识](#什么是分布式共识)
+    - [共识问题特性](#共识问题特性)
+    - [典型共识算法对比](#典型共识算法对比)
+    - [Raft 算法详解](#raft-算法详解)
+      - [节点状态转换](#节点状态转换)
+      - [领导选举流程](#领导选举流程)
+      - [日志复制流程](#日志复制流程)
+  - [一致性模型](#一致性模型)
+    - [一致性强度谱系](#一致性强度谱系)
+    - [一致性模型对比](#一致性模型对比)
+    - [实现机制](#实现机制)
+      - [线性一致性实现](#线性一致性实现)
+      - [因果一致性实现](#因果一致性实现)
+      - [最终一致性实现](#最终一致性实现)
+  - [CAP 定理](#cap-定理)
+    - [CAP 定理概述](#cap-定理概述)
+    - [CAP 权衡选择](#cap-权衡选择)
+    - [CAP 权衡的实际影响](#cap-权衡的实际影响)
+      - [CP 系统行为](#cp-系统行为)
+      - [AP 系统行为](#ap-系统行为)
+    - [PACELC 定理](#pacelc-定理)
+  - [分布式事务](#分布式事务)
+    - [分布式事务概述](#分布式事务概述)
+    - [两阶段提交 (2PC)](#两阶段提交-2pc)
+      - [2PC 实现](#2pc-实现)
+    - [三阶段提交 (3PC)](#三阶段提交-3pc)
+    - [Saga 模式](#saga-模式)
+    - [分布式事务方案对比](#分布式事务方案对比)
+  - [总结](#总结)
 
 ---
 
-## 1. CAP 定理
+## 分布式共识
 
-### 1.1 定理阐述
+### 什么是分布式共识
 
-CAP定理指出，分布式系统无法同时满足以下三个特性：
+分布式共识是指在一个由多个节点组成的分布式系统中，所有节点就某个值达成一致的过程。这是分布式系统中最基本也是最重要的问题之一。
 
-```
-                    CAP 定理
-                       │
-        ┌──────────────┼──────────────┐
-        │              │              │
-        ▼              ▼              ▼
-   ┌─────────┐   ┌─────────┐   ┌─────────┐
-   │Consistency│   │Availability│   │Partition  │
-   │  一致性   │   │  可用性    │   │Tolerance  │
-   │           │   │            │   │分区容错性 │
-   └─────────┘   └─────────┘   └─────────┘
-        │              │              │
-        │              │              │
-        └──────────────┴──────────────┘
-                       │
-              只能同时满足其中两个
-```
+### 共识问题特性
 
-- **一致性 (Consistency)**: 所有节点在同一时刻看到相同的数据
-- **可用性 (Availability)**: 每个请求都能在有限时间内获得响应
-- **分区容错性 (Partition Tolerance)**: 系统在网络分区时仍能继续运行
+| 特性 | 描述 | 重要性 |
+|-----|------|-------|
+| 终止性 | 所有正确节点最终必须做出决定 | 保证系统活性 |
+| 一致性 | 所有正确节点必须做出相同的决定 | 保证安全性 |
+| 有效性 | 决定必须是某个节点提出的值 | 保证有效性 |
+| 容错性 | 系统能在部分节点故障时继续工作 | 保证可用性 |
 
-### 1.2 CAP权衡策略
+### 典型共识算法对比
 
-| 组合 | 代表系统 | 适用场景 |
-|------|----------|----------|
-| CP (Consistency + Partition Tolerance) | HBase, MongoDB, Redis Cluster | 金融交易、库存管理 |
-| AP (Availability + Partition Tolerance) | Cassandra, DynamoDB, Couchbase | 社交网络、日志收集 |
-| CA (Consistency + Availability) | 传统关系型数据库 | 单机或内部网络系统 |
+| 算法 | 容错类型 | 容错节点数 | 通信复杂度 | 适用场景 |
+|-----|---------|-----------|-----------|---------|
+| Paxos | 崩溃容错 | 2f+1 容忍 f | O(n²) | 理论基准 |
+| Multi-Paxos | 崩溃容错 | 2f+1 容忍 f | O(n) 稳定后 | 实际生产 |
+| Raft | 崩溃容错 | 2f+1 容忍 f | O(n) | 教学和工程 |
+| PBFT | 拜占庭容错 | 3f+1 容忍 f | O(n²) | 区块链 |
+| ZAB | 崩溃容错 | 2f+1 容忍 f | O(n) | ZooKeeper |
 
-### 1.3 C语言中的CAP权衡
+### Raft 算法详解
 
-```c
-/* cap_tradeoffs.h - CAP权衡策略定义 */
-#ifndef CAP_TRADEOFFS_H
-#define CAP_TRADEOFFS_H
+Raft 是一种易于理解的共识算法，它将共识问题分解为三个子问题：
 
-typedef enum {
-    CAP_STRATEGY_CP,    /* 优先一致性 */
-    CAP_STRATEGY_AP,    /* 优先可用性 */
-    CAP_STRATEGY_ADJUSTABLE  /* 动态调整 */
-} cap_strategy_t;
-
-/* 分布式配置 */
-typedef struct {
-    cap_strategy_t strategy;
-    uint32_t consistency_level;  /* 写入确认节点数 */
-    uint32_t replication_factor; /* 副本数 */
-    uint32_t read_quorum;        /* 读仲裁数 */
-    uint32_t write_quorum;       /* 写仲裁数 */
-} distributed_config_t;
-
-/* 仲裁计算 */
-static inline uint32_t calculate_quorum(uint32_t replication_factor,
-                                         cap_strategy_t strategy) {
-    switch (strategy) {
-        case CAP_STRATEGY_CP:
-            /* CP: 大多数节点 (严格一致性) */
-            return (replication_factor / 2) + 1;
-        case CAP_STRATEGY_AP:
-            /* AP: 最少节点 (最终一致性) */
-            return 1;
-        default:
-            return (replication_factor / 2) + 1;
-    }
-}
-
-#endif /* CAP_TRADEOFFS_H */
-```
-
----
-
-## 2. 一致性模型
-
-### 2.1 一致性级别
-
-```
-一致性强度递减:
-
-强一致性 ──────────────────────────────────────────► 最终一致性
-│                                                      │
-├─ 线性一致性 (Linearizable)                            ├─ 因果一致性
-├─ 顺序一致性 (Sequential)                              ├─ 会话一致性
-├─ 因果一致性 (Causal)                                  └─ 单调读/写
-└─ 外部一致性 (External)
-
-实现成本: 高 ◄──────────────────────────────────────────► 低
-性能:     低 ◄──────────────────────────────────────────► 高
-可用性:   低 ◄──────────────────────────────────────────► 高
-```
-
-### 2.2 一致性模型C语言实现框架
-
-```c
-/* consistency_models.h */
-#ifndef CONSISTENCY_MODELS_H
-#define CONSISTENCY_MODELS_H
-
-#include <stdint.h>
-#include <stdbool.h>
-#include <time.h>
-
-/* 一致性级别 */
-typedef enum {
-    CONSISTENCY_LINEARIZABLE = 0,  /* 线性一致性 - 最强 */
-    CONSISTENCY_SEQUENTIAL,        /* 顺序一致性 */
-    CONSISTENCY_CAUSAL,            /* 因果一致性 */
-    CONSISTENCY_SESSION,           /* 会话一致性 */
-    CONSISTENCY_EVENTUAL,          /* 最终一致性 - 最弱 */
-    CONSISTENCY_MONOTONIC_READ,    /* 单调读 */
-    CONSISTENCY_MONOTONIC_WRITE    /* 单调写 */
-} consistency_level_t;
-
-/* 向量时钟 - 用于因果一致性 */
-typedef struct {
-    uint32_t node_id;
-    uint64_t counter;
-} vector_clock_entry_t;
-
-typedef struct {
-    vector_clock_entry_t *entries;
-    size_t count;
-    size_t capacity;
-} vector_clock_t;
-
-/* 时间戳 - 用于线性一致性 */
-typedef struct {
-    uint64_t physical_time;   /* 物理时间戳 */
-    uint32_t logical_time;    /* 逻辑时间戳 (Lamport时钟) */
-    uint32_t node_id;         /* 节点标识 */
-} hybrid_timestamp_t;
-
-/* 版本化数据 */
-typedef struct {
-    void *data;
-    size_t data_len;
-    vector_clock_t *vc;           /* 向量时钟 */
-    hybrid_timestamp_t hts;       /* 混合时间戳 */
-    uint64_t version;             /* 单调版本号 */
-} versioned_value_t;
-
-/* API声明 */
-vector_clock_t *vc_create(size_t initial_capacity);
-void vc_destroy(vector_clock_t *vc);
-void vc_increment(vector_clock_t *vc, uint32_t node_id);
-void vc_merge(vector_clock_t *dest, const vector_clock_t *src);
-int vc_compare(const vector_clock_t *a, const vector_clock_t *b);
-
-/* 一致性检查 */
-bool check_read_your_writes(versioned_value_t *write_val,
-                            versioned_value_t *read_val,
-                            uint32_t client_id);
-bool check_monotonic_reads(versioned_value_t *prev_read,
-                           versioned_value_t *current_read);
-
-#endif /* CONSISTENCY_MODELS_H */
-```
-
-```c
-/* consistency_models.c - 向量时钟实现 */
-#include "consistency_models.h"
-#include <stdlib.h>
-#include <string.h>
-
-vector_clock_t *vc_create(size_t initial_capacity) {
-    vector_clock_t *vc = calloc(1, sizeof(vector_clock_t));
-    if (!vc) return NULL;
-
-    vc->entries = calloc(initial_capacity, sizeof(vector_clock_entry_t));
-    if (!vc->entries) {
-        free(vc);
-        return NULL;
-    }
-
-    vc->capacity = initial_capacity;
-    return vc;
-}
-
-void vc_increment(vector_clock_t *vc, uint32_t node_id) {
-    if (!vc) return;
-
-    /* 查找现有条目 */
-    for (size_t i = 0; i < vc->count; i++) {
-        if (vc->entries[i].node_id == node_id) {
-            vc->entries[i].counter++;
-            return;
-        }
-    }
-
-    /* 添加新条目 */
-    if (vc->count >= vc->capacity) {
-        /* 扩容 */
-        size_t new_cap = vc->capacity * 2;
-        vector_clock_entry_t *new_entries = realloc(vc->entries,
-                                                    new_cap * sizeof(vector_clock_entry_t));
-        if (!new_entries) return;
-        vc->entries = new_entries;
-        vc->capacity = new_cap;
-    }
-
-    vc->entries[vc->count].node_id = node_id;
-    vc->entries[vc->count].counter = 1;
-    vc->count++;
-}
-
-/* 向量时钟比较
- * 返回值: 1 = a > b, -1 = a < b, 0 = 并发(不可比较)
- */
-int vc_compare(const vector_clock_t *a, const vector_clock_t *b) {
-    if (!a || !b) return 0;
-
-    bool a_greater = false;
-    bool b_greater = false;
-
-    /* 检查所有已知节点 */
-    size_t max_nodes = a->count > b->count ? a->count : b->count;
-
-    for (size_t i = 0; i < max_nodes; i++) {
-        uint64_t a_val = 0, b_val = 0;
-
-        if (i < a->count) a_val = a->entries[i].counter;
-        if (i < b->count) b_val = b->entries[i].counter;
-
-        if (a_val > b_val) a_greater = true;
-        if (b_val > a_val) b_greater = true;
-    }
-
-    if (a_greater && !b_greater) return 1;
-    if (b_greater && !a_greater) return -1;
-    return 0; /* 并发或相等 */
-}
-
-void vc_merge(vector_clock_t *dest, const vector_clock_t *src) {
-    if (!dest || !src) return;
-
-    for (size_t i = 0; i < src->count; i++) {
-        uint32_t node_id = src->entries[i].node_id;
-        uint64_t counter = src->entries[i].counter;
-
-        /* 查找或创建条目 */
-        bool found = false;
-        for (size_t j = 0; j < dest->count; j++) {
-            if (dest->entries[j].node_id == node_id) {
-                if (counter > dest->entries[j].counter) {
-                    dest->entries[j].counter = counter;
-                }
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            vc_increment(dest, node_id);
-            dest->entries[dest->count - 1].counter = counter;
-        }
-    }
-}
-```
-
----
-
-## 3. 分布式共识算法
-
-### 3.1 Raft 共识算法
-
-Raft是一种易于理解的共识算法，将一致性问题分解为三个子问题：
-
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
-│                     Raft 共识算法                            │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │ Leader Election│  │   Log Replication   │  │  Safety    │      │
-│  │   领导者选举   │  │     日志复制        │  │  安全性    │      │
-│  └──────────────┘  └──────────────┘  └──────────────┘      │
-│                                                             │
-│  角色状态:                                                  │
-│  ┌──────────┐      ┌──────────┐      ┌──────────┐          │
-│  │ Leader   │◄────►│ Candidate│◄────►│ Follower │          │
-│  │  领导者   │      │ 候选人    │      │  追随者   │          │
-│  └──────────┘      └──────────┘      └──────────┘          │
-│                                                             │
+│                      Raft 算法结构                          │
 └─────────────────────────────────────────────────────────────┘
+                              │
+        ┌─────────────────────┼─────────────────────┐
+        │                     │                     │
+        ▼                     ▼                     ▼
+┌───────────────┐     ┌───────────────┐     ┌───────────────┐
+│  领导选举      │     │   日志复制    │     │   安全性      │
+├───────────────┤     ├───────────────┤     ├───────────────┤
+│ - 选举超时     │     │ - 客户端请求  │     │ - 提交规则    │
+│ - 心跳机制     │     │ - 日志条目    │     │ - 状态机安全  │
+│ - 任期(term)  │      │ - 一致性检查  │     │ - 领导人完整  │
+└───────────────┘     └───────────────┘     └───────────────┘
 ```
 
-### 3.2 Raft C语言实现框架
+#### 节点状态转换
 
 ```c
-/* raft_consensus.h */
-#ifndef RAFT_CONSENSUS_H
-#define RAFT_CONSENSUS_H
-
-#include <stdint.h>
-#include <stdbool.h>
-
-/* Raft节点角色 */
+// Raft 节点状态定义
 typedef enum {
-    RAFT_ROLE_FOLLOWER = 0,
-    RAFT_ROLE_CANDIDATE,
-    RAFT_ROLE_LEADER
-} raft_role_t;
-
-/* 日志条目 */
-typedef struct {
-    uint64_t term;          /* 任期号 */
-    uint64_t index;         /* 日志索引 */
-    uint32_t type;          /* 条目类型 */
-    uint8_t *data;          /* 数据 */
-    size_t data_len;
-} raft_log_entry_t;
-
-/* Raft节点状态 */
-typedef struct {
-    /* 持久化状态 */
-    uint64_t current_term;      /* 当前任期 */
-    int32_t voted_for;          /* 投票给谁 (-1表示未投票) */
-    raft_log_entry_t *log;      /* 日志条目数组 */
-    size_t log_count;
-    size_t log_capacity;
-
-    /* 易失状态 */
-    raft_role_t role;
-    uint32_t node_id;
-    uint32_t cluster_size;
-
-    /* 所有节点 */
-    uint64_t commit_index;      /* 已提交的最高日志索引 */
-    uint64_t last_applied;      /* 已应用到状态机的最高索引 */
-
-    /* 仅领导者 */
-    uint64_t *next_index;       /* 每个节点的下一个日志索引 */
-    uint64_t *match_index;      /* 每个节点匹配的最高索引 */
-
-    /* 超时控制 */
-    uint64_t election_timeout_ms;
-    uint64_t heartbeat_interval_ms;
-    uint64_t last_heartbeat;
+    STATE_FOLLOWER,   // 跟随者：被动响应请求
+    STATE_CANDIDATE,  // 候选者：发起选举
+    STATE_LEADER      // 领导者：处理客户端请求
 } raft_state_t;
 
-/* RPC请求/响应 */
 typedef struct {
-    uint64_t term;
-    uint32_t candidate_id;
-    uint64_t last_log_index;
-    uint64_t last_log_term;
-} raft_request_vote_req_t;
+    // 持久状态
+    uint64_t current_term;    // 当前任期
+    int voted_for;            // 当前任期投票给谁
+    log_entry_t* log;         // 日志条目数组
+    size_t log_count;
 
-typedef struct {
-    uint64_t term;
-    bool vote_granted;
-} raft_request_vote_rsp_t;
+    // 易失状态
+    raft_state_t state;
+    int commit_index;         // 已知提交的最高日志索引
+    int last_applied;         // 已应用到状态机的最高索引
 
-typedef struct {
-    uint64_t term;
-    uint32_t leader_id;
-    uint64_t prev_log_index;
-    uint64_t prev_log_term;
-    raft_log_entry_t *entries;
-    size_t entry_count;
-    uint64_t leader_commit;
-} raft_append_entries_req_t;
+    // 领导者易失状态 (重新选举后重置)
+    int* next_index;          // 每个节点的下一个日志索引
+    int* match_index;         // 每个节点已复制的最高索引
 
-typedef struct {
-    uint64_t term;
-    bool success;
-    uint64_t match_index;
-} raft_append_entries_rsp_t;
-
-/* API */
-raft_state_t *raft_create(uint32_t node_id, uint32_t cluster_size);
-void raft_destroy(raft_state_t *raft);
-
-/* 状态机 */
-void raft_become_follower(raft_state_t *raft, uint64_t term);
-void raft_become_candidate(raft_state_t *raft);
-void raft_become_leader(raft_state_t *raft);
-
-/* RPC处理 */
-raft_request_vote_rsp_t raft_handle_request_vote(raft_state_t *raft,
-                                                  const raft_request_vote_req_t *req);
-raft_append_entries_rsp_t raft_handle_append_entries(raft_state_t *raft,
-                                                      const raft_append_entries_req_t *req);
-
-/* 客户端请求 */
-int raft_propose(raft_state_t *raft, const uint8_t *data, size_t len);
-
-/* 定时器处理 */
-void raft_on_election_timeout(raft_state_t *raft);
-void raft_on_heartbeat_interval(raft_state_t *raft);
-
-#endif /* RAFT_CONSENSUS_H */
+    // 定时器
+    struct timeval election_timeout;
+    struct timeval heartbeat_interval;
+} raft_node_t;
 ```
 
+#### 领导选举流程
+
 ```c
-/* raft_consensus.c - 核心实现 */
-#include "raft_consensus.h"
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <time.h>
+// 选举超时触发
+void on_election_timeout(raft_node_t* node) {
+    // 1. 增加任期
+    node->current_term++;
 
-raft_state_t *raft_create(uint32_t node_id, uint32_t cluster_size) {
-    raft_state_t *raft = calloc(1, sizeof(raft_state_t));
-    if (!raft) return NULL;
+    // 2. 转换为候选者
+    node->state = STATE_CANDIDATE;
+    node->voted_for = node->id;
 
-    raft->node_id = node_id;
-    raft->cluster_size = cluster_size;
-    raft->role = RAFT_ROLE_FOLLOWER;
-    raft->current_term = 0;
-    raft->voted_for = -1;
-    raft->commit_index = 0;
-    raft->last_applied = 0;
+    // 3. 给自己投票
+    int votes_received = 1;
 
-    /* 日志初始化 */
-    raft->log_capacity = 1024;
-    raft->log = calloc(raft->log_capacity, sizeof(raft_log_entry_t));
+    // 4. 向其他节点发送 RequestVote RPC
+    for (int i = 0; i < node->cluster_size; i++) {
+        if (i == node->id) continue;
 
-    /* 领导者状态 */
-    raft->next_index = calloc(cluster_size, sizeof(uint64_t));
-    raft->match_index = calloc(cluster_size, sizeof(uint64_t));
+        request_vote_args_t args = {
+            .term = node->current_term,
+            .candidate_id = node->id,
+            .last_log_index = node->log_count - 1,
+            .last_log_term = node->log_count > 0 ?
+                node->log[node->log_count - 1].term : 0
+        };
 
-    /* 超时设置 */
-    raft->election_timeout_ms = 150 + (rand() % 150); /* 150-300ms随机 */
-    raft->heartbeat_interval_ms = 50;
+        send_request_vote(i, &args);
+    }
 
-    return raft;
+    // 5. 重置选举定时器
+    reset_election_timer(node);
 }
 
-void raft_become_candidate(raft_state_t *raft) {
-    if (!raft) return;
+// 处理 RequestVote RPC
+request_vote_reply_t handle_request_vote(raft_node_t* node,
+                                         request_vote_args_t* args) {
+    request_vote_reply_t reply = { .term = node->current_term };
 
-    raft->role = RAFT_ROLE_CANDIDATE;
-    raft->current_term++;
-    raft->voted_for = raft->node_id;
+    // 1. 任期检查
+    if (args->term < node->current_term) {
+        reply.vote_granted = false;
+        return reply;
+    }
 
-    printf("Node %u became candidate for term %lu\n",
-           raft->node_id, raft->current_term);
+    // 2. 更新任期
+    if (args->term > node->current_term) {
+        node->current_term = args->term;
+        node->voted_for = -1;
+        become_follower(node);
+    }
 
-    /* 向其他节点发送RequestVote RPC */
-    raft_request_vote_req_t req = {
-        .term = raft->current_term,
-        .candidate_id = raft->node_id,
-        .last_log_index = raft->log_count > 0 ?
-            raft->log[raft->log_count - 1].index : 0,
-        .last_log_term = raft->log_count > 0 ?
-            raft->log[raft->log_count - 1].term : 0
+    // 3. 投票条件检查
+    bool can_vote = (node->voted_for == -1 ||
+                     node->voted_for == args->candidate_id);
+    bool log_is_up_to_date = is_log_up_to_date(node, args);
+
+    reply.vote_granted = can_vote && log_is_up_to_date;
+    if (reply.vote_granted) {
+        node->voted_for = args->candidate_id;
+        reset_election_timer(node);
+    }
+
+    return reply;
+}
+```
+
+#### 日志复制流程
+
+```c
+// 客户端请求处理 (仅领导者)
+int raft_append_entry(raft_node_t* node, const char* data, size_t len) {
+    if (node->state != STATE_LEADER) {
+        return -1;  // 非领导者，重定向
+    }
+
+    // 1. 创建日志条目
+    log_entry_t entry = {
+        .term = node->current_term,
+        .index = node->log_count,
+        .data = malloc(len),
+        .data_len = len
+    };
+    memcpy(entry.data, data, len);
+
+    // 2. 追加到本地日志
+    node->log[node->log_count++] = entry;
+
+    // 3. 并行发送 AppendEntries RPC
+    for (int i = 0; i < node->cluster_size; i++) {
+        if (i == node->id) continue;
+        send_append_entries(node, i);
+    }
+
+    return entry.index;
+}
+
+// 处理 AppendEntries RPC
+append_entries_reply_t handle_append_entries(raft_node_t* node,
+                                             append_entries_args_t* args) {
+    append_entries_reply_t reply = {
+        .term = node->current_term,
+        .success = false
     };
 
-    /* 这里应该发送RPC到所有其他节点 */
-    /* 收集投票，如果获得多数票则成为领导者 */
-}
-
-void raft_become_leader(raft_state_t *raft) {
-    if (!raft) return;
-
-    raft->role = RAFT_ROLE_LEADER;
-
-    /* 初始化领导者状态 */
-    uint64_t last_log = raft->log_count > 0 ?
-        raft->log[raft->log_count - 1].index + 1 : 1;
-
-    for (uint32_t i = 0; i < raft->cluster_size; i++) {
-        raft->next_index[i] = last_log;
-        raft->match_index[i] = 0;
+    // 1. 任期检查
+    if (args->term < node->current_term) {
+        return reply;
     }
 
-    printf("Node %u became leader for term %lu\n",
-           raft->node_id, raft->current_term);
+    // 2. 成为跟随者并重置定时器
+    if (args->term > node->current_term) {
+        node->current_term = args->term;
+    }
+    become_follower(node);
+    reset_election_timer(node);
 
-    /* 立即发送心跳 */
-    raft_on_heartbeat_interval(raft);
+    // 3. 日志一致性检查
+    if (args->prev_log_index >= 0) {
+        if (args->prev_log_index >= node->log_count ||
+            node->log[args->prev_log_index].term != args->prev_log_term) {
+            // 日志不一致，需要回溯
+            reply.conflict_index = find_conflict_index(node, args);
+            return reply;
+        }
+    }
+
+    // 4. 追加新条目
+    int insert_index = args->prev_log_index + 1;
+    for (int i = 0; i < args->entry_count; i++) {
+        if (insert_index + i < node->log_count) {
+            if (node->log[insert_index + i].term != args->entries[i].term) {
+                // 删除冲突条目及之后的所有条目
+                truncate_log(node, insert_index + i);
+            }
+        }
+        if (insert_index + i >= node->log_count) {
+            append_log_entry(node, &args->entries[i]);
+        }
+    }
+
+    // 5. 更新提交索引
+    if (args->leader_commit > node->commit_index) {
+        node->commit_index = min(args->leader_commit, node->log_count - 1);
+        apply_committed_entries(node);
+    }
+
+    reply.success = true;
+    return reply;
 }
+```
 
-raft_request_vote_rsp_t raft_handle_request_vote(raft_state_t *raft,
-                                                  const raft_request_vote_req_t *req) {
-    raft_request_vote_rsp_t rsp = {
-        .term = raft->current_term,
-        .vote_granted = false
+---
+
+## 一致性模型
+
+### 一致性强度谱系
+
+```text
+一致性强度 (从强到弱):
+
+线性一致性 ──► 顺序一致性 ──► 因果一致性 ──► 会话一致性 ──► 最终一致性
+  (最强)                                              (最弱)
+    │                      │                      │
+    ▼                      ▼                      ▼
+  严格串行化           所有进程看到            无因果关系的
+  所有操作             相同顺序               操作可以乱序
+```
+
+### 一致性模型对比
+
+| 一致性模型 | 描述 | 延迟 | 可用性 | 典型应用 |
+|-----------|------|-----|-------|---------|
+| 线性一致性 | 所有操作看起来是原子且即时发生的 | 高 | 低 | 金融交易 |
+| 顺序一致性 | 所有进程看到的操作顺序一致 | 中高 | 中 | 分布式锁 |
+| 因果一致性 | 有因果关系的操作顺序一致 | 中 | 中高 | 社交网络 |
+| 会话一致性 | 单个会话内的读能看到之前的写 | 中 | 中高 | 购物车 |
+| 最终一致性 | 无新更新时最终所有副本一致 | 低 | 高 | DNS、CDN |
+| 读己之写 | 总是能看到自己的写入 | 中 | 中 | 用户配置 |
+
+### 实现机制
+
+#### 线性一致性实现
+
+```c
+// 基于 Paxos/Raft 的线性一致性存储
+typedef struct {
+    raft_node_t* raft;           // 底层共识层
+    hash_table_t* data;          // 数据存储
+    pthread_mutex_t apply_mutex; // 状态机互斥锁
+} linear_store_t;
+
+// 写操作 - 必须通过共识
+int linear_store_write(linear_store_t* store, const char* key,
+                       const void* value, size_t len) {
+    // 构建写操作日志条目
+    write_op_t op = {
+        .type = OP_WRITE,
+        .key = strdup(key),
+        .value = malloc(len),
+        .value_len = len
     };
+    memcpy(op.value, value, len);
 
-    /* 任期检查 */
-    if (req->term < raft->current_term) {
-        return rsp; /* 拒绝 */
-    }
+    // 提交到 Raft 集群
+    int index = raft_append_entry(store->raft, &op, sizeof(op));
+    if (index < 0) return -1;
 
-    if (req->term > raft->current_term) {
-        raft->current_term = req->term;
-        raft->voted_for = -1;
-        raft_become_follower(raft, req->term);
-    }
-
-    /* 投票检查 */
-    if ((raft->voted_for == -1 || raft->voted_for == req->candidate_id) &&
-        /* 日志至少一样新 */
-        (req->last_log_term > (raft->log_count > 0 ?
-                               raft->log[raft->log_count - 1].term : 0) ||
-         (req->last_log_term == (raft->log_count > 0 ?
-                                 raft->log[raft->log_count - 1].term : 0) &&
-          req->last_log_index >= raft->log_count))) {
-
-        raft->voted_for = req->candidate_id;
-        rsp.vote_granted = true;
-        printf("Node %u voted for %u in term %lu\n",
-               raft->node_id, req->candidate_id, raft->current_term);
-    }
-
-    return rsp;
+    // 等待提交并应用到状态机
+    return wait_for_apply(store->raft, index);
 }
 
-int raft_propose(raft_state_t *raft, const uint8_t *data, size_t len) {
-    if (!raft || raft->role != RAFT_ROLE_LEADER) {
-        return -1; /* 只有领导者能接收客户端请求 */
+// 读操作 - 在领导者上执行确保线性一致性
+int linear_store_read(linear_store_t* store, const char* key,
+                      void** value, size_t* len) {
+    // 确保本节点是领导者
+    if (store->raft->state != STATE_LEADER) {
+        return redirect_to_leader(store->raft, key);
     }
 
-    /* 扩容检查 */
-    if (raft->log_count >= raft->log_capacity) {
-        size_t new_cap = raft->log_capacity * 2;
-        raft_log_entry_t *new_log = realloc(raft->log,
-                                            new_cap * sizeof(raft_log_entry_t));
-        if (!new_log) return -1;
-        raft->log = new_log;
-        raft->log_capacity = new_cap;
-    }
+    // 提交一个空操作(no-op)来确保所有之前的写入已提交
+    raft_append_entry(store->raft, NULL, 0);
 
-    /* 创建新日志条目 */
-    raft_log_entry_t *entry = &raft->log[raft->log_count];
-    entry->term = raft->current_term;
-    entry->index = raft->log_count + 1;
-    entry->data = malloc(len);
-    memcpy(entry->data, data, len);
-    entry->data_len = len;
+    // 从状态机读取
+    pthread_mutex_lock(&store->apply_mutex);
+    entry_t* entry = hash_table_get(store->data, key);
+    pthread_mutex_unlock(&store->apply_mutex);
 
-    raft->log_count++;
+    if (!entry) return -1;
 
-    /* 异步复制到跟随者 */
-    /* 等待多数确认后提交 */
-
+    *value = malloc(entry->len);
+    memcpy(*value, entry->data, entry->len);
+    *len = entry->len;
     return 0;
 }
 ```
 
-### 3.3 Paxos vs Raft 对比
+#### 因果一致性实现
 
-| 特性 | Paxos | Raft |
-|------|-------|------|
-| 可理解性 | 复杂，难以实现 | 设计目标就是易于理解 |
-| 领导者 | Multi-Paxos有领导者 | 必须有领导者 |
-| 成员变更 | 复杂 | 支持联合共识 |
-| 性能 | 类似 | 类似 |
-| 工业应用 | Chubby, PaxosStore | etcd, Consul, TiKV |
+```c
+// 向量时钟实现因果一致性
+typedef struct {
+    uint64_t* clocks;    // 每个节点的逻辑时钟
+    size_t node_count;   // 节点数量
+} vector_clock_t;
+
+// 比较向量时钟
+typedef enum {
+    VC_LESS,      // vc1 < vc2
+    VC_GREATER,   // vc1 > vc2
+    VC_EQUAL,     // vc1 == vc2
+    VC_CONCURRENT // vc1 || vc2 (并发)
+} vc_compare_result_t;
+
+vc_compare_result_t vector_clock_compare(const vector_clock_t* vc1,
+                                         const vector_clock_t* vc2) {
+    bool less = false, greater = false;
+
+    for (size_t i = 0; i < vc1->node_count; i++) {
+        if (vc1->clocks[i] < vc2->clocks[i]) {
+            less = true;
+        } else if (vc1->clocks[i] > vc2->clocks[i]) {
+            greater = true;
+        }
+    }
+
+    if (less && !greater) return VC_LESS;
+    if (greater && !less) return VC_GREATER;
+    if (!less && !greater) return VC_EQUAL;
+    return VC_CONCURRENT;
+}
+
+// 带向量时钟的数据版本
+typedef struct {
+    void* data;
+    size_t len;
+    vector_clock_t* vc;  // 版本向量时钟
+} versioned_data_t;
+
+// 因果一致性写
+void causal_write(causal_store_t* store, const char* key,
+                  const void* value, size_t len) {
+    // 递增本节点的逻辑时钟
+    store->local_clock->clocks[store->node_id]++;
+
+    versioned_data_t* new_version = malloc(sizeof(versioned_data_t));
+    new_version->data = malloc(len);
+    memcpy(new_version->data, value, len);
+    new_version->len = len;
+
+    // 复制当前向量时钟
+    new_version->vc = vector_clock_copy(store->local_clock);
+
+    // 存储新版本 (可能保留多个版本处理并发)
+    store_put_versioned(store, key, new_version);
+
+    // 异步复制到其他节点
+    replicate_async(store, key, new_version);
+}
+
+// 因果一致性读
+versioned_data_t* causal_read(causal_store_t* store, const char* key) {
+    version_list_t* versions = store_get_versions(store, key);
+
+    // 返回最新的因果依赖版本
+    // 如果有并发版本，可能需要合并或返回所有版本
+    return select_causal_latest(versions, store->local_clock);
+}
+```
+
+#### 最终一致性实现
+
+```c
+// 基于 Gossip 协议的最终一致性
+typedef struct {
+    char key[256];
+    void* value;
+    size_t len;
+    uint64_t version;     // 版本号 (通常是时间戳或逻辑时钟)
+    uint64_t timestamp;   // 物理时间戳
+} gossip_entry_t;
+
+typedef struct {
+    gossip_entry_t** entries;
+    size_t count;
+    size_t capacity;
+    pthread_rwlock_t lock;
+} gossip_store_t;
+
+// 反熵 Gossip - 定期与其他节点同步
+void* anti_entropy_gossip(void* arg) {
+    gossip_store_t* store = (gossip_store_t*)arg;
+
+    while (running) {
+        sleep(GOSSIP_INTERVAL);
+
+        // 随机选择对等节点
+        int peer = select_random_peer();
+
+        // 发送本节点的摘要 (checksum 或版本范围)
+        digest_t* local_digest = compute_digest(store);
+        send_digest(peer, local_digest);
+
+        // 接收对方的差异请求
+        diff_request_t* request = receive_diff_request(peer);
+
+        // 发送对方缺失的条目
+        for (size_t i = 0; i < request->missing_count; i++) {
+            gossip_entry_t* entry = find_entry(store, request->missing_keys[i]);
+            if (entry) {
+                send_entry(peer, entry);
+            }
+        }
+
+        // 接收对方发送的差异条目
+        while (has_more_entries(peer)) {
+            gossip_entry_t* entry = receive_entry(peer);
+            merge_entry(store, entry);
+        }
+    }
+    return NULL;
+}
+
+// 合并条目 - 处理冲突
+void merge_entry(gossip_store_t* store, gossip_entry_t* remote) {
+    pthread_rwlock_wrlock(&store->lock);
+
+    gossip_entry_t* local = find_entry(store, remote->key);
+
+    if (!local) {
+        // 本地不存在，直接添加
+        add_entry(store, remote);
+    } else if (remote->version > local->version) {
+        // 远程版本更新，替换
+        replace_entry(store, local, remote);
+    } else if (remote->version == local->version) {
+        // 版本相同但值不同 - 冲突！
+        // 使用最后写入胜利 (LWW) 或其他策略
+        if (remote->timestamp > local->timestamp) {
+            replace_entry(store, local, remote);
+        }
+    }
+    // 否则本地版本更新，忽略远程
+
+    pthread_rwlock_unlock(&store->lock);
+}
+```
 
 ---
 
-## 4. 分布式事务
+## CAP 定理
 
-### 4.1 两阶段提交 (2PC)
+### CAP 定理概述
 
+CAP 定理指出，在分布式系统中，一致性 (Consistency)、可用性 (Availability)、分区容错性 (Partition Tolerance) 三者不可兼得，最多只能同时满足两项。
+
+```text
+                    CAP 定理图示
+
+                         C (一致性)
+                        / \
+                       /   \
+                      /     \
+                     /   CA   \      传统关系型数据库
+                    /   系统    \     (如单机 MySQL)
+                   /             \
+          P(分区容错性) ────────── A(可用性)
+            /                       \
+           /   CP 系统              \   AP 系统
+          /   (如 HBase, MongoDB)    \  (如 Cassandra, DynamoDB)
+         /                             \
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                     两阶段提交 (2PC)                         │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   协调者                       参与者A        参与者B        │
-│     │                             │             │           │
-│     │────── Phase 1: Prepare ────►│             │           │
-│     │────────────────────────────►│────────────►│           │
-│     │                             │             │           │
-│     │◄──────── Yes/No ────────────│             │           │
-│     │◄────────────────────────────│─────────────│           │
-│     │                             │             │           │
-│     │────── Phase 2: Commit ─────►│             │           │
-│     │────────────────────────────►│────────────►│           │
-│     │   (如果所有Yes)             │             │           │
-│     │                             │             │           │
-│     │◄──────── ACK ───────────────│             │           │
-│     │◄────────────────────────────│─────────────│           │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
+
+### CAP 权衡选择
+
+| 组合 | 特性 | 典型系统 | 适用场景 |
+|-----|------|---------|---------|
+| CA | 一致且可用，但不能分区 | 单机数据库 | 非分布式场景 |
+| CP | 一致且分区容错，但可能不可用 | ZooKeeper, etcd, HBase | 金融交易、配置管理 |
+| AP | 可用且分区容错，但可能不一致 | Cassandra, DynamoDB, Eureka | 社交网络、日志收集 |
+
+### CAP 权衡的实际影响
+
+#### CP 系统行为
 
 ```c
-/* two_phase_commit.h */
-#ifndef TWO_PHASE_COMMIT_H
-#define TWO_PHASE_COMMIT_H
-
-#include <stdint.h>
-#include <stdbool.h>
+// CP 系统在分区时的行为：牺牲可用性保证一致性
 
 typedef enum {
-    TPC_PHASE_IDLE = 0,
-    TPC_PHASE_PREPARE,
-    TPC_PHASE_COMMIT,
-    TPC_PHASE_ABORT,
-    TPC_PHASE_COMPLETED
-} tpc_phase_t;
+    NODE_HEALTHY,
+    NODE_PARTITIONED,
+    NODE_RECOVERING
+} node_health_t;
+
+typedef struct {
+    node_health_t health;
+    hash_set_t* quorum_members;  // 当前能通信的节点集合
+    int quorum_size;             // 达到多数派所需的最小节点数
+} cp_node_state_t;
+
+// CP 系统写操作
+int cp_system_write(cp_node_state_t* state, const char* key,
+                    const void* value) {
+    // 检查是否能形成多数派
+    if (hash_set_size(state->quorum_members) < state->quorum_size) {
+        // 分区发生，无法形成多数派
+        // 选择：拒绝操作，牺牲可用性
+        return -1;  // 系统不可用
+    }
+
+    // 发送给所有可达节点，等待多数派确认
+    int acks = 0;
+    for (int node : state->quorum_members) {
+        if (send_write(node, key, value) == SUCCESS) {
+            acks++;
+        }
+        if (acks >= state->quorum_size) {
+            break;
+        }
+    }
+
+    if (acks >= state->quorum_size) {
+        return 0;  // 写入成功
+    } else {
+        return -1;  // 写入失败，回滚
+    }
+}
+```
+
+#### AP 系统行为
+
+```c
+// AP 系统在分区时的行为：牺牲一致性保证可用性
+
+typedef struct {
+    bool partitioned;           // 是否处于分区状态
+    hash_set_t* reachable_nodes;
+    vector_clock_t* local_vc;   // 本地向量时钟
+} ap_node_state_t;
+
+// AP 系统写操作
+int ap_system_write(ap_node_state_t* state, const char* key,
+                    const void* value) {
+    // 无论是否分区，都接受写入
+    // 生成新的版本
+    versioned_value_t* new_val = malloc(sizeof(versioned_value_t));
+    new_val->data = malloc(value_len);
+    memcpy(new_val->data, value, value_len);
+    new_val->vc = vector_clock_increment(state->local_vc, my_node_id);
+
+    // 本地存储
+    local_store_put(key, new_val);
+
+    // 异步复制给可达节点
+    for (int node : state->reachable_nodes) {
+        if (node != my_node_id) {
+            async_replicate(node, key, new_val);
+        }
+    }
+
+    // 立即返回成功 (即使其他分区看不到这个写入)
+    return 0;
+}
+
+// AP 系统读操作
+versioned_value_t* ap_system_read(ap_node_state_t* state, const char* key) {
+    // 始终返回本地值，保证可用性
+    versioned_value_t* local = local_store_get(key);
+
+    // 异步尝试从其他节点获取更新版本
+    for (int node : state->reachable_nodes) {
+        async_fetch(node, key);
+    }
+
+    return local;
+}
+
+// 分区恢复后的冲突解决
+void on_partition_heal(ap_node_state_t* state) {
+    for (each key in local_store) {
+        version_list_t* remote_versions = fetch_versions_from_peers(key);
+        version_list_t* local_versions = local_store_get_all_versions(key);
+
+        // 合并版本，解决冲突
+        version_list_t* merged = merge_versions(local_versions,
+                                                remote_versions);
+
+        // 如果存在并发写入，需要根据业务规则解决
+        if (has_concurrent_versions(merged)) {
+            resolve_conflicts(key, merged);
+        }
+    }
+}
+```
+
+### PACELC 定理
+
+PACELC 是 CAP 的扩展，指出即使没有分区 (P)，也必须在延迟 (L) 和一致性 (C) 之间做权衡。
+
+```text
+PACELC:
+    如果有分区 (P)，在可用性 (A) 和一致性 (C) 之间选择；
+    否则 (E)，在延迟 (L) 和一致性 (C) 之间选择。
+
+示例系统分类:
+┌────────────────┬────────────────────────────────────┐
+│ 系统           │ PACELC 分类                        │
+├────────────────┼────────────────────────────────────┤
+│ ZooKeeper      │ PC/EC (分区时选 C，否则也选 C)      │
+│ Cassandra      │ PA/EL (分区时选 A，否则选 L)        │
+│ MongoDB        │ PA/EC (可配置)                      │
+│ DynamoDB       │ PA/EL                               │
+│ CockroachDB    │ PC/EC                               │
+└────────────────┴────────────────────────────────────┘
+```
+
+---
+
+## 分布式事务
+
+### 分布式事务概述
+
+分布式事务涉及多个节点上的操作，需要保证 ACID 特性：原子性 (Atomicity)、一致性 (Consistency)、隔离性 (Isolation)、持久性 (Durability)。
+
+### 两阶段提交 (2PC)
+
+```text
+两阶段提交流程:
+
+协调者                          参与者1        参与者2        参与者3
+  │                               │              │              │
+  ├────────── PREPARE ────────────┼──────────────┼──────────────┤
+  │                               │              │              │
+  │◄───────── YES/NO ─────────────┤◄─────────────┤◄─────────────┤
+  │                               │              │              │
+  │  [所有回答 YES?]              │              │              │
+  │                               │              │              │
+  ├─── 是 ─── COMMIT ─────────────┼──────────────┼──────────────┤
+  │                               │              │              │
+  │◄──────── ACK ─────────────────┤◄─────────────┤◄─────────────┤
+  │                               │              │              │
+  ├─── 否 ─── ROLLBACK ───────────┼──────────────┼──────────────┤
+  │                               │              │              │
+```
+
+#### 2PC 实现
+
+```c
+// 两阶段提交 - 协调者实现
 
 typedef enum {
-    TPC_VOTE_UNKNOWN = 0,
-    TPC_VOTE_YES,
-    TPC_VOTE_NO
-} tpc_vote_t;
+    PC_PHASE_IDLE,
+    PC_PHASE_PREPARE,
+    PC_PHASE_COMMIT,
+    PC_PHASE_ABORT
+} pc_phase_t;
 
 typedef struct {
-    uint64_t transaction_id;
-    tpc_phase_t phase;
-    uint32_t participant_count;
-    uint32_t yes_votes;
-    uint32_t no_votes;
-    uint32_t timeout_ms;
-    void *context;
-} tpc_coordinator_t;
+    transaction_id_t tx_id;
+    pc_phase_t phase;
+    int participant_count;
+    int* participant_status;  // 每个参与者的状态
+    void* coordinator_log;    // 预写日志
+} pc_coordinator_t;
 
+// 第一阶段：准备
+int pc_phase_prepare(pc_coordinator_t* coord, transaction_t* tx) {
+    coord->phase = PC_PHASE_PREPARE;
+
+    // 记录事务开始日志 (用于故障恢复)
+    write_coordinator_log(coord, TX_START, tx);
+
+    int yes_count = 0;
+    for (int i = 0; i < coord->participant_count; i++) {
+        // 发送 PREPARE 请求
+        prepare_request_t req = {
+            .tx_id = tx->id,
+            .operations = tx->participants[i].operations
+        };
+
+        prepare_response_t resp = send_prepare(i, &req);
+
+        if (resp.vote == VOTE_YES) {
+            coord->participant_status[i] = STATUS_PREPARED;
+            yes_count++;
+        } else {
+            coord->participant_status[i] = STATUS_VOTED_NO;
+            // 收到一个 NO 就立即进入回滚
+            return pc_phase_abort(coord, tx);
+        }
+    }
+
+    // 所有参与者都同意，进入第二阶段
+    if (yes_count == coord->participant_count) {
+        return pc_phase_commit(coord, tx);
+    }
+
+    return -1;
+}
+
+// 第二阶段：提交
+int pc_phase_commit(pc_coordinator_t* coord, transaction_t* tx) {
+    coord->phase = PC_PHASE_COMMIT;
+
+    // 先记录决定 (重要！这是 2PC 的要点)
+    write_coordinator_log(coord, TX_COMMIT, tx);
+
+    // 发送 COMMIT 给所有参与者
+    for (int i = 0; i < coord->participant_count; i++) {
+        commit_request_t req = { .tx_id = tx->id };
+        send_commit(i, &req);
+        coord->participant_status[i] = STATUS_COMMITTED;
+    }
+
+    // 等待 ACK (可异步)
+    wait_for_acks(coord, tx->id);
+
+    // 记录完成
+    write_coordinator_log(coord, TX_COMPLETE, tx);
+    coord->phase = PC_PHASE_IDLE;
+
+    return 0;
+}
+
+// 参与者实现
 typedef struct {
-    uint64_t transaction_id;
+    transaction_id_t tx_id;
+    void* undo_log;      // 回滚日志
+    void* redo_log;      // 重做日志
     bool prepared;
-    bool committed;
-    void (*prepare_handler)(void *context);
-    void (*commit_handler)(void *context);
-    void (*abort_handler)(void *context);
-} tpc_participant_t;
+} participant_tx_state_t;
 
-/* 协调者API */
-tpc_coordinator_t *tpc_coordinator_create(uint64_t tx_id, uint32_t participants);
-int tpc_begin_prepare(tpc_coordinator_t *coord);
-int tpc_send_commit(tpc_coordinator_t *coord);
-int tpc_send_abort(tpc_coordinator_t *coord);
+prepare_response_t participant_handle_prepare(int participant_id,
+                                               prepare_request_t* req) {
+    prepare_response_t resp = { .tx_id = req->tx_id };
 
-/* 参与者API */
-int tpc_participant_vote(tpc_participant_t *p, tpc_vote_t vote);
-int tpc_participant_prepare(tpc_participant_t *p);
-int tpc_participant_commit(tpc_participant_t *p);
-int tpc_participant_abort(tpc_participant_t *p);
+    // 检查能否执行操作
+    if (!can_execute_operations(req->operations)) {
+        resp.vote = VOTE_NO;
+        return resp;
+    }
 
-#endif /* TWO_PHASE_COMMIT_H */
+    // 预执行操作，写入 undo/redo 日志
+    participant_tx_state_t* state = malloc(sizeof(participant_tx_state_t));
+    state->tx_id = req->tx_id;
+    state->undo_log = create_undo_log(req->operations);
+    state->redo_log = create_redo_log(req->operations);
+    state->prepared = true;
+
+    // 强制刷盘，确保持久化
+    fsync(state->undo_log);
+    fsync(state->redo_log);
+
+    save_participant_state(state);
+
+    resp.vote = VOTE_YES;
+    return resp;
+}
+
+void participant_handle_commit(int participant_id, commit_request_t* req) {
+    participant_tx_state_t* state = load_participant_state(req->tx_id);
+
+    if (state && state->prepared) {
+        // 应用 redo 日志完成事务
+        apply_redo_log(state->redo_log);
+
+        // 清理状态
+        delete_participant_state(req->tx_id);
+    }
+}
+
+void participant_handle_rollback(int participant_id,
+                                  rollback_request_t* req) {
+    participant_tx_state_t* state = load_participant_state(req->tx_id);
+
+    if (state && state->prepared) {
+        // 应用 undo 日志回滚事务
+        apply_undo_log(state->undo_log);
+
+        // 清理状态
+        delete_participant_state(req->tx_id);
+    }
+}
 ```
 
----
+### 三阶段提交 (3PC)
 
-## 5. 分布式系统设计模式
+3PC 在 2PC 基础上增加了一个预提交阶段，解决协调者单点故障导致的阻塞问题。
 
-### 5.1 常见模式
+```text
+三阶段提交流程:
 
-| 模式 | 描述 | 应用场景 |
-|------|------|----------|
-| **Circuit Breaker** | 熔断器模式，防止级联故障 | 服务调用保护 |
-| **Bulkhead** | 舱壁隔离，限制资源使用 | 资源隔离 |
-| **Retry with Backoff** | 指数退避重试 | 网络请求 |
-| **Idempotency** | 幂等性保证 | 重复请求处理 |
-| **Saga** | 长事务拆分 | 微服务事务 |
-| **CQRS** | 读写分离 | 高并发场景 |
-| **Event Sourcing** | 事件溯源 | 审计追踪 |
+协调者                 参与者
+  │                      │
+  ├──── CAN_COMMIT ─────►│  第一阶段：询问是否可以执行
+  │◄──── YES/NO ─────────┤
+  │                      │
+  ├──── PRE_COMMIT ─────►│  第二阶段：预提交
+  │◄──── ACK ────────────┤
+  │                      │
+  ├──── DO_COMMIT ──────►│  第三阶段：正式提交
+  │◄──── ACK ────────────┤
+```
 
-### 5.2 熔断器C语言实现
+### Saga 模式
+
+Saga 是长事务的替代方案，将大事务拆分为多个本地事务，通过补偿操作保证最终一致性。
 
 ```c
-/* circuit_breaker.h */
-#ifndef CIRCUIT_BREAKER_H
-#define CIRCUIT_BREAKER_H
-
-#include <stdint.h>
-#include <stdbool.h>
-#include <time.h>
+// Saga 模式实现
 
 typedef enum {
-    CB_STATE_CLOSED = 0,    /* 正常 - 关闭状态 */
-    CB_STATE_OPEN,          /* 故障 - 打开状态 */
-    CB_STATE_HALF_OPEN      /* 探测 - 半开状态 */
-} circuit_breaker_state_t;
+    SAGA_STEP_PENDING,
+    SAGA_STEP_SUCCEEDED,
+    SAGA_STEP_FAILED,
+    SAGA_STEP_COMPENSATED
+} saga_step_status_t;
 
 typedef struct {
-    circuit_breaker_state_t state;
+    const char* name;
+    int (*action)(void* context);       // 正向操作
+    int (*compensate)(void* context);   // 补偿操作
+    void* context;
+    saga_step_status_t status;
+} saga_step_t;
 
-    /* 阈值配置 */
-    uint32_t failure_threshold;     /* 故障阈值 */
-    uint32_t success_threshold;     /* 成功阈值(半开状态) */
-    uint32_t timeout_ms;            /* 超时时间 */
+typedef struct {
+    saga_step_t* steps;
+    size_t step_count;
+    size_t current_step;
+    saga_status_t status;
+} saga_t;
 
-    /* 状态 */
-    uint32_t failure_count;
-    uint32_t success_count;
-    uint64_t last_failure_time;
+// 执行 Saga
+int saga_execute(saga_t* saga) {
+    saga->status = SAGA_RUNNING;
 
-    /* 统计 */
-    uint64_t total_requests;
-    uint64_t total_failures;
-    uint64_t total_successes;
-} circuit_breaker_t;
+    for (size_t i = 0; i < saga->step_count; i++) {
+        saga->current_step = i;
+        saga_step_t* step = &saga->steps[i];
 
-circuit_breaker_t *cb_create(uint32_t failure_threshold,
-                              uint32_t success_threshold,
-                              uint32_t timeout_ms);
-bool cb_allow_request(circuit_breaker_t *cb);
-void cb_record_success(circuit_breaker_t *cb);
-void cb_record_failure(circuit_breaker_t *cb);
-const char *cb_state_string(circuit_breaker_state_t state);
+        step->status = SAGA_STEP_PENDING;
 
-#endif /* CIRCUIT_BREAKER_H */
-```
+        // 执行正向操作
+        int result = step->action(step->context);
 
-```c
-/* circuit_breaker.c */
-#include "circuit_breaker.h"
-#include <stdlib.h>
+        if (result == 0) {
+            step->status = SAGA_STEP_SUCCEEDED;
+        } else {
+            step->status = SAGA_STEP_FAILED;
+            saga->status = SAGA_FAILED;
 
-static uint64_t get_current_time_ms(void) {
-    struct timespec ts;
-    clock_gettime(CLOCK_MONOTONIC, &ts);
-    return (uint64_t)ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
+            // 执行补偿操作
+            return saga_compensate(saga, i);
+        }
+    }
+
+    saga->status = SAGA_SUCCEEDED;
+    return 0;
 }
 
-circuit_breaker_t *cb_create(uint32_t failure_threshold,
-                              uint32_t success_threshold,
-                              uint32_t timeout_ms) {
-    circuit_breaker_t *cb = calloc(1, sizeof(circuit_breaker_t));
-    if (!cb) return NULL;
+// 补偿操作
+int saga_compensate(saga_t* saga, size_t failed_step) {
+    // 对已经成功执行的步骤逆序执行补偿
+    for (int i = (int)failed_step - 1; i >= 0; i--) {
+        saga_step_t* step = &saga->steps[i];
 
-    cb->state = CB_STATE_CLOSED;
-    cb->failure_threshold = failure_threshold;
-    cb->success_threshold = success_threshold;
-    cb->timeout_ms = timeout_ms;
+        if (step->status == SAGA_STEP_SUCCEEDED) {
+            int result = step->compensate(step->context);
 
-    return cb;
-}
-
-bool cb_allow_request(circuit_breaker_t *cb) {
-    if (!cb) return false;
-
-    cb->total_requests++;
-
-    switch (cb->state) {
-        case CB_STATE_CLOSED:
-            return true;
-
-        case CB_STATE_OPEN:
-            /* 检查是否超过超时时间 */
-            if (get_current_time_ms() - cb->last_failure_time > cb->timeout_ms) {
-                cb->state = CB_STATE_HALF_OPEN;
-                cb->failure_count = 0;
-                cb->success_count = 0;
-                return true;
+            if (result == 0) {
+                step->status = SAGA_STEP_COMPENSATED;
+            } else {
+                // 补偿失败，需要人工介入或重试
+                saga->status = SAGA_COMPENSATION_FAILED;
+                return -1;
             }
-            return false;
-
-        case CB_STATE_HALF_OPEN:
-            return true;
+        }
     }
 
-    return false;
+    saga->status = SAGA_COMPENSATED;
+    return 0;
 }
 
-void cb_record_failure(circuit_breaker_t *cb) {
-    if (!cb) return;
+// 订单处理 Saga 示例
+saga_t* create_order_saga(order_context_t* ctx) {
+    saga_step_t steps[] = {
+        {
+            .name = "create_order",
+            .action = step_create_order,
+            .compensate = compensate_create_order,
+            .context = ctx
+        },
+        {
+            .name = "reserve_inventory",
+            .action = step_reserve_inventory,
+            .compensate = compensate_reserve_inventory,
+            .context = ctx
+        },
+        {
+            .name = "process_payment",
+            .action = step_process_payment,
+            .compensate = compensate_process_payment,
+            .context = ctx
+        },
+        {
+            .name = "ship_order",
+            .action = step_ship_order,
+            .compensate = compensate_ship_order,
+            .context = ctx
+        }
+    };
 
-    cb->total_failures++;
-    cb->failure_count++;
-    cb->last_failure_time = get_current_time_ms();
+    saga_t* saga = malloc(sizeof(saga_t));
+    saga->steps = steps;
+    saga->step_count = 4;
+    saga->current_step = 0;
+    saga->status = SAGA_PENDING;
 
-    switch (cb->state) {
-        case CB_STATE_CLOSED:
-            if (cb->failure_count >= cb->failure_threshold) {
-                cb->state = CB_STATE_OPEN;
-            }
-            break;
-
-        case CB_STATE_HALF_OPEN:
-            cb->state = CB_STATE_OPEN;
-            break;
-
-        case CB_STATE_OPEN:
-            break;
-    }
+    return saga;
 }
 
-void cb_record_success(circuit_breaker_t *cb) {
-    if (!cb) return;
+// 具体步骤实现示例
+int step_reserve_inventory(void* context) {
+    order_context_t* ctx = (order_context_t*)context;
 
-    cb->total_successes++;
+    // 调用库存服务预留库存
+    inventory_response_t resp = inventory_service_reserve(
+        ctx->product_id,
+        ctx->quantity
+    );
 
-    switch (cb->state) {
-        case CB_STATE_CLOSED:
-            cb->failure_count = 0;
-            break;
-
-        case CB_STATE_HALF_OPEN:
-            cb->success_count++;
-            if (cb->success_count >= cb->success_threshold) {
-                cb->state = CB_STATE_CLOSED;
-                cb->failure_count = 0;
-                cb->success_count = 0;
-            }
-            break;
-
-        case CB_STATE_OPEN:
-            break;
+    if (resp.success) {
+        ctx->reservation_id = resp.reservation_id;
+        return 0;
     }
+    return -1;
 }
 
-const char *cb_state_string(circuit_breaker_state_t state) {
-    switch (state) {
-        case CB_STATE_CLOSED: return "CLOSED";
-        case CB_STATE_OPEN: return "OPEN";
-        case CB_STATE_HALF_OPEN: return "HALF_OPEN";
-        default: return "UNKNOWN";
-    }
+int compensate_reserve_inventory(void* context) {
+    order_context_t* ctx = (order_context_t*)context;
+
+    // 释放预留的库存
+    inventory_service_release(ctx->reservation_id);
+    return 0;
 }
 ```
 
----
+### 分布式事务方案对比
 
-## 6. 学习资源
-
-| 类型 | 资源 | 说明 |
-|------|------|------|
-| 论文 | "In Search of an Understandable Consensus Algorithm" | Raft原始论文 |
-| 论文 | "The Part-Time Parliament" | Paxos原始论文 |
-| 书籍 | 《Designing Data-Intensive Applications》 | 分布式系统圣经 |
-| 源码 | etcd / Consul | Raft实现参考 |
-| 源码 | Redis Cluster | 分布式缓存实现 |
+| 方案 | 一致性 | 性能 | 复杂度 | 适用场景 |
+|-----|-------|------|-------|---------|
+| 2PC | 强一致性 | 低 | 中 | 短事务、强一致要求 |
+| 3PC | 强一致性 | 较低 | 高 | 对可用性要求更高 |
+| Saga | 最终一致性 | 高 | 中 | 长事务、微服务 |
+| TCC | 最终一致性 | 高 | 高 | 高并发场景 |
+| 本地消息表 | 最终一致性 | 高 | 中 | 异步场景 |
+| 最大努力通知 | 弱一致性 | 极高 | 低 | 对一致性要求低 |
 
 ---
 
 ## 总结
 
-分布式系统的核心挑战在于如何在网络分区、节点故障等异常情况下保持一致性和可用性。理解CAP定理、掌握一致性模型、实现共识算法是构建可靠分布式系统的基础。
+分布式系统的核心挑战在于如何在网络延迟、节点故障、分区等不确定因素下保持一致性和可用性。理解这些概念有助于：
+
+1. **选择合适的架构** - 根据业务需求在 CAP 中做出权衡
+2. **设计可靠的系统** - 使用共识算法保证数据一致性
+3. **处理并发冲突** - 选择适当的一致性模型
+4. **管理分布式事务** - 在性能和一致性之间找到平衡

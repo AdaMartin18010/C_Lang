@@ -1391,6 +1391,6 @@ perf report
 
 ---
 
-**文档结束**
+**文档结束**:
 
-*最后更新: 2026-03-09 | 版本: 3.0 COMPREHENSIVE | 维护者: C_Lang Knowledge Base Team*
+*最后更新: 2026-03-09 | 版本: 3.0 COMPREHENSIVE | 维护者: C_Lang Knowledge Base Team*:

@@ -10,7 +10,7 @@
 
 ### 1.1 项目架构
 
-```
+```text
 http_server/
 ├── include/
 │   └── httpserver/
@@ -354,7 +354,7 @@ int main(void) {
 
 ### 2.1 需求分析
 
-```
+```text
 内存池设计目标:
 1. 减少malloc/free的系统调用开销
 2. 避免内存碎片

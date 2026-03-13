@@ -167,6 +167,393 @@ Settings → Build → Toolchains → + → Remote Host
 
 ---
 
+## 🎛️ CLion 高级配置详解
+
+### 1. 自定义工具链配置
+
+**多工具链管理**:
+
+```
+Settings → Build → Toolchains
+```
+
+配置多个工具链示例:
+
+```
+Toolchain 1: 本地GCC 13
+  - C Compiler: /usr/bin/gcc-13
+  - C++ Compiler: /usr/bin/g++-13
+  - Debugger: /usr/bin/gdb
+
+Toolchain 2: LLVM/Clang
+  - C Compiler: /usr/bin/clang
+  - C++ Compiler: /usr/bin/clang++
+  - Debugger: /usr/bin/lldb
+
+Toolchain 3: 远程ARM交叉编译
+  - Type: Remote Host
+  - Host: arm-build-server.company.com
+  - Credentials: SSH密钥认证
+```
+
+**CMake预设配置**:
+
+```cmake
+# CMakePresets.json
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "debug-clang",
+      "hidden": false,
+      "generator": "Ninja",
+      "toolchainFile": "clang-toolchain.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_FLAGS": "-fsanitize=address,undefined"
+      }
+    },
+    {
+      "name": "release-gcc",
+      "hidden": false,
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_INTERPROCEDURAL_OPTIMIZATION": "ON"
+      }
+    }
+  ]
+}
+```
+
+### 2. 高级调试技巧
+
+**复杂条件断点**:
+
+```c
+// 在循环中设置条件断点
+for (int i = 0; i < n; i++) {
+    // 断点条件: i == 42 && ptr != NULL && ptr->value > 100
+    process_item(&items[i]);
+}
+```
+
+**日志断点 (非暂停)**:
+
+```
+断点设置 → 取消 "Suspend" → 设置 "Evaluate and log"
+表达式: "Processing item: {i}, value: {ptr->value}"
+```
+
+**多线程调试**:
+
+```c
+#include <pthread.h>
+
+void* worker_thread(void* arg) {
+    thread_data_t* data = (thread_data_t*)arg;
+
+    // 设置线程名便于调试
+    pthread_setname_np(pthread_self(), "Worker-1");
+
+    for (int i = 0; i < data->count; i++) {
+        // 在CLion中查看Threads窗口，可看到所有线程状态
+        process_work(data->queue[i]);
+    }
+    return NULL;
+}
+```
+
+**内存断点 (数据断点)**:
+
+```c
+typedef struct {
+    int id;
+    char name[256];
+    double value;
+} sensor_data_t;
+
+sensor_data_t sensor = {0};
+
+// 在CLion中设置数据断点监控 sensor.value 的变化
+// 当任何代码修改 sensor.value 时，调试器会暂停
+```
+
+**反向调试 (Reverse Debugging)**:
+
+```bash
+# 需要GDB 7.6+ 并启用record功能
+(gdb) target record-full
+(gdb) continue
+# 程序崩溃后使用反向步进
+(gdb) reverse-step
+(gdb) reverse-next
+```
+
+### 3. CMake高级集成
+
+**自定义CMake目标**:
+
+```cmake
+# 代码格式化目标
+find_program(CLANG_FORMAT_EXE NAMES clang-format)
+if(CLANG_FORMAT_EXE)
+    file(GLOB_RECURSE ALL_SOURCE_FILES
+        "src/*.c" "src/*.h"
+        "include/*.h"
+    )
+    add_custom_target(format
+        COMMAND ${CLANG_FORMAT_EXE} -i ${ALL_SOURCE_FILES}
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Running clang-format"
+    )
+endif()
+
+# 静态分析目标
+find_program(CPPCHECK_EXE NAMES cppcheck)
+if(CPPCHECK_EXE)
+    add_custom_target(static-analysis
+        COMMAND ${CPPCHECK_EXE}
+            --enable=all
+            --error-exitcode=1
+            --suppress=missingIncludeSystem
+            -I${CMAKE_SOURCE_DIR}/include
+            ${CMAKE_SOURCE_DIR}/src
+        COMMENT "Running cppcheck"
+    )
+endif()
+```
+
+**动态配置切换**:
+
+```cmake
+# 选项配置
+option(ENABLE_SANITIZERS "Enable Address and UB sanitizers" OFF)
+option(BUILD_TESTS "Build test suite" ON)
+option(ENABLE_COVERAGE "Enable code coverage" OFF)
+
+if(ENABLE_SANITIZERS)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address,undefined")
+    set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address,undefined")
+endif()
+
+if(ENABLE_COVERAGE)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage -O0")
+    set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} --coverage")
+endif()
+```
+
+**在CLion中切换选项**:
+
+```
+Settings → Build → CMake → CMake options:
+-DENABLE_SANITIZERS=ON -DBUILD_TESTS=ON
+```
+
+### 4. 代码分析与检查
+
+**自定义检查配置**:
+
+```
+Settings → Editor → Inspections → C/C++
+```
+
+关键检查项推荐:
+
+| 检查项 | 严重级别 | 说明 |
+|:-------|:--------:|:-----|
+| 未使用函数/变量 | Warning | 清理死代码 |
+| 空指针解引用 | Error | 防止崩溃 |
+| 内存泄漏 | Error | 资源管理 |
+| 数组越界 | Error | 缓冲区安全 |
+| 整数溢出 | Warning | 数值安全 |
+| 未初始化变量 | Error | 使用安全 |
+
+**自定义代码模板**:
+
+```
+Settings → Editor → Live Templates
+```
+
+示例模板:
+
+```c
+// 头文件保护模板 (headerguard)
+#ifndef ${PROJECT_NAME}_${FILE_NAME}_H
+#define ${PROJECT_NAME}_${FILE_NAME}_H
+
+#pragma once
+
+$END$
+
+#endif // ${PROJECT_NAME}_${FILE_NAME}_H
+```
+
+```c
+// 函数文档模板 (funcdoc)
+/**
+ * @brief $BRIEF$
+ * @param $PARAM$ 参数说明
+ * @return 返回值说明
+ * @note
+ * @code
+ * // 使用示例
+ * @endcode
+ */
+```
+
+### 5. 远程开发高级配置
+
+**Docker工具链**:
+
+```dockerfile
+# Dockerfile.dev
+FROM gcc:13-bookworm
+
+RUN apt-get update && apt-get install -y \
+    cmake ninja-build gdb \
+    libssl-dev libcurl4-openssl-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace
+```
+
+```
+CLion配置:
+Toolchains → + → Docker
+  - Image: my-dev-image:latest
+  - Container name: clion-dev
+  - Run options: -v /host/path:/workspace
+```
+
+**WSL2集成**:
+
+```
+Settings → Build → Toolchains → + → WSL
+```
+
+优化配置:
+
+```bash
+# ~/.clion-wsl.sh
+export CC=/usr/bin/gcc-13
+export CXX=/usr/bin/g++-13
+export CMAKE_GENERATOR=Ninja
+```
+
+### 6. 性能分析与优化
+
+**集成性能分析器**:
+
+```
+Run → Profile → 选择目标
+```
+
+支持的性能分析器:
+
+| 分析器 | 平台 | 功能 |
+|:-------|:-----|:-----|
+| Perf | Linux | CPU采样、火焰图 |
+| DTrace | macOS | 系统级追踪 |
+| Valgrind | Linux | 内存分析、缓存分析 |
+| Intel VTune | All | 深度性能分析 |
+
+**Valgrind Memcheck配置**:
+
+```
+Run → Edit Configurations → Valgrind Memcheck
+  - Leak check: Full
+  - Show reachable: Yes
+  - Track origins: Yes
+  - Suppressions: ${PROJECT_DIR}/valgrind.supp
+```
+
+抑制文件示例:
+
+```
+# valgrind.supp
+{
+   libc_getpwuid_leak
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:getpwuid
+   ...
+}
+```
+
+### 7. 数据库与SQL支持
+
+```
+Settings → Database → Data Sources
+```
+
+支持直接连接SQLite、MySQL、PostgreSQL进行开发测试。
+
+### 8. 版本控制深度集成
+
+**Git高级操作**:
+
+```
+VCS → Git →
+  - Rebase Interactive (交互式变基)
+  - Stash Changes (暂存)
+  - Unstash (恢复)
+  - Cherry-Pick (遴选)
+  - Bisect (二分查找)
+```
+
+**代码审查工具**:
+
+```
+右键 → Git → Annotate (行级 blame)
+右键 → Git → Show History (文件历史)
+```
+
+### 9. 自定义键位映射
+
+```
+Settings → Keymap
+```
+
+推荐自定义快捷键:
+
+| 操作 | 快捷键 | 说明 |
+|:-----|:-------|:-----|
+| 切换头文件/源文件 | Ctrl+Tab | 快速切换 |
+| 编译当前文件 | Ctrl+F9 | 增量编译 |
+| 运行测试 | Shift+F10 | 测试目标 |
+| 格式化选区 | Ctrl+Alt+Shift+L | 局部格式化 |
+
+### 10. 团队共享配置
+
+**.idea代码风格配置**:
+
+```
+Settings → Editor → Code Style → 齿轮图标 → Export
+```
+
+导出的文件放入版本控制:
+
+```
+project-root/
+├── .idea/
+│   ├── codeStyles/
+│   │   └── codeStyleConfig.xml
+│   ├── inspectionProfiles/
+│   │   └── Project_Default.xml
+│   └── externalDependencies.xml
+```
+
+**CMake预设共享**:
+
+```cmake
+# CMakeUserPresets.json (用户特定，不提交)
+# CMakePresets.json (团队共享，提交到版本控制)
+```
+
+---
+
 ## ✅ 验证清单
 
 - [ ] CLion安装并激活
@@ -175,6 +562,18 @@ Settings → Build → Toolchains → + → Remote Host
 - [ ] 可以编译运行
 - [ ] 可以调试程序
 - [ ] 代码分析工作
+- [ ] 配置远程工具链
+- [ ] 集成静态分析工具
+- [ ] 设置代码格式化
+- [ ] 配置性能分析器
+
+---
+
+## 📚 进阶学习资源
+
+- [CLion官方文档](https://www.jetbrains.com/help/clion/)
+- [CMake参考手册](https://cmake.org/cmake/help/latest/)
+- [GDB调试指南](https://sourceware.org/gdb/current/onlinedocs/gdb/)
 
 ---
 

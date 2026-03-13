@@ -178,6 +178,552 @@ endif
 
 ---
 
+## 🎯 Meson 高级功能深度解析
+
+### 1. 复杂项目结构
+
+**大型项目组织**:
+
+```
+myproject/
+├── meson.build
+├── meson_options.txt
+├── include/
+│   └── myproject/
+│       └── core.h
+├── src/
+│   ├── meson.build
+│   ├── core.c
+│   └── utils.c
+├── subprojects/
+│   ├── zlib.wrap
+│   └── json.wrap
+├── tests/
+│   ├── meson.build
+│   └── test_core.c
+└── examples/
+    ├── meson.build
+    └── example_basic.c
+```
+
+**顶层 meson.build**:
+
+```meson
+project('myproject', 'c',
+    version: '2.0.0',
+    license: 'MIT',
+    default_options: [
+        'warning_level=3',
+        'c_std=c17',
+        'buildtype=release',
+        'b_pie=true',
+        'b_lto=true',
+    ],
+    meson_version: '>=0.60.0'
+)
+
+# 获取编译器对象
+cc = meson.get_compiler('c')
+
+# 全局包含目录
+inc = include_directories('include')
+
+# 检查头文件
+have_stdint = cc.has_header('stdint.h')
+have_unistd = cc.has_header('unistd.h')
+
+# 检查函数
+have_strlcpy = cc.has_function('strlcpy', prefix: '#include <string.h>')
+
+# 生成配置头文件
+config_data = configuration_data()
+config_data.set('VERSION', meson.project_version())
+config_data.set('HAVE_STDINT_H', have_stdint)
+config_data.set('HAVE_STRlcpy', have_strlcpy)
+
+configure_file(
+    input: 'config.h.in',
+    output: 'config.h',
+    configuration: config_data
+)
+
+# 子目录
+subdir('src')
+subdir('tests')
+subdir('examples')
+
+# 安装目标
+install_data('README.md', install_dir: get_option('datadir') / 'doc' / meson.project_name())
+```
+
+**src/meson.build**:
+
+```meson
+# 库源文件
+lib_sources = files(
+    'core.c',
+    'utils.c',
+    'buffer.c',
+    'parser.c',
+)
+
+# 创建静态库
+mylib = static_library('mylib',
+    lib_sources,
+    include_directories: inc,
+    install: true,
+    pic: true,
+)
+
+# 创建共享库
+mylib_shared = shared_library('mylib',
+    lib_sources,
+    include_directories: inc,
+    version: meson.project_version(),
+    soversion: '2',
+    install: true,
+)
+
+# 导出库依赖
+mylib_dep = declare_dependency(
+    link_with: mylib,
+    include_directories: inc,
+)
+
+mylib_shared_dep = declare_dependency(
+    link_with: mylib_shared,
+    include_directories: inc,
+)
+
+# 可执行文件
+executable('myapp',
+    'main.c',
+    include_directories: inc,
+    link_with: mylib,
+    install: true,
+)
+```
+
+### 2. 高级依赖管理
+
+**子项目 (Subprojects)**:
+
+```ini
+# subprojects/zlib.wrap
+[wrap-file]
+directory = zlib-1.3
+source_url = https://zlib.net/zlib-1.3.tar.gz
+source_filename = zlib-1.3.tar.gz
+source_hash = ff0ba4c292013dbc27530b3a81e1f9a813cd44de9d823f9a3546e3792b67b6fe
+patch_directory = zlib
+```
+
+```meson
+# 使用子项目
+zlib_proj = subproject('zlib')
+zlib_dep = zlib_proj.get_variable('zlib_dep')
+
+# 条件性子项目
+if not cc.has_header('zlib.h')
+    zlib_proj = subproject('zlib')
+    zlib_dep = zlib_proj.get_variable('zlib_dep')
+else
+    zlib_dep = dependency('zlib')
+endif
+```
+
+**Pkg-config生成**:
+
+```meson
+# 生成.pc文件
+pkg = import('pkgconfig')
+pkg.generate(mylib,
+    name: 'MyProject',
+    description: 'My awesome C library',
+    version: meson.project_version(),
+    filebase: 'myproject',
+    subdirs: 'myproject',
+    extra_cflags: ['-DMYPROJECT_STATIC'],
+)
+```
+
+**外部依赖高级配置**:
+
+```meson
+# 查找OpenSSL
+openssl_dep = dependency('openssl',
+    version: '>=1.1.1',
+    required: false,
+    modules: ['openssl::ssl', 'openssl::crypto'],
+)
+
+# 回退到查找库
+if not openssl_dep.found()
+    ssl_lib = cc.find_library('ssl', required: false)
+    crypto_lib = cc.find_library('crypto', required: false)
+    if ssl_lib.found() and crypto_lib.found()
+        openssl_dep = declare_dependency(
+            link_with: [ssl_lib, crypto_lib],
+            include_directories: include_directories('/usr/include/openssl'),
+        )
+    endif
+endif
+
+# 检查依赖特性
+if openssl_dep.found()
+    # 检查TLS版本支持
+    if cc.compiles('''
+        #include <openssl/ssl.h>
+        int main() {
+            return OPENSSL_VERSION_NUMBER >= 0x10101000L ? 0 : 1;
+        }
+    ''', dependencies: openssl_dep)
+        add_project_arguments('-DHAVE_TLS_1_3', language: 'c')
+    endif
+endif
+```
+
+### 3. 交叉编译高级配置
+
+**复杂交叉编译文件**:
+
+```ini
+# cross-arm-linux-gnueabihf.ini
+[binaries]
+c = 'arm-linux-gnueabihf-gcc'
+cpp = 'arm-linux-gnueabihf-g++'
+ar = 'arm-linux-gnueabihf-ar'
+strip = 'arm-linux-gnueabihf-strip'
+pkgconfig = 'pkg-config'
+
+[properties]
+c_args = ['-march=armv7-a', '-mfpu=neon-vfpv4', '-mfloat-abi=hard']
+c_link_args = ['-Wl,--no-undefined']
+
+[host_machine]
+system = 'linux'
+cpu_family = 'arm'
+cpu = 'armv7'
+endian = 'little'
+
+[build_machine]
+system = 'linux'
+cpu_family = 'x86_64'
+cpu = 'x86_64'
+endian = 'little'
+
+[project options]
+enable_tests = false
+enable_examples = false
+```
+
+**Android NDK交叉编译**:
+
+```ini
+# cross-android-arm64.ini
+[binaries]
+c = '/path/to/ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang'
+cpp = '/path/to/ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang++'
+ar = '/path/to/ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar'
+strip = '/path/to/ndk/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip'
+
+[properties]
+root = '/path/to/ndk/toolchains/llvm/prebuilt/linux-x86_64/sysroot'
+
+[host_machine]
+system = 'android'
+cpu_family = 'aarch64'
+cpu = 'armv8'
+endian = 'little'
+```
+
+**Windows MinGW交叉编译**:
+
+```ini
+# cross-mingw64.ini
+[binaries]
+c = 'x86_64-w64-mingw32-gcc'
+cpp = 'x86_64-w64-mingw32-g++'
+ar = 'x86_64-w64-mingw32-ar'
+strip = 'x86_64-w64-mingw32-strip'
+windres = 'x86_64-w64-mingw32-windres'
+exe_wrapper = 'wine64'
+
+[properties]
+c_args = ['-DWIN32_LEAN_AND_MEAN']
+c_link_args = ['-static-libgcc']
+
+[host_machine]
+system = 'windows'
+cpu_family = 'x86_64'
+cpu = 'x86_64'
+endian = 'little'
+```
+
+### 4. 高级测试配置
+
+**复杂测试设置**:
+
+```meson
+# 测试可执行文件
+test_deps = [mylib_dep]
+
+if get_option('enable_integration_tests')
+    # 集成测试需要网络
+    test_deps += [curl_dep]
+endif
+
+test_exe = executable('run_tests',
+    'test_main.c',
+    'test_buffer.c',
+    'test_parser.c',
+    include_directories: inc,
+    dependencies: test_deps,
+)
+
+# 单元测试
+test('buffer_tests', test_exe, args: ['--suite=buffer'])
+test('parser_tests', test_exe, args: ['--suite=parser'])
+
+# 带超时和环境的测试
+test('integration_test', test_exe,
+    args: ['--suite=integration'],
+    timeout: 300,
+    env: [
+        'TEST_SERVER=localhost:8080',
+        'TEST_TIMEOUT=60',
+    ],
+    is_parallel: false,  # 串行执行
+)
+
+# 基准测试
+test('benchmark', test_exe,
+    args: ['--benchmark'],
+    timeout: 600,
+    suite: 'benchmark',
+)
+
+# 条件测试
+if get_option('enable_stress_tests')
+    test('stress_test', test_exe,
+        args: ['--stress', '--iterations=1000000'],
+        timeout: 3600,
+    )
+endif
+```
+
+**测试覆盖率**:
+
+```meson
+# 启用覆盖率
+if get_option('b_coverage')
+    # 需要gcov/lcov
+    gcovr = find_program('gcovr', required: false)
+
+    if gcovr.found()
+        run_target('coverage',
+            command: [gcovr, '--html', '--html-details', '-o', 'coverage.html', '.']
+        )
+    endif
+endif
+```
+
+### 5. 自定义构建选项
+
+**meson_options.txt完整示例**:
+
+```meson
+option('enable_tests', type: 'boolean', value: true,
+    description: 'Build test suite')
+
+option('enable_examples', type: 'boolean', value: true,
+    description: 'Build example programs')
+
+option('enable_shared', type: 'boolean', value: true,
+    description: 'Build shared library')
+
+option('enable_static', type: 'boolean', value: true,
+    description: 'Build static library')
+
+option('with_ssl', type: 'feature', value: 'auto',
+    description: 'Enable SSL/TLS support')
+
+option('with_zlib', type: 'feature', value: 'auto',
+    description: 'Enable zlib compression')
+
+option('log_level', type: 'combo',
+    choices: ['error', 'warning', 'info', 'debug', 'trace'],
+    value: 'info',
+    description: 'Default log level')
+
+option('max_connections', type: 'integer', value: 1024,
+    description: 'Maximum concurrent connections',
+    min: 1, max: 65535)
+
+option('custom_allocator', type: 'string', value: 'system',
+    description: 'Memory allocator to use')
+```
+
+**使用选项**:
+
+```meson
+# 布尔选项
+if get_option('enable_tests')
+    subdir('tests')
+endif
+
+# feature选项
+ssl_dep = dependency('openssl', required: get_option('with_ssl'))
+if ssl_dep.found()
+    add_project_arguments('-DHAVE_SSL', language: 'c')
+endif
+
+# combo选项
+log_level = get_option('log_level')
+add_project_arguments('-DLOG_LEVEL_' + log_level.to_upper(), language: 'c')
+
+# 整数选项
+max_conn = get_option('max_connections')
+config_data.set('MAX_CONNECTIONS', max_conn)
+```
+
+### 6. 自定义目标与生成器
+
+**代码生成**:
+
+```meson
+# Protocol Buffers
+protoc = find_program('protoc', required: false)
+
+if protoc.found()
+    gen = generator(protoc,
+        output: ['@BASENAME@.pb.c', '@BASENAME@.pb.h'],
+        arguments: ['--c_out=@BUILD_ROOT@', '@INPUT@']
+    )
+
+    pb_sources = gen.process('messages.proto', 'config.proto')
+endif
+```
+
+**Flex/Bison集成**:
+
+```meson
+flex = find_program('flex', required: false)
+bison = find_program('bison', required: false)
+
+if flex.found() and bison.found()
+    lexer_c = custom_target('lexer',
+        input: 'lexer.l',
+        output: 'lexer.c',
+        command: [flex, '-o', '@OUTPUT@', '@INPUT@'],
+    )
+
+    parser_c = custom_target('parser',
+        input: 'parser.y',
+        output: ['parser.c', 'parser.h'],
+        command: [bison, '-d', '-o', '@OUTPUT0@', '@INPUT@'],
+    )
+
+    parser_sources = [lexer_c, parser_c]
+endif
+```
+
+**资源编译**:
+
+```meson
+# 嵌入二进制文件
+xxd = find_program('xxd', required: false)
+
+if xxd.found()
+    resources = ['logo.png', 'config.json']
+    resource_targets = []
+
+    foreach res : resources
+        target = custom_target(res.underscorify() + '_c',
+            input: res,
+            output: res + '.inc',
+            command: [xxd, '-i', '@INPUT@', '@OUTPUT@'],
+        )
+        resource_targets += target
+    endforeach
+endif
+```
+
+### 7. 安装与打包
+
+**安装配置**:
+
+```meson
+# 安装库
+install_headers(
+    'include/myproject/core.h',
+    'include/myproject/utils.h',
+    subdir: 'myproject',
+)
+
+# 安装文档
+install_man('docs/myproject.1')
+
+# 安装配置文件
+install_data('config/myproject.conf',
+    install_dir: get_option('sysconfdir') / 'myproject',
+    rename: 'myproject.conf.sample',
+)
+
+# 安装systemd服务
+systemd = dependency('systemd', required: false)
+if systemd.found()
+    systemd_unit_dir = systemd.get_variable(pkgconfig: 'systemdsystemunitdir')
+    install_data('myproject.service',
+        install_dir: systemd_unit_dir,
+    )
+endif
+```
+
+### 8. 构建类型与优化
+
+```bash
+# 调试构建
+meson setup build_debug --buildtype=debug
+
+# 发布构建（带调试符号）
+meson setup build_relwithdebinfo --buildtype=release
+
+# 最小尺寸构建
+meson setup build_minsize --buildtype=minsize
+
+# 自定义优化
+meson setup build_custom \
+    --buildtype=release \
+    -Db_lto=true \
+    -Db_pie=true \
+    -Dc_args="-march=native -mtune=native"
+```
+
+### 9. Meson与IDE集成
+
+**生成compile_commands.json**:
+
+```meson
+# meson.build中添加
+if get_option('b_ndebug') == false
+    # 调试构建时生成
+    meson.override_find_program('compdb')
+endif
+```
+
+**VS Code配置**:
+
+```json
+{
+    "mesonbuild.buildFolder": "build",
+    "mesonbuild.configureOnOpen": true,
+    "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild"
+}
+```
+
+---
+
 ## ✅ 检查清单
 
 - [ ] meson.build在项目根目录
@@ -186,6 +732,9 @@ endif
 - [ ] 依赖项已声明
 - [ ] 添加了测试
 - [ ] 安装规则正确
+- [ ] 交叉编译配置完成
+- [ ] 子项目配置正确
+- [ ] CI/CD集成完成
 
 ---
 
