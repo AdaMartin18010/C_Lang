@@ -102,7 +102,7 @@
 | **powerpc64-linux** | Tier 3 | 是 | 是 | 否 | 社区维护 | PowerPC |
 | **mips-linux** | Tier 3 | 是 | 是 | 否 | 社区维护 | MIPS |
 | **x86_64-uefi** | Tier 2 | 是 | 否 | 否 | 部分测试 | UEFI固件 |
-| **x86_64-uefi** | Tier 2 | 是 | 否 | 否 | 部分测试 | 裸机 |
+| **bare metal** | Tier 2 | 是 | 否 | 否 | 部分测试 | 裸机 |
 
 ## 7. 错误处理策略决策矩阵
 
@@ -188,6 +188,204 @@
 | **卫生宏** | N/A | 否 | 否 | 是 | 是 |
 | **AST操作** | 是 | 否 | 否 | 是 | 是 |
 | **类型操作** | 是 | 否 | 是 | 有限 | 是 |
+
+## 12. Zig comptime 能力矩阵
+
+| 能力 | 支持 | 说明 | 示例 |
+|------|:----:|:-----|:-----|
+| **类型计算** | 是 | 编译期类型推导 | `comptime T = @TypeOf(x)` |
+| **泛型编程** | 是 | 类型参数化 | `fn Container(comptime T: type)` |
+| **条件编译** | 是 | 平台相关代码 | `comptime if (target.os == .linux)` |
+| **编译时循环** | 是 | 展开循环 | `inline for (0..10) \|i\|` |
+| **反射** | 是 | 类型内省 | `@typeInfo(T).Struct.fields` |
+| **代码生成** | 是 | 生成代码 | 编译时字符串拼接 |
+| **数值计算** | 是 | 常量表达式 | `comptime PI = 3.14159` |
+
+---
+
+> **文档类型**: 多维矩阵对比
+> **用途**: 技术选型、特性对比
+> **更新**: 2026-03-13
+
+## 12. Zig 代码示例对比
+
+### 12.1 内存分配对比
+
+```zig
+// Zig - 显式分配器
+const std = @import("std");
+
+fn process(allocator: std.mem.Allocator) !void {
+    const buffer = try allocator.alloc(u8, 1024);
+    defer allocator.free(buffer);  // 自动释放
+    
+    // 使用 buffer...
+}
+
+// C - 隐式全局分配
+void process(void) {
+    char *buffer = malloc(1024);
+    if (!buffer) return;  // 错误处理
+    
+    // 使用 buffer...
+    
+    free(buffer);  // 手动释放，容易遗漏
+}
+```
+
+### 12.2 错误处理对比
+
+```zig
+// Zig - 错误联合类型
+const FileError = error{
+    NotFound,
+    PermissionDenied,
+};
+
+fn readFile(path: []const u8) FileError![]u8 {
+    const file = try std.fs.cwd().openFile(path, .{});
+    defer file.close();
+    
+    return try file.readToEndAlloc(allocator, max_size);
+}
+
+// 使用
+const content = readFile("data.txt") catch |err| {
+    std.log.err("Failed to read: {}", .{err});
+    return;
+};
+```
+
+### 12.3 泛型编程对比
+
+```zig
+// Zig - comptime 泛型
+fn max(comptime T: type, a: T, b: T) T {
+    return if (a > b) a else b;
+}
+
+const m1 = max(i32, 10, 20);
+const m2 = max(f64, 3.14, 2.71);
+
+// C++ - 模板
+template<typename T>
+T max(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+// Rust - 泛型
+fn max<T: Ord>(a: T, b: T) -> T {
+    if a > b { a } else { b }
+}
+```
+
+---
+
+## 13. 语言选型决策树
+
+```
+新项目技术选型？
+├── 系统级编程？
+│   ├── 需要极致性能？
+│   │   ├── 是 → Zig / C / C++ / Rust
+│   │   └── 内存安全优先？
+│   │       ├── 是 → Rust
+│   │       └── 否 → Zig / C
+│   └── 快速开发优先？
+│       └── Go
+├── Web开发？
+│   ├── 后端服务 → Go / Rust
+│   └── WebAssembly → Zig / Rust
+├── 嵌入式？
+│   ├── 资源受限 → Zig / C
+│   └── 安全关键 → Rust / SPARK Ada
+└── 脚本/自动化？
+    └── Python / Go
+```
+
+---
+
+## 14. 社区与生态成熟度
+
+| 语言 | GitHub Stars | 包数量 | 主要应用领域 | 就业市场 |
+|:-----|:------------:|:------:|:-------------|:--------:|
+| C | 高(历史积累) | 无数 | 系统/嵌入式 | ⭐⭐⭐⭐⭐ |
+| C++ | 高 | 大量 | 游戏/系统 | ⭐⭐⭐⭐⭐ |
+| Rust | 高(增长快) | crates.io 10万+ | 系统/Web | ⭐⭐⭐⭐ |
+| Go | 高 | 大量 | 云原生/后端 | ⭐⭐⭐⭐⭐ |
+| Zig | 中(增长中) | 增长中 | 系统/工具 | ⭐⭐ |
+
+---
+
+> **文档类型**: 多维矩阵对比
+> **用途**: 技术选型、特性对比
+> **更新**: 2026-03-13
+
+## 15. Zig 编译时反射能力矩阵
+
+| 反射能力 | 支持 | 使用场景 | 示例 |
+|:---------|:----:|:---------|:-----|
+| **类型信息查询** | 是 | 泛型编程 | `@typeInfo(T)` |
+| **字段遍历** | 是 | 序列化 | `@typeInfo(T).Struct.fields` |
+| **函数内省** | 是 | 代码生成 | `@typeInfo(@TypeOf(func))` |
+| **编译时分支** | 是 | 条件编译 | `comptime if (condition)` |
+| **字符串操作** | 是 | 代码生成 | `comptime ++` 拼接 |
+| **类型构造** | 是 | 元编程 | `@Type(.{...})` |
+
+## 16. 性能基准对比
+
+| 测试项目 | Zig | C | C++ | Rust | Go | 说明 |
+|:---------|----:|--:|----:|-----:|---:|:-----|
+| 二进制大小 (Hello World) | 8KB | 12KB | 1.2MB | 300KB | 2MB | 静态链接 |
+| 编译速度 (1万行) | 0.5s | 0.3s | 5s | 3s | 1s | 优化级别-O2 |
+| 内存使用峰值 | 50MB | 30MB | 500MB | 200MB | 100MB | 编译时 |
+| 运行时性能 | 100% | 100% | 98% | 100% | 85% | 相对于C |
+| 启动时间 | 0ms | 0ms | 0ms | 0ms | 10ms | Go有GC初始化 |
+
+*注: 数据为近似值，实际结果取决于具体场景*
+
+## 17. Zig 生态系统成熟度
+
+| 组件 | 状态 | 质量 | 说明 |
+|:-----|:----:|:----:|:-----|
+| **标准库** | 活跃 | ⭐⭐⭐⭐ | 核心功能完整 |
+| **包管理器** | 稳定 | ⭐⭐⭐⭐ | build.zig.zon |
+| **LSP (zls)** | 稳定 | ⭐⭐⭐⭐ | 自动补全 |
+| **调试器支持** | 良好 | ⭐⭐⭐ | GDB/LLDB |
+| **构建系统** | 稳定 | ⭐⭐⭐⭐⭐ | 内置build.zig |
+| **C互操作** | 优秀 | ⭐⭐⭐⭐⭐ | @cImport |
+| **文档工具** | 改进中 | ⭐⭐⭐ | 自动生成 |
+| **测试框架** | 内置 | ⭐⭐⭐⭐⭐ | std.testing |
+
+## 18. 学习资源对比
+
+| 资源类型 | Zig | C | Rust | Go | 说明 |
+|:---------|:---:|:---:|:----:|:--:|:-----|
+| 官方教程 | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 入门文档 |
+| 书籍数量 | 少 | 极多 | 多 | 多 | 第三方资源 |
+| 视频教程 | 少 | 多 | 多 | 多 | YouTube等 |
+| 社区活跃度 | 中 | 高 | 极高 | 高 | Discord/论坛 |
+| 中文资源 | 少 | 多 | 多 | 多 | 翻译资料 |
+
+---
+
+## 总结: Zig 适合谁？
+
+### ✅ 推荐使用 Zig 的场景
+
+- C/C++ 开发者想要更好的编译时编程
+- 嵌入式开发需要精确控制且无运行时
+- 系统工具开发需要单二进制分发
+- WebAssembly 项目需要小体积输出
+- 游戏开发需要自定义内存分配
+
+### ❌ 暂不推荐 Zig 的场景
+
+- 需要成熟生态的企业级 Web 服务
+- 快速原型开发（Python/Go 更快）
+- 团队没有学习新语言的时间
+- 依赖大量第三方库的项目
+- 对稳定性要求极高的生产环境
 
 ---
 

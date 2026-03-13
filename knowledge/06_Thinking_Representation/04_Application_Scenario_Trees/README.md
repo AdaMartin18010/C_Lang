@@ -124,15 +124,15 @@ flowchart TD
     A[嵌入式C开发] --> B[微控制器]
     A --> C[嵌入式Linux]
     A --> D[实时操作系统]
-    
+
     B --> B1[STM32]
     B --> B2[Arduino]
     B --> B3[ESP32]
-    
+
     C --> C1[设备驱动]
     C --> C2[系统裁剪]
     C --> C3[交叉编译]
-    
+
     D --> D1[FreeRTOS]
     D --> D2[RT-Thread]
     D --> D3[Zephyr]
@@ -201,15 +201,15 @@ graph TB
     A[网络编程] --> B[底层协议]
     A --> C[应用协议]
     A --> D[网络安全]
-    
+
     B --> B1[TCP/IP栈实现]
     B --> B2[套接字编程]
     B --> B3[数据包处理]
-    
+
     C --> C1[HTTP服务器]
     C --> C2[DNS服务器]
     C --> C3[代理服务器]
-    
+
     D --> D1[SSL/TLS实现]
     D --> D2[防火墙]
     D --> D3[入侵检测]
@@ -226,14 +226,14 @@ graph TB
 int create_server(int port) {
     int listen_fd = socket(AF_INET, SOCK_STREAM, 0);
     // ... 设置socket选项和绑定
-    
+
     int epoll_fd = epoll_create1(0);
     struct epoll_event ev, events[MAX_EVENTS];
-    
+
     ev.events = EPOLLIN;
     ev.data.fd = listen_fd;
     epoll_ctl(epoll_fd, EPOLL_CTL_ADD, listen_fd, &ev);
-    
+
     while (1) {
         int nfds = epoll_wait(epoll_fd, events, MAX_EVENTS, -1);
         for (int i = 0; i < nfds; i++) {
@@ -287,11 +287,11 @@ flowchart TD
     A[开始选择] --> B{你喜欢底层还是高层?}
     B -->|底层| C[系统/嵌入式方向]
     B -->|高层| D[应用开发方向]
-    
+
     C --> C1{关注硬件吗?}
     C1 -->|是| C2[嵌入式开发]
     C1 -->|否| C3[操作系统/驱动]
-    
+
     D --> D1{关注性能吗?}
     D1 -->|极高性能| D2[游戏/高性能计算]
     D1 -->|可靠性| D3[数据库/金融系统]

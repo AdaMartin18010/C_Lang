@@ -78,7 +78,7 @@ flowchart TD
 
 ## 三、类型兼容性决策树
 
-```
+```text
 两个类型是否兼容？
 ├── 相同类型？
 │   └── 是 → 兼容 ✅
@@ -127,7 +127,7 @@ flowchart TD
 
 ## 五、类型安全等级评估
 
-```
+```text
 Level 5: 类型安全 (Type Safe)
 ├── 使用定宽整数 (stdint.h)
 ├── 显式转换所有类型转换
@@ -340,3 +340,87 @@ f = f + 1;  // f 不变！精度不足以表示
 >
 > - 2025-03-09: 初版创建
 > - 2026-03-13: 扩展语言对比、类型双关、对齐主题、泛化编程
+
+## 十、类型安全最佳实践
+
+### 10.1 使用定宽整数类型
+
+```c
+#include <stdint.h>
+#include <stddef.h>
+
+// ✅ 推荐：使用定宽整数
+uint32_t count;      // 计数器
+int64_t timestamp;   // 时间戳
+uintptr_t addr;      // 地址
+size_t buffer_size;  // 缓冲区大小
+
+// ❌ 避免：依赖平台相关类型
+unsigned int count;  // 大小不确定
+long timestamp;      // 可能32或64位
+```
+
+### 10.2 显式转换与溢出检查
+
+```c
+#include <stdint.h>
+#include <limits.h>
+
+// ✅ 安全的类型转换
+uint32_t safe_downcast(uint64_t value) {
+    if (value > UINT32_MAX) {
+        // 处理溢出
+        return UINT32_MAX;
+    }
+    return (uint32_t)value;  // 显式转换
+}
+
+// ✅ 有符号/无符号混合时显式处理
+int process_count(size_t count) {
+    if (count > INT_MAX) {
+        return -1;  // 错误处理
+    }
+    return (int)count;
+}
+```
+
+### 10.3 布尔类型使用
+
+```c
+#include <stdbool.h>
+
+// ✅ C99 _Bool / bool
+bool is_valid = true;
+bool result = check_condition();
+
+// ❌ 避免：将整数当作布尔
+int flag = 1;  // 不明确意图
+if (flag) { }  // 可读性差
+
+// ✅ 推荐：显式比较
+if (flag != 0) { }
+if (ptr != NULL) { }  // 而非 if (ptr)
+```
+
+---
+
+## 十一、常见类型错误与防范
+
+| 错误类型 | 示例 | 后果 | 防范措施 |
+|:---------|:-----|:-----|:---------|
+| **隐式截断** | `int x = 100000; short s = x;` | 数据丢失 | 显式检查范围 |
+| **符号扩展** | `char c = -1; int i = c;` | 意外大数 | 使用unsigned char |
+| **精度丢失** | `float f = 1e20; f = f + 1;` | 加法无效 | 使用double |
+| **未定义转换** | `float* → int*` | 严格别名违反 | 使用union或memcpy |
+| **对齐错误** | 强制转换未对齐指针 | 崩溃/性能损失 | 使用alignof/aligned_alloc |
+
+---
+
+> **使用建议**: 在设计数据结构或选择类型时，参考此矩阵进行决策。
+
+---
+
+> **更新记录**
+>
+> - 2025-03-09: 初版创建
+> - 2026-03-13: 扩展语言对比、类型双关、对齐主题、泛化编程、最佳实践
