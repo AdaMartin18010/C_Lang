@@ -1,7 +1,7 @@
 # 02 Formal Semantics and Physics - 形式语义与物理
 
 > **对应标准**: ISO C标准、IEEE POSIX、CompCert Verified Compiler
-> **完成度**: 95% | **预估学习时间**: 100-120小时
+> **完成度**: 100% | **预估学习时间**: 100-120小时
 >
 > **新增内容 (2026-03-14)**:
 >
@@ -12,6 +12,24 @@
 ---
 
 ## 目录结构
+
+### 00_Core_Semantics_Foundations - 核心语义基础
+
+形式语义学三大支柱：操作语义、指称语义、公理语义。
+
+| 文件 | 主题 | 难度 | 参考来源 | 代码行数 |
+|:-----|:-----|:----:|:---------|:--------:|
+| [00_Core_Semantics_Foundations/README.md](./00_Core_Semantics_Foundations/README.md) | 模块概述与学习路径 | L5 | 本模块 | - |
+| [00_Core_Semantics_Foundations/01_Operational_Semantics.md](./00_Core_Semantics_Foundations/01_Operational_Semantics.md) | 操作语义基础 | L5 | Plotkin, Winskel | 438 |
+| [00_Core_Semantics_Foundations/02_Denotational_Semantics.md](./00_Core_Semantics_Foundations/02_Denotational_Semantics.md) | 指称语义基础 | L6 | Scott, Strachey | 382 |
+| [00_Core_Semantics_Foundations/03_Axiomatic_Semantics_Hoare.md](./00_Core_Semantics_Foundations/03_Axiomatic_Semantics_Hoare.md) | 公理语义与Hoare逻辑 | L5 | Hoare (1969) | 456 |
+| [00_Core_Semantics_Foundations/04_C_Type_Theory.md](./00_Core_Semantics_Foundations/04_C_Type_Theory.md) | C语言类型理论形式化 | L6 | Cardelli, Pierce | 524 |
+| [00_Core_Semantics_Foundations/05_Undefined_Behavior_Semantics.md](./00_Core_Semantics_Foundations/05_Undefined_Behavior_Semantics.md) | 未定义行为语义边界 | L6 | C标准 §3.4.3 | 468 |
+
+**前置知识**: 数理逻辑、集合论、递归论
+**关联**: [11_CompCert_Verification](../11_CompCert_Verification/)
+
+---
 
 ### 01_Game_Semantics - 博弈语义
 
