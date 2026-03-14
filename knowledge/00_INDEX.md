@@ -169,7 +169,7 @@
 | 段错误排查 | [段错误排查决策树](./06_Thinking_Representation/01_Decision_Trees/02_Segfault_Troubleshooting.md) | 20分钟 |
 | 性能瓶颈分析 | [性能瓶颈分析决策树](./06_Thinking_Representation/01_Decision_Trees/03_Performance_Bottleneck.md) | 1小时 |
 | 并发调试 | [并发调试决策树](./06_Thinking_Representation/01_Decision_Trees/05_Concurrency_Debug.md) | 2小时 |
-| 编译链接错误 | [编译链接决策树](./06_Thinking_Representation/03_Decision_Trees/04_Compile_Link_Errors.md) | 15分钟 |
+| 编译链接错误 | [编译链接决策树](./06_Thinking_Representation/01_Decision_Trees/04_Compilation_Error.md) | 15分钟 |
 | 技术选型对比 | [对比矩阵集合](./06_Thinking_Representation/02_Multidimensional_Matrix/) | 即时 |
 | 概念理解映射 | [概念映射集合](./06_Thinking_Representation/05_Concept_Mappings/) | 即时 |
 
@@ -561,8 +561,8 @@ graph TD
 
 | 问题现象 | 可能原因 | 诊断文件 | 解决方案 |
 |:---------|:---------|:---------|:---------|
-| `undefined reference` | 链接错误、未定义函数 | [编译链接决策树](./06_Thinking_Representation/03_Decision_Trees/04_Compile_Link_Errors.md) | 检查头文件、链接库 |
-| `implicit declaration` | 函数未声明 | [编译链接决策树](./06_Thinking_Representation/03_Decision_Trees/04_Compile_Link_Errors.md) | 添加头文件包含 |
+| `undefined reference` | 链接错误、未定义函数 | [编译链接决策树](./06_Thinking_Representation/01_Decision_Trees/04_Compilation_Error.md) | 检查头文件、链接库 |
+| `implicit declaration` | 函数未声明 | [编译链接决策树](./06_Thinking_Representation/01_Decision_Trees/04_Compilation_Error.md) | 添加头文件包含 |
 | `incompatible pointer types` | 指针类型不匹配 | [01_Pointer_Depth.md](./01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 强制类型转换 |
 | `excess elements in struct initializer` | 结构体初始化错误 | [01_Structures_Unions.md](./01_Core_Knowledge_System/03_Construction_Layer/01_Structures_Unions.md) | 检查初始化顺序 |
 | `array subscript is not an integer` | 数组索引类型错误 | [05_Arrays_Pointers.md](./01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 确保索引为整数 |
@@ -1076,7 +1076,7 @@ graph TD
 │   ├── 01_Memory_Leak_Diagnosis.md          # 内存泄漏诊断
 │   ├── 02_Segfault_Troubleshooting.md       # 段错误排查
 │   ├── 03_Performance_Bottleneck.md         # 性能瓶颈分析
-│   ├── 04_Compile_Link_Errors.md            # 编译链接错误
+│   ├── 04_Compilation_Error.md            # 编译链接错误
 │   └── 05_Concurrency_Debug.md              # 并发调试
 │   └── 01_Learning_Path_Decision_Tree.md    # 学习路径决策
 ├── 04_Application_Scenario_Trees/           # 应用场景树

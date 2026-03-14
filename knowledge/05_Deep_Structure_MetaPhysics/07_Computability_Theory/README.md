@@ -44,7 +44,7 @@
 
 - **可判定性**：给定一个问题，是否存在算法能在有限时间内给出答案？
 - **可计算性**：给定一个函数，是否存在算法能计算其值？
-- [复杂性](knowledge/05_Deep_Structure_MetaPhysics/05_Algorithm_Analysis/README.md)：解决问题需要多少资源（时间、空间）？
+- [复杂性](../05_Computational_Complexity/README.md)：解决问题需要多少资源（时间、空间）？
 
 ---
 

@@ -581,7 +581,7 @@ void abs_control_loop(void) {
 
 #### 为什么需要这个模块
 
-详见: [工具链批判性分析](./CRITICAL_ANALYSIS_TOOLCHAIN.md)
+详见: [工具链评估报告](../archive/reports/2026-03-15/CRITICAL_EVALUATION_REPORT_2026.md)
 
 #### 内容模块
 
@@ -1690,7 +1690,7 @@ Copyright (c) 2025 C Language Knowledge Base Contributors
 | 主题 | 入口 |
 |:-----|:-----|
 | **完整索引** | [00_INDEX.md](./00_INDEX.md) |
-| **完成状态** | [COMPLETION_STATUS_V4.md](./COMPLETION_STATUS_V4.md) |
+| **完成状态** | [改进计划](../archive/reports/2026-03-15/SYSTEMATIC_IMPROVEMENT_PLAN_2026.md) |
 | **数字逻辑** | [数字逻辑门](./02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/01_Digital_Logic_Gates.md) |
 | **图灵机** | [图灵机](./05_Deep_Structure_MetaPhysics/07_Computability_Theory/01_Turing_Machines.md) |
 | **ISA架构** | [ISA架构](./02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/01_Instruction_Set_Architecture.md) |

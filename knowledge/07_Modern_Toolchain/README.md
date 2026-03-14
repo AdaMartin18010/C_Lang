@@ -39,7 +39,7 @@
 
 ### 缺口分析
 
-详见: [批判性分析报告](../CRITICAL_ANALYSIS_TOOLCHAIN.md)
+详见: [评估报告](../../archive/reports/2026-03-15/CRITICAL_EVALUATION_REPORT_2026.md)
 
 ---
 

@@ -27,11 +27,11 @@
 
 | 文件 | 主题 | 用途 | 对比维度 |
 |:-----|:-----|:-----|:---------|
-| ~~01_Type_Storage_Matrix.md~~ | 类型存储对比 | 内存布局 | (计划中) |
-| ~~02_Synchronization_Matrix.md~~ | 同步原语对比 | 并发选择 | (计划中) |
-| ~~03_IO_Methods_Matrix.md~~ | IO方法对比 | IO选型 | (计划中) |
-| ~~04_Memory_Allocation_Matrix.md~~ | 内存分配对比 | 分配策略 | (计划中) |
-| ~~05_Compiler_Optimization_Matrix.md~~ | 优化级别对比 | 编译优化 | (计划中) |
+| [01_Type_Storage_Matrix.md](02_Comparison_Matrices/01_Type_Storage_Matrix.md) | 类型存储对比 | 内存布局 | ✅ |
+| [02_Synchronization_Matrix.md](02_Comparison_Matrices/02_Synchronization_Matrix.md) | 同步原语对比 | 并发选择 | ✅ |
+| [03_IO_Methods_Matrix.md](02_Comparison_Matrices/03_IO_Methods_Matrix.md) | IO方法对比 | IO选型 | ✅ |
+| [04_Memory_Allocation_Matrix.md](02_Comparison_Matrices/04_Memory_Allocation_Matrix.md) | 内存分配对比 | 分配策略 | ✅ |
+| [05_Compiler_Optimization_Matrix.md](02_Comparison_Matrices/05_Compiler_Optimization_Matrix.md) | 优化级别对比 | 编译优化 | ✅ |
 
 ---
 
@@ -43,8 +43,8 @@
 |:-----|:-----|:---------|
 | [01_Knowledge_System_MindMap.md](./01_Mind_Maps/01_Knowledge_System_MindMap.md) | C语言知识系统 | 完整知识图谱 |
 | [02_Memory_Model_Map.md](./03_Mind_Maps/02_Memory_Model_Map.md) | 内存模型 | 堆栈全局常量 |
-| ~~03_Pointer_Concepts_Map.md~~ | 指针概念 | (计划中) |
-| ~~04_Concurrent_Programming_Map.md~~ | 并发编程 | (计划中) |
+| [03_Pointer_Concepts_Map.md](03_Mind_Maps/03_Pointer_Concepts_Map.md) | 指针概念 | ✅ |
+| [04_Concurrent_Programming_Map.md](03_Mind_Maps/04_Concurrent_Programming_Map.md) | 并发编程 | ✅ |
 
 ---
 
@@ -54,11 +54,11 @@
 
 | 文件 | 主题 | 行业 | 关键技术 |
 |:-----|:-----|:-----|:---------|
-| ~~01_Network_Server.md~~ | 网络服务器 | (计划中) |
-| ~~02_Database_Engine.md~~ | 数据库引擎 | (计划中) |
-| ~~03_Operating_System.md~~ | 操作系统 | (计划中) |
-| ~~04_Compiler_Frontend.md~~ | 编译器前端 | (计划中) |
-| ~~05_Embedded_Firmware.md~~ | 嵌入式固件 | (计划中) |
+| [01_Network_Server.md](04_Case_Studies/01_Network_Server.md) | 网络服务器 | ✅ |
+| [02_Database_Engine.md](04_Case_Studies/02_Database_Engine.md) | 数据库引擎 | ✅ |
+| [03_Operating_System.md](04_Case_Studies/03_Operating_System.md) | 操作系统 | ✅ |
+| [04_Compiler_Frontend.md](04_Case_Studies/04_Compiler_Frontend.md) | 编译器前端 | ✅ |
+| [05_Embedded_Firmware.md](04_Case_Studies/05_Embedded_Firmware.md) | 嵌入式固件 | ✅ |
 | [06_Embedded_System_Design.md](./04_Case_Studies/06_Embedded_System_Design.md) | 嵌入式系统设计 | 汽车 | AUTOSAR/状态机 |
 | [07_Performance_Optimization.md](./04_Case_Studies/07_Performance_Optimization.md) | 性能优化案例 | 通用 | Profiling/优化 |
 
@@ -73,8 +73,8 @@
 | [01_Pointer_Memory_Mapping.md](./05_Concept_Mappings/01_Pointer_Memory_Mapping.md) | 指针-内存映射 | 双向映射 |
 | [02_Type_System_Matrix.md](./05_Concept_Mappings/02_Type_System_Matrix.md) | 类型系统矩阵 | 分类矩阵 |
 | [03_Concurrency_Safety_Layers.md](./05_Concept_Mappings/03_Concurrency_Safety_Layers.md) | 并发安全层次 | 层次结构 |
-| ~~04_Storage_Duration_Lifetime.md~~ | 存储期-生命周期 | (计划中) |
-| ~~05_Compilation_Pipeline_Mapping.md~~ | 编译流程映射 | (计划中) |
+| [04_Storage_Duration_Lifetime.md](05_Concept_Mappings/04_Storage_Duration_Lifetime.md) | 存储期-生命周期 | ✅ |
+| [05_Compilation_Pipeline_Mapping.md](05_Concept_Mappings/05_C_Language_Knowledge_Graph.md) | 编译流程映射 | ✅ |
 
 ---
 
@@ -84,13 +84,8 @@
 
 | 文件 | 主题 | 场景 |
 |:-----|:-----|:-----|
-| ~~01_Embedded_Systems.md~~ | 嵌入式系统 | (计划中) |
-| ~~02_Systems_Programming.md~~ | 系统编程 | (计划中) |
-| ~~03_High_Performance_Computing.md~~ | 高性能计算 | (计划中) |
-| ~~04_Network_Programming.md~~ | 网络编程 | (计划中) |
-| ~~05_Database_Implementation.md~~ | 数据库实现 | (计划中) |
-| ~~06_Compiler_Construction.md~~ | 编译器构造 | (计划中) |
-| ~~07_Security_Sensitive.md~~ | 安全敏感 | (计划中) |
+| [01_Industry_Application_Scenario_Tree.md](04_Application_Scenario_Trees/01_Industry_Application_Scenario_Tree.md) | 行业应用场景 | 多行业覆盖 | ✅ |
+| [README.md](04_Application_Scenario_Trees/README.md) | 场景说明文档 | 概述 | ✅ |
 
 ---
 
@@ -100,7 +95,7 @@
 
 | 文件 | 主题 | 内容 |
 |:-----|:-----|:-----|
-| ~~01_Knowledge_Graph.md~~ | 全局知识图谱 | (计划中) |
+| [01_Knowledge_Graph.md](05_Concept_Mappings/05_C_Language_Knowledge_Graph.md) | 全局知识图谱 | ✅ |
 | [02_Learning_Paths.md](./07_Knowledge_Graph/02_Learning_Paths.md) | 学习路径 | 从入门到专家 |
 | [03_Prerequisite_Chains.md](./07_Knowledge_Graph/03_Prerequisite_Chains.md) | 前置依赖链 | 知识依赖关系 |
 
@@ -115,8 +110,8 @@
 | 文件 | 主题 | 用途 |
 |:-----|:-----|:-----|
 | [01_Global_Index.md](./08_Index/01_Global_Index.md) | 全局索引 | 按主题查找 |
-| ~~02_Standard_Reference.md~~ | 标准参考 | (计划中) |
-| ~~03_API_Quick_Reference.md~~ | API速查 | (计划中) |
+| [02_Standard_Reference.md](06_Index/01_Core_Concepts_Index.md) | 标准参考 | ✅ |
+| [03_API_Quick_Reference.md](06_Index/02_Keywords_Index.md) | API速查 | ✅ |
 
 ---
 
