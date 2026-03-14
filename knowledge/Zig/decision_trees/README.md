@@ -6,7 +6,7 @@
 
 ## 📋 目录结构
 
-```
+```text
 decision_trees/
 ├── README.md                          # 本文件：决策树总览
 └── Learning_Path_Decision_Tree.md     # 学习路径决策树
@@ -21,25 +21,25 @@ decision_trees/
 ```mermaid
 flowchart TD
     A[开始决策] --> B{项目类型?}
-    
+
     B -->|系统编程| C{性能要求?}
     B -->|应用开发| D{是否有C/C++代码库?}
     B -->|脚本/原型| E[考虑Python/JS]
-    
+
     C -->|极致性能| F{Zig是合适选择}
     C -->|一般性能| G{考虑Go/Rust}
-    
+
     D -->|大量C/C++代码| H{Zig是理想选择}
     D -->|全新项目| I{团队熟悉度?}
-    
+
     H --> H1[卓越的C互操作]
     H --> H2[渐进式迁移]
     H --> H3[保持性能]
-    
+
     I -->|熟悉C| J[推荐Zig]
     I -->|熟悉Rust| K[考虑Rust]
     I -->|全新团队| L{学习成本评估}
-    
+
     F --> F1[详细评估维度]
     F1 --> F1a[内存安全需求]
     F1 --> F1b[编译时计算需求]
@@ -150,14 +150,14 @@ flowchart LR
         A4[Web后端]
         A5[企业应用]
     end
-    
+
     subgraph 推荐语言
         B1[Zig]
         B2[C/C++]
         B3[Rust]
         B4[Go]
     end
-    
+
     A1 --> B1
     A1 --> B2
     A2 --> B1
@@ -240,10 +240,10 @@ graph LR
     C --> D[关键模块重写]
     D --> E[逐步替换C代码]
     E --> F[纯Zig项目]
-    
+
     B --> B1[保留C代码]
     B --> B2[使用Zig编译C]
-    
+
     C --> C1[C调用Zig函数]
     C --> C2[Zig调用C函数]
 ```

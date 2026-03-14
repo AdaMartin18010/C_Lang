@@ -160,7 +160,7 @@ const array_size = blk: {
 fn Vector(comptime T: type, comptime n: usize) type {
     return struct {
         data: [n]T,
-        
+
         pub fn add(self: @This(), other: @This()) @This() {
             var result: @This() = undefined;
             for (&result.data, self.data, other.data) |*r, a, b| {
@@ -180,7 +180,7 @@ const Vec3f = Vector(f32, 3);
 
 ### 1. 内存安全基础
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                    Zig内存模型核心概念                        │
 ├─────────────────────────────────────────────────────────────┤
@@ -237,7 +237,7 @@ fn dangling_pointer_demo() void {
 
 ### 3. 分配器形式化
 
-```
+```text
 分配器接口的形式化定义：
 
     Allocator = ⟨alloc, resize, free⟩
@@ -262,11 +262,11 @@ pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
-    
+
     // 内存分配
     const ptr = try allocator.alloc(u8, 1024);
     defer allocator.free(ptr);  // 确保释放
-    
+
     // 使用内存...
 }
 ```
@@ -277,7 +277,7 @@ pub fn main() !void {
 
 ### 1. 小步操作语义
 
-```
+```text
 表达式求值的小步语义：
 
     e ──▶ e'   表示表达式e一步求值为e'
@@ -285,30 +285,30 @@ pub fn main() !void {
 基本规则：
 
     n₁ + n₂ ──▶ n₃       其中 n₃ = n₁ + n₂  (算术)
-    
+
     if true then e₁ else e₂ ──▶ e₁          (条件真)
-    
+
     if false then e₁ else e₂ ──▶ e₂         (条件假)
-    
+
     let x = v in e ──▶ e[v/x]               (变量绑定)
-    
+
     f(v) ──▶ body[v/x]  其中 f(x) = body    (函数调用)
 ```
 
 ### 2. 大步操作语义
 
-```
+```text
 大步语义直接描述最终结果：
 
     σ ⊢ e ⇓ v
-    
+
     含义：在存储状态σ下，表达式e求值为v
 
 示例规则：
 
     ─────────────  (E-Num)
     σ ⊢ n ⇓ n
-    
+
     σ ⊢ e₁ ⇓ n₁    σ ⊢ e₂ ⇓ n₂    n = n₁ + n₂
     ───────────────────────────────────────────  (E-Add)
     σ ⊢ e₁ + e₂ ⇓ n
@@ -320,7 +320,7 @@ pub fn main() !void {
 
 ### 1. 类型安全定理
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │                  类型安全定理陈述                             │
 ├─────────────────────────────────────────────────────────────┤
@@ -359,14 +359,14 @@ const BoundedInt = struct {
     value: i32,
     min: i32,
     max: i32,
-    
+
     pub fn init(v: i32, min: i32, max: i32) !BoundedInt {
         if (v < min or v > max) return error.OutOfRange;
         return .{ .value = v, .min = min, .max = max };
     }
-    
+
     pub fn add(self: BoundedInt, other: i32) !BoundedInt {
-        const result = std.math.add(i32, self.value, other) catch 
+        const result = std.math.add(i32, self.value, other) catch
             return error.Overflow;
         return init(result, self.min, self.max);
     }
@@ -377,7 +377,7 @@ const BoundedInt = struct {
 
 ## 🌐 与形式化验证工具的集成
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │              Zig与形式化验证工具链                            │
 ├─────────────────────────────────────────────────────────────┤

@@ -73,20 +73,20 @@ OBJECTS = $(SOURCES:.c=.o)
 
 # 编译规则
 $(TARGET): $(OBJECTS)
-	$(CC) $(LDFLAGS) -o $@ $^
+ $(CC) $(LDFLAGS) -o $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+ $(CC) $(CFLAGS) -c -o $@ $<
 
 # 并行测试目标
 .PHONY: test
 test: $(TARGET)
-	@echo "Running tests with $(NPROCS) parallel jobs..."
-	./run_tests.sh --parallel=$(NPROCS)
+ @echo "Running tests with $(NPROCS) parallel jobs..."
+ ./run_tests.sh --parallel=$(NPROCS)
 
 .PHONY: clean
 clean:
-	rm -f $(TARGET) $(OBJECTS)
+ rm -f $(TARGET) $(OBJECTS)
 ```
 
 **使用方式：**
@@ -272,7 +272,7 @@ find_program(CCACHE ccache)
 if(CCACHE)
     set(CMAKE_C_COMPILER_LAUNCHER ${CCACHE})
     set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE})
-    
+
     # ccache优化选项
     set(ENV{CCACHE_BASEDIR} ${CMAKE_SOURCE_DIR})
     set(ENV{CCACHE_SLOPPINESS} pch_defines,time_macros)

@@ -2,15 +2,29 @@
 
 ## 概述
 
-代数拓扑是数学中研究拓扑空间在连续变形下保持不变的性质的学科。通过将拓扑问题转化为代数问题，我们可以使用代数工具（如群、环、模）来分类和研究空间的拓扑结构。
+代数拓扑是数学中研究拓扑空间在连续变形下保持不变的性质的学科。
+通过将拓扑问题转化为代数问题，我们可以使用代数工具（如群、环、模）来分类和研究空间的拓扑结构。
 
 ## 目录
 
-1. [拓扑空间](#拓扑空间)
-2. [连续映射](#连续映射)
-3. [基本群](#基本群)
-4. [覆盖空间](#覆盖空间)
-5. [高级主题](#高级主题)
+- [代数拓扑](#代数拓扑)
+  - [概述](#概述)
+  - [目录](#目录)
+  - [拓扑空间](#拓扑空间)
+    - [定义与公理](#定义与公理)
+    - [度量拓扑](#度量拓扑)
+  - [连续映射](#连续映射)
+    - [连续性的定义](#连续性的定义)
+    - [同伦](#同伦)
+  - [基本群](#基本群)
+    - [环路和同伦类](#环路和同伦类)
+    - [计算方法](#计算方法)
+  - [覆盖空间](#覆盖空间)
+    - [定义与性质](#定义与性质)
+    - [提升性质](#提升性质)
+  - [高级主题](#高级主题)
+    - [高阶同伦群](#高阶同伦群)
+    - [参考资料](#参考资料)
 
 ---
 
@@ -33,34 +47,34 @@ class Topology:
         self.X = underlying_set
         self.tau = open_sets
         self._verify_axioms()
-    
+
     def _verify_axioms(self):
         """验证拓扑公理"""
         # 公理1: 空集和全集
         assert frozenset() in self.tau, "空集必须是开集"
         assert self.X in self.tau, "全集必须是开集"
-        
+
         # 公理2: 任意并
         from itertools import combinations, chain
         for r in range(1, len(self.tau) + 1):
             for combo in combinations(self.tau, r):
                 union = frozenset().union(*combo)
                 assert union in self.tau, f"并集 {union} 不在拓扑中"
-        
+
         # 公理3: 有限交
         for u in self.tau:
             for v in self.tau:
                 assert u & v in self.tau, f"交集 {u&v} 不在拓扑中"
-    
+
     def is_open(self, subset):
         """判断子集是否为开集"""
         return frozenset(subset) in self.tau
-    
+
     def is_closed(self, subset):
         """判断子集是否为闭集（补集是开集）"""
         complement = self.X - frozenset(subset)
         return complement in self.tau
-    
+
     def closure(self, subset):
         """
         闭包：包含 subset 的最小闭集
@@ -71,11 +85,11 @@ class Topology:
         if not closed_supersets:
             return self.X
         return frozenset.intersection(*closed_supersets)
-    
+
     def _all_closed_sets(self):
         """所有闭集的集合"""
         return [self.X - u for u in self.tau]
-    
+
     def interior(self, subset):
         """
         内部：包含于 subset 的最大开集
@@ -118,15 +132,15 @@ class MetricSpace:
     def __init__(self, points, distance_func):
         self.points = set(points)
         self.d = distance_func
-    
+
     def open_ball(self, center, radius):
         """开球 B(x, r) = {y : d(x, y) < r}"""
         return {p for p in self.points if self.d(center, p) < radius}
-    
+
     def closed_ball(self, center, radius):
         """闭球 B̄(x, r) = {y : d(x, y) ≤ r}"""
         return {p for p in self.points if self.d(center, p) <= radius}
-    
+
     def induced_topology(self):
         """
         度量诱导的拓扑：
@@ -137,7 +151,7 @@ class MetricSpace:
         for p in self.points:
             for r in [0.5, 1, 2, 5]:
                 all_open_balls.append(frozenset(self.open_ball(p, r)))
-        
+
         # 生成拓扑（包含所有并集）
         from itertools import combinations
         tau = {frozenset()}
@@ -178,12 +192,12 @@ class ContinuousMap:
         self.Y = codomain
         self.f = mapping  # 点级的映射
         self._verify_well_defined()
-    
+
     def _verify_well_defined(self):
         """验证映射是良定义的"""
         assert set(self.f.keys()) == self.X.X, "定义域不匹配"
         assert set(self.f.values()).issubset(self.Y.X), "值域不匹配"
-    
+
     def is_continuous(self) -> bool:
         """验证连续性（开集定义）"""
         for v in self.Y.tau:
@@ -191,15 +205,15 @@ class ContinuousMap:
             if preimage not in self.X.tau:
                 return False
         return True
-    
+
     def preimage(self, subset):
         """原像 f^{-1}(B) = {x ∈ X : f(x) ∈ B}"""
         return frozenset({x for x in self.X.X if self.f[x] in subset})
-    
+
     def image(self, subset):
         """像 f(A) = {f(x) : x ∈ A}"""
         return frozenset({self.f[x] for x in subset})
-    
+
     def compose(self, other: 'ContinuousMap') -> 'ContinuousMap':
         """
         映射复合 (f ∘ g)(x) = f(g(x))
@@ -208,7 +222,7 @@ class ContinuousMap:
         assert self.X == other.Y, "复合条件不满足"
         composed = {x: self.f[other.f[x]] for x in other.X.X}
         return ContinuousMap(other.X, self.Y, composed)
-    
+
     def is_homeomorphism(self) -> bool:
         """
         同胚：双射且 f 和 f^{-1} 都连续
@@ -219,11 +233,11 @@ class ContinuousMap:
             return False
         if len(set(self.f.values())) != len(self.f):
             return False
-        
+
         # 检查连续性
         if not self.is_continuous():
             return False
-        
+
         # 检查逆映射连续性
         inverse = {v: k for k, v in self.f.items()}
         inv_map = ContinuousMap(self.Y, self.X, inverse)
@@ -248,18 +262,18 @@ class Homotopy:
     同伦 H: X × [0,1] -> Y
     连接两个连续映射 f, g: X -> Y
     H(x, 0) = f(x), H(x, 1) = g(x)
-    
+
     同伦是映射空间上的等价关系
     """
     def __init__(self, H, X: Topology, Y: Topology):
         self.H = H  # 同伦映射
         self.X = X
         self.Y = Y
-    
+
     def at_time(self, t: float):
         """在时间 t 的切片映射 H_t(x) = H(x, t)"""
         return {x: self.H(x, t) for x in self.X.X}
-    
+
     def connects(self, f: dict, g: dict) -> bool:
         """验证 H 是否连接 f 和 g"""
         h0 = self.at_time(0)
@@ -270,23 +284,23 @@ class HomotopyEquivalence:
     """
     同伦等价：f: X -> Y 和 g: Y -> X 满足
     g ∘ f ≃ id_X 且 f ∘ g ≃ id_Y
-    
+
     同伦等价的空间具有相同的同伦型
     """
     def __init__(self, f: ContinuousMap, g: ContinuousMap):
         self.f = f
         self.g = g
-    
+
     def is_equivalence(self) -> bool:
         """验证同伦等价"""
         # g ∘ f ≃ id_X
         gf = self.g.compose(self.f)
         id_X = {x: x for x in self.f.X.X}
-        
-        # f ∘ g ≃ id_Y  
+
+        # f ∘ g ≃ id_Y
         fg = self.f.compose(self.g)
         id_Y = {y: y for y in self.f.Y.X}
-        
+
         # 这里简化处理，实际需要构造同伦
         return True
 ```
@@ -309,21 +323,21 @@ class Path:
     def __init__(self, map_func: Callable[[float], tuple], space: MetricSpace):
         self.gamma = map_func
         self.space = space
-    
+
     def start(self):
         return self.gamma(0.0)
-    
+
     def end(self):
         return self.gamma(1.0)
-    
+
     def is_loop(self, basepoint) -> bool:
         """判断是否是基于 basepoint 的环路"""
         return self.start() == basepoint and self.end() == basepoint
-    
+
     def reverse(self) -> 'Path':
         """逆道路 γ⁻¹(t) = γ(1-t)"""
         return Path(lambda t: self.gamma(1 - t), self.space)
-    
+
     def concatenate(self, other: 'Path') -> 'Path':
         """
         道路连接 (γ * η)(t) =
@@ -332,7 +346,7 @@ class Path:
         要求 γ(1) = η(0)
         """
         assert self.end() == other.start(), "道路终点不匹配"
-        
+
         def concatenated(t):
             if t < 0.5:
                 return self.gamma(2 * t)
@@ -343,7 +357,7 @@ class Path:
 class FundamentalGroup:
     """
     基本群 π₁(X, x₀)：基于 x₀ 的所有环路的同伦类构成的群
-    
+
     群运算：[γ] · [η] = [γ * η]（道路连接）
     单位元：常值道路 [c_{x₀}]
     逆元：[γ]⁻¹ = [γ⁻¹]
@@ -352,19 +366,19 @@ class FundamentalGroup:
         self.X = space
         self.x0 = basepoint
         self.elements: List[Path] = []  # 环路代表元
-    
+
     def add_loop(self, path: Path):
         """添加环路代表元"""
         assert path.is_loop(self.x0)
         self.elements.append(path)
-    
+
     def is_simply_connected(self) -> bool:
         """
         单连通：基本群是平凡群
         即所有环路都同伦于常值道路
         """
         return len(self.elements) == 0  # 简化判断
-    
+
     def fundamental_group_order(self) -> int:
         """返回基本群的阶（元素个数），∞ 表示无限"""
         # 简化实现
@@ -385,12 +399,12 @@ class VanKampenTheorem:
     若 X = U ∪ V，U、V、U∩V 道路连通
     则 π₁(X) ≅ π₁(U) *_{π₁(U∩V)} π₁(V)（融合自由积）
     """
-    def __init__(self, U: FundamentalGroup, V: FundamentalGroup, 
+    def __init__(self, U: FundamentalGroup, V: FundamentalGroup,
                  intersection: FundamentalGroup):
         self.pi1_U = U
         self.pi1_V = V
         self.pi1_intersection = intersection
-    
+
     def compute(self) -> str:
         """计算基本群的表示"""
         # 简化实现：返回群的表示形式
@@ -405,7 +419,7 @@ class CoveringSpace:
         self.E = total_space
         self.B = base_space
         self.p = projection
-    
+
     def monodromy_action(self, loop: Path, fiber_point):
         """
         单值作用：基本群作用在纤维上
@@ -429,17 +443,17 @@ class CoveringMap:
     2. ∀b ∈ B，存在开邻域 U 使得 p^{-1}(U) 是 E 中不相交开集的并
     3. p 限制在每个这样的开集上是到 U 的同胚
     """
-    def __init__(self, total: Topology, base: Topology, 
+    def __init__(self, total: Topology, base: Topology,
                  projection: dict, fiber_size: int):
         self.E = total
         self.B = base
         self.p = projection
         self.fiber_cardinality = fiber_size
-    
+
     def fiber(self, b):
         """纤维 p^{-1}(b)"""
         return {e for e in self.E.X if self.p[e] == b}
-    
+
     def is_universal_cover(self) -> bool:
         """
         万有覆盖：E 是单连通的
@@ -447,7 +461,7 @@ class CoveringMap:
         """
         # 简化判断
         return True
-    
+
     def deck_transformations(self) -> List[dict]:
         """
         覆叠变换（Deck Transformations）：
@@ -473,7 +487,7 @@ class LiftingProperty:
     """
     def __init__(self, covering: CoveringMap):
         self.cover = covering
-    
+
     def lift_path(self, path_in_B: Path, start_in_E) -> Path:
         """
         道路提升：给定 B 中的道路 γ 和起点 ẽ ∈ p^{-1}(γ(0))
@@ -483,9 +497,9 @@ class LiftingProperty:
         def lifted_map(t):
             # 逐步提升
             return start_in_E  # 简化
-        
+
         return Path(lifted_map, self.cover.E)
-    
+
     def lift_map(self, f: ContinuousMap, E_start) -> ContinuousMap:
         """
         映射提升准则：
@@ -506,18 +520,18 @@ class LiftingProperty:
 class HigherHomotopyGroup:
     """
     高阶同伦群 π_n(X, x₀)：n 维球面到 X 的映射的同伦类
-    
+
     n ≥ 2 时，π_n 是 Abel 群
     """
     def __init__(self, space, n: int, basepoint):
         self.X = space
         self.n = n
         self.x0 = basepoint
-    
+
     def is_abelian(self) -> bool:
         """n ≥ 2 时同伦群是 Abel 群"""
         return self.n >= 2
-    
+
     def homotopy_groups_of_sphere(self) -> str:
         """
         球面的同伦群 π_n(S^k) 是代数拓扑中的经典问题

@@ -21,21 +21,21 @@ typedef struct {
 } Neuron;
 
 // 处理输入事件
-void process_event(Neuron *neuron, float input_current, 
+void process_event(Neuron *neuron, float input_current,
                    uint64_t current_time) {
     // 检查不应期
-    if (current_time - neuron->last_spike_time < 
+    if (current_time - neuron->last_spike_time <
         neuron->refractory_period) {
         return;
     }
-    
+
     // 膜电位衰减（漏电流）
     uint64_t dt = current_time - neuron->last_spike_time;
     neuron->membrane_potential *= exp(-dt * neuron->leak_rate);
-    
+
     // 累加输入电流
     neuron->membrane_potential += input_current;
-    
+
     // 检查是否触发脉冲
     if (neuron->membrane_potential >= neuron->threshold) {
         // 发射脉冲
@@ -59,11 +59,11 @@ typedef struct {
 } SpikeEvent;
 
 // 率编码转脉冲序列
-void rate_to_spikes(float rate, int duration_ms, 
+void rate_to_spikes(float rate, int duration_ms,
                     SpikeEvent *spikes, int *num_spikes) {
     float lambda = rate / 1000.0f; // 转换为每毫秒
     *num_spikes = 0;
-    
+
     for (int t = 0; t < duration_ms; t++) {
         // 泊松过程生成脉冲
         float p = (float)rand() / RAND_MAX;
@@ -90,14 +90,14 @@ typedef struct {
     int v_decay;           // 膜电位衰减
     int v_th_mant;         // 阈值尾数
     int v_th_exp;          // 阈值指数
-    
+
     // 脉冲延迟
     int ds_offset;         // 树突延迟偏移
     int dm_offset;         // 轴突延迟偏移
-    
+
     // 不应期
     int refract_delay;
-    
+
     // 突触连接
     int num_axons;
     int num_synapses;
@@ -129,7 +129,7 @@ typedef struct {
 } TrueNorthCore;
 
 // 突触交叉开关
-void compute_core(TrueNorthCore *core, 
+void compute_core(TrueNorthCore *core,
                   uint8_t axon_inputs[NUM_AXONS],
                   uint8_t neuron_outputs[NUM_NEURONS]) {
     for (int n = 0; n < NUM_NEURONS; n++) {
@@ -165,7 +165,7 @@ typedef struct {
             float bias[16];
             int activation_type;
         } ann;
-        
+
         // SNN 部分
         struct {
             int16_t weights[16][16];
@@ -201,7 +201,7 @@ void update_lif(LIFNeuron *n, float dt) {
     // dv/dt = (v_rest - v + r*i) / tau_m
     float dv = (n->v_rest - n->v + n->r * n->i) / n->tau_m;
     n->v += dv * dt;
-    
+
     // 检查脉冲
     if (n->v >= n->v_th) {
         n->spiked = 1;
@@ -245,11 +245,11 @@ void update_izhikevich(IzhikevichNeuron *n, float i, float dt) {
         n->spiked = 1;
     } else {
         // dv/dt = 0.04v^2 + 5v + 140 - u + i
-        float dv = 0.04f * n->v * n->v + 5.0f * n->v + 140.0f 
+        float dv = 0.04f * n->v * n->v + 5.0f * n->v + 140.0f
                    - n->u + i;
         // du/dt = a(bv - u)
         float du = n->a * (n->b * n->v - n->u);
-        
+
         n->v += dv * dt;
         n->u += du * dt;
         n->spiked = 0;
@@ -271,11 +271,11 @@ typedef struct {
     float w_min;       // 最小权重
 } STDPSynapse;
 
-void apply_stdp(STDPSynapse *syn, 
+void apply_stdp(STDPSynapse *syn,
                 int64_t pre_time, int64_t post_time) {
     int64_t dt = post_time - pre_time;
     float dw;
-    
+
     if (dt > 0) {
         // 后神经元在预神经元之后发放 - 增强
         dw = syn->a_plus * exp(-dt / syn->tau_plus);
@@ -283,9 +283,9 @@ void apply_stdp(STDPSynapse *syn,
         // 抑制
         dw = -syn->a_minus * exp(dt / syn->tau_minus);
     }
-    
+
     syn->weight += dw;
-    
+
     // 边界约束
     if (syn->weight > syn->w_max) syn->weight = syn->w_max;
     if (syn->weight < syn->w_min) syn->weight = syn->w_min;
@@ -300,7 +300,7 @@ typedef struct {
     int num_neurons;
     LIFNeuron *neurons;
     float **weights;
-    
+
     // 事件队列
     SpikeEvent *event_queue;
     int queue_head;
@@ -314,13 +314,13 @@ void simulate_step(SNN *net, float dt) {
         // 传播到连接的目标神经元
         for (int i = 0; i < net->num_neurons; i++) {
             if (net->weights[evt->neuron_id][i] > 0) {
-                net->neurons[i].i += evt->amplitude * 
+                net->neurons[i].i += evt->amplitude *
                                      net->weights[evt->neuron_id][i];
             }
         }
         net->queue_head++;
     }
-    
+
     // 更新所有神经元
     for (int i = 0; i < net->num_neurons; i++) {
         update_lif(&net->neurons[i], dt);
@@ -355,7 +355,7 @@ void update_fixed_lif(FixedLIFNeuron *n) {
     // v = v - (v >> leak_bits) + i
     n->v -= (n->v >> 4);  // 假设 leak_bits = 4
     n->v += n->i;
-    
+
     if (n->v >= n->v_th) {
         n->v = 0;
         // 触发脉冲
@@ -387,12 +387,12 @@ void TIM_IRQHandler(void) {
 int main(void) {
     init_neurons();
     init_timer();
-    
+
     while (1) {
         if (spike_flag) {
             process_spike(spike_neuron_id);
             spike_flag = 0;
-            
+
             // 进入低功耗模式直到下一个事件
             __WFI();
         }
@@ -406,30 +406,30 @@ int main(void) {
 
 ```c
 // 基于 DVS（动态视觉传感器）的手势识别
-void process_dvs_event(int x, int y, int polarity, 
+void process_dvs_event(int x, int y, int polarity,
                        uint64_t timestamp) {
     // 映射到输入层
     int input_id = y * DVS_WIDTH + x;
-    
+
     // 生成脉冲事件
     SpikeEvent evt = {
         .timestamp = timestamp,
         .neuron_id = input_id,
         .amplitude = polarity ? 1.0f : -1.0f
     };
-    
+
     inject_event(&snn, evt);
 }
 
 // 读出类
 int classify_gesture(SNN *net) {
     int spike_counts[OUTPUT_CLASSES] = {0};
-    
+
     // 统计各类输出神经元的脉冲数
     for (int i = 0; i < OUTPUT_CLASSES; i++) {
         spike_counts[i] = count_spikes(&net->neurons[OUTPUT_START + i]);
     }
-    
+
     // 选择发放最多的类别
     int max_class = 0;
     for (int i = 1; i < OUTPUT_CLASSES; i++) {

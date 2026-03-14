@@ -218,7 +218,7 @@ const std = @import("std");
 fn process(allocator: std.mem.Allocator) !void {
     const buffer = try allocator.alloc(u8, 1024);
     defer allocator.free(buffer);  // 自动释放
-    
+
     // 使用 buffer...
 }
 
@@ -226,9 +226,9 @@ fn process(allocator: std.mem.Allocator) !void {
 void process(void) {
     char *buffer = malloc(1024);
     if (!buffer) return;  // 错误处理
-    
+
     // 使用 buffer...
-    
+
     free(buffer);  // 手动释放，容易遗漏
 }
 ```
@@ -245,7 +245,7 @@ const FileError = error{
 fn readFile(path: []const u8) FileError![]u8 {
     const file = try std.fs.cwd().openFile(path, .{});
     defer file.close();
-    
+
     return try file.readToEndAlloc(allocator, max_size);
 }
 
@@ -373,19 +373,19 @@ fn max<T: Ord>(a: T, b: T) -> T {
 
 ### ✅ 推荐使用 Zig 的场景
 
-- C/C++ 开发者想要更好的编译时编程
-- 嵌入式开发需要精确控制且无运行时
-- 系统工具开发需要单二进制分发
-- WebAssembly 项目需要小体积输出
-- 游戏开发需要自定义内存分配
+* C/C++ 开发者想要更好的编译时编程
+* 嵌入式开发需要精确控制且无运行时
+* 系统工具开发需要单二进制分发
+* WebAssembly 项目需要小体积输出
+* 游戏开发需要自定义内存分配
 
 ### ❌ 暂不推荐 Zig 的场景
 
-- 需要成熟生态的企业级 Web 服务
-- 快速原型开发（Python/Go 更快）
-- 团队没有学习新语言的时间
-- 依赖大量第三方库的项目
-- 对稳定性要求极高的生产环境
+* 需要成熟生态的企业级 Web 服务
+* 快速原型开发（Python/Go 更快）
+* 团队没有学习新语言的时间
+* 依赖大量第三方库的项目
+* 对稳定性要求极高的生产环境
 
 ---
 

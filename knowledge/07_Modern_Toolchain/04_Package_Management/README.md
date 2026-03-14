@@ -2,7 +2,9 @@
 
 ## 概述
 
-在现代 C/C++ 项目开发中，管理外部依赖是一项复杂而重要的任务。传统的源码复制或系统包管理器方式难以满足跨平台、版本控制和可重现构建的需求。本指南详细介绍现代 C 语言开发中主流的包管理工具：Conan、vcpkg 和 pkg-config，以及依赖管理策略。
+在现代 C/C++ 项目开发中，管理外部依赖是一项复杂而重要的任务。
+传统的源码复制或系统包管理器方式难以满足跨平台、版本控制和可重现构建的需求。
+本指南详细介绍现代 C 语言开发中主流的包管理工具：Conan、vcpkg 和 pkg-config，以及依赖管理策略。
 
 ## pkg-config
 
@@ -53,7 +55,7 @@ CFLAGS += $(shell pkg-config --cflags libcurl openssl)
 LDFLAGS += $(shell pkg-config --libs libcurl openssl)
 
 myapp: main.c
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+ $(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 ```
 
 ```cmake
@@ -126,7 +128,7 @@ class MyLibraryConan(ConanFile):
     url = "https://github.com/user/mylib"
     description = "A sample C library"
     topics = ("c", "library", "example")
-    
+
     settings = "os", "compiler", "build_type", "arch"
     options = {
         "shared": [True, False],
@@ -136,35 +138,35 @@ class MyLibraryConan(ConanFile):
         "shared": False,
         "fPIC": True,
     }
-    
+
     exports_sources = "CMakeLists.txt", "src/*", "include/*"
-    
+
     def config_options(self):
         if self.settings.os == "Windows":
             del self.options.fPIC
-    
+
     def requirements(self):
         self.requires("zlib/1.2.13")
-    
+
     def build_requirements(self):
         self.tool_requires("cmake/3.25.3")
-    
+
     def layout(self):
         cmake_layout(self)
-    
+
     def generate(self):
         tc = CMakeToolchain(self)
         tc.generate()
-    
+
     def build(self):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
-    
+
     def package(self):
         cmake = CMake(self)
         cmake.install()
-    
+
     def package_info(self):
         self.cpp_info.libs = ["mylib"]
         self.cpp_info.includedirs = ["include"]
@@ -198,14 +200,14 @@ from conan.tools.microsoft import is_msvc
 
 class CrossPlatformLib(ConanFile):
     # ... 基础配置 ...
-    
+
     def configure(self):
         # 平台特定配置
         if self.settings.os == "Windows":
             self.options["openssl"].shared = True
         elif self.settings.os == "Linux":
             self.options["*"].fPIC = True
-    
+
     def validate(self):
         # 验证配置
         if self.settings.compiler == "gcc" and \
@@ -290,8 +292,8 @@ find_package(OpenSSL REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 
 add_executable(myapp main.cpp)
-target_link_libraries(myapp 
-    PRIVATE 
+target_link_libraries(myapp
+    PRIVATE
         ZLIB::ZLIB
         CURL::libcurl
         OpenSSL::SSL
@@ -489,32 +491,32 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         build_type: [Release, Debug]
-    
+
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-      
+
       - name: Install Conan
         run: |
           pip install conan
           conan profile detect --force
-      
+
       - name: Cache Conan packages
         uses: actions/cache@v3
         with:
           path: ~/.conan2
           key: conan-${{ runner.os }}-${{ hashFiles('conanfile.txt') }}
-      
+
       - name: Install dependencies
         run: conan install . --build=missing --settings=build_type=${{ matrix.build_type }}
-      
+
       - name: Configure
         run: cmake --preset conan-default
-      
+
       - name: Build
         run: cmake --build --preset conan-release
 ```
@@ -532,20 +534,20 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-    
+
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-      
+
       - name: Setup vcpkg
         uses: lukka/run-vcpkg@v11
         with:
           vcpkgGitCommitId: 'a7b6122f6b6504d16d96117336a056269357993b'
-      
+
       - name: Configure
         run: cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake
-      
+
       - name: Build
         run: cmake --build build --config Release
 ```

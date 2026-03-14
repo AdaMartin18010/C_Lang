@@ -2,15 +2,32 @@
 
 ## 概述
 
-异构内存系统是现代计算机架构的核心组成部分，涉及多种内存技术的协同工作。本文档深入探讨 NUMA（非统一内存访问）、GPU 内存层次结构、持久内存（Persistent Memory）以及统一内存架构（Unified Memory Architecture）的原理、优化策略和编程模型。
+异构内存系统是现代计算机架构的核心组成部分，涉及多种内存技术的协同工作。
+本文档深入探讨 NUMA（非统一内存访问）、GPU 内存层次结构、持久内存（Persistent Memory）以及统一内存架构（Unified Memory Architecture）的原理、优化策略和编程模型。
 
 ## 目录
 
-1. [NUMA 架构](#numa-架构)
-2. [GPU 内存层次](#gpu-内存层次)
-3. [持久内存](#持久内存)
-4. [统一内存架构](#统一内存架构)
-5. [性能优化策略](#性能优化策略)
+- [异构内存](#异构内存)
+  - [概述](#概述)
+  - [目录](#目录)
+  - [NUMA 架构](#numa-架构)
+    - [NUMA 基础概念](#numa-基础概念)
+    - [NUMA 内存分配策略](#numa-内存分配策略)
+    - [NUMA 距离矩阵](#numa-距离矩阵)
+  - [GPU 内存层次](#gpu-内存层次)
+    - [CUDA 内存模型](#cuda-内存模型)
+    - [GPU 内存池和异步操作](#gpu-内存池和异步操作)
+    - [OpenCL 内存模型](#opencl-内存模型)
+  - [持久内存](#持久内存)
+    - [Intel Optane 持久内存编程](#intel-optane-持久内存编程)
+    - [持久内存数据结构](#持久内存数据结构)
+  - [统一内存架构](#统一内存架构)
+    - [CUDA 统一内存](#cuda-统一内存)
+    - [异构系统架构（HSA）](#异构系统架构hsa)
+  - [性能优化策略](#性能优化策略)
+    - [内存访问模式优化](#内存访问模式优化)
+    - [混合内存系统](#混合内存系统)
+    - [参考资料](#参考资料)
 
 ---
 
@@ -32,22 +49,22 @@ void print_numa_topology() {
         printf("NUMA is not available\n");
         return;
     }
-    
+
     // 获取 NUMA 节点数量
     int max_node = numa_max_node();
     int num_nodes = max_node + 1;
     printf("Number of NUMA nodes: %d\n", num_nodes);
-    
+
     // 获取每个节点的信息
     for (int node = 0; node <= max_node; node++) {
         if (numa_bitmask_isbitset(numa_all_nodes_ptr, node)) {
             long long free_mem, total_mem;
             numa_node_size64(node, &free_mem, &total_mem);
-            
+
             printf("\nNode %d:\n", node);
             printf("  Total memory: %lld MB\n", total_mem / (1024 * 1024));
             printf("  Free memory: %lld MB\n", free_mem / (1024 * 1024));
-            
+
             // 获取节点的 CPU 掩码
             struct bitmask *cpus = numa_allocate_cpumask();
             numa_node_to_cpus(node, cpus);
@@ -93,7 +110,7 @@ void* alloc_interleaved(size_t size) {
 // 4. 使用 mbind 设置内存策略
 #include <sys/mman.h>
 
-int set_memory_policy(void *addr, size_t len, int mode, 
+int set_memory_policy(void *addr, size_t len, int mode,
                       const unsigned long *nmask, unsigned long maxnode) {
     /*
      * mode 选项：
@@ -120,18 +137,18 @@ void* alloc_and_bind(size_t size, int preferred_node) {
     struct bitmask *nodemask = numa_allocate_nodemask();
     numa_bitmask_setbit(nodemask, preferred_node);
     numa_set_preferred(preferred_node);
-    
+
     // 分配内存
     void *ptr = numa_alloc_onnode(size, preferred_node);
-    
+
     // 绑定当前线程到同一节点
     struct bitmask *cpumask = numa_allocate_cpumask();
     numa_node_to_cpus(preferred_node, cpumask);
     numa_run_on_node_mask(cpumask);
-    
+
     numa_free_cpumask(cpumask);
     numa_free_nodemask(nodemask);
-    
+
     return ptr;
 }
 ```
@@ -143,14 +160,14 @@ void* alloc_and_bind(size_t size, int preferred_node) {
 void print_numa_distance_matrix() {
     int max_node = numa_max_node();
     int num_nodes = max_node + 1;
-    
+
     printf("\nNUMA Distance Matrix:\n");
     printf("     ");
     for (int j = 0; j < num_nodes; j++) {
         printf("Node%-2d ", j);
     }
     printf("\n");
-    
+
     for (int i = 0; i < num_nodes; i++) {
         printf("Node%d ", i);
         for (int j = 0; j < num_nodes; j++) {
@@ -167,11 +184,11 @@ int find_nearest_node_with_memory(int target_node, size_t required_size) {
     int max_node = numa_max_node();
     int best_node = -1;
     int best_distance = INT_MAX;
-    
+
     for (int node = 0; node <= max_node; node++) {
         long long free_mem, total_mem;
         numa_node_size64(node, &free_mem, &total_mem);
-        
+
         if (free_mem >= (long long)required_size) {
             int distance = numa_distance(target_node, node);
             if (distance < best_distance) {
@@ -180,7 +197,7 @@ int find_nearest_node_with_memory(int target_node, size_t required_size) {
             }
         }
     }
-    
+
     return best_node;
 }
 ```
@@ -206,15 +223,15 @@ int find_nearest_node_with_memory(int target_node, size_t required_size) {
 global_memory_example() {
     float *d_data;
     size_t size = 1024 * 1024 * sizeof(float);
-    
+
     // 分配全局内存
     cudaMalloc(&d_data, size);
-    
+
     // 设置内存（可选，默认页锁定内存）
     cudaMemset(d_data, 0, size);
-    
+
     // 使用...
-    
+
     cudaFree(d_data);
 }
 
@@ -222,17 +239,17 @@ global_memory_example() {
 __global__ void shared_memory_kernel(float *input, float *output, int n) {
     // 声明共享内存（动态大小由启动参数决定）
     extern __shared__ float sdata[];
-    
+
     // 或静态大小
     __shared__ float static_buffer[256];
-    
+
     int tid = threadIdx.x;
     int gid = blockIdx.x * blockDim.x + threadIdx.x;
-    
+
     // 加载到共享内存（协同加载）
     sdata[tid] = (gid < n) ? input[gid] : 0.0f;
     __syncthreads();
-    
+
     // 在共享内存中进行归约
     for (int s = blockDim.x / 2; s > 0; s >>= 1) {
         if (tid < s) {
@@ -240,7 +257,7 @@ __global__ void shared_memory_kernel(float *input, float *output, int n) {
         }
         __syncthreads();
     }
-    
+
     // 写回结果
     if (tid == 0) {
         output[blockIdx.x] = sdata[0];
@@ -250,12 +267,12 @@ __global__ void shared_memory_kernel(float *input, float *output, int n) {
 // 内存访问模式优化
 __global__ void coalesced_access_kernel(float *data, int n) {
     int gid = blockIdx.x * blockDim.x + threadIdx.x;
-    
+
     // 好的访问模式：连续线程访问连续地址（合并访问）
     if (gid < n) {
         float value = data[gid];  // 合并访问
     }
-    
+
     // 坏的访问模式：步长访问（非合并）
     // float value = data[gid * 32];  // 32 的步长会导致 32 次独立内存事务
 }
@@ -274,7 +291,7 @@ __global__ void constant_memory_kernel(float *output, int n) {
 void setup_constant_memory() {
     float host_data[256];
     // 填充 host_data...
-    
+
     // 拷贝到常量内存
     cudaMemcpyToSymbol(const_data, host_data, sizeof(host_data));
 }
@@ -296,7 +313,7 @@ cudaMalloc(&d_data2, size);
 
 // 重叠数据传输和计算
 cudaMemcpyAsync(d_data1, h_data, size/2, cudaMemcpyHostToDevice, stream1);
-cudaMemcpyAsync(d_data2, h_data + size/2/sizeof(float), size/2, 
+cudaMemcpyAsync(d_data2, h_data + size/2/sizeof(float), size/2,
                 cudaMemcpyHostToDevice, stream2);
 
 kernel1<<<blocks, threads, 0, stream1>>>(d_data1, ...);
@@ -337,7 +354,7 @@ cl_context context;
 cl_command_queue queue;
 
 // 创建缓冲区
-cl_mem create_optimized_buffer(cl_context ctx, size_t size, 
+cl_mem create_optimized_buffer(cl_context ctx, size_t size,
                                 void *host_ptr, cl_mem_flags flags) {
     cl_int err;
     cl_mem buffer = clCreateBuffer(ctx, flags, size, host_ptr, &err);
@@ -356,11 +373,11 @@ __kernel void local_mem_kernel(__global float *input,
     int lid = get_local_id(0);
     int gid = get_global_id(0);
     int group_size = get_local_size(0);
-    
+
     // 加载到本地内存
     local_buffer[lid] = input[gid];
     barrier(CLK_LOCAL_MEM_FENCE);
-    
+
     // 归约操作
     for (int s = group_size / 2; s > 0; s >>= 1) {
         if (lid < s) {
@@ -368,7 +385,7 @@ __kernel void local_mem_kernel(__global float *input,
         }
         barrier(CLK_LOCAL_MEM_FENCE);
     }
-    
+
     if (lid == 0) {
         output[get_group_id(0)] = local_buffer[0];
     }
@@ -423,16 +440,16 @@ POBJ_LAYOUT_END(string_store);
 void transactional_update(PMEMobjpool *pop) {
     TX_BEGIN(pop) {
         TX_ADD(root);  // 记录根对象的旧值
-        
+
         // 修改操作
         D_RW(root)->counter++;
-        
+
         // 分配新对象
         TOID(struct data_item) new_item = TX_NEW(struct data_item);
         TX_MEMCPY(D_RW(new_item)->value, "data", 4);
-        
+
         // 如果这里失败，所有修改都会回滚
-        
+
     } TX_ONABORT {
         fprintf(stderr, "Transaction aborted\n");
     } TX_END
@@ -447,22 +464,22 @@ void transactional_update(PMEMobjpool *pop) {
 void optimized_pmem_write(void *pmem_addr, const void *data, size_t len) {
     // 1. 普通拷贝到持久内存映射区域
     memcpy(pmem_addr, data, len);
-    
+
     // 2. 显式刷写到持久域
     // 方法1: libpmem 的 pmem_persist（自动选择最优方法）
     pmem_persist(pmem_addr, len);
-    
+
     // 方法2: CLWB (Cache Line Write Back) - 异步
     _mm_clwb(pmem_addr);
     // ... 对其他缓存行
     _mm_sfence();  // 确保所有 CLWB 完成
-    
+
     // 方法3: CLFLUSHOPT - 驱逐缓存行
     for (size_t i = 0; i < len; i += 64) {
         _mm_clflushopt((char*)pmem_addr + i);
     }
     _mm_sfence();
-    
+
     // 方法4: NTSTORE (非临时存储) - 绕过缓存
     // 适用于大块数据，不需要保留在 CPU 缓存中
     _mm_stream_si64((long long*)pmem_addr, value);
@@ -484,7 +501,7 @@ using pmem::obj::transaction;
 struct PmemData {
     p<int> counter;  // 持久化整数
     persistent_ptr<char[]> buffer;  // 持久化指针
-    
+
     void init(pool_base &pop) {
         transaction::run(pop, [&] {
             counter = 0;
@@ -511,13 +528,13 @@ struct versioned_node {
 void* read_node(struct versioned_node *node) {
     uint64_t ver;
     void *result;
-    
+
     do {
         ver = node->version;
         // 内存屏障
         result = node->data;
     } while (ver != node->version || (ver & 1));  // 重试如果在修改中
-    
+
     return result;
 }
 
@@ -526,11 +543,11 @@ void write_node_persist(PMEMobjpool *pop, struct versioned_node *node, void *new
     // 1. 标记正在修改（版本变为奇数）
     node->version |= 1;
     pmem_persist(&node->version, sizeof(node->version));
-    
+
     // 2. 写入新数据
     node->data = new_data;
     pmem_persist(&node->data, sizeof(node->data));
-    
+
     // 3. 递增版本号（变为偶数，标记完成）
     node->version++;
     pmem_persist(&node->version, sizeof(node->version));
@@ -550,25 +567,25 @@ void write_node_persist(PMEMobjpool *pop, struct versioned_node *node, void *new
 void unified_memory_example() {
     float *data;
     size_t size = N * sizeof(float);
-    
+
     // 分配统一内存
     cudaMallocManaged(&data, size);
-    
+
     // 在 CPU 上初始化
     for (int i = 0; i < N; i++) {
         data[i] = i;
     }
-    
+
     // 在 GPU 上执行内核（自动迁移）
     kernel<<<blocks, threads>>>(data, N);
     cudaDeviceSynchronize();
-    
+
     // 在 CPU 上使用结果（自动迁移回来）
     float sum = 0;
     for (int i = 0; i < N; i++) {
         sum += data[i];
     }
-    
+
     cudaFree(data);
 }
 
@@ -576,21 +593,21 @@ void unified_memory_example() {
 void prefetch_optimization() {
     float *data;
     cudaMallocManaged(&data, size);
-    
+
     int device = 0;
-    
+
     // 预取到 GPU（异步）
     cudaMemPrefetchAsync(data, size, device, NULL);
-    
+
     kernel<<<blocks, threads>>>(data, N);
-    
+
     // 预取回 CPU
     cudaMemPrefetchAsync(data, size, cudaCpuDeviceId, NULL);
     cudaDeviceSynchronize();
-    
+
     // 现在 CPU 访问不会触发缺页中断
     process_on_cpu(data);
-    
+
     cudaFree(data);
 }
 
@@ -598,14 +615,14 @@ void prefetch_optimization() {
 void memory_advise_example() {
     float *data;
     cudaMallocManaged(&data, size);
-    
+
     // 设置访问建议
     // cudaMemAdviseSetReadMostly: 数据主要是只读的，可以复制到多个处理器
     cudaMemAdvise(data, size, cudaMemAdviseSetReadMostly, 0);
-    
+
     // cudaMemAdviseSetPreferredLocation: 首选位置
     cudaMemAdvise(data, size, cudaMemAdviseSetPreferredLocation, cudaCpuDeviceId);
-    
+
     // cudaMemAdviseSetAccessedBy: 哪些设备会访问
     cudaMemAdvise(data, size, cudaMemAdviseSetAccessedBy, 0);
 }
@@ -614,24 +631,24 @@ void memory_advise_example() {
 void multi_gpu_unified_memory() {
     float *data;
     size_t size = N * sizeof(float);
-    
+
     // 分配可在多个 GPU 间迁移的内存
     cudaMallocManaged(&data, size);
-    
+
     // 设置允许并发访问（需要计算能力 6.0+）
     int devices[] = {0, 1};
     for (int i = 0; i < 2; i++) {
         cudaMemAdvise(data, size, cudaMemAdviseSetAccessedBy, devices[i]);
     }
-    
+
     // GPU 0 处理前半部分
     cudaSetDevice(0);
     kernel<<<blocks, threads>>>(data, N/2);
-    
+
     // GPU 1 处理后半部分
     cudaSetDevice(1);
     kernel<<<blocks, threads>>>(data + N/2, N/2);
-    
+
     cudaDeviceSynchronize();
 }
 ```
@@ -646,28 +663,28 @@ void multi_gpu_unified_memory() {
 
 hsa_status_t hsa_unified_memory_example() {
     hsa_status_t status;
-    
+
     // 初始化 HSA 运行时
     status = hsa_init();
     if (status != HSA_STATUS_SUCCESS) return status;
-    
+
     // 获取系统内存区域（统一内存）
     hsa_region_t system_region;
     // 查找支持核分配的内存区域
-    
+
     // 分配可由 CPU 和 GPU 访问的内存
     void *ptr;
     status = hsa_memory_allocate(system_region, size, &ptr);
-    
+
     // CPU 和 GPU 可以使用相同指针
     // 无需显式拷贝
-    
+
     // 同步原语确保内存一致性
     hsa_memory_fence(HSA_FENCE_SCOPE_SYSTEM);
-    
+
     hsa_memory_free(ptr);
     hsa_shut_down();
-    
+
     return HSA_STATUS_SUCCESS;
 }
 ```
@@ -683,14 +700,14 @@ hsa_status_t hsa_unified_memory_example() {
 void numa_aware_transpose(double *dst, double *src, int n, int numa_node) {
     // 绑定到特定 NUMA 节点
     bind_thread_to_node(numa_node);
-    
+
     // 分配本地内存
     double *local_dst = alloc_on_node(n * n * sizeof(double), numa_node);
     double *local_src = alloc_on_node(n * n * sizeof(double), numa_node);
-    
+
     // 复制输入数据到本地
     memcpy(local_src, src, n * n * sizeof(double));
-    
+
     // 执行转置（使用块优化缓存）
     const int BLOCK = 64;
     for (int ii = 0; ii < n; ii += BLOCK) {
@@ -702,10 +719,10 @@ void numa_aware_transpose(double *dst, double *src, int n, int numa_node) {
             }
         }
     }
-    
+
     // 复制结果
     memcpy(dst, local_dst, n * n * sizeof(double));
-    
+
     numa_free(local_src, n * n * sizeof(double));
     numa_free(local_dst, n * n * sizeof(double));
 }
@@ -716,15 +733,15 @@ void first_touch_optimization(float *data, size_t n, int num_threads) {
     {
         int tid = omp_get_thread_num();
         int numa_node = tid % numa_num_configured_nodes();
-        
+
         // 绑定线程到 NUMA 节点
         bind_thread_to_node(numa_node);
-        
+
         // 首次访问（分配）由创建线程执行
         size_t chunk = n / num_threads;
         size_t start = tid * chunk;
         size_t end = (tid == num_threads - 1) ? n : start + chunk;
-        
+
         for (size_t i = start; i < end; i++) {
             data[i] = 0.0f;  // First-touch 分配
         }

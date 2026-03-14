@@ -14,9 +14,9 @@
 
 ### 大爆炸迁移 vs 渐进式迁移
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
-│                      迁移策略对比                               │
+│                      迁移策略对比                                │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │   大爆炸迁移                        渐进式迁移                   │
@@ -158,10 +158,10 @@ const c = @import("c_bindings.zig").c;
 /// 从 C 获取数据，复制到 Zig 管理
 pub fn copyFromC(c_ptr: ?[*]const u8, len: usize, allocator: std.mem.Allocator) ![]u8 {
     if (c_ptr == null) return error.NullPointer;
-    
+
     const copy = try allocator.alloc(u8, len);
     errdefer allocator.free(copy);
-    
+
     @memcpy(copy, c_ptr.?[0..len]);
     return copy;
 }
@@ -177,13 +177,13 @@ pub fn passToC(data: []const u8, c_allocator: *const fn (usize) callconv(.C) ?*a
 pub fn CLegacyResource(comptime T: type, comptime deinit_fn: anytype) type {
     return struct {
         ptr: *T,
-        
+
         const Self = @This();
-        
+
         pub fn init(ptr: *T) Self {
             return .{ .ptr = ptr };
         }
-        
+
         pub fn deinit(self: Self) void {
             deinit_fn(self.ptr);
         }
@@ -202,14 +202,14 @@ const std = @import("std");
 pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
-    
+
     // 创建 C 库静态链接
     const c_lib = b.addStaticLibrary(.{
         .name = "legacy",
         .target = target,
         .optimize = optimize,
     });
-    
+
     // 添加 C 源文件
     c_lib.addCSourceFiles(.{
         .files = &.{
@@ -224,10 +224,10 @@ pub fn build(b: *std.Build) void {
             "-O2",
         },
     });
-    
+
     c_lib.addIncludePath(b.path("legacy/include"));
     c_lib.linkLibC();
-    
+
     // 创建 Zig 可执行文件
     const exe = b.addExecutable(.{
         .name = "migrated_app",
@@ -235,17 +235,17 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
-    
+
     // 链接 C 库
     exe.linkLibrary(c_lib);
     exe.addIncludePath(b.path("legacy/include"));
     exe.linkLibC();
-    
+
     // 启用 translate-c 进行头文件导入
     exe.addAnonymousModule("c_headers", .{
         .root_source_file = b.path("legacy/include/legacy.h"),
     });
-    
+
     b.installArtifact(exe);
 }
 ```
@@ -305,27 +305,27 @@ const c = @import("../ffi/c_bindings.zig").c;
 
 pub const Config = struct {
     c_handle: *c.Config,
-    
+
     pub fn load(path: []const u8) !Config {
         const c_path = try std.heap.c_allocator.dupeZ(u8, path);
         defer std.heap.c_allocator.free(c_path);
-        
+
         var handle: ?*c.Config = null;
         const status = c.config_load(c_path.ptr, &handle);
         try statusToError(status);
-        
+
         return Config{ .c_handle = handle.? };
     }
-    
+
     pub fn get(self: Config, key: []const u8) ?[]const u8 {
         const c_key = std.heap.c_allocator.dupeZ(u8, key) catch return null;
         defer std.heap.c_allocator.free(c_key);
-        
+
         const value = c.config_get(self.c_handle, c_key.ptr);
         if (value == null) return null;
         return std.mem.span(value);
     }
-    
+
     pub fn deinit(self: Config) void {
         c.config_free(self.c_handle);
     }
@@ -343,9 +343,9 @@ pub const Config = struct {
     values: std.StringHashMap([]const u8),
     // 保留：使用 C 解析器处理复杂格式
     c_parser: ?*c.ConfigParser,
-    
+
     const Self = @This();
-    
+
     pub fn load(allocator: std.mem.Allocator, path: []const u8) !Self {
         var self = Self{
             .allocator = allocator,
@@ -353,21 +353,21 @@ pub const Config = struct {
             .c_parser = null,
         };
         errdefer self.deinit();
-        
+
         // 使用 C 解析器读取文件
         const content = try std.fs.cwd().readFileAlloc(allocator, path, 1024 * 1024);
         defer allocator.free(content);
-        
+
         // 调用 C 解析逻辑，但存储在 Zig 结构中
         try self.parseWithC(content);
-        
+
         return self;
     }
-    
+
     pub fn get(self: Self, key: []const u8) ?[]const u8 {
         return self.values.get(key);
     }
-    
+
     pub fn deinit(self: *Self) void {
         var iter = self.values.iterator();
         while (iter.next()) |entry| {
@@ -377,7 +377,7 @@ pub const Config = struct {
         self.values.deinit();
         if (self.c_parser) |p| c.config_parser_free(p);
     }
-    
+
     fn parseWithC(self: *Self, content: []const u8) !void {
         // 调用 C 解析代码，但将结果存入 Zig HashMap
         _ = self;
@@ -394,42 +394,42 @@ const std = @import("std");
 pub const Config = struct {
     allocator: std.mem.Allocator,
     values: std.StringHashMap([]const u8),
-    
+
     const Self = @This();
-    
+
     pub fn load(allocator: std.mem.Allocator, path: []const u8) !Self {
         var self = Self{
             .allocator = allocator,
             .values = std.StringHashMap([]const u8).init(allocator),
         };
         errdefer self.deinit();
-        
+
         const content = try std.fs.cwd().readFileAlloc(allocator, path, 1024 * 1024);
         defer allocator.free(content);
-        
+
         try self.parse(content);
-        
+
         return self;
     }
-    
+
     fn parse(self: *Self, content: []const u8) !void {
         var lines = std.mem.splitScalar(u8, content, '\n');
         while (lines.next()) |line| {
             const trimmed = std.mem.trim(u8, line, " \t\r");
             if (trimmed.len == 0 or trimmed[0] == '#') continue;
-            
+
             if (std.mem.indexOfScalar(u8, trimmed, '=')) |sep| {
                 const key = try self.allocator.dupe(u8, std.mem.trim(u8, trimmed[0..sep], " \t"));
                 errdefer self.allocator.free(key);
-                
+
                 const value = try self.allocator.dupe(u8, std.mem.trim(u8, trimmed[sep + 1 ..], " \t"));
                 errdefer self.allocator.free(value);
-                
+
                 try self.values.put(key, value);
             }
         }
     }
-    
+
     // ... get, deinit 等
 };
 ```
@@ -457,7 +457,7 @@ pub const ConfigModule = struct {
     use_zig_impl: bool,
     c_impl: CConfig,
     zig_impl: ?ZigConfig,
-    
+
     pub fn load(self: *ConfigModule, path: []const u8) !void {
         if (self.use_zig_impl) {
             self.zig_impl = try ZigConfig.load(path);
@@ -465,18 +465,18 @@ pub const ConfigModule = struct {
             try self.c_impl.load(path);
         }
     }
-    
+
     pub fn get(self: ConfigModule, key: []const u8) ?[]const u8 {
         return if (self.use_zig_impl)
             self.zig_impl.?.get(key)
         else
             self.c_impl.get(key);
     }
-    
+
     // 动态切换实现
     pub fn switchImpl(self: *ConfigModule, use_zig: bool) !void {
         if (use_zig == self.use_zig_impl) return;
-        
+
         // 保存当前状态
         // 重新加载另一种实现
         // 验证等价性
@@ -494,10 +494,10 @@ const std = @import("std");
 pub const CanaryDeployment = struct {
     zig_impl_ratio: f32,  // 0.0 - 1.0
     random: std.Random,
-    
+
     pub fn processRequest(self: *CanaryDeployment, req: Request) !Response {
         const use_zig = self.random.float(f32) < self.zig_impl_ratio;
-        
+
         if (use_zig) {
             return zigProcess(req) catch |err| {
                 // 失败时回退到 C 实现
@@ -508,7 +508,7 @@ pub const CanaryDeployment = struct {
             return cProcess(req);
         }
     }
-    
+
     pub fn increaseRatio(self: *CanaryDeployment, delta: f32) void {
         self.zig_impl_ratio = @min(1.0, self.zig_impl_ratio + delta);
     }
@@ -525,13 +525,14 @@ pub const CanaryDeployment = struct {
 迁移时间线:
 Week 1-2: 设置构建系统，FFI 层
 Week 3-4: 替换字符串处理模块
-Week 5-6: 替换文件 I/O 模块  
+Week 5-6: 替换文件 I/O 模块
 Week 7-8: 替换核心解析算法
 Week 9:   集成测试、性能调优
 Week 10:  文档、发布
 ```
 
 **关键成果**:
+
 - 内存安全漏洞: 3个 → 0个
 - 测试覆盖率: 45% → 78%
 - 运行时性能: +15%
@@ -550,6 +551,7 @@ Phase 4 (2个月): 清理 C 代码
 ```
 
 **关键成果**:
+
 - 服务稳定性: 99.9% → 99.99%
 - 内存泄漏: 定期重启 → 长期运行
 - 代码审查效率: 提升 40%
@@ -557,18 +559,21 @@ Phase 4 (2个月): 清理 C 代码
 ## 迁移检查清单
 
 ### 开始前
+
 - [ ] 现有测试覆盖率评估
 - [ ] 性能基准建立
 - [ ] 依赖关系分析
 - [ ] 团队培训完成
 
 ### 进行中
+
 - [ ] 每个模块功能等价测试
 - [ ] 内存泄漏检测通过
 - [ ] 性能回归不超过 5%
 - [ ] 文档同步更新
 
 ### 完成后
+
 - [ ] 全量集成测试通过
 - [ ] 生产环境金丝雀验证
 - [ ] 回滚方案测试

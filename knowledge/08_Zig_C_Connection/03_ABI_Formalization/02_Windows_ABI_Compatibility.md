@@ -19,7 +19,7 @@
     - [3.1 标量返回值](#31-标量返回值)
     - [3.2 结构体返回值](#32-结构体返回值)
   - [四、调用约定详解](#四调用约定详解)
-    - [4.1 __vectorcall](#41-__vectorcall)
+    - [4.1 \_\_vectorcall](#41-__vectorcall)
     - [4.2 其他调用约定](#42-其他调用约定)
   - [五、Zig 中的 Windows ABI 支持](#五zig-中的-windows-abi-支持)
     - [5.1 extern 声明](#51-extern-声明)

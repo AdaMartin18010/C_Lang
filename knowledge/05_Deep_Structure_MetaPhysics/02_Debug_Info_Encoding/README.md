@@ -2,15 +2,33 @@
 
 ## 概述
 
-本文档深入探讨调试信息编码的底层机制，主要关注 DWARF（Debugging With Attributed Record Formats）格式——现代编译器（GCC、Clang、MSVC）和调试器（GDB、LLDB）广泛采用的标准。理解调试信息的编码方式对于开发调试工具、分析崩溃转储以及优化二进制文件大小至关重要。
+本文档深入探讨调试信息编码的底层机制，主要关注 DWARF（Debugging With Attributed Record Formats）格式——现代编译器（GCC、Clang、MSVC）和调试器（GDB、LLDB）广泛采用的标准。
+理解调试信息的编码方式对于开发调试工具、分析崩溃转储以及优化二进制文件大小至关重要。
 
 ## 目录
 
-1. [DWARF 格式基础](#dwarf-格式基础)
-2. [调试符号表](#调试符号表)
-3. [行号信息编码](#行号信息编码)
-4. [变量位置追踪](#变量位置追踪)
-5. [高级主题](#高级主题)
+- [调试信息编码](#调试信息编码)
+  - [概述](#概述)
+  - [目录](#目录)
+  - [DWARF 格式基础](#dwarf-格式基础)
+    - [DWARF 版本演进](#dwarf-版本演进)
+    - [DWARF 节结构](#dwarf-节结构)
+    - [DIE（调试信息条目）](#die调试信息条目)
+    - [使用 libdw 读取 DWARF](#使用-libdw-读取-dwarf)
+  - [调试符号表](#调试符号表)
+    - [符号表结构](#符号表结构)
+    - [符号解析算法](#符号解析算法)
+  - [行号信息编码](#行号信息编码)
+    - [行号程序状态机](#行号程序状态机)
+    - [行号程序解析](#行号程序解析)
+  - [变量位置追踪](#变量位置追踪)
+    - [位置表达式](#位置表达式)
+    - [位置列表](#位置列表)
+    - [调用帧信息（CFA）](#调用帧信息cfa)
+  - [高级主题](#高级主题)
+    - [分离式 DWARF（Split DWARF）](#分离式-dwarfsplit-dwarf)
+    - [调试信息压缩](#调试信息压缩)
+    - [参考资料](#参考资料)
 
 ---
 
@@ -55,7 +73,7 @@ DIE 是 DWARF 的基本构建块，形成树状结构描述程序中的各种实
 struct Dwarf_Die {
     uint16_t tag;           // 标签，如 DW_TAG_subprogram
     uint8_t has_children;   // 是否有子 DIE
-    
+
     // 属性列表（变长）
     struct {
         uint16_t attr;      // 属性名，如 DW_AT_name
@@ -103,9 +121,9 @@ enum Dwarf_Tag {
 void print_die_tree(Dwarf_Die *die, int indent) {
     const char *name = dwarf_diename(die) ?: "<anonymous>";
     const char *tag_name = dwarf_tag_string(dwarf_tag(die));
-    
+
     printf("%*s%s: %s\n", indent * 2, "", tag_name, name);
-    
+
     // 遍历属性
     Dwarf_Attribute attr;
     Dwarf_Off offset = 0;
@@ -116,7 +134,7 @@ void print_die_tree(Dwarf_Die *die, int indent) {
                dwarf_attr_string(attr_num),
                dwarf_form_string(form));
     }
-    
+
     // 递归遍历子 DIE
     Dwarf_Die child;
     if (dwarf_child(die, &child) == 0) {
@@ -133,14 +151,14 @@ int analyze_dwarf(const char *filename) {
         fprintf(stderr, "Failed to initialize dwfl\n");
         return 1;
     }
-    
+
     Dwarf *dwarf = dwfl_core_file_attach(dwfl, filename);
     if (!dwarf) {
         fprintf(stderr, "Failed to open %s\n", filename);
         dwfl_end(dwfl);
         return 1;
     }
-    
+
     // 遍历所有编译单元
     Dwarf_Off offset = 0;
     Dwarf_Off next_offset;
@@ -152,7 +170,7 @@ int analyze_dwarf(const char *filename) {
         }
         offset = next_offset;
     }
-    
+
     dwfl_end(dwfl);
     return 0;
 }
@@ -210,46 +228,46 @@ typedef struct {
 int parse_symbol_table(const char *filename, SymbolInfo **symbols, size_t *count) {
     int fd = open(filename, O_RDONLY);
     if (fd < 0) return -1;
-    
+
     struct stat st;
     if (fstat(fd, &st) < 0) {
         close(fd);
         return -1;
     }
-    
+
     void *map = mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
     close(fd);
     if (map == MAP_FAILED) return -1;
-    
+
     Elf64_Ehdr *ehdr = (Elf64_Ehdr *)map;
     Elf64_Shdr *sections = (Elf64_Shdr *)((char *)map + ehdr->e_shoff);
-    
+
     // 查找符号表和字符串表
     Elf64_Shdr *symtab = NULL, *strtab = NULL;
     const char *shstrtab = (char *)map + sections[ehdr->e_shstrndx].sh_offset;
-    
+
     for (int i = 0; i < ehdr->e_shnum; i++) {
         const char *name = shstrtab + sections[i].sh_name;
         if (strcmp(name, ".symtab") == 0) symtab = &sections[i];
         if (strcmp(name, ".strtab") == 0) strtab = &sections[i];
     }
-    
+
     if (!symtab || !strtab) {
         munmap(map, st.st_size);
         return -1;
     }
-    
+
     // 解析符号
     Elf64_Sym *syms = (Elf64_Sym *)((char *)map + symtab->sh_offset);
     const char *strings = (char *)map + strtab->sh_offset;
     size_t num_syms = symtab->sh_size / sizeof(Elf64_Sym);
-    
+
     *symbols = malloc(num_syms * sizeof(SymbolInfo));
     *count = 0;
-    
+
     for (size_t i = 0; i < num_syms; i++) {
         if (syms[i].st_name == 0) continue;  // 跳过无名符号
-        
+
         (*symbols)[*count] = (SymbolInfo){
             .name = strings + syms[i].st_name,
             .address = syms[i].st_value,
@@ -259,7 +277,7 @@ int parse_symbol_table(const char *filename, SymbolInfo **symbols, size_t *count
         };
         (*count)++;
     }
-    
+
     munmap(map, st.st_size);
     return 0;
 }
@@ -267,7 +285,7 @@ int parse_symbol_table(const char *filename, SymbolInfo **symbols, size_t *count
 // 地址到符号的映射（用于堆栈回溯）
 const char *addr_to_symbol(SymbolInfo *symbols, size_t count, uint64_t addr) {
     for (size_t i = 0; i < count; i++) {
-        if (addr >= symbols[i].address && 
+        if (addr >= symbols[i].address &&
             addr < symbols[i].address + symbols[i].size) {
             return symbols[i].name;
         }
@@ -331,16 +349,16 @@ int parse_line_number_program(const uint8_t *program, size_t len,
                               void (*callback)(const LineNumberState *)) {
     LineNumberState state = *initial_state;
     const uint8_t *p = program;
-    
+
     while (p < program + len) {
         uint8_t opcode = *p++;
-        
+
         if (opcode == 0) {
             // 扩展操作码
             uint64_t length = decode_uleb128(&p);
             const uint8_t *end = p + length;
             uint8_t ext_opcode = *p++;
-            
+
             switch (ext_opcode) {
                 case DW_LNE_end_sequence:
                     state.end_sequence = 1;
@@ -383,7 +401,7 @@ int parse_line_number_program(const uint8_t *program, size_t len,
                     state.is_stmt = !state.is_stmt;
                     break;
                 case DW_LNS_const_add_pc:
-                    state.address += ((255 - opcode_base) / line_range) 
+                    state.address += ((255 - opcode_base) / line_range)
                                      * minimum_instruction_length;
                     break;
             }
@@ -393,11 +411,11 @@ int parse_line_number_program(const uint8_t *program, size_t len,
             int adjusted = opcode - opcode_base;
             int line_adv = line_base + (adjusted % line_range);
             int addr_adv = adjusted / line_range;
-            
+
             state.line += line_adv;
             state.address += addr_adv * minimum_instruction_length;
             callback(&state);
-            
+
             state.basic_block = 0;
             state.prologue_end = 0;
             state.epilogue_begin = 0;
@@ -425,7 +443,7 @@ enum DwarfExpressionOpcode {
     DW_OP_pick     = 0x15,  // 选取栈中元素
     DW_OP_swap     = 0x16,  // 交换栈顶两个元素
     DW_OP_rot      = 0x17,  // 旋转栈顶三个元素
-    
+
     // 算术运算
     DW_OP_abs      = 0x19,
     DW_OP_and      = 0x1a,
@@ -441,12 +459,12 @@ enum DwarfExpressionOpcode {
     DW_OP_shr      = 0x25,
     DW_OP_shra     = 0x26,
     DW_OP_xor      = 0x27,
-    
+
     // 内存访问
     DW_OP_deref    = 0x06,  // 解引用
     DW_OP_deref_size = 0x94,// 带大小限制的解引用
     DW_OP_xderef   = 0x18,  // 跨地址空间解引用
-    
+
     // 寄存器访问
     DW_OP_reg0     = 0x50,  // 寄存器 0-31 的直接编码
     // ... DW_OP_reg31 = 0x6f
@@ -454,7 +472,7 @@ enum DwarfExpressionOpcode {
     DW_OP_breg0    = 0x70,  // 基址寄存器 + SLEB128 偏移
     // ... DW_OP_breg31 = 0x8f
     DW_OP_bregx    = 0x92,  // 任意基址寄存器 + 偏移
-    
+
     // 字面量
     DW_OP_lit0     = 0x30,  // 压入无符号字面量 0-31
     // ... DW_OP_lit31 = 0x4f
@@ -469,7 +487,7 @@ enum DwarfExpressionOpcode {
     DW_OP_const8s  = 0x0f,
     DW_OP_constu   = 0x10,  // ULEB128 常量
     DW_OP_consts   = 0x11,  // SLEB128 常量
-    
+
     // 特殊
     DW_OP_fbreg    = 0x91,  // 基于帧寄存器的偏移
     DW_OP_piece    = 0x93,  // 值的一部分（分散在多个位置）
@@ -499,63 +517,63 @@ int evaluate_location_expression(const uint8_t *expr, size_t len,
     uint64_t stack[64];
     int sp = 0;
     const uint8_t *p = expr;
-    
+
     while (p < expr + len) {
         uint8_t op = *p++;
-        
+
         switch (op) {
             case DW_OP_reg0 ... DW_OP_reg31:
                 stack[sp++] = regs->r[op - DW_OP_reg0];
                 break;
-                
+
             case DW_OP_breg0 ... DW_OP_breg31: {
                 int64_t offset = decode_sleb128(&p);
                 stack[sp++] = regs->r[op - DW_OP_breg0] + offset;
                 break;
             }
-            
+
             case DW_OP_addr:
                 stack[sp++] = read_target_addr(&p);
                 break;
-                
+
             case DW_OP_constu:
                 stack[sp++] = decode_uleb128(&p);
                 break;
-                
+
             case DW_OP_consts:
                 stack[sp++] = decode_sleb128(&p);
                 break;
-                
+
             case DW_OP_plus:
                 sp--;
                 stack[sp-1] += stack[sp];
                 break;
-                
+
             case DW_OP_minus:
                 sp--;
                 stack[sp-1] -= stack[sp];
                 break;
-                
+
             case DW_OP_deref:
                 // 从计算出的地址读取值
                 // 需要目标进程的内存访问
                 stack[sp-1] = read_memory(stack[sp-1]);
                 break;
-                
+
             case DW_OP_fbreg: {
                 int64_t offset = decode_sleb128(&p);
                 // 帧基址寄存器 + 偏移
                 stack[sp++] = regs->frame_base + offset;
                 break;
             }
-                
+
             case DW_OP_stack_value:
                 // 值本身就在栈上，不在内存中
                 // 常用于寄存器变量
                 break;
         }
     }
-    
+
     *result = stack[0];
     return 0;
 }
@@ -654,5 +672,5 @@ eu-objcopy --decompress-debug-sections binary
 
 1. DWARF Debugging Information Format Version 5
 2. ELF-64 Object File Format
-3. libdw 文档: https://sourceware.org/elfutils/
+3. libdw 文档: <https://sourceware.org/elfutils/>
 4. "Linkers and Loaders" by John R. Levine

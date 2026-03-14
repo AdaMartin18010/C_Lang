@@ -2,23 +2,46 @@
 
 ## 目录
 
-1. [概述](#概述)
-2. [GitHub Actions](#github-actions)
-3. [GitLab CI](#gitlab-ci)
-4. [Jenkins](#jenkins)
-5. [自动化测试](#自动化测试)
-6. [代码质量门禁](#代码质量门禁)
-7. [C项目CI/CD最佳实践](#c项目cicd最佳实践)
+- [CI/CD与DevOps (Continuous Integration \& DevOps)](#cicd与devops-continuous-integration--devops)
+  - [目录](#目录)
+  - [概述](#概述)
+    - [CI/CD流程概览](#cicd流程概览)
+  - [GitHub Actions](#github-actions)
+    - [基础配置](#基础配置)
+    - [高级配置示例](#高级配置示例)
+    - [GitHub Actions核心概念](#github-actions核心概念)
+  - [GitLab CI](#gitlab-ci)
+    - [基础配置](#基础配置-1)
+    - [GitLab CI高级特性](#gitlab-ci高级特性)
+  - [Jenkins](#jenkins)
+    - [Jenkinsfile 声明式流水线](#jenkinsfile-声明式流水线)
+    - [Jenkins 脚本式流水线](#jenkins-脚本式流水线)
+  - [自动化测试](#自动化测试)
+    - [C语言测试框架对比](#c语言测试框架对比)
+    - [Unity测试框架示例](#unity测试框架示例)
+    - [内存测试集成](#内存测试集成)
+    - [集成测试框架](#集成测试框架)
+  - [代码质量门禁](#代码质量门禁)
+    - [质量指标阈值设置](#质量指标阈值设置)
+    - [质量门禁集成](#质量门禁集成)
+    - [代码审查清单](#代码审查清单)
+  - [C项目CI/CD最佳实践](#c项目cicd最佳实践)
+    - [项目结构](#项目结构)
+    - [完整的CMake配置](#完整的cmake配置)
+    - [Docker构建环境](#docker构建环境)
+    - [发布流程](#发布流程)
+  - [参考资源](#参考资源)
 
 ---
 
 ## 概述
 
-CI/CD（持续集成/持续部署）是现代软件开发的核心实践，通过自动化构建、测试和部署流程，提高代码质量、加快交付速度。对于C语言项目，CI/CD需要处理编译器差异、跨平台构建、内存检测等特殊挑战。
+CI/CD（持续集成/持续部署）是现代软件开发的核心实践，通过自动化构建、测试和部署流程，提高代码质量、加快交付速度。
+对于C语言项目，CI/CD需要处理编译器差异、跨平台构建、内存检测等特殊挑战。
 
 ### CI/CD流程概览
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         CI/CD完整流程图                                       │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -76,7 +99,7 @@ env:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    
+
     strategy:
       fail-fast: false
       matrix:
@@ -187,7 +210,7 @@ jobs:
 
 ### GitHub Actions核心概念
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      GitHub Actions 架构图                                    │
 ├─────────────────────────────────────────────────────────────────────────────┤
@@ -408,18 +431,18 @@ child-pipeline:
 // Jenkinsfile
 pipeline {
     agent none
-    
+
     environment {
         BUILD_DIR = 'build'
         CCACHE_DIR = '/var/cache/ccache'
     }
-    
+
     options {
         buildDiscarder(logRotator(numToKeepStr: '10'))
         disableConcurrentBuilds()
         timeout(time: 30, unit: 'MINUTES')
     }
-    
+
     stages {
         stage('Checkout') {
             agent any
@@ -428,7 +451,7 @@ pipeline {
                 sh 'git submodule update --init --recursive'
             }
         }
-        
+
         stage('Parallel Build') {
             parallel {
                 stage('Build Linux GCC') {
@@ -448,7 +471,7 @@ pipeline {
                         stash includes: 'build/**', name: 'linux-build'
                     }
                 }
-                
+
                 stage('Build Linux Clang') {
                     agent {
                         docker {
@@ -463,7 +486,7 @@ pipeline {
                         '''
                     }
                 }
-                
+
                 stage('Build Windows') {
                     agent {
                         label 'windows'
@@ -477,7 +500,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Test') {
             agent {
                 docker {
@@ -491,7 +514,7 @@ pipeline {
                 '''
             }
         }
-        
+
         stage('Static Analysis') {
             agent {
                 docker {
@@ -509,7 +532,7 @@ pipeline {
                 )
             }
         }
-        
+
         stage('Memory Check') {
             agent {
                 docker {
@@ -528,7 +551,7 @@ pipeline {
                 )
             }
         }
-        
+
         stage('Deploy') {
             when {
                 branch 'main'
@@ -544,7 +567,7 @@ pipeline {
             }
         }
     }
-    
+
     post {
         always {
             cleanWs()
@@ -568,13 +591,13 @@ pipeline {
 // Jenkinsfile (Scripted)
 node('linux && docker') {
     def image = null
-    
+
     try {
         stage('Prepare') {
             checkout scm
             image = docker.build("c-builder:${env.BUILD_ID}", "-f Dockerfile.build .")
         }
-        
+
         image.inside("-v ${env.CCACHE_DIR}:/ccache") {
             stage('Build') {
                 sh '''
@@ -583,11 +606,11 @@ node('linux && docker') {
                     cmake --build build -j$(nproc)
                 '''
             }
-            
+
             stage('Test') {
                 sh 'cd build && ctest --output-on-failure'
             }
-            
+
             stage('Package') {
                 sh '''
                     cd build
@@ -598,7 +621,7 @@ node('linux && docker') {
                 archiveArtifacts artifacts: 'build/*.deb,build/*.rpm,build/*.tar.gz'
             }
         }
-        
+
         stage('Deploy') {
             if (env.BRANCH_NAME == 'main') {
                 sh '''
@@ -606,7 +629,7 @@ node('linux && docker') {
                 '''
             }
         }
-        
+
     } catch (Exception e) {
         currentBuild.result = 'FAILURE'
         throw e
@@ -694,7 +717,7 @@ add_test(NAME UnitTests COMMAND test_unit)
 # 内存测试 (Valgrind)
 find_program(VALGRIND valgrind)
 if(VALGRIND)
-    add_test(NAME MemoryTest 
+    add_test(NAME MemoryTest
              COMMAND ${VALGRIND} --leak-check=full --error-exitcode=1 $<TARGET_FILE:test_unit>)
 endif()
 
@@ -702,7 +725,7 @@ endif()
 find_program(AFL_FUZZ afl-fuzz)
 if(AFL_FUZZ)
     add_custom_target(fuzz
-        COMMAND ${AFL_FUZZ} -i ${CMAKE_SOURCE_DIR}/testcases -o findings 
+        COMMAND ${AFL_FUZZ} -i ${CMAKE_SOURCE_DIR}/testcases -o findings
                           ${CMAKE_BINARY_DIR}/fuzz_target @@
         DEPENDS fuzz_target
     )
@@ -713,7 +736,7 @@ option(ENABLE_COVERAGE "Enable coverage reporting" OFF)
 if(ENABLE_COVERAGE)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage -fprofile-arcs -ftest-coverage")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
-    
+
     add_custom_target(coverage
         COMMAND ${CMAKE_MAKE_PROGRAM} test
         COMMAND gcovr -r ${CMAKE_SOURCE_DIR} --html --html-details -o coverage.html
@@ -741,27 +764,27 @@ test_database_connection() {
         .user = "test_user",
         .password = "test_pass"
     };
-    
+
     db_handle_t *db = db_connect(&config);
     ASSERT_NOT_NULL(db);
-    
+
     // 测试CRUD操作
     db_execute(db, "BEGIN TRANSACTION");
-    
+
     // 插入测试数据
-    int result = db_execute(db, 
+    int result = db_execute(db,
         "INSERT INTO users (name, email) VALUES ('test', 'test@example.com')");
     ASSERT_EQUAL(1, result);  // 影响1行
-    
+
     // 查询验证
     result_set_t *rs = db_query(db, "SELECT * FROM users WHERE name='test'");
     ASSERT_NOT_NULL(rs);
     ASSERT_TRUE(rs_next(rs));
     ASSERT_EQUAL_STRING("test@example.com", rs_get_string(rs, "email"));
-    
+
     // 回滚，保持测试隔离
     db_execute(db, "ROLLBACK");
-    
+
     db_disconnect(db);
     printf("Database integration test: PASSED\n");
 }
@@ -771,20 +794,20 @@ test_api_endpoints() {
     // 启动测试服务器
     server_t *server = server_start("127.0.0.1", 0);  // 随机端口
     int port = server_get_port(server);
-    
+
     // 测试GET请求
     http_response_t *resp = http_get(
         format("http://127.0.0.1:%d/api/health", port));
     ASSERT_EQUAL(200, resp->status);
     ASSERT_CONTAINS("healthy", resp->body);
-    
+
     // 测试POST请求
     const char *json = "{\"name\":\"test\",\"value\":123}";
     resp = http_post(
         format("http://127.0.0.1:%d/api/data", port),
         json, "application/json");
     ASSERT_EQUAL(201, resp->status);
-    
+
     http_response_free(resp);
     server_stop(server);
     printf("API integration test: PASSED\n");
@@ -792,10 +815,10 @@ test_api_endpoints() {
 
 int main() {
     printf("Running integration tests...\n");
-    
+
     test_database_connection();
     test_api_endpoints();
-    
+
     printf("All integration tests passed!\n");
     return 0;
 }
@@ -815,24 +838,24 @@ metrics:
     max_function_complexity: 10
     max_file_complexity: 100
     warning_threshold: 8
-    
+
   # 代码重复
   duplication:
     max_percentage: 3.0
     min_lines: 10
-    
+
   # 代码覆盖率
   coverage:
     min_line_coverage: 80
     min_branch_coverage: 70
     min_function_coverage: 90
-    
+
   # 代码风格
   style:
     max_line_length: 100
     indent_size: 4
     use_spaces: true
-    
+
   # 文档
   documentation:
     min_public_api_documentation: 80
@@ -845,7 +868,7 @@ cppcheck:
   suppress:
     - missingIncludeSystem
     - unusedFunction  # 库代码常有
-    
+
 # 安全检查
 security:
   banned_functions:
@@ -871,28 +894,28 @@ stage('Quality Gate') {
             withSonarQubeEnv('SonarQube') {
                 sh "${scannerHome}/bin/sonar-scanner"
             }
-            
+
             // 等待质量门禁结果
             timeout(time: 10, unit: 'MINUTES') {
                 waitForQualityGate abortPipeline: true
             }
-            
+
             // 代码覆盖率检查
             def coverage = sh(
                 script: 'gcovr --print-summary | grep "lines:" | awk \'{print $2}\' | tr -d \'%\'',
                 returnStdout: true
             ).trim()
-            
+
             if (coverage.toInteger() < 80) {
                 error("Code coverage ${coverage}% is below threshold 80%")
             }
-            
+
             // 复杂度检查
             def complexity = sh(
                 script: 'lizard src/ | tail -1 | awk \'{print $3}\'',
                 returnStdout: true
             ).trim()
-            
+
             if (complexity.toInteger() > 10) {
                 unstable("Maximum complexity ${complexity} exceeds threshold 10")
             }
@@ -937,7 +960,7 @@ stage('Quality Gate') {
 
 ### 项目结构
 
-```
+```text
 c-project/
 ├── .github/workflows/      # GitHub Actions配置
 │   ├── ci.yml
@@ -1104,17 +1127,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Build
       run: |
         cmake -B build -DCMAKE_BUILD_TYPE=Release
         cmake --build build --config Release
-        
+
     - name: Package
       run: |
         cd build
         cpack -G TGZ
-        
+
     - name: Upload Release Asset
       uses: softprops/action-gh-release@v1
       with:

@@ -135,7 +135,7 @@ int nr_phy_init(phy_config_t *config);
 void nr_phy_deinit(void);
 
 /* 调制解调 */
-int nr_modulate(const uint8_t *bits, uint32_t num_bits, 
+int nr_modulate(const uint8_t *bits, uint32_t num_bits,
                 modulation_t mod, cf_t *symbols);
 int nr_demodulate(const cf_t *symbols, uint32_t num_symbols,
                   modulation_t mod, float *llr);
@@ -155,7 +155,7 @@ int nr_channel_equalize(const resource_grid_t *rx_grid,
 /* MIMO处理 */
 int nr_mimo_precoding(cf_t *layers, uint32_t num_layers,
                       cf_t *antenna_ports, uint32_t num_ports);
-int nr_mimo_detection(const cf_t *rx_signals, 
+int nr_mimo_detection(const cf_t *rx_signals,
                       const channel_estimate_t *ch_est,
                       cf_t *detected_layers);
 
@@ -212,16 +212,16 @@ typedef struct {
 } fir_filter_t;
 
 void fir_init(fir_filter_t *filter, const float *coeffs, uint32_t num_taps);
-void fir_execute(fir_filter_t *filter, const float *input, 
+void fir_execute(fir_filter_t *filter, const float *input,
                  float *output, uint32_t num_samples);
 void fir_deinit(fir_filter_t *filter);
 
 /* 相关运算 */
-void xcorr(const cf_t *x, const cf_t *y, uint32_t len, 
+void xcorr(const cf_t *x, const cf_t *y, uint32_t len,
            cf_t *result, int32_t min_lag, int32_t max_lag);
 
 /* 线性代数 */
-int matrix_multiply(const matrix_cf_t *a, const matrix_cf_t *b, 
+int matrix_multiply(const matrix_cf_t *a, const matrix_cf_t *b,
                     matrix_cf_t *c);
 int matrix_inverse(const matrix_cf_t *a, matrix_cf_t *inv);
 int matrix_cholesky(const matrix_cf_t *a, matrix_cf_t *l);
@@ -265,19 +265,19 @@ void fft_radix2(cf_t *data, uint32_t n, bool inverse) {
             j ^= bit;
         }
         j ^= bit;
-        
+
         if (i < j) {
             cf_t temp = data[i];
             data[i] = data[j];
             data[j] = temp;
         }
     }
-    
+
     /* FFT蝶形运算 */
     for (uint32_t len = 2; len <= n; len <<= 1) {
         float ang = 2 * M_PI / len * (inverse ? -1 : 1);
         cf_t wlen = cosf(ang) + I * sinf(ang);
-        
+
         for (uint32_t i = 0; i < n; i += len) {
             cf_t w = 1.0f + 0.0f * I;
             for (uint32_t j = 0; j < len / 2; j++) {
@@ -286,7 +286,7 @@ void fft_radix2(cf_t *data, uint32_t n, bool inverse) {
             }
         }
     }
-    
+
     /* 归一化 */
     if (inverse) {
         float scale = 1.0f / n;
@@ -300,14 +300,14 @@ void fft_radix2(cf_t *data, uint32_t n, bool inverse) {
 int nr_ofdm_modulate(const resource_grid_t *grid, cf_t *time_signal) {
     uint32_t n_fft = 2048;  /* 根据带宽配置 */
     uint32_t cp_len = CP_NORMAL_LEN;
-    
+
     cf_t fft_input[N_FFT_MAX];
     cf_t fft_output[N_FFT_MAX];
-    
+
     for (uint32_t sym = 0; sym < grid->num_symbols; sym++) {
         /* 构建FFT输入 (频域 -> 时域) */
         memset(fft_input, 0, n_fft * sizeof(cf_t));
-        
+
         /* 将资源网格数据映射到子载波 */
         uint32_t sc_offset = n_fft / 2 - grid->num_rb * 6; /* 中心对齐 */
         for (uint32_t rb = 0; rb < grid->num_rb; rb++) {
@@ -317,11 +317,11 @@ int nr_ofdm_modulate(const resource_grid_t *grid, cf_t *time_signal) {
                 fft_input[fft_idx] = grid->data[grid_idx];
             }
         }
-        
+
         /* IFFT */
         memcpy(fft_output, fft_input, n_fft * sizeof(cf_t));
         fft_radix2(fft_output, n_fft, true);
-        
+
         /* 添加循环前缀 */
         uint32_t ts_offset = sym * (n_fft + cp_len);
         for (uint32_t i = 0; i < cp_len; i++) {
@@ -331,7 +331,7 @@ int nr_ofdm_modulate(const resource_grid_t *grid, cf_t *time_signal) {
             time_signal[ts_offset + cp_len + i] = fft_output[i];
         }
     }
-    
+
     return 0;
 }
 ```
@@ -361,12 +361,12 @@ void channel_interpolate_linear(const cf_t *pilot_est,
                                 cf_t *full_grid,
                                 uint32_t num_sc) {
     uint32_t pilot_idx = 0;
-    
+
     for (uint32_t sc = 0; sc < num_sc; sc++) {
         if (pilot_idx < num_pilots - 1 && sc >= pilot_sc[pilot_idx + 1]) {
             pilot_idx++;
         }
-        
+
         if (pilot_idx == 0 && sc < pilot_sc[0]) {
             /* 第一个导频之前的点 */
             full_grid[sc] = pilot_est[0];
@@ -378,8 +378,8 @@ void channel_interpolate_linear(const cf_t *pilot_est,
             uint32_t sc1 = pilot_sc[pilot_idx];
             uint32_t sc2 = pilot_sc[pilot_idx + 1];
             float alpha = (float)(sc - sc1) / (sc2 - sc1);
-            
-            full_grid[sc] = (1.0f - alpha) * pilot_est[pilot_idx] + 
+
+            full_grid[sc] = (1.0f - alpha) * pilot_est[pilot_idx] +
                             alpha * pilot_est[pilot_idx + 1];
         }
     }
@@ -394,7 +394,7 @@ void equalize_mmse(const cf_t *rx_signal,
     for (uint32_t i = 0; i < num_samples; i++) {
         cf_t h = channel[i];
         float h2 = crealf(h) * crealf(h) + cimagf(h) * cimagf(h);
-        
+
         /* MMSE系数: H* / (|H|^2 + sigma^2) */
         cf_t mmse_coef = conjf(h) / (h2 + noise_var);
         eq_signal[i] = rx_signal[i] * mmse_coef;
@@ -516,35 +516,35 @@ void rt_set_thread_priority(pthread_t thread, int priority) {
 /* 调度器主循环 */
 static void *scheduler_thread(void *arg) {
     rt_scheduler_t *sched = (rt_scheduler_t *)arg;
-    
+
     /* 设置实时优先级 */
     rt_set_thread_priority(pthread_self(), RT_PRIORITY_CRITICAL);
-    
+
     /* 绑定到特定CPU核心 */
     cpu_set_t cpuset;
     CPU_ZERO(&cpuset);
     CPU_SET(0, &cpuset);  /* 绑定到CPU 0 */
     pthread_setaffinity_np(pthread_self(), sizeof(cpuset), &cpuset);
-    
+
     uint64_t next_tti = rt_get_time_us();
-    
+
     while (sched->running) {
         uint64_t tti_start = rt_get_time_us();
-        
+
         /* 按优先级执行所有任务 */
         for (uint32_t i = 0; i < sched->num_tasks; i++) {
             rt_task_t *task = &sched->tasks[i];
-            
+
             uint64_t task_start = rt_get_time_us();
             task->handler(task->arg);
             uint64_t task_end = rt_get_time_us();
-            
+
             uint32_t execution_us = (uint32_t)(task_end - task_start);
-            task->avg_execution_time = 
-                (task->avg_execution_time * task->execution_count + execution_us) / 
+            task->avg_execution_time =
+                (task->avg_execution_time * task->execution_count + execution_us) /
                 (task->execution_count + 1);
             task->execution_count++;
-            
+
             /* 检查截止时间 */
             if (execution_us > task->deadline_us) {
                 task->miss_count++;
@@ -552,12 +552,12 @@ static void *scheduler_thread(void *arg) {
                        task->type, execution_us, task->deadline_us);
             }
         }
-        
+
         /* 等待下一个TTI */
         next_tti += sched->tti_interval_us;
         rt_sleep_until(next_tti);
     }
-    
+
     return NULL;
 }
 
@@ -571,7 +571,7 @@ int rt_scheduler_init(rt_scheduler_t *sched, uint32_t tti_interval_us) {
 
 int rt_task_register(rt_scheduler_t *sched, const rt_task_t *task) {
     if (sched->num_tasks >= TASK_COUNT) return -1;
-    
+
     /* 按优先级插入 */
     uint32_t insert_pos = 0;
     for (; insert_pos < sched->num_tasks; insert_pos++) {
@@ -579,15 +579,15 @@ int rt_task_register(rt_scheduler_t *sched, const rt_task_t *task) {
             break;
         }
     }
-    
+
     /* 移动现有任务 */
     for (uint32_t i = sched->num_tasks; i > insert_pos; i--) {
         sched->tasks[i] = sched->tasks[i - 1];
     }
-    
+
     sched->tasks[insert_pos] = *task;
     sched->num_tasks++;
-    
+
     return 0;
 }
 
@@ -599,7 +599,7 @@ int rt_scheduler_start(rt_scheduler_t *sched) {
 void rt_scheduler_stop(rt_scheduler_t *sched) {
     sched->running = false;
     pthread_join(sched->thread, NULL);
-    
+
     /* 打印统计 */
     printf("\n=== Real-time Statistics ===\n");
     for (uint32_t i = 0; i < sched->num_tasks; i++) {
@@ -675,18 +675,18 @@ void simd_matrix_multiply_cf(const cf_t *a, const cf_t *b, cf_t *c,
 void simd_complex_multiply_avx(const cf_t *a, const cf_t *b, cf_t *c, uint32_t n) {
     const uint32_t simd_width = 4;  /* 256bit / 64bit per complex */
     uint32_t i = 0;
-    
+
     for (; i + simd_width <= n; i += simd_width) {
         /* 加载4个复数 (8个float) */
         __m256 va = _mm256_loadu_ps((const float *)&a[i]);
         __m256 vb = _mm256_loadu_ps((const float *)&b[i]);
-        
+
         /* 分离实部和虚部 */
         __m256 va_real = _mm256_shuffle_ps(va, va, _MM_SHUFFLE(2, 0, 2, 0));
         __m256 va_imag = _mm256_shuffle_ps(va, va, _MM_SHUFFLE(3, 1, 3, 1));
         __m256 vb_real = _mm256_shuffle_ps(vb, vb, _MM_SHUFFLE(2, 0, 2, 0));
         __m256 vb_imag = _mm256_shuffle_ps(vb, vb, _MM_SHUFFLE(3, 1, 3, 1));
-        
+
         /* 复数乘法: (a+ib)(c+id) = (ac-bd) + i(ad+bc) */
         __m256 real_part = _mm256_sub_ps(
             _mm256_mul_ps(va_real, vb_real),
@@ -696,12 +696,12 @@ void simd_complex_multiply_avx(const cf_t *a, const cf_t *b, cf_t *c, uint32_t n
             _mm256_mul_ps(va_real, vb_imag),
             _mm256_mul_ps(va_imag, vb_real)
         );
-        
+
         /* 交错合并结果 */
         __m256 vc = _mm256_unpacklo_ps(real_part, imag_part);
         _mm256_storeu_ps((float *)&c[i], vc);
     }
-    
+
     /* 处理剩余元素 */
     for (; i < n; i++) {
         c[i] = a[i] * b[i];
@@ -713,27 +713,27 @@ float simd_complex_energy_avx(const cf_t *a, uint32_t n) {
     const uint32_t simd_width = 8;  /* 8个float */
     __m256 sum_vec = _mm256_setzero_ps();
     uint32_t i = 0;
-    
+
     for (; i + simd_width <= 2 * n; i += simd_width) {
         __m256 va = _mm256_loadu_ps((const float *)&a[i / 2]);
         sum_vec = _mm256_add_ps(sum_vec, _mm256_mul_ps(va, va));
     }
-    
+
     /* 水平求和 */
     __m128 sum_lo = _mm256_castps256_ps128(sum_vec);
     __m128 sum_hi = _mm256_extractf128_ps(sum_vec, 1);
     __m128 sum = _mm_add_ps(sum_lo, sum_hi);
     sum = _mm_hadd_ps(sum, sum);
     sum = _mm_hadd_ps(sum, sum);
-    
+
     float result = _mm_cvtss_f32(sum);
-    
+
     /* 处理剩余元素 */
     for (; i / 2 < n; i += 2) {
-        result += crealf(a[i / 2]) * crealf(a[i / 2]) + 
+        result += crealf(a[i / 2]) * crealf(a[i / 2]) +
                   cimagf(a[i / 2]) * cimagf(a[i / 2]);
     }
-    
+
     return result;
 }
 #endif /* USE_AVX */
@@ -744,31 +744,31 @@ float simd_complex_energy_avx(const cf_t *a, uint32_t n) {
 /* NEON复数乘法 */
 void simd_complex_multiply_neon(const cf_t *a, const cf_t *b, cf_t *c, uint32_t n) {
     uint32_t i = 0;
-    
+
     for (; i + 2 <= n; i += 2) {
         float32x4_t va = vld1q_f32((const float *)&a[i]);
         float32x4_t vb = vld1q_f32((const float *)&b[i]);
-        
+
         /* NEON复数乘法 */
         float32x4_t vb_rev = vrev64q_f32(vb);
         float32x4_t real = vmulq_f32(va, vb);
         float32x4_t imag = vmulq_f32(va, vb_rev);
-        
+
         /* 合并 */
         float32x2_t real_lo = vget_low_f32(real);
         float32x2_t real_hi = vget_high_f32(real);
         float32x2_t imag_lo = vget_low_f32(imag);
         float32x2_t imag_hi = vget_high_f32(imag);
-        
+
         /* 实部: real - 交换后的imag */
         float32x2_t result_real = vsub_f32(real_lo, vrev64_f32(real_hi));
         /* 虚部: imag + 交换后的real */
         float32x2_t result_imag = vadd_f32(imag_lo, vrev64_f32(imag_hi));
-        
+
         float32x4_t result = vcombine_f32(result_real, result_imag);
         vst1q_f32((float *)&c[i], result);
     }
-    
+
     for (; i < n; i++) {
         c[i] = a[i] * b[i];
     }

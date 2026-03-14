@@ -2,13 +2,15 @@
 
 ## 概述
 
-本章节通过分析真实的成功项目案例，深入探讨现代 C 语言工具链的选型、配置和最佳实践。这些案例涵盖了嵌入式系统、高性能计算、服务器应用等多个领域。
+本章节通过分析真实的成功项目案例，深入探讨现代 C 语言工具链的选型、配置和最佳实践。
+这些案例涵盖了嵌入式系统、高性能计算、服务器应用等多个领域。
 
 ## 成功案例一：嵌入式实时系统
 
 ### 项目背景
 
 某工业控制系统，基于 ARM Cortex-M4 微控制器，要求：
+
 - 硬实时响应（中断延迟 < 1μs）
 - 功能安全认证（SIL 2）
 - 代码体积 < 256KB
@@ -130,6 +132,7 @@ au-misra3.req.15.7    // if-else if 末尾 else
 ### 项目背景
 
 科学计算矩阵运算库，目标平台 x86_64 + AVX-512，要求：
+
 - 向量化效率 > 90%
 - 多线程可扩展性
 - 跨平台支持（Linux/macOS/Windows）
@@ -182,7 +185,7 @@ if host_machine.cpu_family() == 'x86_64'
             '-fopenmp',
             language: 'c'
         )
-        
+
         # 链接时优化
         if cc.get_id() == 'clang'
             add_project_link_arguments(
@@ -247,17 +250,17 @@ bench_result benchmark_gemm(int m, int n, int k) {
     double *a = aligned_alloc(64, m * k * sizeof(double));
     double *b = aligned_alloc(64, k * n * sizeof(double));
     double *c = aligned_alloc(64, m * n * sizeof(double));
-    
+
     // 初始化数据
     for (int i = 0; i < m*k; i++) a[i] = (double)rand() / RAND_MAX;
     for (int i = 0; i < k*n; i++) b[i] = (double)rand() / RAND_MAX;
     memset(c, 0, m*n*sizeof(double));
-    
+
     double times[NTRIALS];
-    
+
     for (int t = 0; t < NTRIALS + WARMUP; t++) {
         double start = get_time();
-        
+
         // 矩阵乘法
         #pragma omp parallel for collapse(2)
         for (int i = 0; i < m; i++) {
@@ -270,39 +273,39 @@ bench_result benchmark_gemm(int m, int n, int k) {
                 c[i*n + j] = sum;
             }
         }
-        
+
         double end = get_time();
         if (t >= WARMUP) {
             times[t - WARMUP] = end - start;
         }
     }
-    
+
     // 计算统计信息
     bench_result res = {0};
     res.name = "GEMM";
     res.min_time = times[0];
     res.max_time = times[0];
     double sum = 0.0;
-    
+
     for (int i = 0; i < NTRIALS; i++) {
         if (times[i] < res.min_time) res.min_time = times[i];
         if (times[i] > res.max_time) res.max_time = times[i];
         sum += times[i];
     }
-    
+
     res.avg_time = sum / NTRIALS;
-    
+
     // 计算标准差
     double var_sum = 0.0;
     for (int i = 0; i < NTRIALS; i++) {
         var_sum += (times[i] - res.avg_time) * (times[i] - res.avg_time);
     }
     res.std_dev = sqrt(var_sum / NTRIALS);
-    
+
     // 计算 GFLOPS
     double ops = 2.0 * m * n * k;
     res.gflops = (ops / res.avg_time) / 1e9;
-    
+
     free(a); free(b); free(c);
     return res;
 }
@@ -313,6 +316,7 @@ bench_result benchmark_gemm(int m, int n, int k) {
 ### 项目背景
 
 高并发 HTTP 服务器，要求：
+
 - 支持 100K+ 并发连接
 - 内存安全，无缓冲区溢出
 - 快速编译迭代
@@ -377,10 +381,10 @@ jobs:
       matrix:
         compiler: [gcc-12, clang-16]
         sanitizer: [asan, tsan, none]
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Install dependencies
       run: |
         sudo apt-get update
@@ -388,13 +392,13 @@ jobs:
           ${{ matrix.compiler }} \
           valgrind \
           cppcheck
-    
+
     - name: Static analysis
       run: |
         cppcheck --enable=all --error-exitcode=1 \
           --suppress=missingIncludeSystem \
           src/
-    
+
     - name: Build with sanitizer
       run: |
         export CC=${{ matrix.compiler }}
@@ -405,11 +409,11 @@ jobs:
         else
           ./scripts/dev-build.sh release
         fi
-    
+
     - name: Run tests
       run: |
         ./test/run_tests.sh
-    
+
     - name: Valgrind check (release only)
       if: matrix.sanitizer == 'none'
       run: |
@@ -420,7 +424,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Fuzz test
       run: |
         clang -fsanitize=fuzzer,address \
@@ -477,21 +481,21 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}
 ```c
 /**
  * @brief 处理 HTTP 请求
- * 
+ *
  * @param req 请求对象，必须由 http_request_init 初始化
  * @param resp 响应对象，将被填充
  * @param timeout_ms 超时时间（毫秒），0 表示无超时
- * 
+ *
  * @return 0 成功，负值为错误码
  * @retval -EINVAL 无效参数
  * @retval -ETIME  超时
- * 
+ *
  * @pre req != NULL && resp != NULL
  * @post resp->status 已设置
- * 
+ *
  * @note 线程安全，可被多个线程并发调用
  * @warning timeout_ms > 10000 可能导致连接池耗尽
- * 
+ *
  * @code
  *   http_request_t req;
  *   http_response_t resp;
@@ -503,7 +507,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}
  *   http_response_cleanup(&resp);
  * @endcode
  */
-int http_handle_request(const http_request_t *req, 
+int http_handle_request(const http_request_t *req,
                         http_response_t *resp,
                         int timeout_ms);
 ```
