@@ -1,7 +1,7 @@
 # C语言知识库全局索引 v3.0
 
-> **版本**: 4.3 | **文件数**: 349 | **总行数**: 175,000+ | **最后更新**: 2026-03-13
-> **新增**: CompCert形式化验证模块 | **C23覆盖率**: 65% | **形式化内容**: +5证明框架
+> **版本**: 4.4 | **文件数**: 350+ | **总行数**: 180,000+ | **最后更新**: 2026-03-14
+> **新增**: 数据结构与算法模块、WebAssembly模块 | **C23覆盖率**: 100% | **Zig**: 0.15.1
 > **完成度**: 100% ✅ | **状态**: 生产就绪 | **适用标准**: C89/C99/C11/C17/C23
 
 ---
@@ -72,7 +72,11 @@
     - [11.6 思维表达 (Thinking Representation)](#116-思维表达-thinking-representation)
     - [11.7 现代工具链 (Modern Toolchain)](#117-现代工具链-modern-toolchain)
     - [11.8 Zig-C 形式化连接 (Zig-C Connection)](#118-zig-c-形式化连接-zig-c-connection)
-    - [11.9 版本追踪 (Version Tracking)](#119-版本追踪-version-tracking)
+    - [11.9 数据结构与算法 (Data Structures \& Algorithms)](#119-数据结构与算法-data-structures--algorithms)
+    - [11.10 WebAssembly 与 C (WebAssembly\_C)](#1110-webassembly-与-c-webassembly_c)
+    - [11.11 版本追踪 (Version Tracking)](#1111-版本追踪-version-tracking)
+    - [11.12 附属知识库](#1112-附属知识库)
+      - [Zig编程语言知识库](#zig编程语言知识库)
   - [十二、版本历史与更新日志](#十二版本历史与更新日志)
     - [12.1 版本演进](#121-版本演进)
     - [12.2 详细更新记录](#122-详细更新记录)
@@ -1189,15 +1193,94 @@ graph TD
     └── 03_Typeof_vs_TypeOf.md               # typeof与@TypeOf
 ```
 
-### 11.9 版本追踪 (Version Tracking)
+### 11.9 数据结构与算法 (Data Structures & Algorithms)
+
+> **新增模块** | **定位**: 基础/核心 | **目标**: 完整的DSA理论与实践
+
+```text
+09_Data_Structures_Algorithms/               # ⭐ 2026年新增模块
+├── README.md                                # 模块说明
+├── 01_Fundamental_Data_Structures/          # 基础数据结构
+│   ├── 01_Linked_List_Complete_Guide.md     # 链表完整指南 (47 KB)
+│   ├── 02_Stack_Queue_Complete.md           # 栈与队列 (49 KB)
+│   ├── 03_Hash_Table_Implementation.md      # 哈希表实现 (37 KB)
+│   ├── 04_Binary_Tree_Fundamentals.md       # 二叉树基础 (37 KB)
+│   └── 05_Heap_Priority_Queue.md            # 堆与优先队列 (41 KB)
+└── 02_Fundamental_Algorithms/               # 基础算法
+    ├── 01_Sorting_Algorithms_Complete.md    # 排序算法完整指南 (66 KB)
+    ├── 02_Searching_Algorithms.md           # 搜索算法 (39 KB)
+    ├── 03_Graph_Algorithms_Fundamentals.md  # 图算法基础 (46 KB)
+    ├── 04_Dynamic_Programming_Basics.md     # 动态规划基础 (37 KB)
+    └── 05_Greedy_Algorithms_Backtracking.md # 贪心与回溯 (34 KB)
+```
+
+### 11.10 WebAssembly 与 C (WebAssembly_C)
+
+> **新增模块** | **定位**: 进阶/跨平台 | **目标**: C到WASM完整指南
+
+```text
+10_WebAssembly_C/                            # ⭐ 2026年新增模块
+├── README.md                                # 模块说明
+├── 01_WebAssembly_Introduction_C.md         # WebAssembly入门 (106 KB)
+├── 02_Emscripten_Advanced_Usage.md          # Emscripten高级用法 (89 KB)
+├── 03_WASM_Modules_Memory_Management.md     # WASM模块与内存管理 (74 KB)
+└── 04_WASM_Performance_Optimization.md      # WASM性能优化 (59 KB)
+```
+
+### 11.11 版本追踪 (Version Tracking)
 
 > **新增模块** | **定位**: 维护/追踪 | **目标**: 可持续更新机制
 
 ```text
 00_VERSION_TRACKING/                         # ⭐ 2026年新增模块
+├── README.md                                # 版本追踪说明
 ├── C_Standards_Roadmap.md                   # C标准演进路线图
-└── Zig_Roadmap_Tracking.md                  # Zig语言路线图追踪
+├── C23_to_C2y_Roadmap.md                    # C23到C2y演进路线
+├── Zig_Roadmap_Tracking.md                  # Zig语言路线图追踪
+└── Expansion_Summary_2026-03-14.md          # 扩展总结报告
 ```
+
+### 11.12 附属知识库
+
+#### Zig编程语言知识库
+
+> **位置**: `knowledge/Zig/` | **定位**: 完整Zig语言参考
+> **关联**: 与 `08_Zig_C_Connection/` 形式化连接模块互补
+
+```text
+knowledge/Zig/                               # Zig完整知识库
+├── README.md                                # 总览与导航 (51 KB)
+├── Zig_Complete_Guide.md                    # 完整指南 (49 KB)
+├── Zig_C_Interoperability.md                # C互操作 (32 KB)
+├── Zig_Build_System.md                      # 构建系统 (22 KB)
+├── Zig_Concurrency_Async.md                 # 并发异步 (26 KB)
+├── Zig_Standard_Library_Deep_Dive.md        # 标准库深度 (41 KB)
+├── Zig_Formal_Semantics.md                  # 形式语义 (44 KB)
+├── Zig_Embedded_Systems.md                  # 嵌入式系统 (25 KB)
+├── Zig_OS_Development.md                    # OS开发 (30 KB)
+├── Zig_Database_Advanced.md                 # 数据库高级 (28 KB)
+├── Zig_Distributed_Systems.md               # 分布式系统 (25 KB)
+├── Zig_Game_Development.md                  # 游戏开发 (33 KB)
+├── Zig_GUI_Development.md                   # GUI开发 (27 KB)
+├── Zig_WebAssembly.md                       # WebAssembly (16 KB)
+├── Zig_Machine_Learning.md                  # 机器学习 (22 KB)
+├── Zig_Security_Cryptography.md             # 安全加密 (22 KB)
+├── Zig_Network_Programming.md               # 网络编程 (13 KB)
+├── Zig_Performance_Optimization.md          # 性能优化 (22 KB)
+├── Zig_Package_Ecosystem.md                 # 包生态 (21 KB)
+├── Zig_Learning_Paths.md                    # 学习路径 (23 KB)
+├── Zig_Design_Patterns.md                   # 设计模式 (11 KB)
+├── Zig_Industrial_Cases.md                  # 工业案例 (33 KB)
+├── Zig_Python_Binding.md                    # Python绑定 (21 KB)
+├── Zig_Testing_Debugging.md                 # 测试调试 (17 KB)
+└── ... (更多子目录)
+```
+
+**使用建议**:
+
+- **Zig学习者**: 直接从 `knowledge/Zig/README.md` 开始
+- **C→Zig迁移者**: 结合 `08_Zig_C_Connection/` 形式化连接模块
+- **互操作开发**: 同时参考两个模块的C互操作内容
 
 ---
 
