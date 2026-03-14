@@ -16,7 +16,7 @@
 | [01_CAN_Bus_Protocol.md](./01_Automotive_ECU/01_CAN_Bus_Protocol.md) | CAN总线协议 | L4 | ISO 11898 |
 | [02_Autosar_Architecture.md](./01_Automotive_ECU/02_Autosar_Architecture.md) | AUTOSAR架构 | L5 | AUTOSAR Classic |
 | [03_Functional_Safety.md](./01_Automotive_ECU/03_Functional_Safety.md) | 功能安全 | L5 | ISO 26262 |
-| ~~04_OBD_Diagnostics.md~~ | OBD诊断 | L4 | ISO 15031, SAE J1979 (计划中) |
+| [04_OBD_Diagnostics.md](./01_Automotive_ECU/04_OBD_Diagnostics.md) | OBD诊断 | L4 | ISO 15031, SAE J1979 ✅ |
 
 **关联标准**: ISO 26262 (ASIL), AUTOSAR, CANopen
 
@@ -30,7 +30,7 @@
 |:-----|:-----|:----:|:---------|
 | [01_ARINC_429.md](./02_Avionics_Systems/01_ARINC_429.md) | ARINC 429总线 | L5 | ARINC 429 Spec |
 | [02_DO_178C.md](./02_Avionics_Systems/02_DO_178C.md) | 适航认证 | L5 | DO-178C |
-| ~~03_Flight_Control.md~~ | 飞行控制 | L5 | NASA Guidelines (计划中) |
+| [03_Flight_Control.md](./02_Avionics_Systems/03_Flight_Control.md) | 飞行控制 | L5 | NASA Guidelines ✅ |
 
 **关联标准**: DO-178C, ARINC 653, MIL-STD-1553
 
@@ -44,7 +44,7 @@
 |:-----|:-----|:----:|:---------|
 | [01_DPDK_Network_Stack.md](./03_High_Frequency_Trading/01_DPDK_Network_Stack.md) | DPDK网络 | L5 | DPDK Documentation |
 | [02_Lock_Free_Queues.md](./03_High_Frequency_Trading/02_Lock_Free_Queues.md) | 无锁队列 | L5 | LMAX Disruptor |
-| ~~03_Kernel_Bypass.md~~ | 内核旁路 | L5 | Solarflare/OpenOnload (计划中) |
+| [03_Kernel_Bypass.md](./03_High_Frequency_Trading/03_Kernel_Bypass.md) | 内核旁路 | L5 | Solarflare/OpenOnload ✅ |
 
 **关联标准**: FIX Protocol, PTP (IEEE 1588)
 
@@ -58,7 +58,7 @@
 |:-----|:-----|:----:|:---------|
 | [01_SIMD_Vectorization.md](./04_5G_Baseband/01_SIMD_Vectorization.md) | SIMD向量化 | L5 | ARM NEON, AVX-512 |
 | [02_DMA_Offload.md](./04_5G_Baseband/02_DMA_Offload.md) | DMA卸载 | L5 | 3GPP TS 38.211 |
-| ~~03_MIMO_Detection.md~~ | MIMO检测 | L5 | 3GPP TS 38.211 (计划中) |
+| [03_MIMO_Detection.md](./04_5G_Baseband/03_MIMO_Detection.md) | MIMO检测 | L5 | 3GPP TS 38.211 ✅ |
 
 **关联标准**: 3GPP TS 38.xxx (5G NR), IEEE 802.11
 
@@ -112,7 +112,7 @@
 
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
-| ~~01_SNN_Simulation.md~~ | SNN模拟 | L5 | Brian Simulator (计划中) |
+| [01_SNN_Simulation.md](./08_Neuromorphic/01_SNN_Simulation.md) | SNN模拟 | L5 | Brian Simulator ✅ |
 | [02_STDP_Learning.md](./08_Neuromorphic/02_STDP_Learning.md) | STDP学习 | L5 | Neuromorphic Engineering |
 
 ---

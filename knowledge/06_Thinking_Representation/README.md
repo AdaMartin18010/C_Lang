@@ -16,8 +16,8 @@
 | [01_Memory_Leak_Diagnosis.md](./01_Decision_Trees/01_Memory_Leak_Diagnosis.md) | 内存泄漏诊断 | 排查内存问题 | [内存管理](../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) |
 | [02_Segfault_Troubleshooting.md](./01_Decision_Trees/02_Segfault_Troubleshooting.md) | 段错误排查 | 调试崩溃问题 | [调试技术](../01_Core_Knowledge_System/05_Engineering_Layer/02_Debug_Techniques.md) |
 | [03_Performance_Bottleneck.md](./01_Decision_Trees/03_Performance_Bottleneck.md) | 性能瓶颈分析 | 优化决策 | [性能分析](../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md) |
-| ~~04_Compilation_Error.md~~ | 编译错误排查 | 编译问题解决 | (计划中) |
-| ~~05_Concurrency_Debug.md~~ | 并发问题调试 | 死锁/竞态 | (计划中) |
+| [04_Compilation_Error.md](./01_Decision_Trees/04_Compilation_Error.md) | 编译错误排查 | 编译问题解决 | ✅ |
+| [05_Concurrency_Debug.md](./01_Decision_Trees/05_Concurrency_Debug.md) | 并发问题调试 | 死锁/竞态 | ✅ |
 
 ---
 

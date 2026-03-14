@@ -15,7 +15,7 @@
 |:-----|:-----|:----:|:---------|
 | [01_Bytecode_VM.md](./01_Virtual_Machine_Interpreter/01_Bytecode_VM.md) | 字节码VM | L4 | Lua VM, Python VM |
 | [02_Register_VM.md](./01_Virtual_Machine_Interpreter/02_Register_VM.md) | 寄存器VM | L4 | Dalvik VM, BEAM |
-| ~~03_JIT_Compilation.md~~ | JIT编译 | L5 | V8, Java HotSpot (计划中) |
+| [03_JIT_Compilation.md](./01_Virtual_Machine_Interpreter/03_JIT_Compilation.md) | JIT编译 | L5 | V8, Java HotSpot ✅ |
 | ~~04_Garbage_Collection.md~~ | 垃圾回收 | L5 | Go GC, .NET GC (计划中) |
 
 **前置知识**: [01_Core_Knowledge_System](../01_Core_Knowledge_System/README.md)
@@ -139,7 +139,7 @@
 |:-----|:-----|:----:|:---------|
 | [01_B_Tree_Index.md](./11_In_Memory_Database/01_B_Tree_Index.md) | B+树索引 | L4 | SQLite, LMDB |
 | [02_LSM_Tree.md](./11_In_Memory_Database/02_LSM_Tree.md) | LSM树 | L5 | LevelDB, RocksDB |
-| ~~03_Hash_Index.md~~ | 哈希索引 | L4 | Fast Path Cache (计划中) |
+| [03_Hash_Index.md](./11_In_Memory_Database/03_Hash_Index.md) | 哈希索引 | L4 | Fast Path Cache ✅ |
 
 ---
 

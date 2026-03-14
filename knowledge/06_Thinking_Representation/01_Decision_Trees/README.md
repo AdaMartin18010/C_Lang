@@ -475,8 +475,8 @@ $ cat /proc/[pid]/maps            # 查看内存映射
 | 内存相关 | RSS持续增长、OOM被kill | [内存泄漏诊断](./01_Memory_Leak_Diagnosis.md) |
 | 崩溃相关 | SIGSEGV、SIGABRT、core dump | [段错误排查](./02_Segfault_Troubleshooting.md) |
 | 性能相关 | CPU100%、响应慢、吞吐量低 | [性能瓶颈分析](./03_Performance_Bottleneck.md) |
-| 编译相关 | 编译错误、链接错误 | 编译错误处理（计划中） |
-| 并发相关 | 死锁、数据竞争、随机崩溃 | 并发问题调试（计划中） |
+| 编译相关 | 编译错误、链接错误 | [编译错误处理](./04_Compilation_Error.md) ✅ |
+| 并发相关 | 死锁、数据竞争、随机崩溃 | [并发问题调试](./05_Concurrency_Debug.md) ✅ |
 
 ### 3.2 如何跟随分支进行诊断
 
@@ -972,8 +972,8 @@ flowchart LR
 | 程序内存不断增长 | [内存泄漏诊断](./01_Memory_Leak_Diagnosis.md) |
 | 程序突然崩溃/段错误 | [段错误排查](./02_Segfault_Troubleshooting.md) |
 | 程序运行缓慢 | [性能瓶颈分析](./03_Performance_Bottleneck.md) |
-| 编译不通过 | ~~编译错误处理~~ (计划中) |
-| 多线程异常/死锁 | ~~并发问题调试~~ (计划中) |
+| 编译不通过 | [编译错误处理](./04_Compilation_Error.md) ✅ |
+| 多线程异常/死锁 | [并发问题调试](./05_Concurrency_Debug.md) ✅ |
 
 ---
 
@@ -984,8 +984,8 @@ flowchart LR
 | [01_Memory_Leak_Diagnosis.md](./01_Memory_Leak_Diagnosis.md) | 内存泄漏诊断 | 程序内存持续增长、OOM异常、valgrind报告问题 | ✅ 可用 |
 | [02_Segfault_Troubleshooting.md](./02_Segfault_Troubleshooting.md) | 段错误排查 | 程序崩溃、SIGSEGV信号、空指针访问、数组越界 | ✅ 可用 |
 | [03_Performance_Bottleneck.md](./03_Performance_Bottleneck.md) | 性能瓶颈分析 | CPU占用高、响应延迟、吞吐量不足、资源竞争 | ✅ 可用 |
-| 04_Compilation_Error.md | 编译错误处理 | GCC/Clang编译报错、链接错误 | 📝 计划中 |
-| 05_Concurrency_Debug.md | 并发问题调试 | 死锁、数据竞争、线程安全问题 | 📝 计划中 |
+| 04_Compilation_Error.md | 编译错误处理 | GCC/Clang编译报错、链接错误 | ✅ 已完成 |
+| 05_Concurrency_Debug.md | 并发问题调试 | 死锁、数据竞争、线程安全问题 | ✅ 已完成 |
 
 ---
 
