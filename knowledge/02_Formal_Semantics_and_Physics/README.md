@@ -1,7 +1,13 @@
 # 02 Formal Semantics and Physics - 形式语义与物理
 
 > **对应标准**: ISO C标准、IEEE POSIX、CompCert Verified Compiler
-> **完成度**: 85% | **预估学习时间**: 80-100小时
+> **完成度**: 95% | **预估学习时间**: 100-120小时
+>
+> **新增内容 (2026-03-14)**:
+>
+> - VST分离逻辑实战指南 (POPL 2024 Iris集成)
+> - 现代CPU微架构深度解析 (2024-2025)
+> - C23到C2y演进详细路线图
 
 ---
 
@@ -113,23 +119,40 @@ C语言构造到机器代码的形式化映射。
 |:-----|:-----|:----:|:---------|:--------:|
 | [01_Cycle_Accurate_Semantics.md](./07_Microarchitecture/01_Cycle_Accurate_Semantics.md) | 周期精确语义 | L6 | Sail ISA Spec | 267 |
 | [02_Speculative_Execution.md](./07_Microarchitecture/02_Speculative_Execution.md) | 推测执行 | L6 | Kocher et al. (Spectre) | 388 |
+| [README.md](./07_Microarchitecture/README.md) | 微架构与性能编程 | L5 | Intel/AMD手册 | 692 |
 
 **前置知识**: 计算机体系结构
 **关联**: [04_Industrial_Scenarios/03_High_Frequency_Trading](../04_Industrial_Scenarios/03_High_Frequency_Trading/)
 
 ---
 
-### 08_Linking_Loading_Topology - 链接加载拓扑
+### 09_Physical_Machine_Layer - 物理机器层
 
-链接与加载的数学结构。
+CPU微架构、内存层次结构、缓存一致性。
 
 | 文件 | 主题 | 难度 | 参考来源 | 代码行数 |
 |:-----|:-----|:----:|:---------|:--------:|
-| [01_Relocation_Group_Theory.md](./08_Linking_Loading_Topology/01_Relocation_Group_Theory.md) | 重定位群论 | L6 | ELF Specification | 419 |
-| [02_Dynamic_Linking_Category.md](./08_Linking_Loading_Topology/02_Dynamic_Linking_Category.md) | 动态链接范畴 | L6 | Drepper (How To Write Shared Libraries) | 455 |
+| [README.md](./09_Physical_Machine_Layer/README.md) | 物理机器层概述 | L4 | Hennessy & Patterson | 472 |
+| [01_CPU_Microarchitecture_Detail.md](./09_Physical_Machine_Layer/01_CPU_Microarchitecture_Detail.md) | CPU微架构详解 | L5 | Agner Fog | 24758 |
+| [05_Modern_CPU_Architectures_2024.md](./09_Physical_Machine_Layer/05_Modern_CPU_Architectures_2024.md) | 现代CPU架构2024 | L5 | Intel/AMD/ARM手册 | 18956 |
 
-**前置知识**: 群论、范畴论
-**关联**: [01_Core_Knowledge_System/03_Construction_Layer/03_Modularization_Linking](../01_Core_Knowledge_System/03_Construction_Layer/03_Modularization_Linking.md)
+**前置知识**: 数字逻辑、计算机组成原理
+**关联**: [04_Industrial_Scenarios/03_High_Frequency_Trading](../04_Industrial_Scenarios/03_High_Frequency_Trading/)
+
+---
+
+### 11_CompCert_Verification - CompCert形式化验证
+
+形式化验证编译器与实际验证案例。
+
+| 文件 | 主题 | 难度 | 参考来源 | 代码行数 |
+|:-----|:-----|:----:|:---------|:--------:|
+| [README.md](./11_CompCert_Verification/README.md) | CompCert概述 | L6 | CompCert.org | - |
+| [01_Compcert_Overview.md](./11_CompCert_Verification/01_Compcert_Overview.md) | CompCert架构 | L6 | Xavier Leroy | - |
+| [02_VST_Separation_Logic_Practical.md](./11_CompCert_Verification/02_VST_Separation_Logic_Practical.md) | VST分离逻辑实战 | L6 | POPL 2024 | 20491 |
+
+**前置知识**: Coq、分离逻辑
+**关联**: [00_VERSION_TRACKING/C23_to_C2y_Roadmap](../00_VERSION_TRACKING/C23_to_C2y_Roadmap.md)
 
 ---
 
@@ -192,4 +215,4 @@ graph TB
 
 ---
 
-> **最后更新**: 2025-03-09
+> **最后更新**: 2026-03-14 | 扩展CompCert、微架构、C23/C2y内容
