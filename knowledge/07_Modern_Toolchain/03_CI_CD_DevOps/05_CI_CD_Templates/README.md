@@ -27,7 +27,7 @@ flowchart TD
     B -->|GitLab| D[GitLab CI/CD]
     B -->|Jenkins| E[Jenkins Pipeline]
     B -->|其他| F[通用配置参考]
-    
+
     C --> C1{项目需求?}
     C1 -->|基础构建| C2[使用 basic-ci.yml]
     C1 -->|内存安全| C3[使用 memory-safety.yml]
@@ -53,25 +53,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Install dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y build-essential cmake valgrind
-    
+
     - name: Configure CMake
       run: cmake -B build -DCMAKE_BUILD_TYPE=Release
-    
+
     - name: Build
       run: cmake --build build --config Release
-    
+
     - name: Test
       working-directory: build
       run: ctest -C Release --output-on-failure
-    
+
     - name: Memory Check
       run: |
         valgrind --leak-check=full --error-exitcode=1 \
@@ -114,24 +114,24 @@ jobs:
             compiler: clang
 
     runs-on: ${{ matrix.os }}
-    
+
     env:
       CC: ${{ matrix.cc }}
       CXX: ${{ matrix.cxx }}
 
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Setup Windows
       if: runner.os == 'Windows'
       uses: microsoft/setup-msbuild@v2
-    
+
     - name: Configure
       run: cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-    
+
     - name: Build
       run: cmake --build build --config ${{ matrix.build_type }}
-    
+
     - name: Test
       run: ctest --test-dir build -C ${{ matrix.build_type }} --verbose
 ```
@@ -153,50 +153,50 @@ on:
 jobs:
   static-analysis:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Install tools
       run: |
         sudo apt-get update
         sudo apt-get install -y cppcheck clang-tidy clang-format
         pip install cpplint
-    
+
     - name: Cppcheck
       run: |
         cppcheck --enable=all --error-exitcode=1 \
           --suppress=missingIncludeSystem \
           -I include src/
-    
+
     - name: Clang-Tidy
       run: |
         find src -name '*.c' -o -name '*.h' | \
           xargs clang-tidy -p build -- \
           -Iinclude -std=c11
-    
+
     - name: Format Check
       run: |
         find src -name '*.c' -o -name '*.h' | \
           xargs clang-format --dry-run --Werror
-    
+
     - name: Cpplint
       run: cpplint --recursive src/
 
   security-scan:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
         languages: cpp
-    
+
     - name: Autobuild
       uses: github/codeql-action/autobuild@v3
-    
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
 ```
@@ -333,26 +333,26 @@ docker-build:
 // Jenkinsfile
 pipeline {
     agent any
-    
+
     environment {
         CC = 'gcc'
         CXX = 'g++'
         BUILD_TYPE = 'Release'
     }
-    
+
     options {
         buildDiscarder(logRotator(numToKeepStr: '10'))
         timestamps()
         timeout(time: 30, unit: 'MINUTES')
     }
-    
+
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-        
+
         stage('Build') {
             parallel {
                 stage('Linux Build') {
@@ -375,7 +375,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Test') {
             steps {
                 sh 'cd build && ctest --output-on-failure'
@@ -389,7 +389,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Static Analysis') {
             steps {
                 sh '''
@@ -401,7 +401,7 @@ pipeline {
                 )
             }
         }
-        
+
         stage('Coverage') {
             steps {
                 sh '''
@@ -421,7 +421,7 @@ pipeline {
             }
         }
     }
-    
+
     post {
         always {
             cleanWs()
@@ -443,27 +443,27 @@ node('linux') {
         stage('Preparation') {
             git 'https://github.com/yourrepo/c-project.git'
         }
-        
+
         stage('Build') {
             def builds = [:]
-            
+
             builds['Debug'] = {
                 node('linux') {
                     sh 'cmake -B build-debug -DCMAKE_BUILD_TYPE=Debug'
                     sh 'cmake --build build-debug'
                 }
             }
-            
+
             builds['Release'] = {
                 node('linux') {
                     sh 'cmake -B build-release -DCMAKE_BUILD_TYPE=Release'
                     sh 'cmake --build build-release'
                 }
             }
-            
+
             parallel builds
         }
-        
+
         stage('Quality Gate') {
             withSonarQubeEnv('SonarQube') {
                 sh 'sonar-scanner'
@@ -472,7 +472,7 @@ node('linux') {
                 waitForQualityGate abortPipeline: true
             }
         }
-        
+
     } catch (e) {
         currentBuild.result = 'FAILURE'
         throw e
@@ -527,7 +527,7 @@ def notifyBuild(String buildStatus = 'STARTED') {
 ## 🔗 相关资源
 
 - [返回上级目录](../README.md)
-- [并发并行](../07_Concurrency_Parallelism/README.md) - 构建优化相关
+- [并发并行](../../07_Concurrency_Parallelism/README.md) - 构建优化相关
 - [GitHub Actions文档](https://docs.github.com/en/actions)
 - [GitLab CI文档](https://docs.gitlab.com/ee/ci/)
 - [Jenkins文档](https://www.jenkins.io/doc/)

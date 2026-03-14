@@ -369,8 +369,8 @@ int main(void) {
 
 ## 延伸阅读
 
-- [相关链接 1](path/to/doc1.md)
-- [相关链接 2](path/to/doc2.md)
+- [相关链接 1](C23_to_C2y_Roadmap.md)
+- [相关链接 2](Zig_Roadmap_Tracking.md)
 
 ## 参考
 

@@ -1,6 +1,7 @@
 # Frama-C/WP 集成与实战指南
 
 > **定位**: CompCert Verification / 工具集成 | **难度**: ⭐⭐⭐⭐ | **目标**: 掌握 Frama-C 验证 C 程序
+> **版本**: Frama-C 32.0 (Germanium) | **更新**: 2026-03-15
 
 ---
 
@@ -49,7 +50,8 @@ opam install frama-c
 
 # 验证安装
 frama-c --version
-# 29.0 (Cobalt)
+# 32.0 (Germanium) - 2026-03发布
+# 新增: ACSL++ 支持, Clang 20 兼容, \aligned 谓词
 
 # 基本使用
 frama-c -wp source.c
@@ -173,4 +175,5 @@ Node* list_tail(Node* head) {
 
 ---
 
-> **参考**: Frama-C 29.0 文档 | **ACSL 手册**: <https://frama-c.com/acsl.html>
+> **参考**: Frama-C 32.0 (Germanium) 文档 | **ACSL 手册**: <https://frama-c.com/acsl.html>
+> **新特性**: ACSL++ (C++规格语言), MetAcsl v0.10 (安全属性), Frama-Clang v0.0.19 (Clang 20支持)

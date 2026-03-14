@@ -304,7 +304,7 @@ pub export fn run_with_valgrind() void {
 
 ## 延伸阅读
 
-1. [C11 Memory Model](../01_C11_vs_Zig_Memory_Model.md) - C11 内存序与 Zig 的对比
+1. [C11 Memory Model](./01_C11_vs_Zig_Memory_Model.md) - C11 内存序与 Zig 的对比
 2. [Atomic Operations](./02_Atomic_Operations_Mapping.md) - 原子内存操作映射
 3. [Pointer Provenance](./03_Pointer_Provenance_Analysis.md) - 指针来源分析
 
