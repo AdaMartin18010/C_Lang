@@ -261,3 +261,7 @@ graph TD
 > - 02_Core_Layer: 函数与作用域、数组与指针
 > - 04_Standard_Library_Layer: 标准I/O与文件操作
 > - 05_Engineering: Makefile构建系统
+
+---
+
+> **返回导航**: [知识库总览](../README.md) | [上层目录](..)

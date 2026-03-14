@@ -17,7 +17,7 @@
 
 ## 📂 目录结构
 
-```
+```text
 10_WebAssembly_C/
 ├── 01_WebAssembly_Introduction_C.md      (106 KB) - WebAssembly入门
 ├── 02_Emscripten_Advanced_Usage.md        (89 KB) - Emscripten高级用法
@@ -76,7 +76,7 @@
 
 ### 初学者路径
 
-```
+```text
 WebAssembly基础概念
   ↓
 Emscripten安装与配置
@@ -90,7 +90,7 @@ C-JavaScript交互
 
 ### 进阶开发者路径
 
-```
+```text
 WASM内存模型深入
   ↓
 文件系统与网络
@@ -104,7 +104,7 @@ OpenGL/WebGL集成
 
 ### 专家路径
 
-```
+```text
 WASM虚拟机实现
   ↓
 多模块动态链接
@@ -166,7 +166,7 @@ emcc -O3 -msimd128 hello.c -o hello.js
 
 ## 🔗 与其他模块的连接
 
-```
+```text
 10_WebAssembly_C
     │
     ├── 依赖自 → 01_Core_Knowledge_System/ (C语言基础)
@@ -225,3 +225,7 @@ emcc -O3 -msimd128 hello.c -o hello.js
 > **最后更新**: 2026-03-14
 >
 > **状态**: ✅ 完整，生产就绪
+
+---
+
+> **返回导航**: [知识库总览](../README.md) | [上层目录](..)
