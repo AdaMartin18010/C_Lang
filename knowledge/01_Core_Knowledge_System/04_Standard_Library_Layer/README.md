@@ -216,7 +216,7 @@
 
 - **[→ 03 System Technology: POSIX线程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/01_POSIX_Threads.md)** - C11线程与POSIX线程对比
 - **[→ 05 Deep Structure: 标准库物理](../../05_Deep_Structure_MetaPhysics/06_Standard_Library_Physics/)** - malloc、memcpy等底层实现原理
-- **[→ 06 Thinking: 标准对比矩阵](../../06_Thinking_Representation/02_Comparison_Matrices/01_Standards_Comparison_Matrix.md)** - C标准演进对比
+- **[→ 06 Thinking: 对比矩阵目录](../../06_Thinking_Representation/02_Comparison_Matrices/)** - 类型、同步、I/O等对比
 
 ### 问题诊断
 
