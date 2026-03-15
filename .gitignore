@@ -53,3 +53,40 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build artifacts
+build/
+dist/
+cmake-build-*/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Logs
+*.log
+logs/
+
+# Backup files
+*.bak
+*.orig
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Project specific
+validation_report.md
+maintenance_report.md
+!maintenance_report.md.example
