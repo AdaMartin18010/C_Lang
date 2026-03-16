@@ -1397,3 +1397,1463 @@ int c11_worker(void *arg) {
     return 0;
 }
 ```
+
+
+---
+
+## ⚠️ 第五部分：反例与陷阱（12+个经典陷阱）
+
+### 陷阱1：竞态条件 - 非原子递增
+
+```c
+/* 陷阱1.1：简单的非原子操作竞态 */
+int counter = 0;
+
+void *increment(void *arg) {
+    for (int i = 0; i < 100000; i++) {
+        counter++;  // 分解为: LOAD → ADD → STORE，非原子！
+    }
+    return NULL;
+}
+
+/* 问题分析：
+ * 线程T1          线程T2
+ * LOAD counter=0
+ *                 LOAD counter=0
+ * ADD → 1
+ *                 ADD → 1
+ * STORE counter=1
+ *                 STORE counter=1
+ *
+ * 期望：2，实际：1（丢失更新）
+ */
+
+/* 修复方案 */
+pthread_mutex_t counter_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void *increment_fixed(void *arg) {
+    for (int i = 0; i < 100000; i++) {
+        pthread_mutex_lock(&counter_mutex);
+        counter++;
+        pthread_mutex_unlock(&counter_mutex);
+    }
+    return NULL;
+}
+
+/* 或者使用原子操作（C11） */
+#include <stdatomic.h>
+atomic_int atomic_counter = 0;
+
+void *increment_atomic(void *arg) {
+    for (int i = 0; i < 100000; i++) {
+        atomic_fetch_add(&atomic_counter, 1);
+    }
+    return NULL;
+}
+```
+
+### 陷阱2：死锁 - 锁顺序不一致
+
+```c
+/* 陷阱2.1：相互等待死锁 */
+pthread_mutex_t mutex_a = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mutex_b = PTHREAD_MUTEX_INITIALIZER;
+
+void *thread_a(void *arg) {
+    pthread_mutex_lock(&mutex_a);
+    printf("Thread A: locked A\n");
+    usleep(1000);  // 增加上下文切换概率
+
+    pthread_mutex_lock(&mutex_b);  // 等待B
+    printf("Thread A: locked B\n");
+
+    pthread_mutex_unlock(&mutex_b);
+    pthread_mutex_unlock(&mutex_a);
+    return NULL;
+}
+
+void *thread_b(void *arg) {
+    pthread_mutex_lock(&mutex_b);
+    printf("Thread B: locked B\n");
+    usleep(1000);
+
+    pthread_mutex_lock(&mutex_a);  // 等待A → 死锁！
+    printf("Thread B: locked A\n");
+
+    pthread_mutex_unlock(&mutex_a);
+    pthread_mutex_unlock(&mutex_b);
+    return NULL;
+}
+
+/* 修复方案：全局锁排序 */
+#define LOCK_A_FIRST 1
+#define LOCK_B_FIRST 2
+
+void lock_ordered(pthread_mutex_t *m1, pthread_mutex_t *m2, int order) {
+    pthread_mutex_t *first = (order == LOCK_A_FIRST) ? m1 : m2;
+    pthread_mutex_t *second = (order == LOCK_A_FIRST) ? m2 : m1;
+    pthread_mutex_lock(first);
+    pthread_mutex_lock(second);
+}
+
+void *thread_a_fixed(void *arg) {
+    lock_ordered(&mutex_a, &mutex_b, LOCK_A_FIRST);
+    // ... 临界区
+    pthread_mutex_unlock(&mutex_b);
+    pthread_mutex_unlock(&mutex_a);
+    return NULL;
+}
+
+void *thread_b_fixed(void *arg) {
+    lock_ordered(&mutex_a, &mutex_b, LOCK_A_FIRST);  // 相同顺序！
+    // ... 临界区
+    pthread_mutex_unlock(&mutex_b);
+    pthread_mutex_unlock(&mutex_a);
+    return NULL;
+}
+```
+
+### 陷阱3：死锁 - 自锁（递归未配置）
+
+```c
+/* 陷阱3：同线程重复加锁导致死锁 */
+pthread_mutex_t normal_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void helper_function() {
+    pthread_mutex_lock(&normal_mutex);  // 死锁！已经持有
+    // ... 做一些事情
+    pthread_mutex_unlock(&normal_mutex);
+}
+
+void main_function() {
+    pthread_mutex_lock(&normal_mutex);
+    helper_function();  // 尝试再次加锁
+    pthread_mutex_unlock(&normal_mutex);
+}
+
+/* 修复方案1：使用递归锁 */
+pthread_mutex_t recursive_mutex;
+
+void init_recursive_mutex() {
+    pthread_mutexattr_t attr;
+    pthread_mutexattr_init(&attr);
+    pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE);
+    pthread_mutex_init(&recursive_mutex, &attr);
+    pthread_mutexattr_destroy(&attr);
+}
+
+/* 修复方案2：重构代码避免递归加锁 */
+void helper_function_internal() {
+    // 假设锁已持有，不做加锁操作
+}
+
+void main_function_fixed() {
+    pthread_mutex_lock(&normal_mutex);
+    helper_function_internal();
+    pthread_mutex_unlock(&normal_mutex);
+}
+```
+
+### 陷阱4：活锁（Livelock）
+
+```c
+/* 陷阱4：互相礼让导致活锁 */
+typedef struct {
+    pthread_mutex_t lock;
+    int priority;
+} resource_t;
+
+resource_t res1 = { .priority = 1 };
+resource_t res2 = { .priority = 2 };
+
+void *polite_thread_a(void *arg) {
+    while (1) {
+        pthread_mutex_lock(&res1.lock);
+        if (pthread_mutex_trylock(&res2.lock) == 0) {
+            // 获取成功
+            printf("A: Got both resources\n");
+            pthread_mutex_unlock(&res2.lock);
+            pthread_mutex_unlock(&res1.lock);
+            break;
+        }
+        // 礼貌地释放并重试
+        pthread_mutex_unlock(&res1.lock);
+        printf("A: Yielding...\n");
+        usleep(1000);
+    }
+    return NULL;
+}
+
+void *polite_thread_b(void *arg) {
+    while (1) {
+        pthread_mutex_lock(&res2.lock);
+        if (pthread_mutex_trylock(&res1.lock) == 0) {
+            printf("B: Got both resources\n");
+            pthread_mutex_unlock(&res1.lock);
+            pthread_mutex_unlock(&res2.lock);
+            break;
+        }
+        pthread_mutex_unlock(&res2.lock);
+        printf("B: Yielding...\n");
+        usleep(1000);
+    }
+    return NULL;
+}
+
+/* 问题：两个线程同时检测到冲突，同时释放，同时重试，无限循环 */
+
+/* 修复方案：退避策略 + 随机抖动 */
+void *fixed_thread_a(void *arg) {
+    int attempts = 0;
+    while (1) {
+        pthread_mutex_lock(&res1.lock);
+        if (pthread_mutex_trylock(&res2.lock) == 0) {
+            printf("A: Got both resources\n");
+            pthread_mutex_unlock(&res2.lock);
+            pthread_mutex_unlock(&res1.lock);
+            break;
+        }
+        pthread_mutex_unlock(&res1.lock);
+
+        // 指数退避 + 随机抖动
+        unsigned int backoff = (1 << attempts) * 1000 + (rand() % 1000);
+        usleep(backoff > 100000 ? 100000 : backoff);
+        if (attempts < 10) attempts++;
+    }
+    return NULL;
+}
+```
+
+### 陷阱5：饥饿（Starvation）
+
+```c
+/* 陷阱5：读者饥饿写者 */
+pthread_rwlock_t rwlock;
+int data = 0;
+
+void *greedy_reader(void *arg) {
+    while (1) {
+        pthread_rwlock_rdlock(&rwlock);  // 读者可以共享
+        // 读取数据
+        printf("Reader: data=%d\n", data);
+        pthread_rwlock_unlock(&rwlock);
+        usleep(100);  // 短暂休息后立即回来
+    }
+    return NULL;
+}
+
+void *starved_writer(void *arg) {
+    while (1) {
+        pthread_rwlock_wrlock(&rwlock);  // 等待所有读者离开
+        // 如果读者不断到达，写者永远拿不到锁！
+        data++;
+        printf("Writer: updated to %d\n", data);
+        pthread_rwlock_unlock(&rwlock);
+        sleep(1);
+    }
+    return NULL;
+}
+
+/* 修复方案：使用写者优先的读写锁或限制读者并发 */
+typedef struct {
+    pthread_mutex_t lock;
+    pthread_cond_t reader_wait;
+    pthread_cond_t writer_wait;
+    int readers_active;
+    int writers_waiting;
+    int writer_active;
+} fair_rwlock_t;
+
+void fair_write_lock(fair_rwlock_t *rw) {
+    pthread_mutex_lock(&rw->lock);
+    rw->writers_waiting++;
+    while (rw->readers_active > 0 || rw->writer_active) {
+        pthread_cond_wait(&rw->writer_wait, &rw->lock);
+    }
+    rw->writers_waiting--;
+    rw->writer_active = 1;
+    pthread_mutex_unlock(&rw->lock);
+}
+
+void fair_read_lock(fair_rwlock_t *rw) {
+    pthread_mutex_lock(&rw->lock);
+    // 有写者等待时，新读者阻塞
+    while (rw->writer_active || rw->writers_waiting > 0) {
+        pthread_cond_wait(&rw->reader_wait, &rw->lock);
+    }
+    rw->readers_active++;
+    pthread_mutex_unlock(&rw->lock);
+}
+```
+
+### 陷阱6：优先级反转
+
+```c
+/* 陷阱6：高优先级线程被低优先级线程阻塞 */
+/*
+ * 场景：
+ * - T_low: 低优先级，持有锁M
+ * - T_mid: 中优先级，不相关计算
+ * - T_high: 高优先级，需要锁M
+ *
+ * T_low持有M，被T_mid抢占，T_high等待M
+ * 结果：T_high被T_mid间接阻塞（优先级反转）
+ */
+
+/* Linux解决方案：优先级继承协议 */
+void enable_priority_inheritance(pthread_mutex_t *mutex) {
+    pthread_mutexattr_t attr;
+    pthread_mutexattr_init(&attr);
+    pthread_mutexattr_setprotocol(&attr, PTHREAD_PRIO_INHERIT);
+    pthread_mutex_init(mutex, &attr);
+    pthread_mutexattr_destroy(&attr);
+}
+
+/* 或者使用优先级天花板协议 */
+void enable_priority_ceiling(pthread_mutex_t *mutex, int ceiling) {
+    pthread_mutexattr_t attr;
+    pthread_mutexattr_init(&attr);
+    pthread_mutexattr_setprotocol(&attr, PTHREAD_PRIO_PROTECT);
+    pthread_mutexattr_setprioceiling(&attr, ceiling);
+    pthread_mutex_init(mutex, &attr);
+    pthread_mutexattr_destroy(&attr);
+}
+```
+
+### 陷阱7：忘记解锁（提前返回）
+
+```c
+/* 陷阱7：错误路径忘记解锁 */
+pthread_mutex_t data_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+typedef struct {
+    int *data;
+    size_t size;
+} dataset_t;
+
+int process_data(dataset_t *ds, int index) {
+    pthread_mutex_lock(&data_mutex);
+
+    if (index < 0 || index >= ds->size) {
+        return -1;  // BUG: mutex未解锁！
+    }
+
+    if (ds->data == NULL) {
+        return -2;  // BUG: mutex未解锁！
+    }
+
+    int value = ds->data[index];
+    // 处理...
+
+    pthread_mutex_unlock(&data_mutex);
+    return value;
+}
+
+/* 修复方案1：使用goto清理 */
+int process_data_fixed(dataset_t *ds, int index) {
+    pthread_mutex_lock(&data_mutex);
+
+    int ret = -1;
+    if (index < 0 || index >= ds->size) {
+        ret = -1;
+        goto cleanup;
+    }
+
+    if (ds->data == NULL) {
+        ret = -2;
+        goto cleanup;
+    }
+
+    ret = ds->data[index];
+
+cleanup:
+    pthread_mutex_unlock(&data_mutex);
+    return ret;
+}
+
+/* 修复方案2：使用包装函数和宏 */
+#define LOCK_GUARD(mutex) \
+    for (int _locked = 1; _locked; _locked = 0, pthread_mutex_unlock(&(mutex)))
+
+int process_data_clean(dataset_t *ds, int index) {
+    int ret = -1;
+    LOCK_GUARD(data_mutex) {
+        if (index < 0 || index >= ds->size) {
+            ret = -1;
+            continue;  // 退出循环，自动解锁
+        }
+        ret = ds->data[index];
+    }
+    return ret;
+}
+
+/* 修复方案3：使用pthread_cleanup_push */
+int process_data_cleanup(dataset_t *ds, int index) {
+    pthread_mutex_lock(&data_mutex);
+    pthread_cleanup_push(pthread_mutex_unlock, &data_mutex);
+
+    if (index < 0 || index >= ds->size) {
+        pthread_cleanup_pop(1);  // 执行清理（解锁）
+        return -1;
+    }
+
+    int value = ds->data[index];
+
+    pthread_cleanup_pop(1);  // 执行清理
+    return value;
+}
+```
+
+### 陷阱8：条件变量虚假唤醒
+
+```c
+/* 陷阱8：不使用while循环检查条件 */
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+int ready = 0;
+
+void *consumer_wrong(void *arg) {
+    pthread_mutex_lock(&mutex);
+
+    if (!ready) {  // BUG: 应该用while！
+        pthread_cond_wait(&cond, &mutex);
+    }
+
+    // 消费数据
+    printf("Consuming...\n");
+    ready = 0;
+
+    pthread_mutex_unlock(&mutex);
+    return NULL;
+}
+
+/* 问题分析：
+ * 1. 虚假唤醒（Spurious wakeup）：wait可能无故返回
+ * 2. 条件盗用：另一个消费者可能先获取了数据
+ * 3. 广播唤醒：多个等待者，只有一个应该继续
+ */
+
+/* 修复方案：始终使用while循环 */
+void *consumer_fixed(void *arg) {
+    pthread_mutex_lock(&mutex);
+
+    while (!ready) {  // 正确：循环检查
+        pthread_cond_wait(&cond, &mutex);
+    }
+
+    printf("Consuming...\n");
+    ready = 0;
+
+    pthread_mutex_unlock(&mutex);
+    return NULL;
+}
+```
+
+### 陷阱9：信号丢失（Lost Wakeup）
+
+```c
+/* 陷阱9：信号发送时无等待者 */
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+int ready = 0;
+
+void *slow_consumer(void *arg) {
+    sleep(2);  // 延迟启动
+
+    pthread_mutex_lock(&mutex);
+    while (!ready) {
+        pthread_cond_wait(&cond, &mutex);
+    }
+    printf("Consumer: Got signal\n");
+    pthread_mutex_unlock(&mutex);
+    return NULL;
+}
+
+void *fast_producer(void *arg) {
+    pthread_mutex_lock(&mutex);
+    ready = 1;
+    pthread_cond_signal(&cond);  // 此时consumer还未wait！
+    pthread_mutex_unlock(&mutex);
+    printf("Producer: Signal sent\n");
+    return NULL;
+}
+
+/* 结果：consumer永远等待 */
+
+/* 修复方案1：确保状态持久化 */
+void *producer_fixed(void *arg) {
+    pthread_mutex_lock(&mutex);
+    ready = 1;  // 状态先设置
+    pthread_cond_broadcast(&cond);  // 然后通知
+    pthread_mutex_unlock(&mutex);
+    return NULL;
+}
+
+/* 修复方案2：使用信号量（信号不会丢失） */
+#include <semaphore.h>
+sem_t data_ready;
+
+void consumer_sem(void) {
+    sem_wait(&data_ready);  // 即使生产者先post也能收到
+    printf("Consumer: Got signal\n");
+}
+
+void producer_sem(void) {
+    sem_post(&data_ready);  // 信号量保持计数
+    printf("Producer: Signal sent\n");
+}
+```
+
+### 陷阱10：线程不安全函数使用
+
+```c
+/* 陷阱10：使用非线程安全函数 */
+void *unsafe_worker(void *arg) {
+    int id = *(int*)arg;
+
+    // strerror - 返回静态缓冲区，非线程安全
+    char *msg = strerror(EINVAL);
+    printf("Thread %d: %s\n", id, msg);
+
+    // strtok - 使用静态指针保存状态
+    char str[] = "a,b,c";
+    char *token = strtok(str, ",");
+    while (token) {
+        printf("%s\n", token);
+        token = strtok(NULL, ",");
+    }
+
+    // rand - 使用全局状态
+    int r = rand();
+
+    // asctime, ctime - 使用静态缓冲区
+    time_t now = time(NULL);
+    char *time_str = ctime(&now);
+
+    return NULL;
+}
+
+/* 修复方案：使用线程安全版本 */
+void *safe_worker(void *arg) {
+    int id = *(int*)arg;
+
+    // 使用线程安全版本
+    char buf[256];
+    strerror_r(EINVAL, buf, sizeof(buf));  // POSIX线程安全版本
+    printf("Thread %d: %s\n", id, buf);
+
+    // strtok_r 使用显式状态
+    char str[] = "a,b,c";
+    char *saveptr;
+    char *token = strtok_r(str, ",", &saveptr);
+    while (token) {
+        printf("%s\n", token);
+        token = strtok_r(NULL, ",", &saveptr);
+    }
+
+    // 使用线程局部随机状态
+    unsigned int seed = id;  // 每个线程不同种子
+    int r = rand_r(&seed);
+
+    // ctime_r 使用用户提供的缓冲区
+    time_t now = time(NULL);
+    char time_buf[26];
+    ctime_r(&now, time_buf);
+
+    return NULL;
+}
+
+/* 线程安全函数对照表 */
+// 不安全        → 线程安全
+// strerror      → strerror_r
+// strtok        → strtok_r
+// rand/srand    → rand_r
+// ctime         → ctime_r
+// asctime       → asctime_r
+// gethostbyname → gethostbyname_r
+// localtime     → localtime_r
+// gmtime        → gmtime_r
+```
+
+### 陷阱11：栈数据共享（返回局部变量指针）
+
+```c
+/* 陷阱11：返回局部变量地址 */
+void *worker_broken(void *arg) {
+    int local_result = 42;  // 栈局部变量
+    pthread_exit(&local_result);  // BUG: 返回栈地址！
+}
+
+void *worker_return(void *arg) {
+    int local_result = 42;
+    return &local_result;  // 同样的问题
+}
+
+int demo_stack_bug() {
+    pthread_t thread;
+    pthread_create(&thread, NULL, worker_broken, NULL);
+
+    void *result;
+    pthread_join(thread, &result);
+
+    // result指向已销毁的栈帧，未定义行为
+    printf("Result: %d\n", *(int*)result);  // 可能崩溃或输出垃圾
+
+    return 0;
+}
+
+/* 修复方案1：使用堆分配 */
+void *worker_heap(void *arg) {
+    int *result = malloc(sizeof(int));
+    *result = 42;
+    pthread_exit(result);
+}
+
+/* 修复方案2：使用传入的缓冲区 */
+typedef struct {
+    int input;
+    int output;
+} thread_io_t;
+
+void *worker_io(void *arg) {
+    thread_io_t *io = arg;
+    io->output = io->input * 2;
+    return NULL;
+}
+
+int demo_fixed() {
+    pthread_t thread;
+    thread_io_t io = {.input = 21};
+    pthread_create(&thread, NULL, worker_io, &io);
+    pthread_join(thread, NULL);
+    printf("Result: %d\n", io.output);  // 安全：主线程栈仍然有效
+    return 0;
+}
+
+/* 修复方案3：使用线程参数直接传递值 */
+void *worker_value(void *arg) {
+    intptr_t input = (intptr_t)arg;
+    intptr_t result = input * 2;
+    pthread_exit((void*)result);  // 值直接编码在指针中
+}
+
+int demo_value() {
+    pthread_t thread;
+    pthread_create(&thread, NULL, worker_value, (void*)21);
+
+    void *result;
+    pthread_join(thread, &result);
+    printf("Result: %ld\n", (intptr_t)result);
+    return 0;
+}
+```
+
+### 陷阱12：不完整的 Happens-Before 关系
+
+```c
+/* 陷阱12：缺少同步导致的数据竞争 */
+int shared_data = 0;
+int ready_flag = 0;
+
+void *producer_no_sync(void *arg) {
+    shared_data = 42;
+    ready_flag = 1;  // 没有同步原语，可能重排序！
+    return NULL;
+}
+
+void *consumer_no_sync(void *arg) {
+    while (!ready_flag) {
+        // 忙等待
+    }
+    printf("Data: %d\n", shared_data);  // 可能看到0！
+    return NULL;
+}
+
+/* 问题分析（可能的重排序）：
+ * 编译器/CPU可能重排序：
+ * 实际执行顺序可能是：
+ *   producer: ready_flag = 1
+ *   consumer: 看到ready_flag=1，读取shared_data=0
+ *   producer: shared_data = 42
+ */
+
+/* 修复方案1：使用互斥锁建立happens-before */
+pthread_mutex_t hb_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void *producer_hb(void *arg) {
+    pthread_mutex_lock(&hb_mutex);
+    shared_data = 42;
+    ready_flag = 1;
+    pthread_mutex_unlock(&hb_mutex);
+    return NULL;
+}
+
+void *consumer_hb(void *arg) {
+    pthread_mutex_lock(&hb_mutex);
+    while (!ready_flag) {
+        pthread_mutex_unlock(&hb_mutex);
+        sched_yield();
+        pthread_mutex_lock(&hb_mutex);
+    }
+    printf("Data: %d\n", shared_data);  // 保证看到42
+    pthread_mutex_unlock(&hb_mutex);
+    return NULL;
+}
+
+/* 修复方案2：使用内存屏障 */
+#include <stdatomic.h>
+atomic_int atomic_ready = 0;
+
+void *producer_barrier(void *arg) {
+    shared_data = 42;
+    atomic_thread_fence(memory_order_release);  // 发布语义
+    atomic_store_explicit(&atomic_ready, 1, memory_order_relaxed);
+    return NULL;
+}
+
+void *consumer_barrier(void *arg) {
+    while (atomic_load_explicit(&atomic_ready, memory_order_relaxed) == 0) {
+        // 自旋
+    }
+    atomic_thread_fence(memory_order_acquire);  // 获取语义
+    printf("Data: %d\n", shared_data);  // 保证看到42
+    return NULL;
+}
+
+/* 修复方案3：使用C11原子变量 */
+_Atomic int atomic_data = 0;
+
+void *producer_atomic(void *arg) {
+    atomic_store(&atomic_data, 42);
+    return NULL;
+}
+
+void *consumer_atomic(void *arg) {
+    int val = atomic_load(&atomic_data);
+    printf("Data: %d\n", val);
+    return NULL;
+}
+```
+
+### 陷阱13：清理处理程序与取消点
+
+```c
+/* 陷阱13：资源泄漏在取消时 */
+void *worker_cleanup_bug(void *arg) {
+    FILE *fp = fopen("temp.txt", "w");
+    if (!fp) return NULL;
+
+    // 分配内存
+    char *buffer = malloc(1024);
+
+    // 长时间操作（取消点）
+    for (int i = 0; i < 100; i++) {
+        fwrite(buffer, 1, 1024, fp);  // 可能是取消点
+    }
+
+    // 如果在这里被取消，buffer和fp泄漏！
+    free(buffer);
+    fclose(fp);
+    return NULL;
+}
+
+/* 修复方案：使用pthread_cleanup_push/pop */
+void cleanup_file(void *arg) {
+    FILE *fp = arg;
+    if (fp) {
+        printf("Cleanup: closing file\n");
+        fclose(fp);
+    }
+}
+
+void cleanup_memory(void *arg) {
+    void *ptr = arg;
+    if (ptr) {
+        printf("Cleanup: freeing memory\n");
+        free(ptr);
+    }
+}
+
+void *worker_cleanup_fixed(void *arg) {
+    FILE *fp = fopen("temp.txt", "w");
+    if (!fp) return NULL;
+
+    pthread_cleanup_push(cleanup_file, fp);
+
+    char *buffer = malloc(1024);
+    pthread_cleanup_push(cleanup_memory, buffer);
+
+    // 长时间操作
+    for (int i = 0; i < 100; i++) {
+        fwrite(buffer, 1, 1024, fp);
+    }
+
+    // 正常退出时也执行清理
+    pthread_cleanup_pop(1);  // 1 = 执行清理
+    pthread_cleanup_pop(1);
+    return NULL;
+}
+```
+
+---
+
+## 🧭 第六部分：思维导图
+
+### 6.1 线程概念全景图
+
+```
+POSIX线程编程全景
+│
+├── 1. 基础概念
+│   ├── 线程模型
+│   │   ├── 执行上下文（PC/寄存器/栈）
+│   │   ├── 线程 vs 进程
+│   │   └── 内核线程 vs 用户线程
+│   ├── 线程状态
+│   │   ├── NEW → READY → RUNNING → BLOCKED → TERMINATED
+│   │   └── 状态转换条件
+│   └── 线程标识
+│       ├── pthread_t（不透明类型）
+│       └── 线程特定数据（TSD）
+│
+├── 2. 生命周期管理
+│   ├── 创建
+│   │   ├── pthread_create()
+│   │   ├── 线程属性（栈大小/分离状态）
+│   │   └── 启动参数传递
+│   ├── 终止
+│   │   ├── 正常返回
+│   │   ├── pthread_exit()
+│   │   └── pthread_cancel()
+│   └── 清理
+│       ├── pthread_join()（同步回收）
+│       ├── pthread_detach()（异步回收）
+│       └── 取消清理处理程序
+│
+├── 3. 同步机制
+│   ├── 互斥（Mutex）
+│   │   ├── 类型：普通/递归/错误检查/自适应
+│   │   ├── 操作：lock/trylock/timedlock/unlock
+│   │   └── 优先级继承/保护协议
+│   ├── 读写锁（RWLock）
+│   │   ├── 读者优先/写者优先/公平
+│   │   └── 读锁/写锁/降级
+│   ├── 条件变量（CondVar）
+│   │   ├── wait/signal/broadcast
+│   │   ├── 虚假唤醒处理
+│   │   └── 与互斥锁的配合
+│   ├── 信号量（Semaphore）
+│   │   ├── 二进制信号量
+│   │   └── 计数信号量
+│   └── 屏障（Barrier）
+│       ├── 多线程同步点
+│       └── 代计数机制
+│
+├── 4. 并发控制模式
+│   ├── 生产者-消费者
+│   ├── 读者-写者
+│   ├── 哲学家就餐
+│   ├── 线程池
+│   ├── 工作窃取
+│   └── 屏障同步
+│
+├── 5. 线程安全
+│   ├── 可重入性
+│   │   ├── 不依赖共享状态
+│   │   └── 纯函数
+│   ├── 线程安全级别
+│   │   ├── 线程不安全
+│   │   ├── 线程安全（同步）
+│   │   ├── 可重入
+│   │   └── 异步信号安全
+│   └── 线程局部存储
+│       ├── __thread（GCC）
+│       ├── pthread_key_t
+│       └── C11 _Thread_local
+│
+├── 6. 内存模型
+│   ├── Happens-Before关系
+│   ├── 内存序
+│   │   ├── memory_order_relaxed
+│   │   ├── memory_order_acquire/release
+│   │   ├── memory_order_acq_rel
+│   │   └── memory_order_seq_cst
+│   └── 数据竞争
+│       ├── 定义
+│       └── 避免策略
+│
+└── 7. 常见问题
+    ├── 竞态条件
+    ├── 死锁（四必要条件）
+    ├── 活锁
+    ├── 饥饿
+    ├── 优先级反转
+    └── 信号丢失
+```
+
+### 6.2 同步机制选择图
+
+```
+同步机制选择
+│
+├── 需要互斥访问共享数据？
+│   ├── 是
+│   │   ├── 读多写少？
+│   │   │   ├── 是 → 读写锁（RWLock）
+│   │   │   └── 否 → 互斥锁（Mutex）
+│   │   │       ├── 需要递归加锁？
+│   │   │       │   ├── 是 → 递归锁
+│   │   │       │   └── 否 → 普通锁/自适应锁
+│   │   │       └── 需要超时？
+│   │   │           ├── 是 → timedlock
+│   │   │           └── 否 → trylock/lock
+│   │   └── 需要等待特定条件？
+│   │       ├── 是 → 条件变量 + 互斥锁
+│   │       └── 否 → 单纯互斥锁
+│   └── 否
+│       └── 需要协调多线程进度？
+│           ├── 是
+│           │   ├── 所有线程到达某点才能继续？
+│           │   │   ├── 是 → 屏障（Barrier）
+│           │   │   └── 否
+│           │   │       ├── 生产者-消费者模式？
+│           │   │       │   ├── 单生产者 → 信号量/条件变量
+│           │   │       │   └── 多生产者 → 互斥锁+条件变量
+│           │   │       └── 资源计数限制？
+│           │   │           └── 是 → 计数信号量
+│           └── 否 → 无需同步
+│
+└── 性能考量
+    ├── 高竞争场景 → 自适应锁/退避策略
+    ├── 低竞争场景 → 简单互斥锁
+    └── 读密集场景 → 读写锁/RCU
+```
+
+### 6.3 并发问题诊断图
+
+```
+并发问题诊断
+│
+├── 程序崩溃/段错误？
+│   ├── 是
+│   │   ├── 使用已释放的锁？
+│   │   ├── 栈溢出（线程栈太小）？
+│   │   └── 访问已join线程的TSD？
+│   └── 否
+│       └── 继续检查
+│
+├── 死锁（程序无响应）？
+│   ├── 是
+│   │   ├── 锁顺序不一致？（循环等待检测）
+│   │   ├── 忘记解锁？（提前return）
+│   │   ├── 同线程重复加锁？（递归问题）
+│   │   └── 线程A持有锁M等N，线程B持有锁N等M？
+│   └── 否
+│       └── 继续检查
+│
+├── 数据不一致（随机结果）？
+│   ├── 是
+│   │   ├── 缺少同步原语？（数据竞争）
+│   │   ├── 非原子操作？（读-改-写）
+│   │   ├── 编译器优化导致的重排序？
+│   │   └── 缺少内存屏障？
+│   └── 否
+│       └── 继续检查
+│
+├── 某些线程永不执行？
+│   ├── 是
+│   │   ├── 饥饿？（低优先级/读者被写者阻塞）
+│   │   ├── 信号丢失？（先signal后wait）
+│   │   └── 条件判断错误？（if代替while）
+│   └── 否
+│       └── 继续检查
+│
+├── 性能问题（扩展性差）？
+│   ├── 是
+│   │   ├── 锁粒度过大？
+│   │   ├── 伪共享？（缓存行竞争）
+│   │   ├── 过度同步？
+│   │   ├── 线程数过多？（上下文切换开销）
+│   │   └── 负载不均衡？
+│   └── 否
+│       └── 继续检查
+│
+└── 资源泄漏？
+    ├── 线程未join/detach？
+    ├── 取消时未清理？
+    └── 锁未销毁？
+```
+
+---
+
+## 🌳 第七部分：决策树
+
+### 7.1 同步机制选择决策树
+
+```
+开始：需要线程间协调？
+│
+├─ 否 → 无需同步
+│
+└─ 是 → 需要保护共享数据？
+    │
+    ├─ 是 → 读写比例如何？
+    │   │
+    │   ├─ 读 >> 写 → 读写锁（RWLock）
+    │   │   ├─ 写者优先？ → 配置写优先策略
+    │   │   └─ 读者公平？ → 标准RWLock
+    │   │
+    │   ├─ 读 ≈ 写 → 互斥锁（Mutex）
+    │   │   ├─ 同线程可能递归加锁？ → 递归锁
+    │   │   ├─ 需要检测死锁？ → 错误检查锁
+    │   │   ├─ 高竞争场景？ → 自适应锁
+    │   │   └─ 一般场景 → 普通锁
+    │   │
+    │   └─ 读 << 写 → 互斥锁（Mutex）
+    │
+    └─ 否 → 协调类型？
+        │
+        ├─ 等待特定条件 → 条件变量
+        │   ├─ 单唤醒？ → pthread_cond_signal
+        │   └─ 全部唤醒？ → pthread_cond_broadcast
+        │
+        ├─ 资源计数限制 → 信号量
+        │   ├─ 二值状态？ → 二进制信号量
+        │   └─ 多值计数？ → 计数信号量
+        │
+        └─ 多线程同步点 → 屏障（Barrier）
+            ├─ 固定线程数？ → pthread_barrier
+            └─ 动态线程数？ → 自定义实现
+```
+
+### 7.2 并发问题诊断决策树
+
+```
+问题现象识别
+│
+├─ 程序挂起/无响应
+│   ├─ 所有线程都停止？
+│   │   ├─ 是 → 检查：
+│   │   │   ├─ 死锁（循环等待）
+│   │   │   ├─ 信号丢失（条件变量）
+│   │   │   └─ 屏障等待（线程未到达）
+│   │   └─ 否（部分线程工作）→ 检查：
+│   │       ├─ 饥饿（优先级/策略问题）
+│   │       └─ 活锁（无限重试）
+│   └─ 有线程在运行但无进展？
+│       └─ 活锁检测（检查重试循环）
+│
+├─ 数据错误/不一致
+│   ├─ 结果随机变化？
+│   │   ├─ 是 → 数据竞争（缺少同步）
+│   │   └─ 否 → 算法错误
+│   └─ 特定条件下的错误？
+│       └─ 竞态条件（时序依赖）
+│
+├─ 崩溃/段错误
+│   ├─ 在锁操作时崩溃？
+│   │   ├─ 使用已销毁的锁？
+│   │   ├─ 未初始化的锁？
+│   │   └─ 双重解锁？
+│   ├─ 访问共享数据时崩溃？
+│   │   ├─ 使用后释放（use-after-free）
+│   │   └─ 空指针（未初始化）
+│   └─ 栈相关崩溃？
+│       └─ 线程栈溢出（增大栈大小）
+│
+└─ 性能问题
+    ├─ 扩展性差（加速比低）
+    │   ├─ 锁竞争严重？
+    │   │   ├─ 减小锁粒度
+    │   │   ├─ 使用读写锁
+    │   │   └─ 锁分段（striping）
+    │   └─ 负载不均衡？
+    │       └─ 工作窃取队列
+    ├─ 上下文切换开销大
+    │   └─ 减少线程数
+    └─ 缓存未命中率高
+        └─ 检查伪共享（padding对齐）
+```
+
+---
+
+## ⚡ 第八部分：性能优化
+
+### 8.1 锁粒度优化
+
+```c
+/*========================================
+ * 粗粒度锁（低并发，简单）
+ *========================================*/
+typedef struct {
+    pthread_mutex_t lock;  // 保护整个结构
+    int field_a;
+    int field_b;
+    int field_c;
+} coarse_grained_t;
+
+/*========================================
+ * 细粒度锁（高并发，复杂）
+ *========================================*/
+typedef struct {
+    pthread_mutex_t lock_a;  // 独立保护每个字段
+    pthread_mutex_t lock_b;
+    pthread_mutex_t lock_c;
+    int field_a;
+    int field_b;
+    int field_c;
+} fine_grained_t;
+
+/*========================================
+ * 锁分段（中等粒度，折中）
+ *========================================*/
+#define NUM_SEGMENTS 16
+
+typedef struct {
+    pthread_mutex_t locks[NUM_SEGMENTS];
+    int data[NUM_SEGMENTS][100];  // 分段数据
+} striped_lock_t;
+
+void striped_write(striped_lock_t *sl, int index, int value) {
+    int segment = index % NUM_SEGMENTS;
+    pthread_mutex_lock(&sl->locks[segment]);
+    sl->data[segment][index / NUM_SEGMENTS] = value;
+    pthread_mutex_unlock(&sl->locks[segment]);
+}
+
+/*========================================
+ * 读写锁优化读多写少场景
+ *========================================*/
+typedef struct {
+    pthread_rwlock_t rwlock;
+    int config_data[1000];  // 配置数据，很少修改
+} config_t;
+
+int read_config(config_t *cfg, int index) {
+    pthread_rwlock_rdlock(&cfg->rwlock);
+    int value = cfg->config_data[index];
+    pthread_rwlock_unlock(&cfg->rwlock);
+    return value;
+}
+
+void update_config(config_t *cfg, int index, int value) {
+    pthread_rwlock_wrlock(&cfg->rwlock);
+    cfg->config_data[index] = value;
+    pthread_rwlock_unlock(&cfg->rwlock);
+}
+```
+
+### 8.2 无锁编程基础
+
+```c
+#include <stdatomic.h>
+#include <stdbool.h>
+
+/*========================================
+ * CAS（Compare-And-Swap）操作
+ *========================================*/
+typedef struct {
+    atomic_int value;
+} atomic_counter_t;
+
+void atomic_inc(atomic_counter_t *ac) {
+    int expected, desired;
+    do {
+        expected = atomic_load(&ac->value);
+        desired = expected + 1;
+    } while (!atomic_compare_exchange_weak(&ac->value, &expected, desired));
+}
+
+/*========================================
+ * 无锁栈（Treiber栈）
+ *========================================*/
+typedef struct node {
+    void *data;
+    struct node *next;
+} node_t;
+
+typedef struct {
+    atomic_intptr_t top;  // 使用原子指针
+} lock_free_stack_t;
+
+void lf_stack_init(lock_free_stack_t *s) {
+    atomic_init(&s->top, (intptr_t)NULL);
+}
+
+void lf_push(lock_free_stack_t *s, node_t *new_node) {
+    node_t *old_top;
+    do {
+        old_top = (node_t*)atomic_load(&s->top);
+        new_node->next = old_top;
+    } while (!atomic_compare_exchange_weak(&s->top,
+             (intptr_t*)&old_top, (intptr_t)new_node));
+}
+
+node_t *lf_pop(lock_free_stack_t *s) {
+    node_t *old_top;
+    do {
+        old_top = (node_t*)atomic_load(&s->top);
+        if (old_top == NULL) return NULL;
+    } while (!atomic_compare_exchange_weak(&s->top,
+             (intptr_t*)&old_top, (intptr_t)old_top->next));
+    return old_top;
+}
+
+/*========================================
+ * 无锁队列（Michael-Scott队列）
+ *========================================*/
+typedef struct {
+    atomic_intptr_t head;
+    atomic_intptr_t tail;
+} lock_free_queue_t;
+
+void lf_queue_init(lock_free_queue_t *q) {
+    node_t *dummy = calloc(1, sizeof(node_t));
+    atomic_init(&q->head, (intptr_t)dummy);
+    atomic_init(&q->tail, (intptr_t)dummy);
+}
+
+void lf_enqueue(lock_free_queue_t *q, void *data) {
+    node_t *new_node = calloc(1, sizeof(node_t));
+    new_node->data = data;
+
+    node_t *tail;
+    while (1) {
+        tail = (node_t*)atomic_load(&q->tail);
+        node_t *next = (node_t*)atomic_load((atomic_intptr_t*)&tail->next);
+
+        if (tail == (node_t*)atomic_load(&q->tail)) {
+            if (next == NULL) {
+                if (atomic_compare_exchange_weak(
+                        (atomic_intptr_t*)&tail->next,
+                        (intptr_t*)&next, (intptr_t)new_node)) {
+                    break;
+                }
+            } else {
+                atomic_compare_exchange_weak(&q->tail,
+                    (intptr_t*)&tail, (intptr_t)next);
+            }
+        }
+    }
+    atomic_compare_exchange_weak(&q->tail, (intptr_t*)&tail, (intptr_t)new_node);
+}
+```
+
+### 8.3 伪共享避免
+
+```c
+/*========================================
+ * 问题：伪共享（False Sharing）
+ *
+ * CPU缓存行通常为64字节
+ * 不同CPU核心上的线程修改同一缓存行的不同变量
+ * 导致缓存无效化，性能下降
+ *========================================*/
+
+/* 问题代码：性能杀手 */
+typedef struct {
+    atomic_int counter0;  // CPU0频繁修改
+    atomic_int counter1;  // CPU1频繁修改
+    atomic_int counter2;  // CPU2频繁修改
+    atomic_int counter3;  // CPU3频繁修改
+    // 这4个int可能在同一缓存行（64字节）
+} false_sharing_t;
+
+/* 修复方案：缓存行填充 */
+#define CACHE_LINE_SIZE 64
+
+typedef struct {
+    atomic_int counter;
+    char padding[CACHE_LINE_SIZE - sizeof(atomic_int)];
+} padded_counter_t;
+
+typedef struct {
+    padded_counter_t counters[4];  // 每个在独立缓存行
+} no_false_sharing_t;
+
+/* 实际应用：多线程计数器 */
+void increment_counter(no_false_sharing_t *counters, int thread_id) {
+    atomic_fetch_add(&counters->counters[thread_id].counter, 1);
+}
+
+/*========================================
+ * 性能对比测试
+ *========================================*/
+#include <time.h>
+
+void benchmark_false_sharing() {
+    false_sharing_t fs;
+    no_false_sharing_t nfs;
+
+    atomic_init(&fs.counter0, 0);
+    atomic_init(&fs.counter1, 0);
+    atomic_init(&fs.counter2, 0);
+    atomic_init(&fs.counter3, 0);
+
+    // 测试无填充版本（慢）
+    clock_t start = clock();
+    for (int i = 0; i < 10000000; i++) {
+        atomic_fetch_add(&fs.counter0, 1);
+        atomic_fetch_add(&fs.counter1, 1);
+        atomic_fetch_add(&fs.counter2, 1);
+        atomic_fetch_add(&fs.counter3, 1);
+    }
+    printf("False sharing: %ld ticks\n", clock() - start);
+
+    // 测试填充版本（快）
+    start = clock();
+    for (int i = 0; i < 10000000; i++) {
+        atomic_fetch_add(&nfs.counters[0].counter, 1);
+        atomic_fetch_add(&nfs.counters[1].counter, 1);
+        atomic_fetch_add(&nfs.counters[2].counter, 1);
+        atomic_fetch_add(&nfs.counters[3].counter, 1);
+    }
+    printf("No false sharing: %ld ticks\n", clock() - start);
+}
+```
+
+### 8.4 CPU亲和性设置
+
+```c
+#define _GNU_SOURCE
+#include <pthread.h>
+#include <sched.h>
+
+/*========================================
+ * 绑定线程到特定CPU核心
+ * 减少缓存迁移，提高性能
+ *========================================*/
+
+int set_thread_affinity(int cpu_id) {
+    cpu_set_t cpuset;
+    CPU_ZERO(&cpuset);
+    CPU_SET(cpu_id, &cpuset);
+
+    pthread_t current = pthread_self();
+    return pthread_setaffinity_np(current, sizeof(cpu_set_t), &cpuset);
+}
+
+void *affinity_worker(void *arg) {
+    int cpu_id = *(int*)arg;
+
+    // 设置CPU亲和性
+    if (set_thread_affinity(cpu_id) != 0) {
+        fprintf(stderr, "Failed to set affinity to CPU %d\n", cpu_id);
+    }
+
+    // 验证
+    cpu_set_t cpuset;
+    CPU_ZERO(&cpuset);
+    pthread_getaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset);
+
+    printf("Thread running on CPU: ");
+    for (int i = 0; i < CPU_SETSIZE; i++) {
+        if (CPU_ISSET(i, &cpuset)) {
+            printf("%d ", i);
+        }
+    }
+    printf("\n");
+
+    // 执行工作...
+    return NULL;
+}
+
+/*========================================
+ * NUMA感知的内存分配
+ *========================================*/
+#include <numa.h>
+
+void *numa_alloc_on_node(size_t size, int node) {
+    #ifdef HAVE_NUMA
+    return numa_alloc_onnode(size, node);
+    #else
+    return malloc(size);
+    #endif
+}
+
+void numa_optimal_worker(int node_id) {
+    // 在NUMA节点上分配内存
+    void *local_memory = numa_alloc_onnode(1024 * 1024, node_id);
+
+    // 绑定到对应节点的CPU
+    int cpu_start = node_id * (sysconf(_SC_NPROCESSORS_ONLN) / numa_num_configured_nodes());
+    set_thread_affinity(cpu_start);
+
+    // 访问本地内存（低延迟）
+    // ...
+
+    #ifdef HAVE_NUMA
+    numa_free(local_memory, 1024 * 1024);
+    #else
+    free(local_memory);
+    #endif
+}
+```
+
+### 8.5 性能优化检查清单
+
+| 优化领域 | 检查项 | 优化策略 |
+|:---------|:-------|:---------|
+| **锁粒度** | 单个锁保护大量数据？ | 拆分为多个细粒度锁 |
+| | 锁持有时间过长？ | 缩小临界区，延迟计算 |
+| | 读写比例不均衡？ | 使用读写锁 |
+| **无锁编程** | CAS循环竞争激烈？ | 指数退避，随机抖动 |
+| | ABA问题？ | 使用带版本号的指针 |
+| | 内存顺序要求？ | 使用适当memory_order |
+| **缓存优化** | 多线程修改相邻变量？ | 缓存行填充（64字节对齐） |
+| | 频繁缓存未命中？ | 数据预取，局部性优化 |
+| **线程管理** | 线程创建销毁频繁？ | 使用线程池 |
+| | 线程数超过CPU核心？ | 限制线程数，任务队列 |
+| | 负载不均衡？ | 工作窃取，动态任务分配 |
+| **NUMA优化** | 跨节点内存访问？ | NUMA本地分配，CPU绑定 |
+
+---
+
+## ✅ 质量验收清单
+
+- [x] 线程创建与销毁（多种模式）
+- [x] 互斥锁使用（类型/属性/协议）
+- [x] 条件变量同步（等待-通知协议）
+- [x] 读写锁（读者/写者优先策略）
+- [x] 信号量（资源计数）
+- [x] 屏障同步
+- [x] 线程局部存储（多种方法）
+- [x] 线程池完整实现
+- [x] 生产者-消费者（多种实现）
+- [x] 读者-写者问题（多种策略）
+- [x] 哲学家就餐问题（死锁避免）
+- [x] 工作窃取队列
+- [x] 12+ 常见陷阱与修复
+- [x] 形式化定义与数学模型
+- [x] 属性维度矩阵（7+表格）
+- [x] 思维导图（全景/选择/诊断）
+- [x] 决策树（同步选择/问题诊断）
+- [x] 性能优化（锁粒度/无锁/缓存/NUMA）
+
+---
+
+## 📚 参考资源
+
+### 权威文档
+
+- [POSIX.1-2008](https://pubs.opengroup.org/onlinepubs/9699919799/) - IEEE Std 1003.1-2008
+- [Linux man-pages](https://man7.org/linux/man-pages/) - pthread系列
+
+### 经典书籍
+
+- Butenhof, "Programming with POSIX Threads" - 权威指南
+- Goetz et al., "Java Concurrency in Practice" - 并发设计模式
+- Herlihy & Shavit, "The Art of Multiprocessor Programming" - 无锁算法
+
+### 相关工具
+
+- `helgrind` - Valgrind的线程错误检测器
+- `drd` - 数据竞争检测器
+- `ThreadSanitizer` - GCC/Clang的数据竞争检测
+
+---
+
+> **更新记录**
+>
+> - 2026-03-16: 全面深化，添加形式化定义、属性矩阵、12+陷阱、决策树、性能优化
+> - 2025-03-09: 创建基础版本
