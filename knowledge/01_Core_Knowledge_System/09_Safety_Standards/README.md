@@ -8,11 +8,11 @@
 
 | 标准 | 应用领域 | 文档状态 |
 |:-----|:---------|:--------:|
-| [MISRA C:2023](./MISRA_C_2023/) | 汽车、航空、工业 | ✅ 完成(50+规则) |
-| [IEEE 754-2019](./IEEE_754_Floating_Point/) | 浮点运算 | ✅ 完成(基础+运算) |
-| ISO 26262 | 汽车功能安全 | 📝 待创建 |
-| DO-178C | 航空软件 | 📝 待创建 |
-| IEC 61508 | 工业安全 | 📝 待创建 |
+| [MISRA C:2023](./MISRA_C_2023/) | 汽车、航空、工业 | ✅ 完成(90+规则) |
+| [IEEE 754-2019](./IEEE_754_Floating_Point/) | 浮点运算 | ✅ 完成(核心) |
+| [ISO 26262](./ISO_26262/) | 汽车功能安全 | ✅ 完成(概述) |
+| [DO-178C](./DO_178C/) | 航空软件 | ✅ 完成(概述) |
+| [IEC 61508](./IEC_61508/) | 工业功能安全 | ✅ 完成(概述) |
 | POSIX.1-2024 | 可移植操作系统 | 📝 待创建 |
 
 ---
@@ -31,20 +31,87 @@
 | [Rules 3.x](./MISRA_C_2023/03_MISRA_C_2023_Rules_3.md) | 注释与可读性 | 3.1-3.4 |
 | [Rules 4.x](./MISRA_C_2023/04_MISRA_C_2023_Rules_4.md) | 标识符 | 4.1-4.5 |
 | [Rules 5.x](./MISRA_C_2023/05_MISRA_C_2023_Rules_5.md) | 类型系统 | 5.1-5.9 |
-| [Rules 6.x](./MISRA_C_2023/06_MISRA_C_2023_Rules_6.md) | 表达式 | 6.1-6.10 |
+| [Rules 6.x](./MISRA_C_2023/06_MISRA_C_2023_Rules_6.md) | 表达式与语句 | 6.1-6.10 |
 | [Rules 7.x](./MISRA_C_2023/07_MISRA_C_2023_Rules_7.md) | 指针安全 | 7.1-7.5 |
-| [Rules 8.x](./MISRA_C_2023/08_MISRA_C_2023_Rules_8.md) | 预处理与库 | 8.1-8.15 |
+| [Rules 8.x](./MISRA_C_2023/08_MISRA_C_2023_Rules_8.md) | 预处理与标准库 | 8.1-8.15 |
 | [Rules 9.x](./MISRA_C_2023/09_MISRA_C_2023_Rules_9.md) | 资源与并发 | 9.1-9.5 |
+| [Rules 10.x](./MISRA_C_2023/10_MISRA_C_2023_Rules_10.md) | 声明与定义 | 10.1-10.8 |
+| [Rules 11.x](./MISRA_C_2023/11_MISRA_C_2023_Rules_11.md) | 表达式与运算符 | 11.1-11.6 |
+| [Rules 12.x](./MISRA_C_2023/12_MISRA_C_2023_Rules_12.md) | 控制流语句 | 12.1-12.6 |
+| [Rules 13.x](./MISRA_C_2023/13_MISRA_C_2023_Rules_13.md) | 函数安全 | 13.1-13.6 |
+
+### 规则实施状态
+
+| 章节 | 规则范围 | 状态 | 完成度 |
+|:-----|:---------|:----:|:------:|
+| 第1章 | Rules 1.1-1.5 | ✅ | 100% |
+| 第2章 | Rules 2.1-2.7 | ✅ | 100% |
+| 第3章 | Rules 3.1-3.4 | ✅ | 100% |
+| 第4章 | Rules 4.1-4.5 | ✅ | 100% |
+| 第5章 | Rules 5.1-5.9 | ✅ | 100% |
+| 第6章 | Rules 6.1-6.10 | ✅ | 100% |
+| 第7章 | Rules 7.1-7.5 | ✅ | 100% |
+| 第8章 | Rules 8.1-8.15 | ✅ | 100% |
+| 第9章 | Rules 9.1-9.5 | ✅ | 100% |
+| 第10章 | Rules 10.1-10.8 | ✅ | 100% |
+| 第11章 | Rules 11.1-11.6 | ✅ | 100% |
+| 第12章 | Rules 12.1-12.6 | ✅ | 100% |
+| 第13章 | Rules 13.1-13.6 | ✅ | 100% |
+| 第14-22章 | Rules 14.x-22.x | 📝 | 待创建 |
+
+**总计**: ~90条规则已文档化（共220条，约41%）
 
 ### 快速检查清单
 
 ```markdown
-□ 无未定义行为（Rule 1.3）
-□ 类型转换安全（Rules 5.x）
-□ 指针使用安全（Rules 7.x）
-□ 表达式无副作用冲突（Rule 6.1）
-□ 内存管理正确（Rules 7.x, 8.7）
-□ 资源对称释放（Rules 9.x）
+## 类型安全
+□ 不使用隐式窄化转换
+□ char类型只用于字符
+□ 不使用变长数组(VLA)
+□ 枚举类型完整处理
+
+## 指针安全
+□ 解引用前检查NULL
+□ free后立即置NULL
+□ 指针运算在数组边界内
+□ 不使用已释放内存
+
+## 表达式安全
+□ 不依赖表达式求值顺序
+□ 单表达式中只有一个副作用
+□ 不使用逗号运算符
+□ 布尔表达式使用bool类型
+
+## 控制流
+□ switch有default
+□ 不使用向后goto
+□ 循环计数器不在体内修改
+□ 无死代码
+```
+
+---
+
+## 功能安全标准
+
+### ASIL/DAL/SIL对比
+
+| 标准 | 等级系统 | 最高等级 | C语言要求 |
+|:-----|:---------|:---------|:----------|
+| ISO 26262 | ASIL (A-D) | ASIL D | MISRA C Required+Mandatory |
+| DO-178C | DAL (A-E) | Level A | MISRA C Required+Mandatory |
+| IEC 61508 | SIL (1-4) | SIL 4 | MISRA C Required+Mandatory |
+
+### 标准关系
+
+```
+IEC 61508 (通用基础)
+    ├── ISO 26262 (汽车)
+    ├── EN 50128 (铁路)
+    ├── IEC 62304 (医疗)
+    ├── IEC 61511 (过程工业)
+    └── IEC 62061 (机械)
+
+DO-178C (航空，独立发展但与MISRA兼容)
 ```
 
 ---
@@ -58,7 +125,7 @@
 | 文档 | 内容 |
 |:-----|:-----|
 | [基础](./IEEE_754_Floating_Point/01_IEEE_754_Basics.md) | 二进制格式、特殊值、精度 |
-| [运算](./IEEE_754_Floating_Point/02_IEEE_754_Operations.md) | 算术运算、舍入、异常 |
+| [运算](./IEEE_754_Floating_Point/02_IEEE_754_Operations.md) | 运算、舍入模式、异常 |
 
 ### 关键概念
 
@@ -89,80 +156,31 @@ if (fetestexcept(FE_OVERFLOW)) {
 
 ---
 
-## 安全关键编程原则
-
-### 1. 防御性编程
-
-```c
-/* 参数验证 */
-void process(const char *data, size_t len)
-{
-    if (data == NULL || len == 0) {
-        return;
-    }
-    /* 处理 */
-}
-
-/* 边界检查 */
-if (index >= 0 && index < ARRAY_SIZE) {
-    array[index] = value;
-}
-```
-
-### 2. 失败安全
-
-```c
-/* 默认安全 */
-enum state current = STATE_SAFE;
-
-switch (cmd) {
-    case CMD_START:
-        current = STATE_RUNNING;
-        break;
-    default:
-        /* 未知命令：保持安全状态 */
-        break;
-}
-```
-
-### 3. 资源管理
-
-```c
-/* RAII模式 */
-struct resource *r = resource_open();
-if (r == NULL) {
-    return ERROR;
-}
-
-/* 处理 */
-
-resource_close(r);  /* 总是关闭 */
-```
-
----
-
 ## 工具链
 
-### 静态分析
+### 静态分析工具
 
-| 工具 | 用途 | MISRA支持 |
-|:-----|:-----|:---------:|
-| PC-lint | 静态分析 | ✅ 完整 |
-| Coverity | 深度分析 | ✅ 部分 |
-| Cppcheck | 开源检查 | ⚠️ 基础 |
-| Clang Static Analyzer | 编译时检查 | ⚠️ 部分 |
+| 工具 | 厂商 | 说明 | 价格 |
+|:-----|:-----|:-----|:----:|
+| PC-lint/Flexelint | Gimpel | 行业标杆 | 💰 |
+| Coverity | Synopsys | 深度分析 | 💰💰 |
+| Polyspace | MathWorks | 形式化验证 | 💰💰 |
+| Klocwork | Perforce | 企业级 | 💰💰 |
+| Cppcheck | 开源 | 免费方案 | 免费 |
 
-### 运行时检查
+### 编译器检查
 
 ```bash
-# Address Sanitizer
-gcc -fsanitize=address -g -o prog prog.c
+# GCC
+ gcc -Wall -Wextra -Wpedantic \
+     -Wshadow -Wconversion \
+     -Wundef -Wstrict-prototypes \
+     -c file.c
 
-# Undefined Behavior Sanitizer
-gcc -fsanitize=undefined -o prog prog.c
-
-# 浮点异常捕获
-gcc -fsignaling-nans -o prog prog.c
+# Clang（更严格）
+ clang -Weverything \
+       -Wno-padded \
+       -c file.c
 ```
 
 ---
@@ -173,6 +191,7 @@ gcc -fsignaling-nans -o prog prog.c
 - [IEEE 754-2019](https://ieeexplore.ieee.org/document/8766229) - 浮点标准
 - [ISO 26262](https://www.iso.org/standard/68383.html) - 汽车功能安全
 - [DO-178C](https://my.rtca.org/) - 航空软件标准
+- [IEC 61508](https://www.iec.ch/functionalsafety) - 工业功能安全
 
 ---
 
