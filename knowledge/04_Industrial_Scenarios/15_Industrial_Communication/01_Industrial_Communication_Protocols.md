@@ -4018,3 +4018,1323 @@ int eip_unregister_session(eip_session_t *session)
     return 0;
 }
 ```
+
+
+---
+
+## 10. 无线工业通信
+
+### 10.1 工业无线概述
+
+工业无线通信正在快速发展，主要技术包括：
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    工业无线技术对比                          │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  技术          | 频段      | 速率      | 距离      | 特点    │
+│  ─────────────────────────────────────────────────────────  │
+│  WiFi 4/5/6    | 2.4/5GHz  | 1Gbps+    | 100m      | 高带宽  │
+│  4G LTE        | 授权频段  | 100Mbps   | km级      | 广覆盖  │
+│  5G            | 授权频段  | 10Gbps    | km级      | 低时延  │
+│  LoRa          | Sub-GHz   | 50kbps    | 15km      | 超远距  │
+│  ZigBee        | 2.4GHz    | 250kbps   | 100m      | 低功耗  │
+│  WirelessHART  | 2.4GHz    | 250kbps   | 200m      | 工业级  │
+│  NB-IoT        | 授权频段  | 100kbps   | km级      | 广覆盖  │
+│                                                             │
+│  工业应用选择:                                              │
+│  ├─ 视频监控/大数据: WiFi 6, 5G                             │
+│  ├─ 移动设备/远程监控: 4G/5G                                │
+│  ├─ 传感器网络: LoRa, ZigBee, WirelessHART                  │
+│  └─ 大规模传感器: NB-IoT                                    │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 10.2 4G/5G工业DTU实现
+
+```c
+/**
+ * @file industrial_4g.h
+ * @brief 工业4G/5G DTU通信模块
+ * 
+ * 通过AT命令控制4G/5G模块(如移远、SIMCom等)
+ */
+
+#ifndef INDUSTRIAL_4G_H
+#define INDUSTRIAL_4G_H
+
+#include <stdint.h>
+#include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* 4G模块句柄 */
+typedef struct {
+    int serial_fd;              /* 串口文件描述符 */
+    char apn[64];               /* APN接入点 */
+    char server_ip[64];         /* 服务器IP */
+    uint16_t server_port;       /* 服务器端口 */
+    bool connected;             /* 连接状态 */
+    int8_t signal_level;        /* 信号强度(0-31, 99=未知) */
+    uint8_t network_type;       /* 网络类型 */
+} dtu_handle_t;
+
+/* 网络类型 */
+#define NET_TYPE_UNKNOWN    0
+#define NET_TYPE_2G         2
+#define NET_TYPE_3G         3
+#define NET_TYPE_4G         4
+#define NET_TYPE_5G         5
+
+/* 函数声明 */
+int dtu_init(dtu_handle_t *handle, const char *serial_port, int baudrate);
+void dtu_close(dtu_handle_t *handle);
+int dtu_check_module(dtu_handle_t *handle);
+int dtu_get_signal(dtu_handle_t *handle, int8_t *level);
+int dtu_get_network_type(dtu_handle_t *handle, uint8_t *type);
+int dtu_set_apn(dtu_handle_t *handle, const char *apn);
+int dtu_connect_tcp(dtu_handle_t *handle, const char *ip, uint16_t port);
+int dtu_disconnect(dtu_handle_t *handle);
+int dtu_send_data(dtu_handle_t *handle, const uint8_t *data, uint16_t len);
+int dtu_receive_data(dtu_handle_t *handle, uint8_t *buffer, uint16_t max_len,
+                     uint32_t timeout_ms);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* INDUSTRIAL_4G_H */
+```
+
+```c
+/**
+ * @file industrial_4g.c
+ * @brief 工业4G DTU实现(AT命令方式)
+ */
+
+#include "industrial_4g.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <termios.h>
+#include <sys/select.h>
+
+#define AT_TIMEOUT_MS       3000
+#define AT_RETRY_COUNT      3
+
+/**
+ * @brief 打开串口
+ */
+static int open_serial(const char *port, int baudrate)
+{
+    int fd;
+    struct termios tty;
+    
+    fd = open(port, O_RDWR | O_NOCTTY | O_NDELAY);
+    if (fd < 0) {
+        return -1;
+    }
+    
+    tcgetattr(fd, &tty);
+    
+    /* 设置波特率 */
+    speed_t speed;
+    switch (baudrate) {
+        case 9600:   speed = B9600; break;
+        case 19200:  speed = B19200; break;
+        case 38400:  speed = B38400; break;
+        case 115200: speed = B115200; break;
+        default:     speed = B115200; break;
+    }
+    cfsetospeed(&tty, speed);
+    cfsetispeed(&tty, speed);
+    
+    /* 8N1 */
+    tty.c_cflag &= ~PARENB;
+    tty.c_cflag &= ~CSTOPB;
+    tty.c_cflag &= ~CSIZE;
+    tty.c_cflag |= CS8;
+    tty.c_cflag |= CREAD | CLOCAL;
+    
+    tty.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
+    tty.c_iflag &= ~(IXON | IXOFF | IXANY);
+    tty.c_oflag &= ~OPOST;
+    
+    tcsetattr(fd, TCSANOW, &tty);
+    tcflush(fd, TCIOFLUSH);
+    
+    return fd;
+}
+
+/**
+ * @brief 发送AT命令并等待响应
+ */
+static int at_command(int fd, const char *cmd, char *response, 
+                      size_t resp_len, uint32_t timeout_ms)
+{
+    char buffer[512];
+    fd_set readfds;
+    struct timeval tv;
+    int ret;
+    ssize_t n;
+    size_t total = 0;
+    
+    /* 发送命令 */
+    snprintf(buffer, sizeof(buffer), "%s\r\n", cmd);
+    write(fd, buffer, strlen(buffer));
+    tcdrain(fd);
+    
+    /* 等待响应 */
+    memset(response, 0, resp_len);
+    
+    FD_ZERO(&readfds);
+    FD_SET(fd, &readfds);
+    
+    tv.tv_sec = timeout_ms / 1000;
+    tv.tv_usec = (timeout_ms % 1000) * 1000;
+    
+    ret = select(fd + 1, &readfds, NULL, NULL, &tv);
+    if (ret <= 0) {
+        return -1;
+    }
+    
+    /* 读取响应 */
+    while (total < resp_len - 1) {
+        n = read(fd, response + total, resp_len - total - 1);
+        if (n > 0) {
+            total += n;
+            response[total] = '\0';
+            /* 检查是否收到OK或ERROR */
+            if (strstr(response, "OK") || strstr(response, "ERROR")) {
+                break;
+            }
+        } else if (n < 0 && errno != EAGAIN) {
+            break;
+        }
+        
+        /* 再等待一点数据 */
+        tv.tv_sec = 0;
+        tv.tv_usec = 100000;
+        FD_ZERO(&readfds);
+        FD_SET(fd, &readfds);
+        if (select(fd + 1, &readfds, NULL, NULL, &tv) <= 0) {
+            break;
+        }
+    }
+    
+    return (strstr(response, "OK") != NULL) ? 0 : -1;
+}
+
+/**
+ * @brief 初始化DTU
+ */
+int dtu_init(dtu_handle_t *handle, const char *serial_port, int baudrate)
+{
+    if (!handle || !serial_port) {
+        return -1;
+    }
+    
+    memset(handle, 0, sizeof(dtu_handle_t));
+    
+    handle->serial_fd = open_serial(serial_port, baudrate);
+    if (handle->serial_fd < 0) {
+        return -1;
+    }
+    
+    return 0;
+}
+
+/**
+ * @brief 关闭DTU
+ */
+void dtu_close(dtu_handle_t *handle)
+{
+    if (handle && handle->serial_fd >= 0) {
+        dtu_disconnect(handle);
+        close(handle->serial_fd);
+        handle->serial_fd = -1;
+    }
+}
+
+/**
+ * @brief 检查模块是否就绪
+ */
+int dtu_check_module(dtu_handle_t *handle)
+{
+    char response[256];
+    int retries = AT_RETRY_COUNT;
+    
+    while (retries-- > 0) {
+        if (at_command(handle->serial_fd, "AT", response, 
+                       sizeof(response), AT_TIMEOUT_MS) == 0) {
+            return 0;
+        }
+        usleep(100000);
+    }
+    
+    return -1;
+}
+
+/**
+ * @brief 获取信号强度
+ */
+int dtu_get_signal(dtu_handle_t *handle, int8_t *level)
+{
+    char response[256];
+    char *ptr;
+    int rssi;
+    
+    if (at_command(handle->serial_fd, "AT+CSQ", response,
+                   sizeof(response), AT_TIMEOUT_MS) < 0) {
+        return -1;
+    }
+    
+    /* 解析 +CSQ: <rssi>,<ber> */
+    ptr = strstr(response, "+CSQ:");
+    if (!ptr) {
+        return -1;
+    }
+    
+    sscanf(ptr, "+CSQ: %d", &rssi);
+    handle->signal_level = (int8_t)rssi;
+    if (level) *level = handle->signal_level;
+    
+    return 0;
+}
+
+/**
+ * @brief 设置APN
+ */
+int dtu_set_apn(dtu_handle_t *handle, const char *apn)
+{
+    char cmd[128];
+    char response[256];
+    
+    snprintf(cmd, sizeof(cmd), "AT+CGDCONT=1,\"IP\",\"%s\"", apn);
+    
+    if (at_command(handle->serial_fd, cmd, response,
+                   sizeof(response), AT_TIMEOUT_MS) < 0) {
+        return -1;
+    }
+    
+    strncpy(handle->apn, apn, sizeof(handle->apn) - 1);
+    return 0;
+}
+
+/**
+ * @brief TCP连接到服务器
+ */
+int dtu_connect_tcp(dtu_handle_t *handle, const char *ip, uint16_t port)
+{
+    char cmd[256];
+    char response[256];
+    
+    /* 先断开之前的连接 */
+    dtu_disconnect(handle);
+    
+    /* 设置PDP上下文激活 */
+    at_command(handle->serial_fd, "AT+CGACT=1,1", response, 
+               sizeof(response), AT_TIMEOUT_MS);
+    
+    /* 建立TCP连接(具体AT命令因模块而异) */
+    snprintf(cmd, sizeof(cmd), "AT+CIPSTART=\"TCP\",\"%s\",%d", ip, port);
+    
+    if (at_command(handle->serial_fd, cmd, response,
+                   sizeof(response), 10000) < 0) {
+        return -1;
+    }
+    
+    strncpy(handle->server_ip, ip, sizeof(handle->server_ip) - 1);
+    handle->server_port = port;
+    handle->connected = true;
+    
+    return 0;
+}
+
+/**
+ * @brief 断开连接
+ */
+int dtu_disconnect(dtu_handle_t *handle)
+{
+    char response[256];
+    
+    at_command(handle->serial_fd, "AT+CIPCLOSE", response,
+               sizeof(response), AT_TIMEOUT_MS);
+    
+    handle->connected = false;
+    return 0;
+}
+
+/**
+ * @brief 发送数据
+ */
+int dtu_send_data(dtu_handle_t *handle, const uint8_t *data, uint16_t len)
+{
+    char cmd[64];
+    char response[256];
+    char prompt[4];
+    
+    if (!handle->connected) {
+        return -1;
+    }
+    
+    /* 发送数据长度命令 */
+    snprintf(cmd, sizeof(cmd), "AT+CIPSEND=%d", len);
+    write(handle->serial_fd, cmd, strlen(cmd));
+    write(handle->serial_fd, "\r\n", 2);
+    tcdrain(handle->serial_fd);
+    
+    /* 等待 > 提示符 */
+    usleep(100000);
+    read(handle->serial_fd, response, sizeof(response));
+    
+    if (!strstr(response, ">")) {
+        return -1;
+    }
+    
+    /* 发送数据 */
+    write(handle->serial_fd, data, len);
+    
+    /* 发送结束符(通常是Ctrl+Z = 0x1A) */
+    write(handle->serial_fd, "\x1A", 1);
+    tcdrain(handle->serial_fd);
+    
+    /* 等待SEND OK */
+    if (at_command(handle->serial_fd, "", response, 
+                   sizeof(response), 5000) < 0) {
+        return -1;
+    }
+    
+    return len;
+}
+
+/**
+ * @brief 接收数据
+ */
+int dtu_receive_data(dtu_handle_t *handle, uint8_t *buffer, uint16_t max_len,
+                     uint32_t timeout_ms)
+{
+    fd_set readfds;
+    struct timeval tv;
+    int ret;
+    ssize_t n;
+    
+    FD_ZERO(&readfds);
+    FD_SET(handle->serial_fd, &readfds);
+    
+    tv.tv_sec = timeout_ms / 1000;
+    tv.tv_usec = (timeout_ms % 1000) * 1000;
+    
+    ret = select(handle->serial_fd + 1, &readfds, NULL, NULL, &tv);
+    if (ret <= 0) {
+        return 0;
+    }
+    
+    n = read(handle->serial_fd, buffer, max_len);
+    if (n > 0) {
+        /* 解析收到的数据(可能需要从+IPD报文中提取) */
+        char *data_ptr = strstr((char *)buffer, "+IPD,");
+        if (data_ptr) {
+            int data_len;
+            char *colon = strchr(data_ptr, ':');
+            if (colon) {
+                sscanf(data_ptr, "+IPD,%d", &data_len);
+                memmove(buffer, colon + 1, data_len);
+                return data_len;
+            }
+        }
+    }
+    
+    return (int)n;
+}
+```
+
+---
+
+## 11. 实际项目:多协议转换网关
+
+### 11.1 项目概述
+
+多协议转换网关是工业物联网中的核心设备，负责不同协议之间的数据转换和转发。
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    多协议转换网关架构                        │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │                  协议网关主程序                        │    │
+│  ├─────────────────────────────────────────────────────┤    │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │    │
+│  │  │ Modbus RTU  │  │  Modbus TCP │  │   CANopen   │  │    │
+│  │  │   适配器    │  │   适配器    │  │   适配器    │  │    │
+│  │  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘  │    │
+│  │         │                │                │         │    │
+│  │  ┌──────┴────────────────┴────────────────┴──────┐  │    │
+│  │  │           统一数据模型 / 消息总线              │  │    │
+│  │  └──────┬────────────────┬────────────────┬──────┘  │    │
+│  │         │                │                │         │    │
+│  │  ┌──────┴──────┐  ┌──────┴──────┐  ┌──────┴──────┐  │    │
+│  │  │MQTT发布/订阅│  │HTTP REST API│  │本地数据缓存  │  │    │
+│  │  │  云连接    │  │  外部接口   │  │SQLite存储   │  │    │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  │    │
+│  └─────────────────────────────────────────────────────┘    │
+│                                                             │
+│  硬件接口:                                                  │
+│  ├─ RS-485 × 2 (Modbus RTU设备)                            │
+│  ├─ RS-232 × 1 (调试/配置)                                 │
+│  ├─ CAN × 1 (CANopen设备)                                  │
+│  ├─ Ethernet × 1 (Modbus TCP/云服务)                       │
+│  └─ 4G/WiFi (无线云连接)                                   │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 11.2 网关完整代码
+
+```c
+/**
+ * @file protocol_gateway.c
+ * @brief 工业多协议转换网关主程序
+ * @version 1.0.0
+ * 
+ * 本程序实现了一个完整的多协议工业网关，支持:
+ * - Modbus RTU (RS-485)
+ * - Modbus TCP (以太网)
+ * - CAN/CANopen
+ * - MQTT上传
+ * - HTTP配置接口
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <signal.h>
+#include <time.h>
+#include <sys/time.h>
+#include <errno.h>
+
+/* 包含各协议头文件 */
+#include "serial_port.h"
+#include "modbus_rtu.h"
+#include "modbus_tcp.h"
+#include "can_bus.h"
+#include "canopen_sdo.h"
+#include "mqtt_client.h"
+#include "data_cache.h"
+
+#define GATEWAY_VERSION     "1.0.0"
+#define MAX_DEVICE_TYPES    3
+#define MAX_DEVICES         16
+#define MAX_DATA_POINTS     256
+
+/* 设备类型定义 */
+typedef enum {
+    DEV_TYPE_MODBUS_RTU = 0,
+    DEV_TYPE_MODBUS_TCP = 1,
+    DEV_TYPE_CANOPEN    = 2
+} device_type_t;
+
+/* 设备状态 */
+typedef enum {
+    DEV_STATUS_OFFLINE = 0,
+    DEV_STATUS_ONLINE  = 1,
+    DEV_STATUS_ERROR   = 2
+} device_status_t;
+
+/* 数据点定义 */
+typedef struct {
+    char name[64];          /* 数据点名称 */
+    char unit[16];          /* 单位 */
+    uint16_t reg_addr;      /* 寄存器地址 */
+    uint8_t reg_type;       /* 寄存器类型 */
+    uint8_t data_type;      /* 数据类型 */
+    float scale;            /* 比例因子 */
+    float offset;           /* 偏移量 */
+    float value;            /* 当前值 */
+    uint32_t timestamp;     /* 时间戳 */
+    bool alarm_high;        /* 高报警 */
+    bool alarm_low;         /* 低报警 */
+    float alarm_high_val;   /* 高报警阈值 */
+    float alarm_low_val;    /* 低报警阈值 */
+} data_point_t;
+
+/* 设备配置 */
+typedef struct {
+    uint8_t device_id;          /* 设备ID */
+    device_type_t type;         /* 设备类型 */
+    device_status_t status;     /* 设备状态 */
+    char name[64];              /* 设备名称 */
+    
+    /* 连接参数 */
+    union {
+        struct {
+            char port[64];          /* 串口设备 */
+            int baudrate;           /* 波特率 */
+            uint8_t slave_addr;     /* 从机地址 */
+            modbus_context_t *ctx;  /* Modbus上下文 */
+        } modbus_rtu;
+        
+        struct {
+            char ip[64];            /* IP地址 */
+            int port;               /* 端口 */
+            uint8_t slave_addr;     /* 单元ID */
+            modbus_tcp_context_t *ctx;
+        } modbus_tcp;
+        
+        struct {
+            char interface[16];     /* CAN接口 */
+            uint8_t node_id;        /* Node-ID */
+            sdo_client_t sdo;       /* SDO客户端 */
+        } canopen;
+    } conn;
+    
+    /* 数据点 */
+    data_point_t *points;
+    uint16_t point_count;
+    
+    /* 统计 */
+    uint64_t read_count;
+    uint64_t read_errors;
+    uint32_t last_read_time;
+    
+    /* 同步 */
+    pthread_mutex_t lock;
+} device_config_t;
+
+/* 网关配置 */
+typedef struct {
+    /* MQTT配置 */
+    struct {
+        char broker[128];
+        int port;
+        char client_id[64];
+        char username[64];
+        char password[64];
+        char topic_prefix[128];
+        int publish_interval;
+        bool ssl_enable;
+    } mqtt;
+    
+    /* HTTP配置 */
+    struct {
+        int port;
+        bool enable;
+    } http;
+    
+    /* 数据缓存 */
+    struct {
+        bool enable;
+        char db_path[256];
+        int retention_days;
+    } cache;
+    
+    /* 扫描间隔(ms) */
+    uint32_t scan_interval;
+    
+} gateway_config_t;
+
+/* 网关上下文 */
+typedef struct {
+    device_config_t devices[MAX_DEVICES];
+    uint8_t device_count;
+    gateway_config_t config;
+    
+    /* 运行状态 */
+    volatile bool running;
+    volatile bool paused;
+    
+    /* 线程 */
+    pthread_t scan_thread;
+    pthread_t mqtt_thread;
+    pthread_t http_thread;
+    
+    /* 统计 */
+    uint64_t total_reads;
+    uint64_t total_errors;
+    time_t start_time;
+    
+} gateway_context_t;
+
+static gateway_context_t g_gateway;
+
+/* 函数声明 */
+static int load_config(const char *config_file);
+static int init_devices(void);
+static void cleanup_devices(void);
+static int read_device_data(device_config_t *dev);
+static void *scan_thread_func(void *arg);
+static void *mqtt_thread_func(void *arg);
+static int publish_to_mqtt(device_config_t *dev);
+static void signal_handler(int sig);
+
+/**
+ * @brief 打印网关信息
+ */
+static void print_banner(void)
+{
+    printf("\n");
+    printf("╔════════════════════════════════════════════════════════╗\n");
+    printf("║     工业多协议转换网关 v%s                        ║\n", GATEWAY_VERSION);
+    printf("║                                                        ║\n");
+    printf("║  支持协议: Modbus RTU | Modbus TCP | CANopen          ║\n");
+    printf("║  上行协议: MQTT / HTTP REST API                       ║\n");
+    printf("╚════════════════════════════════════════════════════════╝\n");
+    printf("\n");
+}
+
+/**
+ * @brief 获取当前时间戳(毫秒)
+ */
+static uint64_t get_timestamp_ms(void)
+{
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return (uint64_t)tv.tv_sec * 1000 + tv.tv_usec / 1000;
+}
+
+/**
+ * @brief 加载配置文件
+ * 
+ * 实际项目中应使用JSON/YAML/XML解析器
+ * 这里使用简单格式演示
+ */
+static int load_config(const char *config_file)
+{
+    /* 默认配置 */
+    memset(&g_gateway.config, 0, sizeof(gateway_config_t));
+    
+    /* MQTT默认配置 */
+    strcpy(g_gateway.config.mqtt.broker, "mqtt.example.com");
+    g_gateway.config.mqtt.port = 1883;
+    snprintf(g_gateway.config.mqtt.client_id, sizeof(g_gateway.config.mqtt.client_id),
+             "gateway_%ld", (long)getpid());
+    strcpy(g_gateway.config.mqtt.topic_prefix, "factory/gateway1");
+    g_gateway.config.mqtt.publish_interval = 5000;  /* 5秒 */
+    
+    /* HTTP默认配置 */
+    g_gateway.config.http.port = 8080;
+    g_gateway.config.http.enable = true;
+    
+    /* 扫描间隔 */
+    g_gateway.config.scan_interval = 1000;  /* 1秒 */
+    
+    /* 从文件加载配置(简化版) */
+    FILE *fp = fopen(config_file, "r");
+    if (fp) {
+        char line[256];
+        while (fgets(line, sizeof(line), fp)) {
+            /* 简单解析key=value格式 */
+            char *eq = strchr(line, '=');
+            if (eq) {
+                *eq = '\0';
+                char *key = line;
+                char *value = eq + 1;
+                /* 去除换行符 */
+                value[strcspn(value, "\r\n")] = '\0';
+                
+                if (strcmp(key, "mqtt_broker") == 0) {
+                    strncpy(g_gateway.config.mqtt.broker, value, 
+                            sizeof(g_gateway.config.mqtt.broker) - 1);
+                } else if (strcmp(key, "mqtt_port") == 0) {
+                    g_gateway.config.mqtt.port = atoi(value);
+                }
+                /* ... 更多配置项 ... */
+            }
+        }
+        fclose(fp);
+    }
+    
+    /* 加载设备配置(示例) */
+    g_gateway.device_count = 0;
+    
+    /* 设备1: Modbus RTU温度传感器 */
+    {
+        device_config_t *dev = &g_gateway.devices[g_gateway.device_count++];
+        memset(dev, 0, sizeof(device_config_t));
+        dev->device_id = 1;
+        dev->type = DEV_TYPE_MODBUS_RTU;
+        strcpy(dev->name, "温度传感器1");
+        strcpy(dev->conn.modbus_rtu.port, "/dev/ttyUSB0");
+        dev->conn.modbus_rtu.baudrate = 9600;
+        dev->conn.modbus_rtu.slave_addr = 1;
+        pthread_mutex_init(&dev->lock, NULL);
+        
+        /* 配置数据点 */
+        dev->points = calloc(2, sizeof(data_point_t));
+        dev->point_count = 2;
+        
+        /* 温度值 */
+        strcpy(dev->points[0].name, "temperature");
+        strcpy(dev->points[0].unit, "℃");
+        dev->points[0].reg_addr = 0;
+        dev->points[0].reg_type = 0x03;  /* 保持寄存器 */
+        dev->points[0].data_type = 0x03; /* 16位有符号 */
+        dev->points[0].scale = 0.1f;
+        dev->points[0].offset = 0;
+        dev->points[0].alarm_high_val = 80.0f;
+        dev->points[0].alarm_low_val = -20.0f;
+        
+        /* 湿度值 */
+        strcpy(dev->points[1].name, "humidity");
+        strcpy(dev->points[1].unit, "%RH");
+        dev->points[1].reg_addr = 1;
+        dev->points[1].reg_type = 0x03;
+        dev->points[1].data_type = 0x03;
+        dev->points[1].scale = 0.1f;
+        dev->points[1].alarm_high_val = 90.0f;
+        dev->points[1].alarm_low_val = 10.0f;
+    }
+    
+    /* 设备2: Modbus TCP电能表 */
+    {
+        device_config_t *dev = &g_gateway.devices[g_gateway.device_count++];
+        memset(dev, 0, sizeof(device_config_t));
+        dev->device_id = 2;
+        dev->type = DEV_TYPE_MODBUS_TCP;
+        strcpy(dev->name, "电能表1");
+        strcpy(dev->conn.modbus_tcp.ip, "192.168.1.100");
+        dev->conn.modbus_tcp.port = 502;
+        dev->conn.modbus_tcp.slave_addr = 1;
+        pthread_mutex_init(&dev->lock, NULL);
+        
+        dev->points = calloc(3, sizeof(data_point_t));
+        dev->point_count = 3;
+        
+        strcpy(dev->points[0].name, "voltage");
+        strcpy(dev->points[0].unit, "V");
+        dev->points[0].reg_addr = 0;
+        dev->points[0].scale = 0.01f;
+        
+        strcpy(dev->points[1].name, "current");
+        strcpy(dev->points[1].unit, "A");
+        dev->points[1].reg_addr = 2;
+        dev->points[1].scale = 0.001f;
+        
+        strcpy(dev->points[2].name, "power");
+        strcpy(dev->points[2].unit, "W");
+        dev->points[2].reg_addr = 4;
+        dev->points[2].scale = 0.1f;
+    }
+    
+    printf("已加载 %d 个设备配置\n", g_gateway.device_count);
+    return 0;
+}
+
+/**
+ * @brief 初始化所有设备连接
+ */
+static int init_devices(void)
+{
+    int success_count = 0;
+    
+    for (int i = 0; i < g_gateway.device_count; i++) {
+        device_config_t *dev = &g_gateway.devices[i];
+        int ret = -1;
+        
+        printf("初始化设备 %d (%s)... ", dev->device_id, dev->name);
+        
+        switch (dev->type) {
+            case DEV_TYPE_MODBUS_RTU: {
+                modbus_context_t *ctx = modbus_new_rtu(
+                    dev->conn.modbus_rtu.port,
+                    dev->conn.modbus_rtu.baudrate,
+                    'N', 8, 1);
+                if (ctx) {
+                    modbus_set_slave(ctx, dev->conn.modbus_rtu.slave_addr);
+                    modbus_set_response_timeout(ctx, 1000);
+                    modbus_connect(ctx);
+                    dev->conn.modbus_rtu.ctx = ctx;
+                    dev->status = DEV_STATUS_ONLINE;
+                    ret = 0;
+                }
+                break;
+            }
+            
+            case DEV_TYPE_MODBUS_TCP: {
+                modbus_tcp_context_t *ctx = modbus_tcp_new(
+                    dev->conn.modbus_tcp.ip,
+                    dev->conn.modbus_tcp.port);
+                if (ctx) {
+                    ret = modbus_tcp_connect(ctx);
+                    if (ret == 0) {
+                        dev->conn.modbus_tcp.ctx = ctx;
+                        dev->status = DEV_STATUS_ONLINE;
+                    }
+                }
+                break;
+            }
+            
+            case DEV_TYPE_CANOPEN: {
+                /* CANopen初始化 */
+                break;
+            }
+            
+            default:
+                break;
+        }
+        
+        if (ret == 0) {
+            printf("成功\n");
+            success_count++;
+        } else {
+            printf("失败\n");
+            dev->status = DEV_STATUS_ERROR;
+        }
+    }
+    
+    printf("设备初始化: %d/%d 成功\n", success_count, g_gateway.device_count);
+    return success_count;
+}
+
+/**
+ * @brief 清理设备连接
+ */
+static void cleanup_devices(void)
+{
+    for (int i = 0; i < g_gateway.device_count; i++) {
+        device_config_t *dev = &g_gateway.devices[i];
+        
+        switch (dev->type) {
+            case DEV_TYPE_MODBUS_RTU:
+                if (dev->conn.modbus_rtu.ctx) {
+                    modbus_close(dev->conn.modbus_rtu.ctx);
+                    modbus_free(dev->conn.modbus_rtu.ctx);
+                }
+                break;
+                
+            case DEV_TYPE_MODBUS_TCP:
+                if (dev->conn.modbus_tcp.ctx) {
+                    modbus_tcp_close(dev->conn.modbus_tcp.ctx);
+                    modbus_tcp_free(dev->conn.modbus_tcp.ctx);
+                }
+                break;
+                
+            case DEV_TYPE_CANOPEN:
+                break;
+        }
+        
+        if (dev->points) {
+            free(dev->points);
+        }
+        
+        pthread_mutex_destroy(&dev->lock);
+    }
+}
+
+/**
+ * @brief 读取单个设备数据
+ */
+static int read_device_data(device_config_t *dev)
+{
+    int ret = -1;
+    uint16_t registers[16];
+    uint64_t start_time = get_timestamp_ms();
+    
+    pthread_mutex_lock(&dev->lock);
+    
+    if (dev->status == DEV_STATUS_OFFLINE) {
+        pthread_mutex_unlock(&dev->lock);
+        return -1;
+    }
+    
+    switch (dev->type) {
+        case DEV_TYPE_MODBUS_RTU: {
+            if (dev->conn.modbus_rtu.ctx) {
+                /* 读取保持寄存器 */
+                ret = modbus_read_registers(
+                    dev->conn.modbus_rtu.ctx,
+                    dev->points[0].reg_addr,
+                    dev->point_count,
+                    registers);
+            }
+            break;
+        }
+        
+        case DEV_TYPE_MODBUS_TCP: {
+            if (dev->conn.modbus_tcp.ctx) {
+                ret = modbus_tcp_read_registers(
+                    dev->conn.modbus_tcp.ctx,
+                    dev->points[0].reg_addr,
+                    dev->point_count,
+                    registers);
+            }
+            break;
+        }
+        
+        case DEV_TYPE_CANOPEN: {
+            /* CANopen SDO读取 */
+            break;
+        }
+    }
+    
+    if (ret > 0) {
+        /* 解析数据 */
+        uint32_t timestamp = (uint32_t)(start_time / 1000);
+        
+        for (int i = 0; i < dev->point_count && i < ret; i++) {
+            float raw_value = (float)(int16_t)registers[i];
+            dev->points[i].value = raw_value * dev->points[i].scale 
+                                   + dev->points[i].offset;
+            dev->points[i].timestamp = timestamp;
+            
+            /* 报警检查 */
+            dev->points[i].alarm_high = 
+                dev->points[i].value > dev->points[i].alarm_high_val;
+            dev->points[i].alarm_low = 
+                dev->points[i].value < dev->points[i].alarm_low_val;
+        }
+        
+        dev->status = DEV_STATUS_ONLINE;
+        dev->read_count++;
+        dev->last_read_time = timestamp;
+        g_gateway.total_reads++;
+    } else {
+        dev->read_errors++;
+        g_gateway.total_errors++;
+        
+        if (dev->read_errors > 10) {
+            dev->status = DEV_STATUS_ERROR;
+        }
+    }
+    
+    pthread_mutex_unlock(&dev->lock);
+    
+    return ret;
+}
+
+/**
+ * @brief 扫描线程 - 周期性读取所有设备数据
+ */
+static void *scan_thread_func(void *arg)
+{
+    (void)arg;
+    
+    printf("扫描线程启动 (间隔: %d ms)\n", g_gateway.config.scan_interval);
+    
+    while (g_gateway.running) {
+        if (!g_gateway.paused) {
+            for (int i = 0; i < g_gateway.device_count; i++) {
+                device_config_t *dev = &g_gateway.devices[i];
+                
+                if (dev->status != DEV_STATUS_OFFLINE) {
+                    int ret = read_device_data(dev);
+                    
+                    if (g_gateway.config.cache.enable && ret > 0) {
+                        /* 保存到本地缓存 */
+                    }
+                }
+            }
+        }
+        
+        /* 睡眠等待下一个周期 */
+        usleep(g_gateway.config.scan_interval * 1000);
+    }
+    
+    printf("扫描线程退出\n");
+    return NULL;
+}
+
+/**
+ * @brief MQTT发布线程
+ */
+static void *mqtt_thread_func(void *arg)
+{
+    (void)arg;
+    
+    printf("MQTT线程启动\n");
+    
+    /* MQTT客户端初始化 */
+    mqtt_client_t mqtt;
+    int ret = mqtt_connect(&mqtt, g_gateway.config.mqtt.broker,
+                           g_gateway.config.mqtt.port,
+                           g_gateway.config.mqtt.client_id,
+                           g_gateway.config.mqtt.username,
+                           g_gateway.config.mqtt.password);
+    if (ret < 0) {
+        printf("MQTT连接失败\n");
+        return NULL;
+    }
+    
+    while (g_gateway.running) {
+        if (!g_gateway.paused) {
+            /* 发布所有设备数据 */
+            for (int i = 0; i < g_gateway.device_count; i++) {
+                device_config_t *dev = &g_gateway.devices[i];
+                
+                if (dev->status == DEV_STATUS_ONLINE && dev->read_count > 0) {
+                    /* 构建JSON消息 */
+                    char payload[2048];
+                    int len = 0;
+                    
+                    len += snprintf(payload + len, sizeof(payload) - len,
+                                    "{\"device_id\":%d,", dev->device_id);
+                    len += snprintf(payload + len, sizeof(payload) - len,
+                                    "\"device_name\":\"%s\",", dev->name);
+                    len += snprintf(payload + len, sizeof(payload) - len,
+                                    "\"timestamp\":%u,", 
+                                    (unsigned)time(NULL));
+                    len += snprintf(payload + len, sizeof(payload) - len,
+                                    "\"data\":{");
+                    
+                    for (int j = 0; j < dev->point_count; j++) {
+                        data_point_t *pt = &dev->points[j];
+                        len += snprintf(payload + len, sizeof(payload) - len,
+                                        "\"%s\":{\"value\":%.2f,",
+                                        pt->name, pt->value);
+                        len += snprintf(payload + len, sizeof(payload) - len,
+                                        "\"unit\":\"%s\",", pt->unit);
+                        len += snprintf(payload + len, sizeof(payload) - len,
+                                        "\"alarm_high\":%s,",
+                                        pt->alarm_high ? "true" : "false");
+                        len += snprintf(payload + len, sizeof(payload) - len,
+                                        "\"alarm_low\":%s}",
+                                        pt->alarm_low ? "true" : "false");
+                        if (j < dev->point_count - 1) {
+                            payload[len++] = ',';
+                        }
+                    }
+                    
+                    len += snprintf(payload + len, sizeof(payload) - len, "}}");
+                    
+                    /* 发布 */
+                    char topic[256];
+                    snprintf(topic, sizeof(topic), "%s/device/%d/data",
+                             g_gateway.config.mqtt.topic_prefix, dev->device_id);
+                    
+                    mqtt_publish(&mqtt, topic, payload, len);
+                }
+            }
+        }
+        
+        /* 等待下次发布 */
+        usleep(g_gateway.config.mqtt.publish_interval * 1000);
+    }
+    
+    mqtt_disconnect(&mqtt);
+    printf("MQTT线程退出\n");
+    return NULL;
+}
+
+/**
+ * @brief 信号处理
+ */
+static void signal_handler(int sig)
+{
+    if (sig == SIGINT || sig == SIGTERM) {
+        printf("\n接收到信号 %d,正在关闭...\n", sig);
+        g_gateway.running = false;
+    }
+}
+
+/**
+ * @brief 主函数
+ */
+int main(int argc, char *argv[])
+{
+    const char *config_file = argc > 1 ? argv[1] : "gateway.conf";
+    
+    print_banner();
+    
+    /* 初始化 */
+    memset(&g_gateway, 0, sizeof(gateway_context_t));
+    g_gateway.running = true;
+    g_gateway.start_time = time(NULL);
+    
+    /* 信号处理 */
+    signal(SIGINT, signal_handler);
+    signal(SIGTERM, signal_handler);
+    
+    /* 加载配置 */
+    if (load_config(config_file) < 0) {
+        fprintf(stderr, "加载配置失败\n");
+        return 1;
+    }
+    
+    /* 初始化设备 */
+    if (init_devices() <= 0) {
+        fprintf(stderr, "没有设备成功初始化\n");
+        cleanup_devices();
+        return 1;
+    }
+    
+    /* 创建扫描线程 */
+    if (pthread_create(&g_gateway.scan_thread, NULL, 
+                       scan_thread_func, NULL) != 0) {
+        fprintf(stderr, "创建扫描线程失败\n");
+        cleanup_devices();
+        return 1;
+    }
+    
+    /* 创建MQTT线程 */
+    if (pthread_create(&g_gateway.mqtt_thread, NULL,
+                       mqtt_thread_func, NULL) != 0) {
+        fprintf(stderr, "创建MQTT线程失败\n");
+    }
+    
+    printf("\n网关运行中... 按Ctrl+C停止\n\n");
+    
+    /* 主循环 - 显示统计信息 */
+    while (g_gateway.running) {
+        sleep(10);
+        
+        printf("--- 运行统计 ---\n");
+        printf("运行时间: %ld 秒\n", (long)(time(NULL) - g_gateway.start_time));
+        printf("总读取次数: %lu\n", (unsigned long)g_gateway.total_reads);
+        printf("总错误次数: %lu\n", (unsigned long)g_gateway.total_errors);
+        
+        for (int i = 0; i < g_gateway.device_count; i++) {
+            device_config_t *dev = &g_gateway.devices[i];
+            const char *status_str = 
+                dev->status == DEV_STATUS_ONLINE ? "在线" :
+                dev->status == DEV_STATUS_ERROR ? "错误" : "离线";
+            
+            printf("设备 %d (%s): %s, 读取: %lu, 错误: %lu\n",
+                   dev->device_id, dev->name, status_str,
+                   (unsigned long)dev->read_count,
+                   (unsigned long)dev->read_errors);
+            
+            /* 显示数据点值 */
+            pthread_mutex_lock(&dev->lock);
+            for (int j = 0; j < dev->point_count; j++) {
+                data_point_t *pt = &dev->points[j];
+                printf("  %s: %.2f %s%s%s\n",
+                       pt->name, pt->value, pt->unit,
+                       pt->alarm_high ? " [高报警!]" : "",
+                       pt->alarm_low ? " [低报警!]" : "");
+            }
+            pthread_mutex_unlock(&dev->lock);
+        }
+        printf("\n");
+    }
+    
+    /* 等待线程结束 */
+    pthread_join(g_gateway.scan_thread, NULL);
+    pthread_join(g_gateway.mqtt_thread, NULL);
+    
+    /* 清理 */
+    cleanup_devices();
+    
+    printf("网关已停止\n");
+    return 0;
+}
+```
+
+### 11.3 Makefile编译脚本
+
+```makefile
+# 工业多协议网关 Makefile
+
+CC = gcc
+CFLAGS = -Wall -O2 -pthread -D_GNU_SOURCE
+LDFLAGS = -lpthread -lm
+
+# 目标
+TARGET = protocol_gateway
+
+# 源文件
+SOURCES = \
+    protocol_gateway.c \
+    serial_port.c \
+    modbus_rtu.c \
+    modbus_tcp.c \
+    can_bus.c \
+    canopen_sdo.c \
+    mqtt_client.c \
+    data_cache.c
+
+# 对象文件
+OBJECTS = $(SOURCES:.c=.o)
+
+# 头文件
+HEADERS = \
+    serial_port.h \
+    modbus_rtu.h \
+    modbus_tcp.h \
+    can_bus.h \
+    canopen_sdo.h \
+    mqtt_client.h \
+    data_cache.h
+
+# 默认目标
+all: $(TARGET)
+
+# 链接
+$(TARGET): $(OBJECTS)
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
+
+# 编译
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# 清理
+clean:
+	rm -f $(OBJECTS) $(TARGET)
+
+# 安装
+install: $(TARGET)
+	install -m 755 $(TARGET) /usr/local/bin/
+	install -m 644 gateway.conf /etc/
+
+# 运行测试
+test: $(TARGET)
+	./$(TARGET) gateway.conf
+
+.PHONY: all clean install test
+```
+
+---
+
+## 12. 总结与最佳实践
+
+### 12.1 协议选择指南
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    工业通信协议选择指南                        │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  应用场景                    | 推荐协议                     │
+│  ─────────────────────────────────────────────────────────  │
+│  简单传感器网络(温度/压力)   | Modbus RTU (RS-485)          │
+│  复杂运动控制                | EtherCAT, SERCOS III         │
+│  跨车间数据交换              | Modbus TCP, EtherNet/IP      │
+│  大型PLC系统                 | Profinet, EtherNet/IP        │
+│  机器人/伺服控制             | EtherCAT, POWERLINK          │
+│  过程自动化(化工/石油)       | Profibus PA, Foundation Fldbus│
+│  车载电子                    | CAN, CANopen                 │
+│  物联网/云连接               | MQTT over 4G/5G/WiFi         │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 12.2 开发最佳实践
+
+1. **错误处理**: 所有通信操作都应有完善的超时和重试机制
+2. **日志记录**: 记录关键操作和错误，便于故障排查
+3. **线程安全**: 多线程访问共享资源时使用互斥锁
+4. **资源管理**: 使用RAII模式确保资源正确释放
+5. **协议测试**: 使用协议分析仪验证通信正确性
+6. **电磁兼容**: 工业环境注意屏蔽和接地
+
+### 12.3 参考资料
+
+- Modbus Protocol Specification v1.1b3
+- CAN Specification 2.0B
+- CiA 301 CANopen Application Layer
+- EtherCAT Technology Group Specifications
+- IEC 61158 (Industrial Ethernet Standards)
+
+---
+
+*文档版本: 1.0.0*  
+*最后更新: 2024*  
+*作者: C语言知识库*

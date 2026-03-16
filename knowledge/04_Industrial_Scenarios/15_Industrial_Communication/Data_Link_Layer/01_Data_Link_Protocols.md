@@ -27,6 +27,20 @@
     - [6.1 VLAN标签格式 (802.1Q)](#61-vlan标签格式-8021q)
     - [6.2 VLAN完整实现](#62-vlan完整实现)
     - [6.3 编译与运行](#63-编译与运行)
+  - [7. STP生成树协议](#7-stp生成树协议)
+    - [7.1 STP BPDU格式](#71-stp-bpdu格式)
+    - [7.2 STP完整实现](#72-stp完整实现)
+    - [7.3 编译与运行](#73-编译与运行)
+  - [8. ARP协议实现](#8-arp协议实现)
+    - [8.1 ARP包格式](#81-arp包格式)
+    - [8.2 ARP完整实现](#82-arp完整实现)
+    - [8.3 编译与运行](#83-编译与运行)
+  - [9. CRC校验算法](#9-crc校验算法)
+    - [9.1 CRC算法实现](#91-crc算法实现)
+    - [9.3 编译与运行](#93-编译与运行)
+  - [10. 流量控制实现](#10-流量控制实现)
+    - [10.1 滑动窗口协议](#101-滑动窗口协议)
+    - [10.3 编译与运行](#103-编译与运行)
 
 ---
 
@@ -3155,13 +3169,13 @@ typedef struct {
     uint8_t state;           /**< Port state */
     stp_port_role_t role;    /**< Port role */
     uint32_t path_cost;      /**< Path cost */
-    
+
     /* BPDU timing */
     uint16_t designated_priority;
     uint32_t designated_cost;
     stp_bridge_id_t designated_bridge;
     uint16_t designated_port;
-    
+
     /* Timers */
     time_t last_bpdu_time;
     uint16_t fwd_delay_timer;
@@ -3175,22 +3189,22 @@ typedef struct {
     uint32_t root_path_cost;     /**< Root path cost */
     stp_bridge_id_t root_id;     /**< Root bridge ID */
     uint16_t root_port;          /**< Root port */
-    
+
     /* Configuration */
     uint16_t max_age;
     uint16_t hello_time;
     uint16_t forward_delay;
     uint8_t max_hops;
-    
+
     /* Topology change */
     bool topology_change;
     bool topology_change_detected;
     time_t topology_change_time;
-    
+
     /* Ports */
     stp_port_t *ports;
     uint16_t num_ports;
-    
+
     /* State */
     bool is_root;
 } stp_bridge_t;
@@ -3205,7 +3219,7 @@ typedef struct {
  * @param mac MAC address
  * @param id Output bridge ID
  */
-void stp_build_bridge_id(uint16_t priority, const uint8_t *mac, 
+void stp_build_bridge_id(uint16_t priority, const uint8_t *mac,
                          stp_bridge_id_t *id) {
     id->priority = htons(priority);
     memcpy(id->mac, mac, 6);
@@ -3258,35 +3272,35 @@ char* stp_bridge_id_to_string(const stp_bridge_id_t *id, char *str) {
  * @param num_ports Number of ports
  * @return true on success, false on failure
  */
-bool stp_init_bridge(stp_bridge_t *bridge, uint16_t priority, 
+bool stp_init_bridge(stp_bridge_t *bridge, uint16_t priority,
                      const uint8_t *mac, uint16_t num_ports) {
     if (bridge == NULL || mac == NULL || num_ports == 0) {
         return false;
     }
-    
+
     memset(bridge, 0, sizeof(stp_bridge_t));
-    
+
     /* Initialize bridge ID */
     stp_build_bridge_id(priority, mac, &bridge->bridge_id);
-    
+
     /* Initialize root information */
     bridge->root_id = bridge->bridge_id;
     bridge->root_path_cost = 0;
     bridge->root_port = 0;
     bridge->is_root = true;
-    
+
     /* Set default timers */
     bridge->max_age = STP_DEFAULT_MAX_AGE;
     bridge->hello_time = STP_DEFAULT_HELLO_TIME;
     bridge->forward_delay = STP_DEFAULT_FWD_DELAY;
     bridge->max_hops = 20;
-    
+
     /* Allocate ports */
     bridge->ports = (stp_port_t *)calloc(num_ports, sizeof(stp_port_t));
     if (bridge->ports == NULL) {
         return false;
     }
-    
+
     /* Initialize ports */
     for (uint16_t i = 0; i < num_ports; i++) {
         bridge->ports[i].port_id = (0x80 << 8) | (i + 1);  /* Default priority 128 */
@@ -3298,9 +3312,9 @@ bool stp_init_bridge(stp_bridge_t *bridge, uint16_t priority,
         bridge->ports[i].designated_bridge = bridge->bridge_id;
         bridge->ports[i].designated_port = bridge->ports[i].port_id;
     }
-    
+
     bridge->num_ports = num_ports;
-    
+
     return true;
 }
 
@@ -3310,7 +3324,7 @@ bool stp_init_bridge(stp_bridge_t *bridge, uint16_t priority,
  */
 void stp_cleanup_bridge(stp_bridge_t *bridge) {
     if (bridge == NULL) return;
-    
+
     if (bridge->ports != NULL) {
         free(bridge->ports);
         bridge->ports = NULL;
@@ -3364,15 +3378,15 @@ void stp_build_bpdu(const stp_bridge_t *bridge, uint16_t port, stp_bpdu_t *bpdu)
     bpdu->version = STP_VERSION_ID;
     bpdu->bpdu_type = STP_BPDU_TYPE_CFG;
     bpdu->flags = bridge->topology_change ? STP_FLAG_TC : 0;
-    
+
     /* Root information */
     bpdu->root_id = bridge->root_id;
     bpdu->root_path_cost = htonl(bridge->root_path_cost);
-    
+
     /* Bridge information */
     bpdu->bridge_id = bridge->bridge_id;
     bpdu->port_id = htons(bridge->ports[port].port_id);
-    
+
     /* Timers */
     bpdu->message_age = htons(0);  /* Will be updated when relaying */
     bpdu->max_age = htons(bridge->max_age);
@@ -3391,9 +3405,9 @@ bool stp_parse_bpdu(const uint8_t *data, size_t len, stp_bpdu_t *bpdu) {
     if (data == NULL || len < sizeof(stp_bpdu_t) || bpdu == NULL) {
         return false;
     }
-    
+
     memcpy(bpdu, data, sizeof(stp_bpdu_t));
-    
+
     /* Convert from network to host byte order */
     bpdu->protocol_id = ntohs(bpdu->protocol_id);
     bpdu->root_id.priority = ntohs(bpdu->root_id.priority);
@@ -3404,7 +3418,7 @@ bool stp_parse_bpdu(const uint8_t *data, size_t len, stp_bpdu_t *bpdu) {
     bpdu->max_age = ntohs(bpdu->max_age);
     bpdu->hello_time = ntohs(bpdu->hello_time);
     bpdu->forward_delay = ntohs(bpdu->forward_delay);
-    
+
     return true;
 }
 
@@ -3414,11 +3428,11 @@ bool stp_parse_bpdu(const uint8_t *data, size_t len, stp_bpdu_t *bpdu) {
  */
 void stp_print_bpdu(const stp_bpdu_t *bpdu) {
     char id_str[24];
-    
+
     printf("BPDU:\n");
     printf("  Protocol ID: 0x%04X\n", bpdu->protocol_id);
     printf("  Version: %d\n", bpdu->version);
-    printf("  Type: %s\n", bpdu->bpdu_type == STP_BPDU_TYPE_TCN ? 
+    printf("  Type: %s\n", bpdu->bpdu_type == STP_BPDU_TYPE_TCN ?
            "TCN" : "Configuration");
     printf("  Flags: 0x%02X%s%s\n", bpdu->flags,
            bpdu->flags & STP_FLAG_TC ? " TC" : "",
@@ -3448,39 +3462,39 @@ bool stp_process_bpdu(stp_bridge_t *bridge, uint16_t port, const stp_bpdu_t *bpd
     if (bridge == NULL || port >= bridge->num_ports || bpdu == NULL) {
         return false;
     }
-    
+
     stp_port_t *p = &bridge->ports[port];
     bool topology_changed = false;
-    
+
     /* Update last BPDU time */
     p->last_bpdu_time = time(NULL);
-    
+
     /* Check if received BPDU is superior */
     int root_cmp = stp_bridge_id_compare(&bpdu->root_id, &bridge->root_id);
-    
+
     if (root_cmp < 0 ||
         (root_cmp == 0 && bpdu->root_path_cost < bridge->root_path_cost) ||
         (root_cmp == 0 && bpdu->root_path_cost == bridge->root_path_cost &&
          stp_bridge_id_compare(&bpdu->bridge_id, &bridge->bridge_id) < 0)) {
-        
+
         /* Superior BPDU received - update root information */
         bridge->root_id = bpdu->root_id;
         bridge->root_path_cost = bpdu->root_path_cost + p->path_cost;
         bridge->root_port = port;
         bridge->is_root = false;
-        
+
         p->role = STP_ROLE_ROOT;
-        
+
         printf("Port %d: New root discovered\n", port + 1);
         topology_changed = true;
     }
-    
+
     /* Check topology change flag */
     if (bpdu->flags & STP_FLAG_TC) {
         bridge->topology_change_detected = true;
         bridge->topology_change_time = time(NULL);
     }
-    
+
     return topology_changed;
 }
 
@@ -3490,11 +3504,11 @@ bool stp_process_bpdu(stp_bridge_t *bridge, uint16_t port, const stp_bpdu_t *bpd
  */
 void stp_run_state_machine(stp_bridge_t *bridge) {
     if (bridge == NULL) return;
-    
+
     /* Update port states based on roles */
     for (uint16_t i = 0; i < bridge->num_ports; i++) {
         stp_port_t *port = &bridge->ports[i];
-        
+
         switch (port->state) {
             case STP_PORT_STATE_BLOCKING:
                 if (port->role == STP_ROLE_ROOT || port->role == STP_ROLE_DESIGNATED) {
@@ -3502,7 +3516,7 @@ void stp_run_state_machine(stp_bridge_t *bridge) {
                     port->fwd_delay_timer = bridge->forward_delay;
                 }
                 break;
-                
+
             case STP_PORT_STATE_LISTENING:
                 if (port->fwd_delay_timer > 0) {
                     port->fwd_delay_timer--;
@@ -3511,7 +3525,7 @@ void stp_run_state_machine(stp_bridge_t *bridge) {
                     port->fwd_delay_timer = bridge->forward_delay;
                 }
                 break;
-                
+
             case STP_PORT_STATE_LEARNING:
                 if (port->fwd_delay_timer > 0) {
                     port->fwd_delay_timer--;
@@ -3520,7 +3534,7 @@ void stp_run_state_machine(stp_bridge_t *bridge) {
                     printf("Port %d: Forwarding\n", i + 1);
                 }
                 break;
-                
+
             case STP_PORT_STATE_FORWARDING:
                 if (port->role == STP_ROLE_ALTERNATE || port->role == STP_ROLE_BACKUP) {
                     port->state = STP_PORT_STATE_BLOCKING;
@@ -3536,7 +3550,7 @@ void stp_run_state_machine(stp_bridge_t *bridge) {
  */
 void stp_print_bridge(const stp_bridge_t *bridge) {
     char id_str[24];
-    
+
     printf("\n=== STP Bridge Information ===\n");
     printf("Bridge ID: %s\n", stp_bridge_id_to_string(&bridge->bridge_id, id_str));
     printf("Root ID: %s\n", stp_bridge_id_to_string(&bridge->root_id, id_str));
@@ -3547,7 +3561,7 @@ void stp_print_bridge(const stp_bridge_t *bridge) {
     printf("\nPort Information:\n");
     printf("%-6s %-12s %-15s %-10s\n", "Port", "State", "Role", "Path Cost");
     printf("-------------------------------------------\n");
-    
+
     for (uint16_t i = 0; i < bridge->num_ports; i++) {
         stp_port_t *port = &bridge->ports[i];
         printf("%-6d %-12s %-15s %-10u\n",
@@ -3567,22 +3581,22 @@ void stp_print_bridge(const stp_bridge_t *bridge) {
  */
 void stp_test(void) {
     printf("\n=== Spanning Tree Protocol Test ===\n");
-    
+
     /* Create bridge */
     stp_bridge_t bridge;
     uint8_t mac[] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x55};
-    
+
     if (!stp_init_bridge(&bridge, STP_DEFAULT_PRIORITY, mac, 4)) {
         printf("Failed to initialize bridge\n");
         return;
     }
-    
+
     stp_print_bridge(&bridge);
-    
+
     /* Simulate receiving BPDU from another bridge with better priority */
     stp_bpdu_t superior_bpdu;
     uint8_t better_mac[] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x00};  /* Lower MAC */
-    
+
     memset(&superior_bpdu, 0, sizeof(superior_bpdu));
     superior_bpdu.protocol_id = STP_PROTOCOL_ID;
     superior_bpdu.version = STP_VERSION_ID;
@@ -3594,32 +3608,32 @@ void stp_test(void) {
     superior_bpdu.max_age = STP_DEFAULT_MAX_AGE;
     superior_bpdu.hello_time = STP_DEFAULT_HELLO_TIME;
     superior_bpdu.forward_delay = STP_DEFAULT_FWD_DELAY;
-    
+
     printf("\n--- Received BPDU on Port 1 ---\n");
     stp_print_bpdu(&superior_bpdu);
-    
+
     /* Process BPDU */
     stp_process_bpdu(&bridge, 0, &superior_bpdu);
-    
+
     /* Run state machine a few times */
     for (int i = 0; i < 20; i++) {
         stp_run_state_machine(&bridge);
     }
-    
+
     stp_print_bridge(&bridge);
-    
+
     /* Test BPDU serialization */
     uint8_t bpdu_data[sizeof(stp_bpdu_t)];
     stp_build_bpdu(&bridge, 1, &superior_bpdu);
     memcpy(bpdu_data, &superior_bpdu, sizeof(stp_bpdu_t));
-    
+
     printf("\nSerialized BPDU (%zu bytes):\n", sizeof(bpdu_data));
     for (size_t i = 0; i < sizeof(bpdu_data); i++) {
         printf("%02X ", bpdu_data[i]);
         if ((i + 1) % 16 == 0) printf("\n");
     }
     printf("\n");
-    
+
     stp_cleanup_bridge(&bridge);
     printf("\nSTP test completed\n");
 }
@@ -3645,6 +3659,1583 @@ int main(void) {
 ```bash
 gcc -o stp_test stp.c -Wall -Wextra
 ./stp_test
+```
+
+---
+
+## 8. ARP协议实现
+
+### 8.1 ARP包格式
+
+```
+┌───────────┬───────────┬───────────┬───────────┐
+│HW Type    │Protocol   │HW Len     │Prot Len   │
+│(2 bytes)  │Type(2)    │(1 byte)   │(1 byte)   │
+├───────────┼───────────┼───────────┼───────────┤
+│Operation  │Sender HW  │Sender Prot│Target HW  │
+│(2 bytes)  │Address    │Address    │Address    │
+├───────────┼───────────┼───────────┼───────────┤
+│Target Prot│
+│Address    │
+└───────────┘
+```
+
+### 8.2 ARP完整实现
+
+```c
+/**
+ * @file arp.c
+ * @brief ARP (Address Resolution Protocol) Implementation
+ * @version 1.0
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <time.h>
+
+/* ============================================================================
+ * ARP Constants
+ * ============================================================================ */
+
+#define ARP_HW_TYPE_ETHERNET    1       /**< Ethernet hardware type */
+#define ARP_PROTO_TYPE_IP       0x0800  /**< IPv4 protocol type */
+
+#define ARP_OP_REQUEST          1       /**< ARP Request */
+#define ARP_OP_REPLY            2       /**< ARP Reply */
+#define ARP_OP_RARP_REQUEST     3       /**< RARP Request */
+#define ARP_OP_RARP_REPLY       4       /**< RARP Reply */
+
+#define ARP_HW_ADDR_LEN         6       /**< MAC address length */
+#define ARP_PROTO_ADDR_LEN      4       /**< IPv4 address length */
+
+#define ARP_CACHE_SIZE          64      /**< ARP cache size */
+#define ARP_CACHE_TIMEOUT       600     /**< Cache entry timeout (seconds) */
+#define ARP_MAX_RETRIES         3       /**< Maximum ARP retries */
+#define ARP_RETRY_INTERVAL      1       /**< Retry interval (seconds) */
+
+/**
+ * @brief ARP packet structure
+ */
+typedef struct __attribute__((packed)) {
+    uint16_t hw_type;        /**< Hardware type */
+    uint16_t proto_type;     /**< Protocol type */
+    uint8_t  hw_addr_len;    /**< Hardware address length */
+    uint8_t  proto_addr_len; /**< Protocol address length */
+    uint16_t opcode;         /**< Operation code */
+    uint8_t  sender_hw[ARP_HW_ADDR_LEN];     /**< Sender hardware address */
+    uint8_t  sender_proto[ARP_PROTO_ADDR_LEN]; /**< Sender protocol address */
+    uint8_t  target_hw[ARP_HW_ADDR_LEN];     /**< Target hardware address */
+    uint8_t  target_proto[ARP_PROTO_ADDR_LEN]; /**< Target protocol address */
+} arp_packet_t;
+
+/**
+ * @brief ARP cache entry states
+ */
+typedef enum {
+    ARP_ENTRY_FREE,        /**< Entry is free */
+    ARP_ENTRY_INCOMPLETE,  /**< Resolution in progress */
+    ARP_ENTRY_COMPLETE,    /**< Resolution complete */
+    ARP_ENTRY_STATIC       /**< Static entry */
+} arp_entry_state_t;
+
+/**
+ * @brief ARP cache entry
+ */
+typedef struct {
+    uint8_t ip[ARP_PROTO_ADDR_LEN];   /**< IP address */
+    uint8_t mac[ARP_HW_ADDR_LEN];     /**< MAC address */
+    arp_entry_state_t state;          /**< Entry state */
+    time_t timestamp;                 /**< Last update time */
+    uint8_t retries;                  /**< Retry count */
+} arp_cache_entry_t;
+
+/**
+ * @brief ARP context
+ */
+typedef struct {
+    uint8_t local_ip[ARP_PROTO_ADDR_LEN];    /**< Local IP address */
+    uint8_t local_mac[ARP_HW_ADDR_LEN];      /**< Local MAC address */
+    arp_cache_entry_t cache[ARP_CACHE_SIZE]; /**< ARP cache */
+    uint32_t requests_sent;                  /**< Statistics */
+    uint32_t replies_sent;
+    uint32_t requests_received;
+    uint32_t replies_received;
+} arp_context_t;
+
+/* ============================================================================
+ * ARP Packet Operations
+ * ============================================================================ */
+
+/**
+ * @brief Build ARP packet
+ * @param pkt Output ARP packet
+ * @param opcode Operation code
+ * @param sender_mac Sender MAC address
+ * @param sender_ip Sender IP address
+ * @param target_mac Target MAC address
+ * @param target_ip Target IP address
+ */
+void arp_build_packet(arp_packet_t *pkt, uint16_t opcode,
+                      const uint8_t *sender_mac, const uint8_t *sender_ip,
+                      const uint8_t *target_mac, const uint8_t *target_ip) {
+    pkt->hw_type = htons(ARP_HW_TYPE_ETHERNET);
+    pkt->proto_type = htons(ARP_PROTO_TYPE_IP);
+    pkt->hw_addr_len = ARP_HW_ADDR_LEN;
+    pkt->proto_addr_len = ARP_PROTO_ADDR_LEN;
+    pkt->opcode = htons(opcode);
+
+    memcpy(pkt->sender_hw, sender_mac, ARP_HW_ADDR_LEN);
+    memcpy(pkt->sender_proto, sender_ip, ARP_PROTO_ADDR_LEN);
+    memcpy(pkt->target_hw, target_mac, ARP_HW_ADDR_LEN);
+    memcpy(pkt->target_proto, target_ip, ARP_PROTO_ADDR_LEN);
+}
+
+/**
+ * @brief Parse ARP packet
+ * @param data Raw packet data
+ * @param len Data length
+ * @param pkt Output ARP packet structure
+ * @return true on success, false on failure
+ */
+bool arp_parse_packet(const uint8_t *data, size_t len, arp_packet_t *pkt) {
+    if (data == NULL || len < sizeof(arp_packet_t) || pkt == NULL) {
+        return false;
+    }
+
+    memcpy(pkt, data, sizeof(arp_packet_t));
+
+    /* Convert from network to host byte order */
+    pkt->hw_type = ntohs(pkt->hw_type);
+    pkt->proto_type = ntohs(pkt->proto_type);
+    pkt->opcode = ntohs(pkt->opcode);
+
+    /* Validate */
+    if (pkt->hw_type != ARP_HW_TYPE_ETHERNET ||
+        pkt->proto_type != ARP_PROTO_TYPE_IP ||
+        pkt->hw_addr_len != ARP_HW_ADDR_LEN ||
+        pkt->proto_addr_len != ARP_PROTO_ADDR_LEN) {
+        return false;
+    }
+
+    return true;
+}
+
+/**
+ * @brief Get operation code name
+ * @param opcode Operation code
+ * @return Name string
+ */
+const char* arp_opcode_name(uint16_t opcode) {
+    switch (opcode) {
+        case ARP_OP_REQUEST:      return "REQUEST";
+        case ARP_OP_REPLY:        return "REPLY";
+        case ARP_OP_RARP_REQUEST: return "RARP REQUEST";
+        case ARP_OP_RARP_REPLY:   return "RARP REPLY";
+        default:                  return "UNKNOWN";
+    }
+}
+
+/**
+ * @brief Format IP address to string
+ * @param ip IP address bytes
+ * @param str Output string buffer
+ * @return str pointer
+ */
+char* arp_ip_to_string(const uint8_t *ip, char *str) {
+    sprintf(str, "%d.%d.%d.%d", ip[0], ip[1], ip[2], ip[3]);
+    return str;
+}
+
+/**
+ * @brief Format MAC address to string
+ * @param mac MAC address bytes
+ * @param str Output string buffer
+ * @return str pointer
+ */
+char* arp_mac_to_string(const uint8_t *mac, char *str) {
+    sprintf(str, "%02X:%02X:%02X:%02X:%02X:%02X",
+            mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+    return str;
+}
+
+/**
+ * @brief Parse IP address string
+ * @param str IP string
+ * @param ip Output IP bytes
+ * @return true on success, false on failure
+ */
+bool arp_parse_ip(const char *str, uint8_t *ip) {
+    int a, b, c, d;
+    if (sscanf(str, "%d.%d.%d.%d", &a, &b, &c, &d) != 4) {
+        return false;
+    }
+    ip[0] = a; ip[1] = b; ip[2] = c; ip[3] = d;
+    return true;
+}
+
+/**
+ * @brief Compare IP addresses
+ * @param a First IP
+ * @param b Second IP
+ * @return 0 if equal, non-zero otherwise
+ */
+int arp_ip_compare(const uint8_t *a, const uint8_t *b) {
+    return memcmp(a, b, ARP_PROTO_ADDR_LEN);
+}
+
+/**
+ * @brief Compare MAC addresses
+ * @param a First MAC
+ * @param b Second MAC
+ * @return 0 if equal, non-zero otherwise
+ */
+int arp_mac_compare(const uint8_t *a, const uint8_t *b) {
+    return memcmp(a, b, ARP_HW_ADDR_LEN);
+}
+
+/**
+ * @brief Print ARP packet
+ * @param pkt ARP packet
+ */
+void arp_print_packet(const arp_packet_t *pkt) {
+    char ip_str[16], mac_str[18];
+
+    printf("ARP %s:\n", arp_opcode_name(pkt->opcode));
+    printf("  Sender: %s / %s\n",
+           arp_mac_to_string(pkt->sender_hw, mac_str),
+           arp_ip_to_string(pkt->sender_proto, ip_str));
+    printf("  Target: %s / %s\n",
+           arp_mac_to_string(pkt->target_hw, mac_str),
+           arp_ip_to_string(pkt->target_proto, ip_str));
+}
+
+/* ============================================================================
+ * ARP Cache Operations
+ * ============================================================================ */
+
+/**
+ * @brief Initialize ARP context
+ * @param ctx ARP context
+ * @param local_ip Local IP address
+ * @param local_mac Local MAC address
+ * @return true on success, false on failure
+ */
+bool arp_init(arp_context_t *ctx, const uint8_t *local_ip, const uint8_t *local_mac) {
+    if (ctx == NULL || local_ip == NULL || local_mac == NULL) {
+        return false;
+    }
+
+    memset(ctx, 0, sizeof(arp_context_t));
+    memcpy(ctx->local_ip, local_ip, ARP_PROTO_ADDR_LEN);
+    memcpy(ctx->local_mac, local_mac, ARP_HW_ADDR_LEN);
+
+    /* Initialize cache entries as free */
+    for (int i = 0; i < ARP_CACHE_SIZE; i++) {
+        ctx->cache[i].state = ARP_ENTRY_FREE;
+    }
+
+    return true;
+}
+
+/**
+ * @brief Find cache entry by IP
+ * @param ctx ARP context
+ * @param ip IP address to find
+ * @return Pointer to entry, or NULL if not found
+ */
+arp_cache_entry_t* arp_cache_find(arp_context_t *ctx, const uint8_t *ip) {
+    for (int i = 0; i < ARP_CACHE_SIZE; i++) {
+        if (ctx->cache[i].state != ARP_ENTRY_FREE &&
+            arp_ip_compare(ctx->cache[i].ip, ip) == 0) {
+            return &ctx->cache[i];
+        }
+    }
+    return NULL;
+}
+
+/**
+ * @brief Find free cache entry
+ * @param ctx ARP context
+ * @return Pointer to free entry, or NULL if cache full
+ */
+arp_cache_entry_t* arp_cache_find_free(arp_context_t *ctx) {
+    /* First, look for truly free entry */
+    for (int i = 0; i < ARP_CACHE_SIZE; i++) {
+        if (ctx->cache[i].state == ARP_ENTRY_FREE) {
+            return &ctx->cache[i];
+        }
+    }
+
+    /* No free entry - look for oldest complete entry */
+    time_t oldest = time(NULL);
+    arp_cache_entry_t *oldest_entry = NULL;
+
+    for (int i = 0; i < ARP_CACHE_SIZE; i++) {
+        if (ctx->cache[i].state == ARP_ENTRY_COMPLETE &&
+            ctx->cache[i].timestamp < oldest) {
+            oldest = ctx->cache[i].timestamp;
+            oldest_entry = &ctx->cache[i];
+        }
+    }
+
+    return oldest_entry;
+}
+
+/**
+ * @brief Add entry to ARP cache
+ * @param ctx ARP context
+ * @param ip IP address
+ * @param mac MAC address
+ * @param is_static Static entry flag
+ * @return true on success, false on failure
+ */
+bool arp_cache_add(arp_context_t *ctx, const uint8_t *ip, const uint8_t *mac,
+                   bool is_static) {
+    if (ctx == NULL || ip == NULL || mac == NULL) {
+        return false;
+    }
+
+    /* Check if entry already exists */
+    arp_cache_entry_t *entry = arp_cache_find(ctx, ip);
+
+    if (entry == NULL) {
+        /* Find free entry */
+        entry = arp_cache_find_free(ctx);
+        if (entry == NULL) {
+            return false;  /* Cache full */
+        }
+    }
+
+    /* Update entry */
+    memcpy(entry->ip, ip, ARP_PROTO_ADDR_LEN);
+    memcpy(entry->mac, mac, ARP_HW_ADDR_LEN);
+    entry->state = is_static ? ARP_ENTRY_STATIC : ARP_ENTRY_COMPLETE;
+    entry->timestamp = time(NULL);
+    entry->retries = 0;
+
+    char ip_str[16], mac_str[18];
+    printf("ARP cache: Added %s -> %s (%s)\n",
+           arp_ip_to_string(ip, ip_str),
+           arp_mac_to_string(mac, mac_str),
+           is_static ? "static" : "dynamic");
+
+    return true;
+}
+
+/**
+ * @brief Remove entry from ARP cache
+ * @param ctx ARP context
+ * @param ip IP address to remove
+ * @return true on success, false on failure
+ */
+bool arp_cache_remove(arp_context_t *ctx, const uint8_t *ip) {
+    arp_cache_entry_t *entry = arp_cache_find(ctx, ip);
+    if (entry == NULL) {
+        return false;
+    }
+
+    entry->state = ARP_ENTRY_FREE;
+    return true;
+}
+
+/**
+ * @brief Lookup MAC address for IP
+ * @param ctx ARP context
+ * @param ip IP address to resolve
+ * @param mac Output MAC address
+ * @return true if found, false otherwise
+ */
+bool arp_lookup(arp_context_t *ctx, const uint8_t *ip, uint8_t *mac) {
+    if (ctx == NULL || ip == NULL || mac == NULL) {
+        return false;
+    }
+
+    /* Check for broadcast */
+    uint8_t broadcast_ip[4] = {255, 255, 255, 255};
+    if (arp_ip_compare(ip, broadcast_ip) == 0) {
+        memset(mac, 0xFF, ARP_HW_ADDR_LEN);
+        return true;
+    }
+
+    /* Check cache */
+    arp_cache_entry_t *entry = arp_cache_find(ctx, ip);
+    if (entry != NULL && entry->state == ARP_ENTRY_COMPLETE) {
+        memcpy(mac, entry->mac, ARP_HW_ADDR_LEN);
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * @brief Create ARP request
+ * @param ctx ARP context
+ * @param target_ip Target IP to resolve
+ * @param pkt Output ARP packet
+ */
+void arp_create_request(arp_context_t *ctx, const uint8_t *target_ip,
+                        arp_packet_t *pkt) {
+    uint8_t zero_mac[ARP_HW_ADDR_LEN] = {0};
+    arp_build_packet(pkt, ARP_OP_REQUEST,
+                     ctx->local_mac, ctx->local_ip,
+                     zero_mac, target_ip);
+    ctx->requests_sent++;
+}
+
+/**
+ * @brief Create ARP reply
+ * @param ctx ARP context
+ * @param request Received ARP request
+ * @param pkt Output ARP packet
+ */
+void arp_create_reply(arp_context_t *ctx, const arp_packet_t *request,
+                      arp_packet_t *pkt) {
+    arp_build_packet(pkt, ARP_OP_REPLY,
+                     ctx->local_mac, ctx->local_ip,
+                     request->sender_hw, request->sender_proto);
+    ctx->replies_sent++;
+}
+
+/**
+ * @brief Process received ARP packet
+ * @param ctx ARP context
+ * @param pkt Received ARP packet
+ */
+void arp_process_packet(arp_context_t *ctx, const arp_packet_t *pkt) {
+    if (ctx == NULL || pkt == NULL) return;
+
+    char ip_str[16];
+
+    switch (pkt->opcode) {
+        case ARP_OP_REQUEST:
+            ctx->requests_received++;
+            printf("ARP: Received request for %s\n",
+                   arp_ip_to_string(pkt->target_proto, ip_str));
+
+            /* Check if request is for us */
+            if (arp_ip_compare(pkt->target_proto, ctx->local_ip) == 0) {
+                printf("ARP: Request is for us - would send reply\n");
+                /* Add sender to cache */
+                arp_cache_add(ctx, pkt->sender_proto, pkt->sender_hw, false);
+            }
+            break;
+
+        case ARP_OP_REPLY:
+            ctx->replies_received++;
+            printf("ARP: Received reply from %s\n",
+                   arp_ip_to_string(pkt->sender_proto, ip_str));
+            /* Add to cache */
+            arp_cache_add(ctx, pkt->sender_proto, pkt->sender_hw, false);
+            break;
+    }
+}
+
+/**
+ * @brief Print ARP cache
+ * @param ctx ARP context
+ */
+void arp_print_cache(const arp_context_t *ctx) {
+    char ip_str[16], mac_str[18];
+    const char *state_names[] = {"FREE", "INCOMPLETE", "COMPLETE", "STATIC"};
+
+    printf("\n=== ARP Cache ===\n");
+    printf("%-16s %-18s %-12s %s\n", "IP Address", "MAC Address", "State", "Age");
+    printf("---------------------------------------------------------\n");
+
+    time_t now = time(NULL);
+
+    for (int i = 0; i < ARP_CACHE_SIZE; i++) {
+        if (ctx->cache[i].state != ARP_ENTRY_FREE) {
+            printf("%-16s %-18s %-12s %lds\n",
+                   arp_ip_to_string(ctx->cache[i].ip, ip_str),
+                   arp_mac_to_string(ctx->cache[i].mac, mac_str),
+                   state_names[ctx->cache[i].state],
+                   (long)(now - ctx->cache[i].timestamp));
+        }
+    }
+}
+
+/**
+ * @brief Print ARP statistics
+ * @param ctx ARP context
+ */
+void arp_print_stats(const arp_context_t *ctx) {
+    printf("\n=== ARP Statistics ===\n");
+    printf("Requests sent: %u\n", ctx->requests_sent);
+    printf("Replies sent: %u\n", ctx->replies_sent);
+    printf("Requests received: %u\n", ctx->requests_received);
+    printf("Replies received: %u\n", ctx->replies_received);
+}
+
+/* ============================================================================
+ * ARP Test
+ * ============================================================================ */
+
+/**
+ * @brief ARP test
+ */
+void arp_test(void) {
+    printf("\n=== ARP Protocol Test ===\n");
+
+    /* Initialize ARP context */
+    arp_context_t ctx;
+    uint8_t local_ip[4] = {192, 168, 1, 10};
+    uint8_t local_mac[6] = {0x00, 0x11, 0x22, 0x33, 0x44, 0x55};
+
+    if (!arp_init(&ctx, local_ip, local_mac)) {
+        printf("Failed to initialize ARP context\n");
+        return;
+    }
+
+    char ip_str[16], mac_str[18];
+    printf("Local IP: %s\n", arp_ip_to_string(local_ip, ip_str));
+    printf("Local MAC: %s\n", arp_mac_to_string(local_mac, mac_str));
+
+    /* Test ARP packet building */
+    arp_packet_t pkt;
+    uint8_t target_ip[4] = {192, 168, 1, 1};
+
+    printf("\n--- Creating ARP Request ---\n");
+    arp_create_request(&ctx, target_ip, &pkt);
+    arp_print_packet(&pkt);
+
+    /* Test ARP reply */
+    printf("\n--- Creating ARP Reply ---\n");
+    arp_create_reply(&ctx, &pkt, &pkt);
+    arp_print_packet(&pkt);
+
+    /* Test ARP cache operations */
+    printf("\n--- ARP Cache Operations ---\n");
+
+    uint8_t ip1[4] = {192, 168, 1, 1};
+    uint8_t mac1[6] = {0xAA, 0xBB, 0xCC, 0xDD, 0xEE, 0xFF};
+    arp_cache_add(&ctx, ip1, mac1, false);
+
+    uint8_t ip2[4] = {192, 168, 1, 2};
+    uint8_t mac2[6] = {0x11, 0x22, 0x33, 0x44, 0x55, 0x66};
+    arp_cache_add(&ctx, ip2, mac2, true);  /* Static entry */
+
+    arp_print_cache(&ctx);
+
+    /* Test lookup */
+    printf("\n--- ARP Lookup Test ---\n");
+    uint8_t resolved_mac[6];
+    if (arp_lookup(&ctx, ip1, resolved_mac)) {
+        printf("Resolved %s -> %s\n",
+               arp_ip_to_string(ip1, ip_str),
+               arp_mac_to_string(resolved_mac, mac_str));
+    }
+
+    /* Test processing received packet */
+    printf("\n--- Processing ARP Request ---\n");
+    arp_packet_t request;
+    uint8_t sender_ip[4] = {192, 168, 1, 100};
+    uint8_t sender_mac[6] = {0x99, 0x88, 0x77, 0x66, 0x55, 0x44};
+    arp_build_packet(&request, ARP_OP_REQUEST,
+                     sender_mac, sender_ip,
+                     local_mac, local_ip);  /* Request for us */
+    arp_process_packet(&ctx, &request);
+
+    arp_print_cache(&ctx);
+    arp_print_stats(&ctx);
+
+    printf("\nARP test completed\n");
+}
+
+/* Byte order conversion helpers */
+#ifndef htons
+    #define htons(x) ((((x) >> 8) & 0xFF) | (((x) & 0xFF) << 8))
+    #define ntohs(x) htons(x)
+    #define htonl(x) ((((x) >> 24) & 0xFF) | (((x) >> 8) & 0xFF00) | \
+                    (((x) & 0xFF00) << 8) | (((x) & 0xFF) << 24))
+    #define ntohl(x) htonl(x)
+#endif
+
+/* Main entry point */
+int main(void) {
+    arp_test();
+    return 0;
+}
+```
+
+### 8.3 编译与运行
+
+```bash
+gcc -o arp_test arp.c -Wall -Wextra
+./arp_test
+```
+
+---
+
+## 9. CRC校验算法
+
+### 9.1 CRC算法实现
+
+```c
+/**
+ * @file crc_algorithms.c
+ * @brief CRC Algorithms Implementation
+ * @version 1.0
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+/* ============================================================================
+ * CRC-8 Implementations
+ * ============================================================================ */
+
+/**
+ * @brief Calculate CRC-8 (ATM/SDH)
+ * Polynomial: x^8 + x^2 + x + 1 (0x07)
+ * @param data Input data
+ * @param len Data length
+ * @return CRC-8 value
+ */
+uint8_t crc8_sdh(const uint8_t *data, size_t len) {
+    uint8_t crc = 0x00;
+
+    for (size_t i = 0; i < len; i++) {
+        crc ^= data[i];
+        for (int j = 0; j < 8; j++) {
+            if (crc & 0x80) {
+                crc = (crc << 1) ^ 0x07;
+            } else {
+                crc <<= 1;
+            }
+        }
+    }
+
+    return crc;
+}
+
+/**
+ * @brief Calculate CRC-8 (CRC-8-CCITT)
+ * Polynomial: x^8 + x^7 + x^3 + x^2 + 1 (0x8D)
+ * @param data Input data
+ * @param len Data length
+ * @return CRC-8 value
+ */
+uint8_t crc8_ccitt(const uint8_t *data, size_t len) {
+    uint8_t crc = 0x00;
+
+    for (size_t i = 0; i < len; i++) {
+        crc ^= data[i];
+        for (int j = 0; j < 8; j++) {
+            if (crc & 0x80) {
+                crc = (crc << 1) ^ 0x8D;
+            } else {
+                crc <<= 1;
+            }
+        }
+    }
+
+    return crc;
+}
+
+/**
+ * @brief Calculate CRC-8 (Dallas/Maxim 1-Wire)
+ * Polynomial: x^8 + x^5 + x^4 + 1 (0x31)
+ * @param data Input data
+ * @param len Data length
+ * @return CRC-8 value
+ */
+uint8_t crc8_dallas(const uint8_t *data, size_t len) {
+    uint8_t crc = 0x00;
+
+    for (size_t i = 0; i < len; i++) {
+        crc ^= data[i];
+        for (int j = 0; j < 8; j++) {
+            if (crc & 0x01) {
+                crc = (crc >> 1) ^ 0x8C;
+            } else {
+                crc >>= 1;
+            }
+        }
+    }
+
+    return crc;
+}
+
+/* ============================================================================
+ * CRC-16 Implementations
+ * ============================================================================ */
+
+/**
+ * @brief CRC-16 lookup table (CCITT)
+ */
+static uint16_t crc16_ccitt_table[256];
+static bool crc16_ccitt_table_initialized = false;
+
+/**
+ * @brief Initialize CRC-16 CCITT lookup table
+ */
+void crc16_ccitt_init_table(void) {
+    if (crc16_ccitt_table_initialized) return;
+
+    const uint16_t polynomial = 0x1021;  /* x^16 + x^12 + x^5 + 1 */
+
+    for (int i = 0; i < 256; i++) {
+        uint16_t crc = (uint16_t)(i << 8);
+        for (int j = 0; j < 8; j++) {
+            if (crc & 0x8000) {
+                crc = (crc << 1) ^ polynomial;
+            } else {
+                crc <<= 1;
+            }
+        }
+        crc16_ccitt_table[i] = crc;
+    }
+
+    crc16_ccitt_table_initialized = true;
+}
+
+/**
+ * @brief Calculate CRC-16 CCITT (0xFFFF initial)
+ * @param data Input data
+ * @param len Data length
+ * @return CRC-16 value
+ */
+uint16_t crc16_ccitt(const uint8_t *data, size_t len) {
+    crc16_ccitt_init_table();
+
+    uint16_t crc = 0xFFFF;
+
+    for (size_t i = 0; i < len; i++) {
+        crc = (crc << 8) ^ crc16_ccitt_table[((crc >> 8) ^ data[i]) & 0xFF];
+    }
+
+    return crc;
+}
+
+/**
+ * @brief Calculate CRC-16 CCITT (0x1D0F initial for Modbus)
+ * @param data Input data
+ * @param len Data length
+ * @return CRC-16 value
+ */
+uint16_t crc16_ccitt_modbus(const uint8_t *data, size_t len) {
+    crc16_ccitt_init_table();
+
+    uint16_t crc = 0x1D0F;
+
+    for (size_t i = 0; i < len; i++) {
+        crc = (crc << 8) ^ crc16_ccitt_table[((crc >> 8) ^ data[i]) & 0xFF];
+    }
+
+    return crc;
+}
+
+/**
+ * @brief Calculate CRC-16 (IBM/ARC/SDLC)
+ * Polynomial: x^16 + x^15 + x^2 + 1 (0x8005)
+ * @param data Input data
+ * @param len Data length
+ * @return CRC-16 value
+ */
+uint16_t crc16_ibm(const uint8_t *data, size_t len) {
+    uint16_t crc = 0x0000;
+
+    for (size_t i = 0; i < len; i++) {
+        crc ^= (uint16_t)data[i] << 8;
+        for (int j = 0; j < 8; j++) {
+            if (crc & 0x8000) {
+                crc = (crc << 1) ^ 0x8005;
+            } else {
+                crc <<= 1;
+            }
+        }
+    }
+
+    return crc;
+}
+
+/**
+ * @brief Calculate CRC-16 (Modbus)
+ * @param data Input data
+ * @param len Data length
+ * @return CRC-16 value
+ */
+uint16_t crc16_modbus(const uint8_t *data, size_t len) {
+    uint16_t crc = 0xFFFF;
+
+    for (size_t i = 0; i < len; i++) {
+        crc ^= data[i];
+        for (int j = 0; j < 8; j++) {
+            if (crc & 0x0001) {
+                crc = (crc >> 1) ^ 0xA001;
+            } else {
+                crc >>= 1;
+            }
+        }
+    }
+
+    return crc;
+}
+
+/* ============================================================================
+ * CRC-32 Implementations
+ * ============================================================================ */
+
+/**
+ * @brief CRC-32 lookup table (Ethernet)
+ */
+static uint32_t crc32_table[256];
+static bool crc32_table_initialized = false;
+
+/**
+ * @brief Initialize CRC-32 lookup table
+ */
+void crc32_init_table(void) {
+    if (crc32_table_initialized) return;
+
+    const uint32_t polynomial = 0xEDB88320;  /* Reversed polynomial */
+
+    for (uint32_t i = 0; i < 256; i++) {
+        uint32_t crc = i;
+        for (int j = 0; j < 8; j++) {
+            if (crc & 1) {
+                crc = (crc >> 1) ^ polynomial;
+            } else {
+                crc >>= 1;
+            }
+        }
+        crc32_table[i] = crc;
+    }
+
+    crc32_table_initialized = true;
+}
+
+/**
+ * @brief Calculate CRC-32 (Ethernet/IEEE 802.3)
+ * @param data Input data
+ * @param len Data length
+ * @return CRC-32 value
+ */
+uint32_t crc32_ethernet(const uint8_t *data, size_t len) {
+    crc32_init_table();
+
+    uint32_t crc = 0xFFFFFFFF;
+
+    for (size_t i = 0; i < len; i++) {
+        crc = (crc >> 8) ^ crc32_table[(crc ^ data[i]) & 0xFF];
+    }
+
+    return crc ^ 0xFFFFFFFF;
+}
+
+/**
+ * @brief Calculate CRC-32 (POSIX cksum)
+ * @param data Input data
+ * @param len Data length
+ * @return CRC-32 value
+ */
+uint32_t crc32_posix(const uint8_t *data, size_t len) {
+    crc32_init_table();
+
+    uint32_t crc = 0x00000000;
+
+    for (size_t i = 0; i < len; i++) {
+        crc = (crc >> 8) ^ crc32_table[(crc ^ data[i]) & 0xFF];
+    }
+
+    return crc ^ 0xFFFFFFFF;
+}
+
+/**
+ * @brief Calculate CRC-32 (MPEG-2)
+ * @param data Input data
+ * @param len Data length
+ * @return CRC-32 value
+ */
+uint32_t crc32_mpeg2(const uint8_t *data, size_t len) {
+    uint32_t crc = 0xFFFFFFFF;
+    const uint32_t polynomial = 0x04C11DB7;
+
+    for (size_t i = 0; i < len; i++) {
+        crc ^= ((uint32_t)data[i]) << 24;
+        for (int j = 0; j < 8; j++) {
+            if (crc & 0x80000000) {
+                crc = (crc << 1) ^ polynomial;
+            } else {
+                crc <<= 1;
+            }
+        }
+    }
+
+    return crc;
+}
+
+/* ============================================================================
+ * CRC Test
+ * ============================================================================ */
+
+/**
+ * @brief CRC test
+ */
+void crc_test(void) {
+    printf("\n=== CRC Algorithms Test ===\n");
+
+    const char *test_data = "123456789";
+    size_t len = strlen(test_data);
+
+    printf("Test data: \"%s\" (%zu bytes)\n\n", test_data, len);
+
+    /* CRC-8 tests */
+    printf("CRC-8 (SDH/ATM):     0x%02X (expected: 0xF4)\n", crc8_sdh((const uint8_t *)test_data, len));
+    printf("CRC-8 (CCITT):       0x%02X\n", crc8_ccitt((const uint8_t *)test_data, len));
+    printf("CRC-8 (Dallas):      0x%02X (expected: 0xA1)\n", crc8_dallas((const uint8_t *)test_data, len));
+
+    /* CRC-16 tests */
+    printf("\nCRC-16 (CCITT):      0x%04X (expected: 0xE5CC)\n", crc16_ccitt((const uint8_t *)test_data, len));
+    printf("CRC-16 (CCITT Modbus):0x%04X\n", crc16_ccitt_modbus((const uint8_t *)test_data, len));
+    printf("CRC-16 (IBM):        0x%04X (expected: 0xBB3D)\n", crc16_ibm((const uint8_t *)test_data, len));
+    printf("CRC-16 (Modbus):     0x%04X (expected: 0x4B37)\n", crc16_modbus((const uint8_t *)test_data, len));
+
+    /* CRC-32 tests */
+    printf("\nCRC-32 (Ethernet):   0x%08X (expected: 0xCBF43926)\n", crc32_ethernet((const uint8_t *)test_data, len));
+    printf("CRC-32 (POSIX):      0x%08X\n", crc32_posix((const uint8_t *)test_data, len));
+    printf("CRC-32 (MPEG-2):     0x%08X (expected: 0x0376E6E7)\n", crc32_mpeg2((const uint8_t *)test_data, len));
+
+    /* Verify with appended CRC */
+    printf("\n--- Verification Test ---\n");
+    uint32_t crc = crc32_ethernet((const uint8_t *)test_data, len);
+    uint8_t data_with_crc[64];
+    memcpy(data_with_crc, test_data, len);
+    data_with_crc[len] = crc & 0xFF;
+    data_with_crc[len + 1] = (crc >> 8) & 0xFF;
+    data_with_crc[len + 2] = (crc >> 16) & 0xFF;
+    data_with_crc[len + 3] = (crc >> 24) & 0xFF;
+
+    uint32_t verify = crc32_ethernet(data_with_crc, len + 4);
+    printf("Verification CRC: 0x%08X (should be 0x2144DF1C for Ethernet)\n", verify);
+
+    printf("\nCRC test completed\n");
+}
+
+/* Main entry point */
+int main(void) {
+    crc_test();
+    return 0;
+}
+```
+
+### 9.3 编译与运行
+
+```bash
+gcc -o crc_algorithms_test crc_algorithms.c -Wall -Wextra
+./crc_algorithms_test
+```
+
+---
+
+## 10. 流量控制实现
+
+### 10.1 滑动窗口协议
+
+```c
+/**
+ * @file flow_control.c
+ * @brief Data Link Layer Flow Control Implementations
+ * @version 1.0
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <time.h>
+
+/* ============================================================================
+ * Sliding Window Protocol
+ * ============================================================================ */
+
+#define WINDOW_SIZE         8       /**< Window size */
+#define MAX_SEQ_NUM         16      /**< Maximum sequence number */
+#define FRAME_TIMEOUT_MS    1000    /**< Frame timeout in milliseconds */
+#define MAX_FRAME_SIZE      256     /**< Maximum frame size */
+#define BUFFER_SIZE         (WINDOW_SIZE * MAX_FRAME_SIZE)
+
+/**
+ * @brief Frame structure
+ */
+typedef struct {
+    uint8_t seq_num;         /**< Sequence number */
+    uint8_t ack_num;         /**< Acknowledgment number */
+    uint16_t len;            /**< Data length */
+    uint8_t data[MAX_FRAME_SIZE]; /**< Data payload */
+} window_frame_t;
+
+/**
+ * @brief Sliding window transmitter state
+ */
+typedef struct {
+    uint8_t base;            /**< Base of window */
+    uint8_t next_seq;        /**< Next sequence number to use */
+    uint8_t window_size;     /**< Current window size */
+    bool acked[WINDOW_SIZE]; /**< Acknowledgment status */
+    window_frame_t frames[WINDOW_SIZE]; /**< Buffered frames */
+    clock_t send_time[WINDOW_SIZE]; /**< Send timestamps */
+} sw_transmitter_t;
+
+/**
+ * @brief Sliding window receiver state
+ */
+typedef struct {
+    uint8_t expected_seq;    /**< Next expected sequence number */
+    uint8_t window_size;     /**< Window size */
+    bool received[WINDOW_SIZE]; /**< Reception status */
+    window_frame_t frames[WINDOW_SIZE]; /**< Received frames buffer */
+} sw_receiver_t;
+
+/**
+ * @brief Initialize sliding window transmitter
+ * @param tx Transmitter state
+ * @param window_size Window size
+ */
+void sw_init_transmitter(sw_transmitter_t *tx, uint8_t window_size) {
+    if (tx == NULL) return;
+
+    memset(tx, 0, sizeof(sw_transmitter_t));
+    tx->base = 0;
+    tx->next_seq = 0;
+    tx->window_size = window_size < WINDOW_SIZE ? window_size : WINDOW_SIZE;
+
+    for (int i = 0; i < WINDOW_SIZE; i++) {
+        tx->acked[i] = true;  /* Initially all slots are free */
+    }
+}
+
+/**
+ * @brief Initialize sliding window receiver
+ * @param rx Receiver state
+ * @param window_size Window size
+ */
+void sw_init_receiver(sw_receiver_t *rx, uint8_t window_size) {
+    if (rx == NULL) return;
+
+    memset(rx, 0, sizeof(sw_receiver_t));
+    rx->expected_seq = 0;
+    rx->window_size = window_size < WINDOW_SIZE ? window_size : WINDOW_SIZE;
+
+    for (int i = 0; i < WINDOW_SIZE; i++) {
+        rx->received[i] = false;
+    }
+}
+
+/**
+ * @brief Check if transmitter can send
+ * @param tx Transmitter state
+ * @return true if can send, false otherwise
+ */
+bool sw_can_send(const sw_transmitter_t *tx) {
+    if (tx == NULL) return false;
+
+    uint8_t available = (tx->base + tx->window_size - tx->next_seq) % MAX_SEQ_NUM;
+    return available < tx->window_size;
+}
+
+/**
+ * @brief Send frame using sliding window
+ * @param tx Transmitter state
+ * @param data Data to send
+ * @param len Data length
+ * @return Sequence number, or -1 on error
+ */
+int sw_send(sw_transmitter_t *tx, const uint8_t *data, uint16_t len) {
+    if (tx == NULL || data == NULL || len > MAX_FRAME_SIZE) {
+        return -1;
+    }
+
+    if (!sw_can_send(tx)) {
+        printf("Window full, cannot send\n");
+        return -1;
+    }
+
+    uint8_t seq = tx->next_seq;
+    uint8_t idx = seq % WINDOW_SIZE;
+
+    tx->frames[idx].seq_num = seq;
+    tx->frames[idx].len = len;
+    memcpy(tx->frames[idx].data, data, len);
+    tx->acked[idx] = false;
+    tx->send_time[idx] = clock();
+
+    tx->next_seq = (tx->next_seq + 1) % MAX_SEQ_NUM;
+
+    printf("TX: Sent frame with seq=%d, len=%d\n", seq, len);
+    return seq;
+}
+
+/**
+ * @brief Process acknowledgment
+ * @param tx Transmitter state
+ * @param ack_num Acknowledgment number
+ */
+void sw_process_ack(sw_transmitter_t *tx, uint8_t ack_num) {
+    if (tx == NULL) return;
+
+    /* Cumulative acknowledgment - mark all up to ack_num as acked */
+    while (tx->base != ack_num) {
+        uint8_t idx = tx->base % WINDOW_SIZE;
+        tx->acked[idx] = true;
+        printf("TX: Frame %d acknowledged\n", tx->base);
+        tx->base = (tx->base + 1) % MAX_SEQ_NUM;
+    }
+}
+
+/**
+ * @brief Check for timeouts and return timed out frames
+ * @param tx Transmitter state
+ * @param timed_out_seqs Output array for timed out sequence numbers
+ * @param max_count Maximum number to return
+ * @return Number of timed out frames
+ */
+int sw_check_timeouts(sw_transmitter_t *tx, uint8_t *timed_out_seqs, int max_count) {
+    if (tx == NULL || timed_out_seqs == NULL) return 0;
+
+    int count = 0;
+    clock_t now = clock();
+
+    for (uint8_t seq = tx->base; seq != tx->next_seq; seq = (seq + 1) % MAX_SEQ_NUM) {
+        uint8_t idx = seq % WINDOW_SIZE;
+
+        if (!tx->acked[idx]) {
+            double elapsed_ms = ((double)(now - tx->send_time[idx]) / CLOCKS_PER_SEC) * 1000;
+
+            if (elapsed_ms > FRAME_TIMEOUT_MS) {
+                if (count < max_count) {
+                    timed_out_seqs[count++] = seq;
+                    printf("TX: Frame %d timed out (%.0f ms)\n", seq, elapsed_ms);
+                }
+            }
+        }
+    }
+
+    return count;
+}
+
+/**
+ * @brief Receive frame using sliding window
+ * @param rx Receiver state
+ * @param frame Received frame
+ * @param output_data Output buffer for in-order data
+ * @param output_max Maximum output buffer size
+ * @return Number of bytes delivered, or -1 on error
+ */
+int sw_receive(sw_receiver_t *rx, const window_frame_t *frame,
+               uint8_t *output_data, uint16_t output_max) {
+    if (rx == NULL || frame == NULL || output_data == NULL) return -1;
+
+    uint8_t seq = frame->seq_num;
+    uint8_t idx = seq % WINDOW_SIZE;
+
+    /* Check if frame is within receive window */
+    uint8_t window_end = (rx->expected_seq + rx->window_size) % MAX_SEQ_NUM;
+    bool in_window;
+
+    if (rx->expected_seq < window_end) {
+        in_window = (seq >= rx->expected_seq && seq < window_end);
+    } else {
+        in_window = (seq >= rx->expected_seq || seq < window_end);
+    }
+
+    if (!in_window) {
+        printf("RX: Frame %d outside window (expected %d)\n", seq, rx->expected_seq);
+        return 0;  /* Still need to send ACK */
+    }
+
+    /* Store frame */
+    rx->frames[idx] = *frame;
+    rx->received[idx] = true;
+    printf("RX: Received frame %d\n", seq);
+
+    /* Deliver in-order frames */
+    uint16_t delivered = 0;
+    while (rx->received[rx->expected_seq % WINDOW_SIZE]) {
+        idx = rx->expected_seq % WINDOW_SIZE;
+        window_frame_t *f = &rx->frames[idx];
+
+        if (delivered + f->len <= output_max) {
+            memcpy(&output_data[delivered], f->data, f->len);
+            delivered += f->len;
+        }
+
+        rx->received[idx] = false;
+        printf("RX: Delivered frame %d\n", rx->expected_seq);
+        rx->expected_seq = (rx->expected_seq + 1) % MAX_SEQ_NUM;
+    }
+
+    return delivered;
+}
+
+/**
+ * @brief Get expected sequence number for ACK
+ * @param rx Receiver state
+ * @return Expected sequence number
+ */
+uint8_t sw_get_ack_num(const sw_receiver_t *rx) {
+    return rx ? rx->expected_seq : 0;
+}
+
+/* ============================================================================
+ * Stop-and-Wait Protocol
+ * ============================================================================ */
+
+/**
+ * @brief Stop-and-Wait transmitter state
+ */
+typedef struct {
+    uint8_t seq_num;         /**< Current sequence number */
+    bool waiting_for_ack;    /**< Waiting for acknowledgment */
+    clock_t send_time;       /**< Send timestamp */
+    window_frame_t last_frame; /**< Last sent frame for retransmission */
+} saw_transmitter_t;
+
+/**
+ * @brief Stop-and-Wait receiver state
+ */
+typedef struct {
+    uint8_t expected_seq;    /**< Expected sequence number */
+} saw_receiver_t;
+
+/**
+ * @brief Initialize Stop-and-Wait transmitter
+ * @param tx Transmitter state
+ */
+void saw_init_transmitter(saw_transmitter_t *tx) {
+    if (tx == NULL) return;
+
+    memset(tx, 0, sizeof(saw_transmitter_t));
+    tx->seq_num = 0;
+    tx->waiting_for_ack = false;
+}
+
+/**
+ * @brief Initialize Stop-and-Wait receiver
+ * @param rx Receiver state
+ */
+void saw_init_receiver(saw_receiver_t *rx) {
+    if (rx == NULL) return;
+
+    memset(rx, 0, sizeof(saw_receiver_t));
+    rx->expected_seq = 0;
+}
+
+/**
+ * @brief Send frame using Stop-and-Wait
+ * @param tx Transmitter state
+ * @param data Data to send
+ * @param len Data length
+ * @return true on success, false if waiting for ACK
+ */
+bool saw_send(saw_transmitter_t *tx, const uint8_t *data, uint16_t len) {
+    if (tx == NULL || data == NULL || len > MAX_FRAME_SIZE) {
+        return false;
+    }
+
+    if (tx->waiting_for_ack) {
+        printf("S&W TX: Still waiting for ACK of frame %d\n", tx->seq_num ^ 1);
+        return false;
+    }
+
+    tx->last_frame.seq_num = tx->seq_num;
+    tx->last_frame.len = len;
+    memcpy(tx->last_frame.data, data, len);
+    tx->send_time = clock();
+    tx->waiting_for_ack = true;
+
+    printf("S&W TX: Sent frame with seq=%d, len=%d\n", tx->seq_num, len);
+    return true;
+}
+
+/**
+ * @brief Process ACK in Stop-and-Wait
+ * @param tx Transmitter state
+ * @param ack_num Acknowledgment number
+ * @return true if valid ACK, false otherwise
+ */
+bool saw_process_ack(saw_transmitter_t *tx, uint8_t ack_num) {
+    if (tx == NULL || !tx->waiting_for_ack) return false;
+
+    /* In S&W, ACK contains expected sequence number */
+    if (ack_num == ((tx->seq_num + 1) % 2)) {
+        printf("S&W TX: ACK %d received, toggle sequence\n", ack_num);
+        tx->seq_num = ack_num;
+        tx->waiting_for_ack = false;
+        return true;
+    }
+
+    printf("S&W TX: Unexpected ACK %d (expected %d)\n",
+           ack_num, (tx->seq_num + 1) % 2);
+    return false;
+}
+
+/**
+ * @brief Check for timeout and retransmit if needed
+ * @param tx Transmitter state
+ * @return true if retransmission needed, false otherwise
+ */
+bool saw_check_timeout(saw_transmitter_t *tx) {
+    if (tx == NULL || !tx->waiting_for_ack) return false;
+
+    clock_t now = clock();
+    double elapsed_ms = ((double)(now - tx->send_time) / CLOCKS_PER_SEC) * 1000;
+
+    if (elapsed_ms > FRAME_TIMEOUT_MS) {
+        printf("S&W TX: Timeout! Retransmitting frame %d\n", tx->seq_num);
+        tx->send_time = now;
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * @brief Receive frame using Stop-and-Wait
+ * @param rx Receiver state
+ * @param frame Received frame
+ * @param output_data Output buffer
+ * @param output_max Maximum output size
+ * @return Number of bytes delivered, or -1 on error
+ */
+int saw_receive(saw_receiver_t *rx, const window_frame_t *frame,
+                uint8_t *output_data, uint16_t output_max) {
+    if (rx == NULL || frame == NULL || output_data == NULL) return -1;
+
+    if (frame->seq_num == rx->expected_seq) {
+        /* Correct frame received */
+        uint16_t len = frame->len < output_max ? frame->len : output_max;
+        memcpy(output_data, frame->data, len);
+
+        printf("S&W RX: Received expected frame %d, delivering %d bytes\n",
+               frame->seq_num, len);
+
+        /* Toggle expected sequence */
+        rx->expected_seq = (rx->expected_seq + 1) % 2;
+        return len;
+    } else {
+        /* Duplicate or out-of-order frame */
+        printf("S&W RX: Unexpected frame %d (expected %d)\n",
+               frame->seq_num, rx->expected_seq);
+        return 0;  /* Still need to ACK */
+    }
+}
+
+/**
+ * @brief Get expected sequence number for ACK in S&W
+ * @param rx Receiver state
+ * @return Expected sequence number
+ */
+uint8_t saw_get_ack_num(const saw_receiver_t *rx) {
+    return rx ? rx->expected_seq : 0;
+}
+
+/* ============================================================================
+ * Rate-Based Flow Control
+ * ============================================================================ */
+
+/**
+ * @brief Token bucket for rate control
+ */
+typedef struct {
+    uint32_t tokens;         /**< Current tokens */
+    uint32_t bucket_size;    /**< Maximum bucket size */
+    uint32_t rate;           /**< Token refill rate (tokens per second) */
+    clock_t last_update;     /**< Last update time */
+} token_bucket_t;
+
+/**
+ * @brief Initialize token bucket
+ * @param bucket Token bucket
+ * @param rate Token rate (tokens per second)
+ * @param burst_size Maximum bucket size (burst capacity)
+ */
+void token_bucket_init(token_bucket_t *bucket, uint32_t rate, uint32_t burst_size) {
+    if (bucket == NULL) return;
+
+    bucket->tokens = burst_size;  /* Start with full bucket */
+    bucket->bucket_size = burst_size;
+    bucket->rate = rate;
+    bucket->last_update = clock();
+}
+
+/**
+ * @brief Add tokens to bucket based on elapsed time
+ * @param bucket Token bucket
+ */
+void token_bucket_refill(token_bucket_t *bucket) {
+    if (bucket == NULL) return;
+
+    clock_t now = clock();
+    double elapsed_sec = (double)(now - bucket->last_update) / CLOCKS_PER_SEC;
+
+    uint32_t new_tokens = (uint32_t)(elapsed_sec * bucket->rate);
+    bucket->tokens = (bucket->tokens + new_tokens > bucket->bucket_size) ?
+                     bucket->bucket_size : bucket->tokens + new_tokens;
+    bucket->last_update = now;
+}
+
+/**
+ * @brief Try to consume tokens from bucket
+ * @param bucket Token bucket
+ * @param tokens Number of tokens to consume
+ * @return true if tokens consumed, false otherwise
+ */
+bool token_bucket_consume(token_bucket_t *bucket, uint32_t tokens) {
+    if (bucket == NULL) return false;
+
+    token_bucket_refill(bucket);
+
+    if (bucket->tokens >= tokens) {
+        bucket->tokens -= tokens;
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * @brief Get current token count
+ * @param bucket Token bucket
+ * @return Current tokens
+ */
+uint32_t token_bucket_get_tokens(token_bucket_t *bucket) {
+    if (bucket == NULL) return 0;
+    token_bucket_refill(bucket);
+    return bucket->tokens;
+}
+
+/* ============================================================================
+ * Flow Control Test
+ * ============================================================================ */
+
+/**
+ * @brief Flow control test
+ */
+void flow_control_test(void) {
+    printf("\n=== Flow Control Test ===\n");
+
+    /* Test sliding window */
+    printf("\n--- Sliding Window Protocol ---\n");
+    sw_transmitter_t sw_tx;
+    sw_receiver_t sw_rx;
+
+    sw_init_transmitter(&sw_tx, 4);
+    sw_init_receiver(&sw_rx, 4);
+
+    /* Send frames */
+    uint8_t data1[] = "Hello";
+    uint8_t data2[] = "World";
+    uint8_t data3[] = "Sliding";
+    uint8_t data4[] = "Window";
+    uint8_t data5[] = "Test";  /* This should fail (window full) */
+
+    sw_send(&sw_tx, data1, sizeof(data1));
+    sw_send(&sw_tx, data2, sizeof(data2));
+    sw_send(&sw_tx, data3, sizeof(data3));
+    sw_send(&sw_tx, data4, sizeof(data4));
+    sw_send(&sw_tx, data5, sizeof(data5));  /* Window full */
+
+    printf("TX: Window base=%d, next=%d\n", sw_tx.base, sw_tx.next_seq);
+
+    /* Simulate frame reception and ACKs */
+    window_frame_t frame;
+    uint8_t output[256];
+    int delivered;
+
+    /* Process frame 0 */
+    frame.seq_num = 0;
+    frame.len = sizeof(data1);
+    memcpy(frame.data, data1, sizeof(data1));
+    delivered = sw_receive(&sw_rx, &frame, output, sizeof(output));
+    printf("RX: Delivered %d bytes from frame 0\n", delivered);
+
+    /* Send ACK for frame 1 (cumulative) */
+    printf("RX: Sending ACK %d\n", sw_get_ack_num(&sw_rx));
+    sw_process_ack(&sw_tx, sw_get_ack_num(&sw_rx));
+    printf("TX: After ACK, window base=%d, next=%d\n", sw_tx.base, sw_tx.next_seq);
+
+    /* Process frame 2 (out of order) */
+    frame.seq_num = 2;
+    frame.len = sizeof(data3);
+    memcpy(frame.data, data3, sizeof(data3));
+    delivered = sw_receive(&sw_rx, &frame, output, sizeof(output));
+    printf("RX: Delivered %d bytes from frame 2 (buffered, out of order)\n", delivered);
+
+    /* Process frame 1 (completes sequence) */
+    frame.seq_num = 1;
+    frame.len = sizeof(data2);
+    memcpy(frame.data, data2, sizeof(data2));
+    delivered = sw_receive(&sw_rx, &frame, output, sizeof(output));
+    printf("RX: Delivered %d bytes total (frames 1,2 delivered)\n", delivered);
+
+    /* Test Stop-and-Wait */
+    printf("\n--- Stop-and-Wait Protocol ---\n");
+    saw_transmitter_t saw_tx;
+    saw_receiver_t saw_rx;
+
+    saw_init_transmitter(&saw_tx);
+    saw_init_receiver(&saw_rx);
+
+    uint8_t saw_data1[] = "S&W Test 1";
+    uint8_t saw_data2[] = "S&W Test 2";
+
+    saw_send(&saw_tx, saw_data1, sizeof(saw_data1));
+    saw_send(&saw_tx, saw_data2, sizeof(saw_data2));  /* Should fail, waiting for ACK */
+
+    /* Simulate ACK */
+    saw_process_ack(&saw_tx, 1);
+    saw_send(&saw_tx, saw_data2, sizeof(saw_data2));  /* Now should succeed */
+
+    /* Test token bucket */
+    printf("\n--- Token Bucket Rate Control ---\n");
+    token_bucket_t bucket;
+    token_bucket_init(&bucket, 100, 200);  /* 100 tokens/sec, 200 burst */
+
+    printf("Initial tokens: %u\n", token_bucket_get_tokens(&bucket));
+
+    /* Consume tokens */
+    for (int i = 0; i < 5; i++) {
+        if (token_bucket_consume(&bucket, 50)) {
+            printf("Consumed 50 tokens, remaining: %u\n", bucket.tokens);
+        } else {
+            printf("Not enough tokens (have %u)\n", bucket.tokens);
+        }
+    }
+
+    /* Try to consume more than available */
+    if (!token_bucket_consume(&bucket, 100)) {
+        printf("Correctly rejected consumption (only %u tokens)\n", bucket.tokens);
+    }
+
+    printf("\nFlow control test completed\n");
+}
+
+/* Byte order helpers */
+#ifndef htons
+    #define htons(x) ((((x) >> 8) & 0xFF) | (((x) & 0xFF) << 8))
+    #define ntohs(x) htons(x)
+#endif
+
+/* Main entry point */
+int main(void) {
+    flow_control_test();
+    return 0;
+}
+```
+
+### 10.3 编译与运行
+
+```bash
+gcc -o flow_control_test flow_control.c -Wall -Wextra
+./flow_control_test
 ```
 
 ---
