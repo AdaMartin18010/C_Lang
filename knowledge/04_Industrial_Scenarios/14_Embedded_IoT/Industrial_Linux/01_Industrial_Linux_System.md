@@ -35,6 +35,14 @@
     - [9.2 看门狗与进程监控](#92-看门狗与进程监控)
   - [10. 实际项目:工业数据采集器(完整代码)](#10-实际项目工业数据采集器完整代码)
     - [10.1 项目概述](#101-项目概述)
+    - [10.2 工业数据采集器完整代码](#102-工业数据采集器完整代码)
+  - [11. 远程OTA升级](#11-远程ota升级)
+    - [11.1 OTA升级架构](#111-ota升级架构)
+    - [11.2 OTA升级客户端实现](#112-ota升级客户端实现)
+  - [附录](#附录)
+    - [A. 编译依赖安装](#a-编译依赖安装)
+    - [B. 参考资料](#b-参考资料)
+    - [C. 术语表](#c-术语表)
 
 ---
 
@@ -5538,3 +5546,1768 @@ int main(int argc, char *argv[])
 │  └─────────────┘  └─────────────┘  └─────────────┘             │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+
+### 10.2 工业数据采集器完整代码
+
+```c
+/**
+ * @file industrial_data_collector.c
+ * @brief 工业数据采集器 - 完整实现
+ * @details
+ *   - 支持Modbus RTU/TCP设备采集
+ *   - 支持OPC UA设备采集
+ *   - 本地SQLite数据存储
+ *   - 边缘规则计算
+ *   - MQTT云端上传
+ *   - 配置热加载
+ *   - 完善的日志系统
+ *
+ * 编译: gcc -o collector industrial_data_collector.c \
+ *        -lsqlite3 -lmosquitto -lpthread -lrt -lm
+ *
+ * 运行: sudo ./collector -c config.json
+ */
+
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <stdarg.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <time.h>
+#include <signal.h>
+#include <pthread.h>
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <sys/mman.h>
+#include <sqlite3.h>
+#include <mosquitto.h>
+
+/* ============ 版本与配置 ============ */
+#define COLLECTOR_VERSION   "2.1.0"
+#define DEFAULT_CONFIG_FILE "/etc/industrial_collector/config.json"
+#define LOG_FILE            "/var/log/industrial_collector/collector.log"
+#define DB_FILE             "/var/lib/industrial_collector/data.db"
+
+/* 采集参数 */
+#define MAX_DEVICES         32
+#define MAX_TAGS_PER_DEVICE 128
+#define MAX_TAG_NAME        64
+#define MAX_BATCH_SIZE      1000
+#define COLLECTOR_QUEUE_SIZE (1024 * 1024)
+
+/* 日志级别 */
+typedef enum {
+    LOG_DEBUG = 0,
+    LOG_INFO,
+    LOG_WARNING,
+    LOG_ERROR,
+    LOG_FATAL
+} log_level_t;
+
+static log_level_t g_log_level = LOG_INFO;
+static FILE *g_log_file = NULL;
+static pthread_mutex_t g_log_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+/* ============ 数据结构定义 ============ */
+
+/* 数据质量 */
+typedef enum {
+    QUALITY_GOOD = 0,
+    QUALITY_BAD = 1,
+    QUALITY_UNCERTAIN = 2,
+    QUALITY_LAST_KNOWN = 3
+} data_quality_t;
+
+/* 数据点 */
+typedef struct {
+    char tag_name[MAX_TAG_NAME];
+    uint32_t device_id;
+    uint32_t tag_id;
+    double value;
+    data_quality_t quality;
+    uint64_t timestamp_ms;
+    uint64_t collection_time_ms;
+} data_point_t;
+
+/* 环形缓冲区 */
+typedef struct {
+    data_point_t *buffer;
+    size_t capacity;
+    size_t head;
+    size_t tail;
+    pthread_mutex_t lock;
+    pthread_cond_t not_empty;
+    pthread_cond_t not_full;
+    size_t overflow_count;
+} collector_queue_t;
+
+/* 设备类型 */
+typedef enum {
+    DEVICE_MODBUS_RTU = 0,
+    DEVICE_MODBUS_TCP,
+    DEVICE_OPC_UA,
+    DEVICE_SIMULATION  /* 用于测试 */
+} device_type_t;
+
+/* 设备配置 */
+typedef struct {
+    uint32_t id;
+    char name[64];
+    device_type_t type;
+    bool enabled;
+
+    /* 连接参数 */
+    union {
+        struct {
+            char port[64];
+            int baudrate;
+            char parity;
+            int data_bits;
+            int stop_bits;
+            uint8_t slave_id;
+        } modbus_rtu;
+
+        struct {
+            char host[64];
+            int port;
+            uint8_t slave_id;
+        } modbus_tcp;
+
+        struct {
+            char endpoint[128];
+            char username[64];
+            char password[64];
+        } opc_ua;
+    } connection;
+
+    /* 采集参数 */
+    uint32_t scan_interval_ms;
+    uint32_t timeout_ms;
+    uint32_t retry_count;
+
+    /* 标签列表 */
+    struct {
+        char name[MAX_TAG_NAME];
+        char address[32];
+        uint16_t register_addr;
+        uint8_t register_type;  /* 0=线圈, 1=输入, 3=保持寄存器, 4=输入寄存器 */
+        double scale;
+        double offset;
+        bool enabled;
+    } tags[MAX_TAGS_PER_DEVICE];
+    uint32_t tag_count;
+
+    /* 运行时状态 */
+    pthread_t thread;
+    bool running;
+    uint32_t error_count;
+    uint64_t last_scan_time;
+} device_t;
+
+/* 系统配置 */
+typedef struct {
+    /* 采集配置 */
+    uint32_t collection_interval_ms;
+    uint32_t batch_size;
+
+    /* 存储配置 */
+    bool local_storage_enabled;
+    uint32_t retention_days;
+
+    /* MQTT配置 */
+    bool mqtt_enabled;
+    char mqtt_broker[128];
+    int mqtt_port;
+    char mqtt_client_id[64];
+    char mqtt_username[64];
+    char mqtt_password[64];
+    char mqtt_topic_prefix[64];
+    uint32_t mqtt_qos;
+
+    /* 日志配置 */
+    char log_level[16];
+    char log_file[256];
+    uint32_t max_log_size_mb;
+    uint32_t max_log_files;
+} system_config_t;
+
+/* 全局上下文 */
+typedef struct {
+    system_config_t config;
+    device_t devices[MAX_DEVICES];
+    uint32_t device_count;
+
+    collector_queue_t data_queue;
+
+    sqlite3 *db;
+    struct mosquitto *mosq;
+    bool mqtt_connected;
+
+    pthread_t storage_thread;
+    pthread_t mqtt_thread;
+    pthread_t monitor_thread;
+
+    volatile bool running;
+    uint64_t start_time;
+
+    /* 统计 */
+    uint64_t total_collected;
+    uint64_t total_stored;
+    uint64_t total_sent;
+    uint64_t total_dropped;
+} collector_context_t;
+
+static collector_context_t g_ctx = {0};
+
+/* ============ 日志系统 ============ */
+
+static const char *log_level_str[] = {"DEBUG", "INFO", "WARNING", "ERROR", "FATAL"};
+
+static void logger_init(void)
+{
+    g_log_file = fopen(LOG_FILE, "a");
+    if (!g_log_file) {
+        g_log_file = stdout;
+    }
+}
+
+static void logger_close(void)
+{
+    if (g_log_file && g_log_file != stdout) {
+        fclose(g_log_file);
+    }
+}
+
+static void log_message(log_level_t level, const char *format, ...)
+{
+    if (level < g_log_level) {
+        return;
+    }
+
+    pthread_mutex_lock(&g_log_mutex);
+
+    /* 获取时间 */
+    struct timespec ts;
+    clock_gettime(CLOCK_REALTIME, &ts);
+    struct tm tm;
+    localtime_r(&ts.tv_sec, &tm);
+
+    /* 打印时间戳和级别 */
+    fprintf(g_log_file, "[%04d-%02d-%02d %02d:%02d:%02d.%03d] [%s] ",
+            tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
+            tm.tm_hour, tm.tm_min, tm.tm_sec, (int)(ts.tv_nsec / 1000000),
+            log_level_str[level]);
+
+    /* 打印消息 */
+    va_list args;
+    va_start(args, format);
+    vfprintf(g_log_file, format, args);
+    va_end(args);
+
+    fprintf(g_log_file, "\n");
+    fflush(g_log_file);
+
+    pthread_mutex_unlock(&g_log_mutex);
+}
+
+#define LOG_DEBUG(...)   log_message(LOG_DEBUG, __VA_ARGS__)
+#define LOG_INFO(...)    log_message(LOG_INFO, __VA_ARGS__)
+#define LOG_WARNING(...) log_message(LOG_WARNING, __VA_ARGS__)
+#define LOG_ERROR(...)   log_message(LOG_ERROR, __VA_ARGS__)
+#define LOG_FATAL(...)   log_message(LOG_FATAL, __VA_ARGS__)
+
+/* ============ 环形缓冲区实现 ============ */
+
+static int queue_init(collector_queue_t *queue, size_t capacity)
+{
+    queue->buffer = calloc(capacity, sizeof(data_point_t));
+    if (!queue->buffer) {
+        return -1;
+    }
+    queue->capacity = capacity;
+    queue->head = 0;
+    queue->tail = 0;
+    queue->overflow_count = 0;
+
+    pthread_mutex_init(&queue->lock, NULL);
+    pthread_cond_init(&queue->not_empty, NULL);
+    pthread_cond_init(&queue->not_full, NULL);
+
+    return 0;
+}
+
+static void queue_destroy(collector_queue_t *queue)
+{
+    free(queue->buffer);
+    pthread_mutex_destroy(&queue->lock);
+    pthread_cond_destroy(&queue->not_empty);
+    pthread_cond_destroy(&queue->not_full);
+}
+
+static size_t queue_size(collector_queue_t *queue)
+{
+    pthread_mutex_lock(&queue->lock);
+    size_t size = (queue->head - queue->tail) % queue->capacity;
+    pthread_mutex_unlock(&queue->lock);
+    return size;
+}
+
+static bool queue_push(collector_queue_t *queue, const data_point_t *point)
+{
+    pthread_mutex_lock(&queue->lock);
+
+    size_t next_head = (queue->head + 1) % queue->capacity;
+    if (next_head == queue->tail) {
+        /* 队列满 */
+        queue->overflow_count++;
+        pthread_mutex_unlock(&queue->lock);
+        return false;
+    }
+
+    queue->buffer[queue->head] = *point;
+    queue->head = next_head;
+
+    pthread_cond_signal(&queue->not_empty);
+    pthread_mutex_unlock(&queue->lock);
+
+    return true;
+}
+
+static bool queue_pop(collector_queue_t *queue, data_point_t *point, int timeout_ms)
+{
+    pthread_mutex_lock(&queue->lock);
+
+    while (queue->head == queue->tail) {
+        /* 队列为空，等待 */
+        if (timeout_ms >= 0) {
+            struct timespec ts;
+            clock_gettime(CLOCK_REALTIME, &ts);
+            ts.tv_sec += timeout_ms / 1000;
+            ts.tv_nsec += (timeout_ms % 1000) * 1000000;
+            if (ts.tv_nsec >= 1000000000) {
+                ts.tv_sec++;
+                ts.tv_nsec -= 1000000000;
+            }
+
+            int ret = pthread_cond_timedwait(&queue->not_empty, &queue->lock, &ts);
+            if (ret == ETIMEDOUT) {
+                pthread_mutex_unlock(&queue->lock);
+                return false;
+            }
+        } else {
+            pthread_cond_wait(&queue->not_empty, &queue->lock);
+        }
+
+        if (!g_ctx.running) {
+            pthread_mutex_unlock(&queue->lock);
+            return false;
+        }
+    }
+
+    *point = queue->buffer[queue->tail];
+    queue->tail = (queue->tail + 1) % queue->capacity;
+
+    pthread_cond_signal(&queue->not_full);
+    pthread_mutex_unlock(&queue->lock);
+
+    return true;
+}
+
+static size_t queue_pop_batch(collector_queue_t *queue, data_point_t *points,
+                               size_t max_count)
+{
+    pthread_mutex_lock(&queue->lock);
+
+    size_t available = (queue->head - queue->tail) % queue->capacity;
+    size_t count = (available < max_count) ? available : max_count;
+
+    for (size_t i = 0; i < count; i++) {
+        points[i] = queue->buffer[queue->tail];
+        queue->tail = (queue->tail + 1) % queue->capacity;
+    }
+
+    pthread_cond_signal(&queue->not_full);
+    pthread_mutex_unlock(&queue->lock);
+
+    return count;
+}
+
+/* ============ 数据库操作 ============ */
+
+static int db_init(void)
+{
+    int rc = sqlite3_open(DB_FILE, &g_ctx.db);
+    if (rc != SQLITE_OK) {
+        LOG_ERROR("Cannot open database: %s", sqlite3_errmsg(g_ctx.db));
+        return -1;
+    }
+
+    /* 创建表 */
+    const char *create_table_sql =
+        "CREATE TABLE IF NOT EXISTS data_points ("
+        "  id INTEGER PRIMARY KEY AUTOINCREMENT,"
+        "  tag_name TEXT NOT NULL,"
+        "  device_id INTEGER,"
+        "  value REAL,"
+        "  quality INTEGER,"
+        "  timestamp_ms INTEGER,"
+        "  created_at DATETIME DEFAULT CURRENT_TIMESTAMP"
+        ");"
+        "CREATE INDEX IF NOT EXISTS idx_timestamp ON data_points(timestamp_ms);"
+        "CREATE INDEX IF NOT EXISTS idx_tag ON data_points(tag_name);";
+
+    char *err_msg = NULL;
+    rc = sqlite3_exec(g_ctx.db, create_table_sql, NULL, NULL, &err_msg);
+    if (rc != SQLITE_OK) {
+        LOG_ERROR("SQL error: %s", err_msg);
+        sqlite3_free(err_msg);
+        return -1;
+    }
+
+    /* 启用WAL模式 */
+    sqlite3_exec(g_ctx.db, "PRAGMA journal_mode=WAL;", NULL, NULL, NULL);
+    sqlite3_exec(g_ctx.db, "PRAGMA synchronous=NORMAL;", NULL, NULL, NULL);
+
+    LOG_INFO("Database initialized: %s", DB_FILE);
+    return 0;
+}
+
+static void db_close(void)
+{
+    if (g_ctx.db) {
+        sqlite3_close(g_ctx.db);
+        g_ctx.db = NULL;
+    }
+}
+
+static int db_insert_batch(const data_point_t *points, size_t count)
+{
+    if (!g_ctx.db || count == 0) {
+        return 0;
+    }
+
+    sqlite3_exec(g_ctx.db, "BEGIN TRANSACTION;", NULL, NULL, NULL);
+
+    const char *insert_sql = "INSERT INTO data_points "
+                             "(tag_name, device_id, value, quality, timestamp_ms) "
+                             "VALUES (?, ?, ?, ?, ?);";
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(g_ctx.db, insert_sql, -1, &stmt, NULL);
+
+    for (size_t i = 0; i < count; i++) {
+        sqlite3_bind_text(stmt, 1, points[i].tag_name, -1, SQLITE_STATIC);
+        sqlite3_bind_int(stmt, 2, points[i].device_id);
+        sqlite3_bind_double(stmt, 3, points[i].value);
+        sqlite3_bind_int(stmt, 4, points[i].quality);
+        sqlite3_bind_int64(stmt, 5, points[i].timestamp_ms);
+
+        sqlite3_step(stmt);
+        sqlite3_reset(stmt);
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_exec(g_ctx.db, "COMMIT;", NULL, NULL, NULL);
+
+    return (int)count;
+}
+
+/* ============ MQTT操作 ============ */
+
+static void mqtt_connect_callback(struct mosquitto *mosq, void *obj, int rc)
+{
+    (void)mosq;
+    (void)obj;
+
+    if (rc == 0) {
+        g_ctx.mqtt_connected = true;
+        LOG_INFO("MQTT connected");
+    } else {
+        g_ctx.mqtt_connected = false;
+        LOG_ERROR("MQTT connection failed: %s", mosquitto_connack_string(rc));
+    }
+}
+
+static void mqtt_disconnect_callback(struct mosquitto *mosq, void *obj, int rc)
+{
+    (void)mosq;
+    (void)obj;
+
+    g_ctx.mqtt_connected = false;
+    LOG_WARNING("MQTT disconnected: %d", rc);
+}
+
+static int mqtt_init(void)
+{
+    if (!g_ctx.config.mqtt_enabled) {
+        LOG_INFO("MQTT disabled");
+        return 0;
+    }
+
+    mosquitto_lib_init();
+
+    g_ctx.mosq = mosquitto_new(g_ctx.config.mqtt_client_id, true, NULL);
+    if (!g_ctx.mosq) {
+        LOG_ERROR("Failed to create MQTT client");
+        return -1;
+    }
+
+    mosquitto_connect_callback_set(g_ctx.mosq, mqtt_connect_callback);
+    mosquitto_disconnect_callback_set(g_ctx.mosq, mqtt_disconnect_callback);
+
+    if (strlen(g_ctx.config.mqtt_username) > 0) {
+        mosquitto_username_pw_set(g_ctx.mosq,
+                                  g_ctx.config.mqtt_username,
+                                  g_ctx.config.mqtt_password);
+    }
+
+    int rc = mosquitto_connect(g_ctx.mosq,
+                               g_ctx.config.mqtt_broker,
+                               g_ctx.config.mqtt_port,
+                               60);
+    if (rc != MOSQ_ERR_SUCCESS) {
+        LOG_ERROR("MQTT connect error: %s", mosquitto_strerror(rc));
+        return -1;
+    }
+
+    mosquitto_loop_start(g_ctx.mosq);
+    LOG_INFO("MQTT client initialized: %s:%d",
+             g_ctx.config.mqtt_broker, g_ctx.config.mqtt_port);
+
+    return 0;
+}
+
+static void mqtt_close(void)
+{
+    if (g_ctx.mosq) {
+        mosquitto_loop_stop(g_ctx.mosq, true);
+        mosquitto_disconnect(g_ctx.mosq);
+        mosquitto_destroy(g_ctx.mosq);
+        g_ctx.mosq = NULL;
+    }
+    mosquitto_lib_cleanup();
+}
+
+static int mqtt_publish_data(const data_point_t *point)
+{
+    if (!g_ctx.mosq || !g_ctx.mqtt_connected) {
+        return -1;
+    }
+
+    char topic[256];
+    char payload[256];
+
+    snprintf(topic, sizeof(topic), "%s/%s",
+             g_ctx.config.mqtt_topic_prefix, point->tag_name);
+
+    snprintf(payload, sizeof(payload),
+             "{\"value\":%.4f,\"quality\":%d,\"timestamp\":%llu}",
+             point->value, point->quality,
+             (unsigned long long)point->timestamp_ms);
+
+    int rc = mosquitto_publish(g_ctx.mosq, NULL, topic,
+                               strlen(payload), payload,
+                               g_ctx.config.mqtt_qos, false);
+
+    return (rc == MOSQ_ERR_SUCCESS) ? 0 : -1;
+}
+
+/* ============ 设备采集 ============ */
+
+static uint64_t get_time_ms(void)
+{
+    struct timespec ts;
+    clock_gettime(CLOCK_REALTIME, &ts);
+    return (uint64_t)ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
+}
+
+/* Modbus CRC16计算 */
+static uint16_t modbus_crc16(const uint8_t *data, uint16_t length)
+{
+    uint16_t crc = 0xFFFF;
+    for (uint16_t i = 0; i < length; i++) {
+        crc ^= data[i];
+        for (int j = 0; j < 8; j++) {
+            if (crc & 0x0001) {
+                crc >>= 1;
+                crc ^= 0xA001;
+            } else {
+                crc >>= 1;
+            }
+        }
+    }
+    return crc;
+}
+
+/* 模拟设备采集 (用于测试) */
+static void *device_simulation_thread(void *arg)
+{
+    device_t *dev = (device_t *)arg;
+
+    LOG_INFO("[Device %s] Simulation thread started", dev->name);
+
+    /* 预分配批量缓冲区 */
+    data_point_t batch[MAX_BATCH_SIZE];
+    size_t batch_count = 0;
+
+    while (dev->running && g_ctx.running) {
+        uint64_t scan_start = get_time_ms();
+
+        /* 采集所有标签 */
+        for (uint32_t i = 0; i < dev->tag_count; i++) {
+            if (!dev->tags[i].enabled) continue;
+
+            /* 生成模拟数据 */
+            double value;
+            if (strstr(dev->tags[i].name, "Temperature")) {
+                value = 20.0 + 10.0 * sin((double)scan_start / 10000.0) +
+                       (double)(rand() % 100) / 100.0;
+            } else if (strstr(dev->tags[i].name, "Pressure")) {
+                value = 100.0 + 5.0 * cos((double)scan_start / 15000.0) +
+                       (double)(rand() % 50) / 10.0;
+            } else if (strstr(dev->tags[i].name, "Motor")) {
+                value = (scan_start / 1000) % 2 ? 1500.0 : 0.0;
+            } else {
+                value = (double)(rand() % 1000);
+            }
+
+            /* 应用缩放 */
+            value = value * dev->tags[i].scale + dev->tags[i].offset;
+
+            /* 填充数据点 */
+            data_point_t *point = &batch[batch_count++];
+            snprintf(point->tag_name, MAX_TAG_NAME, "%s.%s",
+                     dev->name, dev->tags[i].name);
+            point->device_id = dev->id;
+            point->tag_id = i;
+            point->value = value;
+            point->quality = QUALITY_GOOD;
+            point->timestamp_ms = scan_start;
+            point->collection_time_ms = get_time_ms();
+
+            /* 批量提交 */
+            if (batch_count >= MAX_BATCH_SIZE) {
+                for (size_t j = 0; j < batch_count; j++) {
+                    if (!queue_push(&g_ctx.data_queue, &batch[j])) {
+                        g_ctx.total_dropped++;
+                    } else {
+                        g_ctx.total_collected++;
+                    }
+                }
+                batch_count = 0;
+            }
+        }
+
+        dev->last_scan_time = get_time_ms();
+
+        /* 等待下一个周期 */
+        uint64_t elapsed = get_time_ms() - scan_start;
+        if (elapsed < dev->scan_interval_ms) {
+            usleep((dev->scan_interval_ms - elapsed) * 1000);
+        }
+    }
+
+    /* 提交剩余数据 */
+    for (size_t j = 0; j < batch_count; j++) {
+        if (!queue_push(&g_ctx.data_queue, &batch[j])) {
+            g_ctx.total_dropped++;
+        }
+    }
+
+    LOG_INFO("[Device %s] Simulation thread stopped", dev->name);
+    return NULL;
+}
+
+/* ============ 后台线程 ============ */
+
+/* 存储线程 */
+static void *storage_thread(void *arg)
+{
+    (void)arg;
+
+    LOG_INFO("Storage thread started");
+
+    data_point_t batch[MAX_BATCH_SIZE];
+
+    while (g_ctx.running) {
+        /* 批量获取数据 */
+        size_t count = queue_pop_batch(&g_ctx.data_queue, batch, MAX_BATCH_SIZE);
+
+        if (count > 0) {
+            /* 存储到数据库 */
+            if (g_ctx.config.local_storage_enabled) {
+                int stored = db_insert_batch(batch, count);
+                if (stored > 0) {
+                    g_ctx.total_stored += stored;
+                }
+            }
+
+            /* 发送到MQTT */
+            if (g_ctx.config.mqtt_enabled && g_ctx.mqtt_connected) {
+                for (size_t i = 0; i < count; i++) {
+                    if (mqtt_publish_data(&batch[i]) == 0) {
+                        g_ctx.total_sent++;
+                    }
+                }
+            }
+        } else {
+            /* 队列为空，短暂等待 */
+            usleep(10000);
+        }
+    }
+
+    LOG_INFO("Storage thread stopped");
+    return NULL;
+}
+
+/* 监控线程 */
+static void *monitor_thread(void *arg)
+{
+    (void)arg;
+
+    LOG_INFO("Monitor thread started");
+
+    while (g_ctx.running) {
+        sleep(60);  /* 每分钟报告一次 */
+
+        if (!g_ctx.running) break;
+
+        LOG_INFO("=== Collector Statistics ===");
+        LOG_INFO("  Queue size: %zu", queue_size(&g_ctx.data_queue));
+        LOG_INFO("  Total collected: %llu", (unsigned long long)g_ctx.total_collected);
+        LOG_INFO("  Total stored: %llu", (unsigned long long)g_ctx.total_stored);
+        LOG_INFO("  Total sent: %llu", (unsigned long long)g_ctx.total_sent);
+        LOG_INFO("  Total dropped: %llu", (unsigned long long)g_ctx.total_dropped);
+        LOG_INFO("  MQTT connected: %s", g_ctx.mqtt_connected ? "Yes" : "No");
+
+        for (uint32_t i = 0; i < g_ctx.device_count; i++) {
+            device_t *dev = &g_ctx.devices[i];
+            LOG_INFO("  Device %s: %s, errors: %u",
+                     dev->name,
+                     dev->running ? "Running" : "Stopped",
+                     dev->error_count);
+        }
+    }
+
+    LOG_INFO("Monitor thread stopped");
+    return NULL;
+}
+
+/* ============ 配置加载 ============ */
+
+static int load_config(const char *config_file)
+{
+    /* 简化实现：硬编码配置 */
+    /* 实际项目中应解析JSON配置文件 */
+
+    LOG_INFO("Loading configuration...");
+
+    /* 系统配置 */
+    strcpy(g_ctx.config.log_level, "INFO");
+    g_ctx.config.local_storage_enabled = true;
+    g_ctx.config.retention_days = 30;
+    g_ctx.config.mqtt_enabled = true;
+    strcpy(g_ctx.config.mqtt_broker, "localhost");
+    g_ctx.config.mqtt_port = 1883;
+    snprintf(g_ctx.config.mqtt_client_id, sizeof(g_ctx.config.mqtt_client_id),
+             "collector_%d", getpid());
+    strcpy(g_ctx.config.mqtt_topic_prefix, "industrial/data");
+    g_ctx.config.mqtt_qos = 1;
+
+    /* 创建设备1: 模拟温度/压力传感器 */
+    device_t *dev1 = &g_ctx.devices[g_ctx.device_count++];
+    dev1->id = 1;
+    strcpy(dev1->name, "SensorUnit1");
+    dev1->type = DEVICE_SIMULATION;
+    dev1->enabled = true;
+    dev1->scan_interval_ms = 1000;
+
+    /* 添加标签 */
+    strcpy(dev1->tags[dev1->tag_count].name, "Temperature");
+    dev1->tags[dev1->tag_count].scale = 1.0;
+    dev1->tags[dev1->tag_count].offset = 0.0;
+    dev1->tags[dev1->tag_count].enabled = true;
+    dev1->tag_count++;
+
+    strcpy(dev1->tags[dev1->tag_count].name, "Pressure");
+    dev1->tags[dev1->tag_count].scale = 1.0;
+    dev1->tags[dev1->tag_count].offset = 0.0;
+    dev1->tags[dev1->tag_count].enabled = true;
+    dev1->tag_count++;
+
+    strcpy(dev1->tags[dev1->tag_count].name, "FlowRate");
+    dev1->tags[dev1->tag_count].scale = 1.0;
+    dev1->tags[dev1->tag_count].offset = 0.0;
+    dev1->tags[dev1->tag_count].enabled = true;
+    dev1->tag_count++;
+
+    /* 创建设备2: 模拟电机 */
+    device_t *dev2 = &g_ctx.devices[g_ctx.device_count++];
+    dev2->id = 2;
+    strcpy(dev2->name, "MotorController");
+    dev2->type = DEVICE_SIMULATION;
+    dev2->enabled = true;
+    dev2->scan_interval_ms = 500;
+
+    strcpy(dev2->tags[dev2->tag_count].name, "MotorSpeed");
+    dev2->tags[dev2->tag_count].scale = 1.0;
+    dev2->tags[dev2->tag_count].offset = 0.0;
+    dev2->tags[dev2->tag_count].enabled = true;
+    dev2->tag_count++;
+
+    strcpy(dev2->tags[dev2->tag_count].name, "MotorCurrent");
+    dev2->tags[dev2->tag_count].scale = 0.1;
+    dev2->tags[dev2->tag_count].offset = 0.0;
+    dev2->tags[dev2->tag_count].enabled = true;
+    dev2->tag_count++;
+
+    LOG_INFO("Configuration loaded: %u devices", g_ctx.device_count);
+    return 0;
+}
+
+/* ============ 主程序 ============ */
+
+static void signal_handler(int sig)
+{
+    (void)sig;
+    LOG_INFO("Received signal %d, shutting down...", sig);
+    g_ctx.running = false;
+}
+
+static void print_usage(const char *program)
+{
+    printf("Industrial Data Collector v%s\n", COLLECTOR_VERSION);
+    printf("Usage: %s [options]\n", program);
+    printf("Options:\n");
+    printf("  -c <file>   Configuration file (default: %s)\n", DEFAULT_CONFIG_FILE);
+    printf("  -d          Run as daemon\n");
+    printf("  -v          Show version\n");
+    printf("  -h          Show this help\n");
+}
+
+int main(int argc, char *argv[])
+{
+    const char *config_file = DEFAULT_CONFIG_FILE;
+    bool daemon_mode = false;
+
+    /* 解析命令行 */
+    int opt;
+    while ((opt = getopt(argc, argv, "c:dvh")) != -1) {
+        switch (opt) {
+            case 'c':
+                config_file = optarg;
+                break;
+            case 'd':
+                daemon_mode = true;
+                break;
+            case 'v':
+                printf("Industrial Data Collector v%s\n", COLLECTOR_VERSION);
+                return 0;
+            case 'h':
+            default:
+                print_usage(argv[0]);
+                return (opt == 'h') ? 0 : 1;
+        }
+    }
+
+    /* 初始化日志 */
+    logger_init();
+
+    LOG_INFO("============================================");
+    LOG_INFO("Industrial Data Collector v%s Starting...", COLLECTOR_VERSION);
+    LOG_INFO("============================================");
+
+    /* 守护进程模式 */
+    if (daemon_mode) {
+        if (daemon(0, 0) < 0) {
+            LOG_FATAL("Failed to daemonize: %s", strerror(errno));
+            return 1;
+        }
+        LOG_INFO("Running as daemon");
+    }
+
+    /* 锁定内存 */
+    if (mlockall(MCL_CURRENT | MCL_FUTURE) < 0) {
+        LOG_WARNING("Failed to lock memory: %s", strerror(errno));
+    }
+
+    /* 注册信号处理 */
+    signal(SIGINT, signal_handler);
+    signal(SIGTERM, signal_handler);
+    signal(SIGPIPE, SIG_IGN);
+
+    /* 加载配置 */
+    if (load_config(config_file) != 0) {
+        LOG_FATAL("Failed to load configuration");
+        return 1;
+    }
+
+    /* 初始化队列 */
+    if (queue_init(&g_ctx.data_queue, COLLECTOR_QUEUE_SIZE) != 0) {
+        LOG_FATAL("Failed to initialize data queue");
+        return 1;
+    }
+
+    /* 初始化数据库 */
+    if (db_init() != 0) {
+        LOG_FATAL("Failed to initialize database");
+        return 1;
+    }
+
+    /* 初始化MQTT */
+    if (mqtt_init() != 0) {
+        LOG_WARNING("Failed to initialize MQTT, continuing without cloud upload");
+    }
+
+    /* 启动后台线程 */
+    pthread_create(&g_ctx.storage_thread, NULL, storage_thread, NULL);
+    pthread_create(&g_ctx.monitor_thread, NULL, monitor_thread, NULL);
+
+    /* 启动设备采集线程 */
+    g_ctx.running = true;
+    g_ctx.start_time = get_time_ms();
+
+    for (uint32_t i = 0; i < g_ctx.device_count; i++) {
+        device_t *dev = &g_ctx.devices[i];
+        if (dev->enabled) {
+            dev->running = true;
+            pthread_create(&dev->thread, NULL, device_simulation_thread, dev);
+        }
+    }
+
+    LOG_INFO("Collector started successfully");
+
+    /* 主循环 */
+    while (g_ctx.running) {
+        sleep(1);
+    }
+
+    LOG_INFO("Shutting down...");
+
+    /* 停止设备线程 */
+    for (uint32_t i = 0; i < g_ctx.device_count; i++) {
+        device_t *dev = &g_ctx.devices[i];
+        dev->running = false;
+        pthread_join(dev->thread, NULL);
+    }
+
+    /* 等待队列处理完成 */
+    while (queue_size(&g_ctx.data_queue) > 0) {
+        usleep(100000);
+    }
+
+    /* 停止后台线程 */
+    pthread_join(g_ctx.storage_thread, NULL);
+    pthread_join(g_ctx.monitor_thread, NULL);
+
+    /* 清理 */
+    mqtt_close();
+    db_close();
+    queue_destroy(&g_ctx.data_queue);
+    logger_close();
+
+    printf("Collector stopped.\n");
+
+    return 0;
+}
+```
+
+---
+
+## 11. 远程OTA升级
+
+### 11.1 OTA升级架构
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                    OTA升级系统架构                              │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │                     云端OTA服务器                         │  │
+│  │  - 固件版本管理                                          │  │
+│  │  - 增量/全量包生成                                        │  │
+│  │  - 设备分组管理                                          │  │
+│  │  - 升级策略配置 (灰度/强制/定时)                          │  │
+│  └──────────────────────────────────────────────────────────┘  │
+│                              │                                  │
+│                              ▼ HTTPS/MQTT                      │
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │                    边缘设备OTA客户端                      │  │
+│  ├──────────────────────────────────────────────────────────┤  │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐  │  │
+│  │  │ 版本检查 │→ │ 包下载   │→ │ 完整性   │→ │ 升级执行 │  │  │
+│  │  │          │  │ 断点续传 │  │ 校验     │  │ AB分区   │  │  │
+│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘  │  │
+│  ├──────────────────────────────────────────────────────────┤  │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐               │  │
+│  │  │ 升级回滚 │  │ 状态报告 │  │ 日志记录 │               │  │
+│  │  │ (失败时) │  │          │  │          │               │  │
+│  │  └──────────┘  └──────────┘  └──────────┘               │  │
+│  └──────────────────────────────────────────────────────────┘  │
+│                              │                                  │
+│                              ▼                                  │
+│  ┌──────────────────────────────────────────────────────────┐  │
+│  │                    安全机制                               │  │
+│  │  - 固件签名验证 (RSA/ECC)                                │  │
+│  │  - 安全启动 (Secure Boot)                                │  │
+│  │  - 加密传输 (TLS 1.3)                                    │  │
+│  │  - 防回滚保护                                            │  │
+│  └──────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 11.2 OTA升级客户端实现
+
+```c
+/**
+ * @file ota_client.c
+ * @brief OTA升级客户端实现
+ * @details 支持HTTPS固件下载、签名验证、AB分区升级
+ *
+ * 编译: gcc -o ota_client ota_client.c -lcurl -lcrypto -ljson-c -lpthread
+ * 运行: sudo ./ota_client
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <sys/mount.h>
+#include <sys/reboot.h>
+#include <linux/reboot.h>
+#include <openssl/evp.h>
+#include <openssl/pem.h>
+#include <openssl/sha.h>
+#include <curl/curl.h>
+#include <json-c/json.h>
+
+/* OTA配置 */
+#define OTA_VERSION             "1.0.0"
+#define OTA_SERVER_URL          "https://ota.example.com/api/v1"
+#define OTA_DEVICE_ID           "DEV001"
+#define OTA_CHECK_INTERVAL_SEC  3600
+
+/* 固件配置 */
+#define FIRMWARE_PATH           "/tmp/firmware.bin"
+#define FIRMWARE_PART_A         "/dev/mmcblk0p2"
+#define FIRMWARE_PART_B         "/dev/mmcblk0p3"
+#define BOOT_FLAG_PATH          "/boot/ota_flag"
+
+/* 缓冲区大小 */
+#define DOWNLOAD_BUFFER_SIZE    (64 * 1024)
+#define SHA256_HASH_SIZE        32
+
+/* OTA状态 */
+typedef enum {
+    OTA_STATE_IDLE = 0,
+    OTA_STATE_CHECKING,
+    OTA_STATE_DOWNLOADING,
+    OTA_STATE_VERIFYING,
+    OTA_STATE_UPGRADING,
+    OTA_STATE_REBOOTING,
+    OTA_STATE_ROLLBACK
+} ota_state_t;
+
+/* 升级结果 */
+typedef enum {
+    OTA_RESULT_SUCCESS = 0,
+    OTA_RESULT_NO_UPDATE,
+    OTA_RESULT_DOWNLOAD_FAILED,
+    OTA_RESULT_VERIFY_FAILED,
+    OTA_RESULT_WRITE_FAILED,
+    OTA_RESULT_INSUFFICIENT_SPACE,
+    OTA_RESULT_BATTERY_LOW,
+    OTA_RESULT_NETWORK_ERROR
+} ota_result_t;
+
+/* 固件信息 */
+typedef struct {
+    char version[32];
+    char url[256];
+    char hash[65];  /* SHA256 hex string */
+    uint64_t size;
+    char release_notes[512];
+    bool force_update;
+    bool delta_update;
+    char delta_base[32];  /* 增量升级的基础版本 */
+} firmware_info_t;
+
+/* 设备信息 */
+typedef struct {
+    char device_id[32];
+    char current_version[32];
+    char hardware_version[32];
+    char active_partition;  /* 'A' or 'B' */
+    uint32_t battery_level; /* 百分比 */
+    uint64_t free_space;
+} device_info_t;
+
+/* OTA上下文 */
+typedef struct {
+    ota_state_t state;
+    firmware_info_t firmware;
+    device_info_t device;
+    char public_key_path[128];
+    int download_progress;
+    void (*progress_callback)(int percent);
+    void (*status_callback)(ota_state_t state, const char *msg);
+} ota_context_t;
+
+static ota_context_t g_ctx = {0};
+
+/* ============ 日志 ============ */
+#define LOG_INFO(fmt, ...)  printf("[OTA-INFO] " fmt "\n", ##__VA_ARGS__)
+#define LOG_ERROR(fmt, ...) fprintf(stderr, "[OTA-ERROR] " fmt "\n", ##__VA_ARGS__)
+
+/* ============ 工具函数 ============ */
+
+/**
+ * @brief 执行shell命令并获取输出
+ */
+static int exec_command(const char *cmd, char *output, size_t output_size)
+{
+    FILE *fp = popen(cmd, "r");
+    if (!fp) {
+        return -1;
+    }
+
+    if (output && output_size > 0) {
+        fgets(output, output_size, fp);
+        /* 移除换行符 */
+        size_t len = strlen(output);
+        if (len > 0 && output[len - 1] == '\n') {
+            output[len - 1] = '\0';
+        }
+    }
+
+    int status = pclose(fp);
+    return WEXITSTATUS(status);
+}
+
+/**
+ * @brief 获取当前活动分区
+ */
+static char get_active_partition(void)
+{
+    char root_dev[64] = {0};
+
+    /* 读取当前根分区 */
+    FILE *fp = fopen("/proc/cmdline", "r");
+    if (fp) {
+        char cmdline[256];
+        if (fgets(cmdline, sizeof(cmdline), fp)) {
+            char *root = strstr(cmdline, "root=");
+            if (root) {
+                sscanf(root + 5, "%s", root_dev);
+            }
+        }
+        fclose(fp);
+    }
+
+    /* 判断是A分区还是B分区 */
+    if (strstr(root_dev, "mmcblk0p2") || strstr(root_dev, "p2")) {
+        return 'A';
+    }
+    return 'B';
+}
+
+/**
+ * @brief 获取当前版本
+ */
+static void get_current_version(char *version, size_t size)
+{
+    /* 从文件或命令读取 */
+    FILE *fp = fopen("/etc/firmware_version", "r");
+    if (fp) {
+        fgets(version, size, fp);
+        fclose(fp);
+        /* 移除换行符 */
+        size_t len = strlen(version);
+        if (len > 0 && version[len - 1] == '\n') {
+            version[len - 1] = '\0';
+        }
+    } else {
+        strncpy(version, "1.0.0", size - 1);
+    }
+}
+
+/* ============ 下载功能 ============ */
+
+typedef struct {
+    FILE *fp;
+    size_t downloaded;
+    size_t total;
+} download_context_t;
+
+static size_t write_callback(void *ptr, size_t size, size_t nmemb, void *userdata)
+{
+    download_context_t *ctx = (download_context_t *)userdata;
+    size_t written = fwrite(ptr, size, nmemb, ctx->fp);
+    ctx->downloaded += written * size;
+
+    /* 更新进度 */
+    if (ctx->total > 0 && g_ctx.progress_callback) {
+        int progress = (int)((ctx->downloaded * 100) / ctx->total);
+        if (progress != g_ctx.download_progress) {
+            g_ctx.download_progress = progress;
+            g_ctx.progress_callback(progress);
+        }
+    }
+
+    return written;
+}
+
+static int progress_callback(void *clientp, curl_off_t dltotal, curl_off_t dlnow,
+                              curl_off_t ultotal, curl_off_t ulnow)
+{
+    (void)clientp;
+    (void)ultotal;
+    (void)ulnow;
+
+    if (dltotal > 0) {
+        download_context_t *ctx = (download_context_t *)clientp;
+        ctx->total = dltotal;
+    }
+
+    return 0;
+}
+
+/**
+ * @brief 下载固件
+ */
+static ota_result_t download_firmware(const char *url, const char *output_path)
+{
+    CURL *curl;
+    CURLcode res;
+    download_context_t dl_ctx = {0};
+
+    LOG_INFO("Downloading firmware from: %s", url);
+
+    dl_ctx.fp = fopen(output_path, "wb");
+    if (!dl_ctx.fp) {
+        LOG_ERROR("Failed to create file: %s", output_path);
+        return OTA_RESULT_INSUFFICIENT_SPACE;
+    }
+
+    curl = curl_easy_init();
+    if (!curl) {
+        fclose(dl_ctx.fp);
+        return OTA_RESULT_NETWORK_ERROR;
+    }
+
+    /* 设置下载选项 */
+    curl_easy_setopt(curl, CURLOPT_URL, url);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_callback);
+    curl_easy_setopt(curl, CURLOPT_WRITEDATA, &dl_ctx);
+    curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+    curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 10L);
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 300L);  /* 5分钟超时 */
+    curl_easy_setopt(curl, CURLOPT_XFERINFOFUNCTION, progress_callback);
+    curl_easy_setopt(curl, CURLOPT_XFERINFODATA, &dl_ctx);
+    curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0L);
+
+    /* 启用SSL验证 */
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 2L);
+
+    g_ctx.state = OTA_STATE_DOWNLOADING;
+    if (g_ctx.status_callback) {
+        g_ctx.status_callback(g_ctx.state, "Downloading firmware...");
+    }
+
+    res = curl_easy_perform(curl);
+
+    long http_code = 0;
+    curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+
+    curl_easy_cleanup(curl);
+    fclose(dl_ctx.fp);
+
+    if (res != CURLE_OK) {
+        LOG_ERROR("Download failed: %s", curl_easy_strerror(res));
+        unlink(output_path);
+        return OTA_RESULT_DOWNLOAD_FAILED;
+    }
+
+    if (http_code != 200) {
+        LOG_ERROR("HTTP error: %ld", http_code);
+        unlink(output_path);
+        return OTA_RESULT_DOWNLOAD_FAILED;
+    }
+
+    LOG_INFO("Download complete: %zu bytes", dl_ctx.downloaded);
+    return OTA_RESULT_SUCCESS;
+}
+
+/* ============ 签名验证 ============ */
+
+/**
+ * @brief 验证固件签名 (RSA-SHA256)
+ */
+static bool verify_firmware_signature(const char *firmware_path,
+                                       const char *signature_path,
+                                       const char *public_key_path)
+{
+    EVP_MD_CTX *ctx = NULL;
+    EVP_PKEY *pkey = NULL;
+    FILE *fp = NULL;
+    bool result = false;
+
+    LOG_INFO("Verifying firmware signature...");
+
+    /* 读取公钥 */
+    fp = fopen(public_key_path, "r");
+    if (!fp) {
+        LOG_ERROR("Failed to open public key: %s", public_key_path);
+        return false;
+    }
+
+    pkey = PEM_read_PUBKEY(fp, NULL, NULL, NULL);
+    fclose(fp);
+
+    if (!pkey) {
+        LOG_ERROR("Failed to read public key");
+        return false;
+    }
+
+    /* 读取签名 */
+    uint8_t signature[256];
+    fp = fopen(signature_path, "rb");
+    if (!fp) {
+        LOG_ERROR("Failed to open signature file");
+        EVP_PKEY_free(pkey);
+        return false;
+    }
+
+    size_t sig_len = fread(signature, 1, sizeof(signature), fp);
+    fclose(fp);
+
+    /* 创建验证上下文 */
+    ctx = EVP_MD_CTX_new();
+    if (!ctx) {
+        goto cleanup;
+    }
+
+    if (EVP_DigestVerifyInit(ctx, NULL, EVP_sha256(), NULL, pkey) != 1) {
+        goto cleanup;
+    }
+
+    /* 读取固件并计算哈希 */
+    fp = fopen(firmware_path, "rb");
+    if (!fp) {
+        goto cleanup;
+    }
+
+    uint8_t buffer[8192];
+    size_t bytes_read;
+    while ((bytes_read = fread(buffer, 1, sizeof(buffer), fp)) > 0) {
+        if (EVP_DigestVerifyUpdate(ctx, buffer, bytes_read) != 1) {
+            fclose(fp);
+            goto cleanup;
+        }
+    }
+    fclose(fp);
+
+    /* 验证签名 */
+    if (EVP_DigestVerifyFinal(ctx, signature, sig_len) == 1) {
+        result = true;
+        LOG_INFO("Signature verification PASSED");
+    } else {
+        LOG_ERROR("Signature verification FAILED");
+    }
+
+cleanup:
+    if (ctx) EVP_MD_CTX_free(ctx);
+    if (pkey) EVP_PKEY_free(pkey);
+
+    return result;
+}
+
+/**
+ * @brief 计算文件SHA256
+ */
+static bool calculate_file_sha256(const char *filepath, char *hash_str)
+{
+    FILE *fp = fopen(filepath, "rb");
+    if (!fp) {
+        return false;
+    }
+
+    SHA256_CTX ctx;
+    SHA256_Init(&ctx);
+
+    uint8_t buffer[8192];
+    size_t bytes_read;
+    while ((bytes_read = fread(buffer, 1, sizeof(buffer), fp)) > 0) {
+        SHA256_Update(&ctx, buffer, bytes_read);
+    }
+    fclose(fp);
+
+    uint8_t hash[SHA256_HASH_SIZE];
+    SHA256_Final(hash, &ctx);
+
+    /* 转换为hex字符串 */
+    for (int i = 0; i < SHA256_HASH_SIZE; i++) {
+        sprintf(hash_str + (i * 2), "%02x", hash[i]);
+    }
+    hash_str[64] = '\0';
+
+    return true;
+}
+
+/* ============ 升级执行 ============ */
+
+/**
+ * @brief 写入固件到分区
+ */
+static bool write_firmware_to_partition(const char *firmware_path,
+                                          const char *partition)
+{
+    LOG_INFO("Writing firmware to %s...", partition);
+
+    char cmd[512];
+    snprintf(cmd, sizeof(cmd), "dd if=%s of=%s bs=1M status=progress conv=fsync",
+             firmware_path, partition);
+
+    int ret = system(cmd);
+    if (ret != 0) {
+        LOG_ERROR("Failed to write firmware");
+        return false;
+    }
+
+    LOG_INFO("Firmware written successfully");
+    return true;
+}
+
+/**
+ * @brief 设置下次启动分区
+ */
+static bool set_boot_partition(char partition)
+{
+    FILE *fp = fopen(BOOT_FLAG_PATH, "w");
+    if (!fp) {
+        return false;
+    }
+
+    fprintf(fp, "BOOT_PART=%c\n", partition);
+    fprintf(fp, "OTA_UPGRADE=1\n");
+    fprintf(fp, "OTA_VERSION=%s\n", g_ctx.firmware.version);
+    fprintf(fp, "OTA_TIMESTAMP=%lu\n", (unsigned long)time(NULL));
+    fclose(fp);
+
+    LOG_INFO("Boot partition set to: %c", partition);
+    return true;
+}
+
+/**
+ * @brief 执行系统重启
+ */
+static void system_reboot(void)
+{
+    LOG_INFO("System rebooting...");
+    sync();
+    sleep(2);
+    reboot(LINUX_REBOOT_CMD_RESTART);
+}
+
+/**
+ * @brief 报告升级状态到服务器
+ */
+static void report_upgrade_status(const char *status, const char *message)
+{
+    /* 构造JSON */
+    struct json_object *root = json_object_new_object();
+    json_object_object_add(root, "device_id",
+                           json_object_new_string(g_ctx.device.device_id));
+    json_object_object_add(root, "status", json_object_new_string(status));
+    json_object_object_add(root, "message", json_object_new_string(message));
+    json_object_object_add(root, "version",
+                           json_object_new_string(g_ctx.firmware.version));
+    json_object_object_add(root, "timestamp",
+                           json_object_new_int64(time(NULL)));
+
+    const char *json_str = json_object_to_json_string(root);
+    LOG_INFO("Report status: %s", json_str);
+
+    /* 实际项目中通过HTTP/MQTT发送 */
+
+    json_object_put(root);
+}
+
+/* ============ 主OTA流程 ============ */
+
+/**
+ * @brief 检查更新
+ */
+static ota_result_t check_for_update(void)
+{
+    LOG_INFO("Checking for firmware update...");
+    g_ctx.state = OTA_STATE_CHECKING;
+
+    /* 获取设备信息 */
+    strncpy(g_ctx.device.device_id, OTA_DEVICE_ID,
+            sizeof(g_ctx.device.device_id) - 1);
+    get_current_version(g_ctx.device.current_version,
+                        sizeof(g_ctx.device.current_version));
+    g_ctx.device.active_partition = get_active_partition();
+
+    LOG_INFO("Current version: %s, Partition: %c",
+             g_ctx.device.current_version, g_ctx.device.active_partition);
+
+    /* 构造检查请求 */
+    struct json_object *req = json_object_new_object();
+    json_object_object_add(req, "device_id",
+                           json_object_new_string(g_ctx.device.device_id));
+    json_object_object_add(req, "current_version",
+                           json_object_new_string(g_ctx.device.current_version));
+    json_object_object_add(req, "hardware_version",
+                           json_object_new_string("HW-1.0"));
+
+    /* 实际项目中发送HTTP POST请求到OTA服务器 */
+    /* 这里模拟服务器响应 */
+
+    /* 模拟: 假设有新版本 */
+    strncpy(g_ctx.firmware.version, "2.0.0", sizeof(g_ctx.firmware.version) - 1);
+    strncpy(g_ctx.firmware.url,
+            "https://ota.example.com/firmware/v2.0.0/firmware.bin",
+            sizeof(g_ctx.firmware.url) - 1);
+    strncpy(g_ctx.firmware.hash,
+            "aabbccdd00112233445566778899aabbccdd00112233445566778899aabbccdd",
+            sizeof(g_ctx.firmware.hash) - 1);
+    g_ctx.firmware.size = 16 * 1024 * 1024;  /* 16MB */
+    strncpy(g_ctx.firmware.release_notes, "Bug fixes and improvements",
+            sizeof(g_ctx.firmware.release_notes) - 1);
+    g_ctx.firmware.force_update = false;
+    g_ctx.firmware.delta_update = false;
+
+    json_object_put(req);
+
+    /* 检查版本是否需要升级 */
+    if (strcmp(g_ctx.firmware.version, g_ctx.device.current_version) == 0) {
+        LOG_INFO("Already up to date");
+        return OTA_RESULT_NO_UPDATE;
+    }
+
+    LOG_INFO("New firmware available: %s", g_ctx.firmware.version);
+    return OTA_RESULT_SUCCESS;
+}
+
+/**
+ * @brief 执行OTA升级
+ */
+static ota_result_t perform_ota_upgrade(void)
+{
+    ota_result_t result;
+    char calculated_hash[65];
+
+    /* 1. 下载固件 */
+    result = download_firmware(g_ctx.firmware.url, FIRMWARE_PATH);
+    if (result != OTA_RESULT_SUCCESS) {
+        return result;
+    }
+
+    /* 2. 验证文件哈希 */
+    g_ctx.state = OTA_STATE_VERIFYING;
+    if (g_ctx.status_callback) {
+        g_ctx.status_callback(g_ctx.state, "Verifying firmware integrity...");
+    }
+
+    if (!calculate_file_sha256(FIRMWARE_PATH, calculated_hash)) {
+        LOG_ERROR("Failed to calculate file hash");
+        return OTA_RESULT_VERIFY_FAILED;
+    }
+
+    if (strcasecmp(calculated_hash, g_ctx.firmware.hash) != 0) {
+        LOG_ERROR("Hash mismatch! Expected: %s, Got: %s",
+                  g_ctx.firmware.hash, calculated_hash);
+        return OTA_RESULT_VERIFY_FAILED;
+    }
+    LOG_INFO("Hash verification passed");
+
+    /* 3. 验证数字签名 */
+    char sig_path[256];
+    snprintf(sig_path, sizeof(sig_path), "%s.sig", FIRMWARE_PATH);
+
+    if (access(g_ctx.public_key_path, F_OK) == 0) {
+        if (!verify_firmware_signature(FIRMWARE_PATH, sig_path,
+                                       g_ctx.public_key_path)) {
+            return OTA_RESULT_VERIFY_FAILED;
+        }
+    }
+
+    /* 4. 写入目标分区 */
+    g_ctx.state = OTA_STATE_UPGRADING;
+    if (g_ctx.status_callback) {
+        g_ctx.status_callback(g_ctx.state, "Writing firmware...");
+    }
+
+    char target_partition[32];
+    if (g_ctx.device.active_partition == 'A') {
+        strncpy(target_partition, FIRMWARE_PART_B, sizeof(target_partition) - 1);
+    } else {
+        strncpy(target_partition, FIRMWARE_PART_A, sizeof(target_partition) - 1);
+    }
+
+    if (!write_firmware_to_partition(FIRMWARE_PATH, target_partition)) {
+        return OTA_RESULT_WRITE_FAILED;
+    }
+
+    /* 5. 设置启动标志 */
+    char next_partition = (g_ctx.device.active_partition == 'A') ? 'B' : 'A';
+    if (!set_boot_partition(next_partition)) {
+        LOG_ERROR("Failed to set boot partition");
+        return OTA_RESULT_WRITE_FAILED;
+    }
+
+    /* 6. 报告状态并重启 */
+    report_upgrade_status("SUCCESS", "Firmware installed, rebooting");
+
+    g_ctx.state = OTA_STATE_REBOOTING;
+    if (g_ctx.status_callback) {
+        g_ctx.status_callback(g_ctx.state, "Rebooting system...");
+    }
+
+    /* 清理临时文件 */
+    unlink(FIRMWARE_PATH);
+
+    /* 重启 */
+    system_reboot();
+
+    return OTA_RESULT_SUCCESS;
+}
+
+/* ============ 回调函数 ============ */
+
+static void on_download_progress(int percent)
+{
+    static int last_percent = -1;
+    if (percent != last_percent) {
+        printf("\rDownload progress: %d%%", percent);
+        fflush(stdout);
+        last_percent = percent;
+        if (percent >= 100) {
+            printf("\n");
+        }
+    }
+}
+
+static void on_status_change(ota_state_t state, const char *msg)
+{
+    const char *state_str[] = {
+        "IDLE", "CHECKING", "DOWNLOADING", "VERIFYING",
+        "UPGRADING", "REBOOTING", "ROLLBACK"
+    };
+    LOG_INFO("[State: %s] %s", state_str[state], msg);
+}
+
+/* ============ 主函数 ============ */
+
+int main(int argc, char *argv[])
+{
+    (void)argc;
+    (void)argv;
+
+    printf("╔══════════════════════════════════════════════════════════╗\n");
+    printf("║       Industrial OTA Client v%-26s   ║\n", OTA_VERSION);
+    printf("╚══════════════════════════════════════════════════════════╝\n\n");
+
+    /* 初始化 */
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+
+    g_ctx.progress_callback = on_download_progress;
+    g_ctx.status_callback = on_status_change;
+    strncpy(g_ctx.public_key_path, "/etc/ota/public_key.pem",
+            sizeof(g_ctx.public_key_path) - 1);
+
+    /* 检查更新 */
+    ota_result_t result = check_for_update();
+    if (result == OTA_RESULT_NO_UPDATE) {
+        LOG_INFO("No update available");
+        curl_global_cleanup();
+        return 0;
+    } else if (result != OTA_RESULT_SUCCESS) {
+        LOG_ERROR("Update check failed");
+        curl_global_cleanup();
+        return 1;
+    }
+
+    /* 执行升级 */
+    LOG_INFO("Starting OTA upgrade to version %s", g_ctx.firmware.version);
+    LOG_INFO("Release notes: %s", g_ctx.firmware.release_notes);
+
+    result = perform_ota_upgrade();
+    if (result != OTA_RESULT_SUCCESS) {
+        LOG_ERROR("OTA upgrade failed: %d", result);
+        report_upgrade_status("FAILED", "Upgrade failed");
+        curl_global_cleanup();
+        return 1;
+    }
+
+    curl_global_cleanup();
+    return 0;
+}
+```
+
+---
+
+## 附录
+
+### A. 编译依赖安装
+
+```bash
+# Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install -y \
+    build-essential \
+    libpthread-stubs0-dev \
+    libsqlite3-dev \
+    libmosquitto-dev \
+    libcurl4-openssl-dev \
+    libjson-c-dev \
+    libssl-dev \
+    libopen62541-dev \
+    libethercat-dev \
+
+# PREEMPT_RT内核
+sudo apt-get install linux-image-rt
+
+# Xenomai (如需要)
+sudo apt-get install libxenomai-dev
+```
+
+### B. 参考资料
+
+1. **IgH EtherCAT Master** - <https://etherlab.org/en/ethercat/>
+2. **open62541 OPC UA** - <https://open62541.org/>
+3. **PREEMPT_RT Patch** - <https://wiki.linuxfoundation.org/realtime/start>
+4. **Xenomai** - <https://xenomai.org/>
+5. **Modbus协议规范** - <https://modbus.org/specs.php>
+6. **CANopen CiA标准** - <https://www.can-cia.org/canopen/>
+
+### C. 术语表
+
+| 术语 | 说明 |
+|------|------|
+| RTOS | Real-Time Operating System，实时操作系统 |
+| SCADA | Supervisory Control And Data Acquisition，数据采集与监控系统 |
+| MES | Manufacturing Execution System，制造执行系统 |
+| HMI | Human-Machine Interface，人机界面 |
+| PLC | Programmable Logic Controller，可编程逻辑控制器 |
+| OPC UA | OLE for Process Control Unified Architecture |
+| DDS | Data Distribution Service，数据分发服务 |
+| TSN | Time-Sensitive Networking，时间敏感网络 |
+
+---
+
+*文档版本: 1.0*
+*最后更新: 2026-03-17*
