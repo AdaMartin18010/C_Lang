@@ -11,6 +11,7 @@
 ### 射频通信原理
 
 无线通信系统从应用层到射频前端的分层架构：
+
 - 协议栈层：数据链路层、网络层、传输层
 - 基带处理层：编码器、调制器、扩频器
 - 射频前端层：PLL频率合成、PA功率放大、LNA低噪放大
@@ -35,7 +36,7 @@ double fspl(double distance_m, double frequency_hz)
 }
 
 // 接收信号强度计算
-double rssi_calc(double tx_power_dbm, double distance_m, 
+double rssi_calc(double tx_power_dbm, double distance_m,
                   double frequency_hz, double extra_loss_db)
 {
     double path_loss = fspl(distance_m, frequency_hz);
@@ -315,7 +316,7 @@ void ble_enter_low_power(BleConnection *conn)
 {
     // 计算下一次活动事件
     uint32_t next_event = conn->conn_interval * 1250; // us
-    
+
     // 配置唤醒定时器
     // 进入低功耗模式
     // 保持连接状态
@@ -392,17 +393,17 @@ void sensor_node_main(void)
     SensorData data = {
         .node_id = 0x0001,
     };
-    
+
     while (1) {
         // 读取传感器
         data.temperature = read_temperature_sensor();
         data.humidity = read_humidity_sensor();
         data.battery_mv = read_battery_voltage();
         data.timestamp = get_timestamp();
-        
+
         // 发送数据
         wireless_send(&data, sizeof(data));
-        
+
         // 进入低功耗等待
         enter_low_power_mode(TRANSMIT_INTERVAL_MS);
     }

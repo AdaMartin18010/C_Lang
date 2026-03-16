@@ -176,6 +176,7 @@ void parallel_quicksort(void *base, size_t nmemb, size_t size,
 ```
 
 实现策略：
+
 1. 主线程划分数据
 2. 递归到子线程（当数据量>阈值时）
 3. 任务窃取（工作队列）
@@ -244,12 +245,12 @@ EventLoop* evloop_create(void);
 void evloop_destroy(EventLoop *loop);
 
 // 注册I/O事件
-void evloop_register(EventLoop *loop, int fd, uint32_t events, 
+void evloop_register(EventLoop *loop, int fd, uint32_t events,
                      IOCallback cb, void *userdata);
 void evloop_unregister(EventLoop *loop, int fd);
 
 // 定时器
-void evloop_set_timeout(EventLoop *loop, uint64_t ms, 
+void evloop_set_timeout(EventLoop *loop, uint64_t ms,
                         TimerCallback cb, void *userdata);
 
 // 运行事件循环
@@ -309,7 +310,7 @@ void seqlock_write_unlock(SeqLock *sl);
 
 ```c
 // 并行矩阵乘法
-void matmul_parallel(const double *a, const double *b, 
+void matmul_parallel(const double *a, const double *b,
                      double *c, size_t n);
 
 // 并行归约（求和、求最大最小值）
@@ -317,7 +318,7 @@ double parallel_sum(const double *arr, size_t n);
 double parallel_dot_product(const double *a, const double *b, size_t n);
 
 // 并行for循环
-void parallel_transform(double *arr, size_t n, 
+void parallel_transform(double *arr, size_t n,
                         double (*func)(double));
 
 // 任务并行

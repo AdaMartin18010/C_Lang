@@ -38,7 +38,7 @@
 -- 类型构造的博弈解释（伪代码表示概念）
 
 -- 基本类型：整数博弈
-Game Int = 
+Game Int =
   O 询问 "Value?"
   P 回答  n : Integer
 
@@ -55,7 +55,7 @@ Game (A, B) =
   若 Left:  继续 Game A
   若 Right: 继续 Game B
 
--- 和类型：A + B  
+-- 和类型：A + B
 Game (Either A B) =
   P 选择 Left 或 Right
   若 Left:  继续 Game A
@@ -67,7 +67,7 @@ Game (Either A B) =
 ```c
 /*
  * C 程序中的博弈语义映射
- * 
+ *
  * 函数调用 = 博弈启动
  * 参数传递 = Opponent 的询问
  * 返回值   = Player 的回答
@@ -87,7 +87,7 @@ int add(int x, int y)
     // O: "add 作用于什么?"
     // P: "给我第一个参数"
     // O: "x = 3"
-    // P: "给我第二个参数"  
+    // P: "给我第二个参数"
     // O: "y = 5"
     return x + y;  // P: "结果是 8"
 }
@@ -111,7 +111,7 @@ void interaction_example(Interface *iface)
 {
     // O 询问当前状态
     int state = iface->query();  // P 回答
-    
+
     // P 执行命令
     iface->command(state + 1);   // O 接受执行
 }
@@ -189,11 +189,11 @@ void scoped_interaction(void)
 {
     // 进入作用域 = 创建新的博弈子舞台
     Name x = create_name(0);
-    
+
     // 在作用域内的交互
     int v = query(x);      // O 询问
     update(x, v + 1);      // P 更新
-    
+
     // 离开作用域 = 博弈结束，资源释放
     free(x.value_ref);
 }
@@ -204,7 +204,7 @@ void scoped_interaction(void)
 ```c
 /*
  * 并发程序的博弈语义
- * 
+ *
  * 并行组合：多个博弈同时进行
  * 同步：博弈之间的握手点
  */
@@ -267,14 +267,14 @@ void parallel_composition(void)
     Channel ch;
     sem_init(&ch.ready, 0, 0);
     sem_init(&ch.ack, 0, 0);
-    
+
     pthread_t prod, cons;
     pthread_create(&prod, NULL, producer_game, &ch);
     pthread_create(&cons, NULL, consumer_game, &ch);
-    
+
     pthread_join(prod, NULL);
     pthread_join(cons, NULL);
-    
+
     sem_destroy(&ch.ready);
     sem_destroy(&ch.ack);
 }
@@ -296,7 +296,7 @@ void parallel_composition(void)
 
 规则 2: 可见性
     只能引用当前可见的开启问题
-    
+
 规则 3: 良好括号性
     问题和回答必须正确匹配
 
@@ -353,9 +353,9 @@ Move copy_strategy(const Position *pos)
     for (int i = pos->length - 1; i >= 0; i--) {
         // 假设偶数索引是答案
         if (i % 2 == 1) {
-            return (Move){ 
-                .type = MOVE_ANSWER, 
-                .label = pos->move_history[i] 
+            return (Move){
+                .type = MOVE_ANSWER,
+                .label = pos->move_history[i]
             };
         }
     }
@@ -378,22 +378,22 @@ void run_game(Strategy player, Strategy opponent, int max_moves)
 {
     Position pos = { .length = 0 };
     bool player_turn = false;  // O 先开始
-    
+
     while (pos.length < max_moves) {
         Move m;
         if (player_turn) {
             m = player(&pos);
-            printf("P: %s %d\n", 
+            printf("P: %s %d\n",
                    m.type == MOVE_QUESTION ? "?" : "!", m.label);
         } else {
             m = opponent(&pos);
             printf("O: %s %d\n",
                    m.type == MOVE_QUESTION ? "?" : "!", m.label);
         }
-        
+
         pos.move_history[pos.length++] = m.label;
         player_turn = !player_turn;
-        
+
         // 终止条件：最终答案
         if (m.type == MOVE_ANSWER && pos.length > 2) break;
     }
@@ -412,7 +412,7 @@ void run_game(Strategy player, Strategy opponent, int max_moves)
 线性逻辑          博弈语义
 ─────────────────────────────────────────
 A ⊗ B            A 和 B 的并行博弈
-A ⅋ B            A 和 B 的选择博弈  
+A ⅋ B            A 和 B 的选择博弈
 A ⊸ B            从 A 到 B 的策略
 !A               可复制的 A 博弈
 ?A               可选择的 A 博弈
@@ -478,11 +478,11 @@ Linear linear_compose(Linear x, LinearFn f, LinearFn g)
 void linear_example(void)
 {
     Linear x = linear_new(21);
-    
+
     // 可以转移所有权
     Linear y = double_linear(x);
     // x 现在已消费，不能再使用
-    
+
     int result = linear_consume(&y);
     printf("Result: %d\n", result);
     // y 现在已消费
@@ -524,7 +524,7 @@ void linear_fclose(LinearFile *lf)
 // 会话类型构造器（类型级编程概念）
 
 // ?T.S  : 接收 T，然后继续 S
-// !T.S  : 发送 T，然后继续 S  
+// !T.S  : 发送 T，然后继续 S
 // ⊕{l:S} : 选择分支
 // &{l:S} : 提供选择
 // end   : 终止
@@ -602,18 +602,18 @@ typedef struct {
 } Contract;
 
 // 契约检查包装
-int with_contract(int (*f)(int[], int), int args[], int argc, 
+int with_contract(int (*f)(int[], int), int args[], int argc,
                    Contract c)
 {
     // 检查前置条件（Opponent 必须满足）
     assert(c.pre(args, argc) && "Precondition violated");
-    
+
     // 执行函数
     int result = f(args, argc);
-    
+
     // 检查后置条件（Player 必须满足）
     assert(c.post(result, args, argc) && "Postcondition violated");
-    
+
     return result;
 }
 
@@ -649,7 +649,7 @@ int safe_divide(int a, int b)
 ```c
 /*
  * 博弈语义中的精炼关系
- * 
+ *
  * 策略 σ 精炼策略 τ 当：
  * - σ 的所有合法移动 τ 也能做
  * - σ 的响应比 τ 更具体或相等

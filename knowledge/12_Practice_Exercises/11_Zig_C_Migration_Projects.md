@@ -7,6 +7,7 @@
 ## 项目目标
 
 将C项目逐步迁移到Zig，学习：
+
 - C与Zig的互操作
 - Zig的内存安全特性
 - 渐进式迁移策略
@@ -46,17 +47,17 @@ const std = @import("std");
 pub fn List(comptime T: type) type {
     return struct {
         const Self = @This();
-        
+
         pub const Node = struct {
             data: T,
             next: ?*Node,
         };
-        
+
         head: ?*Node,
         tail: ?*Node,
         len: usize,
         allocator: std.mem.Allocator,
-        
+
         pub fn init(allocator: std.mem.Allocator) Self {
             return .{
                 .head = null,
@@ -65,7 +66,7 @@ pub fn List(comptime T: type) type {
                 .allocator = allocator,
             };
         }
-        
+
         pub fn deinit(self: *Self) void {
             var current = self.head;
             while (current) |node| {
@@ -74,11 +75,11 @@ pub fn List(comptime T: type) type {
             }
             self.* = undefined;
         }
-        
+
         pub fn append(self: *Self, value: T) !void {
             const node = try self.allocator.create(Node);
             node.* = .{ .data = value, .next = null };
-            
+
             if (self.tail) |tail| {
                 tail.next = node;
             } else {
@@ -87,7 +88,7 @@ pub fn List(comptime T: type) type {
             self.tail = node;
             self.len += 1;
         }
-        
+
         pub fn remove(self: *Self, value: T) bool {
             var current = &self.head;
             while (current.*) |node| {
@@ -104,7 +105,7 @@ pub fn List(comptime T: type) type {
             }
             return false;
         }
-        
+
         pub fn toArray(self: Self, allocator: std.mem.Allocator) ![]T {
             var arr = try allocator.alloc(T, self.len);
             var i: usize = 0;
@@ -190,23 +191,23 @@ zig build-lib mathlib.zig -static -O ReleaseSafe
 // Zig生成的函数声明
 int zig_add(int a, int b);
 int zig_sum(const int *arr, size_t len);
-double zig_distance(struct { double x; double y; } p1, 
+double zig_distance(struct { double x; double y; } p1,
                     struct { double x; double y; } p2);
 int zig_divide(int a, int b, int *result);
 
 int main() {
     printf("zig_add(3, 5) = %d\n", zig_add(3, 5));
-    
+
     int arr[] = {1, 2, 3, 4, 5};
     printf("zig_sum = %d\n", zig_sum(arr, 5));
-    
+
     int result;
     if (zig_divide(10, 0, &result) == 0) {
         printf("10 / 2 = %d\n", result);
     } else {
         printf("Division error\n");
     }
-    
+
     return 0;
 }
 ```
@@ -278,25 +279,25 @@ const c = @cImport({
 pub const Person = extern struct {
     name: [64]u8,
     age: c_int,
-    
+
     // Zig风格的方法
     pub fn create(name: []const u8, age: i32) !*Person {
         const c_name = try std.heap.c_allocator.dupeZ(u8, name);
         defer std.heap.c_allocator.free(c_name);
-        
+
         const p = c.person_create(c_name.ptr, age);
         if (p == null) return error.OutOfMemory;
         return @ptrCast(p);
     }
-    
+
     pub fn destroy(self: *Person) void {
         c.person_free(@ptrCast(self));
     }
-    
+
     pub fn greet(self: *const Person) void {
         c.person_greet(@ptrCast(self));
     }
-    
+
     pub fn getName(self: *const Person) []const u8 {
         return std.mem.sliceTo(&self.name, 0);
     }
@@ -305,15 +306,15 @@ pub const Person = extern struct {
 // 更安全的包装
 pub const SafePerson = struct {
     ptr: *Person,
-    
+
     pub fn init(name: []const u8, age: i32) !SafePerson {
         return .{ .ptr = try Person.create(name, age) };
     }
-    
+
     pub fn deinit(self: SafePerson) void {
         self.ptr.destroy();
     }
-    
+
     pub fn greet(self: SafePerson) void {
         self.ptr.greet();
     }
@@ -332,7 +333,7 @@ pub fn main() !void {
     var person = try c_wrapper.SafePerson.init("Alice", 30);
     defer person.deinit();
     person.greet();
-    
+
     // 直接使用（需要手动管理内存）
     const p = try c_wrapper.Person.create("Bob", 25);
     defer p.destroy();
@@ -373,7 +374,7 @@ pub const Parser = struct {
     allocator: std.mem.Allocator,
     input: []const u8,
     pos: usize,
-    
+
     pub fn parse(self: *Parser) !Ast {
         // Zig实现，比C更安全
     }
@@ -388,7 +389,7 @@ pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();
-    
+
     // 纯Zig实现
 }
 ```
@@ -403,9 +404,9 @@ pub fn main() !void {
 void* process_data(const void *input, size_t len) {
     void *buffer = malloc(len);
     if (!buffer) return NULL;
-    
+
     // 处理...
-    
+
     return buffer;  // 调用者负责释放
 }
 ```
@@ -416,9 +417,9 @@ void* process_data(const void *input, size_t len) {
 fn processData(allocator: std.mem.Allocator, input: []const u8) ![]u8 {
     var buffer = try allocator.alloc(u8, input.len);
     errdefer allocator.free(buffer);  // 失败时自动释放
-    
+
     // 处理...
-    
+
     return buffer;  // 调用者负责释放
 }
 
@@ -436,18 +437,18 @@ defer arena.allocator().free(result);
 ```c
 ErrorCode do_something(const char *input, char **output) {
     if (!input) return ERR_NULL_INPUT;
-    
+
     *output = malloc(100);
     if (!*output) return ERR_NO_MEMORY;
-    
+
     FILE *f = fopen(input, "r");
     if (!f) {
         free(*output);
         return ERR_FILE_NOT_FOUND;
     }
-    
+
     // ... 更多错误检查
-    
+
     return SUCCESS;
 }
 ```
@@ -463,16 +464,16 @@ const Error = error{
 
 fn doSomething(allocator: std.mem.Allocator, input: []const u8) Error![]u8 {
     if (input.len == 0) return error.NullInput;
-    
+
     var buffer = try allocator.alloc(u8, 100);
     errdefer allocator.free(buffer);
-    
-    var file = std.fs.cwd().openFile(input, .{}) 
+
+    var file = std.fs.cwd().openFile(input, .{})
         catch return error.FileNotFound;
     defer file.close();
-    
+
     // ... 错误自动传播
-    
+
     return buffer;
 }
 ```

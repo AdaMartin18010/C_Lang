@@ -59,7 +59,7 @@ extern "C" {
     fn c_strlen(s: *const c_char) -> usize;
     fn c_malloc(size: usize) -> *mut c_void;
     fn c_free(ptr: *mut c_void);
-    
+
     // 回调函数类型
     type CallbackFn = extern "C" fn(data: *mut c_void, len: usize);
     fn c_register_callback(cb: CallbackFn, user_data: *mut c_void);
@@ -92,11 +92,11 @@ impl CMemory {
             Some(CMemory { ptr, size })
         }
     }
-    
+
     pub fn as_ptr(&self) -> *mut c_void {
         self.ptr
     }
-    
+
     pub fn size(&self) -> usize {
         self.size
     }
@@ -169,19 +169,19 @@ pub extern "C" fn rust_process_data(
     if data.is_null() || out_len.is_null() {
         return std::ptr::null_mut();
     }
-    
+
     // 安全地将 C 指针转为 Rust slice
     let input = unsafe { slice::from_raw_parts(data, len) };
-    
+
     // Rust 处理逻辑
     let result: Vec<u8> = input.iter().map(|&x| x.wrapping_mul(2)).collect();
-    
+
     let result_len = result.len();
     let result_ptr = result.as_ptr() as *mut u8;
-    
+
     // 忘记 Vec，防止 Rust 释放内存（C 负责释放）
     std::mem::forget(result);
-    
+
     unsafe { *out_len = result_len; }
     result_ptr
 }
@@ -202,11 +202,11 @@ pub extern "C" fn rust_reverse_string(s: *const c_char) -> *mut c_char {
     if s.is_null() {
         return std::ptr::null_mut();
     }
-    
+
     let c_str = unsafe { CStr::from_ptr(s) };
     let mut rust_str = c_str.to_string_lossy().into_owned();
     rust_str = rust_str.chars().rev().collect();
-    
+
     match CString::new(rust_str) {
         Ok(cstring) => cstring.into_raw(),  // 转移所有权到 C
         Err(_) => std::ptr::null_mut(),
@@ -241,9 +241,9 @@ pub extern "C" fn rust_compute(value: c_int) -> RustResult {
             error_msg: error.into_raw(),
         };
     }
-    
+
     let result = Box::into_raw(Box::new(value * value));
-    
+
     RustResult {
         success: true,
         data: result as *mut c_void,
@@ -484,7 +484,7 @@ pub extern "C" fn process_items(
     if items.is_null() {
         return -1;
     }
-    
+
     let slice = unsafe { std::slice::from_raw_parts(items, count) };
     slice.iter().sum::<i32>() as c_int
 }
@@ -498,7 +498,7 @@ pub extern "C" fn optional_process(
         println!("No data provided");
         return 0;
     }
-    
+
     let c_str = unsafe { CStr::from_ptr(data) };
     println!("Received: {:?}", c_str);
     1
@@ -569,23 +569,23 @@ impl SafeWrapper {
             Some(SafeWrapper { raw_ptr: ptr, size })
         }
     }
-    
+
     pub fn get(&self, index: usize) -> Option<u8> {
         if index >= self.size {
             return None;
         }
-        
+
         // SAFETY: 我们已经检查了边界，且指针有效
         unsafe {
             Some(*(self.raw_ptr as *const u8).add(index))
         }
     }
-    
+
     pub fn set(&mut self, index: usize, value: u8) -> bool {
         if index >= self.size {
             return false;
         }
-        
+
         // SAFETY: 同上
         unsafe {
             *(self.raw_ptr as *mut u8).add(index) = value;
@@ -613,7 +613,7 @@ pub struct ThreadSafeContext {
 impl ThreadSafeContext {
     pub fn call_c_function(&self) {
         let ptr = self.inner.lock().unwrap();
-        
+
         // SAFETY: 我们持有锁，且指针在使用期间不会被修改
         unsafe {
             c_function(*ptr);
@@ -631,7 +631,7 @@ impl ThreadSafeContext {
 pub unsafe fn broken_alias(data: *mut i32) {
     let ref1 = &*data;      // 不可变借用
     let ref2 = &mut *data;  // 可变借用 - 未定义行为！
-    
+
     println!("{} {}", ref1, ref2);
 }
 
@@ -641,7 +641,7 @@ pub unsafe fn correct_alias(data: *mut i32) {
         let ref1 = &*data;
         println!("{}", ref1);
     }  // ref1 在这里结束
-    
+
     {
         let ref2 = &mut *data;
         *ref2 += 1;
@@ -705,7 +705,7 @@ pub extern "C" fn shared_resource_new(data: *const u8, len: usize) -> *mut Share
 #[no_mangle]
 pub extern "C" fn shared_resource_clone(res: *mut SharedResource) -> *mut SharedResource {
     if res.is_null() { return std::ptr::null_mut(); }
-    
+
     unsafe {
         let new_res = SharedResource {
             data: Arc::clone(&(*res).data),
@@ -735,14 +735,14 @@ impl CFileHandle {
     pub fn open(path: &str) -> Option<Self> {
         let c_path = std::ffi::CString::new(path).ok()?;
         let handle = unsafe { libc::fopen(c_path.as_ptr(), b"r\0".as_ptr() as *const i8) };
-        
+
         if handle.is_null() {
             None
         } else {
             Some(CFileHandle { handle })
         }
     }
-    
+
     pub fn read(&mut self, buf: &mut [u8]) -> usize {
         unsafe {
             libc::fread(

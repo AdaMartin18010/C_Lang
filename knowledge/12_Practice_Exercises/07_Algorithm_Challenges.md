@@ -118,7 +118,7 @@ typedef struct {
 } ACAutomaton;
 
 ACAutomaton* ac_build(const char **patterns, int n);
-void ac_search(ACAutomaton *ac, const char *text, 
+void ac_search(ACAutomaton *ac, const char *text,
                void (*callback)(int pattern_id, int pos));
 ```
 
@@ -151,7 +151,7 @@ char* lcs_construct(const char *s1, const char *s2);
 
 1. **空间优化**: O(min(m,n))空间
 2. **Hirschberg算法**: 分治O(log n)空间
-3. ** Myers算法**: O((m+n)d)时间（d为编辑距离）
+3. **Myers算法**: O((m+n)d)时间（d为编辑距离）
 4. **diff工具**: 实现类似Unix diff的功能
 
 ### diff输出格式
@@ -256,7 +256,7 @@ Regex* regex_compile(const char *pattern);
 bool regex_match(const Regex *re, const char *text);
 
 // 搜索子串
-bool regex_search(const Regex *re, const char *text, 
+bool regex_search(const Regex *re, const char *text,
                   int *match_start, int *match_end);
 
 // 释放资源
@@ -291,7 +291,7 @@ BigInt* bigint_sub(const BigInt *a, const BigInt *b);
 BigInt* bigint_mul(const BigInt *a, const BigInt *b);
 BigInt* bigint_div(const BigInt *a, const BigInt *b, BigInt **remainder);
 BigInt* bigint_pow(const BigInt *base, uint64_t exp);
-BigInt* bigint_mod_pow(const BigInt *base, const BigInt *exp, 
+BigInt* bigint_mod_pow(const BigInt *base, const BigInt *exp,
                        const BigInt *mod);  // RSA需要
 ```
 
@@ -330,7 +330,7 @@ Matrix* matrix_mul_strassen(const Matrix *a, const Matrix *b);
 int activity_selection(int *start, int *finish, int n, int *selected);
 
 // 分数背包问题
-double fractional_knapsack(double *values, double *weights, 
+double fractional_knapsack(double *values, double *weights,
                            int n, double capacity);
 
 // 0-1背包问题
@@ -349,7 +349,7 @@ char* longest_palindrome(const char *s);
 int matrix_chain_order(int *dims, int n, int **split_points);
 
 // 最优二叉搜索树
-void optimal_bst(double *keys, double *dummy_keys, int n, 
+void optimal_bst(double *keys, double *dummy_keys, int n,
                  double **root_cost, int **roots);
 ```
 

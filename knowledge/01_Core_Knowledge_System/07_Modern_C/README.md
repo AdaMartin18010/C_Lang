@@ -133,16 +133,16 @@ void memory_order_demo(void)
 {
     atomic_int x = 0;
     atomic_int y = 0;
-    
+
     // memory_order_relaxed: 最宽松，仅保证原子性
     atomic_store_explicit(&x, 1, memory_order_relaxed);
-    
+
     // memory_order_release: 释放语义，之前的写入对其他线程可见
     atomic_store_explicit(&y, 1, memory_order_release);
-    
+
     // memory_order_acquire: 获取语义，看到其他线程的释放写入
     int val = atomic_load_explicit(&y, memory_order_acquire);
-    
+
     // memory_order_seq_cst: 顺序一致性（默认）
     atomic_fetch_add(&x, 1);  // 默认使用 seq_cst
 }
@@ -169,12 +169,12 @@ int worker_thread(void *arg)
 {
     int id = *(int *)arg;
     thread_id = id;
-    
+
     printf("Thread %d starting (local id: %d)\n", id, thread_id);
-    
+
     // 模拟工作
     thrd_sleep(&(struct timespec){.tv_sec = 1}, NULL);
-    
+
     printf("Thread %d finished\n", id);
     return id * 10;  // 返回值
 }
@@ -186,17 +186,17 @@ void demonstrate_threads(void)
 {
     thrd_t threads[THREAD_COUNT];
     int thread_args[THREAD_COUNT];
-    
+
     // 创建线程
     for (int i = 0; i < THREAD_COUNT; i++) {
         thread_args[i] = i;
-        if (thrd_create(&threads[i], worker_thread, &thread_args[i]) 
+        if (thrd_create(&threads[i], worker_thread, &thread_args[i])
             != thrd_success) {
             fprintf(stderr, "Failed to create thread %d\n", i);
             exit(EXIT_FAILURE);
         }
     }
-    
+
     // 等待线程完成
     for (int i = 0; i < THREAD_COUNT; i++) {
         int result;
@@ -213,27 +213,27 @@ int shared_data = 0;
 int producer_thread(void *arg)
 {
     (void)arg;
-    
+
     mtx_lock(&mutex);
     shared_data = 42;
     printf("Producer: data ready\n");
     cnd_signal(&condition);  // 通知消费者
     mtx_unlock(&mutex);
-    
+
     return 0;
 }
 
 int consumer_thread(void *arg)
 {
     (void)arg;
-    
+
     mtx_lock(&mutex);
     while (shared_data == 0) {
         cnd_wait(&condition, &mutex);  // 等待通知
     }
     printf("Consumer: got data %d\n", shared_data);
     mtx_unlock(&mutex);
-    
+
     return 0;
 }
 ```
@@ -252,7 +252,7 @@ struct Vector3D {
 void vector_demo(void)
 {
     struct Vector3D v = { .x = 1.0, .y = 2.0, .z = 3.0 };
-    
+
     // 两种访问方式
     printf("x = %f\n", v.x);           // 通过命名成员
     printf("x = %f\n", v.coords[0]);   // 通过数组
@@ -418,10 +418,10 @@ errno_t safe_gets(char *str, rsize_t n)
 #ifndef __STDC_LIB_EXT1__
     #include <string.h>
     #include <stdlib.h>
-    
+
     typedef int errno_t;
     typedef size_t rsize_t;
-    
+
     errno_t memcpy_s(void *dest, rsize_t destsz, const void *src, rsize_t count)
     {
         if (!dest || !src) return -1;

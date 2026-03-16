@@ -7,11 +7,13 @@
 ## 如何使用本章节
 
 每个谜题包含一段有问题的代码。你的任务是：
+
 1. 找出问题（内存泄漏、未定义行为、逻辑错误等）
 2. 解释为什么出问题
 3. 修复代码
 
 建议使用工具辅助：
+
 - `valgrind` 检测内存问题
 - `gdb` 调试
 - `clang -fsanitize=address,undefined` 动态检测
@@ -52,11 +54,11 @@ int main() {
         sprintf(name, "Person%d", i);
         people[i] = create_person(name, i);
     }
-    
+
     for (int i = 0; i < 100; i++) {
         free_person(people[i]);
     }
-    
+
     return 0;
 }
 ```
@@ -69,6 +71,7 @@ int main() {
 `free_person` 只释放了 `Person` 结构体，但没有释放 `name` 字段指向的内存。
 
 **修复**:
+
 ```c
 void free_person(Person *p) {
     free(p->name);  // 先释放内部指针
@@ -107,6 +110,7 @@ int main() {
 `x` 是局部变量，函数返回后栈帧被销毁，`p` 指向无效内存。
 
 **修复**:
+
 ```c
 // 方案1: 使用静态变量
 int* get_static(void) {
@@ -161,6 +165,7 @@ int main() {
 循环条件是 `i <= n`，应该是 `i < n`。访问了 `arr[5]`，越界。
 
 **修复**:
+
 ```c
 for (int i = 0; i < n; i++) {  // 使用 < 而不是 <=
     sum += arr[i];
@@ -201,6 +206,7 @@ int main() {
 `malloc` 分配的内存未初始化，`strcat` 从第一个 `\0` 开始追加，但内存内容是随机的。
 
 **修复**:
+
 ```c
 char *buffer = malloc(100);
 if (buffer) {
@@ -228,12 +234,12 @@ void process(int *p) {
 
 int main() {
     int *data = malloc(sizeof(int) * 10);
-    
+
     process(data);
-    
+
     // 稍后...
     free(data);  // 双重释放！
-    
+
     return 0;
 }
 ```
@@ -246,6 +252,7 @@ int main() {
 `data` 在 `process` 中已被释放，`main` 中再次释放导致未定义行为。
 
 **修复**:
+
 ```c
 // 方案1: 明确所有权
 void process(const int *p) {  // 不释放，只读取
@@ -283,7 +290,7 @@ char* duplicate(const char *str, int count) {
     int len = strlen(str);
     int total = len * count;  // 可能溢出
     char *result = malloc(total + 1);
-    
+
     for (int i = 0; i < count; i++) {
         strcat(result, str);  // 未初始化！
     }
@@ -308,24 +315,25 @@ int main() {
 3. 没有检查 `malloc` 返回值
 
 **修复**:
+
 ```c
 #include <stdint.h>
 #include <limits.h>
 
 char* duplicate(const char *str, int count) {
     if (count < 0 || str == NULL) return NULL;
-    
+
     size_t len = strlen(str);
-    
+
     // 检查溢出
     if (len > 0 && (size_t)count > SIZE_MAX / len) {
         return NULL;  // 溢出
     }
-    
+
     size_t total = len * (size_t)count;
     char *result = malloc(total + 1);
     if (!result) return NULL;
-    
+
     result[0] = '\0';
     for (int i = 0; i < count; i++) {
         strcat(result, str);
@@ -373,6 +381,7 @@ int main() {
 传入 `double` 数组但指定类型为 `'f'`（`float`），导致类型混淆和错误解析。
 
 **修复**:
+
 ```c
 // 使用宏或泛型（C11）
 #define print_array(arr, n, fmt) do { \
@@ -430,6 +439,7 @@ int main() {
 `counter++` 不是原子操作（读取-修改-写入），多线程并发导致竞争条件。
 
 **修复**:
+
 ```c
 // 方案1: 互斥锁
 static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
@@ -492,6 +502,7 @@ void* thread2(void *arg) {
 两个线程以不同顺序获取锁，形成循环等待，导致死锁。
 
 **修复**:
+
 ```c
 // 方案1: 统一加锁顺序
 void* thread2(void *arg) {
@@ -531,10 +542,10 @@ int main() {
     int x = 5, y = 3;
     int m = MAX(x++, y++);  // 副作用！
     printf("m=%d, x=%d, y=%d\n", m, x, y);
-    
+
     int n = SQUARE(x + 1);  // 预期36，实际？
     printf("n=%d\n", n);
-    
+
     return 0;
 }
 ```
@@ -549,6 +560,7 @@ int main() {
 - 但如果参数有副作用就会出错
 
 **修复**:
+
 ```c
 // 使用内联函数（C99）或泛型选择（C11）
 static inline int max_int(int a, int b) {

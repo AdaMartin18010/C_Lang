@@ -25,14 +25,14 @@ typedef struct {
 // I = Ic * sin(φ)
 
 // 计算约瑟夫森穿透深度
-calculate_penetration_depth(float london_depth, 
+calculate_penetration_depth(float london_depth,
                             float barrier_thickness) {
     // λ_J = sqrt(h / (2e * μ0 * Ic * d))
     float h = 6.626e-34;       // 普朗克常数
     float e = 1.602e-19;       // 元电荷
     float mu0 = 4 * M_PI * 1e-7;
-    
-    return sqrtf(h / (2 * e * mu0 * jj->critical_current * 
+
+    return sqrtf(h / (2 * e * mu0 * jj->critical_current *
                       barrier_thickness));
 }
 
@@ -52,7 +52,7 @@ float squid_critical_current(SQUID *squid) {
     float i1 = squid->junction1.critical_current;
     float i2 = squid->junction2.critical_current;
     float phi = squid->applied_flux / FLUX_QUANTUM;  // 以 Φ0 为单位
-    
+
     return sqrtf(i1*i1 + i2*i2 + 2*i1*i2*cosf(2*M_PI*phi));
 }
 ```
@@ -89,7 +89,7 @@ void jtl_propagate(RSFQ_Pulse *input, JosephsonJunction *junctions,
                    int num_junctions, RSFQ_Pulse *output) {
     // JTL 用于传输和放大 SFQ 脉冲
     float current = input->pulse_amplitude / junctions[0].normal_resistance;
-    
+
     for (int i = 0; i < num_junctions; i++) {
         // 检查是否超过临界电流
         if (current > junctions[i].critical_current) {
@@ -98,7 +98,7 @@ void jtl_propagate(RSFQ_Pulse *input, JosephsonJunction *junctions,
             current = v_pulse / junctions[i].normal_resistance;
         }
     }
-    
+
     output->pulse_amplitude = current * junctions[num_junctions-1].normal_resistance;
     output->pulse_duration = input->pulse_duration;
 }
@@ -120,7 +120,7 @@ void rsfq_dff_clock(RSFQ_DFF *dff, int d_input, int clock_pulse) {
             // 写入 "1"
             dff->state = 1;
             // 产生存储电流
-            dff->storage_jj.critical_current = 
+            dff->storage_jj.critical_current =
                 dff->storage_jj.critical_current * 1.2f;
         } else {
             dff->state = 0;
@@ -158,10 +158,10 @@ typedef struct {
 
 void aqfp_simulate(AQFP_Cell *cell, float time, float clock_freq) {
     float clock_phase = 2 * M_PI * clock_freq * time;
-    
+
     // 激励电流按正弦变化
     cell->excitation_current = I_EXC_MAX * sinf(clock_phase);
-    
+
     if (cell->excitation_current < I_THRESHOLD) {
         // 复位阶段
         cell->phase = AQFP_PHASE_RESET;
@@ -177,17 +177,17 @@ void aqfp_simulate(AQFP_Cell *cell, float time, float clock_freq) {
 }
 
 // AQFP 缓冲器
-void aqfp_buffer(AQFP_Cell *input, AQFP_Cell *output, 
+void aqfp_buffer(AQFP_Cell *input, AQFP_Cell *output,
                  float coupling_coeff) {
     // 输入信号耦合到输出
-    output->signal_current = input->output_state * 
+    output->signal_current = input->output_state *
                              coupling_coeff * I_SIGNAL_MAX;
 }
 
 // AQFP  majority gate（多数表决门）
 int aqfp_majority(AQFP_Cell *inputs[3]) {
-    int sum = inputs[0]->output_state + 
-              inputs[1]->output_state + 
+    int sum = inputs[0]->output_state +
+              inputs[1]->output_state +
               inputs[2]->output_state;
     return (sum >= 2) ? 1 : 0;
 }
@@ -213,14 +213,14 @@ typedef struct {
 // α 约为 1-2 mV/K（对于体硅 CMOS）
 float calculate_threshold_voltage(CryoMOSFET *mosfet) {
     float alpha = 0.0015f;  // V/K
-    return mosfet->threshold_voltage_300k + 
+    return mosfet->threshold_voltage_300k +
            alpha * (mosfet->temperature - 300.0f);
 }
 
 // 迁移率温度特性
 // μ(T) = μ(300K) * (T/300)^(-2.5)
 float calculate_mobility(CryoMOSFET *mosfet) {
-    return mosfet->mobility_300k * 
+    return mosfet->mobility_300k *
            powf(mosfet->temperature / 300.0f, -2.5f);
 }
 
@@ -230,10 +230,10 @@ float calculate_mobility(CryoMOSFET *mosfet) {
 float calculate_subthreshold_swing(CryoMOSFET *mosfet) {
     float k = 1.38e-23;  // 玻尔兹曼常数
     float q = 1.602e-19; // 元电荷
-    float Cox = EPSILON_SIO2 * mosfet->width * mosfet->length / 
+    float Cox = EPSILON_SIO2 * mosfet->width * mosfet->length /
                 mosfet->oxide_thickness;
-    
-    return logf(10) * k * mosfet->temperature / q * 
+
+    return logf(10) * k * mosfet->temperature / q *
            (1 + 0.1f);  // 简化体效应因子
 }
 ```
@@ -252,7 +252,7 @@ typedef struct {
 float calculate_read_margin(CryoSRAM_Cell *cell) {
     float vth = calculate_threshold_voltage(&cell->pull_down[0]);
     float vdd = 0.5f;  // 低温下可降低供电电压
-    
+
     // 读干扰裕度
     float read_margin = vdd - 2 * vth;
     return read_margin;
@@ -270,15 +270,15 @@ void optimize_standard_cells_for_cryo(void) {
     // 减小晶体管尺寸（迁移率提高）
     float mobility_boost = calculate_mobility(&(CryoMOSFET){.temperature=4.2f}) /
                            calculate_mobility(&(CryoMOSFET){.temperature=300.0f});
-    
+
     // 可降低供电电压
     float vdd_300k = 1.0f;
     float vdd_4k = 0.3f;  // 可降至 0.3V
-    
+
     printf("Cryo optimization:\n");
     printf("  Mobility boost: %.1fx\n", mobility_boost);
     printf("  VDD reduction: %.1fV -> %.1fV\n", vdd_300k, vdd_4k);
-    printf("  Power reduction: %.2fx\n", 
+    printf("  Power reduction: %.2fx\n",
            powf(vdd_4k/vdd_300k, 2) / mobility_boost);
 }
 ```
@@ -310,24 +310,24 @@ typedef struct {
 void generate_pulse_sequence(QubitPulse *pulses, int num_pulses,
                              float *dac_samples, int num_samples) {
     float dt = 1.0f / CONTROL_BOARD.sample_rate;
-    
+
     for (int i = 0; i < num_samples; i++) {
         float t = i * dt;
         float sample = 0;
-        
+
         // 叠加所有脉冲
         for (int p = 0; p < num_pulses; p++) {
             QubitPulse *pulse = &pulses[p];
-            if (t >= pulse->start_time && 
+            if (t >= pulse->start_time &&
                 t < pulse->start_time + pulse->duration) {
-                
-                float envelope = gaussian_envelope(t - pulse->start_time, 
+
+                float envelope = gaussian_envelope(t - pulse->start_time,
                                                     pulse->duration);
-                sample += pulse->amplitude * envelope * 
+                sample += pulse->amplitude * envelope *
                           cosf(2 * M_PI * pulse->frequency * t + pulse->phase);
             }
         }
-        
+
         // 量化
         dac_samples[i] = quantize(sample, CONTROL_BOARD.resolution);
     }
@@ -338,16 +338,16 @@ float demodulate_readout(float *adc_samples, int num_samples,
                          float if_frequency, float sample_rate) {
     float i_sum = 0, q_sum = 0;
     float dt = 1.0f / sample_rate;
-    
+
     for (int i = 0; i < num_samples; i++) {
         float t = i * dt;
         float signal = adc_samples[i];
-        
+
         // 混频
         i_sum += signal * cosf(2 * M_PI * if_frequency * t);
         q_sum += signal * sinf(2 * M_PI * if_frequency * t);
     }
-    
+
     // 计算幅度
     return sqrtf(i_sum*i_sum + q_sum*q_sum);
 }
@@ -371,14 +371,14 @@ typedef struct {
 void sfq_to_cmos(SFQ_Pulse *sfq_input, float *cmos_output,
                  SFQ_to_CMOS_Converter *converter) {
     float signal = sfq_input->pulse_amplitude;
-    
+
     // 多级放大
     for (int i = 0; i < converter->num_stages; i++) {
         signal *= converter->gain_per_stage;
     }
-    
+
     // 阈值判决
-    *cmos_output = (signal > (CMOS_LOGIC_HIGH + CMOS_LOGIC_LOW) / 2) ? 
+    *cmos_output = (signal > (CMOS_LOGIC_HIGH + CMOS_LOGIC_LOW) / 2) ?
                    CMOS_LOGIC_HIGH : CMOS_LOGIC_LOW;
 }
 
@@ -428,26 +428,26 @@ typedef struct {
 } PID_Controller;
 
 // 温度控制循环
-void temperature_control_loop(PID_Controller *pid, 
+void temperature_control_loop(PID_Controller *pid,
                               float current_temp,
                               float *heater_power) {
     float error = pid->setpoint - current_temp;
-    
+
     // 积分项
     pid->integral += error;
-    
+
     // 微分项
     float derivative = error - pid->prev_error;
-    
+
     // PID 计算
-    float output = pid->kp * error + 
-                   pid->ki * pid->integral + 
+    float output = pid->kp * error +
+                   pid->ki * pid->integral +
                    pid->kd * derivative;
-    
+
     // 限幅
     if (output > pid->output_limit) output = pid->output_limit;
     if (output < 0) output = 0;
-    
+
     *heater_power = output;
     pid->prev_error = error;
 }
@@ -455,24 +455,24 @@ void temperature_control_loop(PID_Controller *pid,
 // 自动降温程序
 void auto_cooldown_sequence(void) {
     printf("Starting auto cooldown sequence...\n");
-    
+
     // 1. 预冷 - 液氮
     set_temp_setpoint(TEMP_STAGE_50K, 77.0f);
     wait_for_temperature(TEMP_STAGE_50K, 80.0f, 600);  // 10分钟
-    
+
     // 2. 主冷 - 液氦
     set_temp_setpoint(TEMP_STAGE_4K, 4.2f);
     wait_for_temperature(TEMP_STAGE_4K, 5.0f, 3600);   // 1小时
-    
+
     // 3. 启动稀释制冷
     enable_dilution_cooling();
     set_temp_setpoint(TEMP_STAGE_1K, 1.5f);
     wait_for_temperature(TEMP_STAGE_1K, 2.0f, 1800);
-    
+
     // 4. 基温
     set_temp_setpoint(TEMP_STAGE_10MK, 0.01f);
     wait_for_temperature(TEMP_STAGE_10MK, 0.015f, 7200);
-    
+
     printf("Cooldown complete. Base temperature reached.\n");
 }
 ```
@@ -497,11 +497,11 @@ float calculate_conductive_load(float area, float length,
 
 // 计算辐射热负载
 float calculate_radiative_load(float area, float emissivity1,
-                               float emissivity2, float t_hot, 
+                               float emissivity2, float t_hot,
                                float t_cold) {
     float sigma = 5.67e-8;  // Stefan-Boltzmann 常数
     float e_eff = 1.0f / (1.0f/emissivity1 + 1.0f/emissivity2 - 1.0f);
-    
+
     return e_eff * sigma * area * (powf(t_hot, 4) - powf(t_cold, 4));
 }
 
@@ -509,13 +509,13 @@ float calculate_radiative_load(float area, float emissivity1,
 void calculate_total_heat_load(ThermalLoad *loads, int num_stages) {
     printf("Heat Load Budget:\n");
     printf("=================\n");
-    
+
     for (int i = 0; i < num_stages; i++) {
-        float total = loads[i].conductive_load + 
-                      loads[i].radiative_load + 
-                      loads[i].electrical_load + 
+        float total = loads[i].conductive_load +
+                      loads[i].radiative_load +
+                      loads[i].electrical_load +
                       loads[i].measurement_load;
-        
+
         printf("Stage %d:\n", i);
         printf("  Conductive: %.2f mW\n", loads[i].conductive_load * 1000);
         printf("  Radiative:  %.2f mW\n", loads[i].radiative_load * 1000);

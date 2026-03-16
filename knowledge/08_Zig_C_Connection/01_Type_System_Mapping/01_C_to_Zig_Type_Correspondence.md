@@ -33,6 +33,29 @@
     - [4.3 联合体互操作](#43-联合体互操作)
     - [4.4 枚举类型映射](#44-枚举类型映射)
     - [4.5 函数指针回调](#45-函数指针回调)
+    - [4.6 变参函数处理](#46-变参函数处理)
+    - [4.7 复杂声明解析](#47-复杂声明解析)
+    - [4.8 内存分配器桥接](#48-内存分配器桥接)
+  - [第五部分：反例与陷阱](#第五部分反例与陷阱)
+    - [陷阱1：整数类型宽度不匹配](#陷阱1整数类型宽度不匹配)
+    - [陷阱2：有符号/无符号混淆](#陷阱2有符号无符号混淆)
+    - [陷阱3：指针类型不兼容](#陷阱3指针类型不兼容)
+    - [陷阱4：VLA不支持](#陷阱4vla不支持)
+    - [陷阱5：位域布局差异](#陷阱5位域布局差异)
+    - [陷阱6：对齐要求不同](#陷阱6对齐要求不同)
+    - [陷阱7：调用约定不匹配](#陷阱7调用约定不匹配)
+    - [陷阱8：宏定义转换问题](#陷阱8宏定义转换问题)
+    - [陷阱9：类型双关（Type Punning）](#陷阱9类型双关type-punning)
+    - [陷阱10：内存布局假设](#陷阱10内存布局假设)
+    - [陷阱11：char符号性歧义](#陷阱11char符号性歧义)
+    - [陷阱12：long double平台差异](#陷阱12long-double平台差异)
+  - [第六部分：最佳实践](#第六部分最佳实践)
+    - [6.1 translate-c使用技巧](#61-translate-c使用技巧)
+    - [6.2 手动绑定编写指南](#62-手动绑定编写指南)
+    - [6.3 测试策略](#63-测试策略)
+  - [附录](#附录)
+    - [A. 完整类型对照速查表](#a-完整类型对照速查表)
+    - [B. 平台ABI差异总结](#b-平台abi差异总结)
 
 ---
 
@@ -1648,13 +1671,13 @@ pub fn formatToBuffer(buf: []u8, comptime fmt: []const u8, values: anytype) !usi
         .count = 0,
         .args = undefined,
     };
-    
+
     const fields = std.meta.fields(@TypeOf(values));
     inline for (fields, 0..) |field, i| {
         if (i >= 8) break;
         const value = @field(values, field.name);
         const T = @TypeOf(value);
-        
+
         if (T == i32 or T == c_int) {
             args.args[i].i_val = value;
         } else if (T == f64) {
@@ -1664,7 +1687,7 @@ pub fn formatToBuffer(buf: []u8, comptime fmt: []const u8, values: anytype) !usi
         }
         args.count += 1;
     }
-    
+
     const result = format_with_args(buf.ptr, buf.len, &args);
     if (result < 0) return error.FormatError;
     return @intCast(result);
@@ -1903,7 +1926,7 @@ test "allocator bridge types" {
 test "zig to C allocator conversion" {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     defer _ = gpa.deinit();
-    
+
     const c_alloc = zigAllocatorToC(gpa.allocator());
     const ptr = c_alloc.alloc(100, 8, c_alloc.state);
     try std.testing.expect(ptr != null);
@@ -2015,7 +2038,7 @@ pub const Flags = packed struct {
 // 正确做法：使用位掩码
 pub const FlagsManual = extern struct {
     bits: u32,
-    
+
     pub fn getA(self: FlagsManual) u4 {
         return @truncate(self.bits & 0xF);
     }
@@ -2100,7 +2123,7 @@ pub fn verifyLayout() void {
     const c_size = c.sizeof_struct();
     const zig_size = @sizeOf(MyStruct);
     std.debug.assert(c_size == zig_size);
-    
+
     const c_align = c.alignof_struct();
     const zig_align = @alignOf(MyStruct);
     std.debug.assert(c_align == zig_align);
@@ -2226,7 +2249,7 @@ test "callback ABI" {
 test "memory layout" {
     var c_struct: c.struct_MyStruct = undefined;
     var zig_struct: MyStruct = undefined;
-    
+
     // 通过指针转换验证布局
     const zig_ptr: *MyStruct = @ptrCast(&c_struct);
     _ = zig_ptr;
@@ -2326,5 +2349,5 @@ test "memory layout" {
 ---
 
 > **文档状态**: 权威参考完成 | **验证状态**: 形式化框架 | **最后更新**: 2026-03-16 | **版本**: 2.0
-> 
+>
 > 本文档提供Zig与C类型系统互操作的完整形式化参考，涵盖概念定义、属性矩阵、转换算法、完整示例、陷阱分析和最佳实践。

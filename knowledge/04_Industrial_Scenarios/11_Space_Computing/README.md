@@ -51,7 +51,7 @@ void inject_seu(void *target, size_t size) {
         size_t bit_pos = rand() % (size * 8);
         size_t byte_idx = bit_pos / 8;
         int bit_idx = bit_pos % 8;
-        
+
         ((uint8_t*)target)[byte_idx] ^= (1 << bit_idx);
         fault_injected = 1;
     }
@@ -75,12 +75,12 @@ int tmr_vote(int a, int b, int c) {
 }
 
 // 内存扫描检测 SEU
-void memory_scrubber(uint32_t *memory, size_t size, 
+void memory_scrubber(uint32_t *memory, size_t size,
                      uint32_t *golden_copy) {
     for (size_t i = 0; i < size; i++) {
         if (memory[i] != golden_copy[i]) {
             // 检测到差异，可能是 SEU
-            printf("SEU detected at address %p, correcting...\n", 
+            printf("SEU detected at address %p, correcting...\n",
                    &memory[i]);
             memory[i] = golden_copy[i];
             log_seu_event(i);
@@ -104,14 +104,14 @@ typedef struct {
 } TMR_Unit;
 
 // TMR 表决逻辑
-uint32_t tmr_execute(TMR_Unit *tmr, 
+uint32_t tmr_execute(TMR_Unit *tmr,
                       uint32_t (*operation)(uint32_t, uint32_t),
                       uint32_t op1, uint32_t op2) {
     // 三个核心执行相同操作
     tmr->core_a_result = operation(op1, op2);
     tmr->core_b_result = operation(op1, op2);
     tmr->core_c_result = operation(op1, op2);
-    
+
     // 多数表决
     if (tmr->core_a_result == tmr->core_b_result) {
         tmr->voted_result = tmr->core_a_result;
@@ -132,7 +132,7 @@ uint32_t tmr_execute(TMR_Unit *tmr,
         tmr->voted_result = 0;
         trigger_system_reset();
     }
-    
+
     return tmr->voted_result;
 }
 ```
@@ -150,7 +150,7 @@ uint8_t hamming_encode(uint64_t data) {
     uint8_t ecc = 0;
     // 校验位位置：1, 2, 4, 8, 16, 32, 64, 128
     // 每个校验位覆盖特定数据位
-    
+
     // P1 覆盖位: 3,5,7,9,11,...
     ecc |= (__builtin_parity(data & 0xAAAAAAAAAAAAAAABULL) << 0);
     // P2 覆盖位: 3,6,7,10,11,...
@@ -163,7 +163,7 @@ uint8_t hamming_encode(uint64_t data) {
     ecc |= (__builtin_parity(data & 0xFFFF0000FFFF0000ULL) << 4);
     // P32
     ecc |= (__builtin_parity(data & 0xFFFFFFFF00000000ULL) << 5);
-    
+
     return ecc;
 }
 
@@ -171,24 +171,24 @@ uint8_t hamming_encode(uint64_t data) {
 int ecc_decode(uint64_t *data, uint8_t received_ecc) {
     uint8_t calculated_ecc = hamming_encode(*data);
     uint8_t syndrome = received_ecc ^ calculated_ecc;
-    
+
     if (syndrome == 0) {
         return 0;  // 无错误
     }
-    
+
     // 检查是否是单比特错误
     if ((syndrome & (syndrome - 1)) == 0) {
         // 校验位错误，数据正确
         return 1;
     }
-    
+
     // 数据位错误，纠正
     int error_bit = syndrome - 1;  // 汉明码错误位编号
     if (error_bit < 64) {
         *data ^= (1ULL << error_bit);
         return 1;  // 纠正成功
     }
-    
+
     return -1;  // 多位错误，无法纠正
 }
 
@@ -203,17 +203,17 @@ uint8_t secded_encode(uint64_t data) {
 int secded_decode(uint64_t *data, uint8_t received_ecc) {
     uint8_t calculated_ecc = secded_encode(*data);
     uint8_t syndrome = received_ecc ^ calculated_ecc;
-    
+
     if (syndrome == 0) return 0;
-    
+
     int parity_bit = (received_ecc >> 7) & 1;
     int data_parity = __builtin_parity(*data);
-    
+
     if ((syndrome & 0x7F) != 0 && parity_bit == data_parity) {
         // 双比特错误检测
         return -2;
     }
-    
+
     return ecc_decode(data, received_ecc & 0x7F);
 }
 ```
@@ -249,17 +249,17 @@ int hardened_read(HardenedData *h, uint32_t *out) {
     if (h->data != ~(h->inverted)) {
         return -1;  // 数据损坏
     }
-    
+
     uint32_t computed_checksum = crc32(&h->data, sizeof(h->data));
     if (computed_checksum != h->checksum) {
         return -1;
     }
-    
+
     // 检查时效性
     if (get_tick_count() - h->timestamp > TIMEOUT_THRESHOLD) {
         return -2;  // 数据过期
     }
-    
+
     *out = h->data;
     return 0;
 }
@@ -282,10 +282,10 @@ typedef struct {
 void configure_sel_protection(void) {
     // 配置衬底抽头
     enable_substrate_taps();
-    
+
     // 设置闩锁检测电路
     enable_latchup_detector();
-    
+
     // 配置自动重启
     set_auto_restart_threshold(3);  // 3次检测后重启
 }
@@ -295,17 +295,17 @@ void power_monitor_task(void) {
     while (1) {
         float core_voltage = read_core_voltage();
         float current = read_supply_current();
-        
+
         // SEL 检测：电流突增
         if (current > SEL_CURRENT_THRESHOLD) {
             trigger_sel_recovery();
         }
-        
+
         // 欠压检测
         if (core_voltage < UVLO_THRESHOLD) {
             trigger_safe_mode();
         }
-        
+
         vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
@@ -331,19 +331,19 @@ typedef enum {
 void thermal_management_task(void) {
     ThermalMode mode = MODE_NORMAL;
     ThermalState state;
-    
+
     while (1) {
         read_thermal_sensors(&state);
-        
+
         switch (mode) {
             case MODE_NORMAL:
-                if (state.temp_cpu > 60.0f || 
+                if (state.temp_cpu > 60.0f ||
                     state.temp_fpga > 70.0f) {
                     mode = MODE_POWER_SAVE;
                     reduce_clock_frequency(50);
                 }
                 break;
-                
+
             case MODE_POWER_SAVE:
                 if (state.temp_cpu > 75.0f) {
                     mode = MODE_EMERGENCY;
@@ -353,7 +353,7 @@ void thermal_management_task(void) {
                     restore_clock_frequency();
                 }
                 break;
-                
+
             case MODE_EMERGENCY:
                 if (state.temp_cpu > 85.0f) {
                     trigger_safe_shutdown();
@@ -363,7 +363,7 @@ void thermal_management_task(void) {
                 }
                 break;
         }
-        
+
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
@@ -385,21 +385,21 @@ void thermal_management_task(void) {
 // 任务看门狗
 void watchdog_task(void *pvParameters) {
     TickType_t last_wake = xTaskGetTickCount();
-    
+
     while (1) {
         // 检查所有任务状态
         for (int i = 0; i < NUM_TASKS; i++) {
-            if (task_states[i].last_ping + PING_TIMEOUT < 
+            if (task_states[i].last_ping + PING_TIMEOUT <
                 xTaskGetTickCount()) {
                 // 任务无响应
                 log_error("Task %d unresponsive", i);
                 trigger_task_restart(i);
             }
         }
-        
+
         // 喂硬件看门狗
         feed_hardware_watchdog();
-        
+
         vTaskDelayUntil(&last_wake, pdMS_TO_TICKS(100));
     }
 }
@@ -412,18 +412,18 @@ void health_check_task(void *pvParameters) {
         if (free_heap < HEAP_WARNING_THRESHOLD) {
             log_warning("Low heap: %d bytes", free_heap);
         }
-        
+
         // 堆栈溢出检查
         for (int i = 0; i < NUM_TASKS; i++) {
-            if (uxTaskGetStackHighWaterMark(task_handles[i]) < 
+            if (uxTaskGetStackHighWaterMark(task_handles[i]) <
                 STACK_WARNING_THRESHOLD) {
                 log_warning("Task %d stack low", i);
             }
         }
-        
+
         // 向看门狗报告
         task_states[HEALTH_TASK_ID].last_ping = xTaskGetTickCount();
-        
+
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
@@ -450,49 +450,49 @@ typedef struct __attribute__((packed)) {
 } CCSDS_SecondaryHeader;
 
 // 遥测数据包组装
-int assemble_telemetry(uint16_t apid, const uint8_t *data, 
+int assemble_telemetry(uint16_t apid, const uint8_t *data,
                        size_t data_len, uint8_t *out_packet) {
-    if (data_len > 65536 - CCSDS_PRIMARY_HEADER_SIZE - 
+    if (data_len > 65536 - CCSDS_PRIMARY_HEADER_SIZE -
                    CCSDS_SECONDARY_HEADER_SIZE) {
         return -1;
     }
-    
+
     CCSDS_PrimaryHeader *pri = (CCSDS_PrimaryHeader *)out_packet;
     pri->packet_id = htons(0x0800 | (apid & 0x07FF));  // 遥测包
     pri->packet_seq = htons(0xC000 | (sequence_count[apid]++ & 0x3FFF));
     pri->packet_len = htons(CCSDS_SECONDARY_HEADER_SIZE + data_len - 1);
-    
+
     CCSDS_SecondaryHeader *sec = (CCSDS_SecondaryHeader *)(pri + 1);
     sec->timestamp_secs = htonl(get_spacecraft_time());
     sec->timestamp_subsecs = htons(get_subseconds());
     sec->source_id = htons(apid);
-    
-    memcpy(out_packet + CCSDS_PRIMARY_HEADER_SIZE + 
+
+    memcpy(out_packet + CCSDS_PRIMARY_HEADER_SIZE +
            CCSDS_SECONDARY_HEADER_SIZE, data, data_len);
-    
-    return CCSDS_PRIMARY_HEADER_SIZE + CCSDS_SECONDARY_HEADER_SIZE + 
+
+    return CCSDS_PRIMARY_HEADER_SIZE + CCSDS_SECONDARY_HEADER_SIZE +
            data_len;
 }
 
 // 遥控命令处理
 void telecommand_handler(uint8_t *packet, size_t len) {
     if (len < CCSDS_PRIMARY_HEADER_SIZE) return;
-    
+
     CCSDS_PrimaryHeader *pri = (CCSDS_PrimaryHeader *)packet;
     uint16_t apid = ntohs(pri->packet_id) & 0x07FF;
-    
+
     // 验证校验和
     if (!verify_checksum(packet, len)) {
         send_rejection(apid, REJECT_CHECKSUM);
         return;
     }
-    
+
     // 验证授权
     if (!check_authorization(apid, get_sender_id(packet))) {
         send_rejection(apid, REJECT_UNAUTHORIZED);
         return;
     }
-    
+
     // 执行命令
     execute_command(apid, packet + CCSDS_PRIMARY_HEADER_SIZE,
                     len - CCSDS_PRIMARY_HEADER_SIZE);
@@ -512,24 +512,24 @@ typedef struct {
 } AttitudeData;
 
 // 星图识别
-void star_identification(const StarImage *image, 
+void star_identification(const StarImage *image,
                          AttitudeData *attitude) {
     // 提取星点
     Star stars[MAX_STARS];
     int num_stars = extract_stars(image, stars, MAX_STARS);
-    
+
     // 三角形匹配
     TrianglePattern pattern;
     build_triangle_pattern(stars, num_stars, &pattern);
-    
+
     // 匹配星表
     StarCatalogMatch matches[MAX_MATCHES];
     int num_matches = match_star_catalog(&pattern, matches);
-    
+
     if (num_matches >= 3) {
         // QUEST 算法计算姿态
         quaternion_t q = quest_algorithm(matches, num_matches);
-        quaternion_to_euler(q, &attitude->ra, &attitude->dec, 
+        quaternion_to_euler(q, &attitude->ra, &attitude->dec,
                             &attitude->roll);
         attitude->quality = 100;
     } else {
@@ -538,12 +538,12 @@ void star_identification(const StarImage *image,
 }
 
 // 轨道确定
-void orbit_determination(const GPS_Data *gps, 
+void orbit_determination(const GPS_Data *gps,
                          const Accelerometer_Data *accel,
                          OrbitElements *orbit) {
     // 卡尔曼滤波融合
     static KalmanFilter kf;
-    
+
     float measurement[6];
     measurement[0] = gps->position_x;
     measurement[1] = gps->position_y;
@@ -551,10 +551,10 @@ void orbit_determination(const GPS_Data *gps,
     measurement[3] = gps->velocity_x;
     measurement[4] = gps->velocity_y;
     measurement[5] = gps->velocity_z;
-    
+
     kalman_predict(&kf, accel, DT);
     kalman_update(&kf, measurement);
-    
+
     // 提取轨道根数
     state_vector_to_elements(kf.state, orbit);
 }

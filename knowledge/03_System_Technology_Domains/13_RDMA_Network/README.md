@@ -9,6 +9,7 @@ RDMA（Remote Direct Memory Access，远程直接内存访问）是一种高性�
 ### 1. 零拷贝（Zero Copy）
 
 传统网络通信需要多次数据拷贝：
+
 - 网卡 → 内核缓冲区 → 用户缓冲区
 - RDMA 消除了这些拷贝，数据直接从网卡写入目标内存
 
@@ -56,7 +57,7 @@ if (!ib_dev) {
 // 打开设备上下文
 ctx = ibv_open_device(ib_dev);
 if (!ctx) {
-    fprintf(stderr, "Failed to open device %s\n", 
+    fprintf(stderr, "Failed to open device %s\n",
             ibv_get_device_name(ib_dev));
     return -1;
 }
@@ -96,7 +97,7 @@ addr.sin_family = AF_INET;
 addr.sin_port = htons(port);
 inet_pton(AF_INET, server_ip, &addr.sin_addr);
 
-ret = rdma_resolve_addr(conn_id, NULL, 
+ret = rdma_resolve_addr(conn_id, NULL,
                         (struct sockaddr *)&addr, 2000);
 if (ret) {
     perror("rdma_resolve_addr");
@@ -311,7 +312,7 @@ ret = ibv_post_send(qp, &atomic_wr, &bad_wr);
 void poll_completions(struct ibv_cq *cq, int expected) {
     struct ibv_wc wc;
     int completed = 0;
-    
+
     while (completed < expected) {
         int ret = ibv_poll_cq(cq, 1, &wc);
         if (ret < 0) {
@@ -320,13 +321,13 @@ void poll_completions(struct ibv_cq *cq, int expected) {
         }
         if (ret == 0)
             continue;
-        
+
         if (wc.status != IBV_WC_SUCCESS) {
             fprintf(stderr, "Work completion error: %s\n",
                     ibv_wc_status_str(wc.status));
             continue;
         }
-        
+
         printf("Completion: wr_id=%lu, opcode=%d\n",
                wc.wr_id, wc.opcode);
         completed++;
@@ -347,12 +348,12 @@ for (int i = 0; i < BATCH_SIZE; i++) {
     sgs[i].addr = (uint64_t)bufs[i];
     sgs[i].length = buf_sizes[i];
     sgs[i].lkey = mrs[i]->lkey;
-    
+
     wrs[i].wr_id = i;
     wrs[i].opcode = IBV_WR_SEND;
     wrs[i].sg_list = &sgs[i];
     wrs[i].num_sge = 1;
-    wrs[i].send_flags = (i == BATCH_SIZE - 1) ? 
+    wrs[i].send_flags = (i == BATCH_SIZE - 1) ?
                         IBV_SEND_SIGNALED : 0;
     wrs[i].next = (i < BATCH_SIZE - 1) ? &wrs[i + 1] : NULL;
 }
@@ -389,7 +390,7 @@ mempool_entry mempool[POOL_SIZE];
 void init_mempool(struct ibv_pd *pd) {
     for (int i = 0; i < POOL_SIZE; i++) {
         posix_memalign(&mempool[i].buf, 4096, CHUNK_SIZE);
-        mempool[i].mr = ibv_reg_mr(pd, mempool[i].buf, 
+        mempool[i].mr = ibv_reg_mr(pd, mempool[i].buf,
                                    CHUNK_SIZE,
                                    IBV_ACCESS_LOCAL_WRITE |
                                    IBV_ACCESS_REMOTE_WRITE);

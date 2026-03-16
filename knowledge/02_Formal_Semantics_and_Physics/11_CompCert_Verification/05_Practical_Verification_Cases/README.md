@@ -2,14 +2,35 @@
 
 ## 概述
 
-本文档详细介绍如何使用 CompCert 编译器和 Frama-C 验证框架进行实际的程序验证。我们将通过具体的案例研究，展示如何编写 ACSL（ANSI/ISO C Specification Language）注释、验证内存安全性以及建立函数契约。
+本文档详细介绍如何使用 CompCert 编译器和 Frama-C 验证框架进行实际的程序验证。
+我们将通过具体的案例研究，展示如何编写 ACSL（ANSI/ISO C Specification Language）注释、验证内存安全性以及建立函数契约。
 
 ## 目录
 
-1. [Frama-C ACSL 基础](#frama-c-acsl-基础)
-2. [内存安全验证](#内存安全验证)
-3. [函数契约设计](#函数契约设计)
-4. [完整案例研究](#完整案例研究)
+- [CompCert 实践验证案例](#compcert-实践验证案例)
+  - [概述](#概述)
+  - [目录](#目录)
+  - [Frama-C ACSL 基础](#frama-c-acsl-基础)
+    - [什么是 ACSL？](#什么是-acsl)
+    - [ACSL 注释结构](#acsl-注释结构)
+    - [核心谓词](#核心谓词)
+  - [内存安全验证](#内存安全验证)
+    - [数组边界检查](#数组边界检查)
+    - [空指针检查](#空指针检查)
+    - [内存分配验证](#内存分配验证)
+  - [函数契约设计](#函数契约设计)
+    - [前置条件与后置条件](#前置条件与后置条件)
+    - [行为规约](#行为规约)
+    - [复杂数据结构的契约](#复杂数据结构的契约)
+  - [完整案例研究](#完整案例研究)
+    - [案例一：安全字符串操作](#案例一安全字符串操作)
+    - [案例二：排序算法验证](#案例二排序算法验证)
+    - [案例三：堆栈数据结构](#案例三堆栈数据结构)
+  - [验证工作流](#验证工作流)
+    - [使用 Frama-C 进行验证](#使用-frama-c-进行验证)
+    - [Makefile 集成](#makefile-集成)
+  - [最佳实践](#最佳实践)
+  - [参考资料](#参考资料)
 
 ---
 
@@ -116,7 +137,7 @@ int* create_filled_array(size_t n, const int* elem) {
     if (arr == NULL) {
         return NULL;
     }
-    
+
     /*@
       @ loop invariant 0 <= i <= n;
       @ loop invariant \valid(arr + (0..n-1));
@@ -126,7 +147,7 @@ int* create_filled_array(size_t n, const int* elem) {
     for (size_t i = 0; i < n; i++) {
         arr[i] = *elem;
     }
-    
+
     return arr;
 }
 ```
@@ -220,7 +241,7 @@ size_t list_size(const struct list* lst);
 */
 char* safe_strcpy(char* dest, const char* src) {
     size_t i = 0;
-    
+
     /*@
       @ loop invariant 0 <= i;
       @ loop invariant \forall integer j; 0 <= j < i ==> dest[j] == src[j];
@@ -233,7 +254,7 @@ char* safe_strcpy(char* dest, const char* src) {
         i++;
     }
     dest[i] = '\0';
-    
+
     return dest;
 }
 ```
@@ -268,7 +289,7 @@ void insertion_sort(int* a, size_t n) {
     for (size_t i = 1; i < n; i++) {
         int key = a[i];
         size_t j = i;
-        
+
         /*@
           @ loop invariant 0 <= j <= i;
           @ loop invariant \forall integer k; j < k <= i ==> a[k] > key;
@@ -375,14 +396,14 @@ OBJS = $(SRCS:.c=.o)
 all: verify $(OBJS)
 
 verify:
-	@echo "Running Frama-C verification..."
-	$(FRAMA) -wp -rte -warn-signed-overflow $(SRCS)
+ @echo "Running Frama-C verification..."
+ $(FRAMA) -wp -rte -warn-signed-overflow $(SRCS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+ $(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) *.ali
+ rm -f $(OBJS) *.ali
 ```
 
 ---

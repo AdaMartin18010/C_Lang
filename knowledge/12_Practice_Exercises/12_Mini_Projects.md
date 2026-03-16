@@ -70,9 +70,9 @@ Database* db_open(const char *path);
 void db_close(Database *db);
 
 // 基本操作
-DBError db_put(Database *db, const char *key, 
+DBError db_put(Database *db, const char *key,
                const void *value, size_t value_len);
-DBError db_get(Database *db, const char *key, 
+DBError db_get(Database *db, const char *key,
                void *out_buf, size_t buf_size, size_t *out_len);
 DBError db_delete(Database *db, const char *key);
 
@@ -161,7 +161,7 @@ typedef struct {
 Token* lexer_tokenize(const char *source);
 ```
 
-2. **语法分析器（Parser）**
+1. **语法分析器（Parser）**
 
 ```c
 // 递归下降解析
@@ -177,7 +177,7 @@ struct AstNode {
 AstNode* parser_parse(Token *tokens);
 ```
 
-3. **语义分析**
+1. **语义分析**
 
 ```c
 // 类型检查
@@ -185,7 +185,7 @@ AstNode* parser_parse(Token *tokens);
 bool sema_check(AstNode *ast);
 ```
 
-4. **代码生成**
+1. **代码生成**
 
 ```c
 // 生成LLVM IR 或 x86汇编
@@ -196,7 +196,7 @@ void codegen_generate(AstNode *ast, FILE *out);
 
 ## 项目4: 网络协议实现
 
-### 选择以下协议之一实现：
+### 选择以下协议之一实现
 
 #### 4.1 DNS客户端
 
@@ -238,7 +238,7 @@ void smtp_quit(SMTPSession *session);
 
 ## 项目5: 图形渲染
 
-### 选择以下方向：
+### 选择以下方向
 
 #### 5.1 软件光栅化器
 
@@ -249,7 +249,7 @@ void draw_triangle(FrameBuffer *fb, Vec2 v[3], Color c);
 void fill_triangle(FrameBuffer *fb, Vec2 v[3], Color c);
 
 // 3D渲染（软光栅）
-void draw_mesh(FrameBuffer *fb, const Mesh *mesh, 
+void draw_mesh(FrameBuffer *fb, const Mesh *mesh,
                const Mat4 *mvp, const Camera *cam);
 ```
 
@@ -316,6 +316,7 @@ void pkg_update(void);
 ### 6.4 配置文件解析器
 
 支持格式：
+
 - JSON
 - YAML
 - TOML
@@ -360,6 +361,7 @@ void vm_run(VM *vm);
 ### 7.2 CPU模拟器
 
 模拟简单CPU：
+
 - 寄存器组
 - 内存
 - ALU

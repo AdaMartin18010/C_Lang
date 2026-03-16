@@ -9,12 +9,14 @@ DNA 存储是一种利用脱氧核糖核酸（DNA）分子存储数字信息的�
 ### 分子基础
 
 DNA 由四种核苷酸组成：
+
 - **A** (Adenine, 腺嘌呤)
 - **T** (Thymine, 胸腺嘧啶)
 - **C** (Cytosine, 胞嘧啶)
 - **G** (Guanine, 鸟嘌呤)
 
 信息编码映射：
+
 ```
 00 → A
 01 → T
@@ -50,10 +52,10 @@ int encode_to_dna(const uint8_t *binary_data, size_t len,
     if (dna_buf_size < len * 4 + 1) {
         return -1;  // 缓冲区不足
     }
-    
+
     const char base_chars[] = {'A', 'T', 'C', 'G'};
     size_t dna_idx = 0;
-    
+
     for (size_t i = 0; i < len; i++) {
         uint8_t byte = binary_data[i];
         // 每个字节编码为 4 个碱基
@@ -72,7 +74,7 @@ int decode_from_dna(const char *dna_sequence, size_t dna_len,
     if (dna_len % 4 != 0 || bin_buf_size < dna_len / 4) {
         return -1;
     }
-    
+
     size_t bin_idx = 0;
     for (size_t i = 0; i < dna_len; i += 4) {
         uint8_t byte = 0;
@@ -133,7 +135,7 @@ char get_alternative_base(char base, int alt_idx) {
 
 int rll_encode_byte(RLLEncoder *enc, DNABase base) {
     const char base_char = "ATCG"[base];
-    
+
     if (base_char == enc->last_base) {
         enc->run_length++;
         if (enc->run_length >= MAX_HOMOPOLYMER) {
@@ -147,7 +149,7 @@ int rll_encode_byte(RLLEncoder *enc, DNABase base) {
         enc->last_base = base_char;
         enc->run_length = 1;
     }
-    
+
     if (enc->out_len >= enc->capacity) return -1;
     enc->output[enc->out_len++] = base_char;
     return 0;
@@ -168,10 +170,10 @@ void rotate_encode(const uint8_t *data, size_t len,
         "GTAC",  // 10 -> GTAC
         "TGCA"   // 11 -> TGCA
     };
-    
+
     size_t out_idx = 0;
     int rotation_idx = 0;
-    
+
     for (size_t i = 0; i < len; i++) {
         uint8_t byte = data[i];
         for (int j = 3; j >= 0; j--) {
@@ -196,7 +198,7 @@ typedef struct HuffmanNode {
 } HuffmanNode;
 
 // 构建频率表
-void build_freq_table(const char *dna_seq, size_t len, 
+void build_freq_table(const char *dna_seq, size_t len,
                       int freq[256]) {
     memset(freq, 0, 256 * sizeof(int));
     for (size_t i = 0; i < len; i++) {
@@ -209,7 +211,7 @@ void build_dimer_freq(const char *dna_seq, size_t len,
                       int dimer_freq[4][4]) {
     const char bases[] = "ATCG";
     memset(dimer_freq, 0, 16 * sizeof(int));
-    
+
     for (size_t i = 0; i < len - 1; i++) {
         int b1 = -1, b2 = -1;
         for (int j = 0; j < 4; j++) {
@@ -267,14 +269,14 @@ void rs_init(RSEncoder *rs, uint16_t primitive_poly) {
 void rs_encode(RSEncoder *rs, const uint8_t *data, size_t len,
                uint8_t *parity) {
     memset(parity, 0, RS_T * 2);
-    
+
     for (size_t i = 0; i < len; i++) {
         uint8_t feedback = data[i] ^ parity[0];
         for (int j = 0; j < RS_T * 2 - 1; j++) {
-            parity[j] = parity[j + 1] ^ 
+            parity[j] = parity[j + 1] ^
                         gf_mul(rs->generator[j + 1], feedback, rs->poly);
         }
-        parity[RS_T * 2 - 1] = gf_mul(rs->generator[RS_T * 2], 
+        parity[RS_T * 2 - 1] = gf_mul(rs->generator[RS_T * 2],
                                       feedback, rs->poly);
     }
 }
@@ -296,9 +298,9 @@ int levenshtein_distance(const char *s1, const char *s2,
                          int len1, int len2) {
     int *prev = malloc((len2 + 1) * sizeof(int));
     int *curr = malloc((len2 + 1) * sizeof(int));
-    
+
     for (int j = 0; j <= len2; j++) prev[j] = j;
-    
+
     for (int i = 1; i <= len1; i++) {
         curr[0] = i;
         for (int j = 1; j <= len2; j++) {
@@ -306,7 +308,7 @@ int levenshtein_distance(const char *s1, const char *s2,
             int deletion = prev[j] + 1;
             int insertion = curr[j-1] + 1;
             int substitution = prev[j-1] + cost;
-            
+
             curr[j] = deletion;
             if (insertion < curr[j]) curr[j] = insertion;
             if (substitution < curr[j]) curr[j] = substitution;
@@ -315,7 +317,7 @@ int levenshtein_distance(const char *s1, const char *s2,
         prev = curr;
         curr = temp;
     }
-    
+
     int result = prev[len2];
     free(prev);
     free(curr);
@@ -342,27 +344,27 @@ int create_dna_block(uint32_t block_id, const uint8_t *payload,
     if (payload_len > DNA_BLOCK_SIZE - sizeof(DNABlockHeader) - 32) {
         return -1;
     }
-    
+
     DNABlockHeader header = {
         .block_id = block_id,
         .payload_len = payload_len
     };
-    
+
     // 组合头部和数据
     uint8_t block_data[DNA_BLOCK_SIZE];
     memcpy(block_data, &header, sizeof(header));
     memcpy(block_data + sizeof(header), payload, payload_len);
-    
+
     // 计算 RS 校验
-    rs_encode(rs, block_data, sizeof(header) + payload_len, 
+    rs_encode(rs, block_data, sizeof(header) + payload_len,
               header.rs_parity);
-    
+
     // 计算 CRC
     header.crc32 = crc32(block_data, sizeof(header) + payload_len);
-    
+
     // 更新块数据
     memcpy(block_data, &header, sizeof(header));
-    
+
     // 编码为 DNA
     return encode_to_dna(block_data, sizeof(header) + payload_len + 32,
                          dna_output, DNA_BLOCK_SIZE * 4);
@@ -431,26 +433,26 @@ int dna_encode(DNAEncoder *enc, const uint8_t *data, size_t len,
     // 分块处理
     size_t chunk_size = 100;  // 每块约 100 字节
     size_t num_chunks = (len + chunk_size - 1) / chunk_size;
-    
+
     size_t dna_capacity = num_chunks * chunk_size * 8;
     *dna_output = malloc(dna_capacity);
     if (!*dna_output) return -1;
-    
+
     size_t total_dna = 0;
     for (size_t i = 0; i < num_chunks; i++) {
         size_t offset = i * chunk_size;
-        size_t this_chunk = (offset + chunk_size <= len) ? 
+        size_t this_chunk = (offset + chunk_size <= len) ?
                             chunk_size : (len - offset);
-        
+
         // 添加地址前缀
         uint8_t chunk_with_addr[128];
         chunk_with_addr[0] = (i >> 8) & 0xFF;
         chunk_with_addr[1] = i & 0xFF;
         memcpy(chunk_with_addr + 2, data + offset, this_chunk);
-        
+
         // RS 编码
         // ... 添加校验
-        
+
         // 基础编码
         int dna_len = encode_to_dna(chunk_with_addr, this_chunk + 2 + 32,
                                     *dna_output + total_dna,
@@ -459,16 +461,16 @@ int dna_encode(DNAEncoder *enc, const uint8_t *data, size_t len,
             free(*dna_output);
             return -1;
         }
-        
+
         // RLL 编码
         if (enc->config.use_rll) {
             // ... 应用 RLL
         }
-        
+
         total_dna += dna_len;
         (*dna_output)[total_dna++] = '\n';  // 块分隔
     }
-    
+
     *dna_len = total_dna;
     return 0;
 }
@@ -494,11 +496,11 @@ typedef struct {
 void *encode_worker(void *arg) {
     EncodeTask *task = arg;
     size_t local_dna_len;
-    
+
     // 独立编码每个块
     dna_encode(task->encoder, task->data + task->start,
                task->end - task->start, &task->output, &local_dna_len);
-    
+
     return NULL;
 }
 
@@ -506,20 +508,20 @@ int parallel_encode(const uint8_t *data, size_t len, char **output,
                     size_t *out_len) {
     pthread_t threads[NUM_THREADS];
     EncodeTask tasks[NUM_THREADS];
-    
+
     size_t chunk_size = len / NUM_THREADS;
-    
+
     for (int i = 0; i < NUM_THREADS; i++) {
         tasks[i].data = data;
         tasks[i].start = i * chunk_size;
         tasks[i].end = (i == NUM_THREADS - 1) ? len : (i + 1) * chunk_size;
         pthread_create(&threads[i], NULL, encode_worker, &tasks[i]);
     }
-    
+
     for (int i = 0; i < NUM_THREADS; i++) {
         pthread_join(threads[i], NULL);
     }
-    
+
     // 合并结果...
     return 0;
 }

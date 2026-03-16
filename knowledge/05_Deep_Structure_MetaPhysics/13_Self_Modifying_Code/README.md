@@ -40,12 +40,12 @@ void* alloc_executable_memory(size_t size) {
         -1,                      // 文件描述符（未使用）
         0                        // 偏移量
     );
-    
+
     if (ptr == MAP_FAILED) {
         perror("mmap");
         return NULL;
     }
-    
+
     return ptr;
 }
 
@@ -62,7 +62,7 @@ JitCode* jit_code_create(size_t size) {
     JitCode* jit = malloc(sizeof(JitCode));
     jit->size = size;
     jit->is_writable = 1;
-    
+
     // 分配时只有读写权限
     jit->code_buffer = mmap(
         NULL, size,
@@ -70,25 +70,25 @@ JitCode* jit_code_create(size_t size) {
         MAP_PRIVATE | MAP_ANONYMOUS,
         -1, 0
     );
-    
+
     if (jit->code_buffer == MAP_FAILED) {
         free(jit);
         return NULL;
     }
-    
+
     return jit;
 }
 
 // 完成代码生成后，移除写权限，添加执行权限
 int jit_code_finalize(JitCode* jit) {
     if (!jit->is_writable) return 0;  // 已经 finalized
-    
+
     // mprotect: 修改内存保护
     if (mprotect(jit->code_buffer, jit->size, PROT_READ | PROT_EXEC) != 0) {
         perror("mprotect");
         return -1;
     }
-    
+
     jit->is_writable = 0;
     return 0;
 }
@@ -96,12 +96,12 @@ int jit_code_finalize(JitCode* jit) {
 // 如果需要再次修改，必须重新添加写权限（但会失去执行权限）
 int jit_code_make_writable(JitCode* jit) {
     if (jit->is_writable) return 0;
-    
+
     if (mprotect(jit->code_buffer, jit->size, PROT_READ | PROT_WRITE) != 0) {
         perror("mprotect");
         return -1;
     }
-    
+
     jit->is_writable = 1;
     return 0;
 }
@@ -159,9 +159,9 @@ typedef int (*unary_int_func)(int);
 unary_int_func generate_multiply_by(int n) {
     JitCode* jit = jit_code_create(4096);
     if (!jit) return NULL;
-    
+
     uint8_t* p = jit->code_buffer;
-    
+
     // 方法1: 使用 imul
     // imul $n, %edi, %eax  ; 3 bytes + 4 bytes immediate
     if (n >= -128 && n <= 127) {
@@ -176,17 +176,17 @@ unary_int_func generate_multiply_by(int n) {
         *(int32_t*)p = n;
         p += 4;
     }
-    
+
     // ret
     *p++ = 0xc3;
-    
+
     // 更新实际大小
     jit->size = p - jit->code_buffer;
-    
+
     // 保护内存
     jit_code_finalize(jit);
     flush_instruction_cache(jit->code_buffer, jit->size);
-    
+
     return (unary_int_func)jit->code_buffer;
 }
 
@@ -194,7 +194,7 @@ unary_int_func generate_multiply_by(int n) {
 void test_dynamic_codegen() {
     unary_int_func times5 = generate_multiply_by(5);
     unary_int_func times100 = generate_multiply_by(100);
-    
+
     printf("7 * 5 = %d\n", times5(7));
     printf("7 * 100 = %d\n", times100(7));
 }
@@ -266,7 +266,7 @@ void emit_mov_reg_imm64(Assembler* a, int reg, uint64_t imm) {
 void emit_mov_mem_reg(Assembler* a, int base_reg, int offset, int src_reg) {
     emit_rex(a, 1, src_reg >= 8, 0, base_reg >= 8);
     emit_u8(a, 0x89);
-    
+
     // ModR/M + SIB 编码
     if (offset == 0 && base_reg != RBP) {
         // [base]
@@ -304,36 +304,36 @@ void emit_ret(Assembler* a) {
 // 生成函数：void set_value(int64_t* ptr, int64_t val) { *ptr = val + 42; }
 void* generate_set_value_plus_42() {
     Assembler* a = assembler_create(256);
-    
+
     // System V AMD64 ABI:
     // %rdi = ptr (第一个参数)
     // %rsi = val (第二个参数)
-    
+
     // mov %rsi, %rax (保存 val)
     emit_rex(a, 1, 0, 0, 0);
     emit_u8(a, 0x89);
     emit_u8(a, 0xf0);  // ModR/M for mov rsi, rax
-    
+
     // add $42, %rax
     emit_add_reg_imm32(a, RAX, 42);
-    
+
     // mov %rax, (%rdi)
     emit_rex(a, 1, 0, 0, 0);
     emit_u8(a, 0x89);
     emit_u8(a, 0x07);  // ModR/M for mov rax, [rdi]
-    
+
     // ret
     emit_ret(a);
-    
+
     // 复制到可执行内存
     JitCode* jit = jit_code_create(a->size);
     memcpy(jit->code_buffer, a->buffer, a->size);
     jit_code_finalize(jit);
     flush_instruction_cache(jit->code_buffer, jit->size);
-    
+
     free(a->buffer);
     free(a);
-    
+
     return jit->code_buffer;
 }
 ```
@@ -389,22 +389,22 @@ void* jit_compile(BytecodeFunction* func) {
         .locals_offset = -8,  // 从 rbp-8 开始
         .const_pool = malloc(256 * sizeof(void*))
     };
-    
+
     // 函数序言
     emit_push_rbp(&state);
     emit_mov_rbp_rsp(&state);
     emit_sub_rsp(&state, func->max_stack * 8);  // 分配栈空间
-    
+
     for (int i = 0; i < func->code_size; i++) {
         Instruction* inst = &func->code[i];
-        
+
         switch (inst->opcode) {
             case OP_PUSH:
                 // push imm32
                 emit_push_imm32(&state, inst->operand);
                 state.stack_offset += 8;
                 break;
-                
+
             case OP_ADD: {
                 // pop %rax
                 emit_pop_rax(&state);
@@ -417,7 +417,7 @@ void* jit_compile(BytecodeFunction* func) {
                 state.stack_offset -= 8;  // net -8 (pop 2, push 1)
                 break;
             }
-            
+
             case OP_LOAD: {
                 // mov -offset(%rbp), %rax
                 int var_offset = state.locals_offset - inst->operand * 8;
@@ -426,7 +426,7 @@ void* jit_compile(BytecodeFunction* func) {
                 state.stack_offset += 8;
                 break;
             }
-            
+
             case OP_STORE: {
                 // pop %rax
                 emit_pop_rax(&state);
@@ -436,26 +436,26 @@ void* jit_compile(BytecodeFunction* func) {
                 state.stack_offset -= 8;
                 break;
             }
-            
+
             case OP_CALL: {
                 // 准备参数（从栈中弹出）
                 int num_args = inst->operand;
                 // System V AMD64: rdi, rsi, rdx, rcx, r8, r9
                 const int arg_regs[] = {RDI, RSI, RDX, RCX, R8, R9};
-                
+
                 for (int j = num_args - 1; j >= 0; j--) {
                     emit_pop_reg(&state, arg_regs[j]);
                 }
-                
+
                 // call function
                 emit_call(&state, state.const_pool[inst->operand]);
-                
+
                 // 推送返回值
                 emit_push_rax(&state);
                 state.stack_offset += 8 - num_args * 8;
                 break;
             }
-            
+
             case OP_RET:
                 // mov %rbp, %rsp
                 emit_mov_rsp_rbp(&state);
@@ -466,21 +466,21 @@ void* jit_compile(BytecodeFunction* func) {
                 break;
         }
     }
-    
+
     // 如果没有显式 ret，添加默认返回
     emit_mov_rsp_rbp(&state);
     emit_pop_rbp(&state);
     emit_ret(&state);
-    
+
     // 复制到可执行内存
     memcpy(jit->code_buffer, state.asm->buffer, state.asm->size);
     jit_code_finalize(jit);
     flush_instruction_cache(jit->code_buffer, state.asm->size);
-    
+
     free(state.asm->buffer);
     free(state.asm);
     free(state.const_pool);
-    
+
     return jit->code_buffer;
 }
 ```
@@ -526,56 +526,56 @@ void tracing_jit_loop(Interpreter* interp) {
         .counters = calloc(interp->func->code_size, sizeof(int)),
         .threshold = 100
     };
-    
+
     TraceRecorder recorder = {
         .trace_pc = malloc(1024 * sizeof(int)),
         .trace_stack = malloc(1024 * sizeof(int)),
         .length = 0,
         .capacity = 1024
     };
-    
+
     ExecutionMode mode = MODE_INTERPRET;
     void* jited_trace = NULL;
-    
+
     while (interp->pc < interp->func->code_size) {
         switch (mode) {
             case MODE_INTERPRET: {
                 // 增加热点计数
                 hotspot.counters[interp->pc]++;
-                
+
                 // 检查是否达到编译阈值
                 if (hotspot.counters[interp->pc] >= hotspot.threshold) {
                     mode = MODE_RECORD;
                     recorder.length = 0;
                     printf("Start recording trace at PC=%d\n", interp->pc);
                 }
-                
+
                 // 解释执行一条指令
                 interpret_one_instruction(interp);
                 break;
             }
-            
+
             case MODE_RECORD: {
                 // 记录当前状态
                 recorder.trace_pc[recorder.length] = interp->pc;
                 // 复制栈快照...
                 recorder.length++;
-                
+
                 // 解释执行
                 interpret_one_instruction(interp);
-                
+
                 // 检测循环闭合
                 if (recorder.length > 10 && interp->pc == recorder.trace_pc[0]) {
                     mode = MODE_COMPILE;
                 }
-                
+
                 if (recorder.length >= recorder.capacity - 1) {
                     // 追踪太长，放弃
                     mode = MODE_INTERPRET;
                 }
                 break;
             }
-            
+
             case MODE_COMPILE: {
                 // 将记录的执行路径编译为机器码
                 jited_trace = compile_trace(&recorder, interp->func);
@@ -583,7 +583,7 @@ void tracing_jit_loop(Interpreter* interp) {
                 printf("Compiled trace of %d instructions\n", recorder.length);
                 break;
             }
-            
+
             case MODE_EXECUTE_JIT: {
                 // 检查是否可以进入追踪
                 if (interp->pc == recorder.trace_pc[0]) {
@@ -614,19 +614,19 @@ void tracing_jit_loop(Interpreter* interp) {
 
 /*
  * 主要安全威胁：
- * 
+ *
  * 1. 代码注入攻击
  *    - 攻击者通过缓冲区溢出等方式注入恶意代码
  *    - 防护: W^X 策略，ASLR，栈保护
- * 
+ *
  * 2. 返回导向编程 (ROP)
  *    - 利用现有代码片段（gadgets）构造攻击
  *    - 防护: 栈金丝雀，ROP 检测
- * 
+ *
  * 3. JIT 喷射 (JIT Spraying)
  *    - 通过控制 JIT 输入来生成恶意代码
  *    - 防护: 常量盲化 (constant blinding)
- * 
+ *
  * 4. 代码重用攻击
  *    - 利用已有的代码进行攻击
  *    - 防护: CFI (Control Flow Integrity)
@@ -649,9 +649,9 @@ void init_blinding() {
 void emit_safe_load_const(Assembler* a, int reg, uint32_t value) {
     // 原始: mov $value, %reg
     // 盲化: mov $(value ^ key), %reg; xor $key, %reg
-    
+
     uint32_t blinded = value ^ blinding_key;
-    
+
     emit_mov_reg_imm32(a, reg, blinded);
     emit_xor_reg_imm32(a, reg, blinding_key);
 }
@@ -666,17 +666,17 @@ int verify_code_signature(void* code, size_t len, CodeSignature* sig) {
     // 计算代码哈希
     uint8_t computed_hash[32];
     sha256_hash(code, len, computed_hash);
-    
+
     // 验证哈希匹配
     if (memcmp(computed_hash, sig->hash, 32) != 0) {
         return -1;  // 哈希不匹配
     }
-    
+
     // 验证签名（使用公钥）
     if (!verify_rsa_signature(sig->hash, 32, sig->signature, public_key)) {
         return -1;  // 签名无效
     }
-    
+
     return 0;
 }
 
@@ -692,7 +692,7 @@ typedef struct {
 
 JitSandbox* create_jit_sandbox(size_t code_size, size_t data_size) {
     JitSandbox* box = malloc(sizeof(JitSandbox));
-    
+
     // 分配隔离的内存区域
     box->memory_base = mmap(
         NULL, data_size,
@@ -701,10 +701,10 @@ JitSandbox* create_jit_sandbox(size_t code_size, size_t data_size) {
         -1, 0
     );
     box->memory_size = data_size;
-    
+
     box->code = jit_code_create(code_size);
     box->max_code_size = code_size;
-    
+
     return box;
 }
 
@@ -735,13 +735,13 @@ void cfi_function_prologue(void* return_addr) {
 void* cfi_function_epilogue(void* actual_return_addr) {
     // 从影子栈弹出预期返回地址
     void* expected = shadow_stack[--shadow_sp];
-    
+
     // 检查匹配
     if (expected != actual_return_addr) {
         // CFI 违规！
         abort();
     }
-    
+
     return actual_return_addr;
 }
 
@@ -768,7 +768,7 @@ void* safe_indirect_call(void* target, void** args) {
         fprintf(stderr, "CFI violation: invalid call target %p\n", target);
         abort();
     }
-    
+
     typedef void* (*func_t)(void**);
     return ((func_t)target)(args);
 }
@@ -812,17 +812,17 @@ typedef struct Expr {
 void* compile_matrix_expression(Expr* expr, int result_rows, int result_cols) {
     JitCode* jit = jit_code_create(8192);
     Assembler* a = assembler_create(8192);
-    
+
     // 生成使用 AVX-512 的代码
     // 目标: void kernel(double* result, double* A, double* B, double* D)
-    
+
     // 函数序言
     emit_push_rbp(a);
     emit_mov_rbp_rsp(a);
-    
+
     // 加载参数
     // rdi = result, rsi = A, rdx = B, rcx = D
-    
+
     // 生成表达式特定的代码
     switch (expr->type) {
         case EXPR_ADD: {
@@ -839,16 +839,16 @@ void* compile_matrix_expression(Expr* expr, int result_rows, int result_cols) {
         }
         // ... 其他操作
     }
-    
+
     // 函数尾声
     emit_pop_rbp(a);
     emit_ret(a);
-    
+
     // 复制到可执行内存
     memcpy(jit->code_buffer, a->buffer, a->size);
     jit_code_finalize(jit);
     flush_instruction_cache(jit->code_buffer, a->size);
-    
+
     return jit->code_buffer;
 }
 
@@ -858,17 +858,17 @@ void matrix_expression_example() {
     Matrix B = {1024, 1024, malloc(1024*1024*sizeof(double))};
     Matrix D = {1024, 1024, malloc(1024*1024*sizeof(double))};
     Matrix C = {1024, 1024, malloc(1024*1024*sizeof(double))};
-    
+
     // 构建表达式树: C = A * B + D
-    Expr mul = {.type = EXPR_MUL, .binop = {&(Expr){.type=EXPR_MATRIX, .matrix=&A}, 
+    Expr mul = {.type = EXPR_MUL, .binop = {&(Expr){.type=EXPR_MATRIX, .matrix=&A},
                                              &(Expr){.type=EXPR_MATRIX, .matrix=&B}}};
-    Expr add = {.type = EXPR_ADD, .binop = {&mul, 
+    Expr add = {.type = EXPR_ADD, .binop = {&mul,
                                              &(Expr){.type=EXPR_MATRIX, .matrix=&D}}};
-    
+
     // JIT 编译
     typedef void (*MatKernel)(double*, double*, double*, double*);
     MatKernel kernel = compile_matrix_expression(&add, 1024, 1024);
-    
+
     // 执行编译后的代码
     kernel(C.data, A.data, B.data, D.data);
 }
@@ -888,7 +888,7 @@ class TinyJIT:
     """
     微型 JIT 编译器，将简单的算术表达式编译为 x86-64 代码
     """
-    
+
     def __init__(self):
         # x86-64 操作码
         self.OPCODES = {
@@ -898,7 +898,7 @@ class TinyJIT:
             'mov_rax_imm32': lambda imm: bytes([0x48, 0xc7, 0xc0]) + imm.to_bytes(4, 'little', signed=True),
             'ret': bytes([0xc3]),
         }
-    
+
     def compile_expr(self, expr):
         """
         编译简单表达式为机器码
@@ -906,15 +906,15 @@ class TinyJIT:
         示例: "1 + 2 + 3"
         """
         code = bytearray()
-        
+
         # 解析表达式（简化版）
         tokens = expr.replace('+', ' + ').split()
-        
+
         # 生成代码
         # 第一个数加载到 rax
         first_num = int(tokens[0])
         code.extend(self.OPCODES['mov_rax_imm32'](first_num))
-        
+
         # 处理加法
         i = 1
         while i < len(tokens):
@@ -929,30 +929,30 @@ class TinyJIT:
                 # add rax, rbx
                 code.extend(self.OPCODES['add_rax_rbx'])
                 i += 2
-        
+
         # ret
         code.extend(self.OPCODES['ret'])
-        
+
         return bytes(code)
-    
+
     def execute(self, machine_code):
         """
         在可执行内存中运行机器码
         """
         # 分配 RWX 内存
         size = len(machine_code)
-        mem = mmap.mmap(-1, size, 
+        mem = mmap.mmap(-1, size,
                        prot=mmap.PROT_READ | mmap.PROT_WRITE | mmap.PROT_EXEC)
-        
+
         # 写入代码
         mem.write(machine_code)
-        
+
         # 转换为函数指针并调用
         func_type = ctypes.CFUNCTYPE(ctypes.c_int64)
         func = func_type(ctypes.addressof(ctypes.c_int.from_buffer(mem)))
-        
+
         result = func()
-        
+
         mem.close()
         return result
 
@@ -1004,7 +1004,7 @@ void restore_interpreter_state(DeoptInfo* info) {
     // 2. 恢复局部变量
     // 3. 设置解释器 PC
     // 4. 切换到解释模式
-    
+
     info->exec_mode = INTERPRETER_MODE;
 }
 
@@ -1014,7 +1014,7 @@ void emit_deoptimization_check(Assembler* a, int bytecode_offset) {
     // cmp expected_type, actual_type
     // je continue
     // jmp deoptimize_entry
-    
+
     // 保存去优化元数据
     DeoptInfo* info = malloc(sizeof(DeoptInfo));
     info->bytecode_pc = bytecode_offset;
@@ -1031,22 +1031,22 @@ void emit_deoptimization_check(Assembler* a, int bytecode_offset) {
 void on_stack_replacement(InterpreterFrame* frame, void* jited_code) {
     // 1. 暂停当前线程
     suspend_thread();
-    
+
     // 2. 构建 JIT 函数的栈帧
     // 将解释器栈变量映射到 JIT 栈槽
-    
+
     JITFrame jit_frame;
     jit_frame.local_vars = map_interpreter_locals(frame);
     jit_frame.operand_stack = map_interpreter_stack(frame);
-    
+
     // 3. 计算 JIT 代码中的入口点
     // 不是函数开头，而是对应当前字节码位置的 OSR 入口
     void* osr_entry = find_osr_entry(jited_code, frame->current_pc);
-    
+
     // 4. 修改返回地址，使其返回到 JIT 代码
     void** return_addr_slot = get_return_address_slot(frame);
     *return_addr_slot = osr_entry;
-    
+
     // 5. 恢复执行
     resume_thread();
 }

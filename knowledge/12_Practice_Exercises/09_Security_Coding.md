@@ -111,13 +111,13 @@ typedef enum {
 } ValidationResult;
 
 // 整数验证
-ValidationResult validate_int(const char *input, int64_t min, 
+ValidationResult validate_int(const char *input, int64_t min,
                               int64_t max, int64_t *output);
-ValidationResult validate_uint(const char *input, uint64_t min, 
+ValidationResult validate_uint(const char *input, uint64_t min,
                                uint64_t max, uint64_t *output);
 
 // 浮点数验证
-ValidationResult validate_double(const char *input, double min, 
+ValidationResult validate_double(const char *input, double min,
                                  double max, double *output);
 
 // 字符串验证
@@ -128,11 +128,11 @@ typedef struct {
     const char *forbidden_chars;
 } StringValidationRules;
 
-ValidationResult validate_string(const char *input, 
+ValidationResult validate_string(const char *input,
                                   const StringValidationRules *rules);
 
 // 路径验证（防止目录遍历）
-ValidationResult validate_path(const char *input, 
+ValidationResult validate_path(const char *input,
                                const char *allowed_base_dir);
 
 // 正则验证
@@ -238,7 +238,7 @@ typedef struct {
 bool audit_log_init(const char *logfile, const uint8_t *key);
 
 // 记录日志
-void audit_log(LogLevel level, const char *event_type, 
+void audit_log(LogLevel level, const char *event_type,
                const char *format, ...);
 
 // 验证日志完整性
@@ -271,19 +271,19 @@ typedef struct {
     // 允许的syscall白名单
     int *allowed_syscalls;
     size_t num_allowed;
-    
+
     // 资源限制
     struct rlimit cpu_limit;
     struct rlimit memory_limit;
     struct rlimit file_limit;
-    
+
     // 文件系统限制
     char *chroot_dir;
     bool read_only;
 } SandboxConfig;
 
 // 在沙箱中执行函数
-int sandbox_execute(int (*func)(void *arg), void *arg, 
+int sandbox_execute(int (*func)(void *arg), void *arg,
                     const SandboxConfig *config);
 
 // 示例：受限的计算
@@ -325,7 +325,7 @@ typedef struct QueryBuilder QueryBuilder;
 QueryBuilder* query_create(const char *table);
 
 // 安全添加条件（自动转义）
-void query_where_int(QueryBuilder *qb, const char *column, 
+void query_where_int(QueryBuilder *qb, const char *column,
                      const char *op, int64_t value);
 void query_where_string(QueryBuilder *qb, const char *column,
                         const char *op, const char *value);

@@ -19,7 +19,7 @@
      1 ──┘                                    │ β │   ├── 叠加态
                                               └───┘   │
      状态空间: {0, 1}                         |α|² + |β|² = 1
-                                              
+
 布洛赫球面表示:
                     |0⟩
                      │
@@ -58,7 +58,7 @@ const Qubit MINUS = { 1.0/sqrt(2), -1.0/sqrt(2) }; // |−⟩
 // 归一化检查
 bool is_normalized(const Qubit *q)
 {
-    double norm = cabs(q->alpha) * cabs(q->alpha) + 
+    double norm = cabs(q->alpha) * cabs(q->alpha) +
                   cabs(q->beta) * cabs(q->beta);
     return fabs(norm - 1.0) < 1e-10;
 }
@@ -66,7 +66,7 @@ bool is_normalized(const Qubit *q)
 // 归一化
 void normalize(Qubit *q)
 {
-    double norm = sqrt(cabs(q->alpha) * cabs(q->alpha) + 
+    double norm = sqrt(cabs(q->alpha) * cabs(q->alpha) +
                        cabs(q->beta) * cabs(q->beta));
     q->alpha /= norm;
     q->beta /= norm;
@@ -120,7 +120,7 @@ const Gate1 GATE_I = {{{1, 0}, {0, 1}}};  // 恒等
 const Gate1 GATE_X = {{{0, 1}, {1, 0}}};  // Pauli-X (NOT)
 const Gate1 GATE_Z = {{{1, 0}, {0, -1}}}; // Pauli-Z
 const Gate1 GATE_H = {                     // Hadamard
-    {{1/sqrt(2), 1/sqrt(2)}, 
+    {{1/sqrt(2), 1/sqrt(2)},
      {1/sqrt(2), -1/sqrt(2)}}
 };
 
@@ -148,16 +148,16 @@ void apply_gate1(QuantumState *state, int target, const Gate1 *gate)
 {
     int n = state->n_qubits;
     int stride = 1 << target;
-    
+
     // 对所有基态应用门
     for (int i = 0; i < (1 << n); i += 2 * stride) {
         for (int j = 0; j < stride; j++) {
             int idx0 = i + j;
             int idx1 = idx0 + stride;
-            
+
             Amplitude a0 = state->amplitudes[idx0];
             Amplitude a1 = state->amplitudes[idx1];
-            
+
             state->amplitudes[idx0] = gate->m[0][0] * a0 + gate->m[0][1] * a1;
             state->amplitudes[idx1] = gate->m[1][0] * a0 + gate->m[1][1] * a1;
         }
@@ -170,7 +170,7 @@ void apply_cnot(QuantumState *state, int control, int target)
     int n = state->n_qubits;
     int c_stride = 1 << control;
     int t_stride = 1 << target;
-    
+
     for (int i = 0; i < (1 << n); i++) {
         // 检查控制位是否为 1
         if ((i & c_stride) && !(i & t_stride)) {
@@ -205,15 +205,15 @@ int measure_qubit(const QuantumState *state, int target)
 {
     double prob0 = 0.0;
     int stride = 1 << target;
-    
+
     // 计算测量结果为 0 的概率
     for (int i = 0; i < (1 << state->n_qubits); i++) {
         if (!(i & stride)) {
-            prob0 += cabs(state->amplitudes[i]) * 
+            prob0 += cabs(state->amplitudes[i]) *
                      cabs(state->amplitudes[i]);
         }
     }
-    
+
     // 随机决定是否坍缩到 0
     double r = (double)rand() / RAND_MAX;
     return (r < prob0) ? 0 : 1;
@@ -225,18 +225,18 @@ int measure_and_collapse(QuantumState *state, int target)
     double prob0 = 0.0;
     int stride = 1 << target;
     int n = state->n_qubits;
-    
+
     // 计算概率
     for (int i = 0; i < (1 << n); i++) {
         if (!(i & stride)) {
-            prob0 += cabs(state->amplitudes[i]) * 
+            prob0 += cabs(state->amplitudes[i]) *
                      cabs(state->amplitudes[i]);
         }
     }
-    
+
     double r = (double)rand() / RAND_MAX;
     int result = (r < prob0) ? 0 : 1;
-    
+
     // 坍缩：将与结果不一致的振幅置零
     for (int i = 0; i < (1 << n); i++) {
         int bit = (i & stride) ? 1 : 0;
@@ -244,7 +244,7 @@ int measure_and_collapse(QuantumState *state, int target)
             state->amplitudes[i] = 0;
         }
     }
-    
+
     // 重新归一化
     double norm = 0.0;
     for (int i = 0; i < (1 << n); i++) {
@@ -254,12 +254,12 @@ int measure_and_collapse(QuantumState *state, int target)
     for (int i = 0; i < (1 << n); i++) {
         state->amplitudes[i] /= norm;
     }
-    
+
     return result;
 }
 
 // 期望值测量
-double expectation_value(const QuantumState *state, 
+double expectation_value(const QuantumState *state,
                          const Amplitude operator_matrix[2][2],
                          int target)
 {
@@ -269,10 +269,10 @@ double expectation_value(const QuantumState *state,
         {operator_matrix[0][0], operator_matrix[0][1]},
         {operator_matrix[1][0], operator_matrix[1][1]}
     }});
-    
+
     double expectation = 0.0;
     for (int i = 0; i < (1 << state->n_qubits); i++) {
-        expectation += creal(conj(state->amplitudes[i]) * 
+        expectation += creal(conj(state->amplitudes[i]) *
                             temp.amplitudes[i]);
     }
     return expectation;
@@ -288,7 +288,7 @@ double expectation_value(const QuantumState *state,
 ```c
 /*
  * Deutsch-Jozsa 算法：判断函数是常数还是平衡
- * 
+ *
  * 经典：最坏需要 2^(n-1)+1 次查询
  * 量子：仅需 1 次查询！
  */
@@ -299,21 +299,21 @@ void deutsch_jozsa(QuantumState *state, int n)
     memset(state->amplitudes, 0, sizeof(state->amplitudes));
     state->n_qubits = n + 1;
     state->amplitudes[1] = 1.0;  // |00...01⟩
-    
+
     // 对所有量子比特应用 H
     for (int i = 0; i <= n; i++) {
         apply_gate1(state, i, &GATE_H);
     }
-    
+
     // 应用黑盒函数 U_f（这里用示例）
     // 假设 f 是常数函数，不做任何操作
     // 或 f(x) = x_0 XOR x_1 XOR ...，需要相应地应用门
-    
+
     // 对前 n 个量子比特应用 H
     for (int i = 0; i < n; i++) {
         apply_gate1(state, i, &GATE_H);
     }
-    
+
     // 测量前 n 个量子比特
     // 如果都是 0，f 是常数；否则是平衡函数
     int is_constant = 1;
@@ -323,7 +323,7 @@ void deutsch_jozsa(QuantumState *state, int n)
             break;
         }
     }
-    
+
     printf("Function is %s\n", is_constant ? "constant" : "balanced");
 }
 ```
@@ -342,19 +342,19 @@ void deutsch_jozsa(QuantumState *state, int n)
 void grover_diffusion(QuantumState *state, int n)
 {
     // 扩散算子：2|ψ⟩⟨ψ| - I
-    
+
     // 对所有量子比特应用 H
     for (int i = 0; i < n; i++) {
         apply_gate1(state, i, &GATE_H);
     }
-    
+
     // 条件相位移动
     for (int i = 0; i < (1 << n); i++) {
         if (i != 0) {
             state->amplitudes[i] *= -1;
         }
     }
-    
+
     // 再次应用 H
     for (int i = 0; i < n; i++) {
         apply_gate1(state, i, &GATE_H);
@@ -371,13 +371,13 @@ int grover_search(int n, int (*oracle)(int))
 {
     QuantumState state;
     state.n_qubits = n;
-    
+
     // 初始化均匀叠加态
     double amp = 1.0 / sqrt(1 << n);
     for (int i = 0; i < (1 << n); i++) {
         state.amplitudes[i] = amp;
     }
-    
+
     // 找到目标
     int target = -1;
     for (int i = 0; i < (1 << n); i++) {
@@ -386,29 +386,29 @@ int grover_search(int n, int (*oracle)(int))
             break;
         }
     }
-    
+
     if (target < 0) return -1;  // 目标不存在
-    
+
     // 迭代次数：π/4 * √N
     int iterations = (int)(M_PI / 4 * sqrt(1 << n));
-    
+
     for (int iter = 0; iter < iterations; iter++) {
         grover_oracle(&state, n, target);
         grover_diffusion(&state, n);
     }
-    
+
     // 测量
     double max_prob = 0;
     int result = 0;
     for (int i = 0; i < (1 << n); i++) {
-        double prob = cabs(state.amplitudes[i]) * 
+        double prob = cabs(state.amplitudes[i]) *
                       cabs(state.amplitudes[i]);
         if (prob > max_prob) {
             max_prob = prob;
             result = i;
         }
     }
-    
+
     return result;
 }
 
@@ -428,7 +428,7 @@ int example_oracle(int x)
 ```c
 /*
  * 基于量子叠加的真随机数生成
- * 
+ *
  * 量子随机性源于波函数坍缩的固有不确定性
  */
 
@@ -442,7 +442,7 @@ int quantum_random_bit(void)
     // 创建 |+⟩ = H|0⟩ 态
     Qubit q = ZERO;
     apply_gate1(&(QuantumState){1, {q.alpha, q.beta}}, 0, &GATE_H);
-    
+
     // 测量 |+⟩ 态：50% 概率得到 0 或 1
     // 理论上这是真随机
     return rand() % 2;  // 模拟（实际需量子硬件）
@@ -464,11 +464,11 @@ uint64_t hardware_qrng(void)
     // 某些系统提供 /dev/qrng 或类似接口
     int fd = open("/dev/urandom", O_RDONLY);  // 熵池（部分量子）
     if (fd < 0) return 0;
-    
+
     uint64_t value;
     ssize_t n = read(fd, &value, sizeof(value));
     close(fd);
-    
+
     return (n == sizeof(value)) ? value : 0;
 }
 
@@ -485,25 +485,25 @@ double quantum_random_normal(void)
 {
     static int has_spare = 0;
     static double spare;
-    
+
     if (has_spare) {
         has_spare = 0;
         return spare;
     }
-    
+
     double u1 = quantum_random_double();
     double u2 = quantum_random_double();
-    
+
     // 避免 log(0)
     while (u1 <= 0) u1 = quantum_random_double();
-    
+
     double mag = sqrt(-2.0 * log(u1));
     double z0 = mag * cos(2 * M_PI * u2);
     double z1 = mag * sin(2 * M_PI * u2);
-    
+
     spare = z1;
     has_spare = 1;
-    
+
     return z0;
 }
 ```
@@ -518,7 +518,7 @@ double quantum_random_normal(void)
 #include <string.h>
 
 // 统计比特频率
-void bit_frequency_test(const uint8_t *data, size_t len, 
+void bit_frequency_test(const uint8_t *data, size_t len,
                          double *freq_0, double *freq_1)
 {
     int count_0 = 0, count_1 = 0;
@@ -541,7 +541,7 @@ int runs_test(const uint8_t *data, size_t len)
 {
     int runs = 1;
     int prev_bit = (data[0] & 1);
-    
+
     for (size_t i = 0; i < len; i++) {
         for (int b = (i == 0) ? 1 : 0; b < 8; b++) {
             int bit = (data[i] >> b) & 1;
@@ -551,7 +551,7 @@ int runs_test(const uint8_t *data, size_t len)
             }
         }
     }
-    
+
     return runs;
 }
 ```
@@ -600,13 +600,13 @@ void qs_apply_u(QSimulator *qs, int target,
 {
     int n = qs->num_qubits;
     int mask = 1 << target;
-    
+
     for (int i = 0; i < (1 << n); i++) {
         if (!(i & mask)) {
             int j = i | mask;
             double complex ai = qs->amplitudes[i];
             double complex aj = qs->amplitudes[j];
-            
+
             qs->amplitudes[i] = u00 * ai + u01 * aj;
             qs->amplitudes[j] = u10 * ai + u11 * aj;
         }
@@ -641,7 +641,7 @@ void qs_cnot(QSimulator *qs, int control, int target)
     int n = qs->num_qubits;
     int c_mask = 1 << control;
     int t_mask = 1 << target;
-    
+
     for (int i = 0; i < (1 << n); i++) {
         if ((i & c_mask) && !(i & t_mask)) {
             int j = i | t_mask;
@@ -659,7 +659,7 @@ void qs_toffoli(QSimulator *qs, int c1, int c2, int target)
     int m1 = 1 << c1;
     int m2 = 1 << c2;
     int mt = 1 << target;
-    
+
     for (int i = 0; i < (1 << n); i++) {
         if ((i & m1) && (i & m2) && !(i & mt)) {
             int j = i | mt;
@@ -683,16 +683,16 @@ int qs_measure(QSimulator *qs, int target)
 {
     int n = qs->num_qubits;
     int mask = 1 << target;
-    
+
     double prob0 = 0.0;
     for (int i = 0; i < (1 << n); i++) {
         if (!(i & mask)) {
             prob0 += cabs(qs->amplitudes[i]) * cabs(qs->amplitudes[i]);
         }
     }
-    
+
     int result = ((double)rand() / RAND_MAX) < prob0 ? 0 : 1;
-    
+
     // 坍缩
     for (int i = 0; i < (1 << n); i++) {
         int bit = (i & mask) ? 1 : 0;
@@ -700,7 +700,7 @@ int qs_measure(QSimulator *qs, int target)
             qs->amplitudes[i] = 0;
         }
     }
-    
+
     // 归一化
     double norm = 0.0;
     for (int i = 0; i < (1 << n); i++) {
@@ -710,7 +710,7 @@ int qs_measure(QSimulator *qs, int target)
     for (int i = 0; i < (1 << n); i++) {
         qs->amplitudes[i] /= norm;
     }
-    
+
     return result;
 }
 
@@ -722,7 +722,7 @@ void qs_print_state(const QSimulator *qs)
         double prob = cabs(qs->amplitudes[i]) * cabs(qs->amplitudes[i]);
         if (prob > 1e-10) {
             printf("|%d⟩: %.4f %+.4fi (prob: %.4f)\n",
-                   i, creal(qs->amplitudes[i]), 
+                   i, creal(qs->amplitudes[i]),
                    cimag(qs->amplitudes[i]), prob);
         }
     }
@@ -740,30 +740,30 @@ void bell_state_demo(void)
 {
     QSimulator qs;
     qs_init(&qs, 2);
-    
+
     printf("Initial state: |00⟩\n");
-    
+
     // 对第一个量子比特应用 H
     qs_hadamard(&qs, 0);
     printf("After H on q0:\n");
     qs_print_state(&qs);
-    
+
     // CNOT(0, 1)
     qs_cnot(&qs, 0, 1);
     printf("After CNOT(0, 1):\n");
     qs_print_state(&qs);
-    
+
     // 多次测量验证纠缠
     printf("\nMeasurement statistics:\n");
     int counts[4] = {0};
-    
+
     for (int run = 0; run < 1000; run++) {
         QSimulator qscopy = qs;
         int m0 = qs_measure(&qscopy, 0);
         int m1 = qs_measure(&qscopy, 1);
         counts[m0 * 2 + m1]++;
     }
-    
+
     printf("|00⟩: %d (expected ~50%%)\n", counts[0]);
     printf("|01⟩: %d (expected ~0%%)\n", counts[1]);
     printf("|10⟩: %d (expected ~0%%)\n", counts[2]);

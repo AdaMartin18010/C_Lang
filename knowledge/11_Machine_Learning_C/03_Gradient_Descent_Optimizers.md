@@ -26,7 +26,8 @@ for epoch in range(num_epochs):
     theta = theta - learning_rate * gradient
 ```
 
-**特点**: 
+**特点**:
+
 - 梯度估计准确
 - 计算成本高（大数据集不可行）
 
@@ -42,10 +43,10 @@ typedef struct {
 } SGD_Optimizer;
 
 // SGD更新
-void sgd_update(SGD_Optimizer* opt, double* x, double y_true, 
+void sgd_update(SGD_Optimizer* opt, double* x, double y_true,
                 double y_pred, int n_features) {
     double error = y_pred - y_true;
-    
+
     for (int i = 0; i < n_features; i++) {
         double gradient = error * x[i];
         opt->weights[i] -= opt->learning_rate * gradient;
@@ -55,6 +56,7 @@ void sgd_update(SGD_Optimizer* opt, double* x, double y_true,
 ```
 
 **特点**:
+
 - 计算快，内存友好
 - 梯度噪声大，收敛不稳定
 
@@ -67,15 +69,15 @@ void sgd_update(SGD_Optimizer* opt, double* x, double y_true,
 
 void minibatch_update(Network* net, Matrix* X_batch, Matrix* y_batch) {
     Matrix* gradients = compute_gradients(net, X_batch, y_batch);
-    
+
     // 平均梯度
     scale_matrix(gradients, 1.0 / BATCH_SIZE);
-    
+
     // 更新参数
     for (int i = 0; i < net->n_layers; i++) {
         axpy_matrix(-net->learning_rate, gradients[i], net->weights[i]);
     }
-    
+
     free_matrix(gradients);
 }
 ```
@@ -100,11 +102,11 @@ typedef struct {
     double learning_rate;
 } Momentum_Optimizer;
 
-void momentum_update(Momentum_Optimizer* opt, double* params, 
+void momentum_update(Momentum_Optimizer* opt, double* params,
                      double* gradients, int n_params) {
     for (int i = 0; i < n_params; i++) {
         // v = gamma * v + lr * grad
-        opt->velocity[i] = opt->momentum * opt->velocity[i] 
+        opt->velocity[i] = opt->momentum * opt->velocity[i]
                          + opt->learning_rate * gradients[i];
         // theta = theta - v
         params[i] -= opt->velocity[i];
@@ -119,21 +121,21 @@ void momentum_update(Momentum_Optimizer* opt, double* params,
 在动量基础上，先沿动量方向"展望"再计算梯度：
 
 ```c
-void nesterov_update(Optimizer* opt, double* params, 
+void nesterov_update(Optimizer* opt, double* params,
                      double* gradients, int n_params) {
     for (int i = 0; i < n_params; i++) {
         double prev_velocity = opt->velocity[i];
-        
+
         // 计算临时位置（展望）
         double lookahead = params[i] - opt->momentum * prev_velocity;
-        
+
         // 在临时位置计算梯度
         double grad_at_lookahead = compute_gradient_at(lookahead);
-        
+
         // 更新速度
-        opt->velocity[i] = opt->momentum * prev_velocity 
+        opt->velocity[i] = opt->momentum * prev_velocity
                          + opt->learning_rate * grad_at_lookahead;
-        
+
         params[i] -= opt->velocity[i];
     }
 }
@@ -163,11 +165,11 @@ void adagrad_update(AdaGrad_Optimizer* opt, double* params,
     for (int i = 0; i < n_params; i++) {
         // 累积平方梯度
         opt->squared_grad_sum[i] += gradients[i] * gradients[i];
-        
+
         // 自适应学习率更新
-        double adapted_lr = opt->learning_rate / 
+        double adapted_lr = opt->learning_rate /
                            (sqrt(opt->squared_grad_sum[i]) + opt->epsilon);
-        
+
         params[i] -= adapted_lr * gradients[i];
     }
 }
@@ -193,10 +195,10 @@ void rmsprop_update(RMSprop_Optimizer* opt, double* params,
         // E[g^2] = rho * E[g^2] + (1-rho) * g^2
         opt->squared_grad_avg[i] = opt->decay_rate * opt->squared_grad_avg[i]
                                   + (1 - opt->decay_rate) * gradients[i] * gradients[i];
-        
-        double adapted_lr = opt->learning_rate / 
+
+        double adapted_lr = opt->learning_rate /
                            (sqrt(opt->squared_grad_avg[i]) + opt->epsilon);
-        
+
         params[i] -= adapted_lr * gradients[i];
     }
 }
@@ -239,16 +241,16 @@ Adam_Optimizer* adam_create(int n_params, double lr) {
 void adam_update(Adam_Optimizer* opt, double* params,
                  double* gradients, int n_params) {
     opt->t++;
-    
+
     for (int i = 0; i < n_params; i++) {
         // 更新一阶和二阶矩
         opt->m[i] = opt->beta1 * opt->m[i] + (1 - opt->beta1) * gradients[i];
         opt->v[i] = opt->beta2 * opt->v[i] + (1 - opt->beta2) * gradients[i] * gradients[i];
-        
+
         // 偏差修正
         double m_hat = opt->m[i] / (1 - pow(opt->beta1, opt->t));
         double v_hat = opt->v[i] / (1 - pow(opt->beta2, opt->t));
-        
+
         // 参数更新
         params[i] -= opt->learning_rate * m_hat / (sqrt(v_hat) + opt->epsilon);
     }
@@ -267,13 +269,13 @@ double lr_schedule(int epoch, double initial_lr, int decay_epochs) {
     if (epoch % decay_epochs == 0 && epoch > 0) {
         return initial_lr * 0.5;
     }
-    
+
     // 指数衰减
     // return initial_lr * exp(-0.1 * epoch);
-    
+
     // 余弦退火
     // return initial_lr * (1 + cos(M_PI * epoch / max_epochs)) / 2;
-    
+
     return initial_lr;
 }
 ```
@@ -331,18 +333,18 @@ void adam_init(Adam* opt, double lr) {
 void adam_step(Adam* opt, double x, double y) {
     double pred = opt->w * x + opt->b;
     double error = pred - y;
-    
+
     double grad_w = error * x;
     double grad_b = error;
-    
+
     opt->t++;
-    double lr = opt->lr * sqrt(1 - pow(opt->beta2, opt->t)) 
+    double lr = opt->lr * sqrt(1 - pow(opt->beta2, opt->t))
                      / (1 - pow(opt->beta1, opt->t));
-    
+
     opt->m_w = opt->beta1 * opt->m_w + (1 - opt->beta1) * grad_w;
     opt->v_w = opt->beta2 * opt->v_w + (1 - opt->beta2) * grad_w * grad_w;
     opt->w -= lr * opt->m_w / (sqrt(opt->v_w) + opt->epsilon);
-    
+
     opt->m_b = opt->beta1 * opt->m_b + (1 - opt->beta1) * grad_b;
     opt->v_b = opt->beta2 * opt->v_b + (1 - opt->beta2) * grad_b * grad_b;
     opt->b -= lr * opt->m_b / (sqrt(opt->v_b) + opt->epsilon);
@@ -353,19 +355,19 @@ int main() {
     double X[] = {1, 2, 3, 4, 5};
     double y[] = {3, 5, 7, 9, 11};
     int n = 5;
-    
+
     Adam opt;
     adam_init(&opt, 0.1);
-    
+
     for (int epoch = 0; epoch < 1000; epoch++) {
         for (int i = 0; i < n; i++) {
             adam_step(&opt, X[i], y[i]);
         }
     }
-    
+
     printf("w = %.4f, b = %.4f\n", opt.w, opt.b);
     // 输出: w ≈ 2.0, b ≈ 1.0
-    
+
     return 0;
 }
 ```
