@@ -50,6 +50,7 @@ archive/
 **归档文件数**: ~30个
 
 **主要操作**:
+
 1. 合并所有完成报告为 `PROJECT_STATUS.md`
 2. 合并所有更新记录为 `CHANGELOG.md`
 3. 移动历史版本到归档目录
@@ -65,7 +66,7 @@ archive/
 # 查看3月15日报告
 ls archive/reports/2026-03-15/
 
-# 查看3月14日报告  
+# 查看3月14日报告
 ls archive/reports/2026-03-14/
 ```
 
@@ -86,5 +87,5 @@ cp archive/reports/2026-03-14/SOME_REPORT.md ./
 
 ---
 
-*归档管理员: C_Lang Knowledge Base Team*  
+*归档管理员: C_Lang Knowledge Base Team*
 *最后归档: 2026-03-15*
