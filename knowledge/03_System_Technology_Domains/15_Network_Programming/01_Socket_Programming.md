@@ -1,9 +1,9 @@
-# Socket网络编程
+# Socket网络编程 - 工程级深度手册
 
 > **层级定位**: 03 System Technology Domains / 15 Network_Programming
-> **对应标准**: POSIX.1-2008, BSD Socket API
+> **对应标准**: POSIX.1-2008, BSD Socket API, RFC 793 (TCP), RFC 768 (UDP)
 > **难度级别**: L3-L5
-> **预估学习时间**: 8-10小时
+> **预估学习时间**: 20-30小时
 
 ---
 
@@ -11,288 +11,632 @@
 
 | 属性 | 内容 |
 |:-----|:-----|
-| **核心概念** | Socket API、TCP/UDP、I/O多路复用、并发服务器 |
-| **前置知识** | C基础、进程/线程 |
-| **后续延伸** | HTTP协议、网络安全、高性能网络 |
-| **权威来源** | POSIX, Stevens《Unix Network Programming》 |
+| **核心概念** | Socket API、TCP/UDP、I/O多路复用、并发服务器、零拷贝、高并发架构 |
+| **前置知识** | C基础、进程/线程、操作系统原理、网络协议基础 |
+| **后续延伸** | HTTP协议、网络安全、高性能网络、分布式系统 |
+| **权威来源** | POSIX, Stevens《Unix Network Programming》, RFC标准 |
 
 ---
 
-## 📖 1. Socket基础
+## 📖 1. 概念定义
 
-### 1.1 TCP客户端
+### 1.1 Socket的严格定义
 
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <arpa/inet.h>
+**定义**: Socket是操作系统内核提供的网络通信端点抽象，是进程间通过网络进行双向数据交换的编程接口。
 
-int tcp_client(const char *ip, int port) {
-    int sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock < 0) {
-        perror("socket");
-        return -1;
-    }
+**形式化定义**:
 
-    struct sockaddr_in server_addr;
-    memset(&server_addr, 0, sizeof(server_addr));
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(port);
-    inet_pton(AF_INET, ip, &server_addr.sin_addr);
+```
+Socket := (Protocol, LocalAddr, LocalPort, RemoteAddr, RemotePort, State)
 
-    if (connect(sock, (struct sockaddr*)&server_addr,
-                sizeof(server_addr)) < 0) {
-        perror("connect");
-        close(sock);
-        return -1;
-    }
-
-    // 发送数据
-    const char *msg = "Hello, Server!";
-    send(sock, msg, strlen(msg), 0);
-
-    // 接收响应
-    char buffer[1024];
-    int n = recv(sock, buffer, sizeof(buffer) - 1, 0);
-    if (n > 0) {
-        buffer[n] = '\0';
-        printf("Received: %s\n", buffer);
-    }
-
-    close(sock);
-    return 0;
-}
+其中:
+- Protocol ∈ {TCP, UDP, RAW, ...}
+- LocalAddr, RemoteAddr ∈ IPv4Address ∪ IPv6Address ∪ UnixPath
+- LocalPort, RemotePort ∈ [0, 65535]
+- State ∈ {CLOSED, LISTEN, SYN_SENT, SYN_RCVD, ESTABLISHED, ...}
 ```
 
-### 1.2 TCP服务器
+**核心语义**:
 
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <arpa/inet.h>
+| 概念 | 说明 | 类比 |
+|:-----|:-----|:-----|
+| **端点(Endpoint)** | 通信的一端，标识为(IP, Port)对 | 电话号码 |
+| **套接字描述符** | 内核对象的文件描述符引用 | 文件句柄 |
+| **五元组** | (协议, 源IP, 源端口, 目的IP, 目的端口) | 通信契约 |
 
-int tcp_server(int port) {
-    int listen_sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (listen_sock < 0) {
-        perror("socket");
-        return -1;
-    }
+### 1.2 网络协议栈层次模型
 
-    // 地址复用
-    int opt = 1;
-    setsockopt(listen_sock, SOL_SOCKET, SO_REUSEADDR,
-               &opt, sizeof(opt));
-
-    struct sockaddr_in server_addr;
-    memset(&server_addr, 0, sizeof(server_addr));
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = INADDR_ANY;
-    server_addr.sin_port = htons(port);
-
-    if (bind(listen_sock, (struct sockaddr*)&server_addr,
-             sizeof(server_addr)) < 0) {
-        perror("bind");
-        close(listen_sock);
-        return -1;
-    }
-
-    if (listen(listen_sock, 5) < 0) {
-        perror("listen");
-        close(listen_sock);
-        return -1;
-    }
-
-    printf("Server listening on port %d...\n", port);
-
-    while (1) {
-        struct sockaddr_in client_addr;
-        socklen_t addr_len = sizeof(client_addr);
-
-        int client_sock = accept(listen_sock,
-                                 (struct sockaddr*)&client_addr,
-                                 &addr_len);
-        if (client_sock < 0) {
-            perror("accept");
-            continue;
-        }
-
-        char client_ip[INET_ADDRSTRLEN];
-        inet_ntop(AF_INET, &client_addr.sin_addr,
-                  client_ip, sizeof(client_ip));
-        printf("Connection from %s:%d\n", client_ip,
-               ntohs(client_addr.sin_port));
-
-        // 处理客户端请求
-        char buffer[1024];
-        int n = recv(client_sock, buffer, sizeof(buffer) - 1, 0);
-        if (n > 0) {
-            buffer[n] = '\0';
-            printf("Received: %s\n", buffer);
-            send(client_sock, "ACK", 3, 0);
-        }
-
-        close(client_sock);
-    }
-
-    close(listen_sock);
-    return 0;
-}
+```
+┌─────────────────────────────────────────────────────────────┐
+│  应用层 (Application)    HTTP/FTP/SMTP/DNS...               │
+├─────────────────────────────────────────────────────────────┤
+│  传输层 (Transport)      TCP/UDP/SCTP                       │
+│  ├─ Socket API ←─────────────────────────────────────┐      │
+│  │   • socket()  - 创建通信端点                      │      │
+│  │   • bind()    - 绑定本地地址                      │      │
+│  │   • listen()  - 监听连接请求                      │      │
+│  │   • accept()  - 接受新连接                        │      │
+│  │   • connect() - 发起连接                          │      │
+│  │   • send/recv - 数据传输                          │      │
+│  └────────────────────────────────────────────────────┘      │
+├─────────────────────────────────────────────────────────────┤
+│  网络层 (Network)        IP/ICMP/IGMP                       │
+├─────────────────────────────────────────────────────────────┤
+│  链路层 (Link)           Ethernet/WiFi/ARP                  │
+├─────────────────────────────────────────────────────────────┤
+│  物理层 (Physical)       电缆/光纤/无线信号                 │
+└─────────────────────────────────────────────────────────────┘
 ```
 
----
+**Socket在协议栈中的位置**:
 
-## 📖 2. UDP编程
+- 位于**传输层与应用层之间**
+- 为应用层提供统一的网络编程接口
+- 屏蔽底层协议差异
 
-```c
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <arpa/inet.h>
+### 1.3 TCP连接状态机
 
-int udp_server(int port) {
-    int sock = socket(AF_INET, SOCK_DGRAM, 0);
+**RFC 793定义的TCP状态机**:
 
-    struct sockaddr_in server_addr;
-    memset(&server_addr, 0, sizeof(server_addr));
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = INADDR_ANY;
-    server_addr.sin_port = htons(port);
-
-    bind(sock, (struct sockaddr*)&server_addr, sizeof(server_addr));
-
-    char buffer[1024];
-    struct sockaddr_in client_addr;
-    socklen_t addr_len = sizeof(client_addr);
-
-    while (1) {
-        int n = recvfrom(sock, buffer, sizeof(buffer) - 1, 0,
-                         (struct sockaddr*)&client_addr, &addr_len);
-        if (n > 0) {
-            buffer[n] = '\0';
-            printf("Received: %s\n", buffer);
-
-            sendto(sock, "ACK", 3, 0,
-                   (struct sockaddr*)&client_addr, addr_len);
-        }
-    }
-
-    close(sock);
-    return 0;
-}
+```
+                              ┌──────────┐
+                    主动打开  │          │  被动打开
+                   ┌─────────│  CLOSED  │◄────────┐
+                   │         │          │         │
+                   │         └────┬─────┘         │
+                   │              │               │
+                   ▼              │               ▼
+            ┌────────────┐        │        ┌────────────┐
+            │  SYN_SENT  │◄───────┴───────►│   LISTEN   │
+            │ (同步已发送)│  同时打开        │  (监听)    │
+            └─────┬──────┘                 └──────┬─────┘
+                  │                               │
+          收到SYN+ACK                       收到SYN
+                  │                               │
+                  ▼                               ▼
+            ┌────────────┐                 ┌────────────┐
+            │ SYN_RCVD   │◄────────────────┤ SYN_RCVD   │
+            │(同步已接收)│    同时打开       │(同步已接收)│
+            └─────┬──────┘                 └─────┬──────┘
+                  │                               │
+          收到ACK                               发送SYN+ACK
+                  │                               │
+                  ▼                               ▼
+            ┌──────────────────────────────────────────┐
+            │           ESTABLISHED                    │
+            │           (连接已建立)                    │
+            │   ◄────────────── 数据传输 ────────────► │
+            └──────────────────┬───────────────────────┘
+                               │
+              ┌────────────────┼────────────────┐
+              ▼                ▼                ▼
+        ┌─────────┐     ┌─────────┐      ┌─────────┐
+        │FIN_WAIT_1│    │CLOSE_WAIT│     │CLOSING  │
+        └────┬────┘     └────┬────┘     └────┬────┘
+             │               │               │
+        收到FIN+ACK      应用关闭          收到FIN
+             │               │               │
+             ▼               ▼               ▼
+        ┌─────────┐     ┌─────────┐      ┌─────────┐
+        │FIN_WAIT_2│    │LAST_ACK │      │TIME_WAIT│
+        └────┬────┘     └────┬────┘      └────┬────┘
+             │               │               │
+        收到FIN          收到ACK          2MSL超时
+             │               │               │
+             ▼               ▼               ▼
+        ┌─────────┐     ┌─────────┐      ┌─────────┐
+        │TIME_WAIT│     │ CLOSED  │      │ CLOSED  │
+        └────┬────┘     └─────────┘      └─────────┘
+             │
+        2MSL超时
+             │
+             ▼
+        ┌─────────┐
+        │ CLOSED  │
+        └─────────┘
 ```
 
----
+**状态说明**:
 
-## 📖 3. I/O多路复用
+| 状态 | 含义 | 持续时间 |
+|:-----|:-----|:---------|
+| **CLOSED** | 连接关闭/未建立 | - |
+| **LISTEN** | 服务器等待连接 | 直到服务器关闭 |
+| **SYN_SENT** | 已发送SYN，等待ACK | 约1个RTT |
+| **SYN_RCVD** | 收到SYN，已发送SYN+ACK | 约1个RTT |
+| **ESTABLISHED** | 连接建立，可传输数据 | 直到连接关闭 |
+| **FIN_WAIT_1** | 已发送FIN，等待ACK | 约1个RTT |
+| **FIN_WAIT_2** | 收到ACK，等待对方FIN | 不定 |
+| **CLOSE_WAIT** | 收到FIN，等待应用关闭 | 取决于应用 |
+| **CLOSING** | 双方同时关闭 | 约1个RTT |
+| **LAST_ACK** | 已发送FIN，等待最后ACK | 约1个RTT |
+| **TIME_WAIT** | 等待2MSL确保ACK到达 | 2×MSL (通常60s) |
 
-### 3.1 select
+### 1.4 端口和地址的数学表示
 
-```c
-#include <sys/select.h>
-#include <sys/time.h>
+**IPv4地址表示**:
 
-void handle_multiple_clients(int listen_sock) {
-    fd_set read_fds;
-    int max_fd = listen_sock;
+```
+IPv4Address := [0, 255]⁴  (4字节，32位无符号整数)
 
-    FD_ZERO(&read_fds);
-    FD_SET(listen_sock, &read_fds);
+示例: 192.168.1.1 = 0xC0A80101 = 3232235777
 
-    struct timeval timeout;
-    timeout.tv_sec = 5;
-    timeout.tv_usec = 0;
-
-    int activity = select(max_fd + 1, &read_fds, NULL, NULL, &timeout);
-
-    if (activity < 0) {
-        perror("select");
-        return;
-    }
-
-    if (FD_ISSET(listen_sock, &read_fds)) {
-        // 有新连接
-        int client = accept(listen_sock, NULL, NULL);
-        // 处理...
-    }
-}
+struct in_addr {
+    uint32_t s_addr;  // 网络字节序大端存储
+};
 ```
 
-### 3.2 epoll (Linux)
+**IPv6地址表示**:
+
+```
+IPv6Address := [0, 65535]⁸  (16字节，128位)
+
+struct in6_addr {
+    uint8_t s6_addr[16];  // 16字节地址
+};
+```
+
+**端口表示**:
+
+```
+Port := [0, 65535]  (16位无符号整数)
+
+知名端口: [0, 1023]    - 需要root权限
+注册端口: [1024, 49151] - IANA注册
+动态端口: [49152, 65535] - 临时使用
+```
+
+**套接字地址结构**:
 
 ```c
-#include <sys/epoll.h>
+// 通用地址结构
+struct sockaddr {
+    sa_family_t sa_family;    // 地址族 AF_INET/AF_INET6/AF_UNIX
+    char        sa_data[14];  // 地址数据
+};
 
-void epoll_server(int listen_sock) {
-    int epoll_fd = epoll_create1(0);
+// IPv4地址结构
+struct sockaddr_in {
+    sa_family_t    sin_family; // AF_INET
+    in_port_t      sin_port;   // 端口号(网络字节序)
+    struct in_addr sin_addr;   // IPv4地址
+    char           sin_zero[8];// 填充
+};
 
-    struct epoll_event event, events[10];
-    event.events = EPOLLIN;
-    event.data.fd = listen_sock;
-    epoll_ctl(epoll_fd, EPOLL_CTL_ADD, listen_sock, &event);
+// IPv6地址结构
+struct sockaddr_in6 {
+    sa_family_t     sin6_family;   // AF_INET6
+    in_port_t       sin6_port;     // 端口号
+    uint32_t        sin6_flowinfo; // 流信息
+    struct in6_addr sin6_addr;     // IPv6地址
+    uint32_t        sin6_scope_id; // 作用域ID
+};
 
-    while (1) {
-        int n = epoll_wait(epoll_fd, events, 10, -1);
-
-        for (int i = 0; i < n; i++) {
-            if (events[i].data.fd == listen_sock) {
-                // 新连接
-                int client = accept(listen_sock, NULL, NULL);
-                event.events = EPOLLIN | EPOLLET;  // 边缘触发
-                event.data.fd = client;
-                epoll_ctl(epoll_fd, EPOLL_CTL_ADD, client, &event);
-            } else {
-                // 可读
-                char buffer[1024];
-                int n = read(events[i].data.fd, buffer, sizeof(buffer));
-                // 处理...
-            }
-        }
-    }
-}
+// Unix域地址结构
+struct sockaddr_un {
+    sa_family_t sun_family; // AF_UNIX/AF_LOCAL
+    char        sun_path[108]; // 路径名
+};
 ```
 
 ---
 
-## ⚠️ 常见陷阱
+## 📊 2. 属性维度矩阵
 
-### 陷阱 SOCK01: 忘记字节序转换
+### 2.1 Socket类型对比矩阵
 
-```c
-// 错误
-server_addr.sin_port = 8080;  // 端口可能不正确！
+| 特性 | TCP (SOCK_STREAM) | UDP (SOCK_DGRAM) | RAW (SOCK_RAW) | UNIX (SOCK_STREAM) |
+|:-----|:-----------------|:-----------------|:---------------|:-------------------|
+| **传输特性** | 面向连接、可靠 | 无连接、不可靠 | 原始协议访问 | 本地进程间通信 |
+| **数据边界** | 字节流，无边界 | 保留报文边界 | 依协议而定 | 字节流 |
+| **可靠性** | 可靠(确认、重传、排序) | 尽力而为 | 依协议而定 | 可靠 |
+| **拥塞控制** | 有 | 无 | 无 | 无 |
+| **数据校验** | 有(校验和+确认) | 有(仅校验和) | 用户处理 | 有 |
+| **头部开销** | 20字节 | 8字节 | 依协议而定 | 无 |
+| **连接建立** | 三次握手 | 无 | 无 | 无/可连接 |
+| **适用场景** | HTTP/SSH/FTP | DNS/视频流/游戏 | Ping/OSPF | 本地IPC |
+| **API复杂度** | 中等 | 简单 | 复杂 | 简单 |
+| **最大数据包** | 无限制(流) | 65507字节(IPv4) | 依协议 | 无限制 |
+| **广播/多播** | ❌ | ✅ | ✅ | ❌ |
 
-// 正确
-server_addr.sin_port = htons(8080);  // 主机字节序转网络字节序
+### 2.2 Socket选项矩阵
+
+#### SOL_SOCKET级别选项
+
+| 选项名 | 类型 | 默认值 | 描述 | 适用Socket |
+|:-------|:-----|:-------|:-----|:-----------|
+| **SO_REUSEADDR** | int | 0 | 允许重用本地地址 | 所有 |
+| **SO_REUSEPORT** | int | 0 | 允许多个进程绑定同一端口 | TCP/UDP |
+| **SO_KEEPALIVE** | int | 0 | 周期性检测连接存活 | TCP |
+| **SO_LINGER** | struct linger | off | 关闭时的逗留行为 | TCP |
+| **SO_SNDTIMEO** | struct timeval | 0 | 发送超时时间 | 所有 |
+| **SO_RCVTIMEO** | struct timeval | 0 | 接收超时时间 | 所有 |
+| **SO_SNDLOWAT** | int | 1 | 发送低水位标记 | 所有 |
+| **SO_RCVLOWAT** | int | 1 | 接收低水位标记 | 所有 |
+| **SO_SNDBUF** | int | 系统默认 | 发送缓冲区大小 | 所有 |
+| **SO_RCVBUF** | int | 系统默认 | 接收缓冲区大小 | 所有 |
+| **SO_ERROR** | int | 0 | 获取并清除待处理错误 | 所有 |
+| **SO_TYPE** | int | - | 获取Socket类型 | 所有 |
+| **SO_OOBINLINE** | int | 0 | 带外数据内联接收 | TCP |
+| **SO_BROADCAST** | int | 0 | 允许发送广播数据 | UDP |
+| **SO_DONTROUTE** | int | 0 | 绕过路由表 | 所有 |
+| **SO_TIMESTAMP** | int | 0 | 接收时间戳 | 所有 |
+
+#### IPPROTO_TCP级别选项
+
+| 选项名 | 类型 | 默认值 | 描述 |
+|:-------|:-----|:-------|:-----|
+| **TCP_NODELAY** | int | 0 | 禁用Nagle算法 |
+| **TCP_MAXSEG** | int | 536 | 最大段大小(MSS) |
+| **TCP_CORK** | int | 0 | 合并小数据包 |
+| **TCP_QUICKACK** | int | 0 | 禁用延迟ACK |
+| **TCP_KEEPIDLE** | int | 7200 | 首次保活探测前空闲时间(秒) |
+| **TCP_KEEPINTVL** | int | 75 | 保活探测间隔(秒) |
+| **TCP_KEEPCNT** | int | 9 | 保活探测次数 |
+| **TCP_SYNCNT** | int | 5 | SYN重传次数 |
+| **TCP_DEFER_ACCEPT** | int | 0 | 延迟accept到数据到达 |
+| **TCP_WINDOW_CLAMP** | int | 无 | 限制通告窗口大小 |
+
+#### IPPROTO_IP级别选项
+
+| 选项名 | 类型 | 默认值 | 描述 |
+|:-------|:-----|:-------|:-----|
+| **IP_TOS** | int | 0 | 服务类型(DSCP) |
+| **IP_TTL** | int | 64 | 生存时间 |
+| **IP_HDRINCL** | int | 0 | 用户构造IP头(RAW) |
+| **IP_OPTIONS** | char[] | 无 | IP选项 |
+| **IP_MULTICAST_TTL** | int | 1 | 多播TTL |
+| **IP_MULTICAST_LOOP** | int | 1 | 多播回环 |
+| **IP_ADD_MEMBERSHIP** | struct ip_mreq | - | 加入多播组 |
+| **IP_DROP_MEMBERSHIP** | struct ip_mreq | - | 离开多播组 |
+| **IP_BIND_ADDRESS_NO_PORT** | int | 0 | 绑定时不分配临时端口 |
+
+### 2.3 IO模型对比矩阵
+
+| IO模型 | 阻塞调用 | 多路复用 | 数据拷贝次数 | 并发能力 | CPU效率 | 复杂度 | 适用场景 |
+|:-------|:---------|:---------|:-------------|:---------|:--------|:-------|:---------|
+| **阻塞IO** | ✅ | ❌ | 2 | 低(每连接1线程) | 低 | 低 | 低并发、简单应用 |
+| **非阻塞IO** | ❌ | 忙轮询 | 2 | 中 | 低 | 中 | 特定场景 |
+| **IO多路复用** | select/poll/epoll | ✅ | 2 | 高(单线程多连接) | 高 | 中 | 高并发服务器 |
+| **信号驱动IO** | ❌ | 信号通知 | 2 | 中 | 中 | 高 | 特定Unix系统 |
+| **异步IO** | ❌ | 事件回调 | 2 | 极高 | 极高 | 高 | 超高并发 |
+| **内存映射IO** | - | - | 0(零拷贝) | 高 | 极高 | 高 | 大文件传输 |
+
+**IO模型详细对比**:
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│                        IO模型对比图                                       │
+├──────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│  阻塞IO                    非阻塞IO                 IO多路复用           │
+│  ┌──────┐                  ┌──────┐                 ┌──────────┐         │
+│  │ 应用 │                  │ 应用 │                 │   应用   │         │
+│  │ 阻塞 │                  │ 轮询 │                 │ 等待事件 │         │
+│  │ 等待 │                  │ 检查 │                 │          │         │
+│  └──┬───┘                  └──┬───┘                 └────┬─────┘         │
+│     │ 数据就绪                │ 数据未就绪               │ 多个FD就绪    │
+│     ▼                         ▼                        ▼               │
+│  ┌─────────┐              ┌─────────┐              ┌──────────┐         │
+│  │  内核   │              │  内核   │              │   内核   │         │
+│  │ 拷贝数据│              │ 立即返回│              │ 通知就绪 │         │
+│  │ 阻塞   │               │ EAGAIN │               │          │         │
+│  └─────────┘              └─────────┘              └──────────┘         │
+│                                                                          │
+│  信号驱动IO                异步IO                    零拷贝              │
+│  ┌──────────┐             ┌──────────┐             ┌──────────┐         │
+│  │   应用   │             │   应用   │             │   应用   │         │
+│  │ 继续执行 │             │ 提交请求 │             │ 建立映射 │         │
+│  │          │             │ 继续执行 │             │          │         │
+│  └────┬─────┘             └────┬─────┘             └────┬─────┘         │
+│       │ SIGIO信号               │ 完成回调               │ DMA传输      │
+│       ▼                         ▼                        ▼               │
+│  ┌──────────┐             ┌──────────┐             ┌──────────┐         │
+│  │   内核   │             │   内核   │             │   内核   │         │
+│  │ 通知就绪 │             │ 全程处理 │             │  不拷贝  │         │
+│  └──────────┘             └──────────┘             └──────────┘         │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 陷阱 SOCK02: 忽略信号中断
+### 2.4 地址族对比矩阵
 
-```c
-// accept可能被信号中断
-while ((client = accept(listen_sock, NULL, NULL)) < 0) {
-    if (errno == EINTR) continue;  // 被信号中断，重试
-    perror("accept");
-    break;
-}
+| 特性 | AF_INET (IPv4) | AF_INET6 (IPv6) | AF_UNIX (本地) | AF_PACKET (链路) |
+|:-----|:---------------|:----------------|:---------------|:-----------------|
+| **地址长度** | 4字节 | 16字节 | 108字节 | 可变 |
+| **地址表示** | 点分十进制 | 冒号十六进制 | 文件路径 | MAC地址 |
+| **回环地址** | 127.0.0.1 | ::1 | 抽象命名空间 | N/A |
+| **广播支持** | ✅ | ❌(用多播) | ❌ | ✅ |
+| **多播支持** | ✅ | ✅ | ❌ | ✅ |
+| **最大连接** | ~65535端口 | ~65535端口 | 无限制 | N/A |
+| **NAT支持** | 常用 | 设计避免 | N/A | N/A |
+| **API兼容性** | 所有系统 | 现代系统 | Unix/Linux | Linux |
+| **结构体** | sockaddr_in | sockaddr_in6 | sockaddr_un | sockaddr_ll |
+| **地址转换函数** | inet_pton/ntop | inet_pton/ntop | 直接字符串 | 手动转换 |
+
+### 2.5 并发模型对比矩阵
+
+| 并发模型 | 连接数限制 | 上下文切换 | 内存占用 | 编程复杂度 | 适用QPS | 代表应用 |
+|:---------|:-----------|:-----------|:---------|:-----------|:--------|:---------|
+| **迭代服务器** | 1 | 无 | 最低 | 最低 | <1 | 测试程序 |
+| **多进程(prefork)** | 进程数 | 高 | 高 | 低 | 1k-10k | Apache Prefork |
+| **多线程** | 线程数 | 高 | 较高 | 中 | 1k-10k | Apache Worker |
+| **select** | FD_SETSIZE(1024) | 低 | 低 | 中 | 1k-5k | 早期服务器 |
+| **poll** | 无限制 | 低 | 低 | 中 | 5k-20k | 通用服务器 |
+| **epoll(LT)** | 无限制 | 极低 | 低 | 中 | 100k+ | Nginx/Redis |
+| **epoll(ET)** | 无限制 | 极低 | 低 | 高 | 200k+ | 高性能服务器 |
+| **io_uring** | 无限制 | 极低 | 低 | 高 | 500k+ | 下一代Linux服务器 |
+| **Reactor** | 无限制 | 极低 | 低 | 高 | 100k+ | Netty/libevent |
+| **Proactor** | 无限制 | 极低 | 低 | 极高 | 200k+ | Windows IOCP |
+
+**并发模型架构图**:
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      并发模型架构对比                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  多进程模型                    多线程模型                Reactor模型    │
+│  ┌────────────────┐           ┌────────────────┐      ┌───────────────┐ │
+│  │   主进程       │           │   主线程       │      │   事件循环    │ │
+│  │  accept()      │           │  accept()      │      │  epoll_wait() │ │
+│  └───────┬────────┘           └───────┬────────┘      └───────┬───────┘ │
+│          │ fork()                     │ pthread_create          │       │
+│          ▼                            ▼                       ▼       │
+│  ┌───────┴───────┐           ┌────────┴───────┐      ┌────────┴──────┐ │
+│  │ 子进程1       │           │  工作线程1     │      │  事件处理器   │ │
+│  │ 处理连接1     │           │  处理连接1     │      │  (读/写处理)  │ │
+│  ├───────────────┤           ├────────────────┤      ├───────────────┤ │
+│  │ 子进程2       │           │  工作线程2     │      │  事件处理器   │ │
+│  │ 处理连接2     │           │  处理连接2     │      │  (非阻塞)     │ │
+│  ├───────────────┤           ├────────────────┤      ├───────────────┤ │
+│  │ 子进程N       │           │  工作线程N     │      │  事件处理器   │ │
+│  │ 处理连接N     │           │  处理连接N     │      │  (回调驱动)   │ │
+│  └───────────────┘           └────────────────┘      └───────────────┘ │
+│                                                                         │
+│  特点: 进程隔离                特点: 共享内存            特点: 单线程    │
+│  开销: 高(fork+IPC)            开销: 中(同步开销)        开销: 极低      │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 2.6 错误码矩阵
+
+#### Socket API错误码分类
+
+| 错误类别 | 错误码 | 触发场景 | 处理策略 |
+|:---------|:-------|:---------|:---------|
+| **连接错误** | ECONNREFUSED | 目标端口未监听 | 检查服务状态 |
+| | ETIMEDOUT | 连接超时 | 检查网络/重试 |
+| | ECONNRESET | 连接被重置 | 关闭Socket重连 |
+| | EPIPE | 写入已关闭连接 | 忽略SIGPIPE/检查 |
+| **地址错误** | EADDRINUSE | 地址已被使用 | 设置SO_REUSEADDR |
+| | EADDRNOTAVAIL | 地址不可用 | 检查IP配置 |
+| | ENETUNREACH | 网络不可达 | 检查路由配置 |
+| | EHOSTUNREACH | 主机不可达 | 检查目标主机 |
+| **资源错误** | EMFILE | 进程FD达到上限 | 增加ulimit/关闭FD |
+| | ENFILE | 系统FD达到上限 | 系统调优 |
+| | ENOBUFS/ENOMEN | 内存不足 | 减少并发/增加内存 |
+| **IO错误** | EAGAIN/EWOULDBLOCK | 非阻塞IO暂不可 | 重试/等待事件 |
+| | EINTR | 被信号中断 | 重试操作 |
+| | EMSGSIZE | 消息太大 | 分片发送 |
+
+#### 详细错误码对照表
+
+| errno | 宏定义 | 数值 | 描述 | 常见原因 |
+|:------|:-------|:-----|:-----|:---------|
+| 1 | EPERM | 1 | 操作不允许 | 权限不足 |
+| 2 | ENOENT | 2 | 没有该文件/目录 | 路径错误 |
+| 4 | EINTR | 4 | 系统调用被中断 | 信号中断 |
+| 9 | EBADF | 9 | 错误的文件描述符 | FD已关闭/无效 |
+| 11 | EAGAIN | 11 | 资源暂时不可用 | 非阻塞IO繁忙 |
+| 12 | ENOMEM | 12 | 内存不足 | 系统资源耗尽 |
+| 13 | EACCES | 13 | 权限拒绝 | 端口<1024需root |
+| 14 | EFAULT | 14 | 错误的地址 | 指针无效 |
+| 22 | EINVAL | 22 | 无效的参数 | 参数错误 |
+| 24 | EMFILE | 24 | 打开文件过多(进程) | FD达到上限 |
+| 23 | ENFILE | 23 | 打开文件过多(系统) | 系统限制 |
+| 98 | EADDRINUSE | 98 | 地址已被使用 | 端口被占用 |
+| 99 | EADDRNOTAVAIL | 99 | 地址不可用 | IP配置错误 |
+| 101 | ENETUNREACH | 101 | 网络不可达 | 路由问题 |
+| 104 | ECONNRESET | 104 | 连接被重置 | 对端强制关闭 |
+| 110 | ETIMEDOUT | 110 | 连接超时 | 网络延迟/丢包 |
+| 111 | ECONNREFUSED | 111 | 连接被拒绝 | 服务未启动 |
+| 112 | EHOSTDOWN | 112 | 主机宕机 | 目标主机故障 |
+| 113 | EHOSTUNREACH | 113 | 主机不可达 | 路由/防火墙 |
+
+---
+
+## 🔄 3. 形式化描述
+
+### 3.1 TCP状态转换图(详细)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                              TCP状态机详图                                       │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                 │
+│   [CLOSED]                                                                      │
+│      │                                                                          │
+│      │ 应用:被动打开(PASSIVE OPEN)                                              │
+│      │ 动作:socket(),bind(),listen()                                           │
+│      ▼                                                                          │
+│   [LISTEN] ─────────────────────────┬───────────────────────────────────────┐   │
+│      │                              │                                       │   │
+│      │ 收到SYN                      │ 应用:主动打开(ACTIVE OPEN)            │   │
+│      │ 动作:发送SYN+ACK             │ 动作:socket(),connect()               │   │
+│      ▼                              ▼                                       │   │
+│   [SYN_RCVD]◄─────────────────── [SYN_SENT]                                 │   │
+│      │  收到SYN(同时打开)              │                                      │   │
+│      │ 收到ACK                        │ 收到SYN+ACK                          │   │
+│      ▼                               ▼                                       │   │
+│   [ESTABLISHED]◄──────────────────[ESTABLISHED]                              │   │
+│      ▲                               ▲                                       │   │
+│      │                               │                                       │   │
+│      └────────── 数据传输 ───────────┘                                       │   │
+│      │                                                                        │   │
+│      │ 应用:close() / 收到FIN                                                 │   │
+│      │                                                                        │   │
+│      ├───► [FIN_WAIT_1] ──收到ACK──► [FIN_WAIT_2] ──收到FIN──► [TIME_WAIT]   │   │
+│      │         │                      ▲                              │        │   │
+│      │         │ 收到FIN+ACK          │                              │ 2MSL   │   │
+│      │         └──────────► [CLOSING]─┘                              ▼        │   │
+│      │                                                                [CLOSED]│   │
+│      │                                                                        │   │
+│      ├───► [CLOSE_WAIT] ──应用close()──► [LAST_ACK] ──收到ACK──► [CLOSED]    │   │
+│      │                                                                        │   │
+│      └────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                 │
+│   状态转换条件说明:                                                              │
+│   ───────────────────────────────────────────────────────────────────────────  │
+│   • 粗线: 正常客户端路径                                                         │
+│   • 细线: 正常服务器路径                                                         │
+│   • 虚线: 异常/同时关闭路径                                                      │
+│   • [TIME_WAIT] 等待2MSL(Maximum Segment Lifetime)                              │
+│                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 3.2 Socket API状态机
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                           Socket API状态机                                       │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                 │
+│   socket()                                                                      │
+│      │                                                                          │
+│      ▼                                                                          │
+│   ┌─────────────┐     bind()      ┌─────────────┐     listen()   ┌───────────┐ │
+│   │   CREATED   │ ───────────────▶│    BOUND    │ ─────────────▶│ LISTENING │ │
+│   │  (已创建)   │                 │  (已绑定)   │               │  (监听中) │ │
+│   └──────┬──────┘                 └──────┬──────┘               └─────┬─────┘ │
+│          │                               │                          │       │
+│          │ connect()                      │ accept()                 │       │
+│          │ (客户端)                       │ (服务器)                 │       │
+│          ▼                               ▼                          │       │
+│   ┌─────────────┐                 ┌─────────────┐                   │       │
+│   │  CONNECTING │ ───────────────▶│ CONNECTED   │◄──────────────────┘       │
+│   │  (连接中)   │   连接成功      │  (已连接)   │                           │
+│   └─────────────┘                 └──────┬──────┘                           │
+│                                          │                                   │
+│              ┌───────────────────────────┼───────────────────────────┐       │
+│              │                           │                           │       │
+│              ▼                           ▼                           ▼       │
+│        ┌──────────┐               ┌──────────┐                 ┌──────────┐ │
+│        │ send()   │               │ recv()   │                 │ close()  │ │
+│        │ 发送数据 │               │ 接收数据 │                 │ 关闭连接 │ │
+│        └──────────┘               └──────────┘                 └────┬─────┘ │
+│                                                                     │       │
+│                                                                     ▼       │
+│                                                               ┌──────────┐  │
+│                                                               │  CLOSED  │  │
+│                                                               │  (已关闭)│  │
+│                                                               └──────────┘  │
+│                                                                               │
+│   状态转换规则:                                                                │
+│   ─────────────────────────────────────────────────────────────────────────  │
+│   1. socket()  → 创建Socket描述符, 状态CREATED                                │
+│   2. bind()    → 绑定本地地址, 状态BOUND (服务器必需, 客户端可选)              │
+│   3. listen()  → 设置监听队列, 状态LISTENING (仅服务器流Socket)                │
+│   4. connect() → 发起连接, 状态CONNECTING→CONNECTED                          │
+│   5. accept()  → 接受连接, 返回CONNECTED状态的Socket                          │
+│   6. send()    → 在CONNECTED状态发送数据                                       │
+│   7. recv()    → 在CONNECTED状态接收数据                                       │
+│   8. close()   → 关闭Socket, 状态CLOSED                                       │
+│                                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 3.3 TCP连接建立与终止时序
+
+#### 三次握手(连接建立)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                          TCP三次握手时序                                         │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                 │
+│   客户端                              服务器                                    │
+│   ────────                            ────────                                  │
+│                                                                                 │
+│      │                                    │                                     │
+│      │────────── SYN, seq=x ─────────────►│                                     │
+│      │        (SYN_SENT状态)              │                                     │
+│      │                                    │────┐                                │
+│      │                                    │    │ 创建控制块(TCB)                 │
+│      │                                    │    │ 分配资源                        │
+│      │                                    │◄───┘                                │
+│      │                                    │ (SYN_RCVD状态)                        │
+│      │◄───────── SYN+ACK, seq=y, ack=x+1──│                                     │
+│      │────┐                               │                                     │
+│      │    │ 分配资源                      │                                     │
+│      │◄───┘                               │                                     │
+│      │ (ESTABLISHED)                      │                                     │
+│      │────────── ACK, ack=y+1 ───────────►│                                     │
+│      │                                    │ (ESTABLISHED)                         │
+│      │                                    │                                     │
+│      │◄══════════ 数据传输 ══════════════►│                                     │
+│      │                                    │                                     │
+│                                                                                 │
+│   关键说明:                                                                      │
+│   ───────────────────────────────────────────────────────────────────────────  │
+│   • SYN标志消耗一个序列号(seq), 因此ack = seq + 1                              │
+│   • 第三次握手可以携带数据(但在某些实现中默认不携带)                             │
+│   • 握手过程中分配的资源: 发送/接收缓冲区, 定时器等                              │
+│   • 未完成连接队列(syn queue)和已完成连接队列(accept queue)                      │
+│                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```
+
+#### 四次挥手(连接终止)
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                          TCP四次挥手时序                                         │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                 │
+│   主动关闭方                          被动关闭方                                │
+│   ──────────                          ──────────                                │
+│                                                                                 │
+│      │                                    │                                     │
+│      │ (应用close())                      │                                     │
+│      │────────── FIN, seq=u ─────────────►│                                     │
+│      │ (FIN_WAIT_1)                       │                                     │
+│      │                                    │────┐                                │
+│      │                                    │    │ 应用收到EOF                      │
+│      │                                    │◄───┘                                │
+│      │                                    │ (CLOSE_WAIT)                         │
+│      │◄────────── ACK, ack=u+1 ───────────│                                     │
+│      │ (FIN_WAIT_2)                       │                                     │
+│      │                                    │                                     │
+│      │                                    │ ...                                 │
+│      │                                    │ (应用处理完数据后close())            │
+│      │                                    │                                     │
+│      │◄────────── FIN, seq=w ─────────────│                                     │
+│      │                                    │ (LAST_ACK)                          │
+│      │────────── ACK, ack=w+1 ───────────►│                                     │
+│      │ (TIME_WAIT)                        │────┐                                │
+│      │                                    │    │ 收到ACK, 关闭连接                │
+│      │                                    │◄───┘                                │
+│      │                                    │ (CLOSED)                            │
+│      │ ...                                 │                                     │
+│      │ (等待2MSL)                          │                                     │
+│      │                                    │                                     │
+│      │ (CLOSED)                           │                                     │
+│                                                                                 │
+│   关键说明:                                                                      │
+│   ───────────────────────────────────────────────────────────────────────────  │
+│   • 为什么需要四次: TCP全双工, 每个方向需要单独关闭                              │
+│   • TIME_WAIT作用: 1)确保最后的ACK到达 2)防止旧连接数据包干扰新连接              │
+│   • 2MSL时间: 通常2分钟, 可配置/proc/sys/net/ipv4/tcp_fin_timeout              │
+│   • 同时关闭: 双方同时发送FIN, 都进入CLOSING状态, 收到ACK后进入TIME_WAIT         │
+│                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## ✅ 质量验收清单
+## 💻 4. 示例矩阵
 
-- [x] TCP客户端/服务器
-- [x] UDP编程
-- [x] select多路复用
-- [x] epoll高性能I/O
-- [x] 字节序处理
-- [x] 常见陷阱分析
-
----
-
-> **更新记录**
->
-> - 2025-03-09: 创建，补充核心缺失主题
+### 4.1 基本TCP客户端/服务器
