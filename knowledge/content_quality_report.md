@@ -87,7 +87,7 @@
 | 19 | `02_Formal_Semantics_and_Physics\11_CompCert_Verification\04_Frama_C_Integration.md` | 5.76KB | 25 | 概念定义, 属性说明, 反例/陷阱, 形式化描述, 思维导图/图表 |
 | 20 | `07_Modern_Toolchain\01_IDE_Editors\06_IDE_Comparison_Matrix.md` | 5.99KB | 25 | 概念定义, 属性说明, 反例/陷阱, 形式化描述, 思维导图/图表 |
 | 21 | `07_Modern_Toolchain\11_Workflow_StateMachines\01_State_Machine_Patterns.md` | 6.04KB | 25 | 概念定义, 属性说明, 反例/陷阱, 形式化描述, 思维导图/图表 |
-| 22 | `03_System_Technology_Domains\12_Graphics_Rendering\01_GPU_Memory_Management.md` | 6.06KB | 25 | 概念定义, 属性说明, 反例/陷阱, 形式化描述, 思维导图/图表 |
+| 22 | `03_System_Technology_Domains\17_Graphics_Rendering\01_GPU_Memory_Management.md` | 6.06KB | 25 | 概念定义, 属性说明, 反例/陷阱, 形式化描述, 思维导图/图表 |
 | 23 | `TOOLCHAIN_IMPROVEMENT_SUMMARY.md` | 6.54KB | 25 | 概念定义, 属性说明, 反例/陷阱, 形式化描述, 思维导图/图表 |
 | 24 | `07_Modern_Toolchain\01_IDE_Editors\04_Zed_Editor.md` | 6.65KB | 25 | 概念定义, 属性说明, 反例/陷阱, 形式化描述, 思维导图/图表 |
 | 25 | `07_Modern_Toolchain\10_Distributed_Systems\01_Consensus_Algorithms.md` | 7.6KB | 25 | 概念定义, 属性说明, 反例/陷阱, 形式化描述, 思维导图/图表 |
@@ -498,7 +498,7 @@
 
 **建议补充**: 概念定义, 属性说明, 反例/陷阱, 形式化描述, 思维导图/图表
 
-#### 22. `03_System_Technology_Domains\12_Graphics_Rendering\01_GPU_Memory_Management.md`
+#### 22. `03_System_Technology_Domains\17_Graphics_Rendering\01_GPU_Memory_Management.md`
 
 - **文件大小**: 6.06 KB (185 行)
 - **结构评分**: 25/100

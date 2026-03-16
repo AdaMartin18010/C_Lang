@@ -204,7 +204,7 @@ knowledge/
 │   ├── 02_Regex_Engine/
 │   ├── 05_Wireless_Protocol/     # 无线协议
 │   ├── 09_High_Performance_Log/  # 高性能日志
-│   ├── 11_Rust_Interoperability/ # Rust 互操作
+│   ├── 16_Rust_Interoperability/ # Rust 互操作
 │   └── ...
 │
 └── [其他领域...]
@@ -221,7 +221,7 @@ knowledge/
 | 形式语义 | `02_Formal_Semantics_and_Physics/README.md` | 博弈语义 | 验证工具 |
 | 无线协议 | `05_Wireless_Protocol/README.md` | BLE、WiFi | 协议分析器 |
 | 高性能日志 | `09_High_Performance_Log/README.md` | 零拷贝、MMAP | 日志库 |
-| Rust FFI | `11_Rust_Interoperability/README.md` | FFI、unsafe | 混合项目 |
+| Rust FFI | `16_Rust_Interoperability/README.md` | FFI、unsafe | 混合项目 |
 
 ### 标签导航系统
 

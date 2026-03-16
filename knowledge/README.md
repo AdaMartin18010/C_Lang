@@ -1067,7 +1067,7 @@ knowledge/
 │   ├── 08_Distributed_Consensus/        # 分布式共识
 │   ├── 09_High_Performance_Log/         # 高性能日志
 │   ├── 11_In_Memory_Database/           # 内存数据库
-│   ├── 11_Rust_Interoperability/        # Rust互操作
+│   ├── 16_Rust_Interoperability/        # Rust互操作
 │   ├── 12_Persistent_Memory/            # 持久内存
 │   ├── 13_RDMA_Network/                 # RDMA网络
 │   ├── 14_Concurrency_Parallelism/      # 并发并行
@@ -1076,28 +1076,28 @@ knowledge/
 ├── 04_Industrial_Scenarios/             # 工业场景 (12,000+行)
 │   ├── README.md
 │   ├── 01_Automotive_ABS/               # 汽车ABS
-│   ├── 02_Linux_Kernel/                 # Linux内核
+│   ├── 13_Linux_Kernel/                 # Linux内核
 │   ├── 03_High_Frequency_Trading/       # 高频交易
 │   ├── 04_5G_Baseband/                  # 5G基带
 │   ├── 05_Game_Engine/                  # 游戏引擎
 │   ├── 06_Quantum_Computing/            # 量子计算
 │   ├── 08_Neuromorphic/                 # 神经形态计算
-│   ├── 09_DNA_Storage/                  # DNA存储
-│   ├── 09_Space_Computing/              # 航天计算
+│   ├── 10_DNA_Storage/                  # DNA存储
+│   ├── 11_Space_Computing/              # 航天计算
 │   ├── 10_Deep_Sea/                     # 深海探测
 │   └── 11_Cryogenic_Superconducting/    # 超导计算
 │
 ├── 05_Deep_Structure_MetaPhysics/       # 深层结构与元物理 (22,800+行)
 │   ├── README.md
 │   ├── 01_Formal_Semantics/             # 形式语义
-│   ├── 01_Linking_Algebraic_Topology/   # 链接代数拓扑
+│   ├── 09_Linking_Algebraic_Topology/   # 链接代数拓扑
 │   ├── 02_Algebraic_Topology/           # 代数拓扑
-│   ├── 02_Debug_Info_Encoding/          # 调试信息编码
-│   ├── 03_Heterogeneous_Memory/         # 异构内存
+│   ├── 10_Debug_Info_Encoding/          # 调试信息编码
+│   ├── 11_Heterogeneous_Memory/         # 异构内存
 │   ├── 03_Verification_Energy/          # 验证能量
 │   ├── 04_Formal_Verification_Energy/   # 形式化验证能量
-│   ├── 04_Self_Modifying_Code/          # 自修改代码
-│   ├── 05_Self_Modifying_Code/          # 自修改代码
+│   ├── 12_Self_Modifying_Code/          # 自修改代码
+│   ├── 13_Self_Modifying_Code/          # 自修改代码
 │   ├── 06_Standard_Library_Physics/     # 标准库物理
 │   ├── 07_Computability_Theory/         # 可计算性理论 ⭐
 │   └── 08_Debugging_Tools/              # 调试工具

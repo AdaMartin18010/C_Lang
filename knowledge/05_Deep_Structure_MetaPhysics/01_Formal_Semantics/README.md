@@ -504,7 +504,7 @@ T ~ T'  当且仅当 T = T' 或 ? 属于 {T, T'}
 
 - [父目录: 深层结构与元物理学](../README.md)
 - [C到汇编映射](../../02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/README.md)
-- [自修改代码](../04_Self_Modifying_Code/README.md)
+- [自修改代码](../12_Self_Modifying_Code/README.md)
 
 ---
 

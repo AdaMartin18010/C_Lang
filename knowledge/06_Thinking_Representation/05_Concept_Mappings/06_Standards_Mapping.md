@@ -33,13 +33,13 @@
 
 | 标准 | 全称 | 适用主题 | 相关文件 |
 |:-----|:-----|:---------|:---------|
-| MISRA C:2012 | Motor Industry Software Reliability | 安全编码 | 05_Engineering, 01_Automotive_ECU |
+| MISRA C:2012 | Motor Industry Software Reliability | 安全编码 | 05_Engineering, 02_Automotive_ECU |
 | MISRA C:2004 | Motor Industry Software Reliability | 安全编码 | 05_Engineering |
 | CERT C | SEI CERT C Coding Standard | 安全编码 | 所有代码文件 |
-| ISO 26262 | Road Vehicles Functional Safety | 汽车安全 | 01_Automotive_ECU |
+| ISO 26262 | Road Vehicles Functional Safety | 汽车安全 | 02_Automotive_ECU |
 | DO-178C | Airborne Software | 航空电子 | 02_Avionics_Systems |
 | IEC 61508 | Functional Safety | 工业安全 | 07_Space_Computing |
-| ISO 21434 | Road Vehicles Cybersecurity | 汽车安全 | 01_Automotive_ECU |
+| ISO 21434 | Road Vehicles Cybersecurity | 汽车安全 | 02_Automotive_ECU |
 | EN 50128 | Railway Software Safety | 铁路安全 | 05_Engineering |
 
 ### 通信标准
@@ -48,7 +48,7 @@
 |:-----|:-----|:---------|:---------|
 | 3GPP TS 38.xxx | 5G NR | 5G基带 | 04_5G_Baseband |
 | Bluetooth Core Spec | Bluetooth | BLE | 05_Wireless_Protocol |
-| CAN ISO 11898 | CAN Bus | 汽车通信 | 01_Automotive_ECU |
+| CAN ISO 11898 | CAN Bus | 汽车通信 | 02_Automotive_ECU |
 | ARINC 429 | Avionics Data Bus | 航空 | 02_Avionics_Systems |
 | ARINC 653 | Avionics Partitioning | 航空OS | 02_Avionics_Systems |
 | InfiniBand Spec | InfiniBand | 高性能网络 | 12_RDMA_Networking |
