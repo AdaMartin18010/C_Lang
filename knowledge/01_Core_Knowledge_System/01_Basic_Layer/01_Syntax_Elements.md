@@ -25,8 +25,9 @@
 **严格定义**：构成C语言程序的基本结构单元，按照ISO/IEC 9899标准，C语言语法元素是指程序翻译过程中能被识别和处理的最小有意义单元。
 
 **形式化定义**：
-```
-语法元素 ∈ {词法单元(Token), 预处理标记(Preprocessing Token), 
+
+```text
+语法元素 ∈ {词法单元(Token), 预处理标记(Preprocessing Token),
            翻译单元(Translation Unit)}
 ```
 
@@ -35,12 +36,13 @@
 **严格定义**（C11标准 6.4）：源程序被词法分析器处理后产生的最小不可分割单元，是编译器语法分析的输入单位。
 
 **分类体系**：
-```
-词法单元(Token) ::= 关键字(Keyword) 
-                  | 标识符(Identifier) 
-                  | 常量(Constant) 
-                  | 字符串字面量(String Literal) 
-                  | 运算符(Operator) 
+
+```text
+词法单元(Token) ::= 关键字(Keyword)
+                  | 标识符(Identifier)
+                  | 常量(Constant)
+                  | 字符串字面量(String Literal)
+                  | 运算符(Operator)
                   | 分隔符(Punctuator)
 ```
 
@@ -49,9 +51,10 @@
 **严格定义**：由词法单元按照特定规则组合而成的更高层次结构，包括表达式、语句、声明、定义等。
 
 **层次关系**：
-```
-字符(Character) → 词法单元(Token) → 语法单元(Syntactic Unit) 
-                → 声明/定义(Declaration/Definition) 
+
+```text
+字符(Character) → 词法单元(Token) → 语法单元(Syntactic Unit)
+                → 声明/定义(Declaration/Definition)
                 → 翻译单元(Translation Unit)
 ```
 
@@ -96,7 +99,7 @@ graph TB
         T5 --> T6[语法单元]
         T6 --> T7[翻译单元]
     end
-    
+
     subgraph "词法单元分类"
         A[词法单元] --> B[标识符]
         A --> C[关键字]
@@ -105,18 +108,18 @@ graph TB
         A --> F[运算符]
         A --> G[分隔符]
     end
-    
+
     subgraph "属性维度"
         P1[作用域] --> P1A[文件作用域]
         P1 --> P1B[块作用域]
         P1 --> P1C[函数作用域]
         P1 --> P1D[函数原型作用域]
-        
+
         P2[生命周期] --> P2A[静态存储期]
         P2 --> P2B[自动存储期]
         P2 --> P2C[动态存储期]
         P2 --> P2D[线程存储期]
-        
+
         P3[链接属性] --> P3A[外部链接]
         P3 --> P3B[内部链接]
         P3 --> P3C[无链接]
@@ -399,7 +402,7 @@ universal-character-name ::= '\\u' hex-quad
 
 hex-quad ::= hex-digit hex-digit hex-digit hex-digit
 
-hex-digit ::= digit | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' 
+hex-digit ::= digit | 'a' | 'b' | 'c' | 'd' | 'e' | 'f'
                           | 'A' | 'B' | 'C' | 'D' | 'E' | 'F'
 ```
 

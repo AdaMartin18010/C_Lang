@@ -47,7 +47,8 @@
       - [目标](#目标)
       - [决策树结构预览](#决策树结构预览)
       - [计划内容](#计划内容-1)
-    - [4.3 其他计划中的决策树](#43-其他计划中的决策树)
+    - [4.3 新添加的决策树 (2026-03-16)](#43-新添加的决策树-2026-03-16)
+    - [4.4 其他计划中的决策树](#44-其他计划中的决策树)
   - [5. 与其他模块的关系](#5-与其他模块的关系)
     - [5.1 如何结合概念映射使用](#51-如何结合概念映射使用)
     - [5.2 如何结合案例研究使用](#52-如何结合案例研究使用)
@@ -697,7 +698,17 @@ flowchart TD
    - 指令重排序问题
    - 内存序选择
 
-### 4.3 其他计划中的决策树
+### 4.3 新添加的决策树 (2026-03-16)
+
+| 决策树名称 | 文件 | 目标问题 |
+|------------|------|----------|
+| **指针使用决策树** | 06_Pointer_Usage_Decision_Tree.md | 指针类型选择、初始化检查、安全性验证、指针转换 |
+| **内存分配决策树** | 07_Memory_Allocation_Decision_Tree.md | malloc/calloc/realloc选择、对齐要求、错误处理 |
+| **类型转换决策树** | 08_Type_Conversion_Decision_Tree.md | 隐式/显式转换、指针转换安全性、算术转换 |
+| **并发模型决策树** | 09_Concurrency_Model_Decision_Tree.md | 线程vs进程、同步机制选择、原子操作、内存序 |
+| **编译错误诊断树** | 10_Compilation_Error_Diagnosis_Tree.md | 语法/类型/链接错误诊断、警告处理 |
+
+### 4.4 其他计划中的决策树
 
 | 决策树名称 | 优先级 | 目标问题 |
 |------------|--------|----------|
@@ -972,8 +983,11 @@ flowchart LR
 | 程序内存不断增长 | [内存泄漏诊断](./01_Memory_Leak_Diagnosis.md) |
 | 程序突然崩溃/段错误 | [段错误排查](./02_Segfault_Troubleshooting.md) |
 | 程序运行缓慢 | [性能瓶颈分析](./03_Performance_Bottleneck.md) |
-| 编译不通过 | [编译错误处理](./04_Compilation_Error.md) ✅ |
-| 多线程异常/死锁 | [并发问题调试](./05_Concurrency_Debug.md) ✅ |
+| 编译不通过 | [编译错误处理](./04_Compilation_Error.md) 或 [编译错误诊断树](./10_Compilation_Error_Diagnosis_Tree.md) |
+| 多线程异常/死锁 | [并发问题调试](./05_Concurrency_Debug.md) 或 [并发模型决策树](./09_Concurrency_Model_Decision_Tree.md) |
+| 指针使用问题 | [指针使用决策树](./06_Pointer_Usage_Decision_Tree.md) 🆕 |
+| 内存分配选择 | [内存分配决策树](./07_Memory_Allocation_Decision_Tree.md) 🆕 |
+| 类型转换问题 | [类型转换决策树](./08_Type_Conversion_Decision_Tree.md) 🆕 |
 
 ---
 
@@ -984,8 +998,13 @@ flowchart LR
 | [01_Memory_Leak_Diagnosis.md](./01_Memory_Leak_Diagnosis.md) | 内存泄漏诊断 | 程序内存持续增长、OOM异常、valgrind报告问题 | ✅ 可用 |
 | [02_Segfault_Troubleshooting.md](./02_Segfault_Troubleshooting.md) | 段错误排查 | 程序崩溃、SIGSEGV信号、空指针访问、数组越界 | ✅ 可用 |
 | [03_Performance_Bottleneck.md](./03_Performance_Bottleneck.md) | 性能瓶颈分析 | CPU占用高、响应延迟、吞吐量不足、资源竞争 | ✅ 可用 |
-| 04_Compilation_Error.md | 编译错误处理 | GCC/Clang编译报错、链接错误 | ✅ 已完成 |
-| 05_Concurrency_Debug.md | 并发问题调试 | 死锁、数据竞争、线程安全问题 | ✅ 已完成 |
+| [04_Compilation_Error.md](./04_Compilation_Error.md) | 编译错误处理 | GCC/Clang编译报错、链接错误 | ✅ 已完成 |
+| [05_Concurrency_Debug.md](./05_Concurrency_Debug.md) | 并发问题调试 | 死锁、数据竞争、线程安全问题 | ✅ 已完成 |
+| [06_Pointer_Usage_Decision_Tree.md](./06_Pointer_Usage_Decision_Tree.md) | 指针使用决策 | 指针类型选择、初始化检查、安全性验证、指针转换 | 🆕 新增 |
+| [07_Memory_Allocation_Decision_Tree.md](./07_Memory_Allocation_Decision_Tree.md) | 内存分配决策 | malloc/calloc/realloc选择、对齐要求、错误处理 | 🆕 新增 |
+| [08_Type_Conversion_Decision_Tree.md](./08_Type_Conversion_Decision_Tree.md) | 类型转换决策 | 隐式/显式转换、指针转换安全性、算术转换 | 🆕 新增 |
+| [09_Concurrency_Model_Decision_Tree.md](./09_Concurrency_Model_Decision_Tree.md) | 并发模型决策 | 线程vs进程、同步机制选择、原子操作、内存序 | 🆕 新增 |
+| [10_Compilation_Error_Diagnosis_Tree.md](./10_Compilation_Error_Diagnosis_Tree.md) | 编译错误诊断 | 语法/类型/链接错误诊断、警告处理 | 🆕 新增 |
 
 ---
 
