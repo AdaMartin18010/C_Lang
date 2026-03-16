@@ -6,7 +6,8 @@
 
 ## 概述
 
-MISRA C (Motor Industry Software Reliability Association C) 是安全关键系统C语言开发的事实标准。MISRA C:2023是该标准的最新版本，包含220条规则，涵盖C11和C17语言特性。
+MISRA C (Motor Industry Software Reliability Association C) 是安全关键系统C语言开发的事实标准。
+MISRA C:2023是该标准的最新版本，包含220条规则，涵盖C11和C17语言特性。
 
 | 属性 | 说明 |
 |:-----|:-----|
