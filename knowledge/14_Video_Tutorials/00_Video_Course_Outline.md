@@ -22,6 +22,38 @@
     - [第10章：结构体与联合体 (8集)](#第10章结构体与联合体-8集)
     - [第11章：文件I/O与序列化 (7集)](#第11章文件io与序列化-7集)
     - [第12章：预处理器与宏 (7集)](#第12章预处理器与宏-7集)
+  - [第三季：系统编程](#第三季系统编程)
+    - [第13章：进程管理 (12集)](#第13章进程管理-12集)
+    - [第14章：信号处理 (8集)](#第14章信号处理-8集)
+    - [第15章：线程编程 (10集)](#第15章线程编程-10集)
+    - [第16章：进程间通信IPC (12集)](#第16章进程间通信ipc-12集)
+    - [第17章：网络编程 (12集)](#第17章网络编程-12集)
+    - [第18章：系统编程综合项目 (6集)](#第18章系统编程综合项目-6集)
+  - [第四季：高级主题](#第四季高级主题)
+    - [第19章：性能优化 (10集)](#第19章性能优化-10集)
+    - [第20章：调试与故障排查 (10集)](#第20章调试与故障排查-10集)
+    - [第21章：静态分析与代码质量 (8集)](#第21章静态分析与代码质量-8集)
+    - [第22章：安全编程 (8集)](#第22章安全编程-8集)
+    - [第23章：高级编译技术 (4集)](#第23章高级编译技术-4集)
+  - [第五季：形式化方法](#第五季形式化方法)
+    - [第24章：形式化方法基础 (6集)](#第24章形式化方法基础-6集)
+    - [第25章：操作语义 (6集)](#第25章操作语义-6集)
+    - [第26章：Hoare逻辑 (8集)](#第26章hoare逻辑-8集)
+    - [第27章：Coq证明助手 (8集)](#第27章coq证明助手-8集)
+    - [第28章：C程序验证实践 (2集)](#第28章c程序验证实践-2集)
+  - [第六季：工业实战](#第六季工业实战)
+    - [第29章：嵌入式系统开发 (10集)](#第29章嵌入式系统开发-10集)
+    - [第30章：汽车软件开发 (10集)](#第30章汽车软件开发-10集)
+    - [第31章：5G通信系统 (8集)](#第31章5g通信系统-8集)
+    - [第32章：游戏引擎开发 (8集)](#第32章游戏引擎开发-8集)
+    - [第33章：量子计算编程 (6集)](#第33章量子计算编程-6集)
+    - [第34章：开源项目分析 (8集)](#第34章开源项目分析-8集)
+  - [附录](#附录)
+    - [A. 学习路径建议](#a-学习路径建议)
+    - [B. 配套资源索引](#b-配套资源索引)
+    - [C. 工具链推荐](#c-工具链推荐)
+    - [D. 认证与进阶](#d-认证与进阶)
+  - [课程统计](#课程统计)
 
 ---
 
@@ -243,3 +275,490 @@
 **项目作业**: 实现一个带垃圾回收标记的内存分配器，包含内存泄漏检测功能。
 
 ---
+
+
+## 第三季：系统编程
+
+> **集数**: 60集 | **预计时长**: 45小时 | **目标**: 掌握Linux/Unix系统编程，理解操作系统接口
+
+### 第13章：进程管理 (12集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S03E01 | 进程概念与标识 | 40min | 1. 进程vs程序<br>2. PID/PPID<br>3. 进程状态<br>4. /proc文件系统 | S02E13 | `process_id.c` | 进程信息查看器 |
+| S03E02 | 进程创建：fork详解 | 45min | 1. fork工作原理<br>2. 父子进程关系<br>3. 写时复制<br>4. fork失败处理 | S03E01 | `fork_demo.c` | 进程树创建 |
+| S03E03 | 进程终止与等待 | 40min | 1. exit/_exit<br>2. 终止处理程序<br>3. wait/waitpid<br>4. 僵尸进程处理 | S03E02 | `process_exit.c` | 进程池管理 |
+| S03E04 | exec系列函数 | 45min | 1. execve/execvp<br>2. 程序替换<br>3. 环境变量传递<br>4. 执行失败处理 | S03E03 | `exec_demo.c` | 迷你shell实现 |
+| S03E05 | system与popen | 35min | 1. system函数<br>2. popen/pclose<br>3. 安全风险<br>4. 替代方案 | S03E04 | `system_popen.c` | 命令执行器 |
+| S03E06 | 进程组与会话 | 40min | 1. 进程组概念<br>2. setpgid<br>3. 会话与会话首进程<br>4. 守护进程基础 | S03E05 | `process_group.c` | 守护进程框架 |
+| S03E07 | 守护进程编写 | 50min | 1. 守护进程步骤<br>2. umask/chdir<br>3. 重定向标准I/O<br>4. 单实例守护 | S03E06 | `daemon.c` | 日志守护进程 |
+| S03E08 | 进程调度与优先级 | 45min | 1. nice/renice<br>2. 调度策略<br>3. 实时进程<br>4. CPU亲和性 | S03E07 | `scheduling.c` | 任务调度器 |
+| S03E09 | 进程资源限制 | 40min | 1. getrlimit/setrlimit<br>2. ulimit命令<br>3. 核心转储控制<br>4. 资源监控 | S03E08 | `resource_limit.c` | 沙箱环境 |
+| S03E10 | 进程间关系：孤儿与僵尸 | 40min | 1. 孤儿进程处理<br>2. 僵尸进程避免<br>3. SIGCHLD处理<br>4. 双fork技巧 | S03E03 | `orphan_zombie.c` | 进程生命周期管理 |
+| S03E11 | 高级进程控制 | 45min | 1. ptrace基础<br>2. 进程跟踪<br>3. vfork使用<br>4. clone简介 | S03E10 | `ptrace_intro.c` | 简单调试器 |
+| S03E12 | 进程间同步基础 | 45min | 1. 文件锁<br>2. 记录锁<br>3. 互斥文件创建<br>4. 进程同步模式 | S03E11 | `process_sync.c` | 进程安全计数器 |
+
+**参考文档**: [APUE第8章](http://www.apuebook.com/) | [Linux进程管理](https://man7.org/linux/man-pages/man2/fork.2.html)
+
+---
+
+### 第14章：信号处理 (8集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S03E13 | 信号基础概念 | 35min | 1. 信号定义<br>2. 信号类型<br>3. 信号产生<br>4. 默认处理 | S03E01 | `signal_basics.c` | 信号查看器 |
+| S03E14 | 信号处理函数 | 40min | 1. signal函数<br>2. 信号处理程序<br>3. 可重入函数<br>4. 异步信号安全 | S03E13 | `signal_handler.c` | 信号计数器 |
+| S03E15 | 可靠信号机制 | 45min | 1. sigaction<br>2. 信号屏蔽<br>3. 信号集操作<br>4. 信号排队 | S03E14 | `sigaction_demo.c` | 可靠信号框架 |
+| S03E16 | 实时信号与扩展 | 40min | 1. 实时信号<br>2. siginfo_t<br>3. SA_SIGINFO<br>4. 信号传递数据 | S03E15 | `realtime_sig.c` | 事件通知系统 |
+| S03E17 | 信号在IPC中的应用 | 45min | 1. 父子进程同步<br>2. 定时器信号<br>3. IO就绪通知<br>4. 自管道技巧 | S03E16 | `sig_ipc.c` | 异步IO框架 |
+| S03E18 | 信号与系统调用 | 40min | 1. 慢系统调用<br>2. SA_RESTART<br>3. EINTR处理<br>4. 自动重启动 | S03E17 | `sig_syscall.c` | 可靠系统调用包装 |
+| S03E19 | 多线程信号处理 | 45min | 1. 线程信号模型<br>2. pthread_sigmask<br>3. 专用信号线程<br>4. 信号分发 | S03E17 | `thread_signal.c` | 线程安全信号 |
+| S03E20 | 信号高级主题 | 40min | 1. 长跳转出处理程序<br>2. 信号与上下文<br>3. 用户态信号<br>4. signalfd | S03E19 | `signal_adv.c` | 高性能事件循环 |
+
+**参考文档**: [Linux信号](https://man7.org/linux/man-pages/man7/signal.7.html) | [sigaction手册](https://man7.org/linux/man-pages/man2/sigaction.2.html)
+
+---
+
+### 第15章：线程编程 (10集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S03E21 | 线程基础概念 | 40min | 1. 进程vs线程<br>2. 线程模型<br>3. Pthreads简介<br>4. 编译链接 | S03E01 | `thread_basics.c` | 多线程Hello World |
+| S03E22 | 线程创建与终止 | 40min | 1. pthread_create<br>2. 线程参数传递<br>3. pthread_exit<br>4. pthread_join | S03E21 | `thread_create.c` | 并行计算框架 |
+| S03E23 | 线程同步：互斥锁 | 45min | 1. pthread_mutex<br>2. 死锁避免<br>3. 递归锁<br>4. 性能优化 | S03E22 | `mutex_demo.c` | 线程安全队列 |
+| S03E24 | 线程同步：条件变量 | 45min | 1. pthread_cond<br>2. 等待与唤醒<br>3. 虚假唤醒<br>4. 条件变量模式 | S03E23 | `cond_var.c` | 生产者消费者 |
+| S03E25 | 线程同步：读写锁与屏障 | 40min | 1. 读写锁<br>2. 屏障同步<br>3. 自旋锁<br>4. 锁粒度选择 | S03E24 | `rwlock_barrier.c` | 并行算法实现 |
+| S03E26 | 线程局部存储 | 35min | 1. pthread_key<br>2. __thread关键字<br>3. 线程私有数据<br>4. 使用场景 | S03E22 | `thread_local.c` | 线程安全日志 |
+| S03E27 | 线程取消与清理 | 40min | 1. pthread_cancel<br>2. 取消点<br>3. 清理处理程序<br>4. 优雅退出 | S03E26 | `thread_cancel.c` | 线程池实现 |
+| S03E28 | 线程属性与调度 | 45min | 1. 线程属性<br>2. 分离线程<br>3. 线程调度<br>4. 栈大小设置 | S03E27 | `thread_attr.c` | 高性能线程池 |
+| S03E29 | 多线程调试技术 | 45min | 1. 竞态条件检测<br>2. Helgrind使用<br>3. ThreadSanitizer<br>4. 调试技巧 | S03E25 | `thread_debug.c` | 死锁检测工具 |
+| S03E30 | 高级线程模式 | 50min | 1. 线程池设计<br>2. 工作窃取<br>3. futures/promises<br>4. actor模型 | S03E28 | `thread_patterns.c` | 异步任务框架 |
+
+**参考文档**: [Pthreads编程](https://computing.llnl.gov/tutorials/pthreads/) | [ThreadSanitizer](https://github.com/google/sanitizers/wiki/ThreadSanitizerCppManual)
+
+---
+
+### 第16章：进程间通信IPC (12集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S03E31 | IPC概述与管道 | 40min | 1. IPC分类<br>2. 匿名管道<br>3. pipe系统调用<br>4. 父子进程通信 | S03E02 | `pipe_demo.c` | 进程管道通信 |
+| S03E32 | 命名管道FIFO | 35min | 1. mkfifo创建<br>2. 非阻塞模式<br>3. 多进程通信<br>4. 权限控制 | S03E31 | `fifo_demo.c` | 命名管道服务器 |
+| S03E33 | System V消息队列 | 45min | 1. msgget/msgsnd<br>2. 消息类型<br>3. 队列属性<br>4. 优缺点 | S03E31 | `sysv_msgq.c` | 消息队列服务 |
+| S03E34 | POSIX消息队列 | 40min | 1. mq_open/mq_send<br>2. 实时性<br>3. 通知机制<br>4. 与SystemV对比 | S03E33 | `posix_msgq.c` | 实时消息系统 |
+| S03E35 | System V共享内存 | 45min | 1. shmget/shmat<br>2. 同步需求<br>3. 性能优势<br>4. 生命周期 | S03E33 | `sysv_shm.c` | 高速数据交换 |
+| S03E36 | POSIX共享内存 | 40min | 1. shm_open<br>2. mmap结合<br>3. 命名共享内存<br>4. 现代推荐 | S03E35 | `posix_shm.c` | 零拷贝传输 |
+| S03E37 | 信号量机制 | 45min | 1. 信号量概念<br>2. SystemV信号量<br>3. POSIX无名信号量<br>4. 命名信号量 | S03E33 | `semaphore.c` | 资源控制器 |
+| S03E38 | 文件映射共享内存高级 | 45min | 1. mmap共享<br>2. 持久化共享内存<br>3. 大页支持<br>4. 性能优化 | S03E36 | `mmap_shm_adv.c` | 高性能数据库 |
+| S03E39 | 内存映射I/O | 40min | 1. mmap文件访问<br>2. 同步机制<br>3. 稀疏文件<br>4. 性能对比 | S03E38 | `mmap_io.c` | 内存映射日志 |
+| S03E40 | D-Bus与高级IPC | 45min | 1. D-Bus架构<br>2. 总线类型<br>3. 消息传递<br>4. 现代IPC趋势 | S03E34 | `dbus_intro.c` | D-Bus服务 |
+| S03E41 | 零拷贝技术 | 45min | 1. sendfile<br>2. splice/tee<br>3. 零拷贝原理<br>4. 性能优化 | S03E39 | `zero_copy.c` | 高性能代理 |
+| S03E42 | IPC综合项目 | 60min | 1. 架构设计<br>2. 选择合适的IPC<br>3. 实现完整系统<br>4. 性能测试 | S03E31-41 | `ipc_project/` | 多进程服务器 |
+
+**参考文档**: [Linux IPC](https://man7.org/linux/man-pages/man7/svipc.7.html) | [POSIX IPC](https://man7.org/linux/man-pages/man7/mq_overview.7.html)
+
+---
+
+### 第17章：网络编程 (12集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S03E43 | 网络编程基础 | 40min | 1. OSI模型<br>2. TCP/IP协议栈<br>3. Socket概念<br>4. 字节序 | S03E31 | `net_basics.c` | 网络工具函数 |
+| S03E44 | TCP套接字编程(上) | 45min | 1. socket创建<br>2. bind绑定<br>3. listen监听<br>4. accept接受 | S03E43 | `tcp_socket_1.c` | 迭代服务器 |
+| S03E45 | TCP套接字编程(下) | 45min | 1. connect连接<br>2. send/recv<br>3. 关闭连接<br>4. 错误处理 | S03E44 | `tcp_socket_2.c` | 回显客户端 |
+| S03E46 | UDP套接字编程 | 40min | 1. UDP特点<br>2. sendto/recvfrom<br>3. 无连接通信<br>4. 数据报边界 | S03E45 | `udp_socket.c` | UDP回显服务 |
+| S03E47 | 并发服务器模型 | 50min | 1. 多进程模型<br>2. 多线程模型<br>3. 优劣对比<br>4. 实现选择 | S03E22,45 | `concurrent_srv.c` | 并发HTTP服务器 |
+| S03E48 | I/O多路复用：select | 45min | 1. select原理<br>2. fd_set操作<br>3. 超时处理<br>4. 限制与问题 | S03E47 | `select_demo.c` | select服务器 |
+| S03E49 | I/O多路复用：poll | 40min | 1. poll接口<br>2. 与select对比<br>3. 实现改进<br>4. 使用场景 | S03E48 | `poll_demo.c` | poll服务器 |
+| S03E50 | I/O多路复用：epoll | 50min | 1. epoll_create<br>2. epoll_ctl<br>3. epoll_wait<br>4. ET/LT模式 | S03E49 | `epoll_demo.c` | 高性能服务器 |
+| S03E51 | 异步I/O | 45min | 1. POSIX AIO<br>2. Linux AIO<br>3. io_uring<br>4. 性能对比 | S03E50 | `async_io.c` | 异步文件服务器 |
+| S03E52 | 高级Socket选项 | 45min | 1. setsockopt<br>2. SO_REUSEADDR<br>3. TCP_NODELAY<br>4. 缓冲区调优 | S03E50 | `sock_options.c` | 高性能调优 |
+| S03E53 | 协议解析实战 | 50min | 1. HTTP解析<br>2. 协议状态机<br>3. 缓冲区管理<br>4. 错误恢复 | S03E52 | `http_parser.c` | 完整HTTP服务器 |
+| S03E54 | 网络安全基础 | 45min | 1. TLS/SSL概念<br>2. OpenSSL基础<br>3. 证书验证<br>4. 安全编程 | S03E53 | `tls_basics.c` | HTTPS客户端 |
+
+**参考文档**: [UNP卷1](http://www.unpbook.com/) | [Linux epoll](https://man7.org/linux/man-pages/man7/epoll.7.html) | [io_uring](https://github.com/axboe/liburing)
+
+---
+
+### 第18章：系统编程综合项目 (6集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S03E55 | 项目设计：高性能Web服务器 | 50min | 1. 需求分析<br>2. 架构设计<br>3. 技术选型<br>4. 模块划分 | S03E47-54 | `webserver/` | 设计文档编写 |
+| S03E56 | 实现：核心网络层 | 60min | 1. epoll事件循环<br>2. 连接管理<br>3. 请求解析<br>4. 响应生成 | S03E55 | `webserver/net.c` | 网络层测试 |
+| S03E57 | 实现：HTTP处理层 | 60min | 1. HTTP状态机<br>2. 方法处理<br>3. 静态文件服务<br>4. 错误处理 | S03E56 | `webserver/http.c` | HTTP合规测试 |
+| S03E58 | 实现：线程池与并发 | 60min | 1. 线程池实现<br>2. 任务队列<br>3. 负载均衡<br>4. 优雅关闭 | S03E57 | `webserver/threadpool.c` | 压力测试 |
+| S03E59 | 实现：日志与监控 | 50min | 1. 异步日志<br>2. 性能统计<br>3. 健康检查<br>4. 配置热加载 | S03E58 | `webserver/log.c` | 监控面板 |
+| S03E60 | 性能优化与部署 | 60min | 1. 性能分析<br>2. 瓶颈优化<br>3. 容器化部署<br>4. 生产配置 | S03E59 | `webserver/deploy/` | 生产部署 |
+
+**参考文档**: [Nginx架构](https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/) | [C10K问题](http://www.kegel.com/c10k.html)
+
+---
+
+**第三季总结**: 完成本季后，你将掌握Linux系统编程的核心技术，包括进程、线程、信号、IPC和网络编程。能够开发高性能的服务器程序。
+
+**项目作业**: 实现一个支持HTTP/1.1的高性能Web服务器，具备静态文件服务、并发处理和日志功能。
+
+---
+
+
+## 第四季：高级主题
+
+> **集数**: 40集 | **预计时长**: 30小时 | **目标**: 掌握性能优化、调试技巧、静态分析和安全编程
+
+### 第19章：性能优化 (10集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S04E01 | 性能分析基础 | 45min | 1. 性能指标<br>2. 分析方法论<br>3. gprof使用<br>4. 性能基线 | S02E50 | `profiling_basic.c` | 性能测试框架 |
+| S04E02 | perf工具详解 | 50min | 1. perf stat<br>2. perf record/report<br>3. 火焰图生成<br>4. 硬件事件 | S04E01 | `perf_demo.c` | 热点分析 |
+| S04E03 | 编译器优化 | 45min | 1. -O级别<br>2. 循环优化<br>3. 向量化<br>4. LTO/PGO | S04E02 | `compiler_opt.c` | 优化对比测试 |
+| S04E04 | 缓存优化(上) | 45min | 1. 缓存层次<br>2. 局部性原理<br>3. 缓存行对齐<br>4. 预取技术 | S02E21 | `cache_opt_1.c` | 矩阵优化 |
+| S04E05 | 缓存优化(下) | 45min | 1. 避免伪共享<br>2. 数据布局优化<br>3. 分块技术<br>4. 性能对比 | S04E04 | `cache_opt_2.c` | 图像处理优化 |
+| S04E06 | 算法优化策略 | 50min | 1. 复杂度分析<br>2. 算法选择<br>3. 空间换时间<br>4. 近似算法 | S02E36 | `algo_opt.c` | 搜索优化 |
+| S04E07 | 锁与并发优化 | 45min | 1. 锁粒度<br>2. 无锁数据结构<br>3. RCU机制<br>4. 读写优化 | S03E30 | `lock_opt.c` | 高并发队列 |
+| S04E08 | 内存优化技术 | 45min | 1. 内存池<br>2. 对象复用<br>3. 小对象优化<br>4. 内存压缩 | S02E19 | `mem_opt.c` | 内存优化器 |
+| S04E09 | I/O优化策略 | 45min | 1. 批量I/O<br>2. 异步I/O<br>3. 直接I/O<br>4. I/O调度 | S03E51 | `io_opt.c` | 数据库优化 |
+| S04E10 | 微基准测试 | 40min | 1. 测试设计<br>2. Google Benchmark<br>3. 统计方法<br>4. 避免陷阱 | S04E01 | `benchmark.c` | 组件基准测试 |
+
+**参考文档**: [性能优化](https://en.wikipedia.org/wiki/Program_optimization) | [What Every Programmer Should Know About Memory](https://people.freebsd.org/~lstewart/articles/cpumemory.pdf)
+
+---
+
+### 第20章：调试与故障排查 (10集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S04E11 | GDB基础使用 | 45min | 1. 启动调试<br>2. 断点设置<br>3. 单步执行<br>4. 查看变量 | S01E01 | `gdb_basic.c` | 调试练习 |
+| S04E12 | GDB高级功能 | 45min | 1. 条件断点<br>2. 观察点<br>3. 反向调试<br>4. 脚本化 | S04E11 | `gdb_adv.c` | 复杂调试场景 |
+| S04E13 | 内存调试技术 | 45min | 1. Valgrind Memcheck<br>2. AddressSanitizer<br>3. 内存泄漏定位<br>4. 使用模式 | S02E16 | `mem_debug.c` | 内存错误修复 |
+| S04E14 | 线程调试 | 40min | 1. 线程断点<br>2. 死锁检测<br>3. 竞态条件<br>4. Helgrind | S03E29 | `thread_debug_adv.c` | 并发Bug修复 |
+| S04E15 | 核心转储分析 | 45min | 1. core文件生成<br>2. gdb分析core<br>3. 堆栈恢复<br>4. 常见问题 | S04E12 | `core_dump.c` | 崩溃分析 |
+| S04E16 | 动态追踪技术 | 50min | 1. strace/ltrace<br>2. SystemTap<br>3. eBPF基础<br>4. 性能追踪 | S04E15 | `tracing.c` | 系统调用分析 |
+| S04E17 | 日志与可观测性 | 40min | 1. 日志级别<br>2. 结构化日志<br>3. 分布式追踪<br>4. 监控指标 | S04E16 | `observability.c` | 可观测系统 |
+| S04E18 | 故障注入测试 | 45min | 1. 故障类型<br>2. 注入方法<br>3. 混沌工程<br>4. 恢复测试 | S04E17 | `fault_inject.c` | 容错测试 |
+| S04E19 | 远程调试 | 40min | 1. gdbserver<br>2. 远程连接<br>3. 嵌入式调试<br>4. VS Code远程 | S04E12 | `remote_debug.c` | 远程调试配置 |
+| S04E20 | 调试方法论 | 45min | 1. 调试思维<br>2. 二分法定位<br>3. 假设验证<br>4. 调试工具链 | S04E11-19 | `debug_method.c` | 复杂Bug修复 |
+
+**参考文档**: [GDB手册](https://sourceware.org/gdb/current/onlinedocs/gdb/) | [eBPF](https://ebpf.io/)
+
+---
+
+### 第21章：静态分析与代码质量 (8集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S04E21 | 静态分析概述 | 35min | 1. 分析类型<br>2. 工具分类<br>3. 误报处理<br>4. 集成流程 | S04E20 | `static_intro.c` | 工具调研 |
+| S04E22 | 编译器警告与诊断 | 35min | 1. -Wall -Wextra<br>2. 警告即错误<br>3. 诊断选项<br>4. 修复流程 | S04E03 | `compiler_warn.c` | 零警告项目 |
+| S04E23 | Clang Static Analyzer | 45min | 1. scan-build<br>2. 路径敏感分析<br>3. 报告解读<br>4. CI集成 | S04E22 | `clang_analyzer.c` | 缺陷修复 |
+| S04E24 | Coverity与商业工具 | 40min | 1. Coverity使用<br>2. 缺陷分类<br>3. 报告管理<br>4. 团队协作 | S04E23 | `coverity_demo.c` | 缺陷分类 |
+| S04E25 | 代码度量与复杂度 | 40min | 1. 圈复杂度<br>2. 代码行数<br>3. 重复代码<br>4. 工具使用 | S04E24 | `code_metrics.c` | 重构复杂函数 |
+| S04E26 | 编码规范自动化 | 40min | 1. Clang-Format<br>2. Clang-Tidy<br>3. 自定义检查<br>4. 预提交钩子 | S04E25 | `format_tidy.c` | 规范集成 |
+| S04E27 | 代码审查实践 | 45min | 1. 审查流程<br>2. 检查清单<br>3. 工具辅助<br>4. 文化建设 | S04E26 | `code_review/` | 审查实践 |
+| S04E28 | 工业级代码审查案例 | 60min | 1. 真实案例<br>2. 严重缺陷<br>3. 安全漏洞<br>4. 经验教训 | S04E27 | `review_cases/` | 案例分析报告 |
+
+**参考文档**: [Clang Static Analyzer](https://clang-analyzer.llvm.org/) | [MISRA C](https://www.misra.org.uk/)
+
+---
+
+### 第22章：安全编程 (8集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S04E29 | C语言安全概述 | 40min | 1. 常见漏洞<br>2. CWE分类<br>3. 安全开发生命周期<br>4. 威胁建模 | S04E28 | `security_intro.c` | 漏洞调研 |
+| S04E30 | 缓冲区溢出防护 | 45min | 1. 栈溢出<br>2. 堆溢出<br>3. 防护机制<br>4. 安全函数 | S01E38 | `buffer_overflow.c` | 漏洞修复 |
+| S04E31 | 格式化字符串安全 | 35min | 1. 格式化漏洞<br>2. 攻击原理<br>3. 安全使用<br>4. FORTIFY_SOURCE | S02E28 | `fmt_security_adv.c` | 安全审计 |
+| S04E32 | 整数溢出处理 | 40min | 1. 溢出类型<br>2. 检测方法<br>3. 安全算术<br>4. 编译器支持 | S01E08 | `int_overflow.c` | 安全计算库 |
+| S04E33 | 内存安全强化 | 45min | 1. ASLR/DEP<br>2. 栈保护<br>3. 安全分配器<br>4. 内存标签 | S02E17 | `mem_security.c` | 强化配置 |
+| S04E34 | 输入验证与净化 | 40min | 1. 输入边界<br>2. 白名单验证<br>3. 编码处理<br>4. 正则安全 | S02E25 | `input_validation.c` | 验证框架 |
+| S04E35 | 加密与安全通信 | 50min | 1. 密码学基础<br>2. OpenSSL使用<br>3. 密钥管理<br>4. 常见错误 | S04E34 | `crypto_basics.c` | 安全通信 |
+| S04E36 | 安全编码规范 | 45min | 1. CERT C规范<br>2. SEI CERT<br>3. 自动化检查<br>4. 安全文化 | S04E35 | `cert_compliant.c` | 规范应用 |
+
+**参考文档**: [CERT C编码标准](https://wiki.sei.cmu.edu/confluence/display/c/SEI+CERT+C+Coding+Standard) | [OWASP C](https://owasp.org/www-project-owasp-embedded-application-security/)
+
+---
+
+### 第23章：高级编译技术 (4集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S04E37 | 链接与加载 | 50min | 1. 编译流程<br>2. 链接器工作<br>3. 动态链接<br>4. 加载过程 | S04E03 | `linking.c` | 链接分析 |
+| S04E38 | 插件与动态加载 | 45min | 1. dlopen/dlsym<br>2. 插件架构<br>3. 版本兼容<br>4. 热更新 | S04E37 | `plugin_system.c` | 插件框架 |
+| S04E39 | JIT编译基础 | 50min | 1. JIT概念<br>2. LLVM ORC<br>3. 代码生成<br>4. 性能权衡 | S04E38 | `jit_basics.c` | 表达式求值器 |
+| S04E40 | 元编程与代码生成 | 45min | 1. 代码生成器<br>2. 模板技术<br>3. 领域特定语言<br>4. 编译时计算 | S04E39 | `metaprogramming.c` | DSL实现 |
+
+**参考文档**: [链接器与加载器](https://linker.iecc.com/) | [LLVM](https://llvm.org/)
+
+---
+
+**第四季总结**: 完成本季后，你将掌握C程序的性能优化、调试技巧、静态分析和安全编程。能够编写高质量、高性能、安全的工业级代码。
+
+**项目作业**: 对一个开源C项目进行完整的安全审计和性能优化，提交详细的分析报告。
+
+---
+
+
+## 第五季：形式化方法
+
+> **集数**: 30集 | **预计时长**: 25小时 | **目标**: 掌握程序形式化验证，理解操作语义、公理语义和Hoare逻辑
+
+### 第24章：形式化方法基础 (6集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S05E01 | 形式化方法概述 | 40min | 1. 什么是形式化方法<br>2. 验证vs测试<br>3. 应用领域<br>4. 工具生态 | 无 | `formal_intro.md` | 方法调研 |
+| S05E02 | 数学基础：逻辑与集合 | 45min | 1. 命题逻辑<br>2. 谓词逻辑<br>3. 集合论基础<br>4. 归纳原理 | S05E01 | `logic_basics.c` | 逻辑练习 |
+| S05E03 | 数学基础：关系与函数 | 40min | 1. 二元关系<br>2. 等价关系<br>3. 偏序关系<br>4. 函数定义 | S05E02 | `relation.c` | 关系证明 |
+| S05E04 | 归纳与递归 | 45min | 1. 数学归纳法<br>2. 结构归纳<br>3. 良基归纳<br>4. 递归函数 | S05E03 | `induction.c` | 归纳证明 |
+| S05E05 | 形式化规约语言 | 40min | 1. 前置/后置条件<br>2. 不变式<br>3. 规约模式<br>4. 规约示例 | S05E04 | `specification.c` | 编写规约 |
+| S05E06 | 验证工具链概览 | 35min | 1. 模型检测<br>2. 定理证明<br>3. 抽象解释<br>4. SAT/SMT求解 | S05E05 | `tools_overview.md` | 工具对比 |
+
+**参考文档**: [Logic in Computer Science](https://www.cs.bham.ac.uk/research/projects/lics/) | [Software Foundations](https://softwarefoundations.cis.upenn.edu/)
+
+---
+
+### 第25章：操作语义 (6集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S05E07 | 操作语义基础 | 45min | 1. 语义的作用<br>2. 大步vs小步语义<br>3. 配置与转移<br>4. 表达式语义 | S05E06 | `os_basics.c` | 语义推导 |
+| S05E08 | IMP语言大步语义 | 50min | 1. IMP语法定义<br>2. 算术表达式<br>3. 布尔表达式<br>4. 命令语义 | S05E07 | `imp_bigstep.c` | IMP解释器 |
+| S05E09 | IMP语言小步语义 | 50min | 1. 小步转移关系<br>2. 顺序组合<br>3. 条件分支<br>4. 循环展开 | S05E08 | `imp_smallstep.c` | 步数分析 |
+| S05E10 | 语义等价性 | 45min | 1. 语义等价定义<br>2. 大步=小步证明<br>3. 确定性证明<br>4. 停机行为 | S05E09 | `equiv_proof.c` | 等价证明 |
+| S05E11 | C语言子集语义 | 55min | 1. C子集定义<br>2. 存储模型<br>3. 指针语义<br>4. 未定义行为 | S05E10 | `c_semantics.c` | 语义分析 |
+| S05E12 | 并发操作语义 | 50min | 1. 并发配置<br>2. 交错语义<br>3. 原子操作<br>4. 内存模型 | S05E11 | `conc_semantics.c` | 并发分析 |
+
+**参考文档**: [Semantics of Programming Languages](https://www.cl.cam.ac.uk/~gw104/SemLectNotes.pdf) | [Concrete Semantics](http://concrete-semantics.org/)
+
+---
+
+### 第26章：Hoare逻辑 (8集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S05E13 | Hoare逻辑基础 | 45min | 1. Hoare三元组<br>2. 公理规则<br>3. 最弱前置条件<br>4. 程序推导 | S05E05 | `hoare_basics.c` | 简单验证 |
+| S05E14 | 推理规则详解 | 50min | 1. 赋值公理<br>2. 顺序规则<br>3. 条件规则<br>4. 循环规则 | S05E13 | `hoare_rules.c` | 规则应用 |
+| S05E15 | 循环不变式 | 55min | 1. 不变式发现<br>2. 循环验证<br>3. 终止性证明<br>4. 变体函数 | S05E14 | `loop_inv.c` | 不变式推导 |
+| S05E16 | 完整程序验证 | 50min | 1. 验证条件生成<br>2. 自动推理<br>3. 辅助断言<br>4. 分治法 | S05E15 | `full_verify.c` | 算法验证 |
+| S05E17 | 过程与递归 | 50min | 1. 过程调用规则<br>2. 前/后置条件<br>3. 递归验证<br>4. 互递归 | S05E16 | `proc_verify.c` | 递归函数验证 |
+| S05E18 | 分离逻辑入门 | 55min | 1. 堆逻辑问题<br>2. 分离合取<br>3. 帧规则<br>4. 指针验证 | S05E17 | `separation_logic.c` | 链表验证 |
+| S05E19 | 并发程序验证 | 55min | 1. 并发挑战<br>2. Owicki-Gries<br>3. 资源不变式<br>4. 原子性 | S05E18 | `conc_verify.c` | 并发验证 |
+| S05E20 | 工业级验证案例 | 60min | 1. 验证方法论<br>2. 真实案例<br>3. 工具辅助<br>4. 经验教训 | S05E19 | `industrial_case/` | 案例研究 |
+
+**参考文档**: [Hoare Logic](https://en.wikipedia.org/wiki/Hoare_logic) | [Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
+
+---
+
+### 第27章：Coq证明助手 (8集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S05E21 | Coq入门安装 | 35min | 1. Coq安装<br>2. CoqIDE/VsCoq<br>3. 基本工作流<br>4. 资源推荐 | S05E06 | `coq_setup.v` | 环境配置 |
+| S05E22 | Gallina基础语法 | 45min | 1. 归纳类型<br>2. 函数定义<br>3. 模式匹配<br>4. 递归函数 | S05E21 | `gallina_basics.v` | 数据类型定义 |
+| S05E23 | 命题与证明 | 50min | 1. Prop类型<br>2. 逻辑连接词<br>3. 证明策略<br>4. 自动化 | S05E22 | `proof_basics.v` | 逻辑证明 |
+| S05E24 | 归纳类型深入 | 50min | 1. 参数化类型<br>2. 多态<br>3. 归纳原理<br>4. 类型族 | S05E23 | `inductive_adv.v` | 类型设计 |
+| S05E25 | 列表与归纳证明 | 55min | 1. 列表类型<br>2. 列表函数<br>3. 结构归纳<br>4. 列表定理 | S05E24 | `list_proofs.v` | 列表算法验证 |
+| S05E26 | 关系与逻辑关系 | 55min | 1. 关系定义<br>2. 传递闭包<br>3. 逻辑关系<br>4. 可观察等价 | S05E25 | `relations.v` | 关系证明 |
+| S05E27 | IMP语言形式化 | 60min | 1. IMP定义<br>2. 语义定义<br>3. 解释器验证<br>4. 等价性证明 | S05E26 | `imp_coq.v` | 完整形式化 |
+| S05E28 | Hoare逻辑在Coq中 | 60min | 1. 断言语言<br>2. 推理规则<br>3. 验证条件<br>4. 程序提取 | S05E27 | `hoare_coq.v` | 验证工具 |
+
+**参考文档**: [Software Foundations](https://softwarefoundations.cis.upenn.edu/) | [Coq参考手册](https://coq.inria.fr/refman/)
+
+---
+
+### 第28章：C程序验证实践 (2集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S05E29 | Frama-C与ACSL | 60min | 1. Frama-C介绍<br>2. ACSL注解<br>3. WP插件<br>4. 内存模型 | S05E28 | `frama_acsl.c` | ACSL注解编写 |
+| S05E30 | 验证C程序案例 | 60min | 1. 安全函数验证<br>2. 数组边界<br>3. 指针安全<br>4. 完整案例 | S05E29 | `verified_c/` | C项目验证 |
+
+**参考文档**: [Frama-C](https://frama-c.com/) | [ACSL语言](https://frama-c.com/acsl.html)
+
+---
+
+**第五季总结**: 完成本季后，你将理解程序语义的理论基础，掌握Hoare逻辑和分离逻辑，能够使用Coq进行形式化证明，并使用Frama-C验证C程序。
+
+**项目作业**: 使用Coq形式化验证一个C语言数据结构的实现，并生成可执行代码。
+
+---
+
+
+## 第六季：工业实战
+
+> **集数**: 50集 | **预计时长**: 40小时 | **目标**: 掌握C语言在各行业的实际应用，分析真实工业代码
+
+### 第29章：嵌入式系统开发 (10集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S06E01 | 嵌入式系统概述 | 40min | 1. 嵌入式特点<br>2. 资源约束<br>3. 实时性要求<br>4. 开发流程 | 无 | `embedded_intro.md` | 领域调研 |
+| S06E02 | 裸机编程基础 | 45min | 1. 启动代码<br>2. 向量表<br>3. 复位处理<br>4. 内存布局 | S06E01 | `baremetal/` | 最小系统 |
+| S06E03 | 寄存器操作与位域 | 40min | 1. 内存映射I/O<br>2. 寄存器访问<br>3. 位操作<br>4. volatile使用 | S06E02 | `register_io.c` | GPIO驱动 |
+| S06E04 | 中断与异常处理 | 50min | 1. 中断向量<br>2. ISR编写<br>3. 上下文保存<br>4. 嵌套中断 | S06E03 | `interrupt.c` | 中断驱动 |
+| S06E05 | 定时器与PWM | 45min | 1. 定时器配置<br>2. 中断定时<br>3. PWM生成<br>4. 捕获模式 | S06E04 | `timer_pwm.c` | 电机控制 |
+| S06E06 | 串口通信 | 40min | 1. UART协议<br>2. 波特率设置<br>3. 中断收发<br>4. DMA传输 | S06E05 | `uart_driver.c` | 串口控制台 |
+| S06E07 | 外设驱动开发 | 50min | 1. I2C/SPI驱动<br>2. ADC/DAC<br>3. 传感器接口<br>4. 驱动框架 | S06E06 | `peripheral/` | 传感器采集 |
+| S06E08 | RTOS集成 | 45min | 1. FreeRTOS介绍<br>2. 任务管理<br>3. 同步机制<br>4. 低功耗 | S06E07 | `freertos/` | RTOS应用 |
+| S06E09 | 嵌入式调试技术 | 45min | 1. JTAG/SWD<br>2. 调试器使用<br>3. Trace分析<br>4. 现场调试 | S06E08 | `debug_embedded.c` | 问题定位 |
+| S06E10 | 完整嵌入式项目 | 60min | 1. 需求分析<br>2. 架构设计<br>3. 模块实现<br>4. 测试验证 | S06E01-09 | `embedded_project/` | 综合项目 |
+
+**参考文档**: [ARM Cortex-M](https://developer.arm.com/documentation) | [FreeRTOS](https://www.freertos.org/)
+
+---
+
+### 第30章：汽车软件开发 (10集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S06E11 | 汽车电子概述 | 40min | 1. ECU架构<br>2. 功能安全<br>3. AUTOSAR介绍<br>4. 行业规范 | S06E01 | `automotive_intro.md` | 标准学习 |
+| S06E12 | ISO 26262功能安全 | 50min | 1. ASIL等级<br>2. 安全生命周期<br>3. C语言安全子集<br>4. 验证要求 | S06E11 | `iso26262/` | 安全分析 |
+| S06E13 | MISRA C规范详解(上) | 50min | 1. 环境规则<br>2. 语言扩展<br>3. 文档化<br>4. 字符集 | S06E12 | `misra_rules_1.c` | 规则应用 |
+| S06E14 | MISRA C规范详解(下) | 50min | 1. 数据类型规则<br>2. 表达式规则<br>3. 控制流规则<br>4. 函数规则 | S06E13 | `misra_rules_2.c` | 代码审查 |
+| S06E15 | AUTOSAR软件架构 | 45min | 1. 分层架构<br>2. RTE接口<br>3. SWC开发<br>4. 基础软件 | S06E14 | `autosar_arch/` | 架构设计 |
+| S06E16 | CAN总线通信 | 50min | 1. CAN协议<br>2. 帧格式<br>3. CAN驱动<br>4. UDS诊断 | S06E15 | `can_driver.c` | 通信实现 |
+| S06E17 | 汽车网络安全 | 45min | 1. ISO/SAE 21434<br>2. 威胁分析<br>3. 安全启动<br>4. 加密机制 | S06E16 | `cyber_security.c` | 安全设计 |
+| S06E18 | 代码生成与配置 | 40min | 1. 工具链<br>2. ARXML配置<br>3. 代码生成<br>4. RTE生成 | S06E17 | `codegen/` | 配置实践 |
+| S06E19 | 测试与验证 | 50min | 1. 单元测试<br>2. SIL/HIL测试<br>3. 覆盖度要求<br>4. 报告生成 | S06E18 | `testing/` | 测试实施 |
+| S06E20 | 汽车代码分析案例 | 60min | 1. 真实代码<br>2. 安全分析<br>3. 性能优化<br>4. 缺陷修复 | S06E19 | `case_studies/` | 案例分析 |
+
+**参考文档**: [ISO 26262](https://www.iso.org/standard/68383.html) | [MISRA C](https://www.misra.org.uk/) | [AUTOSAR](https://www.autosar.org/)
+
+---
+
+### 第31章：5G通信系统 (8集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S06E21 | 5G系统架构 | 45min | 1. 5G NR概述<br>2. 协议栈<br>3. 物理层<br>4. 部署场景 | S03E54 | `5g_intro.md` | 架构学习 |
+| S06E22 | 物理层信号处理 | 55min | 1. OFDM原理<br>2. FFT/IFFT实现<br>3. 信道估计<br>4. 同步算法 | S06E21 | `phy_layer.c` | 信号处理 |
+| S06E23 | MAC层调度器 | 50min | 1. 调度算法<br>2. 资源分配<br>3. QoS管理<br>4. 实时性要求 | S06E22 | `mac_scheduler.c` | 调度实现 |
+| S06E24 | RLC与PDCP层 | 45min | 1. ARQ机制<br>2. 分段重组<br>3. 加密完整性<br>4. 头压缩 | S06E23 | `rlc_pdcp.c` | 协议实现 |
+| S06E25 | RRC协议栈 | 50min | 1. 状态机<br>2. 消息编码<br>3. ASN.1 PER<br>4. 连接管理 | S06E24 | `rrc_stack.c` | 信令处理 |
+| S06E26 | 高性能数据面 | 55min | 1. DPDK基础<br>2. 零拷贝<br>3. 多核优化<br>4. 批处理 | S06E25 | `dpdk_basics.c` | 数据面优化 |
+| S06E27 | 实时性能优化 | 50min | 1. 延迟分析<br>2. 实时Linux<br>3. 优先级调度<br>4. 无锁设计 | S06E26 | `realtime_opt.c` | 实时优化 |
+| S06E28 | 5G基站代码分析 | 60min | 1. 开源实现<br>2. srsRAN分析<br>3. 性能热点<br>4. 优化方向 | S06E27 | `srsran_analysis/` | 源码阅读 |
+
+**参考文档**: [3GPP规范](https://www.3gpp.org/specifications) | [DPDK](https://www.dpdk.org/) | [srsRAN](https://www.srsran.com/)
+
+---
+
+### 第32章：游戏引擎开发 (8集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S06E29 | 游戏引擎架构 | 45min | 1. 引擎组件<br>2. 渲染循环<br>3. 游戏循环<br>4. 模块设计 | S04E05 | `engine_arch.md` | 架构设计 |
+| S06E30 | 内存管理优化 | 50min | 1. 对象池<br>2. 堆分配器<br>3. 内存碎片<br>4. 预分配策略 | S06E29 | `engine_memory.c` | 内存系统 |
+| S06E31 | ECS架构实现 | 55min | 1. ECS概念<br>2. 组件存储<br>3. 系统调度<br>4. 缓存优化 | S06E30 | `ecs_engine.c` | ECS框架 |
+| S06E32 | 数学库优化 | 50min | 1. SIMD基础<br>2. SSE/AVX<br>3. 矩阵运算<br>4. 向量库 | S06E31 | `math_lib.c` | 数学库 |
+| S06E33 | 渲染管线基础 | 55min | 1. 图形API<br>2. 渲染状态<br>3. 批处理<br>4. 实例化 | S06E32 | `render_pipe.c` | 渲染器 |
+| S06E34 | 物理引擎集成 | 50min | 1. 碰撞检测<br>2. 刚体动力学<br>3. 数值积分<br>4. 约束求解 | S06E33 | `physics_eng.c` | 物理系统 |
+| S06E35 | 脚本与热更新 | 45min | 1. 脚本绑定<br>2. Lua集成<br>3. 热重载<br>4. 状态序列化 | S06E34 | `scripting.c` | 脚本系统 |
+| S06E36 | 商业引擎代码分析 | 60min | 1. Quake源码<br>2. DOOM源码<br>3. idTech分析<br>4. 经典技巧 | S06E35 | `idtech_analysis/` | 源码学习 |
+
+**参考文档**: [Game Engine Architecture](https://www.gameenginebook.com/) | [id Tech引擎](https://github.com/id-Software/DOOM) | [Entt ECS](https://github.com/skypjack/entt)
+
+---
+
+### 第33章：量子计算编程 (6集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S06E37 | 量子计算基础 | 50min | 1. 量子比特<br>2. 量子门<br>3. 量子电路<br>4. 测量原理 | 无 | `quantum_intro.c` | 概念理解 |
+| S06E38 | 量子模拟器实现 | 55min | 1. 态向量表示<br>2. 矩阵运算<br>3. 门操作实现<br>4. 模拟器优化 | S06E37 | `quantum_sim.c` | 模拟器 |
+| S06E39 | 量子算法编程 | 50min | 1. Deutsch-Jozsa<br>2. Grover算法<br>3. Shor算法<br>4. 变分算法 | S06E38 | `quantum_algo.c` | 算法实现 |
+| S06E40 | 量子-经典混合 | 45min | 1. 混合架构<br>2. 数据交换<br>3. 优化循环<br>4. 误差处理 | S06E39 | `hybrid_qc.c` | 混合编程 |
+| S06E41 | 量子硬件接口 | 45min | 1. 量子云API<br>2. QASM格式<br>3. 脉冲控制<br>4. 校准数据 | S06E40 | `quantum_hw.c` | 硬件访问 |
+| S06E42 | 量子C库分析 | 50min | 1. Qiskit底层<br>2. C++核心<br>3. 性能分析<br>4. 扩展开发 | S06E41 | `qiskit_c/` | 库分析 |
+
+**参考文档**: [Quantum Computation and Quantum Information](https://www.cambridge.org/9781107002173) | [Qiskit](https://qiskit.org/)
+
+---
+
+### 第34章：开源项目分析 (8集)
+
+| 编号 | 标题 | 时长 | 学习目标 | 前置知识 | 配套代码 | 练习 |
+|------|------|------|----------|----------|----------|------|
+| S06E43 | Linux内核分析(上) | 60min | 1. 内核架构<br>2. 内存管理<br>3. 进程调度<br>4. 文件系统 | S03E60 | `linux_kernel_1/` | 源码阅读 |
+| S06E44 | Linux内核分析(下) | 60min | 1. 网络子系统<br>2. 设备驱动<br>3. 同步原语<br>4. 内核调试 | S06E43 | `linux_kernel_2/` | 驱动分析 |
+| S06E45 | Redis源码分析 | 60min | 1. 数据结构<br>2. 事件循环<br>3. 持久化<br>4. 集群实现 | S06E44 | `redis_analysis/` | 核心模块 |
+| S06E46 | Nginx源码分析 | 60min | 1. 模块化架构<br>2. 事件驱动<br>3. 请求处理<br>4. 负载均衡 | S06E45 | `nginx_analysis/` | 模块开发 |
+| S06E47 | SQLite源码分析 | 60min | 1. B-树实现<br>2. SQL解析<br>3. 事务管理<br>4. 虚拟机 | S06E46 | `sqlite_analysis/` | 存储引擎 |
+| S06E48 | Git源码分析 | 60min | 1. 对象模型<br>2. 引用管理<br>3. 合并算法<br>4. 传输协议 | S06E47 | `git_analysis/` | 底层实现 |
+| S06E49 | 代码阅读方法论 | 50min | 1. 阅读策略<br>2. 工具使用<br>3. 文档化<br>4. 贡献开源 | S06E48 | `reading_method.md` | 阅读计划 |
+| S06E50 | 工业代码最佳实践 | 60min | 1. 代码组织<br>2. 文档规范<br>3. 测试策略<br>4. 持续集成 | S06E49 | `best_practices/` | 实践总结 |
+
+**参考文档**: [Linux内核](https://www.kernel.org/doc/html/latest/) | [Redis设计与实现](http://redisbook.com/) | [Nginx开发](https://nginx.org/en/docs/dev/development.html)
+
+---
+
+## 附录
+
+### A. 学习路径建议
+
+```
+基础阶段 (第一季) → 核心阶段 (第二季) → 系统阶段 (第三季)
+                        ↓
+                高级阶段 (第四季)
+                        ↓
+        研究阶段 (第五季) ← → 实战阶段 (第六季)
+```
+
+### B. 配套资源索引
+
+| 资源类型 | 路径 | 说明 |
+|----------|------|------|
+| 源代码 | `./source_code/` | 配套示例代码 |
+| 练习题 | `./exercises/` | 课后练习与答案 |
+| 项目模板 | `./templates/` | 项目脚手架 |
+| 工具脚本 | `./scripts/` | 自动化脚本 |
+| 参考文档 | `./references/` | 扩展阅读材料 |
+
+### C. 工具链推荐
+
+| 用途 | 工具 | 版本要求 |
+|------|------|----------|
+| 编译器 | GCC / Clang | 11+ / 14+ |
+| 构建系统 | CMake | 3.20+ |
+| 调试器 | GDB / LLDB | 10+ / 12+ |
+| 静态分析 | Clang-Tidy / Frama-C | 最新 |
+| 版本控制 | Git | 2.30+ |
+| 编辑器 | VS Code / Vim / Emacs | 最新 |
+
+### D. 认证与进阶
+
+- **C Programming Language Certified Associate (CLA)**
+- **C Certified Professional Programmer (CLP)**
+- **Embedded C Programming**
+- **Certified Secure Software Lifecycle Professional (CSSLP)**
+
+---
+
+## 课程统计
+
+| 季 | 集数 | 时长(小时) | 练习项目 | 难度 |
+|----|------|-----------|----------|------|
+| 第一季：C语言基础 | 40 | 26 | 20 | ⭐⭐ |
+| 第二季：C语言核心 | 50 | 35 | 25 | ⭐⭐⭐ |
+| 第三季：系统编程 | 60 | 45 | 30 | ⭐⭐⭐⭐ |
+| 第四季：高级主题 | 40 | 30 | 20 | ⭐⭐⭐⭐⭐ |
+| 第五季：形式化方法 | 30 | 25 | 15 | ⭐⭐⭐⭐⭐ |
+| 第六季：工业实战 | 50 | 40 | 25 | ⭐⭐⭐⭐⭐ |
+| **总计** | **270** | **201** | **135** | - |
+
+---
+
+> **完成本课程后，你将具备：**
+>
+> - 扎实的C语言基础和深入的核心理解
+> - 系统级编程能力和网络编程经验
+> - 性能优化、调试和安全编程技能
+> - 形式化验证的理论和实践能力
+> - 多行业的实际项目经验
+>
+> **适合岗位：** 系统工程师、嵌入式开发、游戏引擎开发、通信协议开发、安全研究员、编译器工程师
+
+---
+
+*文档版本: 1.0*
+*最后更新: 2026-03-16*
