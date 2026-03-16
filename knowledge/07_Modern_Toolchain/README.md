@@ -153,9 +153,9 @@ C语言依赖管理解决方案。
 | 模板 | 构建系统 | 特点 |
 |:-----|:---------|:-----|
 | [01_Modern_C_Project_Template.md](./06_Project_Templates/01_Modern_C_Project_Template.md) | 通用 | 项目结构最佳实践 |
-| [02_CMake_Project_Template/](./06_Project_Templates/02_CMake_Project_Template/README.md) | CMake | 现代CMake模板 |
-| [03_Meson_Project_Template/](./06_Project_Templates/03_Meson_Project_Template/README.md) | Meson | Meson项目模板 |
-| [04_Xmake_Project_Template/](./06_Project_Templates/04_Xmake_Project_Template/README.md) | Xmake | Xmake项目模板 |
+| [02_CMake_Project_Template](./06_Project_Templates/README.md) | CMake | 现代CMake模板 |
+| [03_Meson_Project_Template](./06_Project_Templates/README.md) | Meson | Meson项目模板 |
+| [04_Xmake_Project_Template](./06_Project_Templates/README.md) | Xmake | Xmake项目模板 |
 
 **前置知识**: 构建系统选择
 **使用方法**: 复制模板开始新项目

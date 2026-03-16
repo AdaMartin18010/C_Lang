@@ -527,7 +527,7 @@ graph TD
 | 原子操作 | [02_Atomic_Operations.md](./04_Industrial_Scenarios/05_Game_Engine/02_Atomic_Operations.md) | C11 _Atomic | ⭐⭐⭐⭐ |
 | 内存序 | [02_C11_Memory_Model.md](./02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md) | memory_order | ⭐⭐⭐⭐⭐ |
 | 无锁编程 | [03_Lockless_Ring_Buffer_SPSC_MPMC.md](./03_System_Technology_Domains/09_High_Performance_Log/03_Lockless_Ring_Buffer_SPSC_MPMC.md) | CAS/ABA问题 | ⭐⭐⭐⭐⭐ |
-| RCU机制 | [02_Cache_Coherence.md](./04_Industrial_Scenarios/02_Linux_Kernel/02_Cache_Coherence.md) | 读-复制-更新 | ⭐⭐⭐⭐⭐ |
+| RCU机制 | [02_Cache_Coherence.md](./04_Industrial_Scenarios/13_Linux_Kernel/02_Cache_Coherence.md) | 读-复制-更新 | ⭐⭐⭐⭐⭐ |
 
 ### 5.5 系统编程
 
@@ -899,7 +899,7 @@ graph TD
 ├── 03_Linear_Logic/                         # 线性逻辑
 │   ├── 01_Linear_Logic_Theory.md            # 线性逻辑理论
 │   └── 02_Resource_Types.md                 # 资源类型
-├── 03_Compiler_Optimization/                # 编译器优化
+├── 12_Compiler_Optimization/                # 编译器优化
 │   └── 04_Auto_Vectorization.md             # 自动向量化
 ├── 04_Cognitive_Representation/             # 认知表示
 │   ├── 01_Mental_Models.md                  # 心智模型
@@ -963,11 +963,13 @@ graph TD
 │   ├── 01_B_Tree_Index.md                   # B+树索引
 │   ├── 01_RESP_Protocol.md                  # RESP协议
 │   └── 02_LRU_Cache.md                      # LRU缓存
-├── 11_Rust_Interoperability/                # Rust互操作
+├── 16_Rust_Interoperability/                # Rust互操作
 │   ├── 01_C_ABI_Basics.md                   # C ABI基础
 │   ├── 01_Rust_Call_C.md                    # Rust调用C
 │   └── 02_C_Call_Rust.md                    # C调用Rust
 ├── 12_Persistent_Memory/                    # 持久内存
+├── 16_Rust_Interoperability/                # Rust互操作
+├── 17_Graphics_Rendering/                   # 图形渲染
 │   ├── 01_PMDK_Basics.md                    # PMDK基础
 │   └── 02_PM_Optimized_DataStructures.md    # PM优化数据结构
 ├── 13_RDMA_Network/                         # RDMA网络
@@ -988,7 +990,7 @@ graph TD
 ├── 01_Automotive_ABS/                       # 汽车ABS
 │   ├── 01_ABS_System.md                     # ABS系统
 │   └── 02_Hard_RealTime.md                  # 硬实时系统
-├── 02_Linux_Kernel/                         # Linux内核
+├── 13_Linux_Kernel/                         # Linux内核
 │   ├── 01_Page_Table_Operations.md          # 页表操作
 │   └── 02_Cache_Coherence.md                # 缓存一致性
 ├── 03_High_Frequency_Trading/               # 高频交易
@@ -1009,10 +1011,10 @@ graph TD
 ├── 08_Neuromorphic/                         # 神经形态
 │   ├── 01_SNN_Control.md                    # SNN控制
 │   └── 02_STDP_Learning.md                  # STDP学习
-├── 09_DNA_Storage/                          # DNA存储
+├── 10_DNA_Storage/                          # DNA存储
 │   ├── 01_DNA_Synthesis.md                  # DNA合成
 │   └── 02_Error_Correction_Coding.md        # 纠错编码
-├── 09_Space_Computing/                      # 航天计算
+├── 11_Space_Computing/                      # 航天计算
 │   ├── 01_EDAC_Memory.md                    # EDAC内存
 │   ├── 01_Radiation_Hardening.md            # 抗辐射加固
 │   └── 02_TMR_Voting.md                     # TMR表决
@@ -1031,15 +1033,15 @@ graph TD
 05_Deep_Structure_MetaPhysics/
 ├── 01_Formal_Semantics/                     # 形式语义
 │   └── 01_Operational_Semantics.md          # 操作语义
-├── 01_Linking_Algebraic_Topology/           # 链接代数拓扑
+├── 09_Linking_Algebraic_Topology/           # 链接代数拓扑
 │   ├── 01_Relocation_Group_Action.md        # 重定位群作用
 │   └── 02_Homology_Groups.md                # 同调群
 ├── 02_Algebraic_Topology/                   # 代数拓扑
 │   └── 01_Type_Algebra.md                   # 类型代数
-├── 02_Debug_Info_Encoding/                  # 调试信息编码
+├── 10_Debug_Info_Encoding/                  # 调试信息编码
 │   ├── 01_DWARF_Deserialization.md          # DWARF反序列化
 │   └── 02_CFI_Stack_Reconstruction.md       # CFI栈重建
-├── 03_Heterogeneous_Memory/                 # 异构内存
+├── 11_Heterogeneous_Memory/                 # 异构内存
 │   ├── 01_CUDA_Unified_Memory.md            # CUDA统一内存
 │   └── 02_OpenMP_Offload.md                 # OpenMP卸载
 ├── 03_Verification_Energy/                  # 验证能量
@@ -1047,9 +1049,9 @@ graph TD
 ├── 04_Formal_Verification_Energy/           # 形式验证能量
 │   ├── 01_WP_Energy_Landscape.md            # WP能量景观
 │   └── 02_Separation_Logic_Entropy.md       # 分离逻辑熵
-├── 04_Self_Modifying_Code/                  # 自修改代码
+├── 12_Self_Modifying_Code/                  # 自修改代码
 │   └── 01_JIT_Basics.md                     # JIT基础
-├── 05_Self_Modifying_Code/                  # 自修改代码深度
+├── 13_Self_Modifying_Code/                  # 自修改代码深度
 │   ├── 01_Von_Neumann_Reflectivity.md       # 冯诺依曼反射
 │   └── 02_JIT_Physical_Constraints.md       # JIT物理约束
 ├── 06_Standard_Library_Physics/             # 标准库物理

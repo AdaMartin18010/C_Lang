@@ -119,13 +119,13 @@
 
 ---
 
-### 11_Rust_Interoperability - Rust互操作
+### 16_Rust_Interoperability - Rust互操作
 
 跨语言FFI。
 
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
-| [01_C_ABI_Basics.md](./11_Rust_Interoperability/01_C_ABI_Basics.md) | C ABI基础 | L4 | Rust FFI Guide |
+| [01_C_ABI_Basics.md](./16_Rust_Interoperability/01_C_ABI_Basics.md) | C ABI基础 | L4 | Rust FFI Guide |
 | [02_Cbindgen_Usage.md](02_Cbindgen_Usage.md) | cbindgen | L4 | cbindgen Docs ✅ |
 | [03_Unsafe_Rust_Patterns.md](03_Unsafe_Rust_Patterns.md) | Unsafe模式 | L5 | The Rustonomicon ✅ |
 

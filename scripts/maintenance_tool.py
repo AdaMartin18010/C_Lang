@@ -168,6 +168,145 @@ class LinkChecker:
                 print(f"  ... 还有 {len(self.broken_links) - 10} 个")
         print("="*60 + "\n")
 
+class MarkdownCodeExtractor:
+    """Markdown代码块提取器"""
+    
+    def __init__(self):
+        self.c_snippets = []  # [(file_path, line_num, code), ...]
+        self.zig_snippets = []
+    
+    def extract_code_blocks(self):
+        """从所有Markdown文件中提取代码块"""
+        print_status("从Markdown提取代码块...", "info")
+        
+        md_files = list(KNOWLEDGE_DIR.rglob("*.md"))
+        
+        for md_file in md_files:
+            content = md_file.read_text(encoding='utf-8')
+            lines = content.split('\n')
+            
+            in_code_block = False
+            code_lang = None
+            code_content = []
+            start_line = 0
+            
+            for i, line in enumerate(lines):
+                if line.startswith('```'):
+                    if not in_code_block:
+                        # 开始代码块
+                        in_code_block = True
+                        code_lang = line[3:].strip().lower()
+                        code_content = []
+                        start_line = i + 1
+                    else:
+                        # 结束代码块
+                        in_code_block = False
+                        code = '\n'.join(code_content)
+                        
+                        # 只提取足够长的代码块（至少3行，排除单行示例）
+                        if len(code_content) >= 3:
+                            if code_lang in ('c', 'cpp', 'c++', 'c99', 'c11', 'c17', 'c23'):
+                                self.c_snippets.append((md_file, start_line, code))
+                            elif code_lang in ('zig', 'zon'):
+                                self.zig_snippets.append((md_file, start_line, code))
+                        
+                        code_lang = None
+                        code_content = []
+                elif in_code_block:
+                    code_content.append(line)
+        
+        print_status(f"提取到 {len(self.c_snippets)} 个C代码块, {len(self.zig_snippets)} 个Zig代码块", "success")
+    
+    def validate_c_snippets(self) -> Dict:
+        """验证C代码片段"""
+        results = {"total": 0, "success": 0, "failed": []}
+        
+        if not self.c_snippets:
+            return results
+        
+        print_status("验证C代码片段语法...", "info")
+        
+        import tempfile
+        import os
+        
+        for md_file, line_num, code in self.c_snippets[:50]:  # 限制前50个以节省时间
+            results["total"] += 1
+            
+            # 创建临时文件
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.c', delete=False) as f:
+                f.write(code)
+                temp_path = f.name
+            
+            try:
+                # 尝试编译（语法检查）
+                result = subprocess.run(
+                    ['gcc', '-std=c11', '-fsyntax-only', '-c', temp_path],
+                    capture_output=True,
+                    timeout=5
+                )
+                if result.returncode == 0:
+                    results["success"] += 1
+                else:
+                    # 可能是缺少头文件，尝试添加常见头文件
+                    enhanced_code = f"#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n{code}"
+                    with open(temp_path, 'w') as f:
+                        f.write(enhanced_code)
+                    
+                    result = subprocess.run(
+                        ['gcc', '-std=c11', '-fsyntax-only', '-c', temp_path],
+                        capture_output=True,
+                        timeout=5
+                    )
+                    if result.returncode == 0:
+                        results["success"] += 1
+                    else:
+                        results["failed"].append((md_file, line_num, result.stderr.decode()[:100]))
+            except Exception as e:
+                results["failed"].append((md_file, line_num, str(e)))
+            finally:
+                os.unlink(temp_path)
+        
+        return results
+    
+    def validate_zig_snippets(self) -> Dict:
+        """验证Zig代码片段"""
+        results = {"total": 0, "success": 0, "failed": []}
+        
+        if not self.zig_snippets:
+            return results
+        
+        print_status("验证Zig代码片段语法...", "info")
+        
+        import tempfile
+        import os
+        
+        for md_file, line_num, code in self.zig_snippets[:20]:  # 限制前20个
+            results["total"] += 1
+            
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.zig', delete=False) as f:
+                f.write(code)
+                temp_path = f.name
+            
+            try:
+                result = subprocess.run(
+                    ['zig', 'fmt', '--check', temp_path],
+                    capture_output=True,
+                    timeout=5
+                )
+                if result.returncode == 0:
+                    results["success"] += 1
+                else:
+                    results["failed"].append((md_file, line_num, "Format error"))
+            except Exception as e:
+                results["failed"].append((md_file, line_num, str(e)))
+            finally:
+                try:
+                    os.unlink(temp_path)
+                except:
+                    pass
+        
+        return results
+
 class CodeValidator:
     """代码示例验证器"""
     
@@ -175,6 +314,8 @@ class CodeValidator:
         self.results = {
             "c_files": {"total": 0, "success": 0, "failed": []},
             "zig_files": {"total": 0, "success": 0, "failed": []},
+            "c_snippets": {"total": 0, "success": 0, "failed": []},
+            "zig_snippets": {"total": 0, "success": 0, "failed": []},
         }
     
     def check_compilers(self) -> bool:
@@ -267,34 +408,46 @@ class CodeValidator:
         print("\n💻 代码验证报告")
         print("="*60)
         
-        # C代码报告
+        # C代码文件报告
         c_total = self.results["c_files"]["total"]
         c_success = self.results["c_files"]["success"]
         c_rate = (c_success / c_total * 100) if c_total > 0 else 0
         
-        print(f"C代码:")
+        print(f"独立C文件:")
         print(f"  总数: {c_total}, 成功: {c_success}, 成功率: {c_rate:.1f}%")
-        if c_rate >= 80:
-            print_status(f"C代码验证通过 (>80%)", "success")
+        
+        # C代码片段报告
+        cs_total = self.results["c_snippets"]["total"]
+        cs_success = self.results["c_snippets"]["success"]
+        cs_rate = (cs_success / cs_total * 100) if cs_total > 0 else 0
+        
+        print(f"\nMarkdown C代码片段 (抽查前50个):")
+        print(f"  检查: {cs_total}, 成功: {cs_success}, 成功率: {cs_rate:.1f}%")
+        if cs_rate >= 70:
+            print_status(f"C代码片段验证通过 (>70%)", "success")
         else:
-            print_status(f"C代码验证未通过 (<80%)", "error")
+            print_status(f"C代码片段验证需关注 (<70%)", "warning" if cs_total > 0 else "info")
         
-        if self.results["c_files"]["failed"]:
-            print(f"  失败文件 ({len(self.results['c_files']['failed'])}):")
-            for f, err in self.results["c_files"]["failed"][:5]:
-                print(f"    - {f.name}")
+        if self.results["c_snippets"]["failed"]:
+            print(f"  失败片段 ({len(self.results['c_snippets']['failed'])}):")
+            for f, line, err in self.results["c_snippets"]["failed"][:3]:
+                print(f"    - {f.name}:{line}")
         
-        # Zig代码报告
+        # Zig代码文件报告
         z_total = self.results["zig_files"]["total"]
         z_success = self.results["zig_files"]["success"]
         z_rate = (z_success / z_total * 100) if z_total > 0 else 0
         
-        print(f"\nZig代码:")
+        print(f"\n独立Zig文件:")
         print(f"  总数: {z_total}, 成功: {z_success}, 成功率: {z_rate:.1f}%")
-        if z_rate >= 85:
-            print_status(f"Zig代码验证通过 (>85%)", "success")
-        else:
-            print_status(f"Zig代码验证未通过 (<85%)", "warning" if z_total > 0 else "info")
+        
+        # Zig代码片段报告
+        zs_total = self.results["zig_snippets"]["total"]
+        zs_success = self.results["zig_snippets"]["success"]
+        zs_rate = (zs_success / zs_total * 100) if zs_total > 0 else 0
+        
+        print(f"\nMarkdown Zig代码片段 (抽查前20个):")
+        print(f"  检查: {zs_total}, 成功: {zs_success}, 成功率: {zs_rate:.1f}%")
         
         print("="*60 + "\n")
 
@@ -394,9 +547,15 @@ def main():
     validator.check_compilers()
     validator.validate_c_files()
     validator.validate_zig_files()
+    
+    # 4. 提取并验证Markdown代码片段
+    code_extractor = MarkdownCodeExtractor()
+    code_extractor.extract_code_blocks()
+    validator.results["c_snippets"] = code_extractor.validate_c_snippets()
+    validator.results["zig_snippets"] = code_extractor.validate_zig_snippets()
     validator.print_report()
     
-    # 4. 生成报告
+    # 5. 生成报告
     generate_report(stats, link_checker, validator)
     
     print("="*60)

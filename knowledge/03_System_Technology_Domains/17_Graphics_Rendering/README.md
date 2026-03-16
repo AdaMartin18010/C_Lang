@@ -53,8 +53,8 @@ GPU编程关键问题
 
 ## 相关模块
 
-- [05_Game_Engine](../04_Industrial_Scenarios/05_Game_Engine/) - 游戏引擎（含GPU内存、ECS架构）
-- [03_Heterogeneous_Memory](../05_Deep_Structure_MetaPhysics/03_Heterogeneous_Memory/) - 异构内存（CUDA统一内存）
+- [05_Game_Engine](../../04_Industrial_Scenarios/05_Game_Engine/) - 游戏引擎（含GPU内存、ECS架构）
+- [03_Heterogeneous_Memory](../../05_Deep_Structure_MetaPhysics/03_Heterogeneous_Memory/) - 异构内存（CUDA统一内存）
 
 ---
 

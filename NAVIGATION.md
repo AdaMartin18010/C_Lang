@@ -1,6 +1,6 @@
 # C_Lang 知识库导航指南
 
-> **快速找到您需要的内容**  
+> **快速找到您需要的内容**
 > 本指南提供多种浏览路径，帮助您高效使用知识库。
 
 ---
@@ -12,12 +12,12 @@
 ```
 1. 📖 阅读 [全局索引](knowledge/00_INDEX.md)
    └─ 了解知识库全貌
-   
+
 2. 🎯 选择学习路径
    ├─ [初学者](knowledge/06_Thinking_Representation/06_Learning_Paths/01_Beginner_to_Advanced.md)
    ├─ [进阶者](knowledge/01_Core_Knowledge_System/02_Core_Layer/)
    └─ [专家](knowledge/02_Formal_Semantics_and_Physics/)
-   
+
 3. 📚 开始阅读
    └─ 从推荐的第一篇文章开始
 ```
@@ -105,7 +105,7 @@
 04_Industrial_Scenarios/
 ├── 🚗 汽车电子
 │   ├── [ABS系统](knowledge/04_Industrial_Scenarios/01_Automotive_ABS/01_ABS_System.md)
-│   └── [CAN总线](knowledge/04_Industrial_Scenarios/01_Automotive_ECU/01_CAN_Bus_Protocol.md)
+│   └── [CAN总线](knowledge/04_Industrial_Scenarios/02_Automotive_ECU/01_CAN_Bus_Protocol.md)
 │
 ├── ✈️ 航空电子
 │   └── [ARINC 429](knowledge/04_Industrial_Scenarios/02_Avionics_Systems/01_ARINC_429.md)
@@ -168,33 +168,42 @@
 
 ## 🎯 按学习目标浏览
 
-### 我想学习...
+### 我想学习
 
 #### C语言基础
+
 → [01_Core_Knowledge_System/01_Basic_Layer/](knowledge/01_Core_Knowledge_System/01_Basic_Layer/)
 
 #### 指针和内存
+
 → [01_Core_Knowledge_System/02_Core_Layer/](knowledge/01_Core_Knowledge_System/02_Core_Layer/)
 
 #### C23新特性
+
 → [01_Core_Knowledge_System/07_Modern_C/03_C23_Core_Features.md](knowledge/01_Core_Knowledge_System/07_Modern_C/03_C23_Core_Features.md)
 
 #### 形式化验证
+
 → [02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/](knowledge/02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/)
 
 #### 编译器原理
+
 → [02_Formal_Semantics_and_Physics/11_CompCert_Verification/](knowledge/02_Formal_Semantics_and_Physics/11_CompCert_Verification/)
 
 #### Zig语言
+
 → [08_Zig_C_Connection/](knowledge/08_Zig_C_Connection/)
 
 #### 嵌入式开发
+
 → [04_Industrial_Scenarios/01_Automotive_ECU/](knowledge/04_Industrial_Scenarios/01_Automotive_ECU/)
 
 #### 安全编码
+
 → [01_Core_Knowledge_System/09_Safety_Standards/](knowledge/01_Core_Knowledge_System/09_Safety_Standards/)
 
 #### 现代构建工具
+
 → [07_Modern_Toolchain/02_Build_Systems_Modern/](knowledge/07_Modern_Toolchain/02_Build_Systems_Modern/)
 
 ---
@@ -202,16 +211,20 @@
 ## 🔍 按问题类型浏览
 
 ### 编译问题
+
 → [编译构建](knowledge/01_Core_Knowledge_System/05_Engineering_Layer/01_Compilation_Build.md)
 
 ### 内存问题
-→ [内存管理](knowledge/01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md)  
+
+→ [内存管理](knowledge/01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md)
 → [调试技巧](knowledge/01_Core_Knowledge_System/05_Engineering_Layer/02_Debug_Techniques.md)
 
 ### 性能优化
+
 → [性能优化](knowledge/01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
 
 ### 并发问题
+
 → [并发并行](knowledge/03_System_Technology_Domains/14_Concurrency_Parallelism/)
 
 ---
@@ -219,15 +232,18 @@
 ## 📖 参考资源
 
 ### 标准文档
+
 - [C23到C2y路线图](knowledge/00_VERSION_TRACKING/C23_to_C2y_Roadmap.md)
 - [Zig路线图追踪](knowledge/00_VERSION_TRACKING/Zig_Roadmap_Tracking.md)
 
 ### 项目信息
+
 - [项目状态](PROJECT_STATUS.md) - 当前状态和统计
 - [版本历史](CHANGELOG.md) - 更新记录
 - [贡献指南](CONTRIBUTING.md) - 如何参与
 
 ### 工具
+
 - [维护工具](scripts/maintenance_tool.py) - 自动化检查
 
 ---

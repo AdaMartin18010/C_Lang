@@ -162,7 +162,7 @@ graph TB
 ### 技术选型时
 
 1. 查阅 [02_Comparison_Matrices](./02_Comparison_Matrices/README.md) 对比不同方案
-2. 参考 [06_Application_Scenarios](./06_Application_Scenarios/) 看场景匹配
+2. 参考 [04_Application_Scenario_Trees](./04_Application_Scenario_Trees/) 看场景匹配
 
 ### 学习新知识时
 
@@ -198,7 +198,7 @@ graph TB
 | "整体结构是什么？" | 思维导图 | [03_Mind_Maps](./03_Mind_Maps/README.md) |
 | "实际怎么用？" | 案例研究 | [04_Case_Studies](./04_Case_Studies/README.md) |
 | "这些概念什么关系？" | 概念映射 | [05_Concept_Mappings](./05_Concept_Mappings/README.md) |
-| "适合什么场景？" | 应用场景 | [06_Application_Scenarios](./06_Application_Scenarios/README.md) |
+| "适合什么场景？" | 应用场景 | [04_Application_Scenario_Trees](./04_Application_Scenario_Trees/README.md) |
 | "从哪里开始学？" | 知识图谱 | [07_Knowledge_Graph](./07_Knowledge_Graph/README.md) |
 | "怎么快速找到？" | 索引 | [08_Index](./08_Index/README.md) |
 

@@ -1,7 +1,31 @@
 # C_Lang 知识库 - 版本历史
 
-> **格式**: 基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)  
+> **格式**: 基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)
 > **版本控制**: [Semantic Versioning](https://semver.org/lang/zh-CN/)
+
+---
+
+## [V2026.03.16] - 2026-03-16
+
+### 🔧 维护与质量改进
+
+**状态**: 持续优化 ✅
+
+#### 链接完整性修复
+
+- **修复180个失效链接** - 全面扫描并修复知识库中的失效内部链接
+- **链接有效率**: 984个内部链接 **100%有效**
+
+#### 归档整理
+
+- 将**12个历史报告文件**移至 `archive/reports/`
+- 优化项目根目录结构，提升可维护性
+
+#### 维护工具改进
+
+- **新增功能**: Markdown代码块提取和验证
+- **用途**: 自动检测代码块语法错误、提取可运行代码片段
+- 位置: `scripts/` 目录下的维护工具集
 
 ---
 
@@ -22,7 +46,7 @@
 | `11_Zig_C_Migration_Projects.md` | Zig-C迁移项目 | 6 | L3-L5 |
 | `12_Mini_Projects.md` | 综合迷你项目 | 8 | L2-L5 |
 
-**练习总数**: 75+ (之前25+)  
+**练习总数**: 75+ (之前25+)
 **预计学习时间**: 200+小时 (之前50-100小时)
 
 #### 质量改进
@@ -48,18 +72,20 @@
 
 ### 🏆 100% 完成里程碑
 
-**完成度**: 100% ✅  
+**完成度**: 100% ✅
 **状态**: 生产就绪
 
 ### 新增内容
 
 #### 安全标准模块
+
 - **MISRA C:2023** - 汽车电子安全编码标准
 - **CERT C 2024** - 安全编码标准
 - **ISO 26262** - 功能安全指南
 - 位置: `knowledge/01_Core_Knowledge_System/09_Safety_Standards/`
 
 #### C2y新提案追踪
+
 - **Named Loops** (N3658) - 命名循环与break/continue
 - **Elvis操作符** (N3753) - `?:` 简化空值检查
 - **闭包/函数字面量** (N3657) - 函数式编程支持
@@ -67,17 +93,20 @@
 - 位置: `knowledge/00_VERSION_TRACKING/C2y_New_Proposals_2026.md`
 
 #### AI/ML深度内容
+
 - **llama.cpp部署指南** - 生产级LLM部署 (20 KB)
 - **GGML计算图详解** - 底层张量计算
 - **量化策略对比** - Q4_0到FP16完整覆盖
 - 位置: `knowledge/11_Machine_Learning_C/07_llama_cpp_Deployment.md`
 
 #### 形式化验证
+
 - **Coq验证案例** - Swap函数Hoare逻辑证明 (8 KB)
 - **可运行代码** - 附带完整Coq脚本
 - 位置: `knowledge/02_Formal_Semantics_and_Physics/11_CompCert_Verification/06_Coq_Examples/`
 
 #### 基础设施
+
 - **CI/CD工作流** - GitHub Actions自动验证
 - **维护工具** - Python自动化统计与检查
 - **链接验证** - 905个内部链接100%有效
@@ -85,11 +114,13 @@
 ### 修复与改进
 
 #### 版本声明修正
+
 - Zig版本: `0.16.0` → `0.16.0-dev` (添加API警告)
 - CompCert: 明确标注不支持C23
 - Frama-C: `29.0` → `32.0` (Germanium)
 
 #### 链接修复
+
 - 修复17个失效内部链接
 - 链接有效率: 100%
 
@@ -116,6 +147,7 @@
 ### 系统化改进
 
 #### 新增模块
+
 - **08_Zig_C_Connection** - Zig-C形式化连接 (28文件)
   - 类型系统映射
   - 内存模型桥接
@@ -124,6 +156,7 @@
   - 迁移方法论
 
 #### 核心语义基础
+
 - **00_Core_Semantics_Foundations** (新增子模块)
   - 操作语义基础
   - 指称语义基础
@@ -132,6 +165,7 @@
   - 未定义行为语义边界
 
 #### C23完整覆盖
+
 - `nullptr` 类型安全空指针
 - `constexpr` 编译时常量
 - `typeof`/`typeof_unqual` 类型推导
@@ -146,6 +180,7 @@
 ### 基础架构完成
 
 #### 初始模块建立
+
 - **01_Core_Knowledge_System** - 核心知识体系 (50+文件)
 - **02_Formal_Semantics_and_Physics** - 形式语义 (40文件)
 - **03_System_Technology_Domains** - 系统技术 (50+文件)
@@ -155,6 +190,7 @@
 - **07_Modern_Toolchain** - 现代工具链 (40+文件)
 
 #### 初始统计
+
 - Markdown文件: ~350
 - 总行数: ~180,000
 - 目录数: ~100
@@ -214,4 +250,4 @@
 
 ---
 
-*最后更新: 2026-03-15*
+*最后更新: 2026-03-16*

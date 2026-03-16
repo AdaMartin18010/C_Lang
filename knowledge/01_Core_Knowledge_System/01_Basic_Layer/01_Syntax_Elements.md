@@ -18,6 +18,45 @@
 
 ---
 
+## 🎯 概念定义
+
+### 1.1 语法元素（Syntax Elements）
+
+**严格定义**：构成C语言程序的基本结构单元，按照ISO/IEC 9899标准，C语言语法元素是指程序翻译过程中能被识别和处理的最小有意义单元。
+
+**形式化定义**：
+```
+语法元素 ∈ {词法单元(Token), 预处理标记(Preprocessing Token), 
+           翻译单元(Translation Unit)}
+```
+
+### 1.2 词法单元（Lexical Token）
+
+**严格定义**（C11标准 6.4）：源程序被词法分析器处理后产生的最小不可分割单元，是编译器语法分析的输入单位。
+
+**分类体系**：
+```
+词法单元(Token) ::= 关键字(Keyword) 
+                  | 标识符(Identifier) 
+                  | 常量(Constant) 
+                  | 字符串字面量(String Literal) 
+                  | 运算符(Operator) 
+                  | 分隔符(Punctuator)
+```
+
+### 1.3 语法单元（Syntactic Unit）
+
+**严格定义**：由词法单元按照特定规则组合而成的更高层次结构，包括表达式、语句、声明、定义等。
+
+**层次关系**：
+```
+字符(Character) → 词法单元(Token) → 语法单元(Syntactic Unit) 
+                → 声明/定义(Declaration/Definition) 
+                → 翻译单元(Translation Unit)
+```
+
+---
+
 ## 🧠 知识结构思维导图
 
 ```mermaid
@@ -45,6 +84,45 @@ mindmap
       链接
 ```
 
+### 语法元素层次结构详细图
+
+```mermaid
+graph TB
+    subgraph "翻译阶段"
+        T1[字符序列] --> T2[词法分析]
+        T2 --> T3[预处理标记]
+        T3 --> T4[词法单元]
+        T4 --> T5[语法分析]
+        T5 --> T6[语法单元]
+        T6 --> T7[翻译单元]
+    end
+    
+    subgraph "词法单元分类"
+        A[词法单元] --> B[标识符]
+        A --> C[关键字]
+        A --> D[常量]
+        A --> E[字符串字面量]
+        A --> F[运算符]
+        A --> G[分隔符]
+    end
+    
+    subgraph "属性维度"
+        P1[作用域] --> P1A[文件作用域]
+        P1 --> P1B[块作用域]
+        P1 --> P1C[函数作用域]
+        P1 --> P1D[函数原型作用域]
+        
+        P2[生命周期] --> P2A[静态存储期]
+        P2 --> P2B[自动存储期]
+        P2 --> P2C[动态存储期]
+        P2 --> P2D[线程存储期]
+        
+        P3[链接属性] --> P3A[外部链接]
+        P3 --> P3B[内部链接]
+        P3 --> P3C[无链接]
+    end
+```
+
 ---
 
 ## 📖 核心概念详解
@@ -67,7 +145,23 @@ int 变量名;          // Unicode标识符(C23)
 // int my name;      // 空格不允许
 ```
 
-#### 1.2 作用域与可见性
+#### 1.2 属性说明
+
+| 属性类别 | 属性值 | 说明 | 示例 |
+|:---------|:-------|:-----|:-----|
+| **作用域** | 文件作用域 | 在翻译单元内可见 | 全局变量 |
+| | 块作用域 | 在代码块内可见 | 局部变量 |
+| | 函数作用域 | 仅goto标签 | label: |
+| | 函数原型作用域 | 参数列表内 | void f(int x) |
+| **链接属性** | 外部链接 | 跨文件可见 | `int g_var;` |
+| | 内部链接 | 仅限当前文件 | `static int s_var;` |
+| | 无链接 | 无链接属性 | 局部变量 |
+| **命名空间** | 普通标识符 | 变量、函数、typedef | `int count;` |
+| | 标签命名空间 | goto标签 | `loop:` |
+| | 结构体/联合体/枚举标签 | 类型标签 | `struct Node` |
+| | 结构体/联合体成员 | 各自独立 | `struct { int x; }` |
+
+#### 1.3 作用域与可见性
 
 ```c
 // 文件作用域（外部链接）
@@ -86,6 +180,8 @@ void function(void) {
     }
 }
 ```
+
+---
 
 ### 2. 关键字 (Keywords)
 
@@ -141,6 +237,8 @@ void function(void) {
 | | | | nullptr | 空指针 |
 | | | | typeof | 类型推导 |
 | | | | true/false | 布尔字面量 |
+
+---
 
 ### 3. 常量 (Constants)
 
@@ -221,6 +319,8 @@ char32_t c32 = U'中';   // UTF-32
 wchar_t wc = L'中';     // 平台相关
 ```
 
+---
+
 ### 4. 字符串字面量
 
 #### 4.1 字符串基本
@@ -277,6 +377,103 @@ const char *read_only = "Hello";
 
 ---
 
+## 🔬 形式化描述（BNF/EBNF文法）
+
+### 5.1 标识符文法（C11 6.4.2）
+
+```ebnf
+identifier ::= identifier-nondigit
+             | identifier identifier-nondigit
+             | identifier digit
+
+identifier-nondigit ::= nondigit
+                      | universal-character-name
+                      | other implementation-defined characters
+
+nondigit ::= '_' | 'a' | 'b' | ... | 'z' | 'A' | 'B' | ... | 'Z'
+
+digit ::= '0' | '1' | ... | '9'
+
+universal-character-name ::= '\\u' hex-quad
+                           | '\\U' hex-quad hex-quad
+
+hex-quad ::= hex-digit hex-digit hex-digit hex-digit
+
+hex-digit ::= digit | 'a' | 'b' | 'c' | 'd' | 'e' | 'f' 
+                          | 'A' | 'B' | 'C' | 'D' | 'E' | 'F'
+```
+
+### 5.2 常量文法（C11 6.4.4）
+
+```ebnf
+constant ::= integer-constant
+           | floating-constant
+           | enumeration-constant
+           | character-constant
+
+integer-constant ::= decimal-constant integer-suffix?
+                   | octal-constant integer-suffix?
+                   | hexadecimal-constant integer-suffix?
+                   | binary-constant integer-suffix?   (* C23 *)
+
+decimal-constant ::= nonzero-digit | decimal-constant digit
+
+octal-constant ::= '0' | octal-constant octal-digit
+
+hexadecimal-constant ::= hexadecimal-prefix hexadecimal-digit-sequence
+
+hexadecimal-prefix ::= '0x' | '0X'
+
+binary-constant ::= binary-prefix binary-digit-sequence   (* C23 *)
+binary-prefix ::= '0b' | '0B'                             (* C23 *)
+
+integer-suffix ::= unsigned-suffix long-suffix?
+                 | unsigned-suffix long-long-suffix?
+                 | long-suffix unsigned-suffix?
+                 | long-long-suffix unsigned-suffix?
+
+unsigned-suffix ::= 'u' | 'U'
+long-suffix ::= 'l' | 'L'
+long-long-suffix ::= 'll' | 'LL'
+
+floating-constant ::= decimal-floating-constant
+                    | hexadecimal-floating-constant
+
+decimal-floating-constant ::= fractional-constant exponent-part? floating-suffix?
+                            | digit-sequence exponent-part floating-suffix?
+
+hexadecimal-floating-constant ::= hexadecimal-prefix hexadecimal-fractional-constant
+                                    binary-exponent-part floating-suffix?
+                                | hexadecimal-prefix hexadecimal-digit-sequence
+                                    binary-exponent-part floating-suffix?
+
+binary-exponent-part ::= 'p' sign? digit-sequence
+                       | 'P' sign? digit-sequence
+
+sign ::= '+' | '-'
+floating-suffix ::= 'f' | 'F' | 'l' | 'L'
+```
+
+### 5.3 字符串字面量文法（C11 6.4.5）
+
+```ebnf
+string-literal ::= encoding-prefix? '"' s-char-sequence? '"'
+
+encoding-prefix ::= 'u8'  (* UTF-8 *)
+                  | 'u'   (* UTF-16 *)
+                  | 'U'   (* UTF-32 *)
+                  | 'L'   (* 宽字符 *)
+
+s-char-sequence ::= s-char | s-char-sequence s-char
+
+s-char ::= any member of the source character set except
+           the double-quote, backslash, or newline character
+         | escape-sequence
+         | universal-character-name
+```
+
+---
+
 ## 🔄 多维矩阵对比
 
 ### 转义序列参考表
@@ -296,9 +493,22 @@ const char *read_only = "Hello";
 | `\?` | 问号 | 63 |
 | `\0` | 空字符 | 0 |
 
+### 语法元素属性矩阵
+
+| 语法元素 | 作用域 | 存储期 | 链接属性 | 命名空间 |
+|:---------|:-------|:-------|:---------|:---------|
+| 全局变量 | 文件 | 静态 | 外部 | 普通 |
+| static全局变量 | 文件 | 静态 | 内部 | 普通 |
+| 局部变量 | 块 | 自动 | 无 | 普通 |
+| static局部变量 | 块 | 静态 | 无 | 普通 |
+| 函数参数 | 函数原型 | 自动 | 无 | 普通 |
+| 标签 | 函数 | - | - | 标签 |
+| 结构体标签 | 文件/块 | - | - | 标签 |
+| 枚举常量 | 文件/块 | 静态 | 见定义 | 普通 |
+
 ---
 
-## ⚠️ 常见陷阱
+## ⚠️ 常见陷阱与反例
 
 ### 陷阱 SYN01: 字符与字符串混淆
 
@@ -322,6 +532,56 @@ int y = 0123;  // 83 in decimal
 int z = 123;   // 十进制
 ```
 
+### 陷阱 SYN03: 标识符保留字冲突
+
+```c
+// ❌ 使用保留标识符（以_开头后跟大写字母或另一个_）
+int _Reserved;      // 保留给实现使用
+int __reserved;     // 双下划线保留
+int reserved__;     // 末尾双下划线也保留
+
+// ✅ 安全命名
+int reserved;
+int my_reserved;
+int reserved_count;
+```
+
+### 陷阱 SYN04: 多字节字符字面量
+
+```c
+// ❌ 实现定义行为
+char c = 'AB';  // 多字符常量，值不确定
+
+// ✅ 使用正确类型
+char16_t c16 = u'A';   // UTF-16字符
+char32_t c32 = U'中';  // UTF-32字符
+```
+
+### 陷阱 SYN05: 字符串字面量拼接顺序
+
+```c
+// ❌ 未定义行为？不，是未指定行为
+const char *s = "Hello" " " "World";  // OK，翻译阶段6拼接
+
+// ✅ 明确意图
+const char *s1 = "Hello World";  // 直接写完整
+
+// 注意：不同编码前缀不能拼接
+// const char *err = u8"Hello" u"World";  // 错误！
+```
+
+### 陷阱 SYN06: 浮点常量默认类型
+
+```c
+// ⚠️ 注意默认类型
+double d = 3.14;    // double（默认）
+float f = 3.14f;    // 显式float
+long double ld = 3.14L;  // 显式long double
+
+// ❌ 精度损失风险
+float f2 = 3.141592653589793;  // 先转double，再转float，可能截断
+```
+
 ---
 
 ## ✅ 质量验收清单
@@ -330,9 +590,13 @@ int z = 123;   // 十进制
 - [x] 关键字演进表
 - [x] 常量类型详解
 - [x] 字符串安全使用
+- [x] 形式化BNF/EBNF文法定义
+- [x] 语法元素属性矩阵
+- [x] 常见语法错误反例
 
 ---
 
 > **更新记录**
 >
 > - 2025-03-09: 初版创建
+> - 2026-03-16: 深化内容，添加概念定义、形式化文法、属性说明和反例

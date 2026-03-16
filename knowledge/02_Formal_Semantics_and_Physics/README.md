@@ -27,7 +27,7 @@
 | [00_Core_Semantics_Foundations/05_Undefined_Behavior_Semantics.md](./00_Core_Semantics_Foundations/05_Undefined_Behavior_Semantics.md) | 未定义行为语义边界 | L6 | C标准 §3.4.3 | 468 |
 
 **前置知识**: 数理逻辑、集合论、递归论
-**关联**: [11_CompCert_Verification](../11_CompCert_Verification/README.md)
+**关联**: [11_CompCert_Verification](./11_CompCert_Verification/README.md)
 
 ---
 
@@ -73,16 +73,16 @@
 
 ---
 
-### 03_Compiler_Optimization - 编译器优化
+### 12_Compiler_Optimization - 编译器优化
 
 编译器优化技术的形式化分析。
 
 | 文件 | 主题 | 难度 | 参考来源 | 代码行数 |
 |:-----|:-----|:----:|:---------|:--------:|
-| [04_Auto_Vectorization.md](./03_Compiler_Optimization/04_Auto_Vectorization.md) | 自动向量化 | L5 | Intel Optimization Manual | 192 |
+| [04_Auto_Vectorization.md](./12_Compiler_Optimization/04_Auto_Vectorization.md) | 自动向量化 | L5 | Intel Optimization Manual | 192 |
 
 **前置知识**: 编译原理、SIMD指令集
-**关联**: [04_Industrial_Scenarios/04_5G_Baseband/01_SIMD_Vectorization](../04_Industrial_Scenarios/04_5G_Baseband/01_SIMD_Vectorization.md)
+**关联**: [04_Industrial_Scenarios/04_5G_Baseband/01_SIMD_Vectorization](../../04_Industrial_Scenarios/04_5G_Baseband/01_SIMD_Vectorization.md)
 
 ---
 
