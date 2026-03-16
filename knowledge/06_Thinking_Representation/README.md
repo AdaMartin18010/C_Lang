@@ -156,19 +156,19 @@ graph TB
 
 ### 遇到问题时
 
-1. 查阅 [01_Decision_Trees](./01_Decision_Trees/) 进行故障诊断
-2. 参考 [04_Case_Studies](./04_Case_Studies/) 看类似问题如何解决
+1. 查阅 [01_Decision_Trees](./01_Decision_Trees/README.md) 进行故障诊断
+2. 参考 [04_Case_Studies](./04_Case_Studies/README.md) 看类似问题如何解决
 
 ### 技术选型时
 
-1. 查阅 [02_Comparison_Matrices](./02_Comparison_Matrices/) 对比不同方案
+1. 查阅 [02_Comparison_Matrices](./02_Comparison_Matrices/README.md) 对比不同方案
 2. 参考 [06_Application_Scenarios](./06_Application_Scenarios/) 看场景匹配
 
 ### 学习新知识时
 
-1. 查看 [03_Mind_Maps](./03_Mind_Maps/) 了解知识结构
+1. 查看 [03_Mind_Maps](./03_Mind_Maps/README.md) 了解知识结构
 2. 跟随 [07_Knowledge_Graph/02_Learning_Paths.md](./07_Knowledge_Graph/02_Learning_Paths.md) 学习
-3. 理解 [05_Concept_Mappings](./05_Concept_Mappings/) 中的概念关联
+3. 理解 [05_Concept_Mappings](./05_Concept_Mappings/README.md) 中的概念关联
 
 ### 快速查找时
 
@@ -193,14 +193,14 @@ graph TB
 
 | 问题类型 | 推荐工具 | 文件 |
 |:---------|:---------|:-----|
-| "出错了怎么办？" | 决策树 | [01_Decision_Trees](./01_Decision_Trees/) |
-| "选A还是选B？" | 对比矩阵 | [02_Comparison_Matrices](./02_Comparison_Matrices/) |
-| "整体结构是什么？" | 思维导图 | [03_Mind_Maps](./03_Mind_Maps/) |
-| "实际怎么用？" | 案例研究 | [04_Case_Studies](./04_Case_Studies/) |
-| "这些概念什么关系？" | 概念映射 | [05_Concept_Mappings](./05_Concept_Mappings/) |
-| "适合什么场景？" | 应用场景 | [06_Application_Scenarios](./06_Application_Scenarios/) |
-| "从哪里开始学？" | 知识图谱 | [07_Knowledge_Graph](./07_Knowledge_Graph/) |
-| "怎么快速找到？" | 索引 | [08_Index](./08_Index/) |
+| "出错了怎么办？" | 决策树 | [01_Decision_Trees](./01_Decision_Trees/README.md) |
+| "选A还是选B？" | 对比矩阵 | [02_Comparison_Matrices](./02_Comparison_Matrices/README.md) |
+| "整体结构是什么？" | 思维导图 | [03_Mind_Maps](./03_Mind_Maps/README.md) |
+| "实际怎么用？" | 案例研究 | [04_Case_Studies](./04_Case_Studies/README.md) |
+| "这些概念什么关系？" | 概念映射 | [05_Concept_Mappings](./05_Concept_Mappings/README.md) |
+| "适合什么场景？" | 应用场景 | [06_Application_Scenarios](./06_Application_Scenarios/README.md) |
+| "从哪里开始学？" | 知识图谱 | [07_Knowledge_Graph](./07_Knowledge_Graph/README.md) |
+| "怎么快速找到？" | 索引 | [08_Index](./08_Index/README.md) |
 
 ---
 

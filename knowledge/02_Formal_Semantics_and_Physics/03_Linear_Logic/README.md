@@ -739,7 +739,9 @@ Curry-Howard-Lambek 对应:
 
 - [01_Linear_Logic_Theory.md](./01_Linear_Logic_Theory.md) - 线性逻辑理论基础
 - [02_Resource_Types.md](./02_Resource_Types.md) - 资源类型系统详解
-- [05_Game_Semantics目录](../01_Game_Semantics/) - 博弈语义与交互模型### 总结
+- [05_Game_Semantics目录](../01_Game_Semantics/README.md) - 博弈语义与交互模型
+
+### 总结
 
 线性逻辑为计算机科学提供了强大的理论基础：
 

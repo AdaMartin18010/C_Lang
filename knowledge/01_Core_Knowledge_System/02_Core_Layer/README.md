@@ -153,18 +153,18 @@
 
 ### 前置知识
 
-- **[← 01 Basic Layer: 基础层](../01_Basic_Layer/)** - 必须完成基础语法学习
+- **[← 01 Basic Layer: 基础层](../01_Basic_Layer/README.md)** - 必须完成基础语法学习
 - 需要熟练掌握数据类型、运算符、控制流
 
 ### 后续延伸
 
-- **[→ 03 Construction Layer: 构造层](../03_Construction_Layer/)** - 结构体、联合体、预处理器
-- **[→ 04 Standard Library Layer: 标准库层](../04_Standard_Library_Layer/)** - 标准库函数详解
-- **[→ 03 System Technology: 系统技术](../../03_System_Technology_Domains/)** - 线程、网络、并发
+- **[→ 03 Construction Layer: 构造层](../03_Construction_Layer/README.md)** - 结构体、联合体、预处理器
+- **[→ 04 Standard Library Layer: 标准库层](../04_Standard_Library_Layer/README.md)** - 标准库函数详解
+- **[→ 03 System Technology: 系统技术](../../03_System_Technology_Domains/README.md)** - 线程、网络、并发
 
 ### 横向关联
 
-- **[→ 05 Deep Structure: 内存模型](../../05_Deep_Structure_MetaPhysics/)** - 深入理解内存模型
+- **[→ 05 Deep Structure: 内存模型](../../05_Deep_Structure_MetaPhysics/README.md)** - 深入理解内存模型
 - **[→ 02 Formal Semantics: C11内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md)** - 并发内存模型
 - **[→ 06 Thinking: 指针内存映射](../../06_Thinking_Representation/05_Concept_Mappings/01_Pointer_Memory_Mapping.md)** - 可视化理解
 

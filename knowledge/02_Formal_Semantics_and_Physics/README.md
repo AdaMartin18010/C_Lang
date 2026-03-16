@@ -27,7 +27,7 @@
 | [00_Core_Semantics_Foundations/05_Undefined_Behavior_Semantics.md](./00_Core_Semantics_Foundations/05_Undefined_Behavior_Semantics.md) | 未定义行为语义边界 | L6 | C标准 §3.4.3 | 468 |
 
 **前置知识**: 数理逻辑、集合论、递归论
-**关联**: [11_CompCert_Verification](../11_CompCert_Verification/)
+**关联**: [11_CompCert_Verification](../11_CompCert_Verification/README.md)
 
 ---
 
@@ -55,7 +55,7 @@
 | [02_Bisimulation.md](./02_Coalgebraic_Methods/02_Bisimulation.md) | 互模拟关系 | L6 | Milner, Sangiorgi | 538 |
 
 **前置知识**: 范畴论、代数数据结构
-**关联**: [03_System_Technology_Domains/08_Distributed_Consensus](../03_System_Technology_Domains/08_Distributed_Consensus/)
+**关联**: [03_System_Technology_Domains/08_Distributed_Consensus](../03_System_Technology_Domains/08_Distributed_Consensus/README.md)
 
 ---
 
@@ -96,7 +96,7 @@
 | [02_Embodied_Cognition.md](./04_Cognitive_Representation/02_Embodied_Cognition.md) | 具身认知 | L5 | Lakoff, Nunez | 442 |
 
 **前置知识**: 认知心理学
-**关联**: [06_Thinking_Representation/01_Decision_Trees](../06_Thinking_Representation/01_Decision_Trees/)
+**关联**: [06_Thinking_Representation/01_Decision_Trees](../06_Thinking_Representation/01_Decision_Trees/README.md)
 
 ---
 
@@ -110,7 +110,7 @@
 | [02_Randomized_Algorithms.md](./05_Quantum_Random_Computing/02_Randomized_Algorithms.md) | 随机化算法 | L5 | Motwani, Raghavan | 447 |
 
 **前置知识**: 线性代数、概率论
-**关联**: [04_Industrial_Scenarios/06_Quantum_Computing](../04_Industrial_Scenarios/06_Quantum_Computing/)
+**关联**: [04_Industrial_Scenarios/06_Quantum_Computing](../04_Industrial_Scenarios/06_Quantum_Computing/README.md)
 
 ---
 
@@ -140,7 +140,7 @@ C语言构造到机器代码的形式化映射。
 | [README.md](./07_Microarchitecture/README.md) | 微架构与性能编程 | L5 | Intel/AMD手册 | 692 |
 
 **前置知识**: 计算机体系结构
-**关联**: [04_Industrial_Scenarios/03_High_Frequency_Trading](../04_Industrial_Scenarios/03_High_Frequency_Trading/)
+**关联**: [04_Industrial_Scenarios/03_High_Frequency_Trading](../04_Industrial_Scenarios/03_High_Frequency_Trading/README.md)
 
 ---
 
@@ -155,7 +155,7 @@ CPU微架构、内存层次结构、缓存一致性。
 | [05_Modern_CPU_Architectures_2024.md](./09_Physical_Machine_Layer/05_Modern_CPU_Architectures_2024.md) | 现代CPU架构2024 | L5 | Intel/AMD/ARM手册 | 18956 |
 
 **前置知识**: 数字逻辑、计算机组成原理
-**关联**: [04_Industrial_Scenarios/03_High_Frequency_Trading](../04_Industrial_Scenarios/03_High_Frequency_Trading/)
+**关联**: [04_Industrial_Scenarios/03_High_Frequency_Trading](../04_Industrial_Scenarios/03_High_Frequency_Trading/README.md)
 
 ---
 
@@ -227,9 +227,9 @@ graph TB
 
 | 目标 | 路径 |
 |:-----|:-----|
-| 核心基础 | [01_Core_Knowledge_System](../01_Core_Knowledge_System/) |
-| 系统技术 | [03_System_Technology_Domains](../03_System_Technology_Domains/) |
-| 深层结构 | [05_Deep_Structure_MetaPhysics](../05_Deep_Structure_MetaPhysics/) |
+| 核心基础 | [01_Core_Knowledge_System](../01_Core_Knowledge_System/README.md) |
+| 系统技术 | [03_System_Technology_Domains](../03_System_Technology_Domains/README.md) |
+| 深层结构 | [05_Deep_Structure_MetaPhysics](../05_Deep_Structure_MetaPhysics/README.md) |
 
 ---
 

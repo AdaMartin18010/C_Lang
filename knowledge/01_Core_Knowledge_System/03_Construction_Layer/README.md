@@ -169,25 +169,25 @@ extern "C" {
 
 ### 前置知识
 
-- **[← 01 Basic Layer: 基础层](../01_Basic_Layer/)** - 语法、类型、控制流基础
-- **[← 02 Core Layer: 核心层](../02_Core_Layer/)** - 指针、内存管理是理解结构体的前提
+- **[← 01 Basic Layer: 基础层](../01_Basic_Layer/README.md)** - 语法、类型、控制流基础
+- **[← 02 Core Layer: 核心层](../02_Core_Layer/README.md)** - 指针、内存管理是理解结构体的前提
 
 ### 后续延伸
 
-- **[→ 04 Standard Library Layer: 标准库层](../04_Standard_Library_Layer/)** - 标准库数据结构和函数
-- **[→ 05 Engineering Layer: 工程层](../05_Engineering_Layer/)** - Makefile、构建系统
-- **[→ 03 System Technology: 内存数据库](../../03_System_Technology_Domains/11_In_Memory_Database/)** - B+树等高级数据结构
+- **[→ 04 Standard Library Layer: 标准库层](../04_Standard_Library_Layer/README.md)** - 标准库数据结构和函数
+- **[→ 05 Engineering Layer: 工程层](../05_Engineering_Layer/README.md)** - Makefile、构建系统
+- **[→ 03 System Technology: 内存数据库](../../03_System_Technology_Domains/11_In_Memory_Database/README.md)** - B+树等高级数据结构
 
 ### 横向关联
 
-- **[→ 02 Formal Semantics: 链接加载拓扑](../../02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/)** - 深入理解链接机制
-- **[→ 06 Thinking: 概念映射](../../06_Thinking_Representation/05_Concept_Mappings/)** - 可视化知识结构
-- **[→ 03 System: 数据结构实现](../../03_System_Technology_Domains/)** - 实际应用结构体
+- **[→ 02 Formal Semantics: 链接加载拓扑](../../02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/README.md)** - 深入理解链接机制
+- **[→ 06 Thinking: 概念映射](../../06_Thinking_Representation/05_Concept_Mappings/README.md)** - 可视化知识结构
+- **[→ 03 System: 数据结构实现](../../03_System_Technology_Domains/README.md)** - 实际应用结构体
 
 ### 工业场景应用
 
-- **[→ 04 Industrial: 汽车ABS](../../04_Industrial_Scenarios/01_Automotive_ABS/)** - 结构体在实时系统中的应用
-- **[→ 04 Industrial: 游戏引擎](../../04_Industrial_Scenarios/05_Game_Engine/)** - ECS架构中的结构体设计
+- **[→ 04 Industrial: 汽车ABS](../../04_Industrial_Scenarios/01_Automotive_ABS/README.md)** - 结构体在实时系统中的应用
+- **[→ 04 Industrial: 游戏引擎](../../04_Industrial_Scenarios/05_Game_Engine/README.md)** - ECS架构中的结构体设计
 
 ---
 

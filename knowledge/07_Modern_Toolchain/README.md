@@ -90,7 +90,7 @@
 | [02_Docker_C_Development.md](./03_CI_CD_DevOps/02_Docker_C_Development.md) | Docker容器化 | L3 | ⭐⭐⭐⭐⭐ |
 | [03_GitLab_CI_C.md](./03_CI_CD_DevOps/03_GitLab_CI_C.md) | GitLab CI/CD | L3 | ⭐⭐⭐⭐ |
 | [04_DevSecOps_Integration.md](./03_CI_CD_DevOps/04_DevSecOps_Integration.md) | DevSecOps集成 | L4 | ⭐⭐⭐⭐ |
-| [05_CI_CD_Templates/](./03_CI_CD_DevOps/05_CI_CD_Templates/) | CI/CD模板库 | L2 | ⭐⭐⭐⭐⭐ |
+| [05_CI_CD_Templates/](./03_CI_CD_DevOps/05_CI_CD_Templates/README.md) | CI/CD模板库 | L2 | ⭐⭐⭐⭐⭐ |
 
 **前置知识**: Git基础、YAML语法
 **关键决策**: 选择合适的CI/CD平台
@@ -153,9 +153,9 @@ C语言依赖管理解决方案。
 | 模板 | 构建系统 | 特点 |
 |:-----|:---------|:-----|
 | [01_Modern_C_Project_Template.md](./06_Project_Templates/01_Modern_C_Project_Template.md) | 通用 | 项目结构最佳实践 |
-| [02_CMake_Project_Template/](./06_Project_Templates/02_CMake_Project_Template/) | CMake | 现代CMake模板 |
-| [03_Meson_Project_Template/](./06_Project_Templates/03_Meson_Project_Template/) | Meson | Meson项目模板 |
-| [04_Xmake_Project_Template/](./06_Project_Templates/04_Xmake_Project_Template/) | Xmake | Xmake项目模板 |
+| [02_CMake_Project_Template/](./06_Project_Templates/02_CMake_Project_Template/README.md) | CMake | 现代CMake模板 |
+| [03_Meson_Project_Template/](./06_Project_Templates/03_Meson_Project_Template/README.md) | Meson | Meson项目模板 |
+| [04_Xmake_Project_Template/](./06_Project_Templates/04_Xmake_Project_Template/README.md) | Xmake | Xmake项目模板 |
 
 **前置知识**: 构建系统选择
 **使用方法**: 复制模板开始新项目
@@ -212,9 +212,9 @@ Phase 4: 质量门禁设置 (1周)
 
 | 目标模块 | 关系 |
 |:---------|:-----|
-| [01_Core_Knowledge_System](../01_Core_Knowledge_System/) | 工具链是语言知识的延伸 |
-| [05_Engineering_Layer](../01_Core_Knowledge_System/05_Engineering_Layer/) | 本模块是其现代化扩展 |
-| [04_Industrial_Scenarios](../04_Industrial_Scenarios/) | 工具链在工业场景中的应用 |
+| [01_Core_Knowledge_System](../01_Core_Knowledge_System/README.md) | 工具链是语言知识的延伸 |
+| [05_Engineering_Layer](../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 本模块是其现代化扩展 |
+| [04_Industrial_Scenarios](../04_Industrial_Scenarios/README.md) | 工具链在工业场景中的应用 |
 
 ---
 

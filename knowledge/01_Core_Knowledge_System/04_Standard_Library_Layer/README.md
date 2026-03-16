@@ -30,7 +30,7 @@
 | 03 | [03_C11_Library.md](./03_C11_Library.md) | C11标准库 | ⭐⭐⭐⭐ | stdalign、stdatomic、stdnoreturn、threads、uchar、边界检查接口 | 6个 |
 | 04 | [04_C17_C23_Library.md](./04_C17_C23_Library.md) | C17/C23标准库 | ⭐⭐⭐ | C17修复、C23新特性(constexpr、typeof、nullptr) | - |
 | 10 | [10_Threads_C11.md](./10_Threads_C11.md) | C11线程库 | ⭐⭐⭐⭐ | threads.h、互斥锁、条件变量、线程本地存储 | threads.h |
-| - | [01_Standard_IO/](./01_Standard_IO/) | 标准I/O子目录 | ⭐⭐⭐ | 文件操作详解 | stdio.h |
+| - | [01_Standard_IO/](./01_Standard_IO/README.md) | 标准I/O子目录 | ⭐⭐⭐ | 文件操作详解 | stdio.h |
 
 ### 子目录
 
@@ -202,21 +202,21 @@
 
 ### 前置知识
 
-- **[← 01 Basic Layer: 基础层](../01_Basic_Layer/)** - 数据类型、运算符基础
-- **[← 02 Core Layer: 核心层](../02_Core_Layer/)** - 指针、内存管理是理解标准库的前提
-- **[← 03 Construction Layer: 构造层](../03_Construction_Layer/)** - 结构体、联合体相关知识
+- **[← 01 Basic Layer: 基础层](../01_Basic_Layer/README.md)** - 数据类型、运算符基础
+- **[← 02 Core Layer: 核心层](../02_Core_Layer/README.md)** - 指针、内存管理是理解标准库的前提
+- **[← 03 Construction Layer: 构造层](../03_Construction_Layer/README.md)** - 结构体、联合体相关知识
 
 ### 后续延伸
 
-- **[→ 05 Engineering Layer: 工程层](../05_Engineering_Layer/)** - 构建系统、代码质量
-- **[→ 06 Advanced Layer: 高级层](../06_Advanced_Layer/)** - 未定义行为、可移植性
-- **[→ 07 Modern C: 现代C](../07_Modern_C/)** - C11/C17/C23特性详解
+- **[→ 05 Engineering Layer: 工程层](../05_Engineering_Layer/README.md)** - 构建系统、代码质量
+- **[→ 06 Advanced Layer: 高级层](../06_Advanced_Layer/README.md)** - 未定义行为、可移植性
+- **[→ 07 Modern C: 现代C](../07_Modern_C/README.md)** - C11/C17/C23特性详解
 
 ### 横向关联
 
 - **[→ 03 System Technology: POSIX线程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/01_POSIX_Threads.md)** - C11线程与POSIX线程对比
-- **[→ 05 Deep Structure: 标准库物理](../../05_Deep_Structure_MetaPhysics/06_Standard_Library_Physics/)** - malloc、memcpy等底层实现原理
-- **[→ 06 Thinking: 对比矩阵目录](../../06_Thinking_Representation/02_Comparison_Matrices/)** - 类型、同步、I/O等对比
+- **[→ 05 Deep Structure: 标准库物理](../../05_Deep_Structure_MetaPhysics/06_Standard_Library_Physics/README.md)** - malloc、memcpy等底层实现原理
+- **[→ 06 Thinking: 对比矩阵目录](../../06_Thinking_Representation/02_Comparison_Matrices/README.md)** - 类型、同步、I/O等对比
 
 ### 问题诊断
 

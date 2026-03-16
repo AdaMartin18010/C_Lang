@@ -139,27 +139,27 @@
 
 | 阶段 | 描述 | 目录 | 时间 | 文件数 | 难度 |
 |:-----|:-----|:-----|:----:|:------:|:----:|
-| 🌱 入门 | 零基础起步 | [01_Basic_Layer](./01_Core_Knowledge_System/01_Basic_Layer/) | 20h | 4 | ⭐ |
-| 🌿 基础 | 核心语法 | [02_Core_Layer](./01_Core_Knowledge_System/02_Core_Layer/) | 30h | 5 | ⭐⭐ |
-| 🌲 进阶 | 数据结构 | [03_Construction_Layer](./01_Core_Knowledge_System/03_Construction_Layer/) | 20h | 3 | ⭐⭐⭐ |
-| 📚 标准库 | C89-C23演进 | [04_Standard_Library_Layer](./01_Core_Knowledge_System/04_Standard_Library_Layer/) | 25h | 6 | ⭐⭐⭐ |
-| 🏗️ 工程 | 构建调试优化 | [05_Engineering_Layer](./01_Core_Knowledge_System/05_Engineering_Layer/) | 30h | 5 | ⭐⭐⭐⭐ |
-| 🌳 高级 | 系统编程 | [06_Advanced_Layer](./01_Core_Knowledge_System/06_Advanced_Layer/) | 30h | 3 | ⭐⭐⭐⭐ |
-| 🏔️ 专家 | 系统实现 | [03_System_Technology_Domains](./03_System_Technology_Domains/) | 100h | 33 | ⭐⭐⭐⭐⭐ |
-| 🔬 大师 | 形式理论 | [05_Deep_Structure_MetaPhysics](./05_Deep_Structure_MetaPhysics/) | 150h | 21 | ⭐⭐⭐⭐⭐ |
+| 🌱 入门 | 零基础起步 | [01_Basic_Layer](./01_Core_Knowledge_System/01_Basic_Layer/README.md) | 20h | 4 | ⭐ |
+| 🌿 基础 | 核心语法 | [02_Core_Layer](./01_Core_Knowledge_System/02_Core_Layer/README.md) | 30h | 5 | ⭐⭐ |
+| 🌲 进阶 | 数据结构 | [03_Construction_Layer](./01_Core_Knowledge_System/03_Construction_Layer/README.md) | 20h | 3 | ⭐⭐⭐ |
+| 📚 标准库 | C89-C23演进 | [04_Standard_Library_Layer](./01_Core_Knowledge_System/04_Standard_Library_Layer/README.md) | 25h | 6 | ⭐⭐⭐ |
+| 🏗️ 工程 | 构建调试优化 | [05_Engineering_Layer](./01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 30h | 5 | ⭐⭐⭐⭐ |
+| 🌳 高级 | 系统编程 | [06_Advanced_Layer](./01_Core_Knowledge_System/06_Advanced_Layer/README.md) | 30h | 3 | ⭐⭐⭐⭐ |
+| 🏔️ 专家 | 系统实现 | [03_System_Technology_Domains](./03_System_Technology_Domains/README.md) | 100h | 33 | ⭐⭐⭐⭐⭐ |
+| 🔬 大师 | 形式理论 | [05_Deep_Structure_MetaPhysics](./05_Deep_Structure_MetaPhysics/README.md) | 150h | 21 | ⭐⭐⭐⭐⭐ |
 
 ### 2.2 按应用场景
 
 | 场景 | 目录 | 关键文件 | 文件数 | 前置要求 |
 |:-----|:-----|:---------|:------:|:---------|
-| 嵌入式开发 | [04_Industrial_Scenarios/01_Automotive_ABS](./04_Industrial_Scenarios/01_Automotive_ABS/) | ABS, AUTOSAR, 硬实时 | 2 | 指针、内存、中断 |
-| 高性能计算 | [04_Industrial_Scenarios/04_5G_Baseband](./04_Industrial_Scenarios/04_5G_Baseband/) | SIMD, NEON, DMA | 2 | 并发、向量化 |
-| 网络编程 | [03_System_Technology_Domains/13_RDMA_Network](./03_System_Technology_Domains/13_RDMA_Network/) | Verbs API, Socket | 5 | 系统调用、内存 |
-| 游戏开发 | [04_Industrial_Scenarios/05_Game_Engine](./04_Industrial_Scenarios/05_Game_Engine/) | GPU内存, ECS架构 | 3 | 数据结构、并发 |
-| 安全启动 | [03_System_Technology_Domains/06_Security_Boot](./03_System_Technology_Domains/06_Security_Boot/) | TrustZone, TPM2 | 5 | 系统编程、加密 |
-| 形式验证 | [05_Deep_Structure_MetaPhysics/03_Verification_Energy](./05_Deep_Structure_MetaPhysics/03_Verification_Energy/) | Coq, 分离逻辑 | 2 | 形式语义、逻辑 |
-| 数据库 | [03_System_Technology_Domains/11_In_Memory_Database](./03_System_Technology_Domains/11_In_Memory_Database/) | B+树, LRU, RESP | 3 | 数据结构、网络 |
-| 虚拟化 | [03_System_Technology_Domains/01_Virtual_Machine_Interpreter](./03_System_Technology_Domains/01_Virtual_Machine_Interpreter/) | 字节码VM, 寄存器VM | 2 | 编译原理、汇编 |
+| 嵌入式开发 | [04_Industrial_Scenarios/01_Automotive_ABS](./04_Industrial_Scenarios/01_Automotive_ABS/README.md) | ABS, AUTOSAR, 硬实时 | 2 | 指针、内存、中断 |
+| 高性能计算 | [04_Industrial_Scenarios/04_5G_Baseband](./04_Industrial_Scenarios/04_5G_Baseband/README.md) | SIMD, NEON, DMA | 2 | 并发、向量化 |
+| 网络编程 | [03_System_Technology_Domains/13_RDMA_Network](./03_System_Technology_Domains/13_RDMA_Network/README.md) | Verbs API, Socket | 5 | 系统调用、内存 |
+| 游戏开发 | [04_Industrial_Scenarios/05_Game_Engine](./04_Industrial_Scenarios/05_Game_Engine/README.md) | GPU内存, ECS架构 | 3 | 数据结构、并发 |
+| 安全启动 | [03_System_Technology_Domains/06_Security_Boot](./03_System_Technology_Domains/06_Security_Boot/README.md) | TrustZone, TPM2 | 5 | 系统编程、加密 |
+| 形式验证 | [05_Deep_Structure_MetaPhysics/03_Verification_Energy](./05_Deep_Structure_MetaPhysics/03_Verification_Energy/README.md) | Coq, 分离逻辑 | 2 | 形式语义、逻辑 |
+| 数据库 | [03_System_Technology_Domains/11_In_Memory_Database](./03_System_Technology_Domains/11_In_Memory_Database/README.md) | B+树, LRU, RESP | 3 | 数据结构、网络 |
+| 虚拟化 | [03_System_Technology_Domains/01_Virtual_Machine_Interpreter](./03_System_Technology_Domains/01_Virtual_Machine_Interpreter/README.md) | 字节码VM, 寄存器VM | 2 | 编译原理、汇编 |
 
 ### 2.3 按问题类型
 
@@ -170,8 +170,8 @@
 | 性能瓶颈分析 | [性能瓶颈分析决策树](./06_Thinking_Representation/01_Decision_Trees/03_Performance_Bottleneck.md) | 1小时 |
 | 并发调试 | [并发调试决策树](./06_Thinking_Representation/01_Decision_Trees/05_Concurrency_Debug.md) | 2小时 |
 | 编译链接错误 | [编译链接决策树](./06_Thinking_Representation/01_Decision_Trees/04_Compilation_Error.md) | 15分钟 |
-| 技术选型对比 | [对比矩阵集合](./06_Thinking_Representation/02_Multidimensional_Matrix/) | 即时 |
-| 概念理解映射 | [概念映射集合](./06_Thinking_Representation/05_Concept_Mappings/) | 即时 |
+| 技术选型对比 | [对比矩阵集合](./06_Thinking_Representation/02_Multidimensional_Matrix/README.md) | 即时 |
+| 概念理解映射 | [概念映射集合](./06_Thinking_Representation/05_Concept_Mappings/README.md) | 即时 |
 
 ---
 
