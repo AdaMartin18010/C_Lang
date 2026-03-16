@@ -821,7 +821,9 @@ graph TD
 
 | 标准 | 组织 | 适用范围 | 核心要求 | 参考文档 |
 |:-----|:-----|:---------|:---------|:---------|
+| **MISRA C:2023** | MISRA | 安全关键系统 | C11/C17编码规范(220条规则) | [MISRA_C_2023/README.md](./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) |
 | **MISRA C:2012** | 汽车工业软件可靠性协会 | 汽车电子 | 编码规范、安全检查 | [01_Automotive_ABS/01_ABS_System.md](./04_Industrial_Scenarios/01_Automotive_ABS/01_ABS_System.md) |
+| **IEEE 754-2019** | IEEE | 浮点运算 | 浮点数表示与运算标准 | [IEEE_754_Floating_Point/](./01_Core_Knowledge_System/01_Basic_Layer/IEEE_754_Floating_Point/) |
 | **CERT C** | SEI/CMU | 安全关键系统 | 安全编码标准 | [02_Code_Quality.md](./01_Core_Knowledge_System/05_Engineering_Layer/02_Code_Quality.md) |
 | **ISO 26262** | ISO | 汽车功能安全 | ASIL等级、安全生命周期 | [02_Hard_RealTime.md](./04_Industrial_Scenarios/01_Automotive_ABS/02_Hard_RealTime.md) |
 | **DO-178C** | RTCA | 航空软件 | 软件认证、验证 | - |
@@ -937,7 +939,23 @@ graph TD
 │   ├── 04_High_Performance_Computing.md     # 高性能计算
 │   └── README.md
 ├── 09_Safety_Standards/                     # 安全标准 ⭐NEW
-│   └── README.md
+│   ├── README.md
+│   ├── MISRA_C_2023/                        # MISRA C:2023 (220条规则)
+│   │   ├── README.md
+│   │   ├── 00_MISRA_C_2023_Index.md         # 规则索引
+│   │   ├── 01_MISRA_C_2023_Rules_1-5.md     # Rules 1.1-1.5, 2.1-2.7
+│   │   ├── 02_MISRA_C_2023_Rules_2.md       # Rules 2.1-2.7
+│   │   ├── 03_MISRA_C_2023_Rules_3.md       # Rules 3.1-3.4
+│   │   ├── 04_MISRA_C_2023_Rules_4.md       # Rules 4.1-4.5
+│   │   ├── 05_MISRA_C_2023_Rules_5.md       # Rules 5.1-5.9
+│   │   ├── 06_MISRA_C_2023_Rules_6.md       # Rules 6.1-6.10
+│   │   ├── 07_MISRA_C_2023_Rules_7.md       # Rules 7.1-7.5
+│   │   ├── 08_MISRA_C_2023_Rules_8.md       # Rules 8.1-8.15
+│   │   └── 09_MISRA_C_2023_Rules_9.md       # Rules 9.1-9.5
+│   └── IEEE_754_Floating_Point/               # IEEE 754-2019
+│       ├── README.md
+│       ├── 01_IEEE_754_Basics.md            # 基础格式
+│       └── 02_IEEE_754_Operations.md        # 运算与舍入
 └── README.md                                # 模块说明
 ```
 

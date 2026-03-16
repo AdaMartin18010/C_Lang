@@ -135,10 +135,16 @@ void demonstrate_types(void)
     uintptr_t uptr = 0;              // 无符号版本
 
     /* ===== 浮点类型 ===== */
+    // IEEE 754 标准详解见: IEEE_754_Floating_Point/
 
-    float f = 3.14159f;              // 单精度，IEEE 754
-    double d = 3.141592653589793;    // 双精度
+    float f = 3.14159f;              // 单精度(binary32)，IEEE 754
+    double d = 3.141592653589793;    // 双精度(binary64)，IEEE 754
     long double ld = 3.14159265358979323846L;  // 扩展精度
+
+    // 特殊值
+    float inf = INFINITY;            // 正无穷
+    float nan = NAN;                 // 非数字
+    float eps = FLT_EPSILON;         // 机器精度(~1.19e-07)
 
     // 复数类型 (C99)
     float complex z = 1.0f + 2.0f*I;
