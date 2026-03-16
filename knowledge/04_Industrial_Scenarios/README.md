@@ -98,9 +98,9 @@
 
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
-| [01_Radiation_Hardening.md](./09_Space_Computing/01_Radiation_Hardening.md) | 抗辐射加固 | L5 | NASA Standards |
-| [01_EDAC_Memory.md](./09_Space_Computing/01_EDAC_Memory.md) | EDAC内存 | L5 | Hamming Codes |
-| [02_TMR_Voting.md](./09_Space_Computing/02_TMR_Voting.md) | TMR表决 | L5 | Fault Tolerance |
+| [01_Radiation_Hardening.md](./11_Space_Computing/01_Radiation_Hardening.md) | 抗辐射加固 | L5 | NASA Standards |
+| [01_EDAC_Memory.md](./11_Space_Computing/01_EDAC_Memory.md) | EDAC内存 | L5 | Hamming Codes |
+| [02_TMR_Voting.md](./11_Space_Computing/02_TMR_Voting.md) | TMR表决 | L5 | Fault Tolerance |
 
 **关联标准**: NASA-STD-8719.13, ECSS-Q-ST-60-02C
 
@@ -123,8 +123,8 @@
 
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
-| [01_DNA_Synthesis.md](./09_DNA_Storage/01_DNA_Synthesis.md) | DNA合成 | L5 | Nature DNA Storage |
-| [02_Error_Correction_Coding.md](./09_DNA_Storage/02_Error_Correction_Coding.md) | 纠错编码 | L5 | Reed-Solomon |
+| [01_DNA_Synthesis.md](./10_DNA_Storage/01_DNA_Synthesis.md) | DNA合成 | L5 | Nature DNA Storage |
+| [02_Error_Correction_Coding.md](./10_DNA_Storage/02_Error_Correction_Coding.md) | 纠错编码 | L5 | Reed-Solomon |
 
 ---
 

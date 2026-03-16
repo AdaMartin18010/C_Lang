@@ -56,14 +56,14 @@
 
 ---
 
-### 04_Self_Modifying_Code - 自修改代码
+### 12_Self_Modifying_Code - 自修改代码
 
 运行时代码生成。
 
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
-| [01_JIT_Basics.md](./04_Self_Modifying_Code/01_JIT_Basics.md) | JIT基础 | L6 | LLVM ORC |
-| [02_Tracing_JIT.md](./04_Self_Modifying_Code/02_Tracing_JIT.md) | 追踪JIT | L6 | LuaJIT, PyPy |
+| [01_JIT_Basics.md](./12_Self_Modifying_Code/01_JIT_Basics.md) | JIT基础 | L6 | LLVM ORC |
+| [02_Tracing_JIT.md](./12_Self_Modifying_Code/02_Tracing_JIT.md) | 追踪JIT | L6 | LuaJIT, PyPy |
 | [03_Binary_Translation.md](03_Binary_Translation.md) | 二进制翻译 | L6 | QEMU, Rosetta ✅ |
 | [04_Sandboxing.md](04_Sandboxing.md) | 沙箱技术 | L5 | WebAssembly ✅ |
 

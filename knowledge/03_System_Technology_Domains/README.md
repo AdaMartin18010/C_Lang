@@ -19,7 +19,7 @@
 | [04_Garbage_Collection.md](04_Garbage_Collection.md) | 垃圾回收 | L5 | Go GC, .NET GC ✅ |
 
 **前置知识**: [01_Core_Knowledge_System](../01_Core_Knowledge_System/README.md)
-**关联**: [05_Deep_Structure_MetaPhysics/04_Self_Modifying_Code](../05_Deep_Structure_MetaPhysics/04_Self_Modifying_Code/README.md)
+**关联**: [05_Deep_Structure_MetaPhysics/04_Self_Modifying_Code](../05_Deep_Structure_MetaPhysics/12_Self_Modifying_Code/README.md)
 
 ---
 

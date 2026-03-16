@@ -556,7 +556,7 @@ graph TD
 | 进程控制 | [01_OS_Kernel.md](./01_Core_Knowledge_System/08_Application_Domains/01_OS_Kernel.md) | fork/exec/wait | ⭐⭐⭐⭐ |
 | 进程通信 | [01_OS_Kernel.md](./01_Core_Knowledge_System/08_Application_Domains/01_OS_Kernel.md) | pipe/shm/msg | ⭐⭐⭐⭐ |
 | 信号处理 | [01_OS_Kernel.md](./01_Core_Knowledge_System/08_Application_Domains/01_OS_Kernel.md) | signal/sigaction | ⭐⭐⭐⭐ |
-| 内存映射 | [01_Page_Table_Operations.md](./04_Industrial_Scenarios/02_Linux_Kernel/01_Page_Table_Operations.md) | mmap/munmap | ⭐⭐⭐⭐ |
+| 内存映射 | [01_Page_Table_Operations.md](./04_Industrial_Scenarios/13_Linux_Kernel/01_Page_Table_Operations.md) | mmap/munmap | ⭐⭐⭐⭐ |
 | 网络套接字 | [15_Network_Programming/01_Socket_Programming.md](./03_System_Technology_Domains/15_Network_Programming/01_Socket_Programming.md) | socket/bind/listen | ⭐⭐⭐ |
 | IO多路复用 | [15_Network_Programming/01_Socket_Programming.md](./03_System_Technology_Domains/15_Network_Programming/01_Socket_Programming.md) | select/poll/epoll | ⭐⭐⭐⭐ |
 
@@ -652,10 +652,10 @@ graph TD
 
 | 知识点 | 核心问题 | 参考文档 | 出现频率 |
 |:-------|:---------|:---------|:--------:|
-| 虚拟内存 | 页表/TLB/缺页中断 | [01_Page_Table_Operations.md](./04_Industrial_Scenarios/02_Linux_Kernel/01_Page_Table_Operations.md) | ⭐⭐⭐⭐⭐ |
+| 虚拟内存 | 页表/TLB/缺页中断 | [01_Page_Table_Operations.md](./04_Industrial_Scenarios/13_Linux_Kernel/01_Page_Table_Operations.md) | ⭐⭐⭐⭐⭐ |
 | 无锁编程 | CAS/ABA问题/内存序 | [03_Lockless_Ring_Buffer_SPSC_MPMC.md](./03_System_Technology_Domains/09_High_Performance_Log/03_Lockless_Ring_Buffer_SPSC_MPMC.md) | ⭐⭐⭐⭐⭐ |
 | 性能优化 | 缓存优化/向量化/分支预测 | [03_Performance_Optimization.md](./01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md) | ⭐⭐⭐⭐⭐ |
-| 编译器优化 | 内联/循环展开/向量化 | [04_Auto_Vectorization.md](./02_Formal_Semantics_and_Physics/03_Compiler_Optimization/04_Auto_Vectorization.md) | ⭐⭐⭐⭐ |
+| 编译器优化 | 内联/循环展开/向量化 | [04_Auto_Vectorization.md](./02_Formal_Semantics_and_Physics/12_Compiler_Optimization/04_Auto_Vectorization.md) | ⭐⭐⭐⭐ |
 | 嵌入式系统 | 中断处理/内存布局/启动流程 | [02_Embedded_Systems.md](./01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | ⭐⭐⭐⭐ |
 | 形式化方法 | 霍尔逻辑/分离逻辑 | [02_Separation_Logic_Entropy.md](./05_Deep_Structure_MetaPhysics/04_Formal_Verification_Energy/02_Separation_Logic_Entropy.md) | ⭐⭐⭐ |
 | 内核编程 | 模块/字符设备/系统调用 | [01_OS_Kernel.md](./01_Core_Knowledge_System/08_Application_Domains/01_OS_Kernel.md) | ⭐⭐⭐⭐ |
@@ -714,7 +714,7 @@ graph TD
 
 | 项目名称 | 核心技能 | 难度 | 预计代码量 | 参考文档 |
 |:---------|:---------|:----:|:----------:|:---------|
-| **JIT编译器** | 代码生成、自修改代码 | ⭐⭐⭐⭐⭐ | 15000行 | [01_JIT_Basics.md](./05_Deep_Structure_MetaPhysics/04_Self_Modifying_Code/01_JIT_Basics.md) |
+| **JIT编译器** | 代码生成、自修改代码 | ⭐⭐⭐⭐⭐ | 15000行 | [01_JIT_Basics.md](./05_Deep_Structure_MetaPhysics/12_Self_Modifying_Code/01_JIT_Basics.md) |
 | **Raft分布式共识** | 分布式系统、网络编程 | ⭐⭐⭐⭐⭐ | 12000行 | [01_Raft_Core.md](./03_System_Technology_Domains/08_Distributed_Consensus/01_Raft_Core.md) |
 | **H.264解码器** | 视频编解码、SIMD优化 | ⭐⭐⭐⭐⭐ | 20000行 | [01_H264_Decoding.md](./03_System_Technology_Domains/04_Video_Codec/01_H264_Decoding.md) |
 | **RDMA网络库** | 高性能网络、零拷贝 | ⭐⭐⭐⭐⭐ | 8000行 | [01_Verbs_API_Detailed.md](./03_System_Technology_Domains/13_RDMA_Network/01_Verbs_API_Detailed.md) |

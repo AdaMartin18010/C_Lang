@@ -289,7 +289,7 @@
 |:-----|:-----|:----:|:---------|:----:|
 | 01_ABS_Control_System.md | ABS控制系统 | L5 | PID、MISRA C | 200+ |
 
-#### Linux内核 (02_Linux_Kernel)
+#### Linux内核 (13_Linux_Kernel)
 
 | 文件 | 主题 | 难度 | 关键概念 | 行数 |
 |:-----|:-----|:----:|:---------|:----:|
@@ -325,13 +325,13 @@
 |:-----|:-----|:----:|:---------|:----:|
 | 01_Quantum_Simulation_C.md | 量子模拟 | L5 | 态矢量、门操作 | 200+ |
 
-#### DNA存储 (09_DNA_Storage)
+#### DNA存储 (10_DNA_Storage)
 
 | 文件 | 主题 | 难度 | 关键概念 | 行数 |
 |:-----|:-----|:----:|:---------|:----:|
 | 01_DNA_Synthesis.md | DNA合成 | L5 | 编码、纠错 | 164 |
 
-#### 航天计算 (07_Space_Computing / 09_Space_Computing)
+#### 航天计算 (11_Space_Computing)
 
 | 文件 | 主题 | 难度 | 关键概念 | 行数 |
 |:-----|:-----|:----:|:---------|:----:|
@@ -387,7 +387,7 @@
 | 03_CBMC_Model_Checking.md | CBMC模型检测 | L5 | CBMC文档 | 200+ |
 | 04_Separation_Logic.md | 分离逻辑 | L6 | Reynolds O'Hearn | 200+ |
 
-#### 自修改代码 (04_Self_Modifying_Code / 05_Self_Modifying_Code)
+#### 自修改代码 (12_Self_Modifying_Code)
 
 | 文件 | 主题 | 难度 | 关键概念 | 行数 |
 |:-----|:-----|:----:|:---------|:----:|
