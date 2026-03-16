@@ -18,6 +18,58 @@
 
 ---
 
+## 🎯 概念定义
+
+### 1.1 控制流（Control Flow）
+
+**严格定义**：控制流是程序执行过程中指令执行的顺序。在结构化编程中，控制流通过特定的控制结构来组织，决定了程序语句的执行路径。
+
+**形式化定义**：
+
+```
+控制流 ::= 顺序执行 | 选择执行 | 循环执行 | 跳转执行
+
+顺序执行：语句按源代码顺序依次执行
+选择执行：根据条件选择不同的执行路径（if、switch）
+循环执行：重复执行语句块直到满足退出条件（for、while、do-while）
+跳转执行：无条件改变执行位置（break、continue、return、goto）
+```
+
+### 1.2 结构化编程（Structured Programming）
+
+**严格定义**：结构化编程是一种编程范式，主张使用顺序、选择、循环三种基本控制结构来构建程序，避免使用无条件跳转（goto）。
+
+**结构化定理**（Böhm和Jacopini, 1966）：
+> 任何可计算函数都可以通过顺序、选择和循环三种控制结构实现，无需使用goto。
+
+**C语言中的结构化控制结构**：
+
+| 结构类型 | C语言语法 | 结构化？ |
+|:---------|:----------|:--------:|
+| 顺序 | 语句序列 | ✅ |
+| 选择 | if-else、switch | ✅ |
+| 循环 | for、while、do-while | ✅ |
+| 跳转 | break、continue、return | ✅（受限跳转） |
+| 无条件跳转 | goto | ❌（非结构化） |
+
+### 1.3 控制流图（Control Flow Graph, CFG）
+
+**严格定义**：控制流图是表示程序中所有可能执行路径的有向图，其中：
+
+- **节点（Node）**：基本块（Basic Block），即顺序执行的语句序列
+- **边（Edge）**：控制转移，表示从一个基本块到另一个基本块的可能执行路径
+- **入口（Entry）**：程序的起始节点
+- **出口（Exit）**：程序的终止节点
+
+**基本块定义**：
+> 基本块是满足以下性质的连续语句序列：
+>
+> 1. 只能从第一个语句（入口）进入
+> 2. 只能在最后一个语句（出口）退出
+> 3. 内部没有分支或跳转目标
+
+---
+
 ## 🧠 知识结构思维导图
 
 ```mermaid
@@ -163,9 +215,26 @@ for (size_t i = 0; i < n; i += 4) {
 
 ---
 
-### 2. 函数深度
+### 2. 控制结构属性表
 
-#### 2.1 参数传递机制
+| 控制结构 | 条件检查时机 | 执行次数 | 适用场景 | 潜在问题 |
+|:---------|:-------------|:--------:|:---------|:---------|
+| `if` | 进入时 | 0或1次 | 单一条件判断 | 悬空else |
+| `if-else` | 进入时 | 0或1次 | 二选一 | else分支遗漏 |
+| `switch` | 进入时 | 0或1次 | 多分支等值 | fall-through错误 |
+| `for` | 每次迭代前 | 0~N次 | 已知迭代次数 | 循环变量泄漏(C89) |
+| `while` | 每次迭代前 | 0~N次 | 条件不定循环 | 无限循环风险 |
+| `do-while` | 每次迭代后 | 1~N次 | 至少执行一次 | 条件判断在末尾 |
+| `break` | - | - | 退出循环/switch | 只能跳出最内层 |
+| `continue` | - | - | 跳过本次迭代 | 逻辑混乱风险 |
+| `return` | - | - | 函数返回 | 资源清理 |
+| `goto` | - | - | 错误处理/跳出深层 | 破坏结构化 |
+
+---
+
+### 3. 函数深度
+
+#### 3.1 参数传递机制
 
 **C只有值传递**：
 
@@ -205,7 +274,7 @@ void process_array2(int arr[], size_t n);  // 语义相同
 void process_matrix(int rows, int cols, int mat[rows][cols]);
 ```
 
-#### 2.2 函数指针应用
+#### 3.2 函数指针应用
 
 **状态机实现**：
 
@@ -245,7 +314,7 @@ void run_fsm(Context *ctx, State *initial) {
 }
 ```
 
-#### 2.3 变长参数
+#### 3.3 变长参数
 
 ```c
 #include <stdarg.h>
@@ -274,7 +343,7 @@ int main(void) {
 }
 ```
 
-#### 2.4 递归与尾递归
+#### 3.4 递归与尾递归
 
 ```c
 // ❌ 非尾递归（需要保存栈帧）
@@ -302,7 +371,7 @@ int factorial_iter(int n) {
 
 ---
 
-### 3. 存储期与作用域
+### 4. 存储期与作用域
 
 ```c
 // 存储期类别
@@ -330,6 +399,113 @@ void func(void) {
 
 ---
 
+## 🔬 形式化描述：控制流图（CFG）
+
+### 4.1 CFG形式化定义
+
+**定义**：控制流图G = (N, E, entry, exit)，其中：
+
+- N：基本块集合
+- E ⊆ N × N：控制流边集合
+- entry ∈ N：入口节点
+- exit ∈ N：出口节点
+
+### 4.2 控制结构CFG表示
+
+**if-else 的CFG**：
+
+```mermaid
+flowchart TD
+    A[Entry] --> B{Condition}
+    B -->|true| C[Then Block]
+    B -->|false| D[Else Block]
+    C --> E[Exit]
+    D --> E
+```
+
+**while 循环的CFG**：
+
+```mermaid
+flowchart TD
+    A[Entry] --> B{Condition}
+    B -->|true| C[Loop Body]
+    C --> B
+    B -->|false| D[Exit]
+```
+
+**for 循环的CFG**：
+
+```mermaid
+flowchart TD
+    A[Entry] --> B[Init]
+    B --> C{Condition}
+    C -->|true| D[Loop Body]
+    D --> E[Increment]
+    E --> C
+    C -->|false| F[Exit]
+```
+
+**switch 的CFG**：
+
+```mermaid
+flowchart TD
+    A[Entry] --> B{Expression}
+    B -->|case 0| C[Block 0]
+    B -->|case 1| D[Block 1]
+    B -->|default| E[Default Block]
+    C -->|no break| D
+    D -->|break| F[Exit]
+    E --> F
+```
+
+### 4.3 代码到CFG转换示例
+
+**源代码**：
+
+```c
+int max(int a, int b) {
+    int result;
+    if (a > b) {
+        result = a;
+    } else {
+        result = b;
+    }
+    return result;
+}
+```
+
+**基本块划分**：
+
+```
+B1 (Entry):
+    int result;
+    if (a > b) goto B3
+    goto B4
+
+B2 (Exit):
+    return result
+
+B3 (Then):
+    result = a
+    goto B2
+
+B4 (Else):
+    result = b
+    goto B2
+```
+
+**CFG图**：
+
+```mermaid
+flowchart TD
+    B1[B1: Entry<br/>int result<br/>if a > b] -->|true| B3[B3: Then<br/>result = a]
+    B1 -->|false| B4[B4: Else<br/>result = b]
+    B3 --> B2[B2: Exit<br/>return result]
+    B4 --> B2
+```
+
+---
+
 ## 🔄 多维矩阵对比
 
 ### 控制结构选择矩阵
@@ -343,11 +519,143 @@ void func(void) {
 | 至少执行一次 | do-while | while | 减少重复条件 |
 | 错误处理退出 | goto cleanup | 嵌套if | 代码清晰 |
 
+### 存储期与作用域矩阵
+
+| 声明方式 | 作用域 | 存储期 | 链接属性 | 初始化 |
+|:---------|:-------|:-------|:---------|:-------|
+| 块内自动变量 | 块 | 自动 | 无 | 运行时，不默认初始化 |
+| 块内static | 块 | 静态 | 无 | 编译期，0初始化 |
+| 文件内static | 文件 | 静态 | 内部 | 编译期，0初始化 |
+| 全局变量 | 文件 | 静态 | 外部 | 编译期，0初始化 |
+| extern | 声明处 | 静态 | 外部 | 在定义处初始化 |
+| _Thread_local | 声明处 | 线程 | 见定义 | 编译期，0初始化 |
+
 ---
 
-## ⚠️ 常见陷阱
+## 🌳 控制流决策树
 
-### 陷阱 CTRL01: 宏副作用
+```text
+需要控制程序流程？
+├── 选择执行路径
+│   ├── 单一条件判断 → if
+│   ├── 二选一 → if-else
+│   ├── 多分支等值 → switch
+│   ├── 多分支范围 → if-else if-else
+│   └── 简单条件值 → 条件运算符 ?:
+│
+├── 重复执行
+│   ├── 已知次数 → for
+│   ├── 条件前置检查 → while
+│   ├── 至少执行一次 → do-while
+│   └── 无限循环 → for(;;) 或 while(1)
+│
+├── 改变循环流程
+│   ├── 退出当前循环 → break
+│   ├── 跳过本次迭代 → continue
+│   └── 跳出多层循环 → goto（带标签）
+│
+├── 函数控制
+│   ├── 正常返回 → return
+│   ├── 提前返回错误 → return error_code
+│   └── 错误恢复 → setjmp/longjmp
+│
+└── 特殊情况
+    ├── 集中错误处理 → goto cleanup
+    ├── 状态机实现 → switch + 函数指针
+    └── 资源清理 → defer模式（C23属性）
+```
+
+---
+
+## ⚠️ 常见陷阱与反例
+
+### 陷阱 CTRL01: 死代码（Dead Code）
+
+```c
+// ❌ 死代码：永远不会执行的代码
+int func(int x) {
+    return x * 2;
+    printf("This never prints\n");  // 死代码！
+}
+
+// ❌ 不可达代码：条件永远为假
+int func2(int x) {
+    if (0) {
+        // 永远不会执行
+        do_something();
+    }
+    return x;
+}
+
+// ❌ 条件导致的死代码
+int func3(int x) {
+    if (x > 0) {
+        return 1;
+    } else if (x < 0) {
+        return -1;
+    }
+    // 如果x总是非零，下面的代码是死代码
+    return 0;
+}
+
+// ✅ 使用编译器警告检测
+// gcc -Wunreachable-code
+```
+
+### 陷阱 CTRL02: 不可达代码（Unreachable Code）
+
+| 类型 | 示例 | 检测方法 |
+|:-----|:-----|:---------|
+| return后代码 | `return x; y = 1;` | 编译器警告 |
+| 无条件跳转后 | `goto end; x = 1;` | 编译器警告 |
+| break后代码 | `break; y = 2;` | 编译器警告 |
+| 永远假条件 | `if (0) { ... }` | 静态分析 |
+| 逻辑矛盾 | `if (x > 0 && x < 0)` | 静态分析 |
+
+### 陷阱 CTRL03: 错误使用goto
+
+```c
+// ❌ 错误：使用goto进行循环
+int sum = 0;
+int i = 0;
+loop:
+    if (i >= 10) goto end;
+    sum += i;
+    i++;
+    goto loop;
+end:
+    return sum;
+
+// ✅ 正确：使用循环结构
+int sum = 0;
+for (int i = 0; i < 10; i++) {
+    sum += i;
+}
+return sum;
+
+// ✅ 可接受：goto用于错误处理清理
+int process(void) {
+    void *resource1 = alloc1();
+    if (!resource1) return -1;
+
+    void *resource2 = alloc2();
+    if (!resource2) goto cleanup1;
+
+    void *resource3 = alloc3();
+    if (!resource3) goto cleanup2;
+
+    // 处理逻辑
+
+    free(resource3);
+cleanup2:
+    free(resource2);
+cleanup1:
+    free(resource1);
+    return result;
+}
+```
+
+### 陷阱 CTRL04: 宏副作用
 
 ```c
 // ❌ 危险宏
@@ -372,7 +680,7 @@ define SWAP_SAFE(a, b) do { \
 } while(0)
 ```
 
-### 陷阱 CTRL02: switch中变量声明
+### 陷阱 CTRL05: switch中变量声明
 
 ```c
 // ❌ 编译错误
@@ -396,6 +704,26 @@ switch (x) {
 }
 ```
 
+### 陷阱 CTRL06: 悬空else
+
+```c
+// ❌ 悬空else问题
+if (condition1)
+    if (condition2)
+        do_something();
+else  // 这个else属于哪个if？
+    do_other();
+
+// ✅ 始终使用花括号
+if (condition1) {
+    if (condition2) {
+        do_something();
+    } else {
+        do_other();
+    }
+}
+```
+
 ---
 
 ## ✅ 质量验收清单
@@ -404,9 +732,16 @@ switch (x) {
 - [x] 包含函数调用约定
 - [x] 包含存储期对比
 - [x] 包含陷阱分析
+- [x] 概念定义（控制流、结构化编程）
+- [x] 控制结构属性表
+- [x] 形式化描述（CFG表示）
+- [x] 死代码/不可达代码反例
+- [x] goto正确使用指南
+- [x] 控制流可视化（流程图）
 
 ---
 
 > **更新记录**
 >
 > - 2025-03-09: 初版创建
+> - 2026-03-16: 深化内容，添加概念定义、属性表、CFG形式化描述、死代码反例和控制流决策树
