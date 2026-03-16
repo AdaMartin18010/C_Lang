@@ -1,0 +1,21 @@
+# MISRA C:2023 文档模板
+
+本目录包含MISRA C:2023合规项目的标准文档模板。
+
+## 文档列表
+
+| 文件 | 用途 | 说明 |
+|:-----|:-----|:-----|
+| [DEVIATIONS.md](./DEVIATIONS.md) | 偏离记录 | 记录所有MISRA规则的偏离申请 |
+| [AUDIT_LOG.md](./AUDIT_LOG.md) | 审计记录 | 记录合规审计历史和结果 |
+| [MISRA_COMPLIANCE.md](./MISRA_COMPLIANCE.md) | 合规声明 | 项目合规性正式声明 |
+
+## 使用说明
+
+1. **DEVIATIONS.md**: 当代码需要偏离MISRA规则时填写
+2. **AUDIT_LOG.md**: 每次审计后更新
+3. **MISRA_COMPLIANCE.md**: 项目发布前完成签署
+
+## 返回上级
+
+[返回 tools 目录](../README.md)

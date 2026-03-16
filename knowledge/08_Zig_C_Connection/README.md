@@ -111,7 +111,7 @@
 | C 语言 | ⭐⭐⭐⭐⭐ | [01_Core_Knowledge_System](../01_Core_Knowledge_System/) |
 | Zig 语言 | ⭐⭐⭐⭐ | [Zig 官方文档](https://ziglang.org/documentation/master/) |
 | 类型理论 | ⭐⭐⭐ | [05_Deep_Structure_MetaPhysics/01_Formal_Semantics](../05_Deep_Structure_MetaPhysics/01_Formal_Semantics/) |
-| 内存模型 | ⭐⭐⭐ | [02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md](../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md) |
+| 内存模型 | ⭐⭐⭐ | [02_Memory_Model_Bridge/01_C11_vs_Zig_Memory_Model.md](./02_Memory_Model_Bridge/01_C11_vs_Zig_Memory_Model.md) |
 | ABI/调用约定 | ⭐⭐ | [02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping](../02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/) |
 
 ### 推荐学习路径
