@@ -144,8 +144,8 @@ DO-178C (航空，独立发展但与MISRA兼容)
 
 | 文档 | 内容 |
 |:-----|:-----|
-| [基础](./IEEE_754_Floating_Point/01_IEEE_754_Basics.md) | 二进制格式、特殊值、精度 |
-| [运算](./IEEE_754_Floating_Point/02_IEEE_754_Operations.md) | 运算、舍入模式、异常 |
+| [基础](../01_Basic_Layer/IEEE_754_Floating_Point/01_IEEE_754_Basics.md) | 二进制格式、特殊值、精度 |
+| [运算](../01_Basic_Layer/IEEE_754_Floating_Point/02_IEEE_754_Operations.md) | 运算、舍入模式、异常 |
 
 ---
 

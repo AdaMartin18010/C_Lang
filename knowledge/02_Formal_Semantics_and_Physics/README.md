@@ -82,7 +82,7 @@
 | [04_Auto_Vectorization.md](./12_Compiler_Optimization/04_Auto_Vectorization.md) | 自动向量化 | L5 | Intel Optimization Manual | 192 |
 
 **前置知识**: 编译原理、SIMD指令集
-**关联**: [04_Industrial_Scenarios/04_5G_Baseband/01_SIMD_Vectorization](../../04_Industrial_Scenarios/04_5G_Baseband/01_SIMD_Vectorization.md)
+**关联**: [04_Industrial_Scenarios/04_5G_Baseband/01_SIMD_Vectorization](../04_Industrial_Scenarios/04_5G_Baseband/01_SIMD_Vectorization.md)
 
 ---
 
