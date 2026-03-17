@@ -34,6 +34,17 @@
   - [9. 财务计算最佳实践](#9-财务计算最佳实践)
     - [9.1 货币表示规范](#91-货币表示规范)
     - [9.2 错误处理和验证](#92-错误处理和验证)
+  - [10. 实际项目: 货币计算库完整实现](#10-实际项目-货币计算库完整实现)
+    - [10.1 完整货币库头文件](#101-完整货币库头文件)
+    - [10.2 完整货币库实现](#102-完整货币库实现)
+    - [10.3 使用示例](#103-使用示例)
+  - [11. 与 Cobol/Java BigDecimal 的对比](#11-与-coboljava-bigdecimal-的对比)
+    - [11.1 技术对比](#111-技术对比)
+    - [11.2 迁移指南](#112-迁移指南)
+  - [总结](#总结)
+    - [关键要点回顾](#关键要点回顾)
+    - [编译命令参考](#编译命令参考)
+    - [进一步学习资源](#进一步学习资源)
 
 ---
 
@@ -2051,7 +2062,7 @@ int main(void) {
 ```c
 /*
  * moneylib.h - 货币计算库头文件
- * 
+ *
  * 编译: gcc -std=c23 moneylib.c example.c -o money_example
  */
 
@@ -2164,14 +2175,14 @@ bool money_is_positive(const Money* m);
 bool money_is_negative(const Money* m);
 
 /* 汇率转换 */
-Money* money_convert(const Money* m, const char* target_currency, 
+Money* money_convert(const Money* m, const char* target_currency,
                      rate_t exchange_rate, MoneyError* err);
 
 /* 财务计算 */
 money_t money_calculate_discount(money_t original, rate_t discount_rate);
 money_t money_calculate_tax(money_t amount, rate_t tax_rate);
 money_t money_calculate_interest(money_t principal, rate_t rate, int periods);
-money_t money_calculate_compound_interest(money_t principal, rate_t rate, 
+money_t money_calculate_compound_interest(money_t principal, rate_t rate,
                                            int times_per_year, int years);
 
 /* 批量处理 */
@@ -2200,7 +2211,7 @@ void money_print_error(MoneyError err);
 ```c
 /*
  * moneylib.c - 货币计算库完整实现
- * 
+ *
  * 编译: gcc -std=c23 -c moneylib.c -o moneylib.o
  */
 
@@ -2233,25 +2244,25 @@ static money_t do_round(money_t value, int decimal_places, RoundingMode mode) {
     for (int i = 0; i < decimal_places; i++) {
         multiplier *= (money_t)10.0DD;
     }
-    
+
     money_t scaled = value * multiplier;
     money_t int_part = (money_t)(long long)scaled;
     money_t frac_part = scaled - int_part;
     money_t abs_frac = frac_part < MONEY_ZERO ? -frac_part : frac_part;
-    
+
     switch (mode) {
         case ROUND_HALF_UP:
             if (abs_frac >= (money_t)0.5DD) {
                 int_part += (frac_part >= MONEY_ZERO) ? MONEY_ONE : -MONEY_ONE;
             }
             break;
-            
+
         case ROUND_HALF_DOWN:
             if (abs_frac > (money_t)0.5DD) {
                 int_part += (frac_part >= MONEY_ZERO) ? MONEY_ONE : -MONEY_ONE;
             }
             break;
-            
+
         case ROUND_HALF_EVEN:
             if (abs_frac > (money_t)0.5DD) {
                 int_part += (frac_part >= MONEY_ZERO) ? MONEY_ONE : -MONEY_ONE;
@@ -2262,30 +2273,30 @@ static money_t do_round(money_t value, int decimal_places, RoundingMode mode) {
                 }
             }
             break;
-            
+
         case ROUND_UP:
             if (abs_frac > MONEY_ZERO) {
                 int_part += (frac_part >= MONEY_ZERO) ? MONEY_ONE : -MONEY_ONE;
             }
             break;
-            
+
         case ROUND_DOWN:
             /* 截断，什么都不做 */
             break;
-            
+
         case ROUND_CEILING:
             if (frac_part > MONEY_ZERO) {
                 int_part += MONEY_ONE;
             }
             break;
-            
+
         case ROUND_FLOOR:
             if (frac_part < MONEY_ZERO) {
                 int_part -= MONEY_ONE;
             }
             break;
     }
-    
+
     return int_part / multiplier;
 }
 
@@ -2306,16 +2317,16 @@ Money* money_create(const char* currency_code, money_t amount) {
     if (!money_is_valid_amount(amount)) {
         return NULL;
     }
-    
+
     Money* m = (Money*)malloc(sizeof(Money));
     if (m == NULL) {
         return NULL;
     }
-    
+
     m->amount = amount;
     copy_currency_code(m->currency_code, currency_code);
     m->rounding = ROUND_HALF_EVEN;
-    
+
     return m;
 }
 
@@ -2336,7 +2347,7 @@ MoneyError money_set_amount(Money* m, money_t amount) {
     if (!money_is_valid_amount(amount)) {
         return MONEY_ERR_NEGATIVE_AMOUNT;
     }
-    
+
     m->amount = amount;
     return MONEY_OK;
 }
@@ -2361,82 +2372,82 @@ MoneyError money_set_rounding(Money* m, RoundingMode mode) {
 
 Money* money_add(const Money* a, const Money* b, MoneyError* err) {
     if (err != NULL) *err = MONEY_OK;
-    
+
     if (a == NULL || b == NULL) {
         if (err != NULL) *err = MONEY_ERR_NULL_PTR;
         return NULL;
     }
-    
+
     if (!currencies_match(a->currency_code, b->currency_code)) {
         if (err != NULL) *err = MONEY_ERR_CURRENCY_MISMATCH;
         return NULL;
     }
-    
+
     money_t result = a->amount + b->amount;
     return money_create(a->currency_code, result);
 }
 
 Money* money_subtract(const Money* a, const Money* b, MoneyError* err) {
     if (err != NULL) *err = MONEY_OK;
-    
+
     if (a == NULL || b == NULL) {
         if (err != NULL) *err = MONEY_ERR_NULL_PTR;
         return NULL;
     }
-    
+
     if (!currencies_match(a->currency_code, b->currency_code)) {
         if (err != NULL) *err = MONEY_ERR_CURRENCY_MISMATCH;
         return NULL;
     }
-    
+
     money_t result = a->amount - b->amount;
     return money_create(a->currency_code, result);
 }
 
 Money* money_multiply(const Money* m, quantity_t multiplier, MoneyError* err) {
     if (err != NULL) *err = MONEY_OK;
-    
+
     if (m == NULL) {
         if (err != NULL) *err = MONEY_ERR_NULL_PTR;
         return NULL;
     }
-    
+
     money_t result = m->amount * multiplier;
     result = do_round(result, DEFAULT_DECIMAL_PLACES, m->rounding);
-    
+
     return money_create(m->currency_code, result);
 }
 
 Money* money_divide(const Money* m, quantity_t divisor, MoneyError* err) {
     if (err != NULL) *err = MONEY_OK;
-    
+
     if (m == NULL) {
         if (err != NULL) *err = MONEY_ERR_NULL_PTR;
         return NULL;
     }
-    
+
     if (divisor == (quantity_t)0.0DD) {
         if (err != NULL) *err = MONEY_ERR_DIVISION_BY_ZERO;
         return NULL;
     }
-    
+
     money_t result = m->amount / divisor;
     result = do_round(result, DEFAULT_DECIMAL_PLACES, m->rounding);
-    
+
     return money_create(m->currency_code, result);
 }
 
 Money* money_percentage(const Money* m, rate_t percent, MoneyError* err) {
     if (err != NULL) *err = MONEY_OK;
-    
+
     if (m == NULL) {
         if (err != NULL) *err = MONEY_ERR_NULL_PTR;
         return NULL;
     }
-    
+
     money_t result = m->amount * percent;
     result = do_round(result, DEFAULT_DECIMAL_PLACES, m->rounding);
-    
+
     return money_create(m->currency_code, result);
 }
 
@@ -2456,12 +2467,12 @@ int money_compare(const Money* a, const Money* b) {
     if (a == NULL || b == NULL) {
         return (a == b) ? 0 : (a == NULL ? -1 : 1);
     }
-    
+
     if (!currencies_match(a->currency_code, b->currency_code)) {
         /* 不同货币，按货币代码比较 */
         return strcmp(a->currency_code, b->currency_code);
     }
-    
+
     if (a->amount < b->amount) return -1;
     if (a->amount > b->amount) return 1;
     return 0;
@@ -2493,23 +2504,23 @@ bool money_is_negative(const Money* m) {
 
 /* ==================== 汇率转换 ==================== */
 
-Money* money_convert(const Money* m, const char* target_currency, 
+Money* money_convert(const Money* m, const char* target_currency,
                      rate_t exchange_rate, MoneyError* err) {
     if (err != NULL) *err = MONEY_OK;
-    
+
     if (m == NULL || target_currency == NULL) {
         if (err != NULL) *err = MONEY_ERR_NULL_PTR;
         return NULL;
     }
-    
+
     if (exchange_rate <= (rate_t)0.0DD) {
         if (err != NULL) *err = MONEY_ERR_INVALID_RATE;
         return NULL;
     }
-    
+
     money_t converted = m->amount * exchange_rate;
     converted = do_round(converted, DEFAULT_DECIMAL_PLACES, m->rounding);
-    
+
     return money_create(target_currency, converted);
 }
 
@@ -2530,18 +2541,18 @@ money_t money_calculate_interest(money_t principal, rate_t rate, int periods) {
     return do_round(interest, DEFAULT_DECIMAL_PLACES, ROUND_HALF_UP);
 }
 
-money_t money_calculate_compound_interest(money_t principal, rate_t rate, 
+money_t money_calculate_compound_interest(money_t principal, rate_t rate,
                                            int times_per_year, int years) {
     quantity_t n = (quantity_t)times_per_year;
     quantity_t base = (quantity_t)1.0DD + rate / n;
-    
+
     int exponent = times_per_year * years;
     quantity_t factor = (quantity_t)1.0DD;
-    
+
     for (int i = 0; i < exponent; i++) {
         factor *= base;
     }
-    
+
     money_t result = principal * (money_t)factor;
     return do_round(result, DEFAULT_DECIMAL_PLACES, ROUND_HALF_UP);
 }
@@ -2550,19 +2561,19 @@ money_t money_calculate_compound_interest(money_t principal, rate_t rate,
 
 money_t money_sum(const Money** monies, int count, MoneyError* err) {
     if (err != NULL) *err = MONEY_OK;
-    
+
     if (monies == NULL && count > 0) {
         if (err != NULL) *err = MONEY_ERR_NULL_PTR;
         return MONEY_ZERO;
     }
-    
+
     if (count == 0) {
         return MONEY_ZERO;
     }
-    
+
     const char* currency = monies[0]->currency_code;
     money_t total = MONEY_ZERO;
-    
+
     for (int i = 0; i < count; i++) {
         if (monies[i] == NULL) {
             if (err != NULL) *err = MONEY_ERR_NULL_PTR;
@@ -2574,7 +2585,7 @@ money_t money_sum(const Money** monies, int count, MoneyError* err) {
         }
         total += monies[i]->amount;
     }
-    
+
     return total;
 }
 
@@ -2583,12 +2594,12 @@ money_t money_average(const Money** monies, int count, MoneyError* err) {
     if (err != NULL && *err != MONEY_OK) {
         return MONEY_ZERO;
     }
-    
+
     if (count == 0) {
         if (err != NULL) *err = MONEY_ERR_DIVISION_BY_ZERO;
         return MONEY_ZERO;
     }
-    
+
     return sum / (money_t)count;
 }
 
@@ -2596,14 +2607,14 @@ money_t money_min(const Money** monies, int count) {
     if (monies == NULL || count == 0) {
         return MONEY_ZERO;
     }
-    
+
     money_t min = monies[0]->amount;
     for (int i = 1; i < count; i++) {
         if (monies[i] != NULL && monies[i]->amount < min) {
             min = monies[i]->amount;
         }
     }
-    
+
     return min;
 }
 
@@ -2611,14 +2622,14 @@ money_t money_max(const Money** monies, int count) {
     if (monies == NULL || count == 0) {
         return MONEY_ZERO;
     }
-    
+
     money_t max = monies[0]->amount;
     for (int i = 1; i < count; i++) {
         if (monies[i] != NULL && monies[i]->amount > max) {
             max = monies[i]->amount;
         }
     }
-    
+
     return max;
 }
 
@@ -2628,7 +2639,7 @@ int money_format(const Money* m, char* buffer, size_t buffer_size) {
     if (m == NULL || buffer == NULL || buffer_size == 0) {
         return -1;
     }
-    
+
     return snprintf(buffer, buffer_size, "%s %.2f",
                     m->currency_code, (double)m->amount);
 }
@@ -2637,13 +2648,13 @@ int money_format_with_symbol(const Money* m, char* buffer, size_t buffer_size) {
     if (m == NULL || buffer == NULL || buffer_size == 0) {
         return -1;
     }
-    
+
     const char* symbol = "$";  /* 简化处理，实际应根据货币代码选择符号 */
     if (strcmp(m->currency_code, CURRENCY_EUR) == 0) symbol = "€";
     else if (strcmp(m->currency_code, CURRENCY_GBP) == 0) symbol = "£";
     else if (strcmp(m->currency_code, CURRENCY_JPY) == 0) symbol = "¥";
     else if (strcmp(m->currency_code, CURRENCY_CNY) == 0) symbol = "¥";
-    
+
     return snprintf(buffer, buffer_size, "%s%.2f %s",
                     symbol, (double)m->amount, m->currency_code);
 }
@@ -2653,11 +2664,11 @@ int money_format_with_symbol(const Money* m, char* buffer, size_t buffer_size) {
 bool money_is_valid_amount(money_t amount) {
     /* 检查是否为有限数 */
     /* 注意: C23 十进制浮点应始终有限，除非显式创建无穷或 NaN */
-    
+
     /* 检查是否在合理范围内 */
     money_t max = (money_t)999999999999.99DD;  /* 万亿级别 */
     money_t min = (money_t)-999999999999.99DD;
-    
+
     return (amount >= min && amount <= max);
 }
 
@@ -2665,14 +2676,14 @@ bool money_is_valid_currency_code(const char* code) {
     if (code == NULL || strlen(code) != 3) {
         return false;
     }
-    
+
     /* 检查是否都是大写字母 */
     for (int i = 0; i < 3; i++) {
         if (code[i] < 'A' || code[i] > 'Z') {
             return false;
         }
     }
-    
+
     return true;
 }
 
@@ -2702,7 +2713,7 @@ void money_print_error(MoneyError err) {
 ```c
 /*
  * money_example.c - 货币库使用示例
- * 
+ *
  * 编译: gcc -std=c23 moneylib.c money_example.c -o money_example
  */
 
@@ -2711,40 +2722,40 @@ void money_print_error(MoneyError err) {
 
 int main(void) {
     printf("=== 货币计算库使用示例 ===\n\n");
-    
+
     /* 初始化 */
     money_init();
-    
+
     /* 1. 创建货币对象 */
     printf("1. 创建货币对象:\n");
     Money* price = money_create(CURRENCY_USD, 199.99DD);
     Money* tax = money_create(CURRENCY_USD, 0.0875DD);
-    
+
     char buffer[64];
     money_format(price, buffer, sizeof(buffer));
     printf("   商品价格: %s\n", buffer);
-    
+
     /* 2. 计算税费 */
     printf("\n2. 计算税费:\n");
     MoneyError err;
     Money* tax_amount = money_percentage(price, 0.0875DD, &err);
-    
+
     if (err == MONEY_OK) {
         money_format(tax_amount, buffer, sizeof(buffer));
         printf("   税费 (8.75%%): %s\n", buffer);
     } else {
         money_print_error(err);
     }
-    
+
     /* 3. 计算总价 */
     printf("\n3. 计算总价:\n");
     Money* total = money_add(price, tax_amount, &err);
-    
+
     if (err == MONEY_OK) {
         money_format(total, buffer, sizeof(buffer));
         printf("   含税总价: %s\n", buffer);
     }
-    
+
     /* 4. 批量订单 */
     printf("\n4. 批量订单处理:\n");
     Money* items[] = {
@@ -2753,51 +2764,51 @@ int main(void) {
         money_create(CURRENCY_USD, 29.99DD),
         money_create(CURRENCY_USD, 15.00DD)
     };
-    
+
     int num_items = sizeof(items) / sizeof(items[0]);
     money_t subtotal = money_sum((const Money**)items, num_items, &err);
-    
+
     printf("   订单包含 %d 项:\n", num_items);
     for (int i = 0; i < num_items; i++) {
         money_format(items[i], buffer, sizeof(buffer));
         printf("     项目 %d: %s\n", i + 1, buffer);
     }
     printf("   小计: $%.2f\n", (double)subtotal);
-    
+
     money_t avg = money_average((const Money**)items, num_items, &err);
     printf("   平均价格: $%.2f\n", (double)avg);
-    
+
     money_t min = money_min((const Money**)items, num_items);
     money_t max = money_max((const Money**)items, num_items);
     printf("   最低价格: $%.2f\n", (double)min);
     printf("   最高价格: $%.2f\n", (double)max);
-    
+
     /* 5. 汇率转换 */
     printf("\n5. 汇率转换:\n");
     Money* usd_amount = money_create(CURRENCY_USD, 1000.00DD);
     Money* cny_amount = money_convert(usd_amount, CURRENCY_CNY, 7.2456DD, &err);
-    
+
     if (err == MONEY_OK) {
         money_format(usd_amount, buffer, sizeof(buffer));
         printf("   原金额: %s\n", buffer);
         money_format(cny_amount, buffer, sizeof(buffer));
         printf("   转换后: %s (汇率 7.2456)\n", buffer);
     }
-    
+
     /* 6. 复利计算 */
     printf("\n6. 复利计算:\n");
     money_t principal = 10000.00DD;
     rate_t annual_rate = 0.05DD;
     int years = 10;
-    
+
     money_t final = money_calculate_compound_interest(principal, annual_rate, 12, years);
-    
+
     printf("   本金: $%.2f\n", (double)principal);
     printf("   年利率: %.2f%%\n", (double)(annual_rate * 100.0DD));
     printf("   投资年限: %d 年 (月复利)\n", years);
     printf("   最终金额: $%.2f\n", (double)final);
     printf("   利息收入: $%.2f\n", (double)(final - principal));
-    
+
     /* 清理 */
     money_free(price);
     money_free(tax);
@@ -2808,11 +2819,11 @@ int main(void) {
     }
     money_free(usd_amount);
     money_free(cny_amount);
-    
+
     money_cleanup();
-    
+
     printf("\n=== 示例完成 ===\n");
-    
+
     return 0;
 }
 ```
@@ -2826,7 +2837,7 @@ int main(void) {
 ```c
 /*
  * 编译: gcc -std=c23 comparison_demo.c -o comparison_demo
- * 
+ *
  * 与其他语言/系统的十进制计算对比
  */
 
@@ -2835,7 +2846,7 @@ int main(void) {
 /* 技术规格对比表 */
 void print_technical_comparison(void) {
     printf("=== 十进制计算技术对比 ===\n\n");
-    
+
     printf("| 特性 | C _Decimal64 | Java BigDecimal | COBOL COMP-3 |
 ");
     printf("|------|--------------|-----------------|--------------|
@@ -2864,22 +2875,22 @@ void print_technical_comparison(void) {
 /* COBOL 风格计算演示 */
 void cobol_style_example(void) {
     printf("=== COBOL 风格计算 (C实现) ===\n\n");
-    
+
     printf("COBOL 代码示例:\n");
     printf("  01  PRICE      PIC 9(6)V99 COMP-3.    /* 6位整数 + 2位小数 */\n");
     printf("  01  QUANTITY   PIC 9(4) COMP-3.\n");
     printf("  01  TOTAL      PIC 9(8)V99 COMP-3.\n");
     printf("  COMPUTE TOTAL = PRICE * QUANTITY.\n\n");
-    
+
     printf("C _Decimal64 等价实现:\n");
     _Decimal64 price = 1234.56DD;    /* 对应 PIC 9(4)V99 */
     _Decimal64 quantity = 100.0DD;    /* 对应 PIC 9(3) */
     _Decimal64 total = price * quantity;
-    
+
     /* COBOL 风格的舍入 */
     total = total + 0.005DD;  /* 四舍五入到分 */
     total = (_Decimal64)((long long)(total * 100.0DD)) / 100.0DD;
-    
+
     printf("  _Decimal64 price = 1234.56DD;\n");
     printf("  _Decimal64 quantity = 100.0DD;\n");
     printf("  _Decimal64 total = price * quantity;\n");
@@ -2889,29 +2900,29 @@ void cobol_style_example(void) {
 /* Java BigDecimal 风格计算演示 */
 void java_style_example(void) {
     printf("=== Java BigDecimal 风格计算 (C实现) ===\n\n");
-    
+
     printf("Java 代码示例:\n");
     printf("  BigDecimal price = new BigDecimal(\"19.99\");\n");
     printf("  BigDecimal taxRate = new BigDecimal(\"0.0875\");\n");
     printf("  BigDecimal tax = price.multiply(taxRate);\n");
     printf("  tax = tax.setScale(2, RoundingMode.HALF_UP);\n");
     printf("  BigDecimal total = price.add(tax);\n\n");
-    
+
     printf("C _Decimal64 等价实现:\n");
     _Decimal64 price = 19.99DD;
     _Decimal64 tax_rate = 0.0875DD;
-    
+
     /* 计算税费 */
     _Decimal64 tax = price * tax_rate;
-    
+
     /* 手动实现 HALF_UP 舍入到2位小数 */
     tax = tax * 100.0DD;
     tax = tax + (tax >= 0 ? 0.5DD : -0.5DD);
     tax = (_Decimal64)((long long)tax);
     tax = tax / 100.0DD;
-    
+
     _Decimal64 total = price + tax;
-    
+
     printf("  _Decimal64 price = 19.99DD;\n");
     printf("  _Decimal64 tax_rate = 0.0875DD;\n");
     printf("  _Decimal64 tax = price * tax_rate;\n");
@@ -2925,16 +2936,16 @@ void java_style_example(void) {
 /* 性能对比概念 */
 void performance_comparison(void) {
     printf("=== 性能对比 (概念性) ===\n\n");
-    
+
     printf("相对执行时间 (以 C _Decimal64 = 1 为基准):\n\n");
-    
+
     printf("操作类型 | C _Decimal64 | Java BigDecimal | COBOL\n");
     printf("---------|--------------|-----------------|-------\n");
     printf("加法     | 1x           | 50-100x         | 10-20x\n");
     printf("乘法     | 1x           | 100-200x        | 20-40x\n");
     printf("除法     | 1x           | 200-500x        | 50-100x\n");
     printf("内存分配 | 无           | 每次操作        | 预分配\n\n");
-    
+
     printf("说明:\n");
     printf("  - C _Decimal64 使用硬件加速 (Intel/AMD 处理器)\n");
     printf("  - Java BigDecimal 是软件实现，涉及对象创建\n");
@@ -2944,19 +2955,19 @@ void performance_comparison(void) {
 /* 互操作性考虑 */
 void interoperability_notes(void) {
     printf("=== 互操作性考虑 ===\n\n");
-    
+
     printf("与 Java BigDecimal 互操作:\n");
     printf("  1. 使用字符串作为交换格式\n");
     printf("  2. 确保精度信息传递\n");
     printf("  3. 注意舍入模式一致性\n");
     printf("  4. JSON/XML 中作为字符串传输\n\n");
-    
+
     printf("与 COBOL 互操作:\n");
     printf("  1. COBOL COMP-3 是 packed decimal 格式\n");
     printf("  2. 需要字节级转换\n");
     printf("  3. 注意字节序和符号位\n");
     printf("  4. 精度声明要匹配\n\n");
-    
+
     printf("与数据库 DECIMAL 类型:\n");
     printf("  1. MySQL/PostgreSQL DECIMAL 映射到 _Decimal64\n");
     printf("  2. Oracle NUMBER 类型需要精度检查\n");
@@ -2970,26 +2981,26 @@ int main(void) {
     java_style_example();
     performance_comparison();
     interoperability_notes();
-    
+
     printf("\n=== 选择建议 ===\n\n");
-    
+
     printf("使用 C _Decimal64 的场景:\n");
     printf("  ✓ 高性能财务计算\n");
     printf("  ✓ 嵌入式/实时系统\n");
     printf("  ✓ 需要与硬件紧密集成\n");
     printf("  ✓ 内存受限环境\n");
     printf("  ✓ 替代 COBOL 的现代方案\n\n");
-    
+
     printf("使用 Java BigDecimal 的场景:\n");
     printf("  ✓ 需要超过16位精度\n");
     printf("  ✓ Java 生态系统\n");
     printf("  ✓ 需要精确的精度控制\n\n");
-    
+
     printf("使用 COBOL 的场景:\n");
     printf("  ✓ 遗留系统维护\n");
     printf("  ✓ 严格的监管合规要求\n");
     printf("  ✓ 大型机环境\n");
-    
+
     return 0;
 }
 ```
@@ -2999,7 +3010,7 @@ int main(void) {
 ```c
 /*
  * 编译: gcc -std=c23 migration_guide.c -o migration_guide
- * 
+ *
  * 从其他系统迁移到 C 十进制浮点
  */
 
@@ -3007,9 +3018,9 @@ int main(void) {
 
 void cobol_migration(void) {
     printf("=== COBOL 到 C _Decimal 迁移指南 ===\n\n");
-    
+
     printf("1. 数据类型映射:\n\n");
-    
+
     printf("   COBOL                    C\n");
     printf("   ------------------------ -----------------------------\n");
     printf("   PIC 9(4)                 int / short\n");
@@ -3018,18 +3029,18 @@ void cobol_migration(void) {
     printf("   PIC 9(6)V99 COMP-3       _Decimal64 (限制精度)\n");
     printf("   PIC 9(16)V99 COMP-3      _Decimal64\n");
     printf("   PIC 9(33)V99 COMP-3      _Decimal128\n\n");
-    
+
     printf("2. 计算语句转换:\n\n");
-    
+
     printf("   COBOL:                    C:\n");
     printf("   COMPUTE A = B + C.   =>   _Decimal64 a = b + c;\n");
     printf("   COMPUTE A = B - C.   =>   _Decimal64 a = b - c;\n");
     printf("   COMPUTE A = B * C.   =>   _Decimal64 a = b * c;\n");
     printf("   COMPUTE A = B / C.   =>   _Decimal64 a = b / c;\n");
     printf("   ROUNDED                =>   自定义舍入函数\n\n");
-    
+
     printf("3. 舍入处理:\n\n");
-    
+
     printf("   /* COBOL: COMPUTE TOTAL ROUNDED = ... */\n");
     printf("   _Decimal64 calculate_rounded(_Decimal64 value, int decimals) {\n");
     printf("       _Decimal64 factor = 1.0DD;\n");
@@ -3040,28 +3051,28 @@ void cobol_migration(void) {
 
 void java_migration(void) {
     printf("\n=== Java BigDecimal 到 C _Decimal 迁移指南 ===\n\n");
-    
+
     printf("1. 构造方法转换:\n\n");
-    
+
     printf("   Java:                                     C:\n");
     printf("   new BigDecimal(\"123.45\")          =>    123.45DD\n");
     printf("   new BigDecimal(123.45)             =>    避免! 使用字面量\n");
     printf("   BigDecimal.valueOf(123.45)         =>    (_Decimal64)123.45DD\n\n");
-    
+
     printf("2. 算术方法转换:\n\n");
-    
+
     printf("   Java:                          C:\n");
     printf("   a.add(b)                 =>    a + b\n");
     printf("   a.subtract(b)            =>    a - b\n");
     printf("   a.multiply(b)            =>    a * b\n");
     printf("   a.divide(b, scale, mode) =>    需要自定义除法函数\n");
     printf("   a.compareTo(b)           =>    (a > b) - (a < b)\n\n");
-    
+
     printf("3. 精度控制:\n\n");
-    
+
     printf("   Java:\n");
     printf("   result = value.setScale(2, RoundingMode.HALF_UP);\n\n");
-    
+
     printf("   C:\n");
     printf("   _Decimal64 set_scale(_Decimal64 value, int scale) {\n");
     printf("       _Decimal64 factor = pow(10, scale);\n");
@@ -3073,27 +3084,27 @@ void java_migration(void) {
 
 void best_practices_summary(void) {
     printf("\n=== 迁移最佳实践 ===\n\n");
-    
+
     printf("1. 逐步迁移:\n");
     printf("   - 先在非关键模块使用 _Decimal64\n");
     printf("   - 建立完整的测试用例\n");
     printf("   - 对比旧系统和新系统的输出\n\n");
-    
+
     printf("2. 舍入一致性:\n");
     printf("   - 明确文档化舍入策略\n");
     printf("   - 确保与旧系统使用相同的舍入模式\n");
     printf("   - 考虑监管要求的舍入规则\n\n");
-    
+
     printf("3. 精度检查:\n");
     printf("   - 验证 _Decimal64 (16位) 足够业务需求\n");
     printf("   - 如需更高精度，使用 _Decimal128\n");
     printf("   - 注意中间计算可能产生的精度丢失\n\n");
-    
+
     printf("4. 性能优化:\n");
     printf("   - 利用硬件加速 (现代 Intel/AMD CPU)\n");
     printf("   - 避免频繁的十进制/二进制转换\n");
     printf("   - 批量处理以减少函数调用开销\n\n");
-    
+
     printf("5. 测试策略:\n");
     printf("   - 包含边界值测试\n");
     printf("   - 验证舍入边界 (如 x.5)\n");
@@ -3105,7 +3116,7 @@ int main(void) {
     cobol_migration();
     java_migration();
     best_practices_summary();
-    
+
     return 0;
 }
 ```
@@ -3170,6 +3181,6 @@ gcc -std=c23 program.c -o program -lm
 
 ---
 
-*文档版本: 1.0*  
-*最后更新: 2026-03-17*  
+*文档版本: 1.0*
+*最后更新: 2026-03-17*
 *兼容标准: C23, IEEE 754-2008*

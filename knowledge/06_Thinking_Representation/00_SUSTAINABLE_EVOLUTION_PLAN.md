@@ -258,7 +258,7 @@ Month 12: 自治运行
 # 表征质量检查工具示例
 class RepresentationChecker:
     """表征质量自动化检查器"""
-    
+
     def check_structure(self, file_path):
         """检查文档结构"""
         checks = {
@@ -267,7 +267,7 @@ class RepresentationChecker:
             'proper_nesting': self._check_nesting(file_path),
         }
         return checks
-    
+
     def check_content(self, file_path):
         """检查内容质量"""
         checks = {
@@ -276,7 +276,7 @@ class RepresentationChecker:
             'images_exist': self._check_images(file_path),
         }
         return checks
-    
+
     def check_relationships(self, file_path):
         """检查关联完整性"""
         checks = {

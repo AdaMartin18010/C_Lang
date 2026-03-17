@@ -209,7 +209,9 @@ graph TB
 
 ---
 
-## 🆕 新增核心表征（2026-03）
+## 🆕 新增核心表征（2026-03-18持续推进）
+
+### 第一轮新增（基础框架）
 
 | 新增文件 | 类型 | 用途 |
 |:---------|:-----|:-----|
@@ -218,6 +220,17 @@ graph TB
 | [概念关联网络](./07_Knowledge_Graph/06_Concept_Relationship_Network.md) | 知识图谱 | 跨层次概念关联 |
 | [学习路径主决策树](./03_Decision_Trees/02_Learning_Path_Master_Tree.md) | 决策树 | 个性化学习导航 |
 | [可持续演进计划](./00_SUSTAINABLE_EVOLUTION_PLAN.md) | 规划文档 | 长期发展路线图 |
+
+### 第二轮新增（持续推进）
+
+| 新增文件 | 类型 | 用途 |
+|:---------|:-----|:-----|
+| [核心概念状态机](./09_State_Machines/01_Core_Concept_State_Machines.md) | 状态机 | 生命周期与状态转换 |
+| [安全编程决策框架](./01_Decision_Trees/11_Security_Decision_Framework.md) | 决策树 | 安全编码与漏洞防护 |
+| [性能优化决策树](./01_Decision_Trees/12_Performance_Optimization_Tree.md) | 决策树 | 性能诊断与优化策略 |
+| [调试技术主决策树](./01_Decision_Trees/13_Debugging_Master_Tree.md) | 决策树 | 问题诊断与调试方法 |
+| [编译器选项矩阵](./02_Comparison_Matrices/06_Compiler_Options_Matrix.md) | 对比矩阵 | GCC/Clang选项对比 |
+| [现代C特性速查](./08_Index/04_Modern_C_Quick_Reference.md) | 速查表 | C99/C11/C17/C23特性 |
 
 ---
 
