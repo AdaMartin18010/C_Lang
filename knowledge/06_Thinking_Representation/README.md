@@ -204,7 +204,20 @@ graph TB
 
 ---
 
-> **最后更新**: 2025-03-09
+> **最后更新**: 2026-03-18
+> **新增**: 全局架构图、多维对比矩阵、概念关联网络、学习路径主树
+
+---
+
+## 🆕 新增核心表征（2026-03）
+
+| 新增文件 | 类型 | 用途 |
+|:---------|:-----|:-----|
+| [全局架构图](./00_GLOBAL_ARCHITECTURE_MAP.md) | 层级架构 | 知识库总览导航入口 |
+| [核心概念综合矩阵](./02_Multidimensional_Matrix/02_Core_Concepts_Comprehensive_Matrix.md) | 多维矩阵 | 六维概念对比 |
+| [概念关联网络](./07_Knowledge_Graph/06_Concept_Relationship_Network.md) | 知识图谱 | 跨层次概念关联 |
+| [学习路径主决策树](./03_Decision_Trees/02_Learning_Path_Master_Tree.md) | 决策树 | 个性化学习导航 |
+| [可持续演进计划](./00_SUSTAINABLE_EVOLUTION_PLAN.md) | 规划文档 | 长期发展路线图 |
 
 ---
 
