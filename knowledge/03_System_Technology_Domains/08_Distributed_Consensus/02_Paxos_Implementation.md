@@ -1,5 +1,29 @@
 # Paxos算法C语言实现
 
+
+---
+
+## 📑 目录
+
+- [Paxos算法C语言实现](#paxos算法c语言实现)
+  - [📑 目录](#-目录)
+  - [1. Paxos算法核心概念](#1-paxos算法核心概念)
+    - [1.1 什么是Paxos](#11-什么是paxos)
+    - [1.2 Paxos基本角色](#12-paxos基本角色)
+    - [1.3 Paxos两阶段流程](#13-paxos两阶段流程)
+  - [2. 核心数据结构](#2-核心数据结构)
+  - [3. Acceptor实现](#3-acceptor实现)
+  - [4. Proposer实现](#4-proposer实现)
+  - [5. 网络层与Learner实现](#5-网络层与learner实现)
+  - [6. 完整的Paxos演示程序](#6-完整的paxos演示程序)
+  - [7. Paxos算法特性总结](#7-paxos算法特性总结)
+    - [7.1 安全性（Safety）保证](#71-安全性safety保证)
+    - [7.2 活性（Liveness）条件](#72-活性liveness条件)
+    - [7.3 生产环境扩展](#73-生产环境扩展)
+
+
+---
+
 ## 1. Paxos算法核心概念
 
 ### 1.1 什么是Paxos

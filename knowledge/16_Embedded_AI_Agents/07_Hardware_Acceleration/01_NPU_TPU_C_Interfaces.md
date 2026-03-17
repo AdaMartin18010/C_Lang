@@ -22,6 +22,29 @@
 
 ---
 
+
+---
+
+## 📑 目录
+
+- [NPU/TPU硬件加速C语言接口](#nputpu硬件加速c语言接口)
+  - [概述](#概述)
+    - [硬件对比](#硬件对比)
+  - [📑 目录](#-目录)
+  - [ARM Ethos-U (微控制器NPU)](#arm-ethos-u-微控制器npu)
+    - [架构概述](#架构概述)
+    - [Vela编译器与模型部署](#vela编译器与模型部署)
+    - [C语言驱动代码](#c语言驱动代码)
+  - [Google Coral Edge TPU](#google-coral-edge-tpu)
+    - [libedgetpu C API](#libedgetpu-c-api)
+  - [NVIDIA Jetson (CUDA/TensoRT C API)](#nvidia-jetson-cudatensort-c-api)
+  - [通用抽象层设计](#通用抽象层设计)
+  - [性能基准](#性能基准)
+    - [相同模型在不同硬件上的对比](#相同模型在不同硬件上的对比)
+
+
+---
+
 ## ARM Ethos-U (微控制器NPU)
 
 ### 架构概述

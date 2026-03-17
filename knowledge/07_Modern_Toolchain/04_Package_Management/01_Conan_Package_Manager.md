@@ -17,6 +17,47 @@ Conan是C/C++的跨平台包管理器：
 
 ---
 
+
+---
+
+## 📑 目录
+
+- [Conan包管理器指南](#conan包管理器指南)
+  - [📋 Conan简介](#-conan简介)
+  - [📑 目录](#-目录)
+  - [🚀 快速开始](#-快速开始)
+    - [安装](#安装)
+    - [基础用法](#基础用法)
+  - [📊 conanfile.txt vs conanfile.py 对比](#-conanfiletxt-vs-conanfilepy-对比)
+    - [何时使用conanfile.txt](#何时使用conanfiletxt)
+    - [何时使用conanfile.py](#何时使用conanfilepy)
+  - [📚 高级配置](#-高级配置)
+    - [conanfile.py 完整示例](#conanfilepy-完整示例)
+    - [私有仓库](#私有仓库)
+  - [⚙️ 选项和配置](#️-选项和配置)
+    - [设置（Settings）vs 选项（Options）](#设置settingsvs-选项options)
+    - [配置（Conf）系统](#配置conf系统)
+    - [常用配置项](#常用配置项)
+  - [🌐 交叉编译配置](#-交叉编译配置)
+    - [创建交叉编译Profile](#创建交叉编译profile)
+    - [使用交叉编译Profile](#使用交叉编译profile)
+    - [主机（Host）vs 构建（Build）Profile](#主机hostvs-构建buildprofile)
+    - [常用交叉编译场景](#常用交叉编译场景)
+  - [🏢 Artifactory集成](#-artifactory集成)
+    - [设置JFrog Artifactory](#设置jfrog-artifactory)
+    - [仓库布局最佳实践](#仓库布局最佳实践)
+    - [CI/CD自动化上传](#cicd自动化上传)
+    - [包推广（Promotion）](#包推广promotion)
+  - [🔧 CI/CD最佳实践](#-cicd最佳实践)
+    - [GitHub Actions 集成](#github-actions-集成)
+    - [GitLab CI 集成](#gitlab-ci-集成)
+    - [Jenkins Pipeline](#jenkins-pipeline)
+    - [缓存优化策略](#缓存优化策略)
+  - [📖 参考资源](#-参考资源)
+
+
+---
+
 ## 🚀 快速开始
 
 ### 安装

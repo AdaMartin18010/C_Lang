@@ -2,6 +2,49 @@
 
 > **领域**: 深度结构与元物理层 | **子领域**: 安全隔离与权限控制
 
+
+---
+
+## 📑 目录
+
+- [软件沙箱技术](#软件沙箱技术)
+  - [📑 目录](#-目录)
+  - [1. 沙箱概述](#1-沙箱概述)
+    - [1.1 什么是沙箱](#11-什么是沙箱)
+    - [1.2 沙箱的核心目标](#12-沙箱的核心目标)
+    - [1.3 沙箱类型](#13-沙箱类型)
+  - [2. seccomp-bpf](#2-seccomp-bpf)
+    - [2.1 seccomp简介](#21-seccomp简介)
+    - [2.2 高级seccomp策略](#22-高级seccomp策略)
+    - [2.3 seccomp动作类型](#23-seccomp动作类型)
+    - [2.4 使用libseccomp库](#24-使用libseccomp库)
+  - [3. Linux Namespaces](#3-linux-namespaces)
+    - [3.1 Namespace类型](#31-namespace类型)
+    - [3.2 Namespace编程接口](#32-namespace编程接口)
+    - [3.3 完整的沙箱初始化](#33-完整的沙箱初始化)
+  - [4. WebAssembly 沙箱](#4-webassembly-沙箱)
+    - [4.1 WASM沙箱特性](#41-wasm沙箱特性)
+    - [4.2 WASM内存安全模型](#42-wasm内存安全模型)
+    - [4.3 WASI - WASM系统接口](#43-wasi---wasm系统接口)
+    - [4.4 WASM运行时比较](#44-wasm运行时比较)
+  - [5. Linux Capabilities](#5-linux-capabilities)
+    - [5.1 Capabilities概述](#51-capabilities概述)
+    - [5.2 Capabilities管理](#52-capabilities管理)
+  - [6. Chrome沙箱架构](#6-chrome沙箱架构)
+    - [6.1 多层沙箱设计](#61-多层沙箱设计)
+    - [6.2 Chrome Linux沙箱实现](#62-chrome-linux沙箱实现)
+    - [6.3 Chrome Site Isolation](#63-chrome-site-isolation)
+    - [6.4 Chrome沙箱安全特性](#64-chrome沙箱安全特性)
+  - [7. 沙箱最佳实践](#7-沙箱最佳实践)
+    - [7.1 设计原则](#71-设计原则)
+    - [7.2 沙箱逃逸防护](#72-沙箱逃逸防护)
+  - [8. 总结](#8-总结)
+    - [关键技术对比](#关键技术对比)
+    - [实施建议](#实施建议)
+
+
+---
+
 ## 1. 沙箱概述
 
 ### 1.1 什么是沙箱

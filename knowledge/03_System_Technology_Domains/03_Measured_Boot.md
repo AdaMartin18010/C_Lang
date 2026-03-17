@@ -1,5 +1,55 @@
 # 可信启动与度量启动
 
+
+---
+
+## 📑 目录
+
+- [可信启动与度量启动](#可信启动与度量启动)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [TPM基础](#tpm基础)
+    - [什么是TPM](#什么是tpm)
+    - [TPM版本演进](#tpm版本演进)
+    - [TPM 2.0架构](#tpm-20架构)
+    - [TPM关键能力](#tpm关键能力)
+      - [1. 平台配置寄存器 (PCR)](#1-平台配置寄存器-pcr)
+      - [2. 密钥层次结构](#2-密钥层次结构)
+  - [度量启动流程](#度量启动流程)
+    - [度量启动原理](#度量启动原理)
+    - [CRTM（Core Root of Trust for Measurement）](#crtmcore-root-of-trust-for-measurement)
+    - [启动度量序列](#启动度量序列)
+  - [PCR寄存器详解](#pcr寄存器详解)
+    - [PCR寄存器分配](#pcr寄存器分配)
+    - [PCR扩展操作](#pcr扩展操作)
+    - [PCR引用与验证](#pcr引用与验证)
+  - [安全启动链](#安全启动链)
+    - [信任链构建](#信任链构建)
+    - [远程证明（Remote Attestation）](#远程证明remote-attestation)
+  - [UEFI Secure Boot](#uefi-secure-boot)
+    - [安全启动原理](#安全启动原理)
+    - [签名验证数据库](#签名验证数据库)
+    - [Secure Boot与度量启动结合](#secure-boot与度量启动结合)
+  - [Linux IMA（Integrity Measurement Architecture）](#linux-imaintegrity-measurement-architecture)
+    - [IMA架构](#ima架构)
+    - [IMA运行模式](#ima运行模式)
+    - [IMA策略配置](#ima策略配置)
+    - [IMA与TPM集成](#ima与tpm集成)
+    - [EVM（Extended Verification Module）](#evmextended-verification-module)
+  - [实际应用示例](#实际应用示例)
+    - [示例1：启用度量启动（Ubuntu）](#示例1启用度量启动ubuntu)
+    - [示例2：生成TPM引用（Quote）](#示例2生成tpm引用quote)
+    - [示例3：配置IMA强制模式](#示例3配置ima强制模式)
+  - [安全最佳实践](#安全最佳实践)
+    - [1. 密钥管理](#1-密钥管理)
+    - [2. PCR选择](#2-pcr选择)
+    - [3. 撤销与更新](#3-撤销与更新)
+  - [相关技术对比](#相关技术对比)
+  - [参考资源](#参考资源)
+
+
+---
+
 ## 概述
 
 可信启动（Trusted Boot）和度量启动（Measured Boot）是保障系统启动过程安全性的核心技术。

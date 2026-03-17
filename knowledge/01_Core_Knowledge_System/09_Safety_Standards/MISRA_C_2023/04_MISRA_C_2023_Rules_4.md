@@ -16,6 +16,49 @@
 
 ---
 
+
+---
+
+## 📑 目录
+
+- [MISRA C:2023 Rules 4.1-4.5 - 标识符命名与隐藏](#misra-c2023-rules-41-45---标识符命名与隐藏)
+  - [规则分类概述](#规则分类概述)
+  - [📑 目录](#-目录)
+  - [Rule 4.1 - 标识符长度与唯一性](#rule-41---标识符长度与唯一性)
+    - [规则原文](#规则原文)
+    - [规则澄清](#规则澄清)
+    - [C11翻译限制](#c11翻译限制)
+    - [违反示例](#违反示例)
+    - [合规示例](#合规示例)
+  - [Rule 4.2 - 标识符隐藏](#rule-42---标识符隐藏)
+    - [规则原文](#规则原文-1)
+    - [什么是标识符隐藏](#什么是标识符隐藏)
+    - [违反示例](#违反示例-1)
+    - [合规示例](#合规示例-1)
+    - [标识符隐藏检测工具](#标识符隐藏检测工具)
+  - [Rule 4.3 - 宏与标识符冲突](#rule-43---宏与标识符冲突)
+    - [规则原文](#规则原文-2)
+    - [违反示例](#违反示例-2)
+    - [合规示例](#合规示例-2)
+  - [Rule 4.4 - 文档化标识符](#rule-44---文档化标识符)
+    - [规则原文](#规则原文-3)
+    - [文档化要求](#文档化要求)
+  - [Rule 4.5 - Typedef唯一性](#rule-45---typedef唯一性)
+    - [规则原文](#规则原文-4)
+    - [违反示例](#违反示例-3)
+    - [合规示例](#合规示例-3)
+  - [命名规范最佳实践](#命名规范最佳实践)
+    - [命名约定表](#命名约定表)
+    - [示例代码](#示例代码)
+  - [检测工具配置](#检测工具配置)
+    - [GCC检查选项](#gcc检查选项)
+    - [PC-lint配置](#pc-lint配置)
+  - [总结](#总结)
+    - [命名检查清单](#命名检查清单)
+
+
+---
+
 ## Rule 4.1 - 标识符长度与唯一性
 
 ### 规则原文
@@ -27,6 +70,7 @@
 ### 规则澄清
 
 MISRA C:2023实际上包含多个与标识符相关的规则：
+
 - **Rule 4.1**: 标识符必须唯一（考虑前63个字符）
 - **Rule 4.2**: 不得隐藏其他标识符
 - **Rule 5.1**: 外部标识符唯一性（考虑前31个字符）
@@ -233,10 +277,10 @@ typedef int int32_t;
 ```c
 /**
  * @brief Maximum number of sensors supported
- * 
+ *
  * This constant defines the maximum number of sensors
  * that can be connected to the system simultaneously.
- * 
+ *
  * @note Increasing this value will increase RAM usage
  * @see sensor_init(), sensor_count
  */
@@ -244,7 +288,7 @@ typedef int int32_t;
 
 /**
  * @brief System state enumeration
- * 
+ *
  * Defines the possible states of the system state machine.
  */
 enum system_state {
@@ -257,7 +301,7 @@ enum system_state {
 
 /**
  * @brief Sensor data structure
- * 
+ *
  * Contains the data read from a physical sensor.
  * All values are in SI units.
  */
@@ -397,10 +441,10 @@ system_status_t sensor_init(const sensor_config_t *p_config)
     if (p_config == NULL) {
         return STATUS_ERROR_INVALID_PARAM;
     }
-    
+
     /* 实现 */
     /* ... */
-    
+
     return STATUS_OK;
 }
 ```

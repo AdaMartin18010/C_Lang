@@ -1,5 +1,37 @@
 # 段错误(Segfault)排查决策树
 
+
+---
+
+## 📑 目录
+
+- [段错误(Segfault)排查决策树](#段错误segfault排查决策树)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [段错误产生原因分类](#段错误产生原因分类)
+    - [1. 空指针解引用 (Null Pointer Dereference)](#1-空指针解引用-null-pointer-dereference)
+    - [2. 数组越界访问 (Array Out of Bounds)](#2-数组越界访问-array-out-of-bounds)
+    - [3. 使用已释放内存 (Use After Free)](#3-使用已释放内存-use-after-free)
+    - [4. 栈溢出 (Stack Overflow)](#4-栈溢出-stack-overflow)
+  - [GDB调试技巧和命令](#gdb调试技巧和命令)
+    - [启动和基本命令](#启动和基本命令)
+    - [调试段错误示例](#调试段错误示例)
+  - [Core Dump分析方法](#core-dump分析方法)
+    - [启用Core Dump](#启用core-dump)
+    - [分析Core Dump](#分析core-dump)
+    - [Core Dump分析脚本](#core-dump分析脚本)
+  - [AddressSanitizer检测](#addresssanitizer检测)
+    - [编译和使用](#编译和使用)
+    - [ASan检测示例](#asan检测示例)
+    - [ASan运行时选项](#asan运行时选项)
+  - [系统化排查流程图](#系统化排查流程图)
+  - [完整排查流程代码](#完整排查流程代码)
+  - [编译和测试](#编译和测试)
+  - [总结](#总结)
+
+
+---
+
 ## 概述
 
 段错误(Segmentation Fault, Segfault)是C语言开发中最常见的运行时错误之一。

@@ -10,6 +10,7 @@
 
 - [C语言设计模式索引](#c语言设计模式索引)
   - [索引目录](#索引目录)
+  - [📑 目录](#-目录)
   - [创建型模式](#创建型模式)
     - [单例模式 (Singleton)](#单例模式-singleton)
     - [工厂模式 (Factory)](#工厂模式-factory)
@@ -49,6 +50,57 @@
     - [按问题类型选择](#按问题类型选择)
     - [模式复杂度分级](#模式复杂度分级)
   - [相关资源](#相关资源)
+
+---
+
+
+---
+
+## 📑 目录
+
+- [C语言设计模式索引](#c语言设计模式索引)
+  - [索引目录](#索引目录)
+  - [📑 目录](#-目录)
+  - [创建型模式](#创建型模式)
+    - [单例模式 (Singleton)](#单例模式-singleton)
+    - [工厂模式 (Factory)](#工厂模式-factory)
+    - [抽象工厂模式 (Abstract Factory)](#抽象工厂模式-abstract-factory)
+    - [建造者模式 (Builder)](#建造者模式-builder)
+    - [对象池模式 (Object Pool)](#对象池模式-object-pool)
+  - [结构型模式](#结构型模式)
+    - [适配器模式 (Adapter)](#适配器模式-adapter)
+    - [桥接模式 (Bridge)](#桥接模式-bridge)
+    - [组合模式 (Composite)](#组合模式-composite)
+    - [装饰器模式 (Decorator)](#装饰器模式-decorator)
+    - [外观模式 (Facade)](#外观模式-facade)
+    - [享元模式 (Flyweight)](#享元模式-flyweight)
+  - [行为型模式](#行为型模式)
+    - [观察者模式 (Observer)](#观察者模式-observer)
+    - [策略模式 (Strategy)](#策略模式-strategy)
+    - [状态模式 (State)](#状态模式-state)
+    - [命令模式 (Command)](#命令模式-command)
+    - [迭代器模式 (Iterator)](#迭代器模式-iterator)
+    - [模板方法模式 (Template Method)](#模板方法模式-template-method)
+    - [责任链模式 (Chain of Responsibility)](#责任链模式-chain-of-responsibility)
+    - [访问者模式 (Visitor)](#访问者模式-visitor)
+  - [并发模式](#并发模式)
+    - [读写锁模式 (Read-Write Lock)](#读写锁模式-read-write-lock)
+    - [生产者-消费者模式 (Producer-Consumer)](#生产者-消费者模式-producer-consumer)
+    - [线程池模式 (Thread Pool)](#线程池模式-thread-pool)
+    - [屏障模式 (Barrier)](#屏障模式-barrier)
+    - [信号量模式 (Semaphore)](#信号量模式-semaphore)
+  - [嵌入式模式](#嵌入式模式)
+    - [中断服务例程模式 (ISR)](#中断服务例程模式-isr)
+    - [环形缓冲区模式 (Ring Buffer)](#环形缓冲区模式-ring-buffer)
+    - [内存池模式 (Memory Pool)](#内存池模式-memory-pool)
+    - [设备驱动模式 (Device Driver)](#设备驱动模式-device-driver)
+    - [状态机模式 (State Machine)](#状态机模式-state-machine)
+    - [看门狗模式 (Watchdog)](#看门狗模式-watchdog)
+  - [模式选择指南](#模式选择指南)
+    - [按问题类型选择](#按问题类型选择)
+    - [模式复杂度分级](#模式复杂度分级)
+  - [相关资源](#相关资源)
+
 
 ---
 

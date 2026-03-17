@@ -22,6 +22,38 @@
 
 ---
 
+
+---
+
+## 📑 目录
+
+- [实时AI: 确定性推理与WCET分析](#实时ai-确定性推理与wcet分析)
+  - [概述](#概述)
+    - [实时AI的挑战](#实时ai的挑战)
+  - [📑 目录](#-目录)
+  - [确定性推理技术](#确定性推理技术)
+    - [1. 静态内存分配](#1-静态内存分配)
+    - [2. 无分支推理 (Branchless Inference)](#2-无分支推理-branchless-inference)
+    - [3. 固定点运算 (Fixed-Point Arithmetic)](#3-固定点运算-fixed-point-arithmetic)
+    - [4. 循环展开 (Loop Unrolling)](#4-循环展开-loop-unrolling)
+  - [WCET (Worst Case Execution Time) 分析](#wcet-worst-case-execution-time-分析)
+    - [1. 基本块计时](#1-基本块计时)
+    - [2. 抽象解释 (Abstract Interpretation)](#2-抽象解释-abstract-interpretation)
+    - [3. 缓存锁定 (Cache Locking)](#3-缓存锁定-cache-locking)
+  - [实时调度集成](#实时调度集成)
+    - [1. Rate Monotonic Scheduling (RMS)](#1-rate-monotonic-scheduling-rms)
+    - [2. 时间触发架构 (TTA)](#2-时间触发架构-tta)
+  - [实际案例: 汽车ADAS实时推理](#实际案例-汽车adas实时推理)
+    - [系统架构](#系统架构)
+    - [确定性推理实现](#确定性推理实现)
+  - [验证与测试](#验证与测试)
+    - [1. 执行时间边界测试](#1-执行时间边界测试)
+    - [2. 形式化WCET分析工具](#2-形式化wcet分析工具)
+  - [参考资源](#参考资源)
+
+
+---
+
 ## 确定性推理技术
 
 ### 1. 静态内存分配

@@ -1,5 +1,36 @@
 # 神经形态计算
 
+
+---
+
+## 📑 目录
+
+- [神经形态计算](#神经形态计算)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [核心特点](#核心特点)
+    - [1. 事件驱动（Event-Driven）](#1-事件驱动event-driven)
+    - [2. 稀疏表示（Sparse Representation）](#2-稀疏表示sparse-representation)
+  - [神经形态芯片](#神经形态芯片)
+    - [Intel Loihi](#intel-loihi)
+    - [IBM TrueNorth](#ibm-truenorth)
+    - [清华大学天机芯](#清华大学天机芯)
+  - [脉冲神经网络（SNN）仿真](#脉冲神经网络snn仿真)
+    - [神经元模型](#神经元模型)
+      - [Leaky Integrate-and-Fire (LIF)](#leaky-integrate-and-fire-lif)
+      - [Izhikevich 模型](#izhikevich-模型)
+    - [突触模型](#突触模型)
+    - [网络仿真框架](#网络仿真框架)
+  - [嵌入式神经形态](#嵌入式神经形态)
+    - [低功耗实现](#低功耗实现)
+    - [中断驱动实现](#中断驱动实现)
+  - [应用案例](#应用案例)
+    - [手势识别](#手势识别)
+  - [参考资源](#参考资源)
+
+
+---
+
 ## 概述
 
 神经形态计算（Neuromorphic Computing）是一种受生物神经系统启发的计算范式，通过模拟大脑神经元和突触的工作方式，实现高能效、自适应的智能计算。

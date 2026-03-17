@@ -19,6 +19,57 @@
 
 ---
 
+
+---
+
+## 📑 目录
+
+- [MISRA C:2023 Rules 10.1-10.8 - 声明与定义](#misra-c2023-rules-101-108---声明与定义)
+  - [规则分类概述](#规则分类概述)
+  - [📑 目录](#-目录)
+  - [Rule 10.1 - 初始化](#rule-101---初始化)
+    - [规则原文](#规则原文)
+    - [违反示例](#违反示例)
+    - [合规示例](#合规示例)
+    - [初始化最佳实践](#初始化最佳实践)
+  - [Rule 10.2 - 作用域最小化](#rule-102---作用域最小化)
+    - [规则原文](#规则原文-1)
+    - [违反示例](#违反示例-1)
+    - [合规示例](#合规示例-1)
+  - [Rule 10.3 - 标识符隐藏](#rule-103---标识符隐藏)
+    - [规则原文](#规则原文-2)
+    - [违反示例](#违反示例-2)
+    - [合规示例](#合规示例-2)
+  - [Rule 10.4 - 存储类使用](#rule-104---存储类使用)
+    - [规则原文](#规则原文-3)
+    - [违反示例](#违反示例-3)
+    - [合规示例](#合规示例-3)
+  - [Rule 10.5 - 声明位置](#rule-105---声明位置)
+    - [规则原文](#规则原文-4)
+    - [合规示例](#合规示例-4)
+  - [Rule 10.6 - 类型一致性](#rule-106---类型一致性)
+    - [规则原文](#规则原文-5)
+    - [违反示例](#违反示例-4)
+    - [合规示例](#合规示例-5)
+  - [Rule 10.7 - 链接一致性](#rule-107---链接一致性)
+    - [规则原文](#规则原文-6)
+    - [违反示例](#违反示例-5)
+    - [合规示例](#合规示例-6)
+  - [Rule 10.8 - 唯一定义](#rule-108---唯一定义)
+    - [规则原文](#规则原文-7)
+    - [违反示例](#违反示例-6)
+    - [合规示例](#合规示例-7)
+  - [声明与定义最佳实践](#声明与定义最佳实践)
+    - [头文件模板](#头文件模板)
+    - [实现文件模板](#实现文件模板)
+  - [检测工具配置](#检测工具配置)
+    - [GCC检查](#gcc检查)
+    - [PC-lint](#pc-lint)
+  - [总结](#总结)
+
+
+---
+
 ## Rule 10.1 - 初始化
 
 ### 规则原文
@@ -136,13 +187,13 @@ static struct Config default_config = {
 struct Config load_config(void)
 {
     struct Config cfg = {0};  /* 先清零 */
-    
+
     /* 从文件读取 */
     cfg.timeout = read_timeout();
     if (cfg.timeout <= 0) {
         cfg.timeout = default_config.timeout;
     }
-    
+
     return cfg;
 }
 ```
@@ -189,12 +240,12 @@ void func(void)
 {
     /* 声明靠近使用 */
     int local_temp;
-    
+
     /* 循环变量在循环中声明 */
     for (int i = 0; i < 10; i++) {
         /* i只在循环内可见 */
     }
-    
+
     /* 块作用域 */
     {
         int block_var = 42;
@@ -403,20 +454,20 @@ void process_data(const char *input)
     int result = 0;
     size_t len = 0;
     char *buffer = NULL;
-    
+
     /* 2. 然后是语句 */
     if (input == NULL) {
         return;
     }
-    
+
     len = strlen(input);
     buffer = malloc(len + 1);
     if (buffer == NULL) {
         return;
     }
-    
+
     /* 处理 */
-    
+
     free(buffer);
 }
 
@@ -425,11 +476,11 @@ void modern_style(const char *input)
 {
     /* 主要声明在开头 */
     int result = 0;
-    
+
     if (input == NULL) {
         return;
     }
-    
+
     /* for循环变量在循环中 */
     for (size_t i = 0; i < strlen(input); i++) {
         /* ... */
@@ -715,16 +766,16 @@ module_status_t module_init(const module_config_t *config)
     if (s_initialized) {
         return MODULE_OK;  /* 幂等 */
     }
-    
+
     const module_config_t *cfg = config ? config : &g_default_config;
-    
+
     if (!validate_config(cfg)) {
         return MODULE_ERROR_INIT;
     }
-    
+
     s_current_config = *cfg;
     s_initialized = true;
-    
+
     return MODULE_OK;
 }
 
@@ -733,7 +784,7 @@ void module_deinit(void)
     if (!s_initialized) {
         return;
     }
-    
+
     memset(&s_current_config, 0, sizeof(s_current_config));
     s_initialized = false;
 }
@@ -748,13 +799,13 @@ module_status_t module_process(const uint8_t *data, size_t len)
     if (!s_initialized) {
         return MODULE_ERROR_INIT;
     }
-    
+
     if (data == NULL || len == 0) {
         return MODULE_OK;  /* 空操作 */
     }
-    
+
     /* 处理数据 */
-    
+
     return MODULE_OK;
 }
 ```

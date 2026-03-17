@@ -84,6 +84,35 @@ void minibatch_update(Network* net, Matrix* X_batch, Matrix* y_batch) {
 
 ---
 
+
+---
+
+## 📑 目录
+
+- [梯度下降与优化算法 (Gradient Descent \& Optimizers)](#梯度下降与优化算法-gradient-descent--optimizers)
+  - [1. 梯度下降基础](#1-梯度下降基础)
+    - [1.1 核心思想](#11-核心思想)
+    - [1.2 批量梯度下降 (BGD)](#12-批量梯度下降-bgd)
+    - [1.3 随机梯度下降 (SGD)](#13-随机梯度下降-sgd)
+    - [1.4 小批量梯度下降 (Mini-batch GD)](#14-小批量梯度下降-mini-batch-gd)
+  - [📑 目录](#-目录)
+  - [2. 动量方法](#2-动量方法)
+    - [2.1 Momentum](#21-momentum)
+    - [2.2 Nesterov加速梯度 (NAG)](#22-nesterov加速梯度-nag)
+  - [3. 自适应学习率方法](#3-自适应学习率方法)
+    - [3.1 AdaGrad](#31-adagrad)
+    - [3.2 RMSprop](#32-rmsprop)
+    - [3.3 Adam (Adaptive Moment Estimation)](#33-adam-adaptive-moment-estimation)
+  - [4. 学习率调度](#4-学习率调度)
+    - [4.1 衰减策略](#41-衰减策略)
+    - [4.2 预热 (Warmup)](#42-预热-warmup)
+  - [5. 优化器对比](#5-优化器对比)
+  - [6. 完整实现示例](#6-完整实现示例)
+  - [7. 参考文献](#7-参考文献)
+
+
+---
+
 ## 2. 动量方法
 
 ### 2.1 Momentum

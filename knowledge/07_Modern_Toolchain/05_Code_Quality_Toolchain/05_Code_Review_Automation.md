@@ -25,6 +25,50 @@
 
 ---
 
+
+---
+
+## 📑 目录
+
+- [代码审查自动化](#代码审查自动化)
+  - [📋 审查流程](#-审查流程)
+    - [GitHub Flow](#github-flow)
+    - [自动化检查清单](#自动化检查清单)
+  - [📑 目录](#-目录)
+  - [🚀 GitHub Actions集成](#-github-actions集成)
+  - [🦊 GitLab CI/CD集成](#-gitlab-cicd集成)
+  - [📊 代码覆盖率集成](#-代码覆盖率集成)
+    - [CMake + gcov + Codecov配置](#cmake--gcov--codecov配置)
+    - [GitHub Actions + Codecov](#github-actions--codecov)
+    - [覆盖率阈值设置](#覆盖率阈值设置)
+  - [🔍 自动化代码审查工具](#-自动化代码审查工具)
+    - [SonarQube集成](#sonarqube集成)
+    - [CodeClimate配置](#codeclimate配置)
+  - [🔒 依赖安全扫描](#-依赖安全扫描)
+    - [Snyk集成](#snyk集成)
+    - [Dependabot配置](#dependabot配置)
+  - [📝 PR模板配置](#-pr模板配置)
+    - [GitHub PR模板](#github-pr模板)
+    - [GitLab MR模板](#gitlab-mr模板)
+  - [✅ 代码审查最佳实践](#-代码审查最佳实践)
+    - [审查者指南](#审查者指南)
+    - [提交者指南](#提交者指南)
+    - [审查效率技巧](#审查效率技巧)
+  - [🔐 审查权限和工作流设置](#-审查权限和工作流设置)
+    - [GitHub分支保护规则](#github分支保护规则)
+    - [CODEOWNERS配置](#codeowners配置)
+    - [合并策略配置](#合并策略配置)
+  - [🚨 常见审查问题自动检测规则](#-常见审查问题自动检测规则)
+    - [自定义Lint规则](#自定义lint规则)
+    - [禁止函数检测脚本](#禁止函数检测脚本)
+    - [Clang-Tidy检测规则](#clang-tidy检测规则)
+    - [代码异味检测](#代码异味检测)
+  - [📋 审查清单模板](#-审查清单模板)
+    - [C代码审查清单](#c代码审查清单)
+
+
+---
+
 ## 🚀 GitHub Actions集成
 
 ```yaml
