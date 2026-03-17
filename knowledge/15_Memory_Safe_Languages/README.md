@@ -1,0 +1,136 @@
+# 内存安全语言生态
+
+> **模块编号**: 15
+> **创建日期**: 2026-03-18
+> **覆盖领域**: Rust、内存安全迁移、C互操作、安全合规
+
+---
+
+## 概述
+
+随着CISA 2026合规令和欧盟Cyber Resilience Act的实施，内存安全语言(MSL)的选择和迁移成为安全关键系统开发的战略决策。本模块提供：
+
+- **技术对比**: C与Rust的深度技术比较
+- **迁移指南**: 从C到Rust的渐进式迁移策略
+- **决策框架**: 何时使用C，何时使用Rust
+- **工业案例**: Google、Microsoft、Linux内核等真实案例
+
+---
+
+## 为什么需要内存安全语言
+
+### 数据支撑
+
+| 来源 | 数据 | 说明 |
+|:-----|:-----|:-----|
+| **Microsoft** | 70%严重安全缺陷 | 内存安全问题 |
+| **Google Chrome** | 70%高危漏洞 | 内存安全问题 |
+| **Apple iOS/macOS** | 60-70%漏洞 | 内存安全问题 |
+| **NSA** | 2022年警示 | 建议使用内存安全语言 |
+| **CISA** | 2024年强制令 | 2026年1月合规截止 |
+
+### 内存安全漏洞类型
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   内存安全漏洞分布                          │
+├─────────────────────────────────────────────────────────────┤
+│  缓冲区溢出          ████████████████████████  40%          │
+│  Use-After-Free     ████████████████          25%          │
+│  空指针解引用       ████████                  15%          │
+│  双重释放           █████                     10%          │
+│  内存泄漏           ████                       7%          │
+│  其他               ██                         3%          │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 内存安全语言对比
+
+| 语言 | 编译型 | 零成本抽象 | 与C互操作 | 学习曲线 | 生态成熟度 |
+|:-----|:------:|:----------:|:---------:|:--------:|:----------:|
+| **Rust** | ✅ | ✅ | 优秀 | 陡峭 | 高 |
+| **Ada/SPARK** | ✅ | ✅ | 良好 | 陡峭 | 中 |
+| **Swift** | ✅ | ✅ | 良好 | 中等 | 中 |
+| **Go** | ✅ | 部分 | 良好 | 平缓 | 高 |
+| **C#** | JIT | 部分 | 中等 | 平缓 | 高 |
+| **Java** | JIT | 否 | 中等 | 平缓 | 极高 |
+
+---
+
+## 子模块导航
+
+### 📘 01_Rust_vs_C
+
+- [01_Technical_Comparison.md](./01_Rust_vs_C/01_Technical_Comparison.md) - 技术深度对比
+- [02_Memory_Model.md](./01_Rust_vs_C/02_Memory_Model.md) - 内存模型对比
+- [03_Performance_Comparison.md](./01_Rust_vs_C/03_Performance_Comparison.md) - 性能基准测试
+
+### 🔄 02_Migration_Strategies
+
+- [01_Incremental_Migration.md](./02_Migration_Strategies/01_Incremental_Migration.md)
+- [02_FFI_Best_Practices.md](./02_Migration_Strategies/02_FFI_Best_Practices.md)
+- [03_Tooling_Workflows.md](./02_Migration_Strategies/03_Tooling_Workflows.md)
+
+### 📊 03_Industry_Cases
+
+- [01_Google_Android.md](./03_Industry_Cases/01_Google_Android.md)
+- [02_Microsoft_Windows.md](./03_Industry_Cases/02_Microsoft_Windows.md)
+- [03_Linux_Kernel.md](./03_Industry_Cases/03_Linux_Kernel.md)
+- [04_Cloudflare_Pingora.md](./03_Industry_Cases/04_Cloudflare_Pingora.md)
+
+### 🎯 04_Decision_Frameworks
+
+- [01_Language_Selection_Guide.md](./04_Decision_Frameworks/01_Language_Selection_Guide.md)
+- [02_Safety_Critical_Analysis.md](./04_Decision_Frameworks/02_Safety_Critical_Analysis.md)
+
+---
+
+## 快速参考
+
+### C vs Rust 核心对比
+
+| 特性 | C | Rust |
+|:-----|:--|:-----|
+| **内存管理** | 手动(malloc/free) | 所有权系统 |
+| **空指针** | 允许 | 不允许(Option<T>) |
+| **缓冲区溢出** | 可能 | 编译时阻止 |
+| **数据竞争** | 可能 | 编译时阻止 |
+| **未定义行为** | 常见 | 安全子集消除 |
+| **运行时开销** | 无 | 无(零成本抽象) |
+| **二进制大小** | 小 | 较小(可优化) |
+
+### 迁移成本估算
+
+| 项目规模 | 预期迁移时间 | 团队培训 | 风险 |
+|:---------|:-------------|:---------|:-----|
+| 小型 (<10K LOC) | 1-2月 | 2周 | 低 |
+| 中型 (10K-100K) | 6-12月 | 1月 | 中 |
+| 大型 (100K-1M) | 2-3年 | 3月 | 高 |
+| 超大型 (>1M) | 5年+ | 6月 | 极高 |
+
+---
+
+## CISA 2026合规
+
+根据CISA "Secure by Design"要求：
+
+```markdown
+□ 内存安全漏洞基线评估
+□ 内存安全迁移计划 (2026-01-01前发布)
+□ 消除目标和时间表
+□ 遗留代码补救策略
+□ 供应商合规要求
+```
+
+详情参见: [CISA_CRA_Compliance_2026.md](../00_VERSION_TRACKING/CISA_CRA_Compliance_2026.md)
+
+---
+
+**相关模块**:
+
+- [08_Zig_C_Connection/](../08_Zig_C_Connection/) - Zig与C互操作
+- [16_Embedded_AI_Agents/](../16_Embedded_AI_Agents/) - 嵌入式AI
+
+**最后更新**: 2026-03-18
