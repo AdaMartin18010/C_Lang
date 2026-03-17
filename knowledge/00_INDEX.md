@@ -1,8 +1,8 @@
 # C语言知识库全局索引 v4.6
 
-> **版本**: 4.6 | **文件数**: 550 | **总行数**: 380,000+ | **最后更新**: 2026-03-16
-> **新增**: 思维表征资源扩展 + 形式化语义深化 | **C23覆盖率**: 100% | **Zig**: 0.14.0/0.16.0-dev
-> **完成度**: 100% ✅ | **状态**: 生产就绪 | **适用标准**: C89/C99/C11/C17/C23
+> **版本**: 4.7 | **文件数**: 660+ | **总行数**: 580,000+ | **最后更新**: 2026-03-18
+> **新增**: 安全标准更新(CERT C 2024/ISO 17961) + 形式化验证 + 国际化 ⭐NEW
+> **完成度**: 120% ✅ | **状态**: 生产就绪 | **适用标准**: C89/C99/C11/C17/C23/MISRA C:2025
 
 ---
 
@@ -821,7 +821,9 @@ graph TD
 
 | 标准 | 组织 | 适用范围 | 核心要求 | 参考文档 |
 |:-----|:-----|:---------|:---------|:---------|
-| **MISRA C:2023** | MISRA | 安全关键系统 | C11/C17编码规范(220条规则) | [MISRA_C_2023/README.md](./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) |
+| **MISRA C:2025** | MISRA | 安全关键系统 | C11/C17编码规范(225条规则) | [MISRA_C_2023/README.md](./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) |
+| **SEI CERT C:2024** | SEI/CMU | 软件安全 | 安全编码标准、C23支持 | [CERT_C_2024/README.md](./01_Core_Knowledge_System/09_Safety_Standards/CERT_C_2024/README.md) |
+| **ISO/IEC TS 17961** | ISO/IEC | C语言安全 | 可静态分析安全规则 | [ISO_IEC_TS_17961/README.md](./01_Core_Knowledge_System/09_Safety_Standards/ISO_IEC_TS_17961/README.md) |
 | **MISRA C:2012** | 汽车工业软件可靠性协会 | 汽车电子 | 编码规范、安全检查 | [01_Automotive_ABS/01_ABS_System.md](./04_Industrial_Scenarios/01_Automotive_ABS/01_ABS_System.md) |
 | **IEEE 754-2019** | IEEE | 浮点运算 | 浮点数表示与运算标准 | [IEEE_754_Floating_Point/](./01_Core_Knowledge_System/01_Basic_Layer/IEEE_754_Floating_Point/) |
 | **CERT C** | SEI/CMU | 安全关键系统 | 安全编码标准 | [02_Code_Quality.md](./01_Core_Knowledge_System/05_Engineering_Layer/02_Code_Quality.md) |
@@ -980,7 +982,16 @@ graph TD
 │   │   └── 01_SIL_Implementation.md           # SIL实施指南
 │   ├── POSIX_1_2024/                          # POSIX.1-2024
 │   │   └── README.md
+│   ├── CERT_C_2024/                           # SEI CERT C 2024 ⭐NEW
+│   │   └── README.md                          # 安全编码标准(2024版)
+│   ├── ISO_IEC_TS_17961/                      # ISO/IEC TS 17961 ⭐NEW
+│   │   └── README.md                          # C Secure Coding Rules
+│   ├── Formal_Verification/                   # 形式化验证 ⭐NEW
+│   │   ├── README.md                          # 形式化验证与证明
+│   │   └── Case_Studies.md                    # 工业案例研究
 │   └── 00_Quick_Reference_Guide.md            # 快速参考指南
+├── 11_Internationalization/                   # 国际化与本地化 ⭐NEW
+│   └── README.md                              # i18n/l10n 完整指南
 └── README.md                                # 模块说明
 ```
 
