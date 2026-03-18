@@ -5,9 +5,24 @@
 
 ---
 
+## 文档索引
+
+| 文档 | 内容 | 难度 |
+|:-----|:-----|:----:|
+| [01_Compcert_Overview.md](01_Compcert_Overview.md) | CompCert编译器概述 | ⭐⭐⭐ |
+| [02_VST_Separation_Logic_Practical.md](02_VST_Separation_Logic_Practical.md) | VST分离逻辑实践 | ⭐⭐⭐⭐ |
+| [04_Frama_C_2024_Guide.md](04_Frama_C_2024_Guide.md) | **Frama-C 2024完整指南** (新) | ⭐⭐⭐ |
+| [05_Eva_Tutorial.md](05_Eva_Tutorial.md) | **Eva抽象解释深度教程** (新) | ⭐⭐⭐ |
+| [06_WP_Tutorial.md](06_WP_Tutorial.md) | **WP演绎验证深度教程** (新) | ⭐⭐⭐⭐ |
+| [07_Industrial_Case_Studies.md](07_Industrial_Case_Studies.md) | **工业案例研究** (新) | ⭐⭐⭐⭐ |
+| [08_MetAcsl_Metaprogramming.md](08_MetAcsl_Metaprogramming.md) | **MetAcsl元编程扩展** (新) | ⭐⭐⭐⭐⭐ |
+
+---
+
 ## 目录
 
 - [CompCert 形式化验证](#compcert-形式化验证)
+  - [文档索引](#文档索引)
   - [目录](#目录)
   - [CompCert 概述](#compcert-概述)
     - [核心特性](#核心特性)
@@ -26,6 +41,10 @@
   - [实践案例](#实践案例)
     - [内存安全证明](#内存安全证明)
     - [函数契约示例](#函数契约示例)
+  - [Frama-C 深度教程系列](#frama-c-深度教程系列)
+    - [学习路径](#学习路径)
+    - [统计数据](#统计数据)
+    - [特色内容](#特色内容)
   - [奖项和认可](#奖项和认可)
   - [参考资料](#参考资料)
 
@@ -259,6 +278,64 @@ int safe_access(int *array, int length, int index) {
     return array[index];
 }
 ```
+
+---
+
+## Frama-C 深度教程系列
+
+基于2024年《Guide to Software Verification with Frama-C》，本目录提供完整的Frama-C学习和实践指南。
+
+### 学习路径
+
+```
+初学者 ────────────────────────────────────────────────► 专家
+   │                                                        │
+   ▼                                                        ▼
+[04_Frama_C_2024_Guide.md] ──► [05_Eva_Tutorial.md] ──► [06_WP_Tutorial.md]
+        │                           │                       │
+        │                           ▼                       ▼
+        │                   抽象解释分析                演绎验证
+        │                   • 数值程序验证               • 功能正确性证明
+        │                   • 内存安全分析               • 交互式证明
+        │                   • 循环不变量                 • 高级ACSL
+        │
+        ▼
+[07_Industrial_Case_Studies.md] ◄── 工业实践
+        • 三菱电机10年经验
+        • AUTOSAR集成
+        • 航天DO-178C
+
+[08_MetAcsl_Metaprogramming.md] ◄── 专家级
+        • 元编程扩展
+        • 大规模代码标注
+        • 遗留代码逆向
+```
+
+### 统计数据
+
+```
+📊 Frama-C 系列文档统计
+═══════════════════════════════════════════════════════════════
+文档                          行数      大小      完整案例
+─────────────────────────────────────────────────────────────
+04_Frama_C_2024_Guide.md      ~1100     37 KB     15+
+05_Eva_Tutorial.md            ~1060     33 KB     14+
+06_WP_Tutorial.md              ~985     39 KB     10+
+07_Industrial_Case_Studies.md  ~940     36 KB      8+
+08_MetAcsl_Metaprogramming.md  ~730     25 KB      6+
+─────────────────────────────────────────────────────────────
+总计                          ~4800    170 KB     50+
+═══════════════════════════════════════════════════════════════
+```
+
+### 特色内容
+
+- ✅ 基于2024年《Guide to Software Verification with Frama-C》
+- ✅ 可运行的ACSL代码示例 (50+ 完整案例)
+- ✅ 详细命令行说明和验证流程
+- ✅ 工业界真实案例 (三菱电机、Airbus、AUTOSAR)
+- ✅ 与DO-178C、ISO 26262、MISRA C标准关联
+- ✅ FAQ和故障排除指南
 
 ---
 
