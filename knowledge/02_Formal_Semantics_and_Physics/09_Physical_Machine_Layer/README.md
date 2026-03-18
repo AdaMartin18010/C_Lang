@@ -431,12 +431,45 @@ long perf_event_open(struct perf_event_attr *hw_event,
 
 ## 文件结构
 
+### 数字逻辑基础 (晶体管级 → 门电路 → 运算单元)
+
 | 文件名 | 难度 | 核心内容 |
 |--------|------|----------|
-| `01_CPU_Microarchitecture.md` | 4星 | 流水线、乱序执行、超标量、超线程 |
-| `02_Memory_Hierarchy.md` | 4星 | 存储层次、局部性、缓存组织、预取 |
-| `03_Cache_Coherence.md` | 5星 | MESI协议、伪共享、内存模型、屏障 |
-| `04_Branch_Prediction.md` | 4星 | 静态/动态预测、BTB、预测失败处理 |
+| `01_Digital_Logic_Foundations/01_Transistor_Level.md` | 4星 | MOS晶体管、CMOS工艺、开关特性 |
+| `01_Digital_Logic_Foundations/02_Logic_Gates_Implementation.md` | 4星 | NAND/NOR实现、传输门、三态门 |
+| `01_Digital_Logic_Foundations/03_Combinational_Circuits.md` | 4星 | 多路选择器、译码器、加法器 |
+| `02_Arithmetic_Logic_Unit/01_Binary_Arithmetic.md` | 4星 | 半加器、全加器、CLA加法器 |
+| `02_Arithmetic_Logic_Unit/02_Multiplier_Divider.md` | 5星 | 阵列乘法器、Booth算法、除法器 |
+| `02_Arithmetic_Logic_Unit/03_ALU_Design.md` | 4星 | 完整ALU设计、标志位生成 |
+| `02_Arithmetic_Logic_Unit/04_Floating_Point_Unit.md` | 5星 | FPU设计、IEEE 754实现 |
+| `03_Memory_Circuits/01_SR_Latch_and_D_FlipFlop.md` | 4星 | 锁存器、触发器、时序分析 |
+| `03_Memory_Circuits/02_Register_File.md` | 4星 | 寄存器文件、多端口设计 |
+| `03_Memory_Circuits/03_SRAM_Cell.md` | 5星 | 6T SRAM单元、读写操作 |
+| `03_Memory_Circuits/04_Cache_Array.md` | 5星 | Cache阵列、Tag/Data组织 |
+
+### 处理器微架构 (CPU实现)
+
+| 文件名 | 难度 | 核心内容 |
+|--------|------|----------|
+| `01_CPU_Microarchitecture_Detail.md` | 4星 | 流水线、乱序执行、超标量 |
+| `05_Modern_CPU_Architectures_2024.md` | 4星 | 现代CPU架构趋势 |
+
+### 内存管理硬件
+
+| 文件名 | 难度 | 核心内容 |
+|--------|------|----------|
+| `05_Memory_Management_Hardware/01_MMU_Architecture.md` | 5星 | MMU架构、地址转换 |
+| `05_Memory_Management_Hardware/02_Page_Table_Walker.md` | 5星 | 页表遍历器硬件 |
+| `05_Memory_Management_Hardware/03_TLB_Implementation.md` | 5星 | TLB硬件实现 |
+| `05_Memory_Management_Hardware/04_Memory_Protection_Unit.md` | 4星 | MPU设计、嵌入式保护 |
+
+### 内存层次与缓存
+
+| 文件名 | 难度 | 核心内容 |
+|--------|------|----------|
+| `02_Memory_Hierarchy.md` | 4星 | 存储层次、局部性原理 |
+| `03_Cache_Coherence.md` | 5星 | MESI协议、伪共享 |
+| `04_Branch_Prediction.md` | 4星 | 分支预测机制 |
 
 ---
 

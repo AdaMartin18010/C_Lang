@@ -503,6 +503,8 @@ void disassemble_text(const char *filename) {
 
 ## 文件结构
 
+### 指令集架构
+
 | 文件名 | 难度 | 核心内容 |
 |--------|------|----------|
 | `01_x86_64_ISA.md` | 4星 | x86-64指令集、变长编码、REX前缀、ModR/M |
@@ -510,6 +512,28 @@ void disassemble_text(const char *filename) {
 | `03_RISCV_ISA.md` | 3星 | RISC-V指令集、模块化扩展、六种指令格式 |
 | `04_Disassembly.md` | 4星 | 反汇编算法、Capstone库、静态分析挑战 |
 | `05_ELF_Format.md` | 4星 | ELF结构、程序头、节头、符号表、重定位 |
+
+### 控制单元与CPU设计
+
+| 文件名 | 难度 | 核心内容 |
+|--------|------|----------|
+| `06_Control_Unit_Design/01_Hardwired_Control.md` | 5星 | 硬布线控制器、RISC-V实现 |
+| `06_Control_Unit_Design/02_Microprogrammed_Control.md` | 5星 | 微程序控制、控制存储器 |
+| `06_Control_Unit_Design/03_x86_Microcode.md` | 5星 | x86微码架构、安全 |
+| `07_CPU_Implementation/` | 5星 | 单周期/多周期/流水线CPU |
+| `08_RISCV_CPU_Complete/01_RV32I_Single_Cycle.md` | 4星 | 单周期RISC-V实现 |
+| `08_RISCV_CPU_Complete/02_RV32I_Pipelined.md` | 5星 | 流水线RISC-V实现 |
+| `08_RISCV_CPU_Complete/03_RV32IM_with_Cache.md` | 5星 | 带缓存的RISC-V SoC |
+| `08_RISCV_CPU_Complete/04_RISCV_Simulator_in_C.md` | 4星 | C语言RISC-V模拟器 |
+
+### 中断与I/O系统
+
+| 文件名 | 难度 | 核心内容 |
+|--------|------|----------|
+| `09_Interrupt_Hardware/01_Interrupt_Controller.md` | 5星 | 8259A/APIC中断控制器 |
+| `09_Interrupt_Hardware/02_System_Call_Hardware.md` | 5星 | 系统调用硬件机制 |
+| `10_IO_System/01_DMA_Controller.md` | 5星 | DMA控制器设计 |
+| `10_IO_System/02_PCIe_Basics.md` | 5星 | PCIe架构与TLP |
 
 ---
 
