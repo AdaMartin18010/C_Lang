@@ -4,159 +4,228 @@
 
 ### 1.1 目标
 
-- 理解写时复制（Copy-on-Write, COW）机制
-- 实现COW fork以优化进程创建性能
-- 掌握引用计数和页表标记
+- 实现写时复制(Copy-on-Write, COW)机制
+- 优化fork()的性能，避免不必要的内存复制
+- 理解页表标志位和引用计数
+- 处理COW页面的页面错误
 
-### 1.2 传统fork vs COW fork
+### 1.2 COW原理
 
 ```
-传统fork():
-父进程                    子进程
-┌─────────┐              ┌─────────┐
-│ 代码段  │  ──复制──>   │ 代码段  │  (共享，只读)
-├─────────┤              ├─────────┤
-│ 数据段  │  ──复制──>   │ 数据段  │  (完整复制)
-├─────────┤              ├─────────┤
-│ 堆      │  ──复制──>   │ 堆      │  (完整复制)
-└─────────┘              └─────────┘
+传统fork:
+父进程内存 ──复制──> 子进程内存 (完全独立的副本)
+                    (耗时且浪费内存)
 
-问题: fork后立即exec()，复制 wasted
+COW fork:
+父进程内存 ──共享──> 子进程内存 (只读共享)
+    ↓                    ↓
+  写入时              写入时
+    ↓                    ↓
+ 触发复制           触发复制
+    ↓                    ↓
+ 新物理页           新物理页
 
-COW fork():
-父进程                    子进程
-┌─────────┐              ┌─────────┐
-│ 代码段  │  <─共享─>    │ 代码段  │  (共享，只读)
-├─────────┤              ├─────────┤
-│ 数据段  │  <─共享─>    │ 数据段  │  (共享，COW标记)
-├─────────┤              ├─────────┤
-│ 堆      │  <─共享─>    │ 堆      │  (共享，COW标记)
-└─────────┘              └─────────┘
+优势:
+1. fork()执行速度更快
+2. 减少内存使用
+3. 只有实际写入时才复制
+```
 
-直到一方写入时才复制被修改的页
+### 1.3 xv6内存布局
+
+```
+xv6进程虚拟地址空间 (RISC-V Sv39):
+
+0x00000000_00000000
+      │
+      │  未映射区域
+      │
+0x00000000_00100000  ← text段 (代码)
+      │
+      │  data段
+      │
+      ▼
+      堆 (向上增长: sbrk)
+      │
+      │  未映射区域
+      │
+0x0000003f_c0000000  ← 用户栈 (向下增长)
+      │
+      │  未映射 (保护页)
+      │
+0x0000003f_f0000000  ← trapframe
+      │
+0x0000003f_f0001000  ← trampoline代码
+      │
+      │  内核区域 (用户不可访问)
+      │
+0x00000040_00000000  ← 内核基地址
 ```
 
 ---
 
-## 2. COW核心机制
+## 2. 实现设计
 
-### 2.1 页表标记
+### 2.1 核心设计
 
-```c
-// 使用RISC-V PTE的RSW位 (Reserved for Software)
-// 位8-9为软件保留，可用于COW标记
+```
+COW实现关键组件:
 
-#define PTE_COW (1L << 8)  // COW标记位
+1. 页表项(PTE)标志
+   - 使用PTE_COW位 (RSW字段) 标记COW页面
+   - 清除PTE_W位，使页面只读
 
-// 页表项标志组合
-// 只读 + COW: 表示共享页面，需要复制才能写入
-// 可写: 表示私有页面，可直接写入
+2. 引用计数
+   - 跟踪每个物理页面的引用次数
+   - fork时增加计数，释放时减少计数
+   - 计数为1时才真正释放
+
+3. 页面错误处理
+   - 检测COW页面错误 (scause=15)
+   - 分配新物理页并复制数据
+   - 更新页表为可写
 ```
 
-### 2.2 引用计数
+### 2.2 引用计数数据结构
 
 ```c
 // kernel/kalloc.c
 
-// 每个物理页需要一个引用计数
-// 使用数组来存储引用计数 (假设最多PHYSTOP页)
-#define PGREFNUM(pa) (((pa) - KERNBASE) / PGSIZE)
+// 物理内存分为4096字节的页框
+// 定义引用计数数组
+#define PHYSTOP 0x88000000   // 物理内存上限
+#define KERNBASE 0x80000000  // 内核基地址
 
-struct {
-    struct spinlock lock;
-    int count[PHYSTOP / PGSIZE];  // 引用计数数组
-} pgref;
+// 物理页框数量
+#define NPAGES ((PHYSTOP - KERNBASE) / PGSIZE)
 
-void pgref_init(void) {
-    initlock(&pgref.lock, "pgref");
-    // 初始化为1 (kernel使用的页)
-    for (int i = 0; i < PHYSTOP / PGSIZE; i++)
-        pgref.count[i] = 1;
+// 引用计数数组 (每个物理页一个计数)
+int ref_count[NPAGES];
+struct spinlock ref_lock;  // 保护引用计数
+
+// 物理地址转引用计数索引
+#define PA2IDX(pa) (((uint64)(pa) - KERNBASE) / PGSIZE)
+
+// 初始化引用计数
+void
+kinit()
+{
+    initlock(&ref_lock, "ref");
+    for (int i = 0; i < NPAGES; i++) {
+        ref_count[i] = 1;  // 初始为1 (被内核持有)
+    }
+    // ... 原有freerange代码 ...
+}
+```
+
+### 2.3 引用计数操作函数
+
+```c
+// kernel/kalloc.c
+
+// 增加引用计数
+void
+increment_ref(uint64 pa)
+{
+    if (pa < KERNBASE || pa >= PHYSTOP)
+        panic("increment_ref: invalid pa");
+
+    acquire(&ref_lock);
+    ref_count[PA2IDX(pa)]++;
+    release(&ref_lock);
 }
 
-// 增加引用
-void pgref_inc(uint64 pa) {
-    acquire(&pgref.lock);
-    int idx = PGREFNUM(pa);
-    if (idx < 0 || idx >= PHYSTOP / PGSIZE)
-        panic("pgref_inc");
-    pgref.count[idx]++;
-    release(&pgref.lock);
-}
+// 减少引用计数，如果为0则释放
+void
+decrement_ref(uint64 pa)
+{
+    if (pa < KERNBASE || pa >= PHYSTOP)
+        panic("decrement_ref: invalid pa");
 
-// 减少引用，返回是否为0
-int pgref_dec(uint64 pa) {
-    acquire(&pgref.lock);
-    int idx = PGREFNUM(pa);
-    if (idx < 0 || idx >= PHYSTOP / PGSIZE)
-        panic("pgref_dec");
-    if (pgref.count[idx] < 1)
-        panic("pgref_dec: count < 1");
-    pgref.count[idx]--;
-    int count = pgref.count[idx];
-    release(&pgref.lock);
-    return count == 0;
+    acquire(&ref_lock);
+    int idx = PA2IDX(pa);
+    if (ref_count[idx] < 1)
+        panic("decrement_ref: ref_count < 1");
+
+    ref_count[idx]--;
+    int new_count = ref_count[idx];
+    release(&ref_lock);
+
+    // 如果引用为0，释放页面
+    if (new_count == 0) {
+        kfree((void *)pa);
+    }
 }
 
 // 获取引用计数
-int pgref_get(uint64 pa) {
-    acquire(&pgref.lock);
-    int idx = PGREFNUM(pa);
-    if (idx < 0 || idx >= PHYSTOP / PGSIZE)
-        panic("pgref_get");
-    int count = pgref.count[idx];
-    release(&pgref.lock);
+int
+get_ref(uint64 pa)
+{
+    if (pa < KERNBASE || pa >= PHYSTOP)
+        return 0;
+
+    acquire(&ref_lock);
+    int count = ref_count[PA2IDX(pa)];
+    release(&ref_lock);
     return count;
 }
 ```
 
----
-
-## 3. 修改uvmcopy实现COW
-
-### 3.1 原始uvmcopy
+### 2.4 修改kalloc和kfree
 
 ```c
-// 原始版本：复制所有页面
-int uvmcopy(pagetable_t old, pagetable_t new, uint64 sz) {
-    pte_t *pte;
-    uint64 pa, i;
-    uint flags;
-    char *mem;
+// kernel/kalloc.c
 
-    for (i = 0; i < sz; i += PGSIZE) {
-        if ((pte = walk(old, i, 0)) == 0)
-            panic("uvmcopy: pte should exist");
-        if ((*pte & PTE_V) == 0)
-            panic("uvmcopy: page not present");
+// 分配页面时设置引用计数为1
+void *
+kalloc(void)
+{
+    struct run *r;
 
-        pa = PTE2PA(*pte);
-        flags = PTE_FLAGS(*pte);
+    acquire(&kmem.lock);
+    r = kmem.freelist;
+    if (r) {
+        kmem.freelist = r->next;
 
-        // 分配新页并复制
-        if ((mem = kalloc()) == 0)
-            goto err;
-        memmove(mem, (char*)pa, PGSIZE);
-
-        // 映射到新页表
-        if (mappages(new, i, PGSIZE, (uint64)mem, flags) != 0) {
-            kfree(mem);
-            goto err;
-        }
+        // 设置引用计数为1
+        uint64 pa = (uint64)r;
+        ref_count[PA2IDX(pa)] = 1;
     }
-    return 0;
+    release(&kmem.lock);
 
-err:
-    uvmunmap(new, 0, i / PGSIZE, 1);
-    return -1;
+    if (r)
+        memset((char *)r, 5, PGSIZE);  // 填充垃圾值
+
+    return (void *)r;
+}
+
+// kfree不再直接释放，而是调用decrement_ref
+void
+kfree(void *pa)
+{
+    // 添加到空闲列表 (原有逻辑)
+    struct run *r = (struct run *)pa;
+
+    acquire(&kmem.lock);
+    r->next = kmem.freelist;
+    kmem.freelist = r;
+    release(&kmem.lock);
 }
 ```
 
-### 3.2 COW版本uvmcopy
+---
+
+## 3. 修改fork实现COW
+
+### 3.1 修改uvmcopy
 
 ```c
-// COW版本：共享页面，标记COW
-int uvmcopy(pagetable_t old, pagetable_t new, uint64 sz) {
+// kernel/vm.c
+
+// 复制页表，但不复制物理页面，使用COW
+int
+uvmcopy(pagetable_t old, pagetable_t new, uint64 sz)
+{
     pte_t *pte;
     uint64 pa, i;
     uint flags;
@@ -170,78 +239,75 @@ int uvmcopy(pagetable_t old, pagetable_t new, uint64 sz) {
         pa = PTE2PA(*pte);
         flags = PTE_FLAGS(*pte);
 
-        // 如果是可写页，改为只读并标记COW
+        // 如果是可写页面，转换为COW
         if (flags & PTE_W) {
-            flags = (flags | PTE_COW) & ~PTE_W;
-            *pte = PA2PTE(pa) | flags;  // 修改父进程页表
+            // 清除写权限，添加COW标志
+            flags = (flags & ~PTE_W) | PTE_COW;
+            *pte = PA2PTE(pa) | flags;  // 更新父进程页表
+        }
+
+        // 映射到子进程 (共享同一物理页)
+        if (mappages(new, i, PGSIZE, pa, flags) != 0) {
+            // 失败，取消映射已映射的页面
+            uvmunmap(new, 0, i / PGSIZE, 0);
+            return -1;
         }
 
         // 增加引用计数
-        pgref_inc(pa);
-
-        // 映射到新页表 (共享同一物理页)
-        if (mappages(new, i, PGSIZE, pa, flags) != 0) {
-            // 注意：这里不能释放pa，因为是共享的
-            goto err;
-        }
+        increment_ref(pa);
     }
+
     return 0;
-
-err:
-    // 减少引用计数
-    for (uint64 j = 0; j < i; j += PGSIZE) {
-        pte = walk(new, j, 0);
-        if (pte && (*pte & PTE_V)) {
-            pa = PTE2PA(*pte);
-            if (pgref_dec(pa))
-                kfree((void*)pa);
-        }
-    }
-    return -1;
 }
+```
+
+### 3.2 定义PTE_COW标志
+
+```c
+// kernel/riscv.h
+
+// PTE标志位 (使用RSW保留位)
+#define PTE_COW (1L << 8)  // Copy-on-Write标志
 ```
 
 ---
 
-## 4. 处理COW页错误
+## 4. 处理COW页面错误
 
 ### 4.1 修改usertrap
 
 ```c
 // kernel/trap.c
 
-void usertrap(void) {
+void
+usertrap(void)
+{
     // ... 原有代码 ...
 
-    uint64 scause = r_scause();
+    uint64 cause = r_scause();
 
-    if (scause == 8) {
-        // 系统调用处理
+    if (cause == 8) {
+        // 系统调用
         // ...
-    } else if (scause == 13 || scause == 15) {
-        // 13: 加载页错误 (Load page fault)
-        // 15: 存储/AMO页错误 (Store/AMO page fault)
+    } else if (cause == 13 || cause == 15) {
+        // 13: 加载页面错误
+        // 15: 存储/AMO页面错误
 
-        uint64 va = r_stval();  // 出错的虚拟地址
+        uint64 va = r_stval();  // 错误虚拟地址
 
-        if (va >= p->sz) {
-            // 访问超出进程内存
-            printf("usertrap(): page fault va=%p pid=%d\n", va, p->pid);
-            setkilled(p);
-        } else if (cowhandle(p->pagetable, va) < 0) {
-            // COW处理失败
-            printf("usertrap(): cowhandle failed\n");
+        // 尝试处理COW页面错误
+        if (cow_handler(va) == 0) {
+            // 成功处理
+        } else {
+            printf("usertrap(): unexpected page fault pa=%p\n", va);
             setkilled(p);
         }
-        // 成功处理，返回继续执行
-
     } else if ((which_dev = devintr()) != 0) {
-        // 中断处理
+        // 设备中断
         // ...
     } else {
         // 其他异常
-        printf("usertrap(): unexpected scause %p pid=%d\n", scause, p->pid);
-        setkilled(p);
+        // ...
     }
 
     // ...
@@ -251,53 +317,57 @@ void usertrap(void) {
 ### 4.2 COW处理函数
 
 ```c
-// kernel/vm.c
+// kernel/trap.c (或 vm.c)
 
-// 处理COW页错误
-// 返回值: 0成功，-1失败
-int cowhandle(pagetable_t pagetable, uint64 va) {
+int
+cow_handler(uint64 va)
+{
+    struct proc *p = myproc();
     pte_t *pte;
-    uint64 pa, newpa;
+    uint64 pa;
     uint flags;
-    char *mem;
+    char *new_page;
 
-    // 对齐到页边界
-    va = PGROUNDDOWN(va);
-
-    // 查找PTE
-    if (va >= MAXVA)
+    // 检查虚拟地址合法性
+    if (va >= p->sz || va < PGSIZE)  // 跳过NULL指针
         return -1;
 
-    pte = walk(pagetable, va, 0);
+    // 获取页表项
+    pte = walk(p->pagetable, va, 0);
     if (pte == 0)
         return -1;
     if ((*pte & PTE_V) == 0)
         return -1;
     if ((*pte & PTE_COW) == 0)
-        return -1;  // 不是COW页
+        return -1;  // 不是COW页面
 
     pa = PTE2PA(*pte);
     flags = PTE_FLAGS(*pte);
 
-    // 检查引用计数
-    if (pgref_get(pa) == 1) {
-        // 只有一个引用，直接改为可写
-        *pte = (*pte | PTE_W) & ~PTE_COW;
+    // 获取引用计数
+    int ref = get_ref(pa);
+
+    if (ref > 1) {
+        // 多个进程共享，需要复制
+        new_page = kalloc();
+        if (new_page == 0) {
+            // 内存不足
+            return -1;
+        }
+
+        // 复制数据
+        memmove(new_page, (char *)pa, PGSIZE);
+
+        // 减少原页面引用计数
+        decrement_ref(pa);
+
+        // 更新页表指向新页面
+        flags = (flags & ~PTE_COW) | PTE_W;  // 清除COW，设置可写
+        *pte = PA2PTE((uint64)new_page) | flags;
     } else {
-        // 多个引用，需要复制
-        if ((mem = kalloc()) == 0)
-            return -1;  // 内存不足
-
-        // 复制页面内容
-        memmove(mem, (char*)pa, PGSIZE);
-
-        // 减少原页引用
-        pgref_dec(pa);
-
-        // 更新PTE指向新页
-        newpa = (uint64)mem;
-        flags = (flags | PTE_W) & ~PTE_COW;
-        *pte = PA2PTE(newpa) | flags;
+        // 只有一个引用，直接设置为可写
+        flags = (flags & ~PTE_COW) | PTE_W;
+        *pte = PA2PTE(pa) | flags;
     }
 
     return 0;
@@ -306,34 +376,50 @@ int cowhandle(pagetable_t pagetable, uint64 va) {
 
 ---
 
-## 5. 修改copyout支持COW
+## 5. 修改copyout
 
-### 5.1 问题
-
-`copyout`用于从内核复制数据到用户空间。如果目标页是COW页，需要处理。
-
-### 5.2 解决方案
+### 5.1 处理COW页面的copyout
 
 ```c
 // kernel/vm.c
 
-int copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len) {
+int
+copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len)
+{
     uint64 n, va0, pa0;
     pte_t *pte;
 
     while (len > 0) {
         va0 = PGROUNDDOWN(dstva);
 
-        // 处理COW页
+        // 检查是否需要处理COW
         pte = walk(pagetable, va0, 0);
         if (pte && (*pte & PTE_V) && (*pte & PTE_COW)) {
-            if (cowhandle(pagetable, va0) < 0)
+            // 需要复制COW页面
+            uint64 pa = PTE2PA(*pte);
+            int ref = get_ref(pa);
+
+            if (ref > 1) {
+                char *new_page = kalloc();
+                if (new_page == 0)
+                    return -1;
+
+                memmove(new_page, (char *)pa, PGSIZE);
+                decrement_ref(pa);
+
+                uint flags = (PTE_FLAGS(*pte) & ~PTE_COW) | PTE_W;
+                *pte = PA2PTE((uint64)new_page) | flags;
+                pa0 = (uint64)new_page;
+            } else {
+                uint flags = (PTE_FLAGS(*pte) & ~PTE_COW) | PTE_W;
+                *pte = PA2PTE(pa) | flags;
+                pa0 = pa;
+            }
+        } else {
+            pa0 = walkaddr(pagetable, va0);
+            if (pa0 == 0)
                 return -1;
         }
-
-        pa0 = walkaddr(pagetable, va0);
-        if (pa0 == 0)
-            return -1;
 
         n = PGSIZE - (dstva - va0);
         if (n > len)
@@ -345,18 +431,23 @@ int copyout(pagetable_t pagetable, uint64 dstva, char *src, uint64 len) {
         src += n;
         dstva = va0 + PGSIZE;
     }
+
     return 0;
 }
 ```
 
 ---
 
-## 6. 修改uvmunmap释放内存
+## 6. 释放进程资源
+
+### 6.1 修改uvmunmap
 
 ```c
 // kernel/vm.c
 
-void uvmunmap(pagetable_t pagetable, uint64 va, uint64 npages, int do_free) {
+void
+uvmunmap(pagetable_t pagetable, uint64 va, uint64 npages, int do_free)
+{
     uint64 a;
     pte_t *pte;
     uint64 pa;
@@ -369,15 +460,12 @@ void uvmunmap(pagetable_t pagetable, uint64 va, uint64 npages, int do_free) {
             panic("uvmunmap: walk");
         if ((*pte & PTE_V) == 0)
             panic("uvmunmap: not mapped");
-
         if (PTE_FLAGS(*pte) == PTE_V)
             panic("uvmunmap: not a leaf");
 
         if (do_free) {
             pa = PTE2PA(*pte);
-            // 使用引用计数决定是否释放
-            if (pgref_dec(pa))
-                kfree((void*)pa);
+            decrement_ref(pa);  // 使用引用计数释放
         }
 
         *pte = 0;
@@ -387,62 +475,21 @@ void uvmunmap(pagetable_t pagetable, uint64 va, uint64 npages, int do_free) {
 
 ---
 
-## 7. COW流程图
+## 7. 测试与验证
 
-```
-父进程调用fork()
-    |
-    v
-调用uvmcopy() [COW版本]
-    |
-    v
-对于每个用户页:
-    ├── 如果可写:
-    │   ├── 标记为只读+PTE_COW
-    │   ├── 增加引用计数
-    │   └── 子进程共享该页
-    └── 如果只读:
-        └── 直接共享
-    |
-    v
-父子进程继续执行
-    |
-    v
-子/父进程尝试写入COW页
-    |
-    v
-触发页错误 (Store page fault)
-    |
-    v
-trap处理调用cowhandle()
-    |
-    v
-检查引用计数:
-    ├── 计数==1:
-    │   └── 直接改为可写
-    └── 计数>1:
-        ├── 分配新页
-        ├── 复制内容
-        ├── 减少原页引用
-        └── 映射新页(可写)
-    |
-    v
-返回用户态继续执行
-```
-
----
-
-## 8. 测试与验证
-
-### 8.1 cowtest
+### 7.1 COW测试程序
 
 ```c
 // user/cowtest.c
 #include "kernel/types.h"
 #include "user/user.h"
 
-void simpletest() {
+void simple_test() {
     int pid;
+    char *page = sbrk(4096);
+
+    // 写入数据
+    strcpy(page, "parent data");
 
     pid = fork();
     if (pid < 0) {
@@ -451,45 +498,178 @@ void simpletest() {
     }
 
     if (pid == 0) {
-        // 子进程修改数据
-        int x = 100;
-        x = 200;  // 触发COW
-        printf("child: x = %d\n", x);
+        // 子进程
+        printf("child before write: %s\n", page);
+
+        // 写入触发COW
+        strcpy(page, "child data");
+        printf("child after write: %s\n", page);
+
         exit(0);
     } else {
+        // 父进程
         wait(0);
-        printf("parent: child exited\n");
+        printf("parent after child: %s\n", page);
+
+        if (strcmp(page, "parent data") != 0) {
+            printf("ERROR: parent data corrupted!\n");
+            exit(1);
+        }
     }
 }
 
+void stress_test() {
+    // 大量fork和写入测试
+    for (int i = 0; i < 100; i++) {
+        int pid = fork();
+        if (pid == 0) {
+            // 分配并写入内存
+            char *mem = sbrk(4096 * 10);
+            for (int j = 0; j < 10; j++) {
+                mem[j * 4096] = 'a' + (j % 26);
+            }
+            exit(0);
+        }
+        wait(0);
+    }
+    printf("stress test passed\n");
+}
+
 int main() {
-    simpletest();
-    printf("COW tests passed\n");
+    printf("=== COW Test ===\n");
+    simple_test();
+    stress_test();
+    printf("All tests passed!\n");
     exit(0);
 }
 ```
 
-### 8.2 性能测试
+### 7.2 Makefile修改
+
+```makefile
+UPROGS=\
+    ...
+    $U/_cowtest\
+    ...
+```
+
+---
+
+## 8. 调试技巧
+
+### 8.1 常见错误
+
+```
+错误1: panic("kfree: ref_count < 1")
+原因: 引用计数管理错误，可能重复释放
+解决: 检查所有increment_ref和decrement_ref调用
+
+错误2: 页面错误未处理
+原因: cow_handler未正确识别COW页面
+解决: 检查PTE_COW标志是否正确设置
+
+错误3: 子进程看到父进程修改后的数据
+原因: COW页面未正确复制
+解决: 确保写入前完成复制
+
+错误4: 内存泄漏
+原因: 引用计数未正确减少
+解决: 检查所有错误路径的引用计数处理
+```
+
+### 8.2 调试打印
 
 ```c
-// 测试fork性能
-void forktest() {
-    int n = 1000;
-
-    for (int i = 0; i < n; i++) {
-        int pid = fork();
-        if (pid == 0) {
-            exit(0);  // 立即退出
-        } else {
-            wait(0);
-        }
+// 打印页表信息
+void debug_pte(pagetable_t pagetable, uint64 va) {
+    pte_t *pte = walk(pagetable, va, 0);
+    if (pte) {
+        printf("PTE at va=%p: %p (flags: ", va, *pte);
+        if (*pte & PTE_V) printf("V ");
+        if (*pte & PTE_R) printf("R ");
+        if (*pte & PTE_W) printf("W ");
+        if (*pte & PTE_X) printf("X ");
+        if (*pte & PTE_U) printf("U ");
+        if (*pte & PTE_COW) printf("COW ");
+        printf(")\n");
     }
+}
 
-    printf("forked %d times\n", n);
+// 打印引用计数
+void debug_ref(uint64 pa) {
+    printf("ref_count[%p] = %d\n", pa, get_ref(pa));
 }
 ```
 
 ---
 
+## 9. 性能分析
+
+### 9.1 COW性能对比
+
+```
+测试场景: fork后立即exec
+
+传统fork:
+- 复制所有可写页面
+- 耗时: O(n)，n为页面数
+- 内存: 2x原进程
+
+COW fork:
+- 仅复制页表
+- 耗时: O(1)
+- 内存: ~1x原进程 (加上少量页表)
+
+实际改进:
+- fork()速度提升 10-100x
+- 内存使用减少 30-50%
+```
+
+### 9.2 性能测试代码
+
+```c
+// 测量fork性能
+void benchmark_fork() {
+    int start = uptime();
+
+    // 分配大量内存
+    sbrk(1024 * 1024 * 10);  // 10MB
+
+    for (int i = 0; i < 100; i++) {
+        int pid = fork();
+        if (pid == 0) {
+            exit(0);
+        }
+        wait(0);
+    }
+
+    int end = uptime();
+    printf("100 forks took %d ticks\n", end - start);
+}
+```
+
+---
+
+## 10. 总结
+
+### 10.1 核心概念
+
+| 概念 | 说明 |
+|------|------|
+| **COW** | 延迟复制直到写入时 |
+| **引用计数** | 跟踪物理页面的共享情况 |
+| **PTE_COW** | 标记只读共享页面 |
+| **页面错误** | 检测写入COW页面的时机 |
+
+### 10.2 实现要点
+
+1. **fork优化**: 共享物理页，复制页表
+2. **引用计数**: 管理物理页生命周期
+3. **页面错误处理**: 复制页面并更新权限
+4. **边界处理**: copyout和系统调用需要特殊处理
+
+---
+
 **难度**: ⭐⭐⭐⭐
-**预计时间**: 8-10小时
+**预计时间**: 10-12小时
+**依赖**: Lab 4 (陷入)

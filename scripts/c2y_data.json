@@ -1,0 +1,251 @@
+{
+  "proposals": [
+    {
+      "number": "N3096",
+      "title": "defer mechanism for scope exit",
+      "author": "Alex Gilding",
+      "status": "accepted",
+      "category": "language",
+      "date_submitted": "2024-03",
+      "date_updated": "2024-06",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf",
+      "description": "延迟执行语句直到作用域退出",
+      "compiler_support": {
+        "gcc": "16+",
+        "clang": "22+",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3369",
+      "title": "The _Countof Operator",
+      "author": "Jens Gustedt",
+      "status": "accepted",
+      "category": "language",
+      "date_submitted": "2024-09",
+      "date_updated": "2025-03",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3369.pdf",
+      "description": "数组元素计数操作符",
+      "compiler_support": {
+        "gcc": "16+",
+        "clang": "22+",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3473",
+      "title": "if with Initialization Statement",
+      "author": "Jens Gustedt",
+      "status": "accepted",
+      "category": "language",
+      "date_submitted": "2024-11",
+      "date_updated": "2025-06",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3473.pdf",
+      "description": "C++风格的if声明语句",
+      "compiler_support": {
+        "gcc": "planned",
+        "clang": "22+",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3742",
+      "title": "Named Loops for C",
+      "author": "Alex Gilding",
+      "status": "active",
+      "category": "language",
+      "date_submitted": "2025-09",
+      "date_updated": "2026-03",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3742.pdf",
+      "description": "具名循环与break/continue",
+      "compiler_support": {
+        "gcc": "not_yet",
+        "clang": "22+",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3753",
+      "title": "The Elvis Operator for C",
+      "author": "Martin Uecker",
+      "status": "active",
+      "category": "language",
+      "date_submitted": "2025-12",
+      "date_updated": "2026-01",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3753.pdf",
+      "description": "?:操作符增强",
+      "compiler_support": {
+        "gcc": "extension",
+        "clang": "planned",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3472",
+      "title": "auto storage-class specifier for type inference",
+      "author": "Jens Gustedt",
+      "status": "active",
+      "category": "language",
+      "date_submitted": "2024-11",
+      "date_updated": "2025-09",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3472.pdf",
+      "description": "自动类型推导",
+      "compiler_support": {
+        "gcc": "planned",
+        "clang": "planned",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3353",
+      "title": "Enhanced octal literals",
+      "author": "Aaron Ballman",
+      "status": "accepted",
+      "category": "language",
+      "date_submitted": "2024-02",
+      "date_updated": "2024-06",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3353.pdf",
+      "description": "0o前缀八进制字面量",
+      "compiler_support": {
+        "gcc": "14+",
+        "clang": "18+",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3148",
+      "title": "Digit separators",
+      "author": "Jens Gustedt",
+      "status": "accepted",
+      "category": "preprocessor",
+      "date_submitted": "2023-12",
+      "date_updated": "2024-03",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3148.pdf",
+      "description": "数字分隔符(1'000'000)",
+      "compiler_support": {
+        "gcc": "planned",
+        "clang": "planned",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3457",
+      "title": "The __COUNTER__ macro",
+      "author": "Aaron Ballman",
+      "status": "accepted",
+      "category": "preprocessor",
+      "date_submitted": "2025-06",
+      "date_updated": "2025-09",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3457.pdf",
+      "description": "预处理器计数器宏",
+      "compiler_support": {
+        "gcc": "extension",
+        "clang": "extension",
+        "msvc": "extension"
+      }
+    },
+    {
+      "number": "N3183",
+      "title": "Bounds-safe interfaces",
+      "author": "David Keaton",
+      "status": "accepted",
+      "category": "security",
+      "date_submitted": "2024-02",
+      "date_updated": "2024-06",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3183.pdf",
+      "description": "内存安全接口注解",
+      "compiler_support": {
+        "gcc": "planned",
+        "clang": "planned",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3260",
+      "title": "_Generic with type operands",
+      "author": "Jens Gustedt",
+      "status": "accepted",
+      "category": "language",
+      "date_submitted": "2024-06",
+      "date_updated": "2024-11",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3260.pdf",
+      "description": "_Generic支持类型名参数",
+      "compiler_support": {
+        "gcc": "planned",
+        "clang": "22+",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3744",
+      "title": "Compatible anonymous structures",
+      "author": "Joseph Myers",
+      "status": "accepted",
+      "category": "language",
+      "date_submitted": "2025-08",
+      "date_updated": "2025-09",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3744.pdf",
+      "description": "无标签结构体类型兼容",
+      "compiler_support": {
+        "gcc": "planned",
+        "clang": "22+",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3667",
+      "title": "Modules for C",
+      "author": "Jens Gustedt",
+      "status": "deferred",
+      "category": "language",
+      "date_submitted": "2025-03",
+      "date_updated": "2025-09",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3667.pdf",
+      "description": "模块化系统(import/export)",
+      "compiler_support": {
+        "gcc": "not_yet",
+        "clang": "not_yet",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3685",
+      "title": "Ownership system foundations",
+      "author": "David Keaton",
+      "status": "deferred",
+      "category": "security",
+      "date_submitted": "2025-05",
+      "date_updated": "2025-11",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3685.pdf",
+      "description": "所有权系统基础",
+      "compiler_support": {
+        "gcc": "not_yet",
+        "clang": "not_yet",
+        "msvc": "not_yet"
+      }
+    },
+    {
+      "number": "N3654",
+      "title": "Concepts for C",
+      "author": "Martin Uecker",
+      "status": "active",
+      "category": "language",
+      "date_submitted": "2025-02",
+      "date_updated": "2025-08",
+      "url": "https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3654.pdf",
+      "description": "类型约束泛型(概念)",
+      "compiler_support": {
+        "gcc": "not_yet",
+        "clang": "not_yet",
+        "msvc": "not_yet"
+      }
+    }
+  ],
+  "changes": [],
+  "last_check": "2026-03-19T04:08:03.694083",
+  "metadata": {
+    "version": "1.0",
+    "total_proposals": 15,
+    "last_updated": "2026-03-19T04:08:03.694087"
+  }
+}

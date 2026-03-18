@@ -4,41 +4,88 @@
 
 ### 1.1 目标
 
-- 理解用户级线程实现
-- 掌握上下文切换机制
-- 实现线程创建和调度
-- 使用线程加速程序
+- 理解用户级线程的概念和实现
+- 实现线程上下文切换
+- 理解线程调度机制
+- 实现基本的同步原语
+- 使用线程解决并行计算问题
 
-### 1.2 用户级线程 vs 内核级线程
+### 1.2 线程 vs 进程
 
 ```
-用户级线程 (本实验):
-├── 线程管理在用户空间
-├── 切换不需要陷入内核
-├── 阻塞系统调用会阻塞所有线程
-└── 实现简单，效率高
+进程 (Process):
+┌─────────────────────────────────┐
+│  独立的地址空间                 │
+│  独立的页表                     │
+│  独立的打开文件                 │
+│  独立的PID                      │
+│  父子关系明确                   │
+└─────────────────────────────────┘
+           切换开销大
 
-内核级线程:
-├── 线程管理在内核空间
-├── 切换需要陷入内核
-├── 阻塞不影响其他线程
-└── 实现复杂，更灵活
+线程 (Thread):
+┌─────────────────────────────────┐
+│  共享地址空间                   │
+│  共享页表                       │
+│  共享打开文件                   │
+│  独立的执行上下文               │
+│  独立的栈                       │
+└─────────────────────────────────┘
+           切换开销小
+
+关键区别:
+- 线程共享代码段、数据段、堆
+- 线程拥有独立的栈和寄存器
+- 线程切换不需要切换页表
+```
+
+### 1.3 用户级线程模型
+
+```
+用户级线程 (User-Level Threads):
+
+用户空间                       内核空间
+┌──────────────┐              ┌──────────────┐
+│ Thread 1     │              │              │
+│  - 寄存器    │              │              │
+│  - 栈        │              │   不知道     │
+├──────────────┤  线程库     │   线程的     │
+│ Thread 2     │  管理       │   存在       │
+│  - 寄存器    │◄───────────►│              │
+│  - 栈        │              │   只看到     │
+├──────────────┤              │   一个       │
+│ Thread 3     │              │   进程       │
+│  - 寄存器    │              │              │
+│  - 栈        │              │              │
+└──────────────┘              └──────────────┘
+
+优势:
+- 切换不需要陷入内核 (快)
+- 调度策略由应用控制
+- 可以创建大量线程
+
+劣势:
+- 一个线程阻塞会导致所有线程阻塞
+- 无法利用多核 (xv6场景)
 ```
 
 ---
 
-## 2. 线程数据结构
+## 2. 线程上下文切换
 
-### 2.1 线程上下文
+### 2.1 上下文定义
 
 ```c
-// 保存线程执行状态
-struct context {
-    uint64 ra;    // 返回地址
-    uint64 sp;    // 栈指针
+// user/uthread.c
 
-    // 被调用者保存的寄存器
-    uint64 s0;    // 帧指针
+// 线程上下文 - 保存所有callee-saved寄存器
+// 加上ra和sp
+struct context {
+    uint64 ra;
+    uint64 sp;
+
+    // callee-saved寄存器
+    uint64 s0;
     uint64 s1;
     uint64 s2;
     uint64 s3;
@@ -51,44 +98,31 @@ struct context {
     uint64 s10;
     uint64 s11;
 };
-```
 
-### 2.2 线程控制块
-
-```c
-// user/uthread.c
-
-#define MAX_THREAD  4
-#define STACK_SIZE  4096
-
-// 线程状态
-enum thread_state { FREE, RUNNING, RUNNABLE };
-
+// 线程结构
 struct thread {
     char       stack[STACK_SIZE];  // 线程栈
     struct context context;         // 保存的上下文
-    enum thread_state state;        // 线程状态
-    int        id;                  // 线程ID
+    int        state;               // 线程状态
 };
 
-struct thread all_thread[MAX_THREAD];
+enum { FREE, RUNNING, RUNNABLE };
+
+struct thread threads[MAX_THREAD];
 struct thread *current_thread;
-int thread_count = 0;
 ```
 
----
-
-## 3. 上下文切换
-
-### 3.1 汇编实现
+### 2.2 上下文切换汇编代码
 
 ```asm
 # user/uthread_switch.S
+
 # void thread_switch(struct context *old, struct context *new);
+# 保存old上下文，恢复new上下文
 
 .globl thread_switch
 thread_switch:
-    # 保存旧线程的寄存器
+    # 保存old寄存器
     sd ra, 0(a0)
     sd sp, 8(a0)
     sd s0, 16(a0)
@@ -104,7 +138,7 @@ thread_switch:
     sd s10, 96(a0)
     sd s11, 104(a0)
 
-    # 恢复新线程的寄存器
+    # 恢复new寄存器
     ld ra, 0(a1)
     ld sp, 8(a1)
     ld s0, 16(a1)
@@ -120,332 +154,509 @@ thread_switch:
     ld s10, 96(a1)
     ld s11, 104(a1)
 
-    # 返回到新线程
     ret
 ```
 
-### 3.2 C包装函数
+### 2.3 线程调度器
 
 ```c
 // user/uthread.c
 
-extern void thread_switch(struct context *old, struct context *new);
-
-void thread_yield(void) {
-    struct thread *next;
+void
+thread_schedule(void)
+{
+    struct thread *t, *next_thread;
 
     // 找到下一个可运行的线程
-    next = current_thread + 1;
-    if (next >= all_thread + MAX_THREAD)
-        next = all_thread;
+    next_thread = 0;
+    t = current_thread + 1;
 
-    while (next->state != RUNNABLE && next != current_thread)
-        next = (next + 1 >= all_thread + MAX_THREAD) ?
-               all_thread : next + 1;
-
-    if (next == current_thread)
-        return;  // 没有其他可运行线程
-
-    // 切换
-    struct thread *prev = current_thread;
-    next->state = RUNNING;
-    current_thread = next;
-
-    thread_switch(&prev->context, &next->context);
-}
-```
-
----
-
-## 4. 线程管理函数
-
-### 4.1 线程创建
-
-```c
-// user/uthread.c
-
-void thread_create(void (*func)()) {
-    struct thread *t;
-
-    // 找到空闲线程槽
-    for (t = all_thread; t < all_thread + MAX_THREAD; t++) {
-        if (t->state == FREE)
-            break;
-    }
-
-    if (t >= all_thread + MAX_THREAD) {
-        printf("thread_create: no free slots\n");
-        exit(-1);
-    }
-
-    // 初始化线程
-    t->state = RUNNABLE;
-    t->id = thread_count++;
-
-    // 设置栈顶
-    t->context.sp = (uint64)(t->stack + STACK_SIZE);
-
-    // 设置返回地址为线程函数
-    t->context.ra = (uint64)func;
-}
-
-void thread_init(void) {
-    // 初始化主线程
-    current_thread = &all_thread[0];
-    current_thread->state = RUNNING;
-    current_thread->id = 0;
-    thread_count = 1;
-}
-```
-
-### 4.2 线程调度
-
-```c
-// user/uthread.c
-
-void thread_schedule(void) {
-    struct thread *t;
-    int found = 0;
-
-    // 寻找可运行线程
-    for (t = all_thread; t < all_thread + MAX_THREAD; t++) {
-        if (t->state == RUNNABLE) {
-            found = 1;
+    for (int i = 0; i < MAX_THREAD; i++) {
+        if (t >= threads + MAX_THREAD)
+            t = threads;
+        if (t->state == RUNNABLE && t != current_thread) {
+            next_thread = t;
             break;
         }
+        t++;
     }
 
-    if (!found) {
+    if (next_thread == 0) {
         printf("thread_schedule: no runnable threads\n");
         exit(-1);
     }
 
-    // 切换到选中的线程
-    if (t != current_thread) {
+    if (current_thread != next_thread) {
         struct thread *prev = current_thread;
-        next->state = RUNNING;
-        current_thread = t;
+        next_thread->state = RUNNING;
+        current_thread = next_thread;
 
-        thread_switch(&prev->context, &t->context);
+        // 上下文切换
+        thread_switch(&prev->context, &next_thread->context);
     }
+}
+```
+
+### 2.4 线程创建
+
+```c
+// user/uthread.c
+
+void
+thread_create(void (*func)())
+{
+    struct thread *t;
+
+    // 寻找空闲线程槽
+    for (t = threads; t < threads + MAX_THREAD; t++) {
+        if (t->state == FREE) break;
+    }
+
+    if (t >= threads + MAX_THREAD) {
+        printf("thread_create: no free slots\n");
+        exit(-1);
+    }
+
+    // 初始化上下文
+    memset(&t->context, 0, sizeof(t->context));
+
+    // 设置栈指针 (栈从高地址向低地址增长)
+    t->context.sp = (uint64)(t->stack + STACK_SIZE);
+
+    // 设置返回地址为线程函数
+    t->context.ra = (uint64)func;
+
+    t->state = RUNNABLE;
+}
+
+void
+thread_yield(void)
+{
+    current_thread->state = RUNNABLE;
+    thread_schedule();
 }
 ```
 
 ---
 
-## 5. 使用示例
+## 3. 使用线程解决实际问题
 
-### 5.1 简单多线程程序
+### 3.1 生产者-消费者问题
 
 ```c
-// user/uthreadtest.c
+// user/prodcon.c
 #include "kernel/types.h"
 #include "user/user.h"
 
-int shared_counter = 0;
+#define N 10          // 缓冲区大小
+#define NUM_ITEMS 100 // 生产/消费数量
 
-void thread_func(void) {
-    for (int i = 0; i < 100; i++) {
-        printf("Thread %d: counter = %d\n",
-               current_thread->id, shared_counter++);
-        thread_yield();  // 主动让出CPU
+int buffer[N];
+int count = 0;
+int in = 0, out = 0;
+
+// 简单的锁 (使用原子操作)
+int lock = 0;
+
+void acquire(int *lk) {
+    while (__sync_lock_test_and_set(lk, 1) != 0)
+        ;
+}
+
+void release(int *lk) {
+    __sync_lock_release(lk);
+}
+
+void producer() {
+    for (int i = 0; i < NUM_ITEMS; i++) {
+        acquire(&lock);
+
+        // 等待有空位 (简化版，实际应使用条件变量)
+        while (count == N) {
+            release(&lock);
+            thread_yield();
+            acquire(&lock);
+        }
+
+        buffer[in] = i;
+        in = (in + 1) % N;
+        count++;
+
+        release(&lock);
     }
+}
 
-    current_thread->state = FREE;
-    thread_schedule();  // 切换到其他线程
+void consumer() {
+    for (int i = 0; i < NUM_ITEMS; i++) {
+        acquire(&lock);
+
+        // 等待有数据
+        while (count == 0) {
+            release(&lock);
+            thread_yield();
+            acquire(&lock);
+        }
+
+        int item = buffer[out];
+        out = (out + 1) % N;
+        count--;
+
+        release(&lock);
+
+        printf("consumed: %d\n", item);
+    }
 }
 
 int main() {
-    // 初始化线程系统
-    thread_init();
+    thread_create(producer);
+    thread_create(consumer);
 
-    // 创建3个工作线程
-    thread_create(thread_func);
-    thread_create(thread_func);
-    thread_create(thread_func);
+    // 主线程也参与调度
+    while (count < NUM_ITEMS) {
+        thread_yield();
+    }
 
-    // 主线程也参与工作
-    thread_func();
-
-    printf("All threads finished\n");
     exit(0);
 }
 ```
 
-### 5.2 并行计算示例
+### 3.2 并行计算 - 素数筛选
 
 ```c
-// 使用多线程并行计算数组和
-#define N 1000
-#define NTHREAD 4
+// user/primes_thread.c
+// 使用多线程的素数筛选
 
-int array[N];
-int partial_sums[NTHREAD];
+#include "kernel/types.h"
+#include "user/user.h"
 
-void worker(void) {
-    int tid = current_thread->id;
-    int start = tid * (N / NTHREAD);
-    int end = start + (N / NTHREAD);
+#define MAX_PRIMES 100
 
-    int sum = 0;
-    for (int i = start; i < end; i++) {
-        sum += array[i];
-    }
-
-    partial_sums[tid] = sum;
-    current_thread->state = FREE;
-    thread_schedule();
-}
-
-int main() {
-    // 初始化数组
-    for (int i = 0; i < N; i++)
-        array[i] = i;
-
-    thread_init();
-
-    // 创建工作线程
-    for (int i = 0; i < NTHREAD - 1; i++)
-        thread_create(worker);
-
-    // 主线程也工作
-    worker();
-
-    // 汇总结果
-    int total = 0;
-    for (int i = 0; i < NTHREAD; i++)
-        total += partial_sums[i];
-
-    printf("Total sum: %d\n", total);
-    exit(0);
-}
-```
-
----
-
-## 6. 使用多线程加速程序
-
-### 6.1 ph程序 (并行哈希表)
-
-```c
-// user/ph.c
-// 并行哈希表测试
-
-#define NBUCKET 5
-#define NKEYS 10000
-#define NTHREADS 4
-
-struct entry {
-    int key;
-    int value;
-    struct entry *next;
+struct channel {
+    int data[MAX_PRIMES];
+    int head;
+    int tail;
+    int lock;
 };
 
-struct entry *table[NBUCKET];
-int keys[NKEYS];
-int nthread;
-
-void put(int key, int value) {
-    int i = key % NBUCKET;
-
-    struct entry *e = malloc(sizeof(struct entry));
-    e->key = key;
-    e->value = value;
-    e->next = table[i];
-    table[i] = e;
+void channel_put(struct channel *c, int n) {
+    while (__sync_lock_test_and_set(&c->lock, 1) != 0)
+        ;
+    c->data[c->tail++] = n;
+    __sync_lock_release(&c->lock);
 }
 
-struct entry* get(int key) {
-    int i = key % NBUCKET;
-
-    struct entry *e = table[i];
-    while (e) {
-        if (e->key == key)
-            return e;
-        e = e->next;
+int channel_get(struct channel *c) {
+    int n;
+    while (1) {
+        while (__sync_lock_test_and_set(&c->lock, 1) != 0)
+            ;
+        if (c->head < c->tail) {
+            n = c->data[c->head++];
+            __sync_lock_release(&c->lock);
+            return n;
+        }
+        __sync_lock_release(&c->lock);
+        thread_yield();
     }
-    return 0;
 }
 
-void thread_put(void) {
-    int tid = current_thread->id;
-    int start = tid * (NKEYS / nthread);
-    int end = start + (NKEYS / nthread);
+void sieve(struct channel *in, int p) {
+    printf("prime %d\n", p);
 
-    for (int i = start; i < end; i++) {
-        put(keys[i], i);
+    struct channel out = { .head = 0, .tail = 0, .lock = 0 };
+    int n;
+
+    // 过滤倍数
+    while ((n = channel_get(in)) != -1) {
+        if (n % p != 0) {
+            channel_put(&out, n);
+        }
     }
 
-    current_thread->state = FREE;
-    thread_schedule();
-}
+    // 如果还有数，创建下一个筛子
+    if (out.head < out.tail) {
+        int next_p = channel_get(&out);
+        channel_put(&out, -1);  // 结束标记
 
-int main(int argc, char *argv[]) {
-    // ... 初始化和启动线程 ...
-
-    // 对比单线程和多线程性能
-    // 注意：本实验的线程库没有锁，存在竞态条件
-
-    return 0;
+        // 创建新线程处理下一个素数
+        // ... 需要线程传递参数的支持
+    }
 }
 ```
 
 ---
 
-## 7. 线程切换流程
+## 4. 线程barrier实现
+
+### 4.1 Barrier概念
 
 ```
-线程A运行中
-    |
-    | 调用thread_yield()
-    v
-保存线程A上下文 (ra, sp, s0-s11)
-    |
-    v
-选择下一个可运行线程B
-    |
-    v
-恢复线程B上下文
-    |
-    v
-从线程B上次保存的位置继续执行
-    |
-    v
-线程B运行
+Barrier同步:
+
+Thread 1    Thread 2    Thread 3
+    │           │           │
+    ▼           ▼           ▼
+  计算1       计算2       计算3
+    │           │           │
+    └───────────┼───────────┘
+                ▼
+            Barrier等待
+                │
+    ┌───────────┼───────────┐
+    ▼           ▼           ▼
+  汇总1       汇总2       汇总3
+    │           │           │
+    ▼           ▼           ▼
+  继续执行...
+
+所有线程必须到达barrier后才能继续
 ```
 
----
-
-## 8. 调试技巧
-
-### 8.1 常见问题
-
-```
-问题1: 线程不切换
-原因: 忘记调用thread_yield()或thread_schedule()
-解决: 在适当位置添加yield
-
-问题2: 栈溢出
-原因: 递归太深或局部变量太大
-解决: 增加STACK_SIZE或优化代码
-
-问题3: 竞态条件
-原因: 无锁访问共享数据
-解决: 本实验不处理，实际系统需要锁
-```
-
-### 8.2 调试输出
+### 4.2 Barrier实现
 
 ```c
-void debug_thread(struct thread *t) {
-    printf("Thread %d:\n", t->id);
-    printf("  state: %d\n", t->state);
-    printf("  sp: %p\n", t->context.sp);
-    printf("  ra: %p\n", t->context.ra);
+// user/barrier.c
+
+struct barrier {
+    int count;          // 当前等待的线程数
+    int max;            // 需要等待的线程总数
+    int lock;           // 保护barrier的锁
+    int passed;         // 当前轮次 (防止过早通过)
+};
+
+void barrier_init(struct barrier *b, int n) {
+    b->count = 0;
+    b->max = n;
+    b->lock = 0;
+    b->passed = 0;
 }
+
+void barrier_wait(struct barrier *b) {
+    int passed = b->passed;
+
+    // 增加计数
+    while (__sync_lock_test_and_set(&b->lock, 1) != 0)
+        ;
+    b->count++;
+    __sync_lock_release(&b->lock);
+
+    if (b->count == b->max) {
+        // 最后一个到达的线程
+        b->count = 0;
+        b->passed++;  // 增加轮次，唤醒其他线程
+    } else {
+        // 等待其他线程
+        while (b->passed == passed) {
+            thread_yield();
+        }
+    }
+}
+```
+
+---
+
+## 5. 线程安全与同步
+
+### 5.1 竞态条件
+
+```c
+// 非线程安全的计数器
+int counter = 0;
+
+void unsafe_increment() {
+    counter++;  // 这不是原子操作！
+}
+
+// 实际执行的指令:
+// 1. ld  t0, counter   (加载)
+// 2. addi t0, t0, 1    (加1)
+// 3. sd  t0, counter   (存储)
+
+// 两个线程并发执行:
+// T1: load(0)    T2: load(0)
+// T1: add(1)     T2: add(1)
+// T1: store(1)   T2: store(1)
+// 结果: counter = 1 (期望是2)
+```
+
+### 5.2 原子操作
+
+```c
+// 使用RISC-V原子指令
+
+// 原子加
+static inline int
+atomic_add(int *ptr, int val)
+{
+    int result;
+    __asm__ volatile(
+        "amoadd.w %0, %2, (%1)"
+        : "=r" (result)
+        : "r" (ptr), "r" (val)
+        : "memory"
+    );
+    return result;
+}
+
+// 测试并设置 (用于自旋锁)
+static inline int
+test_and_set(int *ptr, int val)
+{
+    int result;
+    __asm__ volatile(
+        "amoswap.w %0, %2, (%1)"
+        : "=r" (result)
+        : "r" (ptr), "r" (val)
+        : "memory"
+    );
+    return result;
+}
+```
+
+### 5.3 自旋锁实现
+
+```c
+// user/spinlock.h
+
+typedef struct {
+    int locked;
+} spinlock_t;
+
+void spinlock_init(spinlock_t *lk) {
+    lk->locked = 0;
+}
+
+void spinlock_acquire(spinlock_t *lk) {
+    while (__sync_lock_test_and_set(&lk->locked, 1) != 0)
+        ;
+    // 内存屏障，防止编译器重排序
+    __sync_synchronize();
+}
+
+void spinlock_release(spinlock_t *lk) {
+    __sync_synchronize();
+    __sync_lock_release(&lk->locked);
+}
+```
+
+---
+
+## 6. 调试多线程程序
+
+### 6.1 常见bug
+
+```
+Bug 1: 忘记初始化线程上下文
+症状: 程序崩溃或跳转到随机地址
+解决: 确保ra和sp正确设置
+
+Bug 2: 栈溢出
+症状: 数据损坏，随机崩溃
+解决: 增加STACK_SIZE，检查递归深度
+
+Bug 3: 竞态条件
+症状: 结果不稳定，偶尔出错
+解决: 使用适当的同步机制
+
+Bug 4: 死锁
+症状: 程序挂起
+解决: 确保锁的获取顺序一致
+```
+
+### 6.2 调试技巧
+
+```c
+// 添加线程调试信息
+#define DEBUG_THREAD 1
+
+#if DEBUG_THREAD
+#define thread_debug(fmt, ...) printf("[T%d] " fmt "\n", \
+    current_thread - threads, ##__VA_ARGS__)
+#else
+#define thread_debug(fmt, ...)
+#endif
+
+// 使用示例
+void thread_function() {
+    thread_debug("starting");
+    // ...
+    thread_debug("yielding");
+    thread_yield();
+    thread_debug("resumed");
+}
+```
+
+---
+
+## 7. 性能评估
+
+### 7.1 线程切换开销
+
+```
+测量方法:
+1. 创建两个线程
+2. 让它们来回切换N次
+3. 测量总时间
+
+预期结果:
+- 用户级线程切换: ~10-100 ns
+- 内核级线程切换: ~1-10 us
+- 进程切换: ~10-100 us
+```
+
+### 7.2 加速比测试
+
+```c
+// 计算加速比
+void speedup_test() {
+    int start, end;
+
+    // 单线程版本
+    start = uptime();
+    compute_single_thread();
+    end = uptime();
+    int single_time = end - start;
+
+    // 多线程版本
+    start = uptime();
+    compute_multi_thread(NUM_THREADS);
+    end = uptime();
+    int multi_time = end - start;
+
+    printf("Single thread: %d ticks\n", single_time);
+    printf("Multi thread: %d ticks\n", multi_time);
+    printf("Speedup: %.2fx\n", (float)single_time / multi_time);
+}
+```
+
+---
+
+## 8. 总结
+
+### 8.1 核心概念
+
+| 概念 | 说明 |
+|------|------|
+| **上下文** | 线程执行状态，包括寄存器和栈 |
+| **上下文切换** | 保存当前线程状态，恢复另一线程状态 |
+| **调度** | 决定哪个线程运行的策略 |
+| **竞态条件** | 并发访问共享数据导致的不确定性 |
+| **同步** | 协调多线程执行顺序的机制 |
+
+### 8.2 RISC-V调用约定
+
+```
+Caller-saved寄存器: ra, t0-t6, a0-a7, (调用者保存)
+Callee-saved寄存器: s0-s11, (被调用者保存)
+
+线程切换需要保存:
+- ra (返回地址)
+- sp (栈指针)
+- s0-s11 (callee-saved)
 ```
 
 ---
 
 **难度**: ⭐⭐⭐
-**预计时间**: 5-7小时
+**预计时间**: 6-8小时
+**依赖**: Lab 4 (陷入，理解上下文)

@@ -4,404 +4,744 @@
 
 ### 1.1 目标
 
-- 理解网络设备驱动架构
-- 掌握DMA和内存映射I/O
-- 实现网卡驱动程序
-- 理解网络协议栈底层
+- 理解网络设备驱动程序的工作原理
+- 实现E1000网卡的DMA管理
+- 处理网卡中断
+- 实现网络栈接口 (socket API)
+- 完成可靠的数据包收发
 
-### 1.2 E1000网卡架构
+### 1.2 E1000网卡概述
 
-```text
-E1000网卡架构
-├── PCI接口
-│   └── 配置空间访问
-├── 内存映射寄存器
-│   └── 控制和状态寄存器(CSR)
-├── DMA引擎
-│   ├── 发送DMA (TX)
-│   └── 接收DMA (RX)
-├── 描述符环
-│   ├── TX描述符环
-│   └── RX描述符环
-└── 数据包缓冲区
-    ├── 发送缓冲区
-    └── 接收缓冲区
+```
+Intel E1000 (8254x系列) 以太网控制器:
+
+特性:
+- PCI接口
+- DMA传输 (Direct Memory Access)
+- 硬件校验和计算
+- 多个发送/接收队列
+
+关键组件:
+┌─────────────────────────────────────┐
+│           E1000 Controller          │
+├─────────────────────────────────────┤
+│  ┌─────────┐     ┌─────────┐        │
+│  │ TX DMA  │     │ RX DMA  │        │
+│  │ Engine  │     │ Engine  │        │
+│  └────┬────┘     └────┬────┘        │
+│       │               │             │
+│  ┌────▼────┐     ┌────▼────┐        │
+│  │ TX Ring │     │ RX Ring │        │
+│  │ (描述符) │     │ (描述符) │        │
+│  └────┬────┘     └────┬────┘        │
+│       │               │             │
+│  ┌────▼────┐     ┌────▼────┐        │
+│  │ TX FIFO │     │ RX FIFO │        │
+│  └─────────┘     └─────────┘        │
+└─────────────────────────────────────┘
+         │               │
+         └───────┬───────┘
+                 │
+            以太网线
+```
+
+### 1.3 DMA环原理
+
+```
+发送描述符环 (Transmit Descriptor Ring):
+
+软件                                 硬件
+  │                                    │
+  │  1. 填充描述符 (指向数据包)         │
+  ▼                                    │
+┌──────────┐                          │
+│  Desc 0  │───► 数据包0               │
+├──────────┤                          │
+│  Desc 1  │───► 数据包1               │
+├──────────┤                          │
+│  Desc 2  │───► 数据包2               │
+├──────────┤                          │
+│    ...   │                          │
+├──────────┤                          │
+│  Desc N  │                          │
+└──────────┘                          │
+     │                                │
+     │ 2. 更新TDT (Tail Desc Pointer) │
+     │───────────────────────────────►│
+     │                                │
+     │ 3. 硬件读取描述符并发送          │
+     │◄───────────────────────────────│
+     │                                │
+     │ 4. 更新TDH (Head Desc Pointer) │
+     │◄───────────────────────────────│
+     │                                │
+     ▼                                ▼
+
+重要规则:
+- TDH == TDT 表示环空
+- (TDT + 1) % N == TDH 表示环满
+- 硬件移动TDH，软件移动TDT
 ```
 
 ---
 
-## 2. PCI设备初始化
+## 2. E1000寄存器
 
-### 2.1 PCI配置空间
+### 2.1 关键寄存器
+
+```c
+// kernel/e1000.h
+
+// E1000寄存器偏移 (BAR0 + offset)
+#define E1000_CTL      0x00000   // 设备控制
+#define E1000_STATUS   0x00008   // 设备状态
+#define E1000_EERD     0x00014   // EEPROM读
+#define E1000_ICR      0x000C0   // 中断原因读
+#define E1000_IMS      0x000D0   // 中断掩码设置
+#define E1000_RCTL     0x00100   // 接收控制
+#define E1000_TCTL     0x00400   // 发送控制
+
+// 接收描述符环
+#define E1000_RDBAL    0x02800   // 接收描述符基地址 (低32位)
+#define E1000_RDBAH    0x02804   // 接收描述符基地址 (高32位)
+#define E1000_RDLEN    0x02808   // 接收描述符环长度
+#define E1000_RDH      0x02810   // 接收描述符头
+#define E1000_RDT      0x02818   // 接收描述符尾
+
+// 发送描述符环
+#define E1000_TDBAL    0x03800   // 发送描述符基地址 (低32位)
+#define E1000_TDBAH    0x03804   // 发送描述符基地址 (高32位)
+#define E1000_TDLEN    0x03808   // 发送描述符环长度
+#define E1000_TDH      0x03810   // 发送描述符头
+#define E1000_TDT      0x03818   // 发送描述符尾
+
+// MAC地址
+#define E1000_RA       0x05400   // 接收地址 (MAC)
+#define E1000_MTA      0x05200   // 多播表数组
+
+// 控制寄存器位
+#define E1000_CTL_RST    0x00400000   // 复位
+#define E1000_CTL_SLU    0x00000040   // Set Link Up
+#define E1000_CTL_ASDE   0x00000020   // Auto-Speed Detection
+
+// 接收控制位
+#define E1000_RCTL_EN    0x00000002   // 接收使能
+#define E1000_RCTL_BAM   0x00008000   // 广播使能
+#define E1000_RCTL_SZ_2048 0x00000000 // 2048字节缓冲区
+#define E1000_RCTL_SECRC 0x04000000   // 剥离CRC
+
+// 发送控制位
+#define E1000_TCTL_EN    0x00000002   // 发送使能
+#define E1000_TCTL_PSP   0x00000008   // Pad Short Packets
+```
+
+### 2.2 描述符结构
+
+```c
+// kernel/e1000.h
+
+// 发送描述符 (Legacy模式)
+struct tx_desc {
+    uint64 addr;       // 数据包缓冲区物理地址
+    uint16 length;     // 数据包长度
+    uint8  cso;        // 校验和偏移
+    uint8  cmd;        // 命令
+    uint8  status;     // 状态
+    uint8  css;        // 校验和开始
+    uint16 special;
+};
+
+// TX命令位
+#define TX_CMD_EOP    0x01   // End Of Packet
+#define TX_CMD_IFCS   0x02   // Insert FCS (CRC)
+#define TX_CMD_RS     0x08   // Report Status
+
+// 接收描述符 (Legacy模式)
+struct rx_desc {
+    uint64 addr;       // 缓冲区物理地址
+    uint16 length;     // 接收长度
+    uint16 checksum;   // 校验和
+    uint8  status;     // 状态
+    uint8  errors;     // 错误
+    uint16 special;
+};
+
+// RX状态位
+#define RX_STATUS_DD  0x01   // Descriptor Done
+#define RX_STATUS_EOP 0x02   // End Of Packet
+
+#define NTXDESC 32   // 发送描述符数量
+#define NRXDESC 128  // 接收描述符数量
+```
+
+---
+
+## 3. 驱动程序实现
+
+### 3.1 全局数据结构
 
 ```c
 // kernel/e1000.c
 
-// E1000 PCI配置
-#define E1000_VENDOR_ID 0x8086
-#define E1000_DEVICE_ID 0x100E  // 82540EM
+#include "types.h"
+#include "param.h"
+#include "memlayout.h"
+#include "riscv.h"
+#include "spinlock.h"
+#include "proc.h"
+#include "defs.h"
+#include "e1000.h"
 
-// PCI配置空间寄存器偏移
-#define PCI_VENDOR_ID   0x00
-#define PCI_DEVICE_ID   0x02
-#define PCI_COMMAND     0x04
-#define PCI_BAR0        0x10    // 内存映射基地址
-#define PCI_BAR1        0x14    // I/O端口基地址
-
-struct pci_dev {
-    uint32_t reg_base[6];   // BAR寄存器基地址
-    uint8_t irq;            // 中断线
-};
-
-// 检测E1000网卡
-int e1000_probe(struct pci_dev *dev) {
-    uint16_t vendor = pci_read_config_word(dev, PCI_VENDOR_ID);
-    uint16_t device = pci_read_config_word(dev, PCI_DEVICE_ID);
-
-    if (vendor != E1000_VENDOR_ID || device != E1000_DEVICE_ID)
-        return -1;
-
-    printf("e1000: found Intel 82540EM\n");
-
-    // 启用PCI设备
-    uint16_t cmd = pci_read_config_word(dev, PCI_COMMAND);
-    cmd |= PCI_COMMAND_MEM | PCI_COMMAND_MASTER;  // 启用内存访问和总线主控
-    pci_write_config_word(dev, PCI_COMMAND, cmd);
-
-    // 获取内存映射基地址
-    dev->reg_base[0] = pci_read_config_dword(dev, PCI_BAR0) & ~0xF;
-
-    // 获取中断线
-    dev->irq = pci_read_config_byte(dev, PCI_INTERRUPT_LINE);
-
-    return 0;
-}
-```
-
-### 2.2 内存映射寄存器访问
-
-```c
-// E1000寄存器偏移
-#define E1000_CTRL      0x00000    // 设备控制
-#define E1000_STATUS    0x00008    // 设备状态
-#define E1000_EERD      0x00014    // EEPROM读取
-#define E1000_ICR       0x000C0    // 中断原因读取
-#define E1000_IMS       0x000D0    // 中断掩码设置
-#define E1000_RCTL      0x00100    // 接收控制
-#define E1000_TCTL      0x00400    // 发送控制
-#define E1000_RDBAL     0x02800    // 接收描述符基地址(低)
-#define E1000_RDBAH     0x02804    // 接收描述符基地址(高)
-#define E1000_RDLEN     0x02808    // 接收描述符长度
-#define E1000_RDH       0x02810    // 接收描述符头
-#define E1000_RDT       0x02818    // 接收描述符尾
-#define E1000_TDBAL     0x03800    // 发送描述符基地址(低)
-#define E1000_TDBAH     0x03804    // 发送描述符基地址(高)
-#define E1000_TDLEN     0x03808    // 发送描述符长度
-#define E1000_TDH       0x03810    // 发送描述符头
-#define E1000_TDT       0x03818    // 发送描述符尾
-
-// 寄存器读写
-static inline uint32_t e1000_read_reg(uint32_t reg) {
-    return *(volatile uint32_t *)(e1000_regs + reg);
-}
-
-static inline void e1000_write_reg(uint32_t reg, uint32_t val) {
-    *(volatile uint32_t *)(e1000_regs + reg) = val;
-}
-```
-
----
-
-## 3. 描述符环机制
-
-### 3.1 发送描述符
-
-```c
-// 发送描述符结构
-struct tx_desc {
-    uint64_t addr;      // 数据包缓冲区地址
-    uint16_t length;    // 数据包长度
-    uint8_t  cso;       // 校验和偏移
-    uint8_t  cmd;       // 命令字段
-    uint8_t  status;    // 状态字段
-    uint8_t  css;       // 校验和开始
-    uint16_t special;   // 特殊字段
-};
+// MMIO基地址
+volatile uint32 *e1000_regs;
 
 // 发送描述符环
-#define TX_RING_SIZE 16
-struct tx_desc tx_ring[TX_RING_SIZE] __attribute__((aligned(16)));
-char tx_bufs[TX_RING_SIZE][2048];  // 发送缓冲区
-
-// 初始化发送环
-void e1000_init_tx(void) {
-    // 清零描述符环
-    memset(tx_ring, 0, sizeof(tx_ring));
-
-    // 设置发送描述符基地址
-    e1000_write_reg(E1000_TDBAL, (uint64_t)tx_ring);
-    e1000_write_reg(E1000_TDBAH, (uint64_t)tx_ring >> 32);
-    e1000_write_reg(E1000_TDLEN, sizeof(tx_ring));
-
-    // 初始化和尾指针
-    e1000_write_reg(E1000_TDH, 0);
-    e1000_write_reg(E1000_TDT, 0);
-
-    // 配置发送控制寄存器
-    uint32_t tctl = E1000_TCTL_EN |      // 启用发送
-                    E1000_TCTL_PSP |     // 填充短包
-                    (0x10 << 4) |        // 冷阈值
-                    (0x40 << 12);        // 热阈值
-    e1000_write_reg(E1000_TCTL, tctl);
-
-    // 设置IPG (帧间隙)
-    e1000_write_reg(E1000_TIPG, 10 | (8 << 10) | (6 << 20));
-}
-```
-
-### 3.2 接收描述符
-
-```c
-// 接收描述符结构
-struct rx_desc {
-    uint64_t addr;      // 数据包缓冲区地址
-    uint16_t length;    // 接收长度
-    uint16_t checksum;  // 校验和
-    uint8_t  status;    // 状态字段
-    uint8_t  errors;    // 错误字段
-    uint16_t special;   // 特殊字段
-};
+struct tx_desc tx_ring[NTXDESC] __attribute__((aligned(16)));
+char tx_bufs[NTXDESC][2048];  // 发送缓冲区
+int tx_mbuf[NTXDESC];         // 保存mbuf索引
 
 // 接收描述符环
-#define RX_RING_SIZE 16
-struct rx_desc rx_ring[RX_RING_SIZE] __attribute__((aligned(16)));
-char rx_bufs[RX_RING_SIZE][2048];  // 接收缓冲区
+struct rx_desc rx_ring[NRXDESC] __attribute__((aligned(16)));
+char rx_bufs[NRXDESC][2048];  // 接收缓冲区
 
-// 初始化接收环
-void e1000_init_rx(void) {
-    // 清零描述符环
-    memset(rx_ring, 0, sizeof(rx_ring));
+// 锁
+struct spinlock e1000_lock;
 
-    // 分配接收缓冲区
-    for (int i = 0; i < RX_RING_SIZE; i++) {
-        rx_ring[i].addr = (uint64_t)rx_bufs[i];
-    }
-
-    // 设置接收描述符基地址
-    e1000_write_reg(E1000_RDBAL, (uint64_t)rx_ring);
-    e1000_write_reg(E1000_RDBAH, (uint64_t)rx_ring >> 32);
-    e1000_write_reg(E1000_RDLEN, sizeof(rx_ring));
-
-    // 初始化和尾指针
-    e1000_write_reg(E1000_RDH, 0);
-    e1000_write_reg(E1000_RDT, RX_RING_SIZE - 1);
-
-    // 配置接收控制寄存器
-    uint32_t rctl = E1000_RCTL_EN |      // 启用接收
-                    E1000_RCTL_BAM |     // 接收广播
-                    E1000_RCTL_SECRC |   // 剥离CRC
-                    (3 << 16);           // 4KB缓冲区
-    e1000_write_reg(E1000_RCTL, rctl);
-}
+// MAC地址
+uint8 mac_addr[6];
 ```
 
----
-
-## 4. 数据包发送与接收
-
-### 4.1 发送数据包
+### 3.2 初始化函数
 
 ```c
-// 发送数据包
-int e1000_tx(void *data, int len) {
-    // 获取当前尾指针
-    uint32_t tail = e1000_read_reg(E1000_TDT);
-    uint32_t head = e1000_read_reg(E1000_TDH);
+// kernel/e1000.c
 
-    // 检查是否有空闲描述符
-    uint32_t next_tail = (tail + 1) % TX_RING_SIZE;
-    if (next_tail == head) {
-        printf("e1000_tx: ring full\n");
-        return -1;
+int
+e1000_init(void)
+{
+    // 1. 查找PCI设备
+    // 扫描PCI总线找到E1000
+    // ... (PCI枚举代码)
+
+    // 2. 映射BAR0寄存器
+    // e1000_regs = (uint32 *)map_bar0();
+
+    // 3. 复位设备
+    uint32 ctrl = e1000_regs[E1000_CTL / 4];
+    e1000_regs[E1000_CTL / 4] = ctrl | E1000_CTL_RST;
+
+    // 等待复位完成
+    while (e1000_regs[E1000_CTL / 4] & E1000_CTL_RST)
+        ;
+
+    // 4. 初始化MAC地址
+    // 从EEPROM读取或使用硬编码
+    e1000_read_mac();
+
+    // 5. 初始化接收描述符环
+    memset(rx_ring, 0, sizeof(rx_ring));
+    for (int i = 0; i < NRXDESC; i++) {
+        rx_ring[i].addr = (uint64)rx_bufs[i];
+        rx_ring[i].status = 0;  // 硬件可写入
     }
 
-    // 复制数据到发送缓冲区
-    memcpy(tx_bufs[tail], data, len);
+    // 设置接收描述符环基地址
+    e1000_regs[E1000_RDBAL / 4] = (uint64)rx_ring & 0xFFFFFFFF;
+    e1000_regs[E1000_RDBAH / 4] = (uint64)rx_ring >> 32;
+    e1000_regs[E1000_RDLEN / 4] = sizeof(rx_ring);
+    e1000_regs[E1000_RDH / 4] = 0;
+    e1000_regs[E1000_RDT / 4] = NRXDESC - 1;  // 初始时所有描述符可用
 
-    // 设置描述符
-    tx_ring[tail].addr = (uint64_t)tx_bufs[tail];
-    tx_ring[tail].length = len;
-    tx_ring[tail].cmd = E1000_TXD_CMD_EOP |  // 包结束
-                        E1000_TXD_CMD_RS;    // 报告状态
-    tx_ring[tail].status = 0;
+    // 6. 初始化发送描述符环
+    memset(tx_ring, 0, sizeof(tx_ring));
+    for (int i = 0; i < NTXDESC; i++) {
+        tx_ring[i].status = TX_STATUS_DD;  // 初始时所有描述符空闲
+    }
 
-    // 更新尾指针，通知网卡
-    e1000_write_reg(E1000_TDT, next_tail);
+    // 设置发送描述符环基地址
+    e1000_regs[E1000_TDBAL / 4] = (uint64)tx_ring & 0xFFFFFFFF;
+    e1000_regs[E1000_TDBAH / 4] = (uint64)tx_ring >> 32;
+    e1000_regs[E1000_TDLEN / 4] = sizeof(tx_ring);
+    e1000_regs[E1000_TDH / 4] = 0;
+    e1000_regs[E1000_TDT / 4] = 0;
+
+    // 7. 配置接收控制寄存器
+    e1000_regs[E1000_RCTL / 4] = E1000_RCTL_EN |      // 使能接收
+                                  E1000_RCTL_BAM |     // 广播使能
+                                  E1000_RCTL_SZ_2048 | // 2048字节缓冲区
+                                  E1000_RCTL_SECRC;    // 剥离CRC
+
+    // 8. 配置发送控制寄存器
+    e1000_regs[E1000_TCTL / 4] = E1000_TCTL_EN |      // 使能发送
+                                  E1000_TCTL_PSP;      // Pad短包
+
+    // 9. 配置中断
+    e1000_regs[E1000_IMS / 4] = 0x1;  // 使能接收中断
+
+    printf("e1000: initialized, mac=%x:%x:%x:%x:%x:%x\n",
+           mac_addr[0], mac_addr[1], mac_addr[2],
+           mac_addr[3], mac_addr[4], mac_addr[5]);
 
     return 0;
 }
 ```
 
-### 4.2 接收数据包
+### 3.3 发送数据包
 
 ```c
-// 接收数据包
-int e1000_rx(void *buf, int max_len) {
-    // 获取当前头指针
-    uint32_t head = e1000_read_reg(E1000_RDH);
-    uint32_t tail = (e1000_read_reg(E1000_RDT) + 1) % RX_RING_SIZE;
+// kernel/e1000.c
 
-    // 检查是否有新数据包
-    if (head == tail)
-        return 0;  // 没有新数据包
+int
+e1000_transmit(struct mbuf *m)
+{
+    acquire(&e1000_lock);
 
-    // 检查描述符状态
-    if (!(rx_ring[head].status & E1000_RXD_STAT_DD)) {
-        return 0;  // 网卡还未写入
-    }
+    // 获取当前尾指针
+    uint32 tail = e1000_regs[E1000_TDT / 4];
+    uint32 next_tail = (tail + 1) % NTXDESC;
 
-    // 检查错误
-    if (rx_ring[head].errors) {
-        printf("e1000_rx: error %x\n", rx_ring[head].errors);
-        rx_ring[head].status = 0;  // 清零状态
+    // 检查是否有空闲描述符
+    if (!(tx_ring[tail].status & TX_STATUS_DD)) {
+        release(&e1000_lock);
+        printf("e1000_transmit: no free descriptors\n");
         return -1;
     }
 
-    // 复制数据
-    int len = rx_ring[head].length;
-    if (len > max_len)
-        len = max_len;
-    memcpy(buf, rx_bufs[head], len);
+    // 如果有之前的数据包，释放它
+    if (tx_mbuf[tail]) {
+        mbuffree(tx_mbuf[tail]);
+    }
 
-    // 清零状态，归还描述符
-    rx_ring[head].status = 0;
+    // 填充描述符
+    tx_ring[tail].addr = (uint64)m->head;
+    tx_ring[tail].length = m->len;
+    tx_ring[tail].cmd = TX_CMD_EOP | TX_CMD_IFCS | TX_CMD_RS;
+    tx_ring[tail].status = 0;
 
-    // 更新尾指针
-    e1000_write_reg(E1000_RDT, head);
+    // 保存mbuf指针以便稍后释放
+    tx_mbuf[tail] = m;
 
+    // 更新尾指针，通知硬件
+    e1000_regs[E1000_TDT / 4] = next_tail;
+
+    release(&e1000_lock);
+    return 0;
+}
+```
+
+### 3.4 接收数据包
+
+```c
+// kernel/e1000.c
+
+static void
+e1000_recv(void)
+{
+    // 获取当前头指针
+    uint32 tail = (e1000_regs[E1000_RDT / 4] + 1) % NRXDESC;
+
+    // 处理所有已完成的描述符
+    while (rx_ring[tail].status & RX_STATUS_DD) {
+        // 检查是否有错误
+        if (rx_ring[tail].errors) {
+            printf("e1000_recv: packet error %x\n", rx_ring[tail].errors);
+        } else {
+            // 将数据包传递给网络栈
+            struct mbuf *m = mbufalloc(0);
+            if (m) {
+                uint16 len = rx_ring[tail].length;
+                if (len > MBUF_SIZE)
+                    len = MBUF_SIZE;
+
+                memmove(m->head, rx_bufs[tail], len);
+                m->len = len;
+
+                // 传递给上层 (IP层)
+                net_rx(m);
+            }
+        }
+
+        // 重置描述符状态
+        rx_ring[tail].status = 0;
+
+        // 更新尾指针，释放描述符给硬件
+        e1000_regs[E1000_RDT / 4] = tail;
+
+        // 下一个描述符
+        tail = (tail + 1) % NRXDESC;
+    }
+}
+```
+
+### 3.5 中断处理
+
+```c
+// kernel/e1000.c
+
+void
+e1000_intr(void)
+{
+    // 读取中断原因寄存器 (自动清除中断)
+    uint32 icr = e1000_regs[E1000_ICR / 4];
+
+    if (icr & 0x80) {
+        // 接收中断
+        e1000_recv();
+    }
+
+    if (icr & 0x01) {
+        // 发送中断
+        // 可以在这里处理发送完成通知
+    }
+}
+```
+
+---
+
+## 4. 网络栈接口
+
+### 4.1 mbuf数据结构
+
+```c
+// kernel/mbuf.h
+
+#ifndef MBUF_SIZE
+#define MBUF_SIZE 2048
+#endif
+
+// mbuf头部大小
+#define MBUF_HEADROOM 128
+
+struct mbuf {
+    struct mbuf *next;      // 链表指针
+    char *head;             // 数据起始
+    uint len;               // 数据长度
+    char buf[MBUF_SIZE];    // 数据缓冲区
+};
+
+// 分配mbuf
+struct mbuf *mbufalloc(uint headroom);
+
+// 释放mbuf
+void mbuffree(struct mbuf *m);
+
+// 在头部预留空间
+char *mbufpush(struct mbuf *m, uint len);
+
+// 在尾部添加空间
+char *mbufput(struct mbuf *m, uint len);
+
+// 从头部移除数据
+char *mbufpull(struct mbuf *m, uint len);
+
+// 从尾部移除数据
+void mbuftrim(struct mbuf *m, uint len);
+```
+
+### 4.2 mbuf实现
+
+```c
+// kernel/mbuf.c
+
+struct mbuf *
+mbufalloc(uint headroom)
+{
+    struct mbuf *m;
+
+    if (headroom > MBUF_SIZE)
+        return 0;
+
+    m = kalloc();
+    if (!m)
+        return 0;
+
+    m->next = 0;
+    m->head = m->buf + headroom;
+    m->len = 0;
+
+    return m;
+}
+
+void
+mbuffree(struct mbuf *m)
+{
+    kfree((void *)m);
+}
+
+char *
+mbufpush(struct mbuf *m, uint len)
+{
+    m->head -= len;
+    m->len += len;
+    return m->head;
+}
+
+char *
+mbufput(struct mbuf *m, uint len)
+{
+    char *tail = m->head + m->len;
+    m->len += len;
+    return tail;
+}
+
+char *
+mbufpull(struct mbuf *m, uint len)
+{
+    char *head = m->head;
+    m->head += len;
+    m->len -= len;
+    return head;
+}
+```
+
+---
+
+## 5. Socket API实现
+
+### 5.1 Socket系统调用
+
+```c
+// kernel/sysnet.c
+
+// 创建socket
+int
+sys_socket(void)
+{
+    int domain, type, protocol;
+
+    if (argint(0, &domain) < 0 ||
+        argint(1, &type) < 0 ||
+        argint(2, &protocol) < 0)
+        return -1;
+
+    // 分配socket结构
+    struct sock *so = sockalloc(domain, type, protocol);
+    if (!so)
+        return -1;
+
+    // 分配文件描述符
+    int fd = fdalloc(so);
+    if (fd < 0) {
+        sockclose(so);
+        return -1;
+    }
+
+    return fd;
+}
+
+// 发送数据
+int
+sys_send(void)
+{
+    int fd, n;
+    uint64 addr;
+    struct file *f;
+    struct mbuf *m;
+
+    if (argint(0, &fd) < 0 ||
+        argint(2, &n) < 0 ||
+        argaddr(1, &addr) < 0)
+        return -1;
+
+    f = myproc()->ofile[fd];
+    if (!f || f->type != FD_SOCK)
+        return -1;
+
+    // 分配mbuf并复制数据
+    m = mbufalloc(0);
+    if (!m)
+        return -1;
+
+    if (copyin(myproc()->pagetable, mbufput(m, n), addr, n) < 0) {
+        mbuffree(m);
+        return -1;
+    }
+
+    return socksend(f->sock, m);
+}
+
+// 接收数据
+int
+sys_recv(void)
+{
+    int fd, n;
+    uint64 addr;
+    struct file *f;
+    struct mbuf *m;
+
+    if (argint(0, &fd) < 0 ||
+        argint(2, &n) < 0 ||
+        argaddr(1, &addr) < 0)
+        return -1;
+
+    f = myproc()->ofile[fd];
+    if (!f || f->type != FD_SOCK)
+        return -1;
+
+    m = sockrecv(f->sock);
+    if (!m)
+        return -1;
+
+    // 复制到用户空间
+    int len = m->len;
+    if (len > n)
+        len = n;
+
+    if (copyout(myproc()->pagetable, addr, m->head, len) < 0) {
+        mbuffree(m);
+        return -1;
+    }
+
+    mbuffree(m);
     return len;
 }
 ```
 
 ---
 
-## 5. 中断处理
+## 6. 调试技巧
 
-### 5.1 中断初始化
+### 6.1 常见问题
+
+```
+问题1: 无法发送数据包
+原因: 描述符未正确设置或尾指针未更新
+解决: 检查描述符状态位和TDT寄存器
+
+问题2: 无法接收数据包
+原因: 接收描述符未正确初始化或RDT设置错误
+解决: 确保所有接收描述符可用，RDT = N-1
+
+问题3: 中断不触发
+原因: 中断掩码未设置或PCI中断配置错误
+解决: 检查IMS寄存器和PCI配置
+
+问题4: 数据包损坏
+原因: 缓冲区未对齐或DMA地址错误
+解决: 确保描述符环16字节对齐
+```
+
+### 6.2 调试命令
 
 ```c
-// 初始化中断
-void e1000_init_irq(void) {
-    // 清零中断原因寄存器
-    e1000_read_reg(E1000_ICR);
-
-    // 启用接收中断和发送完成中断
-    e1000_write_reg(E1000_IMS, E1000_IMS_RXT0 | E1000_IMS_TXDW);
-}
-
-// 中断处理函数
-void e1000_intr(void) {
-    uint32_t icr = e1000_read_reg(E1000_ICR);
-
-    if (icr & E1000_ICR_RXT0) {
-        // 接收中断
-        // 通知网络栈处理数据包
-        net_rx();
-    }
-
-    if (icr & E1000_ICR_TXDW) {
-        // 发送完成中断
-        // 清理已发送的描述符
-        e1000_tx_cleanup();
-    }
+// 打印寄存器状态
+void e1000_debug(void) {
+    printf("E1000 Status:\n");
+    printf("  STATUS: %08x\n", e1000_regs[E1000_STATUS / 4]);
+    printf("  RCTL:   %08x\n", e1000_regs[E1000_RCTL / 4]);
+    printf("  TCTL:   %08x\n", e1000_regs[E1000_TCTL / 4]);
+    printf("  RDH:    %d, RDT: %d\n",
+           e1000_regs[E1000_RDH / 4],
+           e1000_regs[E1000_RDT / 4]);
+    printf("  TDH:    %d, TDT: %d\n",
+           e1000_regs[E1000_TDH / 4],
+           e1000_regs[E1000_TDT / 4]);
 }
 ```
 
 ---
 
-## 6. 与网络栈集成
+## 7. 测试程序
 
-### 6.1 数据包处理流程
-
-```text
-发送流程:
-应用程序 → 网络栈(TCP/IP) → 网卡驱动 → DMA → 网卡 → 网络
-
-接收流程:
-网络 → 网卡 → DMA → 网卡驱动 → 网络栈 → 应用程序
-```
-
-### 6.2 驱动初始化流程
+### 7.1 简单ping测试
 
 ```c
-void e1000_init(struct pci_dev *pci_dev) {
-    // 1. PCI设备检测和配置
-    if (e1000_probe(pci_dev) < 0)
-        panic("e1000: probe failed");
+// user/ping.c
+#include "kernel/types.h"
+#include "user/user.h"
 
-    // 2. 映射寄存器空间
-    e1000_regs = iomap(pci_dev->reg_base[0], 0x20000);
+// ICMP Echo Request
+struct icmp_packet {
+    uint8 type;
+    uint8 code;
+    uint16 checksum;
+    uint16 id;
+    uint16 seq;
+    char data[56];
+};
 
-    // 3. 重置网卡
-    e1000_reset();
+uint16 checksum(void *data, int len) {
+    uint32 sum = 0;
+    uint16 *p = data;
 
-    // 4. 读取MAC地址
-    e1000_read_mac();
+    while (len > 1) {
+        sum += *p++;
+        len -= 2;
+    }
+    if (len == 1) {
+        sum += *(uint8 *)p;
+    }
 
-    // 5. 初始化多播表
-    e1000_init_multicast();
+    while (sum >> 16) {
+        sum = (sum & 0xFFFF) + (sum >> 16);
+    }
 
-    // 6. 初始化发送环
-    e1000_init_tx();
+    return ~sum;
+}
 
-    // 7. 初始化接收环
-    e1000_init_rx();
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        printf("Usage: ping <ip>\n");
+        exit(1);
+    }
 
-    // 8. 初始化中断
-    e1000_init_irq();
-    pci_register_irq(pci_dev->irq, e1000_intr);
+    // 创建原始socket
+    int sock = socket(2, 3, 1);  // AF_INET, SOCK_RAW, ICMP
+    if (sock < 0) {
+        printf("socket failed\n");
+        exit(1);
+    }
 
-    printf("e1000: initialized\n");
+    struct icmp_packet pkt;
+    pkt.type = 8;  // Echo Request
+    pkt.code = 0;
+    pkt.id = getpid();
+    pkt.seq = 1;
+    memset(pkt.data, 0xAB, sizeof(pkt.data));
+    pkt.checksum = 0;
+    pkt.checksum = checksum(&pkt, sizeof(pkt));
+
+    // 发送
+    send(sock, &pkt, sizeof(pkt), 0);
+
+    // 接收响应
+    char buf[128];
+    int n = recv(sock, buf, sizeof(buf), 0);
+    if (n > 0) {
+        struct icmp_packet *resp = (void *)(buf + 20);  // 跳过IP头
+        if (resp->type == 0) {  // Echo Reply
+            printf("Reply from %s: bytes=%d\n", argv[1], n);
+        }
+    }
+
+    close(sock);
+    exit(0);
 }
 ```
 
 ---
 
-## 7. 关键概念
+## 8. 总结
 
-### 7.1 DMA (直接内存访问)
+### 8.1 核心概念
 
-```text
-传统I/O:
-CPU ←→ 数据 ←→ 设备
-(占用CPU时间)
+| 概念 | 说明 |
+|------|------|
+| **DMA** | 直接内存访问，无需CPU参与数据传输 |
+| **描述符环** | 硬件和软件共享的环形缓冲区 |
+| **MMIO** | 内存映射I/O，通过内存访问设备寄存器 |
+| **mbuf** | 网络数据包缓冲区管理 |
+| **中断** | 设备通知CPU事件发生的机制 |
 
-DMA:
-CPU设置DMA控制器
-    ↓
-DMA控制器 ←→ 数据 ←→ 设备
-(不占用CPU)
-    ↓
-DMA完成中断通知CPU
-```
+### 8.2 关键要点
 
-### 7.2 描述符环
-
-```text
-发送描述符环 (循环缓冲区):
-
-    0     1     2     3     ...    N-1
-  ┌─────┬─────┬─────┬─────┬─────┬─────┐
-  │     │     │     │     │     │     │
-  └─────┴─────┴─────┴─────┴─────┴─────┘
-    ↑                       ↑
-   HEAD (网卡读取)        TAIL (驱动写入)
-
-当HEAD == TAIL时，环为空
-当(TAIL+1) % N == HEAD时，环为满
-```
+1. **描述符管理**: 正确维护头尾指针
+2. **内存对齐**: 描述符和缓冲区需要适当对齐
+3. **并发控制**: 使用锁保护共享资源
+4. **错误处理**: 检查状态位和错误标志
 
 ---
 
 **难度**: ⭐⭐⭐⭐
-**预计时间**: 8-10小时
+**预计时间**: 12-15小时
+**依赖**: Lab 4 (中断处理)
