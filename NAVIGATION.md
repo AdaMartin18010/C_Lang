@@ -240,7 +240,14 @@
 
 - [项目状态](PROJECT_STATUS.md) - 当前状态和统计
 - [版本历史](CHANGELOG.md) - 更新记录
-- [贡献指南](CONTRIBUTING.md) - 如何参与
+
+### 社区贡献
+
+- [贡献指南](CONTRIBUTING.md) - 如何参与项目
+- [内容风格指南](CONTENT_STYLE_GUIDE.md) - 文档编写规范
+- [审核流程](REVIEW_PROCESS.md) - PR 审核标准
+- [社区荣誉榜](COMMUNITY_HALL_OF_FAME.md) - 贡献者认可
+- [季度评审模板](QUARTERLY_REVIEW_TEMPLATE.md) - 内容评审流程
 
 ### 工具
 

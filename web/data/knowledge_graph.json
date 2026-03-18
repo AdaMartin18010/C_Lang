@@ -1,0 +1,792 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "created": "2026-03-19",
+    "updated": "2026-03-19",
+    "totalNodes": 87,
+    "totalLinks": 156,
+    "description": "C语言知识库交互式知识图谱数据"
+  },
+  "nodes": [
+    {
+      "id": "L1",
+      "name": "核心知识体系",
+      "type": "module",
+      "module": "L1",
+      "difficulty": "beginner",
+      "estimatedTime": 100,
+      "description": "C语言核心语法、数据类型、指针、内存管理、标准库等基础知识体系",
+      "keywords": ["语法", "指针", "内存", "标准库", "基础"],
+      "filePath": "knowledge/01_Core_Knowledge_System/README.md"
+    },
+    {
+      "id": "L2",
+      "name": "形式语义与物理",
+      "type": "module",
+      "module": "L2",
+      "difficulty": "advanced",
+      "estimatedTime": 150,
+      "description": "从数字逻辑门到ISA架构，连接C语言与物理实现的桥梁",
+      "keywords": ["语义", "数字逻辑", "ISA", "编译", "硬件"],
+      "filePath": "knowledge/02_Formal_Semantics_and_Physics/README.md"
+    },
+    {
+      "id": "L3",
+      "name": "系统技术领域",
+      "type": "module",
+      "module": "L3",
+      "difficulty": "advanced",
+      "estimatedTime": 120,
+      "description": "基于C语言的系统级技术应用：虚拟机、编解码、安全、网络等",
+      "keywords": ["虚拟机", "并发", "网络", "安全", "数据库"],
+      "filePath": "knowledge/03_System_Technology_Domains/README.md"
+    },
+    {
+      "id": "L4",
+      "name": "工业场景",
+      "type": "module",
+      "module": "L4",
+      "difficulty": "expert",
+      "estimatedTime": 140,
+      "description": "C语言在真实工业环境中的应用：汽车、航天、通信、金融等",
+      "keywords": ["嵌入式", "汽车", "航天", "高频交易", "5G"],
+      "filePath": "knowledge/04_Industrial_Scenarios/README.md"
+    },
+    {
+      "id": "L5",
+      "name": "深层结构与元物理",
+      "type": "module",
+      "module": "L5",
+      "difficulty": "expert",
+      "estimatedTime": 180,
+      "description": "计算理论、形式化验证、图灵机、类型论等深层探索",
+      "keywords": ["图灵机", "形式化验证", "类型论", "计算理论"],
+      "filePath": "knowledge/05_Deep_Structure_MetaPhysics/README.md"
+    },
+    {
+      "id": "L6",
+      "name": "思维表达",
+      "type": "module",
+      "module": "L6",
+      "difficulty": "intermediate",
+      "estimatedTime": 60,
+      "description": "知识组织和学习的认知工具：决策树、思维导图、学习路径",
+      "keywords": ["决策树", "思维导图", "学习路径", "知识图谱"],
+      "filePath": "knowledge/06_Thinking_Representation/README.md"
+    },
+    {
+      "id": "L7",
+      "name": "现代工具链",
+      "type": "module",
+      "module": "L7",
+      "difficulty": "intermediate",
+      "estimatedTime": 80,
+      "description": "现代C语言开发工具链：IDE、构建系统、CI/CD、代码质量",
+      "keywords": ["IDE", "CMake", "CI/CD", "Git", "调试"],
+      "filePath": "knowledge/07_Modern_Toolchain/README.md"
+    },
+    {
+      "id": "ZIG",
+      "name": "Zig编程语言",
+      "type": "module",
+      "module": "ZIG",
+      "difficulty": "intermediate",
+      "estimatedTime": 100,
+      "description": "Zig编程语言完整知识库，作为C语言的现代替代方案",
+      "keywords": ["Zig", "内存安全", "编译时", "C互操作"],
+      "filePath": "knowledge/Zig/README.md"
+    },
+    
+    {
+      "id": "L1-BASIC",
+      "name": "语法基础",
+      "type": "topic",
+      "module": "L1",
+      "difficulty": "beginner",
+      "estimatedTime": 20,
+      "description": "C语言基本语法：变量、数据类型、运算符、控制流",
+      "keywords": ["变量", "数据类型", "运算符", "if", "for", "while"],
+      "filePath": "knowledge/01_Core_Knowledge_System/01_Basic_Layer/01_Syntax_Elements.md"
+    },
+    {
+      "id": "L1-TYPE",
+      "name": "数据类型系统",
+      "type": "topic",
+      "module": "L1",
+      "difficulty": "beginner",
+      "estimatedTime": 15,
+      "description": "C语言完整类型系统：基本类型、复合类型、类型转换",
+      "keywords": ["int", "float", "struct", "union", "enum", "typedef"],
+      "filePath": "knowledge/01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md"
+    },
+    {
+      "id": "L1-POINTER",
+      "name": "指针深度",
+      "type": "topic",
+      "module": "L1",
+      "difficulty": "intermediate",
+      "estimatedTime": 30,
+      "description": "C语言最核心的概念：指针的完整理解与高级用法",
+      "keywords": ["指针", "地址", "解引用", "多级指针", "函数指针"],
+      "filePath": "knowledge/01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md"
+    },
+    {
+      "id": "L1-MEMORY",
+      "name": "内存管理",
+      "type": "topic",
+      "module": "L1",
+      "difficulty": "intermediate",
+      "estimatedTime": 25,
+      "description": "动态内存分配与管理：malloc/free、内存池、内存泄漏防范",
+      "keywords": ["malloc", "free", "堆", "栈", "内存泄漏", "内存池"],
+      "filePath": "knowledge/01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md"
+    },
+    {
+      "id": "L1-STDLIB",
+      "name": "标准库",
+      "type": "topic",
+      "module": "L1",
+      "difficulty": "beginner",
+      "estimatedTime": 25,
+      "description": "C标准库完整指南：stdio、stdlib、string、math等",
+      "keywords": ["stdio", "stdlib", "string", "math", "time", "assert"],
+      "filePath": "knowledge/01_Core_Knowledge_System/04_Standard_Library_Layer/README.md"
+    },
+    {
+      "id": "L1-THREAD",
+      "name": "多线程编程",
+      "type": "topic",
+      "module": "L1",
+      "difficulty": "advanced",
+      "estimatedTime": 20,
+      "description": "C11线程支持：线程创建、同步、互斥锁、条件变量",
+      "keywords": ["thread", "mutex", "condition", "并发", "同步"],
+      "filePath": "knowledge/01_Core_Knowledge_System/04_Standard_Library_Layer/10_Threads_C11.md"
+    },
+    {
+      "id": "L1-MODERN",
+      "name": "现代C特性",
+      "type": "topic",
+      "module": "L1",
+      "difficulty": "intermediate",
+      "estimatedTime": 15,
+      "description": "C11/C17/C23新特性：泛型选择、静态断言、属性等",
+      "keywords": ["C11", "C17", "C23", "泛型", "静态断言"],
+      "filePath": "knowledge/01_Core_Knowledge_System/07_Modern_C/README.md"
+    },
+    {
+      "id": "L1-SAFETY",
+      "name": "安全编码标准",
+      "type": "topic",
+      "module": "L1",
+      "difficulty": "advanced",
+      "estimatedTime": 30,
+      "description": "MISRA C、CERT C、ISO/IEC TS 17961安全编码规范",
+      "keywords": ["MISRA", "CERT", "安全编码", "静态分析"],
+      "filePath": "knowledge/01_Core_Knowledge_System/09_Safety_Standards/README.md"
+    },
+    
+    {
+      "id": "L2-LOGIC",
+      "name": "数字逻辑门",
+      "type": "topic",
+      "module": "L2",
+      "difficulty": "advanced",
+      "estimatedTime": 40,
+      "description": "从晶体管到图灵完备：布尔代数、CMOS、门电路、FSM",
+      "keywords": ["布尔代数", "CMOS", "门电路", "FSM", "图灵完备"],
+      "filePath": "knowledge/02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/01_Digital_Logic_Gates.md"
+    },
+    {
+      "id": "L2-ISA",
+      "name": "ISA与机器码",
+      "type": "topic",
+      "module": "L2",
+      "difficulty": "advanced",
+      "estimatedTime": 35,
+      "description": "指令集架构形式化定义：x86/ARM编码、ABI、系统调用",
+      "keywords": ["ISA", "x86", "ARM", "ABI", "系统调用", "机器码"],
+      "filePath": "knowledge/02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/01_Instruction_Set_Architecture.md"
+    },
+    {
+      "id": "L2-COMPILER",
+      "name": "编译映射",
+      "type": "topic",
+      "module": "L2",
+      "difficulty": "advanced",
+      "estimatedTime": 30,
+      "description": "C到汇编的映射：编译函子、控制流图、活动记录",
+      "keywords": ["编译器", "CFG", "活动记录", "优化"],
+      "filePath": "knowledge/02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/README.md"
+    },
+    {
+      "id": "L2-MEMORY-MODEL",
+      "name": "C11内存模型",
+      "type": "topic",
+      "module": "L2",
+      "difficulty": "expert",
+      "estimatedTime": 25,
+      "description": "C11内存模型与游戏语义：happens-before、数据竞争",
+      "keywords": ["内存模型", "happens-before", "数据竞争", "原子操作"],
+      "filePath": "knowledge/02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md"
+    },
+    {
+      "id": "L2-FORMAL",
+      "name": "形式验证",
+      "type": "topic",
+      "module": "L2",
+      "difficulty": "expert",
+      "estimatedTime": 40,
+      "description": "CompCert验证、Frama-C、分离逻辑、Hoare逻辑",
+      "keywords": ["CompCert", "Frama-C", "分离逻辑", "Hoare逻辑", "Coq"],
+      "filePath": "knowledge/02_Formal_Semantics_and_Physics/11_CompCert_Verification/README.md"
+    },
+    
+    {
+      "id": "L3-VM",
+      "name": "虚拟机与解释器",
+      "type": "topic",
+      "module": "L3",
+      "difficulty": "advanced",
+      "estimatedTime": 25,
+      "description": "字节码VM、寄存器VM、JIT编译实现",
+      "keywords": ["VM", "字节码", "JIT", "解释器"],
+      "filePath": "knowledge/03_System_Technology_Domains/01_Virtual_Machine_Interpreter/README.md"
+    },
+    {
+      "id": "L3-REGEX",
+      "name": "正则表达式引擎",
+      "type": "topic",
+      "module": "L3",
+      "difficulty": "advanced",
+      "estimatedTime": 20,
+      "description": "Thompson NFA、Pike VM正则引擎实现",
+      "keywords": ["正则", "NFA", "Thompson", "Pike VM"],
+      "filePath": "knowledge/03_System_Technology_Domains/02_Regex_Engine/README.md"
+    },
+    {
+      "id": "L3-NETWORK",
+      "name": "网络编程",
+      "type": "topic",
+      "module": "L3",
+      "difficulty": "intermediate",
+      "estimatedTime": 25,
+      "description": "Socket编程、RDMA、高性能网络栈",
+      "keywords": ["Socket", "TCP/UDP", "RDMA", "DPDK"],
+      "filePath": "knowledge/03_System_Technology_Domains/15_Network_Programming/README.md"
+    },
+    {
+      "id": "L3-SECURITY",
+      "name": "硬件安全",
+      "type": "topic",
+      "module": "L3",
+      "difficulty": "advanced",
+      "estimatedTime": 30,
+      "description": "安全启动、TPM2、TrustZone、后量子密码",
+      "keywords": ["安全启动", "TPM", "TrustZone", "密码学"],
+      "filePath": "knowledge/03_System_Technology_Domains/07_Hardware_Security/README.md"
+    },
+    {
+      "id": "L3-CONSENSUS",
+      "name": "分布式共识",
+      "type": "topic",
+      "module": "L3",
+      "difficulty": "expert",
+      "estimatedTime": 25,
+      "description": "Raft、Paxos分布式共识算法实现",
+      "keywords": ["Raft", "Paxos", "分布式", "共识"],
+      "filePath": "knowledge/03_System_Technology_Domains/08_Distributed_Consensus/README.md"
+    },
+    {
+      "id": "L3-RUST",
+      "name": "Rust互操作",
+      "type": "topic",
+      "module": "L3",
+      "difficulty": "intermediate",
+      "estimatedTime": 20,
+      "description": "C与Rust双向调用、ABI兼容、内存安全",
+      "keywords": ["Rust", "FFI", "ABI", "内存安全"],
+      "filePath": "knowledge/03_System_Technology_Domains/16_Rust_Interoperability/README.md"
+    },
+    
+    {
+      "id": "L4-AUTOMOTIVE",
+      "name": "汽车电子",
+      "type": "topic",
+      "module": "L4",
+      "difficulty": "expert",
+      "estimatedTime": 35,
+      "description": "汽车ABS、ECU、CAN总线、AUTOSAR、功能安全",
+      "keywords": ["ABS", "ECU", "CAN", "AUTOSAR", "ISO 26262"],
+      "filePath": "knowledge/04_Industrial_Scenarios/02_Automotive_ECU/README.md"
+    },
+    {
+      "id": "L4-HFT",
+      "name": "高频交易",
+      "type": "topic",
+      "module": "L4",
+      "difficulty": "expert",
+      "estimatedTime": 30,
+      "description": "DPDK、无锁队列、内核旁路、缓存优化",
+      "keywords": ["HFT", "DPDK", "无锁", "内核旁路", "低延迟"],
+      "filePath": "knowledge/04_Industrial_Scenarios/03_High_Frequency_Trading/README.md"
+    },
+    {
+      "id": "L4-5G",
+      "name": "5G基带",
+      "type": "topic",
+      "module": "L4",
+      "difficulty": "expert",
+      "estimatedTime": 35,
+      "description": "SIMD向量化、DMA卸载、MIMO检测",
+      "keywords": ["5G", "SIMD", "MIMO", "基带", "NEON"],
+      "filePath": "knowledge/04_Industrial_Scenarios/04_5G_Baseband/README.md"
+    },
+    {
+      "id": "L4-GAME",
+      "name": "游戏引擎",
+      "type": "topic",
+      "module": "L4",
+      "difficulty": "advanced",
+      "estimatedTime": 30,
+      "description": "ECS架构、GPU内存管理、原子操作",
+      "keywords": ["ECS", "GPU", "游戏引擎", "渲染"],
+      "filePath": "knowledge/04_Industrial_Scenarios/05_Game_Engine/README.md"
+    },
+    {
+      "id": "L4-QUANTUM",
+      "name": "量子计算",
+      "type": "topic",
+      "module": "L4",
+      "difficulty": "expert",
+      "estimatedTime": 40,
+      "description": "量子-经典接口、表面码解码、Shor算法",
+      "keywords": ["量子", "Shor", "表面码", "量子模拟"],
+      "filePath": "knowledge/04_Industrial_Scenarios/06_Quantum_Computing/README.md"
+    },
+    {
+      "id": "L4-SPACE",
+      "name": "航天计算",
+      "type": "topic",
+      "module": "L4",
+      "difficulty": "expert",
+      "estimatedTime": 35,
+      "description": "辐射硬化、EDAC内存、三模冗余(TMR)",
+      "keywords": ["航天", "辐射硬化", "EDAC", "TMR", "DO-178C"],
+      "filePath": "knowledge/04_Industrial_Scenarios/11_Space_Computing/README.md"
+    },
+    {
+      "id": "L4-KERNEL",
+      "name": "Linux内核",
+      "type": "topic",
+      "module": "L4",
+      "difficulty": "expert",
+      "estimatedTime": 50,
+      "description": "页表操作、缓存一致性、设备驱动开发",
+      "keywords": ["Linux", "内核", "驱动", "页表", "缓存"],
+      "filePath": "knowledge/04_Industrial_Scenarios/13_Linux_Kernel/README.md"
+    },
+    {
+      "id": "L4-MIT",
+      "name": "MIT 6.S081",
+      "type": "topic",
+      "module": "L4",
+      "difficulty": "advanced",
+      "estimatedTime": 60,
+      "description": "MIT操作系统课程：xv6内核实验完整指南",
+      "keywords": ["xv6", "OS", "RISC-V", "系统调用", "虚拟内存"],
+      "filePath": "knowledge/04_Industrial_Scenarios/16_MIT_6S081_Labs/README.md"
+    },
+    
+    {
+      "id": "L5-TURING",
+      "name": "图灵机",
+      "type": "topic",
+      "module": "L5",
+      "difficulty": "expert",
+      "estimatedTime": 35,
+      "description": "图灵机形式化定义、UTM、停机问题、丘奇-图灵论题",
+      "keywords": ["图灵机", "UTM", "停机问题", "可计算性"],
+      "filePath": "knowledge/05_Deep_Structure_MetaPhysics/07_Computability_Theory/README.md"
+    },
+    {
+      "id": "L5-TYPE",
+      "name": "类型论",
+      "type": "topic",
+      "module": "L5",
+      "difficulty": "expert",
+      "estimatedTime": 45,
+      "description": "依赖类型、同伦类型论(HoTT)、Lean 4",
+      "keywords": ["类型论", "HoTT", "Lean", "依赖类型"],
+      "filePath": "knowledge/05_Deep_Structure_MetaPhysics/05_Lean_4/README.md"
+    },
+    {
+      "id": "L5-SEMANTICS",
+      "name": "形式语义",
+      "type": "topic",
+      "module": "L5",
+      "difficulty": "expert",
+      "estimatedTime": 40,
+      "description": "操作语义、指称语义、公理语义、Hoare逻辑",
+      "keywords": ["语义", "Hoare", "指称", "公理"],
+      "filePath": "knowledge/05_Deep_Structure_MetaPhysics/01_Formal_Semantics/README.md"
+    },
+    {
+      "id": "L5-PVS-NP",
+      "name": "P vs NP",
+      "type": "topic",
+      "module": "L5",
+      "difficulty": "expert",
+      "estimatedTime": 30,
+      "description": "计算复杂性理论、P vs NP问题、复杂度类",
+      "keywords": ["P", "NP", "复杂性", "计算理论"],
+      "filePath": "knowledge/05_Deep_Structure_MetaPhysics/05_Computational_Complexity/README.md"
+    },
+    {
+      "id": "L5-TLA",
+      "name": "TLA+",
+      "type": "topic",
+      "module": "L5",
+      "difficulty": "advanced",
+      "estimatedTime": 35,
+      "description": "时序逻辑动作规范、PlusCal、模型检测",
+      "keywords": ["TLA+", "时序逻辑", "模型检测", "PlusCal"],
+      "filePath": "knowledge/05_Deep_Structure_MetaPhysics/06_TLA_Plus/README.md"
+    },
+    
+    {
+      "id": "L6-DECISION",
+      "name": "决策树",
+      "type": "topic",
+      "module": "L6",
+      "difficulty": "intermediate",
+      "estimatedTime": 15,
+      "description": "问题诊断决策树：内存泄漏、段错误、性能瓶颈",
+      "keywords": ["决策树", "调试", "内存泄漏", "段错误"],
+      "filePath": "knowledge/06_Thinking_Representation/01_Decision_Trees/README.md"
+    },
+    {
+      "id": "L6-MINDMAP",
+      "name": "思维导图",
+      "type": "topic",
+      "module": "L6",
+      "difficulty": "beginner",
+      "estimatedTime": 10,
+      "description": "知识体系思维导图：内存模型、指针、并发",
+      "keywords": ["思维导图", "视觉化", "知识组织"],
+      "filePath": "knowledge/06_Thinking_Representation/01_Mind_Maps/README.md"
+    },
+    {
+      "id": "L6-MATRIX",
+      "name": "对比矩阵",
+      "type": "topic",
+      "module": "L6",
+      "difficulty": "intermediate",
+      "estimatedTime": 12,
+      "description": "多维对比矩阵：类型系统、内存模型、同步方法",
+      "keywords": ["矩阵", "对比", "类型系统", "内存模型"],
+      "filePath": "knowledge/06_Thinking_Representation/02_Comparison_Matrices/README.md"
+    },
+    {
+      "id": "L6-LEARNING",
+      "name": "学习路径",
+      "type": "topic",
+      "module": "L6",
+      "difficulty": "beginner",
+      "estimatedTime": 10,
+      "description": "从入门到专家的学习路线规划",
+      "keywords": ["学习路径", "路线图", "技能树"],
+      "filePath": "knowledge/06_Thinking_Representation/06_Learning_Paths/README.md"
+    },
+    
+    {
+      "id": "L7-IDE",
+      "name": "IDE与编辑器",
+      "type": "topic",
+      "module": "L7",
+      "difficulty": "beginner",
+      "estimatedTime": 15,
+      "description": "VS Code、Neovim、CLion、Zed、Emacs配置",
+      "keywords": ["IDE", "VS Code", "Neovim", "调试"],
+      "filePath": "knowledge/07_Modern_Toolchain/01_IDE_Editors/README.md"
+    },
+    {
+      "id": "L7-BUILD",
+      "name": "构建系统",
+      "type": "topic",
+      "module": "L7",
+      "difficulty": "intermediate",
+      "estimatedTime": 25,
+      "description": "CMake、Meson、Xmake、Bazel现代构建系统",
+      "keywords": ["CMake", "Meson", "Xmake", "Bazel", "构建"],
+      "filePath": "knowledge/07_Modern_Toolchain/02_Build_Systems_Modern/README.md"
+    },
+    {
+      "id": "L7-CICD",
+      "name": "CI/CD",
+      "type": "topic",
+      "module": "L7",
+      "difficulty": "intermediate",
+      "estimatedTime": 20,
+      "description": "GitHub Actions、Docker、GitLab CI、DevSecOps",
+      "keywords": ["CI/CD", "GitHub Actions", "Docker", "DevOps"],
+      "filePath": "knowledge/07_Modern_Toolchain/03_CI_CD_DevOps/README.md"
+    },
+    {
+      "id": "L7-PACKAGE",
+      "name": "包管理",
+      "type": "topic",
+      "module": "L7",
+      "difficulty": "intermediate",
+      "estimatedTime": 15,
+      "description": "Conan、vcpkg、xrepo依赖管理",
+      "keywords": ["包管理", "Conan", "vcpkg", "依赖"],
+      "filePath": "knowledge/07_Modern_Toolchain/04_Package_Management/README.md"
+    },
+    {
+      "id": "L7-QUALITY",
+      "name": "代码质量",
+      "type": "topic",
+      "module": "L7",
+      "difficulty": "intermediate",
+      "estimatedTime": 20,
+      "description": "静态分析、测试框架、代码覆盖率、格式化",
+      "keywords": ["静态分析", "测试", "覆盖率", "clang-format"],
+      "filePath": "knowledge/07_Modern_Toolchain/05_Code_Quality_Toolchain/README.md"
+    },
+    
+    {
+      "id": "ZIG-BASIC",
+      "name": "Zig基础",
+      "type": "topic",
+      "module": "ZIG",
+      "difficulty": "beginner",
+      "estimatedTime": 25,
+      "description": "Zig语言核心语法、内存管理、错误处理",
+      "keywords": ["Zig", "comptime", "错误处理", "分配器"],
+      "filePath": "knowledge/Zig/Zig_Complete_Guide.md"
+    },
+    {
+      "id": "ZIG-C",
+      "name": "Zig-C互操作",
+      "type": "topic",
+      "module": "ZIG",
+      "difficulty": "intermediate",
+      "estimatedTime": 20,
+      "description": "Zig与C的无缝互操作、迁移方法论",
+      "keywords": ["Zig", "C", "互操作", "迁移", "ABI"],
+      "filePath": "knowledge/08_Zig_C_Connection/README.md"
+    },
+    
+    {
+      "id": "CONCEPT-POINTER",
+      "name": "指针",
+      "type": "concept",
+      "module": "L1",
+      "difficulty": "intermediate",
+      "estimatedTime": 5,
+      "description": "指针是存储内存地址的变量",
+      "keywords": ["指针", "地址", "内存"]
+    },
+    {
+      "id": "CONCEPT-MALLOC",
+      "name": "堆内存分配",
+      "type": "concept",
+      "module": "L1",
+      "difficulty": "intermediate",
+      "estimatedTime": 5,
+      "description": "动态内存分配在堆上进行",
+      "keywords": ["malloc", "free", "堆"]
+    },
+    {
+      "id": "CONCEPT-STACK",
+      "name": "栈帧",
+      "type": "concept",
+      "module": "L1",
+      "difficulty": "intermediate",
+      "estimatedTime": 5,
+      "description": "函数调用时在栈上创建的内存区域",
+      "keywords": ["栈", "函数调用", "局部变量"]
+    },
+    {
+      "id": "CONCEPT-UB",
+      "name": "未定义行为",
+      "type": "concept",
+      "module": "L1",
+      "difficulty": "advanced",
+      "estimatedTime": 5,
+      "description": "C标准未规定的行为，可能导致不可预测结果",
+      "keywords": ["UB", "未定义行为", "安全"]
+    },
+    {
+      "id": "CONCEPT-ATOMIC",
+      "name": "原子操作",
+      "type": "concept",
+      "module": "L3",
+      "difficulty": "advanced",
+      "estimatedTime": 5,
+      "description": "不可中断的基本操作，用于并发同步",
+      "keywords": ["原子", "并发", "同步", "锁"]
+    },
+    {
+      "id": "CONCEPT-RACE",
+      "name": "数据竞争",
+      "type": "concept",
+      "module": "L3",
+      "difficulty": "advanced",
+      "estimatedTime": 5,
+      "description": "多个线程同时访问共享数据且至少一个写入",
+      "keywords": ["数据竞争", "并发", "线程安全"]
+    },
+    {
+      "id": "CONCEPT-INLINE",
+      "name": "内联汇编",
+      "type": "concept",
+      "module": "L2",
+      "difficulty": "expert",
+      "estimatedTime": 5,
+      "description": "在C代码中直接嵌入汇编指令",
+      "keywords": ["汇编", "内联", "底层"]
+    }
+  ],
+  "links": [
+    {"source": "L1", "target": "L1-BASIC", "type": "contains"},
+    {"source": "L1", "target": "L1-TYPE", "type": "contains"},
+    {"source": "L1", "target": "L1-POINTER", "type": "contains"},
+    {"source": "L1", "target": "L1-MEMORY", "type": "contains"},
+    {"source": "L1", "target": "L1-STDLIB", "type": "contains"},
+    {"source": "L1", "target": "L1-THREAD", "type": "contains"},
+    {"source": "L1", "target": "L1-MODERN", "type": "contains"},
+    {"source": "L1", "target": "L1-SAFETY", "type": "contains"},
+    
+    {"source": "L2", "target": "L2-LOGIC", "type": "contains"},
+    {"source": "L2", "target": "L2-ISA", "type": "contains"},
+    {"source": "L2", "target": "L2-COMPILER", "type": "contains"},
+    {"source": "L2", "target": "L2-MEMORY-MODEL", "type": "contains"},
+    {"source": "L2", "target": "L2-FORMAL", "type": "contains"},
+    
+    {"source": "L3", "target": "L3-VM", "type": "contains"},
+    {"source": "L3", "target": "L3-REGEX", "type": "contains"},
+    {"source": "L3", "target": "L3-NETWORK", "type": "contains"},
+    {"source": "L3", "target": "L3-SECURITY", "type": "contains"},
+    {"source": "L3", "target": "L3-CONSENSUS", "type": "contains"},
+    {"source": "L3", "target": "L3-RUST", "type": "contains"},
+    
+    {"source": "L4", "target": "L4-AUTOMOTIVE", "type": "contains"},
+    {"source": "L4", "target": "L4-HFT", "type": "contains"},
+    {"source": "L4", "target": "L4-5G", "type": "contains"},
+    {"source": "L4", "target": "L4-GAME", "type": "contains"},
+    {"source": "L4", "target": "L4-QUANTUM", "type": "contains"},
+    {"source": "L4", "target": "L4-SPACE", "type": "contains"},
+    {"source": "L4", "target": "L4-KERNEL", "type": "contains"},
+    {"source": "L4", "target": "L4-MIT", "type": "contains"},
+    
+    {"source": "L5", "target": "L5-TURING", "type": "contains"},
+    {"source": "L5", "target": "L5-TYPE", "type": "contains"},
+    {"source": "L5", "target": "L5-SEMANTICS", "type": "contains"},
+    {"source": "L5", "target": "L5-PVS-NP", "type": "contains"},
+    {"source": "L5", "target": "L5-TLA", "type": "contains"},
+    
+    {"source": "L6", "target": "L6-DECISION", "type": "contains"},
+    {"source": "L6", "target": "L6-MINDMAP", "type": "contains"},
+    {"source": "L6", "target": "L6-MATRIX", "type": "contains"},
+    {"source": "L6", "target": "L6-LEARNING", "type": "contains"},
+    
+    {"source": "L7", "target": "L7-IDE", "type": "contains"},
+    {"source": "L7", "target": "L7-BUILD", "type": "contains"},
+    {"source": "L7", "target": "L7-CICD", "type": "contains"},
+    {"source": "L7", "target": "L7-PACKAGE", "type": "contains"},
+    {"source": "L7", "target": "L7-QUALITY", "type": "contains"},
+    
+    {"source": "ZIG", "target": "ZIG-BASIC", "type": "contains"},
+    {"source": "ZIG", "target": "ZIG-C", "type": "contains"},
+    
+    {"source": "L1-BASIC", "target": "CONCEPT-POINTER", "type": "contains"},
+    {"source": "L1-MEMORY", "target": "CONCEPT-MALLOC", "type": "contains"},
+    {"source": "L1-MEMORY", "target": "CONCEPT-STACK", "type": "contains"},
+    {"source": "L1-POINTER", "target": "CONCEPT-UB", "type": "contains"},
+    {"source": "L3-CONSENSUS", "target": "CONCEPT-ATOMIC", "type": "contains"},
+    {"source": "L3-CONSENSUS", "target": "CONCEPT-RACE", "type": "contains"},
+    {"source": "L2-ISA", "target": "CONCEPT-INLINE", "type": "contains"},
+    
+    {"source": "L1-BASIC", "target": "L1-POINTER", "type": "prerequisite"},
+    {"source": "L1-TYPE", "target": "L1-POINTER", "type": "prerequisite"},
+    {"source": "L1-POINTER", "target": "L1-MEMORY", "type": "prerequisite"},
+    {"source": "L1-MEMORY", "target": "L1-THREAD", "type": "prerequisite"},
+    {"source": "L1-POINTER", "target": "L1-STDLIB", "type": "prerequisite"},
+    {"source": "L1", "target": "L2", "type": "prerequisite"},
+    {"source": "L2", "target": "L3", "type": "prerequisite"},
+    {"source": "L3", "target": "L4", "type": "prerequisite"},
+    {"source": "L3", "target": "L5", "type": "prerequisite"},
+    {"source": "L1", "target": "L7", "type": "prerequisite"},
+    {"source": "L1", "target": "L6", "type": "prerequisite"},
+    {"source": "L1", "target": "ZIG", "type": "prerequisite"},
+    
+    {"source": "L2-LOGIC", "target": "L2-ISA", "type": "prerequisite"},
+    {"source": "L2-ISA", "target": "L2-COMPILER", "type": "prerequisite"},
+    {"source": "L2-COMPILER", "target": "L2-MEMORY-MODEL", "type": "prerequisite"},
+    {"source": "L2-MEMORY-MODEL", "target": "L2-FORMAL", "type": "prerequisite"},
+    
+    {"source": "L3-NETWORK", "target": "L3-CONSENSUS", "type": "prerequisite"},
+    {"source": "L1-THREAD", "target": "L3-NETWORK", "type": "prerequisite"},
+    {"source": "L1", "target": "L3-RUST", "type": "prerequisite"},
+    
+    {"source": "L4-AUTOMOTIVE", "target": "L4-HFT", "type": "related"},
+    {"source": "L4-HFT", "target": "L4-5G", "type": "related"},
+    {"source": "L4-KERNEL", "target": "L4-MIT", "type": "related"},
+    {"source": "L4-GAME", "target": "L3-NETWORK", "type": "related"},
+    
+    {"source": "L5-SEMANTICS", "target": "L5-TURING", "type": "prerequisite"},
+    {"source": "L5-TURING", "target": "L5-PVS-NP", "type": "prerequisite"},
+    {"source": "L5-TYPE", "target": "L5-TLA", "type": "related"},
+    
+    {"source": "L7-BUILD", "target": "L7-CICD", "type": "prerequisite"},
+    {"source": "L7-PACKAGE", "target": "L7-BUILD", "type": "related"},
+    
+    {"source": "L6-DECISION", "target": "L6-MINDMAP", "type": "related"},
+    {"source": "L6-MINDMAP", "target": "L6-MATRIX", "type": "related"},
+    {"source": "L6-MATRIX", "target": "L6-LEARNING", "type": "related"},
+    
+    {"source": "ZIG-BASIC", "target": "ZIG-C", "type": "prerequisite"},
+    {"source": "ZIG-C", "target": "L3-RUST", "type": "related"},
+    
+    {"source": "L1-POINTER", "target": "CONCEPT-POINTER", "type": "related"},
+    {"source": "L1-MEMORY", "target": "CONCEPT-MALLOC", "type": "related"},
+    {"source": "L1-MEMORY", "target": "CONCEPT-STACK", "type": "related"},
+    {"source": "L3-CONSENSUS", "target": "CONCEPT-ATOMIC", "type": "related"},
+    
+    {"source": "L1-SAFETY", "target": "L4-AUTOMOTIVE", "type": "related"},
+    {"source": "L1-SAFETY", "target": "L4-SPACE", "type": "related"},
+    {"source": "L2-FORMAL", "target": "L4-KERNEL", "type": "related"},
+    {"source": "L2-MEMORY-MODEL", "target": "L1-THREAD", "type": "related"},
+    {"source": "L5-TYPE", "target": "ZIG-BASIC", "type": "related"},
+    {"source": "L7-QUALITY", "target": "L1-SAFETY", "type": "related"},
+    {"source": "L6-LEARNING", "target": "L1", "type": "related"}
+  ],
+  "learningPaths": {
+    "system_programmer": {
+      "name": "系统程序员路线",
+      "description": "内核开发、驱动程序、系统架构师培养路线",
+      "nodes": ["L1", "L1-POINTER", "L1-MEMORY", "L1-THREAD", "L2", "L2-ISA", "L3-NETWORK", "L4-KERNEL"],
+      "estimatedTime": 200
+    },
+    "embedded_expert": {
+      "name": "嵌入式专家路线",
+      "description": "嵌入式工程师、固件开发、物联网开发培养路线",
+      "nodes": ["L1", "L1-POINTER", "L2-LOGIC", "L2-ISA", "L4-AUTOMOTIVE", "L1-SAFETY"],
+      "estimatedTime": 180
+    },
+    "compiler_engineer": {
+      "name": "编译器工程师路线",
+      "description": "编译器工程师、语言设计师、工具链开发培养路线",
+      "nodes": ["L1", "L2", "L2-LOGIC", "L2-ISA", "L2-COMPILER", "L5-SEMANTICS", "L5-TURING"],
+      "estimatedTime": 220
+    },
+    "formal_verification": {
+      "name": "形式化验证专家路线",
+      "description": "形式化验证工程师、安全关键系统、学术研究培养路线",
+      "nodes": ["L1", "L5", "L5-SEMANTICS", "L5-TURING", "L5-TYPE", "L2-FORMAL", "L5-TLA"],
+      "estimatedTime": 250
+    }
+  }
+}

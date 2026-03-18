@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C语言知识库 - 交互式知识图谱</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- D3.js CDN -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="header-left">
+            <button id="sidebar-toggle" class="btn-icon">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="logo">
+                <i class="fas fa-project-diagram"></i>
+                <span>C语言知识图谱</span>
+            </h1>
+        </div>
+        <div class="header-center">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-input" placeholder="搜索知识节点..." autocomplete="off">
+                <div id="search-suggestions" class="search-suggestions"></div>
+            </div>
+        </div>
+        <div class="header-right">
+            <button id="theme-toggle" class="btn-icon" title="切换主题">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="help-btn" class="btn-icon" title="帮助">
+                <i class="fas fa-question-circle"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 侧边栏导航 -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>知识模块</h3>
+        </div>
+        <nav class="sidebar-nav">
+            <ul id="module-list">
+                <!-- 动态生成模块列表 -->
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="node-count">0</span>
+                    <span class="stat-label">节点</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="edge-count">0</span>
+                    <span class="stat-label">关系</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <!-- 过滤器面板 -->
+        <div id="filter-panel" class="filter-panel">
+            <div class="filter-header">
+                <h4><i class="fas fa-filter"></i> 过滤器</h4>
+                <button id="filter-toggle" class="btn-icon small">
+                    <i class="fas fa-chevron-up"></i>
+                </button>
+            </div>
+            <div class="filter-body">
+                <div class="filter-group">
+                    <label>难度级别</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="beginner" checked data-filter="difficulty">
+                            <span class="checkmark beginner"></span>
+                            <span>初级</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="intermediate" checked data-filter="difficulty">
+                            <span class="checkmark intermediate"></span>
+                            <span>中级</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="advanced" checked data-filter="difficulty">
+                            <span class="checkmark advanced"></span>
+                            <span>高级</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="expert" checked data-filter="difficulty">
+                            <span class="checkmark expert"></span>
+                            <span>专家</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <label>节点类型</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="module" checked data-filter="type">
+                            <span class="checkmark module"></span>
+                            <span>模块</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="topic" checked data-filter="type">
+                            <span class="checkmark topic"></span>
+                            <span>主题</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="concept" checked data-filter="type">
+                            <span class="checkmark concept"></span>
+                            <span>概念</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button id="reset-filters" class="btn-secondary small">
+                        <i class="fas fa-undo"></i> 重置
+                    </button>
+                    <button id="apply-filters" class="btn-primary small">
+                        <i class="fas fa-check"></i> 应用
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 图谱可视化区域 -->
+        <div id="graph-container" class="graph-container">
+            <div id="graph-svg" class="graph-svg"></div>
+            
+            <!-- 图谱控制按钮 -->
+            <div class="graph-controls">
+                <button id="zoom-in" class="btn-control" title="放大">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button id="zoom-out" class="btn-control" title="缩小">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button id="zoom-fit" class="btn-control" title="适应屏幕">
+                    <i class="fas fa-expand"></i>
+                </button>
+                <button id="reset-view" class="btn-control" title="重置视图">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+
+            <!-- 图例 -->
+            <div class="graph-legend">
+                <h4>图例</h4>
+                <div class="legend-item">
+                    <span class="legend-color module"></span>
+                    <span>模块 (L1-L7)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color topic"></span>
+                    <span>主题</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color concept"></span>
+                    <span>概念</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-line prerequisite"></span>
+                    <span>前置知识</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-line related"></span>
+                    <span>相关概念</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 学习路径规划界面 -->
+        <div id="learning-path-panel" class="learning-path-panel hidden">
+            <div class="panel-header">
+                <h3><i class="fas fa-route"></i> 学习路径规划</h3>
+                <button id="close-learning-path" class="btn-icon">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="panel-body">
+                <div class="path-selector">
+                    <label>选择目标：</label>
+                    <select id="target-node">
+                        <option value="">-- 选择学习目标 --</option>
+                    </select>
+                </div>
+                <div class="path-options">
+                    <label class="radio-label">
+                        <input type="radio" name="path-type" value="shortest" checked>
+                        <span>最短路径</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="path-type" value="beginner">
+                        <span>初学路线</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="path-type" value="comprehensive">
+                        <span>全面路线</span>
+                    </label>
+                </div>
+                <button id="generate-path" class="btn-primary">
+                    <i class="fas fa-magic"></i> 生成学习路径
+                </button>
+                <div id="path-result" class="path-result"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 节点详情弹窗 -->
+    <div id="node-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">节点标题</h2>
+                <button id="modal-close" class="btn-icon">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="node-info">
+                    <div class="info-row">
+                        <span class="info-label">类型:</span>
+                        <span id="modal-type" class="info-value"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">难度:</span>
+                        <span id="modal-difficulty" class="info-value"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">预估时间:</span>
+                        <span id="modal-time" class="info-value"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">所属模块:</span>
+                        <span id="modal-module" class="info-value"></span>
+                    </div>
+                </div>
+                <div class="node-description">
+                    <h4>描述</h4>
+                    <p id="modal-description"></p>
+                </div>
+                <div class="node-prerequisites">
+                    <h4>前置知识</h4>
+                    <ul id="modal-prerequisites"></ul>
+                </div>
+                <div class="node-resources">
+                    <h4>相关资源</h4>
+                    <ul id="modal-resources"></ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="view-details" class="btn-primary">
+                    <i class="fas fa-external-link-alt"></i> 查看文档
+                </button>
+                <button id="plan-learning" class="btn-secondary">
+                    <i class="fas fa-route"></i> 规划学习路径
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 帮助弹窗 -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-question-circle"></i> 使用帮助</h2>
+                <button id="help-close" class="btn-icon">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="help-section">
+                    <h4>图谱交互</h4>
+                    <ul>
+                        <li><strong>拖拽:</strong> 拖动节点调整位置</li>
+                        <li><strong>滚轮:</strong> 缩放图谱</li>
+                        <li><strong>点击:</strong> 查看节点详情</li>
+                        <li><strong>双击:</strong> 展开/折叠子节点</li>
+                    </ul>
+                </div>
+                <div class="help-section">
+                    <h4>搜索功能</h4>
+                    <ul>
+                        <li>输入关键词搜索知识节点</li>
+                        <li>支持模糊匹配</li>
+                        <li>自动补全建议</li>
+                    </ul>
+                </div>
+                <div class="help-section">
+                    <h4>学习路径</h4>
+                    <ul>
+                        <li>选择学习目标节点</li>
+                        <li>系统自动计算最优学习路径</li>
+                        <li>支持多种路径策略</li>
+                    </ul>
+                </div>
+                <div class="help-section">
+                    <h4>快捷键</h4>
+                    <ul>
+                        <li><kbd>Ctrl</kbd> + <kbd>F</kbd> - 搜索</li>
+                        <li><kbd>Ctrl</kbd> + <kbd>0</kbd> - 重置视图</li>
+                        <li><kbd>ESC</kbd> - 关闭弹窗</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 遮罩层 -->
+    <div id="modal-overlay" class="modal-overlay"></div>
+
+    <!-- JavaScript 文件 -->
+    <script src="js/data.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/search.js"></script>
+    <script>
+        // 初始化应用
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 加载数据
+            await DataLoader.load();
+            
+            // 初始化图谱
+            GraphVisualization.init();
+            
+            // 初始化搜索
+            SearchManager.init();
+            
+            // 更新统计
+            updateStats();
+            
+            // 生成模块列表
+            generateModuleList();
+            
+            console.log('C语言知识图谱已加载完成');
+        });
+
+        // 更新统计信息
+        function updateStats() {
+            const data = DataLoader.getData();
+            document.getElementById('node-count').textContent = data.nodes.length;
+            document.getElementById('edge-count').textContent = data.links.length;
+        }
+
+        // 生成模块列表
+        function generateModuleList() {
+            const data = DataLoader.getData();
+            const modules = data.nodes.filter(n => n.type === 'module');
+            const list = document.getElementById('module-list');
+            
+            modules.forEach(module => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <a href="#" data-node-id="${module.id}">
+                        <i class="fas fa-layer-group" style="color: ${module.color}"></i>
+                        <span>${module.name}</span>
+                    </a>
+                `;
+                li.querySelector('a').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    GraphVisualization.focusNode(module.id);
+                });
+                list.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -819,5 +819,101 @@
 
 ---
 
-*文档版本: 1.0*
-*最后更新: 2026-03-16*
+## 精选专题视频系列
+
+除上述270集系统课程外，我们还精心制作了10个专题深度视频，每个视频聚焦一个核心主题，配有完整的教学资源。
+
+### 专题列表
+
+| 序号 | 视频标题 | 时长 | 目标受众 | 前置知识 | 关联文档 |
+|-----|---------|------|---------|---------|---------|
+| 01 | [C语言历史与价值](../01_Video_Scripts/01_Introduction_to_C.md) | 15min | 编程初学者 | 无 | [C语言概述](../01_Introduction/README.md) |
+| 02 | [指针深度解析](../01_Video_Scripts/02_Pointer_Deep_Dive.md) | 30min | 有C基础者 | 基础语法 | [指针详解](../02_Core_Concepts/03_Pointers/README.md) |
+| 03 | [内存管理实战](../01_Video_Scripts/03_Memory_Management.md) | 25min | 进阶学习者 | 指针 | [内存管理](../02_Core_Concepts/04_Memory_Management/README.md) |
+| 04 | [并发编程模式](../01_Video_Scripts/04_Concurrency_Patterns.md) | 35min | 系统开发者 | 指针、Linux基础 | [系统编程-线程](../03_System_Programming/02_Threading/README.md) |
+| 05 | [MISRA C与安全编码](../01_Video_Scripts/05_Safety_Standards.md) | 20min | 嵌入式开发者 | C基础 | [安全编程](../04_Advanced_Topics/04_Secure_Coding/README.md) |
+| 06 | [C23新特性介绍](../01_Video_Scripts/06_Modern_C_C23.md) | 25min | C语言开发者 | C11基础 | [C语言标准演进](../01_Introduction/04_C_Standards/README.md) |
+| 07 | [Zig与C互操作](../01_Video_Scripts/07_Zig_C_Interoperability.md) | 30min | C语言开发者 | C基础 | [Zig与C互操作](../06_Industrial_Practice/Zig_Interoperability/README.md) |
+| 08 | [嵌入式C编程](../01_Video_Scripts/08_Embedded_Systems.md) | 40min | 嵌入式开发者 | C基础 | [嵌入式系统开发](../06_Industrial_Practice/01_Embedded_Systems/README.md) |
+| 09 | [性能优化技巧](../01_Video_Scripts/09_Performance_Optimization.md) | 35min | 性能工程师 | C基础、计算机体系结构 | [性能优化](../04_Advanced_Topics/01_Performance_Optimization/README.md) |
+| 10 | [形式化验证入门](../01_Video_Scripts/10_Formal_Verification.md) | 30min | 安全研究员 | C基础 | [形式化方法](../05_Formal_Methods/README.md) |
+
+**专题视频总计**: 10集 | **总时长**: 约5小时 | **配套代码**: 50+ 示例
+
+---
+
+## 配套教学资源
+
+### Compiler Explorer 集成
+
+- [Compiler Explorer 使用指南](../02_Compiler_Explorer_Integration/Compiler_Explorer_Guide.md)
+- [10个可嵌入的代码示例](../02_Compiler_Explorer_Integration/embedded_examples.html)
+
+### 交互式练习平台
+
+- [在线练习平台规格说明](../03_Interactive_Exercises/Online_Exercise_Platform_Spec.md)
+- [练习题数据库设计](../03_Interactive_Exercises/Exercise_Database_Schema.md)
+
+### 视频制作资源
+
+- [视频制作最佳实践](../04_Video_Production_Guide/Video_Production_Best_Practices.md)
+- [视觉设计规范](../04_Video_Production_Guide/Visual_Design_Guidelines.md)
+
+---
+
+## 学习路径建议
+
+### 路径A：零基础入门
+
+```
+第1-2周: 视频01 (C语言历史) → 第一季第1-2章
+第3-4周: 第一季第3-4章
+第5-6周: 视频02 (指针入门) → 第一季第5-6章
+第7-8周: 第二季第1-3章
+第9-10周: 视频03 (内存管理) → 第二季第4-6章
+```
+
+### 路径B：系统编程方向
+
+```
+第1-2周: 视频02 (指针深度) + 视频03 (内存管理)
+第3-4周: 第二季全部
+第5-6周: 视频04 (并发编程) → 第三季全部
+第7-8周: 视频08 (嵌入式) → 第六季嵌入式章节
+```
+
+### 路径C：安全与验证方向
+
+```
+第1-2周: 视频05 (MISRA C安全编码)
+第3-4周: 第四季安全编程章节
+第5-6周: 视频10 (形式化验证) → 第五季全部
+第7-8周: 工业实战案例分析
+```
+
+### 路径D：现代C语言实践
+
+```
+第1周: 视频06 (C23新特性)
+第2-3周: 视频07 (Zig与C互操作)
+第4-5周: 视频09 (性能优化)
+第6-8周: 第四季高级主题 + 第六季工业实战
+```
+
+---
+
+## 资源统计
+
+| 资源类型 | 数量 | 说明 |
+|---------|------|------|
+| 系统课程视频 | 270集 | 约180小时 |
+| 专题视频 | 10集 | 约5小时 |
+| 视频脚本 | 10份 | 30000+行 |
+| 示例代码 | 500+ | 覆盖所有知识点 |
+| 练习题 | 500+ | 在线平台支持 |
+| 项目案例 | 20+ | 工业级项目 |
+
+---
+
+*文档版本: 2.0*
+*最后更新: 2026-03-19*
