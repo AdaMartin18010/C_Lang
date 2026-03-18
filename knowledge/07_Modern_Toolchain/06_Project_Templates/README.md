@@ -305,7 +305,8 @@ int {project_name}_module_a_init(void) {{
         return 0;
     }}
 
-    /* TODO: Initialize module */
+    /* 初始化模块资源 */
+    /* 例如：打开设备、分配缓冲区、建立连接等 */
 
     g_initialized = 1;
     return 0;
@@ -316,7 +317,8 @@ void {project_name}_module_a_deinit(void) {{
         return;
     }}
 
-    /* TODO: Cleanup */
+    /* 释放模块资源 */
+    /* 例如：关闭设备、释放缓冲区、断开连接等 */
 
     g_initialized = 0;
 }}
@@ -339,7 +341,8 @@ int {project_name}_module_a_process(
         return -1;
     }}
 
-    /* TODO: Implement processing logic */
+    /* 处理数据：简单示例是复制输入到输出 */
+    /* 实际应用中，这里应该是模块的核心处理逻辑 */
     memcpy(output, input, input_len);
 
     return (int)input_len;
@@ -360,7 +363,19 @@ int main(int argc, char **argv) {{
         return EXIT_FAILURE;
     }}
 
-    /* TODO: Application logic */
+    /* 应用程序主逻辑 */
+    /* 示例：读取输入、调用模块处理、输出结果 */
+    printf("Module initialized successfully\n");
+
+    /* 示例数据处理 */
+    uint8_t input[] = "Hello, World!";
+    uint8_t output[256] = {0};
+    int result = {project_name}_module_a_process(
+        input, sizeof(input), output, sizeof(output));
+
+    if (result > 0) {
+        printf("Processed %d bytes: %s\n", result, output);
+    }
 
     {project_name}_module_a_deinit();
     return EXIT_SUCCESS;
@@ -966,7 +981,8 @@ module_error_t module_process(module_handle_t *handle,
         return MODULE_ERROR_INVALID_PARAM;
     }
 
-    /* TODO: 实现处理逻辑 */
+    /* 实现数据处理逻辑 */
+    /* 示例：简单复制输入数据到输出缓冲区 */
     (void)memcpy(output, input, input_len);
     *bytes_written = input_len;
 

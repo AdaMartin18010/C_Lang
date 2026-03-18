@@ -65,6 +65,9 @@
     - [代码异味检测](#代码异味检测)
   - [📋 审查清单模板](#-审查清单模板)
     - [C代码审查清单](#c代码审查清单)
+  - [🛠️ 自动化审查脚本集合](#️-自动化审查脚本集合)
+    - [完整的CI/CD审查脚本](#完整的cicd审查脚本)
+    - [预提交钩子配置](#预提交钩子配置)
 
 
 ---
@@ -588,6 +591,202 @@ jobs:
 - [ ] 命名清晰
 - [ ] 函数长度适中
 - [ ] 注释充分
+
+---
+
+## 🛠️ 自动化审查脚本集合
+
+### 完整的CI/CD审查脚本
+
+```bash
+#!/bin/bash
+# ci-code-review.sh - 完整的CI代码审查脚本
+# 用法: ./ci-code-review.sh [目标目录]
+
+set -e  # 遇到错误立即退出
+
+TARGET_DIR="${1:-.}"
+EXIT_CODE=0
+
+echo "=========================================="
+echo "     C项目自动化代码审查"
+echo "=========================================="
+echo ""
+
+# 颜色定义
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+# 检查工具是否安装
+check_tool() {
+    if ! command -v "$1" &> /dev/null; then
+        echo -e "${RED}✗ $1 未安装${NC}"
+        return 1
+    else
+        echo -e "${GREEN}✓ $1 已安装${NC}"
+        return 0
+    fi
+}
+
+echo "【1/7】检查依赖工具..."
+check_tool clang-format
+check_tool clang-tidy
+check_tool cppcheck || true
+
+# 1. 格式化检查
+echo ""
+echo "【2/7】代码格式检查..."
+if command -v clang-format &> /dev/null; then
+    # 查找所有C/C++源文件
+    FILES=$(find "$TARGET_DIR" -type f \( -name "*.c" -o -name "*.h" \) ! -path "*/build/*" ! -path "*/third_party/*")
+
+    FORMAT_ERRORS=0
+    for file in $FILES; do
+        if ! clang-format --dry-run --Werror "$file" 2>/dev/null; then
+            echo -e "${RED}  格式错误: $file${NC}"
+            FORMAT_ERRORS=$((FORMAT_ERRORS + 1))
+        fi
+    done
+
+    if [ $FORMAT_ERRORS -eq 0 ]; then
+        echo -e "${GREEN}✓ 所有文件格式正确${NC}"
+    else
+        echo -e "${RED}✗ 发现 $FORMAT_ERRORS 个文件格式不正确${NC}"
+        echo "  运行 'clang-format -i <file>' 修复"
+        EXIT_CODE=1
+    fi
+fi
+
+# 2. 静态分析 - Cppcheck
+echo ""
+echo "【3/7】Cppcheck静态分析..."
+if command -v cppcheck &> /dev/null; then
+    if cppcheck --enable=all --error-exitcode=1 \
+                --suppress=missingIncludeSystem \
+                --suppress=unusedFunction \
+                --inline-suppr \
+                -I "$TARGET_DIR/include" \
+                "$TARGET_DIR/src" 2>&1; then
+        echo -e "${GREEN}✓ Cppcheck检查通过${NC}"
+    else
+        echo -e "${RED}✗ Cppcheck发现问题${NC}"
+        EXIT_CODE=1
+    fi
+else
+    echo -e "${YELLOW}⚠ Cppcheck未安装，跳过${NC}"
+fi
+
+# 3. 禁止函数检查
+echo ""
+echo "【4/7】禁止函数检查..."
+BANNED_FUNCS="strcpy|gets|sprintf|scanf|system|strcat"
+BANNED_COUNT=0
+
+FILES=$(find "$TARGET_DIR" -type f \( -name "*.c" -o -name "*.h" \) ! -path "*/build/*" ! -path "*/third_party/*")
+
+for file in $FILES; do
+    matches=$(grep -n -E "\b($BANNED_FUNCS)\s*\(" "$file" 2>/dev/null || true)
+    if [ -n "$matches" ]; then
+        echo -e "${RED}  禁止函数发现于 $file:${NC}"
+        echo "$matches" | head -5
+        BANNED_COUNT=$((BANNED_COUNT + 1))
+    fi
+done
+
+if [ $BANNED_COUNT -eq 0 ]; then
+    echo -e "${GREEN}✓ 未发现禁止函数${NC}"
+else
+    EXIT_CODE=1
+fi
+
+# 4. TODO/FIXME检查
+echo ""
+echo "【5/7】TODO/FIXME注释检查..."
+TODO_COUNT=$(grep -r "TODO\|FIXME" "$TARGET_DIR/src" --include="*.c" --include="*.h" 2>/dev/null | wc -l)
+
+if [ "$TODO_COUNT" -gt 10 ]; then
+    echo -e "${YELLOW}⚠ 发现 $TODO_COUNT 个TODO/FIXME注释（建议: <=10）${NC}"
+else
+    echo -e "${GREEN}✓ TODO/FIXME注释数量: $TODO_COUNT${NC}"
+fi
+
+# 5. 文件头版权检查
+echo ""
+echo "【6/7】文件头版权检查..."
+COPYRIGHT_MISSING=0
+
+for file in $FILES; do
+    if ! head -10 "$file" | grep -q "Copyright\|LICENSE\|@file"; then
+        COPYRIGHT_MISSING=$((COPYRIGHT_MISSING + 1))
+    fi
+done
+
+if [ $COPYRIGHT_MISSING -eq 0 ]; then
+    echo -e "${GREEN}✓ 所有文件包含版权信息${NC}"
+else
+    echo -e "${YELLOW}⚠ $COPYRIGHT_MISSING 个文件缺少版权头${NC}"
+fi
+
+# 6. 行长度检查
+echo ""
+echo "【7/7】行长度检查（最大100字符）..."
+LONG_LINES=$(find "$TARGET_DIR" -type f \( -name "*.c" -o -name "*.h" \) ! -path "*/build/*" ! -path "*/third_party/*" -exec awk 'length > 100 {print FILENAME":"NR":"length}' {} \; | head -20)
+
+if [ -z "$LONG_LINES" ]; then
+    echo -e "${GREEN}✓ 所有行长度符合要求${NC}"
+else
+    echo -e "${YELLOW}⚠ 发现超长行:${NC}"
+    echo "$LONG_LINES"
+fi
+
+echo ""
+echo "=========================================="
+if [ $EXIT_CODE -eq 0 ]; then
+    echo -e "${GREEN}     所有检查通过！✓${NC}"
+else
+    echo -e "${RED}     发现代码质量问题，请修复${NC}"
+fi
+echo "=========================================="
+
+exit $EXIT_CODE
+```
+
+### 预提交钩子配置
+
+```bash
+#!/bin/bash
+# .git/hooks/pre-commit - Git预提交钩子
+
+echo "Running pre-commit checks..."
+
+# 运行自动格式化
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(c|h)$' || true)
+
+if [ -z "$STAGED_FILES" ]; then
+    exit 0
+fi
+
+# 检查格式
+for file in $STAGED_FILES; do
+    if command -v clang-format &> /dev/null; then
+        if ! clang-format --dry-run --Werror "$file" 2>/dev/null; then
+            echo "Error: $file is not properly formatted"
+            echo "Run: clang-format -i $file"
+            exit 1
+        fi
+    fi
+done
+
+# 检查是否有禁止函数
+if grep -n -E "\b(strcpy|gets|sprintf|scanf|system)\s*\(" $STAGED_FILES; then
+    echo "Error: Found banned functions in staged files"
+    exit 1
+fi
+
+echo "Pre-commit checks passed!"
+```
 
 ---
 
