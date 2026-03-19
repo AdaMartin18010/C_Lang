@@ -728,7 +728,7 @@ void demonstrate_func_array(void)
     };
 
     for (size_t i = 0; i < 2; i++) {
-        operations[i](5);
+        `operations[i](5);`
     }
 }
 ```

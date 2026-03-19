@@ -1,37 +1,47 @@
 # 工业通信技术完全指南 (Industrial Communication)
 
-> **对应标准**: IEC 61158, IEEE 802.x, ISO 11898, IEC 61784  
-> **难度等级**: L3-L5 | **预估学习时间**: 80-120小时  
+> **对应标准**: IEC 61158, IEEE 802.x, ISO 11898, IEC 61784
+> **难度等级**: L3-L5 | **预估学习时间**: 80-120小时
 > **最后更新**: 2026-03-17
 
 ---
 
 ## 目录
 
-- [1. 工业通信概述](#1-工业通信概述)
-  - [1.1 工业通信的重要性](#11-工业通信的重要性)
-  - [1.2 工业通信 vs 传统IT通信](#12-工业通信-vs-传统it通信)
-  - [1.3 应用场景](#13-应用场景)
-- [2. 通信协议分层模型](#2-通信协议分层模型)
-  - [2.1 OSI参考模型在工业中的应用](#21-osi参考模型在工业中的应用)
-  - [2.2 工业通信协议栈](#22-工业通信协议栈)
-- [3. 子目录详细介绍](#3-子目录详细介绍)
-  - [3.1 物理层 (Physical Layer)](#31-物理层-physical-layer)
-  - [3.2 数据链路层 (Data Link Layer)](#32-数据链路层-data-link-layer)
-  - [3.3 工业通信协议](#33-工业通信协议)
-- [4. 典型应用场景](#4-典型应用场景)
-  - [4.1 智能制造](#41-智能制造)
-  - [4.2 能源电力](#42-能源电力)
-  - [4.3 交通运输](#43-交通运输)
-- [5. 选型决策指南](#5-选型决策指南)
-  - [5.1 协议对比分析](#51-协议对比分析)
-  - [5.2 选型决策树](#52-选型决策树)
-- [6. 学习路径推荐](#6-学习路径推荐)
-  - [6.1 初级工程师路径](#61-初级工程师路径)
-  - [6.2 中级工程师路径](#62-中级工程师路径)
-  - [6.3 高级工程师路径](#63-高级工程师路径)
-- [7. 相关标准和规范](#7-相关标准和规范)
-- [8. 模块关联关系](#8-模块关联关系)
+- [工业通信技术完全指南 (Industrial Communication)](#工业通信技术完全指南-industrial-communication)
+  - [目录](#目录)
+  - [1. 工业通信概述](#1-工业通信概述)
+    - [1.1 工业通信的重要性](#11-工业通信的重要性)
+    - [1.2 工业通信 vs 传统IT通信](#12-工业通信-vs-传统it通信)
+    - [1.3 应用场景](#13-应用场景)
+  - [2. 通信协议分层模型](#2-通信协议分层模型)
+    - [2.1 OSI参考模型在工业中的应用](#21-osi参考模型在工业中的应用)
+    - [2.2 工业通信协议栈](#22-工业通信协议栈)
+  - [3. 子目录详细介绍](#3-子目录详细介绍)
+    - [3.1 物理层 (Physical Layer)](#31-物理层-physical-layer)
+    - [3.2 数据链路层 (Data Link Layer)](#32-数据链路层-data-link-layer)
+    - [3.3 工业通信协议](#33-工业通信协议)
+  - [4. 典型应用场景](#4-典型应用场景)
+    - [4.1 智能制造](#41-智能制造)
+    - [4.2 能源电力](#42-能源电力)
+    - [4.3 交通运输](#43-交通运输)
+  - [5. 选型决策指南](#5-选型决策指南)
+    - [5.1 协议对比分析](#51-协议对比分析)
+    - [5.2 选型决策树](#52-选型决策树)
+  - [6. 学习路径推荐](#6-学习路径推荐)
+    - [6.1 初级工程师路径 (4-8周)](#61-初级工程师路径-4-8周)
+    - [6.2 中级工程师路径 (8-16周)](#62-中级工程师路径-8-16周)
+    - [6.3 高级工程师路径 (16周以上)](#63-高级工程师路径-16周以上)
+  - [7. 相关标准和规范](#7-相关标准和规范)
+    - [7.1 国际标准](#71-国际标准)
+    - [7.2 行业规范](#72-行业规范)
+    - [7.3 协议组织](#73-协议组织)
+  - [8. 模块关联关系](#8-模块关联关系)
+    - [8.1 与04\_Industrial\_Scenarios其他模块的关联](#81-与04_industrial_scenarios其他模块的关联)
+    - [8.2 知识依赖关系](#82-知识依赖关系)
+  - [附录](#附录)
+    - [术语表](#术语表)
+    - [快速参考](#快速参考)
 
 ---
 
@@ -47,20 +57,20 @@ graph TB
         ERP[ERP系统]
         MES[制造执行系统]
     end
-    
+
     subgraph 控制层[控制层 SCADA/PLC]
         SCADA[SCADA监控]
         PLC[PLC控制器]
         DCS[DCS分布式系统]
     end
-    
+
     subgraph 现场层[现场层 Field Level]
         Sensor[传感器]
         Actuator[执行器]
         Drive[变频器/驱动器]
         HMI[人机界面]
     end
-    
+
     ERP <-->|OPC UA/MQTT| MES
     MES <-->|工业以太网| SCADA
     SCADA <-->|Profinet/EtherNet/IP| PLC
@@ -148,7 +158,7 @@ graph LR
         O2[数据链路层]
         O1[物理层]
     end
-    
+
     subgraph Industrial[工业协议简化模型]
         I4[应用层<br/>设备配置<br/>数据表示]
         I3[传输层<br/>TCP/UDP]
@@ -156,7 +166,7 @@ graph LR
         I1[数据链路层<br/>MAC/帧格式]
         I0[物理层<br/>电气特性]
     end
-    
+
     O7 --> I4
     O6 --> I4
     O5 --> I4
@@ -184,45 +194,45 @@ graph LR
 graph TB
     subgraph 协议金字塔[工业通信协议金字塔]
         direction TB
-        
+
         L4[信息层<br/>Level 4]
         L3[控制层<br/>Level 3]
         L2[现场层<br/>Level 2]
         L1[设备层<br/>Level 1]
-        
+
         L4 --> L3
         L3 --> L2
         L2 --> L1
     end
-    
+
     subgraph L4P[信息层协议]
         OPC[OPC UA]
         MQTT[MQTT]
         HTTP[REST API]
         SQL[SQL数据库]
     end
-    
+
     subgraph L3P[控制层协议]
         ENIP[EtherNet/IP]
         PN[Profinet]
         ECAT[EtherCAT]
         MTC[Modbus TCP]
     end
-    
+
     subgraph L2P[现场层协议]
         PB[Profibus]
         CAN[CANopen]
         DNET[DeviceNet]
         MBRTU[Modbus RTU]
     end
-    
+
     subgraph L1P[设备层协议]
         IOL[IO-Link]
         ASI[AS-i]
         HART[HART]
         SER[串口RS-485]
     end
-    
+
     L4 --- L4P
     L3 --- L3P
     L2 --- L2P
@@ -250,24 +260,24 @@ graph TB
 graph LR
     subgraph PHY[物理层技术]
         direction TB
-        
+
         Wired[有线通信]
         Wireless[无线通信]
-        
+
         Wired --> Serial[串行通信]
         Wired --> Fieldbus[现场总线]
         Wired --> Eth[工业以太网]
-        
+
         Serial --> RS232[RS-232]
         Serial --> RS485[RS-485]
         Serial --> UART[UART]
-        
+
         Fieldbus --> CAN_PHY[CAN物理层]
         Fieldbus --> PB_PHY[Profibus物理层]
-        
+
         Eth --> TP[双绞线]
         Eth --> Fiber[光纤]
-        
+
         Wireless --> WHART[WirelessHART]
         Wireless --> ZigBee[ZigBee]
         Wireless --> LTE[4G/5G]
@@ -302,25 +312,25 @@ graph LR
 graph TB
     subgraph DLL[数据链路层]
         direction TB
-        
+
         LLC[逻辑链路控制子层 LLC]
         MAC[介质访问控制子层 MAC]
-        
+
         LLC --> MAC
-        
+
         subgraph LLC_Func[LLC功能]
             SAP[服务访问点]
             FC[流量控制]
             ErrR[差错恢复]
         end
-        
+
         subgraph MAC_Func[MAC功能]
             Framing[帧定界]
             Addr[MAC寻址]
             CRC[CRC校验]
             Media[介质访问]
         end
-        
+
         LLC --- LLC_Func
         MAC --- MAC_Func
     end
@@ -359,7 +369,7 @@ graph TB
         Cloud[云平台<br/>数字孪生/大数据分析]
         Edge[边缘计算节点]
         MES[制造执行系统 MES]
-        
+
         subgraph ProductionLine[生产线]
             Robot1[六轴机器人<br/>EtherCAT]
             Robot2[协作机器人<br/>EtherCAT]
@@ -367,10 +377,10 @@ graph TB
             AGV[AGV小车<br/>5G/WiFi6]
             Vision[视觉检测<br/>GigE Vision]
         end
-        
+
         PLC[主控制器 PLC]
         HMI[人机界面 HMI]
-        
+
         Cloud <-->|OPC UA/MQTT| Edge
         Edge <-->|工业以太网| MES
         MES <-->|Profinet| PLC
@@ -401,31 +411,31 @@ graph TB
 graph TB
     subgraph SmartGrid[智能电网通信架构]
         ControlCenter[调度控制中心]
-        
+
         subgraph Transmission[输电层]
             PMU[同步相量测量 PMU]
             RTU[远动终端 RTU]
         end
-        
+
         subgraph Distribution[配电层]
             substation[智能变电站]
             Ring[环网柜]
         end
-        
+
         subgraph Consumption[用电层]
             SmartMeter[智能电表]
             EV[充电桩]
             DG[分布式能源]
         end
-        
+
         ControlCenter <-->|IEC 61850| substation
         ControlCenter <-->|IEC 60870-5-104| RTU
-        
+
         substation <-->|光纤环网| Ring
         Ring <-->|PLC/RF| SmartMeter
         Ring <-->|CAN/以太网| EV
         Ring <-->|Modbus TCP| DG
-        
+
         RTU <-->|光纤| PMU
     end
 ```
@@ -451,25 +461,25 @@ graph TB
             ATS[列车自动监控 ATS]
             wayside[轨旁设备]
             train[车载系统]
-            
+
             ATS <-->|LTE-M/WiFi| wayside
             wayside <-->|LTE-M/波导管| train
         end
-        
+
         subgraph Vehicle[车联网]
             V2X[V2X服务器]
             OBU[车载单元 OBU]
             RSU[路侧单元 RSU]
-            
+
             V2X <-->|5G/DSRC| RSU
             RSU <-->|C-V2X| OBU
         end
-        
+
         subgraph Port[智慧港口]
             TOS[码头操作系统 TOS]
             Crane[岸桥/场桥]
             Truck[无人集卡]
-            
+
             TOS <-->|5G专网| Crane
             TOS <-->|5G专网| Truck
         end
@@ -513,27 +523,27 @@ graph TB
 ```mermaid
 flowchart TD
     Start[开始选型] --> Q1{实时性要求?}
-    
+
     Q1 -->|微秒级| Q2{运动控制?}
     Q1 -->|毫秒级| Q3{设备复杂度?}
     Q1 -->|秒级| Q4{成本敏感?}
-    
+
     Q2 -->|是| ECAT[EtherCAT]
     Q2 -->|否| PN[Profinet IRT]
-    
+
     Q3 -->|高| Q5{西门子生态?}
     Q3 -->|中| ENIP[EtherNet/IP]
     Q3 -->|低| MBTCP[Modbus TCP]
-    
+
     Q5 -->|是| PN2[Profinet]
     Q5 -->|否| ENIP2[EtherNet/IP]
-    
+
     Q4 -->|是| MBRTU[Modbus RTU]
     Q4 -->|否| Q6{无线需求?}
-    
+
     Q6 -->|是| Wireless[WirelessHART/5G]
     Q6 -->|否| CAN[CANopen]
-    
+
     ECAT --> Final[最终方案]
     PN --> Final
     ENIP --> Final
@@ -569,12 +579,12 @@ flowchart TD
 graph LR
     subgraph Basic[初级学习路径]
         direction TB
-        
+
         B1[1. 串口通信基础<br/>RS-232/RS-485]
         B2[2. Modbus协议<br/>RTU/TCP]
         B3[3. 以太网基础<br/>TCP/IP协议栈]
         B4[4. 简单项目实践<br/>温度采集系统]
-        
+
         B1 --> B2 --> B3 --> B4
     end
 ```
@@ -597,13 +607,13 @@ graph LR
 graph LR
     subgraph Intermediate[中级学习路径]
         direction TB
-        
+
         I1[1. CAN总线深入<br/>CANopen协议]
         I2[2. 工业以太网<br/>EtherCAT/Profinet]
         I3[3. 协议栈移植<br/>开源协议栈]
         I4[4. 诊断与维护<br/>网络分析工具]
         I5[5. 中型项目<br/>生产线控制系统]
-        
+
         I1 --> I2 --> I3 --> I4 --> I5
     end
 ```
@@ -616,13 +626,13 @@ graph LR
 graph LR
     subgraph Advanced[高级学习路径]
         direction TB
-        
+
         A1[1. 时间敏感网络<br/>TSN/IEEE 802.1]
         A2[2. OPC UA信息模型<br/>工业4.0架构]
         A3[3. 功能安全<br/>SIL等级设计]
         A4[4. 信息安全<br/>IEC 62443]
         A5[5. 系统集成<br/>多协议融合架构]
-        
+
         A1 --> A2 --> A3 --> A4 --> A5
     end
 ```
@@ -659,12 +669,12 @@ graph LR
 
 | 组织名称 | 官方网站 | 主要协议 |
 |:---------|:---------|:---------|
-| **ETG (EtherCAT技术组)** | www.ethercat.org | EtherCAT |
-| **PI (Profinet国际组织)** | www.profibus.com | Profinet/Profibus |
-| **ODVA** | www.odva.org | EtherNet/IP, DeviceNet |
-| **CiA (CAN in Automation)** | www.can-cia.org | CANopen, CAN FD |
-| **OPC Foundation** | www.opcfoundation.org | OPC UA |
-| **Modbus组织** | www.modbus.org | Modbus |
+| **ETG (EtherCAT技术组)** | <www.ethercat.org> | EtherCAT |
+| **PI (Profinet国际组织)** | <www.profibus.com> | Profinet/Profibus |
+| **ODVA** | <www.odva.org> | EtherNet/IP, DeviceNet |
+| **CiA (CAN in Automation)** | <www.can-cia.org> | CANopen, CAN FD |
+| **OPC Foundation** | <www.opcfoundation.org> | OPC UA |
+| **Modbus组织** | <www.modbus.org> | Modbus |
 
 ---
 
@@ -677,36 +687,36 @@ graph TB
     subgraph IC[15_Industrial_Communication<br/>本模块]
         COMM[工业通信协议栈]
     end
-    
+
     subgraph Related[关联模块]
         direction TB
-        
+
         subgraph Auto[汽车电子]
             ECU[02_Automotive_ECU]
             CAN[CAN总线协议]
         end
-        
+
         subgraph Aero[航空电子]
             AV[02_Avionics_Systems]
             ARINC[ARINC 429]
         end
-        
+
         subgraph 5G[5G通信]
             BB[04_5G_Baseband]
             PHY[物理层协议]
         end
-        
+
         subgraph IoT[物联网]
             EI[14_Embedded_IoT]
             MQTT[MQTT/CoAP]
         end
-        
+
         subgraph Linux[Linux系统]
             LK[13_Linux_Kernel]
             SOCK[SocketCAN]
         end
     end
-    
+
     COMM -.->|CAN协议| CAN
     COMM -.->|ARINC协议| ARINC
     COMM -.->|5G通信| PHY
@@ -718,12 +728,12 @@ graph TB
 
 | 关联模块 | 关联内容 | 技术交集 | 应用场景 |
 |:---------|:---------|:---------|:---------|
-| [02_Automotive_ECU](../02_Automotive_ECU/) | CAN总线协议 | ISO 11898, CAN FD, CANopen | 汽车网络通信 |
-| [02_Avionics_Systems](../02_Avionics_Systems/) | 航空总线 | ARINC 429, MIL-STD-1553 | 航空电子通信 |
-| [04_5G_Baseband](../04_5G_Baseband/) | 无线通信 | 5G uRLLC, 时间同步 | 工业无线 |
-| [14_Embedded_IoT](../14_Embedded_IoT/) | 物联网协议 | MQTT, CoAP, LoRa | 工业物联网 |
-| [13_Linux_Kernel](../13_Linux_Kernel/) | 驱动开发 | SocketCAN, 网络驱动 | Linux工业网关 |
-| [03_High_Frequency_Trading](../03_High_Frequency_Trading/) | 低延迟通信 | DPDK, 内核旁路 | 高频数据采集 |
+| [02_Automotive_ECU](../02_Automotive_ECU/README.md) | CAN总线协议 | ISO 11898, CAN FD, CANopen | 汽车网络通信 |
+| [02_Avionics_Systems](../02_Avionics_Systems/README.md) | 航空总线 | ARINC 429, MIL-STD-1553 | 航空电子通信 |
+| [04_5G_Baseband](../04_5G_Baseband/README.md) | 无线通信 | 5G uRLLC, 时间同步 | 工业无线 |
+| [14_Embedded_IoT](../14_Embedded_IoT/README.md) | 物联网协议 | MQTT, CoAP, LoRa | 工业物联网 |
+| [13_Linux_Kernel](../13_Linux_Kernel/README.md) | 驱动开发 | SocketCAN, 网络驱动 | Linux工业网关 |
+| [03_High_Frequency_Trading](../03_High_Frequency_Trading/README.md) | 低延迟通信 | DPDK, 内核旁路 | 高频数据采集 |
 
 ### 8.2 知识依赖关系
 
@@ -734,34 +744,34 @@ graph BT
         OS[操作系统]
         NET[计算机网络]
     end
-    
+
     subgraph Core[核心技术]
         UART[串口通信]
         ETH[以太网技术]
         RTOS[实时操作系统]
     end
-    
+
     subgraph Advanced[高级技术]
         FIELD[现场总线]
         IND_ETH[工业以太网]
         SEC[工业安全]
     end
-    
+
     subgraph Expert[专家级]
         ARCH[系统架构]
         TSN[TSN网络]
         OPC[OPC UA]
     end
-    
+
     C --> UART
     OS --> RTOS
     NET --> ETH
-    
+
     UART --> FIELD
     ETH --> IND_ETH
     RTOS --> FIELD
     RTOS --> IND_ETH
-    
+
     FIELD --> ARCH
     IND_ETH --> TSN
     IND_ETH --> OPC
@@ -797,5 +807,5 @@ graph BT
 
 ---
 
-> **文档维护**: 本指南持续更新，如有问题请提交Issue  
+> **文档维护**: 本指南持续更新，如有问题请提交Issue
 > **返回导航**: [04_Industrial_Scenarios](../README.md) | [知识库总览](../../README.md)

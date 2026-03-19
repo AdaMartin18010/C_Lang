@@ -1,8 +1,8 @@
 # C语言知识库 v4.0 - 完整版
 
 > **完成度**: **100%** ✅ | **文件数**: 483 | **总行数**: 271,000+ | **最后更新**: 2026-03-14
-> **状态**: 100%完成 | **新模块**: [形式语义基础](./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/) | [机器学习](./11_Machine_Learning_C/)
-> **Zig语言**: [Zig知识库](./Zig/) ✅ 100%完成 (41文档/855KB)
+> **状态**: 100%完成 | **新模块**: [形式语义基础](./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | [机器学习](./11_Machine_Learning_C/README.md)
+> **Zig语言**: [Zig知识库](./Zig/README.md) ✅ 100%完成 (41文档/855KB)
 
 ---
 
@@ -581,7 +581,7 @@ void abs_control_loop(void) {
 
 #### 为什么需要这个模块
 
-详见: [工具链评估报告](../archive/reports/2026-03-15/CRITICAL_EVALUATION_REPORT_2026.md)
+详见: 工具链评估报告
 
 #### 内容模块
 
@@ -1690,7 +1690,7 @@ Copyright (c) 2025 C Language Knowledge Base Contributors
 | 主题 | 入口 |
 |:-----|:-----|
 | **完整索引** | [00_INDEX.md](./00_INDEX.md) |
-| **完成状态** | [改进计划](../archive/reports/2026-03-15/SYSTEMATIC_IMPROVEMENT_PLAN_2026.md) |
+| **完成状态** | 改进计划 |
 | **数字逻辑** | [数字逻辑门](./02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/01_Digital_Logic_Gates.md) |
 | **图灵机** | [图灵机](./05_Deep_Structure_MetaPhysics/07_Computability_Theory/01_Turing_Machines.md) |
 | **ISA架构** | [ISA架构](./02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/01_Instruction_Set_Architecture.md) |

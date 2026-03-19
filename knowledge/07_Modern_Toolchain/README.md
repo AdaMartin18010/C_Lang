@@ -75,7 +75,7 @@
 
 ### 缺口分析
 
-详见: [评估报告](../../archive/reports/2026-03-15/CRITICAL_EVALUATION_REPORT_2026.md)
+详见: 评估报告
 
 ---
 

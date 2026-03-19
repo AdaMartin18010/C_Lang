@@ -213,7 +213,7 @@
 
 ## 🔗 相关文档
 
-- [评估报告](../archive/reports/2026-03-15/CRITICAL_EVALUATION_REPORT_2026.md)
+- 评估报告
 - [工具链模块主页](./07_Modern_Toolchain/README.md)
 - [可持续推进路线图](./07_Modern_Toolchain/SUSTAINABLE_ROADMAP.md)
 - [IDE对比矩阵](./07_Modern_Toolchain/01_IDE_Editors/06_IDE_Comparison_Matrix.md)

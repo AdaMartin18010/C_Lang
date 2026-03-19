@@ -5,11 +5,13 @@
 ## 📚 内容结构
 
 ### 课程大纲
+
 | 文件 | 描述 |
 |------|------|
 | `00_Video_Course_Outline.md` | 完整的270集视频课程大纲，包含6个季节的学习路径 |
 
 ### 视频脚本
+
 `01_Video_Scripts/` 目录包含10个专题视频的详细脚本：
 
 | 脚本 | 视频标题 | 时长 | 主题 |
@@ -28,6 +30,7 @@
 **脚本总计**: 10份 | **约30000行** | **覆盖C语言核心到高级主题**
 
 ### Compiler Explorer 集成
+
 `02_Compiler_Explorer_Integration/` 目录包含：
 
 | 文件 | 描述 |
@@ -36,6 +39,7 @@
 | `embedded_examples.html` | 10个可嵌入的Compiler Explorer代码示例，用于课堂教学 |
 
 ### 交互式练习平台
+
 `03_Interactive_Exercises/` 目录包含：
 
 | 文件 | 描述 |
@@ -44,6 +48,7 @@
 | `Exercise_Database_Schema.md` | 练习题数据库设计，包含完整的表结构和评分规则 |
 
 ### 视频制作指南
+
 `04_Video_Production_Guide/` 目录包含：
 
 | 文件 | 描述 |
@@ -56,30 +61,37 @@
 ### 按主题查找
 
 **初学者入门**
+
 - 视频脚本: `01_Introduction_to_C.md`
 - 课程大纲: 第一季
 
 **指针与内存**
+
 - 视频脚本: `02_Pointer_Deep_Dive.md`, `03_Memory_Management.md`
 - 课程大纲: 第二季第7-8章
 
 **系统编程**
+
 - 视频脚本: `04_Concurrency_Patterns.md`, `08_Embedded_Systems.md`
 - 课程大纲: 第三季
 
 **安全与规范**
+
 - 视频脚本: `05_Safety_Standards.md`
 - 课程大纲: 第四季第22章
 
 **现代C语言**
+
 - 视频脚本: `06_Modern_C_C23.md`, `07_Zig_C_Interoperability.md`
 - 课程大纲: 第四季第23章
 
 **性能优化**
+
 - 视频脚本: `09_Performance_Optimization.md`
 - 课程大纲: 第四季第19章
 
 **形式化验证**
+
 - 视频脚本: `10_Formal_Verification.md`
 - 课程大纲: 第五季
 
@@ -96,8 +108,8 @@
 ## 🔗 关联资源
 
 - [知识库总览](../README.md)
-- [源代码仓库](../../source_code/)
-- [练习题库](../../exercises/)
+- 源代码仓库（暂不可用）
+- 练习题库（暂不可用）
 
 ## 📝 贡献指南
 

@@ -353,10 +353,10 @@ IoT_Protocols/
 
 | 本目录协议 | 目标平台 | 集成要点 |
 |:-----------|:---------|:---------|
-| MQTT | [../ESP32](../ESP32/) | 配合 WiFi 客户端使用 |
-| CoAP | [../RPi_Pico](../RPi_Pico/) | 轻量级 UDP 实现 |
-| Modbus | [../RaspberryPi](../RaspberryPi/) | 工业网关应用 |
-| 协议优化 | [../Memory_Constrained](../Memory_Constrained/) | 缓冲区管理 |
+| MQTT | [../ESP32](../ESP32/README.md) | 配合 WiFi 客户端使用 |
+| CoAP | [../RPi_Pico](../RPi_Pico/README.md) | 轻量级 UDP 实现 |
+| Modbus | [../RaspberryPi](../RaspberryPi/README.md) | 工业网关应用 |
+| 协议优化 | [../Memory_Constrained](../Memory_Constrained/README.md) | 缓冲区管理 |
 
 ---
 

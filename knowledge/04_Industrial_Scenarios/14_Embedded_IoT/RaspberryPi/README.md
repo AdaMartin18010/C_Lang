@@ -262,10 +262,10 @@ RaspberryPi/
 
 | 本目录特性 | 对比平台 | 技术差异 |
 |:-----------|:---------|:---------|
-| 完整 Linux 系统 | [../RPi_Pico](../RPi_Pico/) | 裸机 vs Linux，应用场景不同 |
-| 内存管理 | [../Memory_Constrained](../Memory_Constrained/) | GB 级 vs KB 级，策略截然不同 |
-| 网络协议栈 | [../IoT_Protocols](../IoT_Protocols/) | 内核协议栈 vs 用户态实现 |
-| 实时性 | [../Baremetal](../Baremetal/) | PREEMPT_RT vs 裸机中断 |
+| 完整 Linux 系统 | [../RPi_Pico](../RPi_Pico/README.md) | 裸机 vs Linux，应用场景不同 |
+| 内存管理 | [../Memory_Constrained](../Memory_Constrained/README.md) | GB 级 vs KB 级，策略截然不同 |
+| 网络协议栈 | [../IoT_Protocols](../IoT_Protocols/README.md) | 内核协议栈 vs 用户态实现 |
+| 实时性 | [../Baremetal](../Baremetal/README.md) | PREEMPT_RT vs 裸机中断 |
 
 ### 选型建议
 

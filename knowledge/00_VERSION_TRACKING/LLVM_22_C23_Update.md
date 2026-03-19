@@ -756,7 +756,7 @@ void parallel_vector_add(const float *a, const float *b,
     sycl::buffer<float, 1> buf_c(c, sycl::range<1>(n));
 
     // 提交并行内核
-    q.submit([&](sycl::handler& h) {
+    `q.submit([&](sycl::handler& h) {`
         auto acc_a = buf_a.get_access<sycl::access::mode::read>(h);
         auto acc_b = buf_b.get_access<sycl::access::mode::read>(h);
         auto acc_c = buf_c.get_access<sycl::access::mode::write>(h);

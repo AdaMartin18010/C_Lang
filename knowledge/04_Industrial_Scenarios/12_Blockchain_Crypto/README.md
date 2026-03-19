@@ -38,7 +38,7 @@
 
 更完整的密码学内容请参考:
 
-- [07_Hardware_Security](../../03_System_Technology_Domains/07_Hardware_Security/) - 硬件安全(TPM等)
+- [07_Hardware_Security](../../03_System_Technology_Domains/07_Hardware_Security/README.md) - 硬件安全(TPM等)
 - [Zig_Security_Cryptography](../../Zig/Zig_Security_Cryptography.md) - Zig安全与密码学
 
 ---

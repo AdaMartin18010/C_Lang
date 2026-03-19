@@ -68,4 +68,4 @@ int process_sensor_data(const SensorData *data)
 
 ---
 
-**参考**: [MISRA C:2023](../MISRA_C_2023/)
+**参考**: [MISRA C:2023](../MISRA_C_2023/README.md)

@@ -103,7 +103,7 @@
 
 ### 08_Index - 索引与导航
 
-> 注：学习路径已移至 [06_Learning_Paths](./06_Learning_Paths/)
+> 注：学习路径已移至 [06_Learning_Paths](./06_Learning_Paths/README.md)
 
 快速查找工具。
 
@@ -162,7 +162,7 @@ graph TB
 ### 技术选型时
 
 1. 查阅 [02_Comparison_Matrices](./02_Comparison_Matrices/README.md) 对比不同方案
-2. 参考 [04_Application_Scenario_Trees](./04_Application_Scenario_Trees/) 看场景匹配
+2. 参考 [04_Application_Scenario_Trees](./04_Application_Scenario_Trees/README.md) 看场景匹配
 
 ### 学习新知识时
 

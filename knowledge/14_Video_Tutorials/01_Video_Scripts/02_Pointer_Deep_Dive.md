@@ -4,7 +4,7 @@
 > **视频时长**: 30分钟
 > **目标受众**: 有一定C语言基础，希望深入理解指针的开发者
 > **前置知识**: C语言基础语法、变量、函数
-> **关联文档**: [指针详解](../../02_Core_Concepts/03_Pointers/README.md)
+> **关联文档**: 指针详解
 
 ---
 
@@ -911,7 +911,7 @@ struct Node64 {
 
 ### 延伸阅读
 
-- [C语言深度解析：指针](../02_Core_Concepts/03_Pointers/)
+- C语言深度解析：指针
 - [Expert C Programming](https://www.amazon.com/Expert-Programming-Peter-van-Linden/dp/0131774298) - 第4章
 
 ---

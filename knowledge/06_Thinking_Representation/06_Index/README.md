@@ -24,9 +24,9 @@
 
 ## 相关模块
 
-- [思维导图](../01_Mind_Maps/) - 可视化知识结构
-- [对比矩阵](../02_Comparison_Matrices/) - 横向对比不同概念
-- [知识图谱](../07_Knowledge_Graph/) - 完整的知识网络
+- [思维导图](../01_Mind_Maps/README.md) - 可视化知识结构
+- [对比矩阵](../02_Comparison_Matrices/README.md) - 横向对比不同概念
+- [知识图谱](../07_Knowledge_Graph/README.md) - 完整的知识网络
 
 ---
 

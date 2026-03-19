@@ -312,15 +312,15 @@ Baremetal/
 ```
 应用层
     │
-    ├── [../IoT_Protocols/](../IoT_Protocols/) - MQTT/CoAP/HTTP
+    ├── [../IoT_Protocols/](../IoT_Protocols/README.md) - MQTT/CoAP/HTTP
     │
 中间层
     │
-    ├── [../Memory_Constrained/](../Memory_Constrained/) - 内存管理
+    ├── [../Memory_Constrained/](../Memory_Constrained/README.md) - 内存管理
     │
 硬件抽象层
     │
-    ├── [../RPi_Pico/](../RPi_Pico/) - SDK API
+    ├── [../RPi_Pico/](../RPi_Pico/README.md) - SDK API
     │
 裸机层 (本目录)
     │

@@ -395,7 +395,7 @@ build-docker:
 
 ## 📁 模板库
 
-查看 [05_CI_CD_Templates](./05_CI_CD_Templates/) 目录获取即用模板:
+查看 [05_CI_CD_Templates](./05_CI_CD_Templates/README.md) 目录获取即用模板:
 
 - `basic-ci.yml` - 基础CI模板
 - `multi-platform.yml` - 多平台构建

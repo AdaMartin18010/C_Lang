@@ -4,7 +4,7 @@
 > **视频时长**: 25分钟
 > **目标受众**: 有一定C语言基础，希望深入理解内存管理的开发者
 > **前置知识**: 指针、结构体、函数
-> **关联文档**: [内存管理](../../02_Core_Concepts/04_Memory_Management/README.md)
+> **关联文档**: 内存管理
 
 ---
 
@@ -779,7 +779,7 @@ pool allocator  45ms     64MB         0%
 
 ### 延伸阅读
 
-- [Memory Management in C](../02_Core_Concepts/04_Memory_Management/)
+- Memory Management in C
 - [ptmalloc internals](https://sourceware.org/glibc/wiki/MallocInternals)
 
 ### 练习题

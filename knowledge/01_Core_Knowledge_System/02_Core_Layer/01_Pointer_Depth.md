@@ -869,7 +869,7 @@ int main(void) {
     printf("\nFunction pointer array:\n");
     int a = 20, b = 5;
     for (int i = 0; i < 4; i++) {
-        printf("%d %s %d = %d\n", a, op_names[i], b, ops[i](a, b));
+        `printf("%d %s %d = %d\n", a, op_names[i], b, ops[i](a, b));`
     }
 
     /* 动态选择函数 */

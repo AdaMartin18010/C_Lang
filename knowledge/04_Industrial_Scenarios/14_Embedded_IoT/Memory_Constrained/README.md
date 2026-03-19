@@ -271,10 +271,10 @@ Memory_Constrained/
 
 | 本目录技术 | 关联平台 | 应用方式 |
 |:-----------|:---------|:---------|
-| 内存池 | [../ESP32](../ESP32/) | 避免堆碎片，提高稳定性 |
-| 代码优化 | [../RPi_Pico](../RPi_Pico/) | 减小固件体积 |
-| 位域操作 | [../Baremetal](../Baremetal/) | 寄存器访问优化 |
-| 数据结构压缩 | [../IoT_Protocols](../IoT_Protocols/) | 协议包优化 |
+| 内存池 | [../ESP32](../ESP32/README.md) | 避免堆碎片，提高稳定性 |
+| 代码优化 | [../RPi_Pico](../RPi_Pico/README.md) | 减小固件体积 |
+| 位域操作 | [../Baremetal](../Baremetal/README.md) | 寄存器访问优化 |
+| 数据结构压缩 | [../IoT_Protocols](../IoT_Protocols/README.md) | 协议包优化 |
 
 ### 适用平台对比
 

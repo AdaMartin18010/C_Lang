@@ -8,12 +8,12 @@
 
 | 目录 | 内容 | 适用硬件 |
 |:-----|:-----|:---------|
-| [ESP32](./ESP32/) | ESP32-S3/C3 完整开发指南 | ESP32 DevKit |
-| [RPi_Pico](./RPi_Pico/) | RP2040 双核开发 | Raspberry Pi Pico |
-| [RaspberryPi](./RaspberryPi/) | 嵌入式 Linux 开发 | RPi 4/5/CM4 |
-| [Industrial_Linux](./Industrial_Linux/) | 工控 Linux 系统 | 工业 PC |
-| [Memory_Constrained](./Memory_Constrained/) | 内存受限系统设计 | 8/16位 MCU |
-| [IoT_Protocols](./IoT_Protocols/) | 轻量级协议实现 | 所有 IoT 平台 |
+| [ESP32](./ESP32/README.md) | ESP32-S3/C3 完整开发指南 | ESP32 DevKit |
+| [RPi_Pico](./RPi_Pico/README.md) | RP2040 双核开发 | Raspberry Pi Pico |
+| [RaspberryPi](./RaspberryPi/README.md) | 嵌入式 Linux 开发 | RPi 4/5/CM4 |
+| [Industrial_Linux](./Industrial_Linux/README.md) | 工控 Linux 系统 | 工业 PC |
+| [Memory_Constrained](./Memory_Constrained/README.md) | 内存受限系统设计 | 8/16位 MCU |
+| [IoT_Protocols](./IoT_Protocols/README.md) | 轻量级协议实现 | 所有 IoT 平台 |
 
 ---
 

@@ -64,26 +64,26 @@
 ### 📘 01_Rust_vs_C
 
 - [01_Technical_Comparison.md](./01_Rust_vs_C/01_Technical_Comparison.md) - 技术深度对比
-- [02_Memory_Model.md](./01_Rust_vs_C/02_Memory_Model.md) - 内存模型对比
-- [03_Performance_Comparison.md](./01_Rust_vs_C/03_Performance_Comparison.md) - 性能基准测试
+- 02_Memory_Model.md - 内存模型对比（待创建）
+- 03_Performance_Comparison.md - 性能基准测试（待创建）
 
 ### 🔄 02_Migration_Strategies
 
-- [01_Incremental_Migration.md](./02_Migration_Strategies/01_Incremental_Migration.md)
-- [02_FFI_Best_Practices.md](./02_Migration_Strategies/02_FFI_Best_Practices.md)
-- [03_Tooling_Workflows.md](./02_Migration_Strategies/03_Tooling_Workflows.md)
+- 01_Incremental_Migration.md（待创建）
+- 02_FFI_Best_Practices.md（待创建）
+- 03_Tooling_Workflows.md（待创建）
 
 ### 📊 03_Industry_Cases
 
-- [01_Google_Android.md](./03_Industry_Cases/01_Google_Android.md)
-- [02_Microsoft_Windows.md](./03_Industry_Cases/02_Microsoft_Windows.md)
-- [03_Linux_Kernel.md](./03_Industry_Cases/03_Linux_Kernel.md)
-- [04_Cloudflare_Pingora.md](./03_Industry_Cases/04_Cloudflare_Pingora.md)
+- 01_Google_Android.md（待创建）
+- 02_Microsoft_Windows.md（待创建）
+- 03_Linux_Kernel.md（待创建）
+- 04_Cloudflare_Pingora.md（待创建）
 
 ### 🎯 04_Decision_Frameworks
 
-- [01_Language_Selection_Guide.md](./04_Decision_Frameworks/01_Language_Selection_Guide.md)
-- [02_Safety_Critical_Analysis.md](./04_Decision_Frameworks/02_Safety_Critical_Analysis.md)
+- 01_Language_Selection_Guide.md（待创建）
+- 02_Safety_Critical_Analysis.md（待创建）
 
 ---
 
@@ -130,7 +130,7 @@
 
 **相关模块**:
 
-- [08_Zig_C_Connection/](../08_Zig_C_Connection/) - Zig与C互操作
-- [16_Embedded_AI_Agents/](../16_Embedded_AI_Agents/) - 嵌入式AI
+- [08_Zig_C_Connection/](../08_Zig_C_Connection/README.md) - Zig与C互操作
+- [16_Embedded_AI_Agents/](../16_Embedded_AI_Agents/README.md) - 嵌入式AI
 
 **最后更新**: 2026-03-18
