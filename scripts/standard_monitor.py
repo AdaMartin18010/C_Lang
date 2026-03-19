@@ -294,7 +294,7 @@ class StandardMonitor:
             if source.url not in self.hasher.hashes:
                 change_type = 'new'
             else:
-            change_type = 'updated'
+                change_type = 'updated'
             
             # 更新哈希
             self.hasher.update_hash(source.url, new_hash)
