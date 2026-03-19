@@ -72,7 +72,8 @@ mindmap
 
 ## 1. 概述
 
-TPM 2.0（Trusted Platform Module）提供硬件级别的安全功能，包括密钥生成、安全存储、平台完整性度量等。TSS（Trusted Software Stack）是访问TPM的软件栈，提供从底层命令传输到高级功能API的完整接口层次。
+TPM 2.0（Trusted Platform Module）提供硬件级别的安全功能，包括密钥生成、安全存储、平台完整性度量等。
+TSS（Trusted Software Stack）是访问TPM的软件栈，提供从底层命令传输到高级功能API的完整接口层次。
 
 **TSS架构层次：**
 
