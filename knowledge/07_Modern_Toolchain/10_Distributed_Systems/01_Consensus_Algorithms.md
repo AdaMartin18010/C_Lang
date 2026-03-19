@@ -1,4 +1,4 @@
-# 分布式共识算法
+﻿# 分布式共识算法
 
 ## 目录
 
@@ -304,3 +304,29 @@ void ring_get_nodes(hash_ring_t* ring, const char* key,
 - [Raft Paper](https://raft.github.io/raft.pdf)
 - [Dynamo Paper](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)
 - [Gossip Protocols](http://www.cs.cornell.edu/home/rvr/papers/flowgossip.pdf)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

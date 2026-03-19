@@ -1,4 +1,4 @@
-# 线程池模式 (Thread Pool Patterns)
+﻿# 线程池模式 (Thread Pool Patterns)
 
 ## 目录
 
@@ -482,3 +482,29 @@ void submit_batch(thread_pool_t* pool, batch_queue_t* bq,
 
 - [Java Fork/Join Framework](https://docs.oracle.com/javase/tutorial/essential/concurrency/forkjoin.html)
 - [Intel TBB](https://github.com/oneapi-src/oneTBB)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

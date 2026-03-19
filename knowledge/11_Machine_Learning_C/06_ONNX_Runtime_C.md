@@ -1,4 +1,4 @@
-# ONNX Runtime C API
+﻿# ONNX Runtime C API
 
 > **难度**: L4 | **预估学习时间**: 3-4小时
 > 包含：ONNX模型加载、推理执行、性能优化
@@ -513,3 +513,29 @@ OrtValue* create_tensor_from_pool(ONNX_Runtime* rt, int64_t* dims,
 ---
 
 > **关联文档**: [神经网络基础](./01_Neural_Network_Basics.md) | [CNN基础](./04_CNN_Fundamentals.md) | [RNN与LSTM](./05_RNN_LSTM_Basics.md)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

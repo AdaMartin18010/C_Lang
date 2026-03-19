@@ -1,4 +1,4 @@
-# 案例研究
+﻿# 案例研究
 
 > **嵌入式AI Agent在实际场景中的部署案例、应用经验与解决方案分析**
 
@@ -44,3 +44,29 @@ ZeroClaw边缘部署案例是本模块的核心内容之一，展示了如何在
 - [TensorFlow Lite Micro Examples](https://github.com/tensorflow/tflite-micro/tree/main/tensorflow/lite/micro/examples)
 
 [← 返回上级](../README.md)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

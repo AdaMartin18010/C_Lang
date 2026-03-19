@@ -1,4 +1,4 @@
-# 真实迁移案例
+﻿# 真实迁移案例
 
 ## 概述
 
@@ -239,3 +239,29 @@ pub const PNGDecoder = struct {
 - [Zig 官方文档 - C 互操作](https://ziglang.org/documentation/master/#C)
 - [Zig 标准库源码](https://github.com/ziglang/zig/tree/master/lib/std)
 - [TigerBeetle 项目](https://github.com/tigerbeetle/tigerbeetle)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review
