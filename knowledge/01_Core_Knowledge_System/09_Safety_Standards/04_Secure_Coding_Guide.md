@@ -1,24 +1,78 @@
 ﻿# C语言安全编程完全指南
 
-> **版本**: v1.0  
-> **更新日期**: 2026-03-16  
-> **适用范围**: C99/C11/C17/C23  
+> **版本**: v1.0
+> **更新日期**: 2026-03-16
+> **适用范围**: C99/C11/C17/C23
 > **安全等级**: 生产环境必备
 
 ---
 
 ## 目录
 
-1. [安全威胁模型](#1-安全威胁模型)
-2. [输入验证](#2-输入验证)
-3. [内存安全](#3-内存安全)
-4. [字符串安全](#4-字符串安全)
-5. [并发安全](#5-并发安全)
-6. [密码学安全](#6-密码学安全)
-7. [防御性编程](#7-防御性编程)
-8. [静态分析工具](#8-静态分析工具)
-9. [运行时检测](#9-运行时检测)
-10. [安全开发生命周期](#10-安全开发生命周期)
+- [C语言安全编程完全指南](#c语言安全编程完全指南)
+  - [目录](#目录)
+  - [1. 安全威胁模型](#1-安全威胁模型)
+    - [1.1 STRIDE威胁分类](#11-stride威胁分类)
+    - [1.2 C语言特有风险](#12-c语言特有风险)
+    - [1.3 攻击面分析](#13-攻击面分析)
+    - [1.4 威胁建模检查清单](#14-威胁建模检查清单)
+  - [2. 输入验证](#2-输入验证)
+    - [2.1 缓冲区溢出防护](#21-缓冲区溢出防护)
+    - [2.2 整数溢出检测](#22-整数溢出检测)
+    - [2.3 格式化字符串安全](#23-格式化字符串安全)
+    - [2.4 命令注入防护](#24-命令注入防护)
+  - [3. 内存安全](#3-内存安全)
+    - [3.1 安全内存管理模式](#31-安全内存管理模式)
+    - [3.2 Use After Free 防护](#32-use-after-free-防护)
+    - [3.3 双重释放防护](#33-双重释放防护)
+    - [3.4 未初始化内存防护](#34-未初始化内存防护)
+    - [3.5 安全内存清零](#35-安全内存清零)
+  - [4. 字符串安全](#4-字符串安全)
+    - [4.1 安全字符串函数](#41-安全字符串函数)
+    - [4.2 多字节字符安全](#42-多字节字符安全)
+    - [4.3 UTF-8安全处理](#43-utf-8安全处理)
+  - [5. 并发安全](#5-并发安全)
+    - [5.1 数据竞争防护](#51-数据竞争防护)
+    - [5.2 死锁避免](#52-死锁避免)
+    - [5.3 原子操作使用](#53-原子操作使用)
+    - [5.4 线程局部存储](#54-线程局部存储)
+  - [6. 密码学安全](#6-密码学安全)
+    - [6.1 随机数生成](#61-随机数生成)
+    - [6.2 哈希函数使用](#62-哈希函数使用)
+    - [6.3 密钥管理](#63-密钥管理)
+    - [6.4 敏感数据擦除](#64-敏感数据擦除)
+  - [7. 防御性编程](#7-防御性编程)
+    - [7.1 断言和不变式](#71-断言和不变式)
+    - [7.2 错误处理策略](#72-错误处理策略)
+    - [7.3 日志安全](#73-日志安全)
+    - [7.4 最小权限原则](#74-最小权限原则)
+  - [8. 静态分析工具](#8-静态分析工具)
+    - [8.1 GCC/Clang警告选项](#81-gccclang警告选项)
+    - [8.2 Clang Static Analyzer](#82-clang-static-analyzer)
+    - [8.3 Coverity Scan](#83-coverity-scan)
+    - [8.4 CodeQL](#84-codeql)
+  - [9. 运行时检测](#9-运行时检测)
+    - [9.1 AddressSanitizer (ASan)](#91-addresssanitizer-asan)
+    - [9.2 MemorySanitizer (MSan)](#92-memorysanitizer-msan)
+    - [9.3 UndefinedBehaviorSanitizer (UBSan)](#93-undefinedbehaviorsanitizer-ubsan)
+    - [9.4 Control-Flow Integrity (CFI)](#94-control-flow-integrity-cfi)
+    - [9.5 综合运行时检测脚本](#95-综合运行时检测脚本)
+  - [10. 安全开发生命周期](#10-安全开发生命周期)
+    - [10.1 安全设计审查](#101-安全设计审查)
+    - [10.2 代码审计检查清单](#102-代码审计检查清单)
+    - [10.3 渗透测试指南](#103-渗透测试指南)
+    - [10.4 漏洞响应流程](#104-漏洞响应流程)
+  - [附录A: 安全编码速查表](#附录a-安全编码速查表)
+    - [危险函数与替代方案](#危险函数与替代方案)
+    - [编译安全选项速查](#编译安全选项速查)
+  - [附录B: 参考资源](#附录b-参考资源)
+    - [标准与规范](#标准与规范)
+    - [工具资源](#工具资源)
+    - [安全库](#安全库)
+  - [深入理解](#深入理解)
+    - [核心概念](#核心概念)
+    - [实践应用](#实践应用)
+    - [学习建议](#学习建议)
 
 ---
 
@@ -72,9 +126,9 @@ void integer_overflow(void) {
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    C程序攻击面                                │
+│                    C程序攻击面                               │
 ├─────────────────────────────────────────────────────────────┤
-│  输入层          处理层           输出层        环境层          │
+│  输入层          处理层           输出层        环境层        │
 │  ┌──────┐      ┌──────┐        ┌──────┐     ┌──────┐       │
 │  │文件  │─────▶│解析  │───────▶│网络  │     │环境变量│       │
 │  ├──────┤      ├──────┤        ├──────┤     ├──────┤       │
@@ -104,6 +158,7 @@ void integer_overflow(void) {
 **威胁描述**: 向缓冲区写入超出其容量的数据，覆盖相邻内存。
 
 **攻击示例**:
+
 ```c
 // 漏洞代码：栈缓冲区溢出
 void vulnerable_function(char *input) {
@@ -114,6 +169,7 @@ void vulnerable_function(char *input) {
 ```
 
 **防护代码**:
+
 ```c
 #include <string.h>
 #include <stdint.h>
@@ -124,13 +180,13 @@ bool safe_copy_v1(const char *input, char *output, size_t out_len) {
     if (!input || !output || out_len == 0) {
         return false;
     }
-    
+
     size_t in_len = strnlen(input, out_len);
     if (in_len >= out_len) {
         // 输入过长，截断或拒绝
         return false;
     }
-    
+
     memcpy(output, input, in_len);
     output[in_len] = '\0';
     return true;
@@ -147,7 +203,7 @@ bool safe_copy_v2(const char *input, char *output, size_t out_len) {
     if (!input || !output || out_len == 0) {
         return false;
     }
-    
+
     size_t result = strlcpy(output, input, out_len);
     return result < out_len;  // 返回true表示未截断
 }
@@ -158,7 +214,7 @@ bool safe_copy_v3(const char *input, char *output, size_t out_len) {
     if (!input || !output || out_len == 0) {
         return false;
     }
-    
+
     errno_t err = strncpy_s(output, out_len, input, _TRUNCATE);
     return err == 0;
 }
@@ -166,6 +222,7 @@ bool safe_copy_v3(const char *input, char *output, size_t out_len) {
 ```
 
 **检测方法**:
+
 ```bash
 # GCC/Clang栈保护
 gcc -fstack-protector-strong -Wstack-protector -fstack-check
@@ -179,6 +236,7 @@ valgrind --tool=memcheck --leak-check=full ./program
 **威胁描述**: 算术运算结果超出整数类型表示范围，导致未定义行为。
 
 **攻击示例**:
+
 ```c
 // 漏洞代码：整数溢出导致缓冲区过小
 void *vulnerable_alloc(size_t count, size_t size) {
@@ -189,6 +247,7 @@ void *vulnerable_alloc(size_t count, size_t size) {
 ```
 
 **防护代码**:
+
 ```c
 #include <stdint.h>
 #include <limits.h>
@@ -200,12 +259,12 @@ bool safe_multiply(size_t a, size_t b, size_t *result) {
         *result = 0;
         return true;
     }
-    
+
     // 检查溢出: a * b > SIZE_MAX
     if (a > SIZE_MAX / b) {
         return false;  // 溢出
     }
-    
+
     *result = a * b;
     return true;
 }
@@ -236,24 +295,24 @@ void *safe_calloc(size_t count, size_t size) {
 // 完整安全的内存分配包装
 void *safe_malloc_array(size_t count, size_t elem_size) {
     size_t total_size;
-    
+
     // 检查参数有效性
     if (count == 0 || elem_size == 0) {
         return NULL;
     }
-    
+
     // 检查乘法溢出
     if (!safe_multiply(count, elem_size, &total_size)) {
         return NULL;
     }
-    
+
     // 检查加上头部信息后的溢出（如有）
     const size_t header_size = sizeof(size_t) * 2;
     size_t alloc_size;
     if (!safe_add(total_size, header_size, &alloc_size)) {
         return NULL;
     }
-    
+
     void *ptr = malloc(alloc_size);
     if (ptr) {
         // 记录元数据用于调试
@@ -271,6 +330,7 @@ void *safe_malloc_array(size_t count, size_t elem_size) {
 **威胁描述**: 用户输入直接作为格式化字符串，可导致内存读取/写入。
 
 **攻击示例**:
+
 ```c
 // 漏洞代码
 void vulnerable_log(const char *user_input) {
@@ -281,6 +341,7 @@ void vulnerable_log(const char *user_input) {
 ```
 
 **防护代码**:
+
 ```c
 #include <stdio.h>
 #include <stdarg.h>
@@ -293,7 +354,7 @@ void safe_log_v1(const char *user_input) {
 // 安全方式2: 包装函数强制检查
 void safe_printf(const char *fmt, ...) {
     if (!fmt) return;
-    
+
     va_list args;
     va_start(args, fmt);
     vprintf(fmt, args);
@@ -316,7 +377,7 @@ void safe_format_log(const char *fmt, ...) {
 // 用户输入验证函数
 bool validate_format_input(const char *input) {
     if (!input) return false;
-    
+
     // 检查危险格式化字符
     const char *dangerous = "%*";
     for (const char *p = input; *p; p++) {
@@ -333,6 +394,7 @@ bool validate_format_input(const char *input) {
 **威胁描述**: 用户输入被拼接到系统命令，导致任意命令执行。
 
 **攻击示例**:
+
 ```c
 // 漏洞代码
 void vulnerable_exec(const char *filename) {
@@ -343,6 +405,7 @@ void vulnerable_exec(const char *filename) {
 ```
 
 **防护代码**:
+
 ```c
 #include <unistd.h>
 #include <sys/wait.h>
@@ -359,18 +422,18 @@ int safe_exec_ls(const char *filename) {
             return -1;
         }
     }
-    
+
     pid_t pid = fork();
     if (pid == -1) {
         return -1;
     }
-    
+
     if (pid == 0) {
         // 子进程
         execlp("ls", "ls", "-la", filename, (char *)NULL);
         _exit(127);  // exec失败
     }
-    
+
     // 父进程等待
     int status;
     waitpid(pid, &status, 0);
@@ -385,7 +448,7 @@ int safe_execvp(const char *file, char *const argv[]) {
         execvp(file, argv);
         _exit(127);
     }
-    
+
     int status;
     waitpid(pid, &status, 0);
     return WIFEXITED(status) ? WEXITSTATUS(status) : -1;
@@ -398,13 +461,13 @@ int safe_execvp(const char *file, char *const argv[]) {
 void setup_seccomp(void) {
     scmp_filter_ctx ctx = seccomp_init(SCMP_ACT_KILL);
     if (!ctx) return;
-    
+
     // 只允许白名单系统调用
     seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(read), 0);
     seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(write), 0);
     seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(exit), 0);
     seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(exit_group), 0);
-    
+
     seccomp_load(ctx);
     seccomp_release(ctx);
 }
@@ -420,6 +483,7 @@ void setup_seccomp(void) {
 **威胁描述**: C语言手动内存管理容易出错，导致UAF、双重释放等漏洞。
 
 **防护代码**:
+
 ```c
 #include <stdlib.h>
 #include <string.h>
@@ -449,7 +513,7 @@ static int mem_count = 0;
 void *safe_malloc_impl(size_t size, const char *file, int line) {
     if (size == 0) return NULL;
     if (size > PTRDIFF_MAX) return NULL;  // 防止溢出
-    
+
     void *ptr = malloc(size);
     if (ptr) {
         if (mem_count < MAX_TRACKED_PTRS) {
@@ -469,7 +533,7 @@ void *safe_malloc_impl(size_t size, const char *file, int line) {
 
 void safe_free_impl(void **ptr) {
     if (!ptr || !*ptr) return;
-    
+
     // 查找记录
     for (int i = 0; i < mem_count; i++) {
         if (mem_records[i].ptr == *ptr) {
@@ -482,7 +546,7 @@ void safe_free_impl(void **ptr) {
             break;
         }
     }
-    
+
     free(*ptr);
     *ptr = NULL;  // 防止悬空指针
 }
@@ -501,6 +565,7 @@ void *safe_calloc_impl(size_t nmemb, size_t size, const char *file, int line) {
 **威胁描述**: 释放内存后继续使用，可能导致数据泄露或代码执行。
 
 **防护代码**:
+
 ```c
 // UAF检测模式
 #define UAF_SENTINEL 0xDEADBEEFCAFEBABEULL
@@ -515,28 +580,28 @@ typedef struct {
 void *guarded_alloc(size_t size) {
     guarded_block_t *block = malloc(sizeof(guarded_block_t) + size);
     if (!block) return NULL;
-    
+
     block->sentinel = UAF_SENTINEL;
     block->size = size;
-    
+
     return block->data;
 }
 
 void guarded_free(void *ptr) {
     if (!ptr) return;
-    
+
     guarded_block_t *block = (void *)((char *)ptr - sizeof(guarded_block_t));
-    
+
     // 验证哨兵
     if (block->sentinel != UAF_SENTINEL) {
         fprintf(stderr, "[FATAL] Invalid free or heap corruption\n");
         abort();
     }
-    
+
     // 毒化内存
     memset(block->data, 0xDD, block->size);  // 0xDD = dead
     block->sentinel = 0xBADC0DE;
-    
+
     free(block);
 }
 
@@ -566,6 +631,7 @@ void smart_free(smart_ptr_t *sp) {
 ### 3.3 双重释放防护
 
 **防护代码**:
+
 ```c
 #include <pthread.h>
 
@@ -574,15 +640,15 @@ static pthread_mutex_t free_lock = PTHREAD_MUTEX_INITIALIZER;
 // 线程安全的双重释放防护
 void thread_safe_free(void **ptr) {
     if (!ptr || !*ptr) return;
-    
+
     pthread_mutex_lock(&free_lock);
-    
+
     // 原子操作：检查并置空
     void *to_free = *ptr;
     *ptr = NULL;  // 立即置空
-    
+
     pthread_mutex_unlock(&free_lock);
-    
+
     free(to_free);
 }
 
@@ -596,7 +662,7 @@ typedef struct refcounted {
 void *refcounted_alloc(size_t size, void (*dtor)(void *)) {
     refcounted_t *rc = malloc(sizeof(refcounted_t) + size);
     if (!rc) return NULL;
-    
+
     rc->count = 1;
     rc->destructor = dtor;
     return rc->data;
@@ -610,7 +676,7 @@ void refcounted_acquire(void *ptr) {
 
 void refcounted_release(void **ptr) {
     if (!ptr || !*ptr) return;
-    
+
     refcounted_t *rc = (void *)((char *)*ptr - sizeof(refcounted_t));
     if (__sync_sub_and_fetch(&rc->count, 1) == 0) {
         if (rc->destructor) {
@@ -625,6 +691,7 @@ void refcounted_release(void **ptr) {
 ### 3.4 未初始化内存防护
 
 **防护代码**:
+
 ```c
 // 强制初始化宏
 #define DECLARE_ARRAY(type, name, size) \
@@ -712,17 +779,17 @@ static void *(*volatile secure_memset)(void *, int, size_t) = memset;
 // 敏感数据清理示例
 void process_password(const char *input) {
     char password[128];
-    
+
     if (strlen(input) >= sizeof(password)) {
         return;
     }
-    
+
     strncpy(password, input, sizeof(password) - 1);
     password[sizeof(password) - 1] = '\0';
-    
+
     // 使用密码...
     verify_password(password);
-    
+
     // 立即安全清零
     SECURE_ZERO(password, sizeof(password));
 }
@@ -760,6 +827,7 @@ static inline void cleanup_crypto_key(crypto_key_t **k) {
 **威胁描述**: C标准字符串函数缺乏边界检查，易导致缓冲区溢出。
 
 **防护代码**:
+
 ```c
 #include <stddef.h>
 #include <stdbool.h>
@@ -769,29 +837,29 @@ static inline void cleanup_crypto_key(crypto_key_t **k) {
 #ifndef HAVE_STRLCPY
 size_t strlcpy(char *dst, const char *src, size_t size) {
     size_t srclen = strlen(src);
-    
+
     if (size > 0) {
         size_t copylen = (srclen >= size) ? size - 1 : srclen;
         memcpy(dst, src, copylen);
         dst[copylen] = '\0';
     }
-    
+
     return srclen;  // 返回源字符串长度
 }
 
 size_t strlcat(char *dst, const char *src, size_t size) {
     size_t dstlen = strnlen(dst, size);
-    
+
     if (dstlen >= size) {
         return dstlen + strlen(src);  // dst未正确终止
     }
-    
+
     size_t srclen = strlen(src);
     size_t copylen = (srclen >= size - dstlen) ? size - dstlen - 1 : srclen;
-    
+
     memcpy(dst + dstlen, src, copylen);
     dst[dstlen + copylen] = '\0';
-    
+
     return dstlen + srclen;
 }
 #endif
@@ -812,12 +880,12 @@ void safe_string_init(safe_string_t *str) {
 
 bool safe_string_set(safe_string_t *str, const char *src) {
     if (!str || !src) return false;
-    
+
     size_t srclen = strlen(src);
     if (srclen > str->capacity) {
         return false;  // 过长
     }
-    
+
     memcpy(str->data, src, srclen + 1);
     str->len = srclen;
     return true;
@@ -825,12 +893,12 @@ bool safe_string_set(safe_string_t *str, const char *src) {
 
 bool safe_string_append(safe_string_t *str, const char *src) {
     if (!str || !src) return false;
-    
+
     size_t srclen = strlen(src);
     if (str->len + srclen > str->capacity) {
         return false;
     }
-    
+
     memcpy(str->data + str->len, src, srclen + 1);
     str->len += srclen;
     return true;
@@ -843,17 +911,17 @@ int safe_snprintf(char *str, size_t size, const char *format, ...) {
     if (!str || size == 0 || !format) {
         return -1;
     }
-    
+
     va_list args;
     va_start(args, format);
     int ret = vsnprintf(str, size, format, args);
     va_end(args);
-    
+
     if (ret < 0 || (size_t)ret >= size) {
         str[size - 1] = '\0';  // 确保终止
         return -1;  // 截断或错误
     }
-    
+
     return ret;
 }
 
@@ -868,11 +936,11 @@ int timing_safe_compare(const void *a, const void *b, size_t len) {
     const volatile unsigned char *pa = a;
     const volatile unsigned char *pb = b;
     unsigned char result = 0;
-    
+
     for (size_t i = 0; i < len; i++) {
         result |= pa[i] ^ pb[i];
     }
-    
+
     return result;  // 0表示相等，非0表示不等
 }
 ```
@@ -880,6 +948,7 @@ int timing_safe_compare(const void *a, const void *b, size_t len) {
 ### 4.2 多字节字符安全
 
 **防护代码**:
+
 ```c
 #include <wchar.h>
 #include <locale.h>
@@ -899,55 +968,55 @@ bool is_utf8_continuation(char c) {
 // 获取UTF-8字符长度（首字节）
 int utf8_char_len(char first_byte) {
     unsigned char c = (unsigned char)first_byte;
-    
+
     if (c < 0x80) return 1;
     if ((c & 0xE0) == 0xC0) return 2;
     if ((c & 0xF0) == 0xE0) return 3;
     if ((c & 0xF8) == 0xF0) return 4;
-    
+
     return -1;  // 非法首字节
 }
 
 // 验证UTF-8字符串有效性
 bool validate_utf8(const char *str) {
     if (!str) return false;
-    
+
     for (const char *p = str; *p; ) {
         int len = utf8_char_len(*p);
         if (len < 0) return false;
-        
+
         // 检查后续字节
         for (int i = 1; i < len; i++) {
             if (!p[i] || !is_utf8_continuation(p[i])) {
                 return false;
             }
         }
-        
+
         p += len;
     }
-    
+
     return true;
 }
 
 // 安全的多字节字符串截断
 bool safe_utf8_truncate(char *str, size_t max_bytes, size_t max_chars) {
     if (!str || max_bytes == 0) return false;
-    
+
     size_t bytes = 0;
     size_t chars = 0;
-    
+
     for (const char *p = str; *p && bytes < max_bytes - 1 && chars < max_chars; ) {
         int char_len = utf8_char_len(*p);
         if (char_len < 0) char_len = 1;  // 跳过非法字节
-        
+
         // 检查是否超出边界
         if (bytes + char_len > max_bytes - 1) break;
-        
+
         bytes += char_len;
         chars++;
         p += char_len;
     }
-    
+
     str[bytes] = '\0';
     return true;
 }
@@ -955,22 +1024,22 @@ bool safe_utf8_truncate(char *str, size_t max_bytes, size_t max_chars) {
 // 安全的宽字符转换
 size_t safe_mbstowcs(wchar_t *dest, const char *src, size_t max) {
     if (!src || max == 0) return (size_t)-1;
-    
+
     // 先验证UTF-8
     if (!validate_utf8(src)) {
         return (size_t)-1;
     }
-    
+
     size_t result = mbstowcs(dest, src, max);
     if (result == (size_t)-1) {
         return (size_t)-1;
     }
-    
+
     // 确保终止
     if (dest && result >= max) {
         dest[max - 1] = L'\0';
     }
-    
+
     return result;
 }
 ```
@@ -985,12 +1054,12 @@ size_t safe_mbstowcs(wchar_t *dest, const char *src, size_t max) {
 // UTF-8序列有效性验证
 bool utf8_is_valid_sequence(const uint8_t *bytes, size_t len) {
     if (len == 0) return false;
-    
+
     uint8_t c0 = bytes[0];
-    
+
     // 1字节: 0xxxxxxx
     if (c0 < 0x80) return len == 1;
-    
+
     // 2字节: 110xxxxx 10xxxxxx
     if ((c0 & 0xE0) == 0xC0) {
         if (len != 2) return false;
@@ -999,7 +1068,7 @@ bool utf8_is_valid_sequence(const uint8_t *bytes, size_t len) {
         if (c0 < 0xC2) return false;
         return true;
     }
-    
+
     // 3字节: 1110xxxx 10xxxxxx 10xxxxxx
     if ((c0 & 0xF0) == 0xE0) {
         if (len != 3) return false;
@@ -1010,12 +1079,12 @@ bool utf8_is_valid_sequence(const uint8_t *bytes, size_t len) {
         if (c0 == 0xED && bytes[1] >= 0xA0) return false;
         return true;
     }
-    
+
     // 4字节: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
     if ((c0 & 0xF8) == 0xF0) {
         if (len != 4) return false;
-        if ((bytes[1] & 0xC0) != 0x80 || 
-            (bytes[2] & 0xC0) != 0x80 || 
+        if ((bytes[1] & 0xC0) != 0x80 ||
+            (bytes[2] & 0xC0) != 0x80 ||
             (bytes[3] & 0xC0) != 0x80) return false;
         // 检查范围 (F0 90-BF, F4 80-8F)
         if (c0 == 0xF0 && bytes[1] < 0x90) return false;
@@ -1023,32 +1092,32 @@ bool utf8_is_valid_sequence(const uint8_t *bytes, size_t len) {
         if (c0 > 0xF4) return false;
         return true;
     }
-    
+
     return false;
 }
 
 // 安全的字符串长度计算（字符数）
 size_t utf8_strlen_safe(const char *str, size_t max_bytes) {
     if (!str) return 0;
-    
+
     size_t char_count = 0;
     size_t bytes = 0;
-    
+
     while (str[bytes] && bytes < max_bytes) {
         int len = utf8_char_len(str[bytes]);
         if (len < 0) len = 1;  // 跳过非法字节
-        
+
         bytes += len;
         char_count++;
     }
-    
+
     return char_count;
 }
 
 // 规范化路径（防止UTF-8规范化攻击）
 bool normalize_utf8_path(const char *input, char *output, size_t out_size) {
     if (!input || !output || out_size == 0) return false;
-    
+
     size_t j = 0;
     for (size_t i = 0; input[i] && j < out_size - 1; ) {
         // 跳过控制字符
@@ -1056,7 +1125,7 @@ bool normalize_utf8_path(const char *input, char *output, size_t out_size) {
             i++;
             continue;
         }
-        
+
         // 检查多字节序列有效性
         int char_len = utf8_char_len(input[i]);
         if (char_len > 0 && i + char_len <= strlen(input)) {
@@ -1068,11 +1137,11 @@ bool normalize_utf8_path(const char *input, char *output, size_t out_size) {
                 continue;
             }
         }
-        
+
         // 非法字节：用替换字符或跳过
         i++;
     }
-    
+
     output[j] = '\0';
     return true;
 }
@@ -1087,6 +1156,7 @@ bool normalize_utf8_path(const char *input, char *output, size_t out_size) {
 **威胁描述**: 多个线程无同步访问共享数据，导致未定义行为。
 
 **防护代码**:
+
 ```c
 #include <pthread.h>
 #include <stdatomic.h>
@@ -1126,20 +1196,20 @@ void ts_array_destroy(thread_safe_array_t *arr) {
 
 bool ts_array_get(thread_safe_array_t *arr, size_t index, int *value) {
     pthread_rwlock_rdlock(&arr->lock);
-    
+
     bool success = false;
     if (index < arr->size) {
         *value = arr->data[index];
         success = true;
     }
-    
+
     pthread_rwlock_unlock(&arr->lock);
     return success;
 }
 
 bool ts_array_set(thread_safe_array_t *arr, size_t index, int value) {
     pthread_rwlock_wrlock(&arr->lock);
-    
+
     bool success = false;
     if (index < sizeof(arr->data) / sizeof(arr->data[0])) {
         arr->data[index] = value;
@@ -1148,7 +1218,7 @@ bool ts_array_set(thread_safe_array_t *arr, size_t index, int value) {
         }
         success = true;
     }
-    
+
     pthread_rwlock_unlock(&arr->lock);
     return success;
 }
@@ -1157,6 +1227,7 @@ bool ts_array_set(thread_safe_array_t *arr, size_t index, int value) {
 ### 5.2 死锁避免
 
 **防护代码**:
+
 ```c
 #include <pthread.h>
 #include <time.h>
@@ -1182,12 +1253,12 @@ bool mutex_lock_timeout(pthread_mutex_t *mutex, int timeout_ms) {
     clock_gettime(CLOCK_REALTIME, &ts);
     ts.tv_sec += timeout_ms / 1000;
     ts.tv_nsec += (timeout_ms % 1000) * 1000000;
-    
+
     if (ts.tv_nsec >= 1000000000) {
         ts.tv_sec++;
         ts.tv_nsec -= 1000000000;
     }
-    
+
     return pthread_mutex_timedlock(mutex, &ts) == 0;
 }
 
@@ -1203,7 +1274,7 @@ bool lock_multiple(ordered_mutex_t *locks[], size_t count, int timeout_ms) {
             }
         }
     }
-    
+
     // 按顺序获取
     size_t acquired = 0;
     for (size_t i = 0; i < count; i++) {
@@ -1216,7 +1287,7 @@ bool lock_multiple(ordered_mutex_t *locks[], size_t count, int timeout_ms) {
         }
         acquired++;
     }
-    
+
     return true;
 }
 
@@ -1228,12 +1299,12 @@ void unlock_multiple(ordered_mutex_t *locks[], size_t count) {
 }
 
 // 使用示例
-void safe_transfer(thread_safe_array_t *from, thread_safe_array_t *to, 
+void safe_transfer(thread_safe_array_t *from, thread_safe_array_t *to,
                    size_t index, int value) {
     ordered_mutex_t lock1 = {from->lock, LOCK_ORDER_A};
     ordered_mutex_t lock2 = {to->lock, LOCK_ORDER_B};
     ordered_mutex_t *locks[] = {&lock1, &lock2};
-    
+
     if (lock_multiple(locks, 2, 1000)) {
         // 执行操作
         int val;
@@ -1273,14 +1344,14 @@ void lf_queue_enqueue(lockfree_queue_t *q, void *data) {
     node_t *new_node = malloc(sizeof(node_t));
     new_node->data = data;
     atomic_init(&new_node->next, NULL);
-    
+
     node_t *tail;
     node_t *next;
-    
+
     while (1) {
         tail = atomic_load(&q->tail);
         next = atomic_load(&tail->next);
-        
+
         if (tail == atomic_load(&q->tail)) {
             if (next == NULL) {
                 // 尝试链接新节点
@@ -1293,7 +1364,7 @@ void lf_queue_enqueue(lockfree_queue_t *q, void *data) {
             }
         }
     }
-    
+
     // 尝试更新tail
     atomic_compare_exchange_weak(&q->tail, &tail, new_node);
 }
@@ -1302,12 +1373,12 @@ bool lf_queue_dequeue(lockfree_queue_t *q, void **data) {
     node_t *head;
     node_t *tail;
     node_t *next;
-    
+
     while (1) {
         head = atomic_load(&q->head);
         tail = atomic_load(&q->tail);
         next = atomic_load(&head->next);
-        
+
         if (head == atomic_load(&q->head)) {
             if (head == tail) {
                 if (next == NULL) {
@@ -1322,7 +1393,7 @@ bool lf_queue_dequeue(lockfree_queue_t *q, void **data) {
             }
         }
     }
-    
+
     free(head);
     return true;
 }
@@ -1331,14 +1402,14 @@ bool lf_queue_dequeue(lockfree_queue_t *q, void **data) {
 void memory_order_examples(void) {
     atomic_int x = ATOMIC_VAR_INIT(0);
     atomic_int y = ATOMIC_VAR_INIT(0);
-    
+
     // memory_order_relaxed: 无同步，仅原子性
     atomic_fetch_add_explicit(&x, 1, memory_order_relaxed);
-    
+
     // memory_order_acquire/release: 生产者-消费者同步
     atomic_store_explicit(&x, 1, memory_order_release);
     int val = atomic_load_explicit(&x, memory_order_acquire);
-    
+
     // memory_order_seq_cst: 全局顺序（默认，最保守）
     atomic_store(&x, 1);  // 等价于 seq_cst
 }
@@ -1398,22 +1469,22 @@ typedef struct {
 void worker_thread(void *unused) {
     thread_context_t *ctx = get_thread_context();
     ctx->request_count = 0;
-    
+
     while (1) {
         task_t *task = get_next_task();
         if (!task) break;
-        
+
         // 每个任务前重置TLS
         memset(ctx->session_id, 0, sizeof(ctx->session_id));
-        
+
         task->task_fn(task->arg);
-        
+
         ctx->request_count++;
-        
+
         // 任务后清理
         cleanup_task_data();
     }
-    
+
     cleanup_thread_context();
 }
 
@@ -1435,6 +1506,7 @@ _Thread_local thread_context_t c11_context;
 **威胁描述**: 使用可预测的随机数会导致安全令牌、密钥被猜测。
 
 **防护代码**:
+
 ```c
 #include <fcntl.h>
 #include <unistd.h>
@@ -1451,7 +1523,7 @@ secure_rng_t g_rng = {-1, false};
 
 bool secure_rng_init(void) {
     if (g_rng.initialized) return true;
-    
+
     // Linux/Unix: /dev/urandom（非阻塞）或 /dev/random（阻塞，更安全但慢）
     g_rng.fd = open("/dev/urandom", O_RDONLY | O_CLOEXEC);
     if (g_rng.fd < 0) {
@@ -1462,7 +1534,7 @@ bool secure_rng_init(void) {
         return false;
         #endif
     }
-    
+
     g_rng.initialized = true;
     return true;
 }
@@ -1479,13 +1551,13 @@ bool secure_random_bytes(void *buf, size_t len) {
     if (!g_rng.initialized && !secure_rng_init()) {
         return false;
     }
-    
+
     unsigned char *p = buf;
     size_t total = 0;
-    
+
     while (total < len) {
         ssize_t n;
-        
+
         #ifdef SYS_getrandom
         if (g_rng.fd == -2) {
             n = syscall(SYS_getrandom, p + total, len - total, 0);
@@ -1494,21 +1566,21 @@ bool secure_random_bytes(void *buf, size_t len) {
         {
             n = read(g_rng.fd, p + total, len - total);
         }
-        
+
         if (n < 0) {
             if (errno == EINTR) continue;
             return false;
         }
         total += n;
     }
-    
+
     return true;
 }
 
 // 生成安全随机整数
 bool secure_random_int(int min, int max, int *result) {
     if (min >= max) return false;
-    
+
     uint32_t range = (uint32_t)(max - min);
     uint32_t mask = range;
     mask |= mask >> 1;
@@ -1516,7 +1588,7 @@ bool secure_random_int(int min, int max, int *result) {
     mask |= mask >> 4;
     mask |= mask >> 8;
     mask |= mask >> 16;
-    
+
     uint32_t value;
     do {
         if (!secure_random_bytes(&value, sizeof(value))) {
@@ -1524,7 +1596,7 @@ bool secure_random_int(int min, int max, int *result) {
         }
         value &= mask;
     } while (value >= range);
-    
+
     *result = min + (int)value;
     return true;
 }
@@ -1559,8 +1631,8 @@ typedef enum {
     HASH_SHA512
 } hash_type_t;
 
-bool compute_hash(const void *data, size_t len, 
-                  hash_type_t type, 
+bool compute_hash(const void *data, size_t len,
+                  hash_type_t type,
                   unsigned char *out, size_t *out_len) {
     const EVP_MD *md;
     switch (type) {
@@ -1569,14 +1641,14 @@ bool compute_hash(const void *data, size_t len,
         case HASH_SHA512: md = EVP_sha512(); *out_len = 64; break;
         default: return false;
     }
-    
+
     EVP_MD_CTX *ctx = EVP_MD_CTX_new();
     if (!ctx) return false;
-    
+
     bool success = EVP_DigestInit_ex(ctx, md, NULL) &&
                    EVP_DigestUpdate(ctx, data, len) &&
                    EVP_DigestFinal_ex(ctx, out, NULL);
-    
+
     EVP_MD_CTX_free(ctx);
     return success;
 }
@@ -1593,7 +1665,7 @@ bool compute_hmac(const void *key, size_t key_len,
         case HASH_SHA512: md = EVP_sha512(); *out_len = 64; break;
         default: return false;
     }
-    
+
     unsigned int len;
     HMAC(md, key, (int)key_len, data, data_len, out, &len);
     *out_len = len;
@@ -1611,8 +1683,8 @@ bool derive_key(const char *password, const void *salt, size_t salt_len,
         case HASH_SHA512: md = EVP_sha512(); break;
         default: return false;
     }
-    
-    return PKCS5_PBKDF2_HMAC(password, -1, salt, (int)salt_len, 
+
+    return PKCS5_PBKDF2_HMAC(password, -1, salt, (int)salt_len,
                              iterations, md, (int)out_len, out) == 1;
 }
 #endif
@@ -1624,15 +1696,15 @@ bool derive_key(const char *password, const void *salt, size_t salt_len,
 uint32_t fnv1a_hash(const void *data, size_t len) {
     const uint32_t FNV_PRIME = 0x01000193;
     const uint32_t FNV_OFFSET = 0x811c9dc5;
-    
+
     const unsigned char *p = data;
     uint32_t hash = FNV_OFFSET;
-    
+
     for (size_t i = 0; i < len; i++) {
         hash ^= p[i];
         hash *= FNV_PRIME;
     }
-    
+
     return hash;
 }
 ```
@@ -1652,27 +1724,27 @@ typedef struct {
 // 密钥封装
 bool import_key(protected_key_t *pk, const unsigned char *key_data, size_t len) {
     if (len != sizeof(pk->key)) return false;
-    
+
     pthread_mutex_lock(&pk->mutex);
     memcpy(pk->key, key_data, len);
     atomic_store(&pk->locked, false);
     pthread_mutex_unlock(&pk->mutex);
-    
+
     return true;
 }
 
 // 使用密钥时临时解密/解锁
 bool use_key(protected_key_t *pk, bool (*callback)(const unsigned char *key, void *ctx), void *ctx) {
     pthread_mutex_lock(&pk->mutex);
-    
+
     if (atomic_load(&pk->locked)) {
         pthread_mutex_unlock(&pk->mutex);
         return false;
     }
-    
+
     // 执行回调
     bool result = callback(pk->key, ctx);
-    
+
     pthread_mutex_unlock(&pk->mutex);
     return result;
 }
@@ -1688,7 +1760,7 @@ void lock_key(protected_key_t *pk) {
 // 密钥派生最佳实践
 #define MIN_PBKDF2_ITERATIONS 100000  // NIST推荐最少10000，建议100000+
 
-bool secure_derive_key(const char *password, 
+bool secure_derive_key(const char *password,
                        const unsigned char *salt, size_t salt_len,
                        unsigned char *out, size_t out_len) {
     // 生成随机盐
@@ -1700,9 +1772,9 @@ bool secure_derive_key(const char *password,
         salt = random_salt;
         salt_len = sizeof(random_salt);
     }
-    
-    return derive_key(password, salt, salt_len, 
-                      MIN_PBKDF2_ITERATIONS, 
+
+    return derive_key(password, salt, salt_len,
+                      MIN_PBKDF2_ITERATIONS,
                       HASH_SHA256, out, out_len);
 }
 ```
@@ -1724,12 +1796,12 @@ typedef struct {
 sensitive_buffer_t *sensitive_alloc(size_t size) {
     sensitive_buffer_t *buf = calloc(1, sizeof(sensitive_buffer_t));
     if (!buf) return NULL;
-    
+
     if (size > sizeof(buf->data)) {
         free(buf);
         return NULL;
     }
-    
+
     buf->len = size;
     return buf;
 }
@@ -1737,10 +1809,10 @@ sensitive_buffer_t *sensitive_alloc(size_t size) {
 // 释放时清零
 void sensitive_free(sensitive_buffer_t **buf) {
     if (!buf || !*buf) return;
-    
+
     SECURE_ZERO((*buf)->data, (*buf)->len);
     (*buf)->len = 0;
-    
+
     free(*buf);
     *buf = NULL;
 }
@@ -1789,7 +1861,7 @@ bool protect_memory_noaccess(protected_memory_t *pm) {
 bool process_password_securely(const char *user_input) {
     sensitive_buffer_t *password = sensitive_alloc(128);
     if (!password) return false;
-    
+
     // 复制输入
     size_t input_len = strlen(user_input);
     if (input_len >= password->len) {
@@ -1797,13 +1869,13 @@ bool process_password_securely(const char *user_input) {
         return false;
     }
     memcpy(password->data, user_input, input_len);
-    
+
     // 锁定内存
     lock_sensitive_memory(password->data, password->len);
-    
+
     // 使用密码...
     // hash_password(password->data, ...);
-    
+
     // 清理并释放
     sensitive_free(&password);
     return true;
@@ -1852,7 +1924,7 @@ typedef struct {
 // 前置条件
 #define PRECONDITION(expr) DEBUG_ASSERT(expr)
 
-// 后置条件  
+// 后置条件
 #define POSTCONDITION(expr) DEBUG_ASSERT(expr)
 
 bool vector_push(vector_t *v, int value) {
@@ -1860,20 +1932,20 @@ bool vector_push(vector_t *v, int value) {
     PRECONDITION(v != NULL);
     PRECONDITION(v->size <= v->capacity);
     PRECONDITION(v->capacity == 0 || v->data != NULL);
-    
+
     size_t old_size = v->size;
-    
+
     if (v->size >= v->capacity) {
         // 扩展容量...
         return false;
     }
-    
+
     v->data[v->size++] = value;
-    
+
     // 后置条件
     POSTCONDITION(v->size == old_size + 1);
     POSTCONDITION(v->data[v->size - 1] == value);
-    
+
     return true;
 }
 
@@ -1948,12 +2020,12 @@ result_t allocate_buffer(size_t size) {
     if (size == 0 || size > MAX_BUFFER_SIZE) {
         return ERR(ERR_INVALID);
     }
-    
+
     void *ptr = malloc(size);
     if (!ptr) {
         return ERR(ERR_NOMEM);
     }
-    
+
     return OK(ptr);
 }
 
@@ -1962,11 +2034,11 @@ result_t process_data(const void *input, size_t len) {
     if (!buf_result.ok) {
         return buf_result;  // 传播错误
     }
-    
+
     void *buffer = buf_result.value;
-    
+
     // 处理数据...
-    
+
     free(buffer);
     return OK(NULL);
 }
@@ -1974,21 +2046,21 @@ result_t process_data(const void *input, size_t len) {
 // 链式错误处理
 result_t complex_operation(void) {
     void *a = NULL, *b = NULL, *c = NULL;
-    
+
     result_t ra = allocate_buffer(100);
     if (!ra.ok) goto cleanup;
     a = ra.value;
-    
+
     result_t rb = allocate_buffer(200);
     if (!rb.ok) goto cleanup;
     b = rb.value;
-    
+
     result_t rc = allocate_buffer(300);
     if (!rc.ok) goto cleanup;
     c = rc.value;
-    
+
     // 使用a, b, c...
-    
+
 cleanup:
     free(c);
     free(b);
@@ -2009,7 +2081,7 @@ const char *error_string(error_code_t code) {
         [ERR_TIMEOUT] = "Operation timeout",
         [ERR_UNKNOWN] = "Unknown error"
     };
-    
+
     if (code < 0 || (size_t)code >= sizeof(messages)/sizeof(messages[0])) {
         return "Invalid error code";
     }
@@ -2036,15 +2108,15 @@ typedef enum {
 // 敏感数据掩码
 static const char *mask_sensitive(const char *input) {
     static __thread char masked[1024];
-    
+
     // 简单掩码：如果包含"password", "token", "key"等，替换为***
-    if (strcasestr(input, "password") || 
+    if (strcasestr(input, "password") ||
         strcasestr(input, "token") ||
         strcasestr(input, "secret") ||
         strcasestr(input, "key=")) {
         return "***REDACTED***";
     }
-    
+
     // 复制并截断
     strncpy(masked, input, sizeof(masked) - 1);
     masked[sizeof(masked) - 1] = '\0';
@@ -2054,26 +2126,26 @@ static const char *mask_sensitive(const char *input) {
 // 安全日志函数
 void secure_log(log_level_t level, const char *format, ...) {
     if (level < MIN_LOG_LEVEL) return;
-    
+
     // 时间戳
     time_t now = time(NULL);
     struct tm *tm_info = localtime(&now);
     char time_str[32];
     strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", tm_info);
-    
+
     // 级别字符串
     const char *level_str[] = {"DEBUG", "INFO", "WARN", "ERROR", "FATAL"};
-    
+
     // 格式化消息
     char message[4096];
     va_list args;
     va_start(args, format);
     vsnprintf(message, sizeof(message), format, args);
     va_end(args);
-    
+
     // 输出到stderr（生产环境应使用syslog或专用日志库）
     fprintf(stderr, "[%s] [%s] %s\n", time_str, level_str[level], message);
-    
+
     // 关键错误写入syslog
     if (level >= LOG_LEVEL_ERROR) {
         syslog(LOG_ERR, "%s", message);
@@ -2092,7 +2164,7 @@ void audit_log(const char *action, const char *subject, bool success) {
     time_t now = time(NULL);
     char time_str[32];
     strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", gmtime(&now));
-    
+
     syslog(LOG_NOTICE, "AUDIT: time=%s action=%s subject=%s result=%s",
            time_str, action, subject, success ? "SUCCESS" : "FAILURE");
 }
@@ -2129,31 +2201,31 @@ bool drop_privileges(const char *username) {
         perror("getpwnam");
         return false;
     }
-    
+
     // 先初始化组
     if (initgroups(username, pw->pw_gid) != 0) {
         perror("initgroups");
         return false;
     }
-    
+
     // 设置gid
     if (setgid(pw->pw_gid) != 0) {
         perror("setgid");
         return false;
     }
-    
+
     // 设置uid（不可逆）
     if (setuid(pw->pw_uid) != 0) {
         perror("setuid");
         return false;
     }
-    
+
     // 验证降权成功
     if (getuid() == 0 || geteuid() == 0) {
         fprintf(stderr, "Failed to drop root privileges\n");
         return false;
     }
-    
+
     return true;
 }
 
@@ -2164,15 +2236,15 @@ bool drop_privileges(const char *username) {
 bool restrict_capabilities(void) {
     cap_t caps = cap_init();  // 空能力集
     if (!caps) return false;
-    
+
     // 仅保留必要能力（示例：仅保留NET_BIND_SERVICE）
     cap_value_t keep[] = {CAP_NET_BIND_SERVICE};
     cap_set_flag(caps, CAP_PERMITTED, 1, keep, CAP_SET);
     cap_set_flag(caps, CAP_EFFECTIVE, 1, keep, CAP_SET);
-    
+
     bool ok = cap_set_proc(caps) == 0;
     cap_free(caps);
-    
+
     return ok;
 }
 #endif
@@ -2183,39 +2255,39 @@ bool enter_chroot(const char *path) {
         perror("chroot");
         return false;
     }
-    
+
     if (chdir("/") != 0) {
         perror("chdir");
         return false;
     }
-    
+
     return true;
 }
 
 // 资源限制
 bool set_resource_limits(void) {
     struct rlimit limit;
-    
+
     // 限制CPU时间
     limit.rlim_cur = 60;  // 60秒
     limit.rlim_max = 120;
     setrlimit(RLIMIT_CPU, &limit);
-    
+
     // 限制内存
     limit.rlim_cur = 256 * 1024 * 1024;  // 256MB
     limit.rlim_max = 512 * 1024 * 1024;
     setrlimit(RLIMIT_AS, &limit);
-    
+
     // 限制打开文件数
     limit.rlim_cur = 1024;
     limit.rlim_max = 2048;
     setrlimit(RLIMIT_NOFILE, &limit);
-    
+
     // 限制核心文件大小（防止敏感信息泄露）
     limit.rlim_cur = 0;
     limit.rlim_max = 0;
     setrlimit(RLIMIT_CORE, &limit);
-    
+
     return true;
 }
 
@@ -2225,20 +2297,20 @@ bool security_init(const char *run_as_user) {
     if (!set_resource_limits()) {
         return false;
     }
-    
+
     // 2. 限制能力
     #ifdef __linux__
     restrict_capabilities();
     #endif
-    
+
     // 3. 降权
     if (run_as_user && !drop_privileges(run_as_user)) {
         return false;
     }
-    
+
     // 4. 阻止核心转储
     prevent_core_dump();
-    
+
     return true;
 }
 ```
@@ -2371,25 +2443,25 @@ jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
-    
+
     strategy:
       fail-fast: false
       matrix:
         language: [ 'cpp' ]
-        
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
         queries: security-extended,security-and-quality
-        
+
     - name: Autobuild
       uses: github/codeql-action/autobuild@v2
-      
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
 ```
@@ -2675,38 +2747,38 @@ echo "=== 测试完成 ==="
 ```c
 /**
  * C代码安全审计检查清单
- * 
+ *
  * 复制此清单到每个源文件进行自查
  */
 
-/* 
+/*
  * □ 内存管理
  *   - 所有malloc都有对应的free
  *   - 已检查分配失败
  *   - 无双重释放
  *   - 无使用-after-free
  *   - 敏感数据已用memset_s清零
- * 
+ *
  * □ 缓冲区
  *   - 所有字符串操作使用strlcpy/strlcat
  *   - 数组访问有边界检查
  *   - 整数运算检查溢出
- * 
+ *
  * □ 输入处理
  *   - 外部输入经过验证
  *   - 格式化字符串使用"%s", 而非直接传入
  *   - 无命令注入风险
- * 
+ *
  * □ 并发
  *   - 共享数据有适当同步
  *   - 无死锁风险
  *   - 原子操作使用正确
- * 
+ *
  * □ 错误处理
  *   - 所有错误路径正确处理
  *   - 资源在错误时释放
  *   - 不泄露系统信息
- * 
+ *
  * □ 密码学
  *   - 使用加密安全随机数
  *   - 密钥派生使用PBKDF2/Argon2
@@ -2855,12 +2927,14 @@ gcc \
 ## 附录B: 参考资源
 
 ### 标准与规范
+
 - [C11 Standard (ISO/IEC 9899:2011)](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1548.pdf)
 - [SEI CERT C Coding Standard](https://wiki.sei.cmu.edu/confluence/display/c/SEI+CERT+C+Coding+Standard)
 - [MISRA C:2012](https://www.misra.org.uk/)
 - [OWASP C Secure Coding](https://owasp.org/www-project-c-secure-coding/)
 
 ### 工具资源
+
 - [AFL++](https://github.com/AFLplusplus/AFLplusplus) - 模糊测试
 - [Valgrind](https://valgrind.org/) - 内存调试
 - [Clang Static Analyzer](https://clang-analyzer.llvm.org/)
@@ -2868,6 +2942,7 @@ gcc \
 - [Coverity Scan](https://scan.coverity.com/)
 
 ### 安全库
+
 - [libsodium](https://libsodium.gitbook.io/doc/) - 现代加密库
 - [OpenSSL](https://www.openssl.org/) - TLS/加密
 - [libbsd](https://libbsd.freedesktop.org/) - strlcpy等BSD函数
@@ -2899,5 +2974,5 @@ gcc \
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review
