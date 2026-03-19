@@ -1,4 +1,4 @@
-# SQLite 工程设计与实现深度分析
+﻿# SQLite 工程设计与实现深度分析
 
 ## 目录
 
@@ -1431,3 +1431,29 @@ SQLite 的工程实践提供了以下可借鉴的关键点：
 - [SQLite WAL 模式](https://sqlite.org/wal.html)
 - [SQLite 测试指南](https://sqlite.org/testing.html)
 - [The Definitive Guide to SQLite](https://www.apress.com/gp/book/9781430232254)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

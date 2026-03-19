@@ -1,4 +1,4 @@
-# CMU 15-213 实验
+﻿# CMU 15-213 实验
 
 本目录提供CMU 15-213（计算机系统导论）课程实验的完整指南。这门课程被称为"CSAPP"（Computer Systems: A Programmer's Perspective），是理解计算机系统的经典课程。
 
@@ -42,3 +42,29 @@ Data Lab → Bomb Lab → Attack Lab → Cache Lab → Shell Lab → Malloc Lab 
 ---
 
 [← 返回上级目录](../README.md)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

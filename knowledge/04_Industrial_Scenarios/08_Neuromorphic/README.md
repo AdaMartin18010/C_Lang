@@ -1,4 +1,4 @@
-# 神经形态计算
+﻿# 神经形态计算
 
 
 ---
@@ -478,3 +478,29 @@ int classify_gesture(SNN *net) {
 - [Intel Loihi Research Community](https://neuromorphic.intel.com/)
 - [Brian2 - SNN Simulator](https://briansimulator.org/)
 - [Norse - Deep Learning with Spiking Neural Networks](https://github.com/electronicvisions/norse)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

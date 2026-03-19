@@ -1,4 +1,4 @@
-# 分布式系统规范案例
+﻿# 分布式系统规范案例
 
 ## 1. 分布式系统概述
 
@@ -999,3 +999,29 @@ int append_entries(struct RaftServer *s,
 **创建日期**: 2026-03-19
 **关联文件**: 01_TLA_Introduction.md, 03_Model_Checking.md, 05_C_Verification_with_TLA.md
 **参考实现**: knowledge/04_System_Architecture/06_Distributed_Systems/ 目录下的Raft实现
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

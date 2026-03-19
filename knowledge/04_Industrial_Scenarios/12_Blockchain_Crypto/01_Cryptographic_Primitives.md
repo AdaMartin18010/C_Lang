@@ -1,4 +1,4 @@
-# 密码学原语实现 (Cryptographic Primitives)
+﻿# 密码学原语实现 (Cryptographic Primitives)
 
 > **难度**: L5-L6 | **预估学习时间**: 10-12小时
 > **技术栈**: OpenSSL 3.x, libsodium, mbedTLS
@@ -803,3 +803,29 @@ int secure_recv(SecureConnection* conn, void* buf, size_t len) {
 ---
 
 > **关联文档**: [区块链基础](./02_Blockchain_Basics.md) | [硬件安全](../../03_System_Technology_Domains/07_Hardware_Security/README.md) | [Zig安全](../../Zig/Zig_Security_Cryptography.md)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

@@ -1,4 +1,4 @@
-# 无锁编程 (Lock-Free Programming)
+﻿# 无锁编程 (Lock-Free Programming)
 
 ## 目录
 
@@ -1108,3 +1108,29 @@ LF_ASSERT(atomic_load(&q->head) != NULL, "Head cannot be null");
 - [Lock-Free Algorithms](https://www.cs.cmu.edu/~410-s05/lectures/L31_LockFree.pdf)
 - [Hazard Pointers](http://web.cecs.pdx.edu/~walpole/class/cs510/papers/05.pdf)
 - [Linux Kernel RCU](https://www.kernel.org/doc/html/latest/RCU/whatisRCU.html)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

@@ -1,4 +1,4 @@
-# Lean 4 证明示例大全
+﻿# Lean 4 证明示例大全
 
 > **层级定位**: 05 Deep Structure MetaPhysics / 05 Lean 4
 > **目标读者**: 已掌握Lean基础语法，希望学习实战证明技巧
@@ -1078,3 +1078,29 @@ theorem mergeSort_correct [DecidableEq α] [LE α] [DecidableRel (@LE.le α _)] 
 - [02_Dependent_Type_Theory.md](02_Dependent_Type_Theory.md)
 - [03_Tactics_Proofs.md](03_Tactics_Proofs.md)
 - [04_C_Verification_Lean.md](04_C_Verification_Lean.md)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

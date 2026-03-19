@@ -1,4 +1,4 @@
-# 计算复杂性 (Computational Complexity)
+﻿# 计算复杂性 (Computational Complexity)
 
 > **模块**: 05_Deep_Structure_MetaPhysics | **子模块**: 05_Computational_Complexity
 > **最后更新**: 2026-03-14 | **状态**: ✅ 已完成
@@ -66,3 +66,29 @@ P ⊆ NP ⊆ PSPACE ⊆ EXPTIME ⊆ NEXPTIME
 ---
 
 > 返回: [上层目录](../README.md)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

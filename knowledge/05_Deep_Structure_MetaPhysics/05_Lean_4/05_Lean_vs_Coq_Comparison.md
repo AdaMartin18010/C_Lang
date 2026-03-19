@@ -1,4 +1,4 @@
-# Lean 4 vs Coq 详细对比分析
+﻿# Lean 4 vs Coq 详细对比分析
 
 > **层级定位**: 05 Deep Structure MetaPhysics / 05 Lean 4
 > **目标读者**: 已有Coq基础，希望学习Lean 4的开发者
@@ -903,3 +903,29 @@ rw [h]
 - [01_Lean_4_Introduction.md](01_Lean_4_Introduction.md)
 - [03_Tactics_Proofs.md](03_Tactics_Proofs.md)
 - [../03_Verification_Energy/01_Coq_Verification.md](../03_Verification_Energy/01_Coq_Verification.md)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

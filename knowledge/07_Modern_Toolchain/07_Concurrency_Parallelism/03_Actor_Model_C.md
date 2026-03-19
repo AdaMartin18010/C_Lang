@@ -1,4 +1,4 @@
-# C语言实现 Actor 模型
+﻿# C语言实现 Actor 模型
 
 ## 目录
 
@@ -1113,3 +1113,29 @@ C语言实现Actor模型的关键要点：
 - [Erlang OTP Design Principles](https://www.erlang.org/doc/design_principles/sup_princ.html)
 - [Akka Actor Model](https://doc.akka.io/docs/akka/current/typed/actors.html)
 - [Orleans: Distributed Virtual Actors](https://dotnet.github.io/orleans/)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

@@ -1,4 +1,4 @@
-# Raspberry Pi 嵌入式Linux开发完全指南
+﻿# Raspberry Pi 嵌入式Linux开发完全指南
 
 ## 目录
 
@@ -2700,3 +2700,29 @@ RaspberryPi_Embedded_Linux/
 - [Yocto Project Documentation](https://docs.yoctoproject.org/)
 - [PREEMPT_RT Wiki](https://wiki.linuxfoundation.org/realtime/start)
 - [libgpiod Documentation](https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/about/)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

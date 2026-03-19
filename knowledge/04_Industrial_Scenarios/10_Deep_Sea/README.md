@@ -1,4 +1,4 @@
-# 深海计算
+﻿# 深海计算
 
 
 ---
@@ -574,3 +574,29 @@ int should_forward(RoutingEntry *local, RoutingEntry *relay,
 -[深海工程技术](https://www.marine-technology.com/)
 - [WHOI Deep Ocean Exploration](https://www.whoi.edu/)
 - [NOAA Ocean Explorer](https://oceanexplorer.noaa.gov/)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

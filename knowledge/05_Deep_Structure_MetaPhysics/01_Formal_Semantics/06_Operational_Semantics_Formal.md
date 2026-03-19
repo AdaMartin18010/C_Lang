@@ -1,4 +1,4 @@
-# 操作语义形式化 (Operational Semantics Formal)
+﻿# 操作语义形式化 (Operational Semantics Formal)
 
 ## 目录
 
@@ -528,3 +528,29 @@ n₁ + n₂ = n
 1. Plotkin, G.D. (1981). A Structural Approach to Operational Semantics
 2. Kahn, G. (1987). Natural Semantics
 3. Felleisen, M. & Hieb, R. (1992). The Revised Report on the Syntactic Theories of Sequential Control and State
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

@@ -1,4 +1,4 @@
-# Linux Kernel 工具链与工程实践深度分析
+﻿# Linux Kernel 工具链与工程实践深度分析
 
 ## 目录
 
@@ -928,3 +928,29 @@ Linux Kernel 的工程实践提供了以下可借鉴的关键点：
 - [Linux Device Drivers, 3rd Edition](https://lwn.net/Kernel/LDD3/)
 - [Linux Kernel Development, 3rd Edition](https://www.amazon.com/Linux-Kernel-Development-Robert-Love/dp/0672329468)
 - [Kernel Newbies](https://kernelnewbies.org/)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

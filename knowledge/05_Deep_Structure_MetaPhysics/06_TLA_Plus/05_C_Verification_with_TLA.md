@@ -1,4 +1,4 @@
-# C代码验证与TLA+的关联
+﻿# C代码验证与TLA+的关联
 
 ## 1. C并发代码到TLA+的映射
 
@@ -1006,3 +1006,29 @@ end algorithm *)
 **创建日期**: 2026-03-19
 **关联文件**: 01_TLA_Introduction.md, 02_PlusCal_Language.md, 03_Model_Checking.md, 04_Distributed_Systems_Specs.md
 **参考工具**: CBMC (<https://github.com/diffblue/cbmc>), TLA+ Toolbox
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

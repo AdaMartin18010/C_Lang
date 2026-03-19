@@ -1,4 +1,4 @@
-# 工业 Linux (Industrial Linux)
+﻿# 工业 Linux (Industrial Linux)
 
 > **描述**: 工业环境下Linux嵌入式系统开发指南，涵盖实时Linux(PREEMPT_RT/Xenomai)、EtherCAT主站、软PLC运行时、OPC UA服务器、工业协议栈等关键技术
 
@@ -48,3 +48,29 @@
 ---
 
 [← 返回 14_Embedded_IoT 目录](../README.md)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

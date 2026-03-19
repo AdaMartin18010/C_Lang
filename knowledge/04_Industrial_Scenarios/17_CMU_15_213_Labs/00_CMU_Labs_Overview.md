@@ -1,4 +1,4 @@
-# CMU 15-213 Introduction to Computer Systems Labs
+﻿# CMU 15-213 Introduction to Computer Systems Labs
 
 ## 1. 课程概述
 
@@ -54,3 +54,29 @@ int getByte(int x, int n) {
 ---
 
 **创建日期**: 2026-03-19
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

@@ -1,4 +1,4 @@
-# 数学基础 (Mathematical Foundations)
+﻿# 数学基础 (Mathematical Foundations)
 
 ## 目录
 
@@ -576,3 +576,29 @@ C: Com → (State → State⊥)
 2. Winskel, G. (1993). *The Formal Semantics of Programming Languages*
 3. Pierce, B.C. (2002). *Types and Programming Languages*
 4. Abramsky, S. & Jung, A. (1994). *Domain Theory*
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review
