@@ -642,7 +642,7 @@ ait --cpu=Cortex-M7 \
 
 ---
 
-**上一章**: [../04_C_Implementation_Guide/02_Static_Memory_Inference.md](../04_C_Implementation_Guide/02_Static_Memory_Inference.md)
-**下一章**: [../07_Hardware_Acceleration/01_ARM_Ethos_U.md](../07_Hardware_Acceleration/01_ARM_Ethos_U.md)
+**上一章**: 04_C_Implementation_Guide/02_Static_Memory_Inference（待创建）
+**下一章**: 07_Hardware_Acceleration/01_ARM_Ethos_U（待创建）
 
 **最后更新**: 2026-03-18

@@ -459,6 +459,6 @@ void low_power_inference() {
 
 ---
 
-**下一章**: [02_TensorFlow_Lite_Micro.md](./02_TensorFlow_Lite_Micro.md)
+**下一章**: 02_TensorFlow_Lite_Micro（待创建）
 
 **最后更新**: 2026-03-18

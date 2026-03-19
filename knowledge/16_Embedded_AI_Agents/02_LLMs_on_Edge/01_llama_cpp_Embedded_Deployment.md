@@ -486,6 +486,6 @@ export OMP_PLACES=threads
 
 ---
 
-**下一章**: [02_GGML_Optimization.md](./02_GGML_Optimization.md)
+**下一章**: 02_GGML_Optimization（待创建）
 
 **最后更新**: 2026-03-18

@@ -397,8 +397,8 @@ int main() {
 
 ## 后续学习
 
-- [02_OpenClaw_Ecosystem.md](./02_OpenClaw_Ecosystem.md) - OpenClaw完整生态
-- [04_C_Rust_Interop.md](./04_C_Rust_Interop.md) - C与Rust互操作详解
+- 02_OpenClaw_Ecosystem（待创建）- OpenClaw完整生态
+- 04_C_Rust_Interop（待创建）- C与Rust互操作详解
 - [案例研究: ZeroClaw边缘部署](../05_Case_Studies/04_ZeroClaw_Edge_Deployment.md)
 
 ---

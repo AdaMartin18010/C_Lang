@@ -620,7 +620,7 @@ int tflm_cmsis_inference(const uint8_t* model_data,
 
 ---
 
-**上一章**: [04_C_Implementation_Techniques.md](../01_TinyML_Fundamentals/04_C_Implementation_Techniques.md)
-**下一章**: [02_microTVM.md](./02_microTVM.md)
+**上一章**: 04_C_Implementation_Techniques（待创建）
+**下一章**: 02_microTVM（待创建）
 
 **最后更新**: 2026-03-18

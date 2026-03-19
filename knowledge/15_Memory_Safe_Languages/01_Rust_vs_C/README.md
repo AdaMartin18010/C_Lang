@@ -287,9 +287,9 @@ Rust项目:     █                                                <5%
 
 **相关模块**:
 
-- [02_Migration_Strategies/](../02_Migration_Strategies/README.md) - 迁移策略
-- [03_Industry_Cases/](../03_Industry_Cases/README.md) - 行业案例
-- [04_Decision_Frameworks/](../04_Decision_Frameworks/README.md) - 决策框架
+- 02_Migration_Strategies/ - 迁移策略（待创建）
+- 03_Industry_Cases/ - 行业案例（待创建）
+- 04_Decision_Frameworks/ - 决策框架（待创建）
 
 ---
 
