@@ -1,6 +1,28 @@
-# 03_Ada_C_Interoperability
+# Ada与C互操作
 
-本目录涵盖Ada与C语言之间的互操作性，包括双向调用方法。
+> **Ada与C语言之间的双向调用方法、数据类型映射和混合编程最佳实践**
+
+## 概述
+
+Ada与C的互操作性是连接两种语言生态系统的桥梁。C语言拥有庞大的库生态（操作系统API、硬件驱动、通信协议等），而Ada提供了更强的类型安全和验证能力。在实际项目中，经常需要在Ada代码中调用C库（复用现有代码），或在C代码中调用Ada模块（引入高级抽象）。本模块详细介绍了这两种互操作场景的完整实现方法。
+
+Ada语言原生支持C互操作，通过`Interfaces.C`包提供了C类型的Ada映射，通过`Import`和`Export`编译指示（pragma）声明外部子程序和全局变量。这些特性使得Ada可以几乎零开销地调用C代码。反之，C调用Ada稍微复杂一些，需要理解Ada的运行时初始化、命名修饰（name mangling）等问题，但同样是成熟可靠的技术。
+
+数据类型映射是互操作的关键挑战。Ada的强类型系统需要精确对应C的类型定义，包括标量类型（整数、浮点）、数组、结构体、指针和函数指针。本模块提供了详细的类型映射表和实用建议，帮助开发者避免常见的类型不匹配问题。
+
+## 核心概念
+
+- **Interfaces.C包**：Ada标准库提供的C互操作包，定义了C类型（C.int、C.double、C.char等）在Ada中的对应类型。
+
+- **Import编译指示**：`pragma Import(C, Procedure_Name)`声明一个Ada子程序由C实现，链接器会从C库中解析符号。
+
+- **Export编译指示**：`pragma Export(C, Procedure_Name)`导出Ada子程序供C调用，控制符号的可见性和命名。
+
+- **Convention编译指示**：`pragma Convention(C, Type_Name)`指定Ada类型的内存布局与C兼容，用于结构体和函数指针。
+
+- **访问类型映射**：Ada访问类型（access type）与C指针的对应关系，包括空指针检查、指针算术的注意事项。
+
+- **Ada运行时初始化**：C调用Ada时，需要确保Ada运行时库已正确初始化，否则可能导致任务和异常处理失败。
 
 ## 文件列表
 
@@ -8,5 +30,17 @@
 |------|------|
 | [01_Calling_C_from_Ada.md](./01_Calling_C_from_Ada.md) | 从Ada调用C代码 |
 | [02_Calling_Ada_from_C.md](./02_Calling_Ada_from_C.md) | 从C调用Ada代码 |
+
+## 学习路径
+
+1. **基础映射**：学习基本数据类型（int、float、char等）在两种语言之间的映射
+2. **函数调用**：练习简单的函数导入和导出，理解参数传递方式
+3. **复杂类型**：掌握结构体、数组、指针的映射和处理方法
+4. **回调机制**：实现C调用Ada回调，以及Ada调用C回调函数
+5. **项目集成**：学习如何在构建系统中配置Ada-C混合项目
+
+## 参考资源
+
+- [Ada-C Interfacing Guide](https://docs.adacore.com/gnat_ugn-docs/html/gnat_ugn/gnat_ugn/building_executable_programs_with_gnat.html#interfacing-to-other-languages)
 
 [← 返回上级](../README.md)

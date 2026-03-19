@@ -1,11 +1,49 @@
-# 09_Security_Reliability
+# 安全与可靠性
 
-本目录涵盖嵌入式AI系统的安全性和可靠性标准，确保AI应用在关键领域的安全部署。
+> **嵌入式AI系统的安全性、可靠性标准和关键领域安全部署的最佳实践**
+
+## 概述
+
+随着AI系统越来越多地部署在安全关键领域（自动驾驶、医疗设备、工业控制），其安全性和可靠性要求达到了前所未有的高度。与传统软件不同，AI系统引入了新的风险维度：模型的不可解释性、对抗样本攻击、数据投毒、以及训练和运行时环境的安全。这些风险在嵌入式环境中尤为严峻，因为资源受限的设备往往缺乏强大的安全防护能力。
+
+AI安全标准正在快速演进，涵盖了从数据采集、模型训练到部署推理的全生命周期。ISO/IEC 24028提供了AI系统的可信性概述，ISO/IEC 23053定义了AI系统的框架，而特定行业的标准如ISO 26262（汽车功能安全）、IEC 62304（医疗设备软件）也在扩展以覆盖AI组件。理解并遵循这些标准是嵌入式AI项目成功的关键。
+
+可靠性工程关注的是系统在各种故障情况下仍能维持功能的能力。对于嵌入式AI系统，这包括硬件故障（传感器失效、内存损坏）、软件故障（模型推理错误、运行时崩溃）、以及外部攻击（对抗样本、模型窃取）等场景。设计可靠的AI系统需要采用冗余设计、故障检测、 graceful degradation（优雅降级）等技术，确保在组件失效时系统仍能安全运行。
+
+## 核心概念
+
+- **AI功能安全（AI Functional Safety）**：确保AI系统在安全关键应用中正确执行预期功能的工程实践，遵循IEC 61508、ISO 26262等功能安全标准。
+
+- **对抗鲁棒性（Adversarial Robustness）**：AI模型抵御对抗样本攻击的能力，通过对抗训练、输入验证、模型集成等技术提升。
+
+- **运行时监控（Runtime Monitoring）**：在部署环境中持续监控AI系统的行为，检测异常输入、模型漂移和输出异常，触发安全响应。
+
+- **模型验证（Model Verification）**：形式化或非形式化方法验证AI模型的性质，如输出范围、单调性、输入输出关系等。
+
+- **安全启动（Secure Boot）**：确保设备只执行经过授权的固件和AI模型，防止恶意代码注入和模型篡改。
+
+- **故障注入测试（Fault Injection Testing）**：通过人为注入硬件故障和软件异常，验证系统在故障情况下的行为和恢复能力。
 
 ## 文件列表
 
 | 文件 | 描述 |
 |------|------|
 | [01_AI_Safety_Standards.md](./01_AI_Safety_Standards.md) | AI安全标准 |
+
+## 学习路径
+
+1. **安全基础**：学习网络安全和嵌入式系统安全的基本概念
+2. **AI安全**：理解AI特有的安全威胁和防护技术
+3. **功能安全**：掌握IEC 61508、ISO 26262等功能安全标准
+4. **可靠性工程**：学习容错设计、故障检测和恢复技术
+5. **认证流程**：了解AI系统的安全认证过程和文档要求
+
+## 参考资源
+
+- [ISO/IEC 24028 - AI Trustworthiness](https://www.iso.org/standard/77396.html)
+- [ISO 26262 - Road Vehicle Functional Safety](https://www.iso.org/standard/68383.html)
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+- [OWASP ML Top 10](https://owasp.org/www-project-machine-learning-security-top-10/)
+- [AI Safety Institute](https://www.aisi.gov.uk/)
 
 [← 返回上级](../README.md)

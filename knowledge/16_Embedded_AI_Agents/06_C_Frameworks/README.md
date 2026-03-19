@@ -1,11 +1,48 @@
-# 06_C_Frameworks
+# C语言框架
 
-本目录介绍适用于嵌入式AI开发的C语言框架和库。
+> **适用于嵌入式AI开发的C语言神经网络库和机器学习框架详解**
+
+## 概述
+
+嵌入式AI开发需要专门的软件框架支持，这些框架必须在有限的资源下提供高效的神经网络推理能力。与桌面或服务器端的ML框架不同，嵌入式AI框架需要极致的优化：极小的代码体积、极低的内存占用、确定性的执行时间，以及对各种硬件平台的广泛支持。C语言实现的框架在这方面具有天然优势，可以直接操作硬件，消除运行时开销。
+
+CMSIS-NN是ARM生态系统中最广泛使用的嵌入式神经网络库，专门针对Cortex-M处理器进行了汇编级优化。它提供了卷积、池化、全连接、激活函数等常用算子的实现，与TensorFlow Lite Micro等高层框架配合使用，可以构建完整的嵌入式AI应用。除了CMSIS-NN，还有其他优秀的C语言框架，如用于微控制器的microTVM、支持自动微分的TinyMaix等。
+
+选择合适的框架需要考虑多个因素：目标硬件架构（ARM、RISC-V、ESP32等）、支持的模型类型（CNN、RNN、Transformer等）、内存限制、以及开发和部署流程。本模块详细介绍了主流C语言嵌入式AI框架的特性、使用方法和最佳实践，帮助开发者为项目选择最合适的技术栈。
+
+## 核心概念
+
+- **CMSIS-NN**：ARM的神经网络内核库，针对Cortex-M系列MCU优化，提供汇编实现的核心算子，与ARM DSP指令集深度集成。
+
+- **TensorFlow Lite Micro**：Google推出的微控制器版TFLite，核心运行时约20KB，支持从TensorFlow模型直接转换，提供C++ API。
+
+- **层融合优化（Layer Fusion）**：将多个神经网络层合并为一个计算步骤，减少中间结果的内存存储和读写开销。
+
+- **算子选择策略（Operator Selection）**：根据硬件能力和模型需求，选择软件实现、DSP优化或硬件加速的算子版本。
+
+- **模型解析器（Model Parser）**：将序列化模型文件（如.tflite）解析为内存数据结构的组件，负责张量分配和算子调度图构建。
+
+- **推理引擎接口（Inference Engine API）**：框架提供的统一编程接口，封装底层实现细节，使应用代码可以方便地加载模型和运行推理。
 
 ## 文件列表
 
 | 文件 | 描述 |
 |------|------|
 | [01_CMSIS_NN.md](./01_CMSIS_NN.md) | CMSIS-NN神经网络库 |
+
+## 学习路径
+
+1. **框架概览**：了解主流嵌入式AI框架的特性和适用场景
+2. **环境配置**：搭建开发环境，下载框架源码和示例项目
+3. **模型转换**：学习如何将训练好的模型转换为框架支持的格式
+4. **API学习**：掌握框架的C API，理解模型加载和推理流程
+5. **性能优化**：学习如何针对特定硬件优化模型和推理性能
+
+## 参考资源
+
+- [CMSIS-NN GitHub](https://github.com/ARM-software/CMSIS-NN)
+- [TensorFlow Lite Micro](https://www.tensorflow.org/lite/microcontrollers)
+- [TinyMaix GitHub](https://github.com/sipeed/TinyMaix)
+- [microTVM Documentation](https://tvm.apache.org/docs/topic/microtvm/)
 
 [← 返回上级](../README.md)

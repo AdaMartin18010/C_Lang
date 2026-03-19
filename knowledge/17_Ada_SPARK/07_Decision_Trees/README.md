@@ -1,11 +1,46 @@
-# 07_Decision_Trees
+# 决策树
 
-本目录包含Ada相关的决策树，帮助开发者进行任务调度和调试决策。
+> **Ada相关的任务调度、调试和开发决策辅助工具与实践指南**
+
+## 概述
+
+决策树是将复杂决策过程可视化的有效工具。在Ada/SPARK开发中，开发者经常面临各种需要权衡的决策：何时使用任务（Task）而非过程调用？如何调试复杂的并发问题？是否应该在某个模块引入形式化验证？本模块提供的决策树工具帮助开发者系统性地分析这些问题，做出明智的选择。
+
+Ada任务调度与调试决策树是本模块的核心内容。Ada的任务模型（基于Rendezvous的并发）虽然功能强大，但也增加了调试难度。决策树通过一系列问题引导开发者：问题是否与并发相关？是否涉及任务间同步？是否出现时序问题？根据回答，决策树会推荐相应的诊断步骤和工具——是查看任务状态、分析入口调用队列，还是使用时序分析工具。
+
+除了具体的调试决策，本模块还涵盖了更广泛的技术决策，如：选择Ada而非C或Rust的场景；确定需要SPARK验证的代码边界；评估Ada.Containers与自定义数据结构的优劣等。这些决策树基于Ada社区的经验总结，帮助开发者避免常见的陷阱，提高开发效率。
+
+## 核心概念
+
+- **任务调度分析（Task Scheduling Analysis）**：评估Ada任务优先级分配、调度策略选择的方法，确保实时性要求得到满足。
+
+- **死锁检测（Deadlock Detection）**：识别任务间循环等待状态的技术，Ada运行时和静态分析工具可提供支持。
+
+- **入口调用分析（Entry Call Analysis）**：理解任务入口（Entry）调用的流程，诊断接受的（Accept）和选择的（Select）语句相关问题。
+
+- **时序调试（Timing Debugging）**：分析任务响应时间、识别时序违规的技术，通常需要专门的Trace和Profiler工具。
+
+- **决策矩阵（Decision Matrix）**：将Ada技术选择的多个因素（安全性要求、团队技能、认证需求）量化评估的工具。
+
+- **根因分析（Root Cause Analysis）**：系统化诊断Ada软件问题的结构化方法，从现象出发逐步缩小问题范围。
 
 ## 文件列表
 
 | 文件 | 描述 |
 |------|------|
 | [01_Ada_Task_Scheduling_Debug.md](./01_Ada_Task_Scheduling_Debug.md) | Ada任务调度与调试决策树 |
+
+## 学习路径
+
+1. **问题分类**：学习如何对Ada开发中的问题进行分类和初步诊断
+2. **决策流程**：理解决策树的结构和使用方法
+3. **工具掌握**：学习使用GPS、GNAT Studio等IDE的调试功能
+4. **案例分析**：通过实际案例练习使用决策树解决问题
+5. **决策优化**：根据项目反馈不断完善决策标准
+
+## 参考资源
+
+- [AdaCore Debugging Guide](https://docs.adacore.com/gnat_ugn-docs/html/gnat_ugn/gnat_ugn/debugging.html)
+- [Ada Tasking and Concurrency](https://learn.adacore.com/courses/intro-to-ada/chapters/tasking.html)
 
 [← 返回上级](../README.md)
