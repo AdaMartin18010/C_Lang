@@ -1,0 +1,535 @@
+{
+  "summary": {
+    "total_files": 905,
+    "size_distribution": {
+      "< 5KB": 126,
+      "5-10KB": 143,
+      "10-20KB": 280,
+      "> 20KB": 356
+    },
+    "structure_coverage": {
+      "概念定义": 294,
+      "属性说明": 285,
+      "示例代码": 834,
+      "反例/陷阱": 387,
+      "形式化描述": 176,
+      "思维导图/图表": 271
+    },
+    "score_distribution": {
+      "优秀 (80-100)": 50,
+      "良好 (60-79)": 148,
+      "一般 (40-59)": 481,
+      "薄弱 (20-39)": 160,
+      "需重点加强 (0-19)": 66
+    },
+    "module_avg_scores": {
+      "00_INDEX.md": 100.0,
+      "content_quality_report.md": 45.0,
+      "DEEP_CONTENT_QUALITY_ANALYSIS_REPORT.md": 45.0,
+      "KNOWLEDGE_GRAPH.md": 40.0,
+      "README.md": 85.0,
+      "TOOLCHAIN_IMPROVEMENT_SUMMARY.md": 25.0,
+      "00_VERSION_TRACKING": 40.9,
+      "01_Core_Knowledge_System": 48.3,
+      "02_Formal_Semantics_and_Physics": 45.3,
+      "03_System_Technology_Domains": 54.6,
+      "04_Industrial_Scenarios": 44.4,
+      "05_Deep_Structure_MetaPhysics": 56.8,
+      "06_Thinking_Representation": 47.5,
+      "07_Modern_Toolchain": 46.7,
+      "08_Zig_C_Connection": 56.6,
+      "09_Data_Structures_Algorithms": 42.3,
+      "10_WebAssembly_C": 46.0,
+      "11_Machine_Learning_C": 48.3,
+      "12_Practice_Exercises": 38.9,
+      "14_Video_Tutorials": 33.3,
+      "15_Memory_Safe_Languages": 30.4,
+      "16_Embedded_AI_Agents": 28.3,
+      "17_Ada_SPARK": 29.5,
+      "templates": 77.5,
+      "Zig": 39.8
+    }
+  },
+  "weak_files": [
+    {
+      "path": "15_Memory_Safe_Languages\\02_Migration_Strategies\\README.md",
+      "size_kb": 0.19,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 10,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "16_Embedded_AI_Agents\\04_C_Implementation_Guide\\README.md",
+      "size_kb": 0.2,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 10,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "15_Memory_Safe_Languages\\03_Industry_Cases\\README.md",
+      "size_kb": 0.2,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 10,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "15_Memory_Safe_Languages\\04_Decision_Frameworks\\README.md",
+      "size_kb": 0.2,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 10,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "16_Embedded_AI_Agents\\06_C_Frameworks\\README.md",
+      "size_kb": 0.24,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 12,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "04_Industrial_Scenarios\\15_Industrial_Communication\\Data_Link_Layer\\README.md",
+      "size_kb": 0.24,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 12,
+      "code_block_count": 0,
+      "heading_count": 3
+    },
+    {
+      "path": "04_Industrial_Scenarios\\14_Embedded_IoT\\Industrial_Linux\\README.md",
+      "size_kb": 0.26,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 12,
+      "code_block_count": 0,
+      "heading_count": 3
+    },
+    {
+      "path": "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\tools\\README.md",
+      "size_kb": 0.28,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 14,
+      "code_block_count": 0,
+      "heading_count": 3
+    },
+    {
+      "path": "02_Formal_Semantics_and_Physics\\18_FPGA_Labs\\code\\lab6\\README.md",
+      "size_kb": 0.29,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 18,
+      "code_block_count": 0,
+      "heading_count": 3
+    },
+    {
+      "path": "16_Embedded_AI_Agents\\03_AI_Agent_Runtime\\README.md",
+      "size_kb": 0.3,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 12,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "16_Embedded_AI_Agents\\08_Real_Time_AI\\README.md",
+      "size_kb": 0.3,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 12,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "02_Formal_Semantics_and_Physics\\18_FPGA_Labs\\reports\\README.md",
+      "size_kb": 0.3,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 19,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "02_Formal_Semantics_and_Physics\\18_FPGA_Labs\\code\\lab2\\README.md",
+      "size_kb": 0.3,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 18,
+      "code_block_count": 0,
+      "heading_count": 3
+    },
+    {
+      "path": "17_Ada_SPARK\\07_Decision_Trees\\README.md",
+      "size_kb": 0.31,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 12,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "16_Embedded_AI_Agents\\05_Case_Studies\\README.md",
+      "size_kb": 0.31,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 12,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "16_Embedded_AI_Agents\\07_Hardware_Acceleration\\README.md",
+      "size_kb": 0.31,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 12,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "16_Embedded_AI_Agents\\09_Security_Reliability\\README.md",
+      "size_kb": 0.31,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 12,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "02_Formal_Semantics_and_Physics\\18_FPGA_Labs\\code\\lab3\\README.md",
+      "size_kb": 0.31,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 18,
+      "code_block_count": 0,
+      "heading_count": 3
+    },
+    {
+      "path": "17_Ada_SPARK\\08_Comparison_Matrices\\README.md",
+      "size_kb": 0.32,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 12,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "16_Embedded_AI_Agents\\02_LLMs_on_Edge\\README.md",
+      "size_kb": 0.32,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 12,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "02_Formal_Semantics_and_Physics\\18_FPGA_Labs\\code\\lab4\\README.md",
+      "size_kb": 0.32,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 18,
+      "code_block_count": 0,
+      "heading_count": 3
+    },
+    {
+      "path": "02_Formal_Semantics_and_Physics\\18_FPGA_Labs\\code\\lab5\\README.md",
+      "size_kb": 0.32,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 18,
+      "code_block_count": 0,
+      "heading_count": 3
+    },
+    {
+      "path": "17_Ada_SPARK\\02_SPARK_Verification\\README.md",
+      "size_kb": 0.33,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 13,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "16_Embedded_AI_Agents\\01_TinyML_Fundamentals\\README.md",
+      "size_kb": 0.34,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 12,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "04_Industrial_Scenarios\\15_Industrial_Communication\\Physical_Layer\\README.md",
+      "size_kb": 0.34,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 15,
+      "code_block_count": 0,
+      "heading_count": 3
+    },
+    {
+      "path": "02_Formal_Semantics_and_Physics\\18_FPGA_Labs\\code\\lab1\\README.md",
+      "size_kb": 0.35,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 18,
+      "code_block_count": 0,
+      "heading_count": 3
+    },
+    {
+      "path": "17_Ada_SPARK\\03_Ada_C_Interoperability\\README.md",
+      "size_kb": 0.36,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 13,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "17_Ada_SPARK\\06_Migration_from_C\\README.md",
+      "size_kb": 0.37,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 13,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "14_Video_Tutorials\\02_Compiler_Explorer_Integration\\README.md",
+      "size_kb": 0.42,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 13,
+      "code_block_count": 0,
+      "heading_count": 2
+    },
+    {
+      "path": "14_Video_Tutorials\\04_Video_Production_Guide\\README.md",
+      "size_kb": 0.42,
+      "structure_score": 0,
+      "missing_elements": [
+        "概念定义",
+        "属性说明",
+        "示例代码",
+        "反例/陷阱",
+        "形式化描述",
+        "思维导图/图表"
+      ],
+      "line_count": 13,
+      "code_block_count": 0,
+      "heading_count": 2
+    }
+  ]
+}
