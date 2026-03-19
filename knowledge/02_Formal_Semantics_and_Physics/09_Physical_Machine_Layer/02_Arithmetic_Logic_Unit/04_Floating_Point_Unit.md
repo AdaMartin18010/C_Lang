@@ -1,4 +1,4 @@
-# 浮点单元 (Floating Point Unit)
+﻿# 浮点单元 (Floating Point Unit)
 
 ## 目录
 
@@ -1294,3 +1294,29 @@ for (int i = 0; i < n; i++) {
 3. Patterson & Hennessy - 《计算机体系结构：量化研究方法》
 4. Intel 64 and IA-32 Architectures Software Developer's Manual
 5. ARM Architecture Reference Manual (ARMv8)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

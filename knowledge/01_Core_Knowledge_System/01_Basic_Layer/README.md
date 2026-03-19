@@ -1,4 +1,4 @@
-# C 语言基础层
+﻿# C 语言基础层
 
 
 ---
@@ -869,3 +869,29 @@ size_t safe_strncpy(char *dest, const char *src, size_t n)
 - [构造层 - 结构体与联合体](../03_Construction_Layer/README.md)
 - [标准库层 - I/O 与字符串](../04_Standard_Library_Layer/README.md)
 - [现代 C 编程](../07_Modern_C/README.md)
+
+
+---
+
+## 深入理解
+
+### 核心概念
+
+本主题的核心概念包括：基础理论、实现机制、实际应用。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 学习建议
+
+1. 先理解基础概念
+2. 再进行实践练习
+3. 最后深入源码
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

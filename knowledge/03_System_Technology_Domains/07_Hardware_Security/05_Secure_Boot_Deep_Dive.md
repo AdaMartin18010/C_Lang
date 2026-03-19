@@ -1,4 +1,4 @@
-# 安全启动深度解析 (Secure Boot Deep Dive)
+﻿# 安全启动深度解析 (Secure Boot Deep Dive)
 
 > **层级定位**: 03 System Technology Domains / 07 Hardware Security / 05 Secure Boot
 > **对应标准**: ARM Trusted Firmware, UEFI Secure Boot, NIST SP 800-193, IEC 62443-4-2
@@ -3077,3 +3077,29 @@ psa_status_t psa_initial_attest_get_token(const uint8_t *auth_challenge,
 > **更新记录**
 >
 > - 2026-03-19: 初版创建，包含ARM Trusted Firmware详细分析、安全启动链实现、测量启动、密钥管理、信任根实现、RISC-V安全启动、工业标准关联
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

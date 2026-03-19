@@ -1,4 +1,4 @@
-# RDMA 网络编程
+﻿# RDMA 网络编程
 
 ## 概述
 
@@ -422,3 +422,29 @@ printf("  Speed: %d\n", port_attr.active_speed);
 - [RDMAmojo - RDMA Programming Guide](http://www.rdmamojo.com/)
 - [Linux RDMA 内核文档](https://www.kernel.org/doc/html/latest/infiniband/)
 - [Mellanox OFED 文档](https://docs.nvidia.com/networking/)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

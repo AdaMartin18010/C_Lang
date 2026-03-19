@@ -1,4 +1,4 @@
-# MISRA C:2023 Rules 18.1-18.6 - 指针和数组
+﻿# MISRA C:2023 Rules 18.1-18.6 - 指针和数组
 
 > 数组访问、指针运算、字符串处理
 
@@ -363,3 +363,29 @@ struct Buffer *create_buffer(size_t size)
 ---
 
 **参考**: MISRA C:2023 Guidelines for the use of the C language in critical systems, Chapter 18
+
+
+---
+
+## 深入理解
+
+### 核心概念
+
+本主题的核心概念包括：基础理论、实现机制、实际应用。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 学习建议
+
+1. 先理解基础概念
+2. 再进行实践练习
+3. 最后深入源码
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

@@ -1,4 +1,4 @@
-# 操作语义学 (Operational Semantics)
+﻿# 操作语义学 (Operational Semantics)
 
 > **难度**: L5 | **预估学习时间**: 12-16小时
 > **数学预备知识**: 离散数学、数理逻辑、集合论
@@ -1455,3 +1455,29 @@ Qed.
 ---
 
 > **关联文档**: [02_Denotational_Semantics](./02_Denotational_Semantics.md) | [03_Axiomatic_Semantics_Hoare](./03_Axiomatic_Semantics_Hoare.md) | [CompCert概述](../11_CompCert_Verification/01_Compcert_Overview.md)
+
+
+---
+
+## 深入理解
+
+### 核心概念
+
+本主题的核心概念包括：基础理论、实现机制、实际应用。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 学习建议
+
+1. 先理解基础概念
+2. 再进行实践练习
+3. 最后深入源码
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

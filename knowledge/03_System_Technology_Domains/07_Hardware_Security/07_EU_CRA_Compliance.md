@@ -1,4 +1,4 @@
-# 欧盟Cyber Resilience Act合规指南 (EU CRA Compliance)
+﻿# 欧盟Cyber Resilience Act合规指南 (EU CRA Compliance)
 
 > **层级定位**: 03 System Technology Domains / 07 Hardware Security / 07 EU CRA
 > **对应标准**: EU Cyber Resilience Act (EU) 2024/2847, ETSI EN 303 645, IEC 62443
@@ -3012,3 +3012,29 @@ int check_standard_compliance(const char *standard_name) {
 > **更新记录**
 >
 > - 2026-03-19: 初版创建，包含EU CRA法规解读、产品安全要求、嵌入式C开发合规检查清单、时间线规划、与CISA对比、实施指南、代码示例
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

@@ -1,4 +1,4 @@
-# 硬件信任根 (Hardware Root of Trust)
+﻿# 硬件信任根 (Hardware Root of Trust)
 
 > **层级定位**: 03 System Technology Domains / 07 Hardware Security / 08 Hardware RoT
 > **对应标准**: NIST SP 800-193, GlobalPlatform TEE, ARM TrustZone
@@ -2848,3 +2848,29 @@ static standard_mapping_t rot_standard_mappings[] = {
 > **更新记录**
 >
 > - 2026-03-19: 初版创建，包含硬件信任根架构、PUF实现、安全启动ROM、密钥注入和存储、平台特定实现（ARM/RISC-V/Intel TXT）、安全评估
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

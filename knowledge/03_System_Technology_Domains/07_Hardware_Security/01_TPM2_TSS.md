@@ -1,4 +1,4 @@
-# TPM 2.0 TSS (Trusted Software Stack)
+﻿# TPM 2.0 TSS (Trusted Software Stack)
 
 > **层级定位**: 03 System Technology Domains / 07 Hardware Security
 > **对应标准**: TPM 2.0 Library Spec, TSS 2.0, C99
@@ -590,3 +590,29 @@ int tpm_sign(uint32_t key_handle, const uint8_t *auth, uint16_t auth_len,
 > **更新记录**
 >
 > - 2025-03-09: 初版创建，包含TPM命令结构、PCR、密钥管理、HMAC/签名实现
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

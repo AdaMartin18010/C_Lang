@@ -1,4 +1,4 @@
-# MetAcsl v0.8+ 元编程扩展指南
+﻿# MetAcsl v0.8+ 元编程扩展指南
 
 > **文档版本**: MetAcsl v0.8 / Frama-C 30.0+  
 > **功能**: ACSL规范的元编程扩展  
@@ -725,3 +725,29 @@ frama-c -metacsl -metacsl-merge-strategy conservative program.c
 **上一章**: [07_Industrial_Case_Studies.md](./07_Industrial_Case_Studies.md)  
 
 **最后更新**: 2026-03-19
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

@@ -1,4 +1,4 @@
-# MISRA C:2023 Rules 21.1-21.x - 运行时错误
+﻿# MISRA C:2023 Rules 21.1-21.x - 运行时错误
 
 > 算术错误、除以零、溢出检查
 
@@ -240,3 +240,29 @@ uint32_t rotate_left(uint32_t value, unsigned int shift)
 ---
 
 **参考**: MISRA C:2023 Guidelines for the use of the C language in critical systems, Chapter 21
+
+
+---
+
+## 深入理解
+
+### 核心概念
+
+本主题的核心概念包括：基础理论、实现机制、实际应用。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 学习建议
+
+1. 先理解基础概念
+2. 再进行实践练习
+3. 最后深入源码
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

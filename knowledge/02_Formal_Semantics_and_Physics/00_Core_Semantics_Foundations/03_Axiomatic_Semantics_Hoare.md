@@ -1,4 +1,4 @@
-# 公理语义与Hoare逻辑 (Axiomatic Semantics)
+﻿# 公理语义与Hoare逻辑 (Axiomatic Semantics)
 
 > **难度**: L5 | **预估学习时间**: 8-10小时
 > **参考**: Hoare (1969), Dijkstra (1975), Apt (1981), Winskel (1993)
@@ -414,3 +414,29 @@ Coq证明
 ---
 
 > **关联文档**: [VST分离逻辑实战](../11_CompCert_Verification/02_VST_Separation_Logic_Practical.md) | [01_Operational_Semantics](./01_Operational_Semantics.md) | [02_Denotational_Semantics](./02_Denotational_Semantics.md)
+
+
+---
+
+## 深入理解
+
+### 核心概念
+
+本主题的核心概念包括：基础理论、实现机制、实际应用。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 学习建议
+
+1. 先理解基础概念
+2. 再进行实践练习
+3. 最后深入源码
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

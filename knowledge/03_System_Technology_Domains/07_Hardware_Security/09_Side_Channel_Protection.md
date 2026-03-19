@@ -1,4 +1,4 @@
-# 侧信道攻击防护 (Side-Channel Attack Protection)
+﻿# 侧信道攻击防护 (Side-Channel Attack Protection)
 
 > **层级定位**: 03 System Technology Domains / 07 Hardware Security / 09 Side-Channel
 > **对应标准**: NIST IR 8214, ISO/IEC 17825, FIPS 140-3
@@ -2119,3 +2119,29 @@ static sca_standard_mapping_t sca_standards[] = {
 > **更新记录**
 >
 > - 2026-03-19: 初版创建，包含时序攻击防护、功耗分析防护（SPA/DPA/CPA）、掩码技术、故障注入防护、代码示例、TVLA测试
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

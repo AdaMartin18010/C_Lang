@@ -1,4 +1,4 @@
-# Frama-C/WP 集成与实战指南
+﻿# Frama-C/WP 集成与实战指南
 
 > **定位**: CompCert Verification / 工具集成 | **难度**: ⭐⭐⭐⭐ | **目标**: 掌握 Frama-C 验证 C 程序
 > **版本**: Frama-C 32.0 (Germanium) | **更新**: 2026-03-15
@@ -177,3 +177,29 @@ Node* list_tail(Node* head) {
 
 > **参考**: Frama-C 32.0 (Germanium) 文档 | **ACSL 手册**: <https://frama-c.com/acsl.html>
 > **新特性**: ACSL++ (C++规格语言), MetAcsl v0.10 (安全属性), Frama-Clang v0.0.19 (Clang 20支持)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

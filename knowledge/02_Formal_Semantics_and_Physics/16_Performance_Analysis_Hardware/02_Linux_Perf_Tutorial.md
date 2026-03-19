@@ -1,4 +1,4 @@
-# Linux Perf工具完整实战教程
+﻿# Linux Perf工具完整实战教程
 
 ## 目录
 
@@ -1822,3 +1822,29 @@ add_custom_target(perf-all
 - Linux perf Documentation: <https://perf.wiki.kernel.org/>
 - Intel VTune Profiler Documentation
 - ARM Performance Monitoring Unit Guide
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

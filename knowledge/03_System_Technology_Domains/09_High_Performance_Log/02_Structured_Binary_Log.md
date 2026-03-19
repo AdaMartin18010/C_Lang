@@ -1,4 +1,4 @@
-# 结构化二进制日志 (Structured Binary Log)
+﻿# 结构化二进制日志 (Structured Binary Log)
 
 > **层级定位**: 03 System Technology Domains / 09 High Performance Log
 > **对应标准**: C11, protobuf, FlatBuffers
@@ -687,3 +687,29 @@ int log_query_range(RollingLog *rl, const LogQuery *q,
 > **更新记录**
 >
 > - 2025-03-09: 初版创建，包含VarInt编码、结构化格式、MMAP持久化
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

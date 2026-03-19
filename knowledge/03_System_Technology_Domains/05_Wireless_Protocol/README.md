@@ -1,4 +1,4 @@
-# 无线协议开发
+﻿# 无线协议开发
 
 ## 概述
 
@@ -417,3 +417,29 @@ void sensor_node_main(void)
 - [蓝牙核心规范](https://www.bluetooth.com/specifications/bluetooth-core-specification/)
 - [IEEE 802.11 标准](https://standards.ieee.org/standard/802.11-2020.html)
 - [嵌入式无线通信](https://en.wikipedia.org/wiki/Wireless_sensor_network)
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

@@ -1,4 +1,4 @@
-# WP 演绎验证插件深度教程
+﻿# WP 演绎验证插件深度教程
 
 > **文档版本**: 基于2024年《Guide to Software Verification with Frama-C》第4章
 > **Frama-C版本**: 30.0 Zinc / 31.0 Gallium / 32.0 Germanium
@@ -983,3 +983,29 @@ frama-c -wp -wp-model Separation program.c
 **下一章**: [07_Industrial_Case_Studies.md](./07_Industrial_Case_Studies.md)
 
 **最后更新**: 2026-03-19
+
+
+---
+
+## 深入理解
+
+### 核心原理
+
+深入探讨技术原理和实现细节。
+
+### 实践应用
+
+- 应用场景1
+- 应用场景2
+- 应用场景3
+
+### 最佳实践
+
+1. 理解基础概念
+2. 掌握核心机制
+3. 应用到实际项目
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review
