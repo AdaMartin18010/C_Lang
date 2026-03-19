@@ -696,7 +696,7 @@ if (condition) {
 
 ---
 
-**上一章**: [03_MISRA_C_2025_Rules_11-15.md](./03_MISRA_C_2025_Rules_11-15.md)
-**迁移指南**: [MISRA_C_2023_to_2025_Migration.md](./MISRA_C_2023_to_2025_Migration.md)
+**上一章**: [03_MISRA_C_2025_Rules_11-15.md](./MISRA_C_2025_Rules_Dir11.md)
+**迁移指南**: [MISRA_C_2023_to_2025_Migration.md](./MISRA_C_2023_to_2025_Migration_Guide.md)
 
 **最后更新**: 2026-03-18

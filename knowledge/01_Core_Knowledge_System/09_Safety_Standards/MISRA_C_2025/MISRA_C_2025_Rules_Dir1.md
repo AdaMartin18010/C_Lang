@@ -416,6 +416,6 @@ clang -Weverything -Werror -c file.c
 
 **参考**: MISRA C:2025 Guidelines [待官方确认]
 **上一章**: [索引](./00_MISRA_C_2025_Index.md)
-**下一章**: [规则 2.x - 代码设计](./MISRA_C_2025_Rules_Dir2.md) [待创建]
+**下一章**: 规则 2.x - 代码设计（待创建）
 
 > **免责声明**: 本文档基于MISRA C:2023和公开信息创建，具体规则内容请以MISRA官方发布的C:2025文档为准。

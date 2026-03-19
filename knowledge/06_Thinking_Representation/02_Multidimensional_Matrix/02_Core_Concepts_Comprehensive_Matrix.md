@@ -213,12 +213,12 @@
 
 | 对比主题 | 详细文档 | 适用场景 |
 |:---------|:---------|:---------|
-| 类型存储布局 | [01_Type_Storage_Matrix.md](./01_Type_Storage_Matrix.md) | 内存优化 |
-| 同步原语选择 | [02_Synchronization_Matrix.md](./02_Synchronization_Matrix.md) | 并发编程 |
-| IO方法选择 | [03_IO_Methods_Matrix.md](./03_IO_Methods_Matrix.md) | 文件操作 |
-| 内存分配策略 | [04_Memory_Allocation_Matrix.md](./04_Memory_Allocation_Matrix.md) | 内存管理 |
-| 编译器优化级别 | [05_Compiler_Optimization_Matrix.md](./05_Compiler_Optimization_Matrix.md) | 性能优化 |
-| 类型限定符 | [04_Type_Qualifiers_Matrix.md](./04_Type_Qualifiers_Matrix.md) | 代码安全 |
+| 类型存储布局 | 01_Type_Storage_Matrix.md（待创建） | 内存优化 |
+| 同步原语选择 | 02_Synchronization_Matrix.md（待创建） | 并发编程 |
+| IO方法选择 | 03_IO_Methods_Matrix.md（待创建） | 文件操作 |
+| 内存分配策略 | [04_Memory_Allocation_Matrix.md](../02_Comparison_Matrices/04_Memory_Allocation_Matrix.md) | 内存管理 |
+| 编译器优化级别 | 05_Compiler_Optimization_Matrix.md（待创建） | 性能优化 |
+| 类型限定符 | 04_Type_Qualifiers_Matrix.md（待创建） | 代码安全 |
 
 ---
 
