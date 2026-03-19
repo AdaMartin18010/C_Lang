@@ -174,17 +174,34 @@ const uint8_t data[] = {
 
 ```
 MISRA_C_2025/
-├── 00_MISRA_C_2025_Index.md          # 主索引文件
-├── README.md                          # 本文件
-├── MISRA_C_2023_to_2025_Migration_Guide.md  # 迁移指南
-├── 01_MISRA_C_2025_Rules_1-5.md       # 规则详情 (待创建)
-├── 02_MISRA_C_2025_Rules_2.md         # 规则详情 (待创建)
-├── ...                                # 其他规则文件
-├── tools/                             # 工具支持
-│   ├── README.md
-│   └── docs/                          # 工具文档
-└── ...
+├── 00_MISRA_C_2025_Index.md              # 主索引文件
+├── README.md                              # 本文件
+├── MISRA_C_2025_Changes_Summary.md        # C:2025变更摘要
+├── MISRA_C_2025_Rules_Dir1.md             # 规则 1.x - 标准C环境
+├── MISRA_C_2025_Rules_Dir6.md             # 规则 6.x-10.x - 类型与常量
+├── MISRA_C_2025_Rules_Dir11.md            # 规则 11.x-15.x - 表达式与控制流
+├── 04_MISRA_C_2025_Rules_16-22.md         # 规则 16.x-22.x - 标准库与C23
+├── MISRA_C_2025_C23_Guidance.md           # C23新特性详细指导
+├── MISRA_C_2023_to_2025_Migration_Guide.md # 迁移指南
+└── tools/                                 # 工具支持
+    ├── README.md
+    └── docs/                              # 工具文档
 ```
+
+## 文档说明
+
+### 已创建的文档
+
+| 文档 | 内容描述 | 状态 |
+|:-----|:---------|:----:|
+| [变更摘要](./MISRA_C_2025_Changes_Summary.md) | 与C:2023的主要变化、新增/修改/废弃规则 | [待官方确认] |
+| [规则 1.x](./MISRA_C_2025_Rules_Dir1.md) | 标准C环境、语言符合性 | [待官方确认] |
+| [规则 6.x-10.x](./MISRA_C_2025_Rules_Dir6.md) | 声明定义、初始化、基本类型 | [待官方确认] |
+| [规则 11.x-15.x](./MISRA_C_2025_Rules_Dir11.md) | 指针安全、表达式、控制语句、函数 | [待官方确认] |
+| [规则 16.x-22.x](./04_MISRA_C_2025_Rules_16-22.md) | 标准库、并发、网络安全、C23 | [待官方确认] |
+| [C23指导](./MISRA_C_2025_C23_Guidance.md) | nullptr、typeof、constexpr、#embed等 | [待官方确认] |
+
+> ⚠️ **注意**: 所有规则文件标记为`[待官方确认]`表示具体内容需参考MISRA C:2025官方文档。
 
 ---
 

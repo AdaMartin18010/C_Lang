@@ -27,10 +27,14 @@
 | 需求 | 直接跳转 |
 |:-----|:---------|
 | 学习C23新特性 | [C23核心特性](knowledge/01_Core_Knowledge_System/07_Modern_C/03_C23_Core_Features.md) |
+| 追踪C2y演进 | [C23到C2y路线图](knowledge/00_VERSION_TRACKING/C23_to_C2y_Roadmap.md) |
 | 了解Zig语言 | [Zig-C连接](knowledge/08_Zig_C_Connection/README.md) |
 | 形式化验证入门 | [核心语义基础](knowledge/02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/) |
-| 安全编码规范 | [MISRA C:2023](knowledge/01_Core_Knowledge_System/09_Safety_Standards/README.md) |
+| 硬件-汇编-C全链 | [数字逻辑基础](knowledge/02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/01_Digital_Logic_Foundations/01_Transistor_Level.md) |
+| 安全编码规范 | [MISRA C:2025](knowledge/01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2025/README.md) |
 | LLM部署实战 | [llama.cpp指南](knowledge/11_Machine_Learning_C/07_llama_cpp_Deployment.md) |
+| 嵌入式AI开发 | [TinyML基础](knowledge/16_Embedded_AI_Agents/01_TinyML_Fundamentals/01_Introduction_to_TinyML.md) |
+| 实践练习 | [编程练习总览](knowledge/12_Practice_Exercises/README.md) |
 
 ---
 
@@ -234,7 +238,9 @@
 ### 标准文档
 
 - [C23到C2y路线图](knowledge/00_VERSION_TRACKING/C23_to_C2y_Roadmap.md)
+- [C2y提案追踪器](knowledge/00_VERSION_TRACKING/C2y_Proposal_Tracker.md)
 - [Zig路线图追踪](knowledge/00_VERSION_TRACKING/Zig_Roadmap_Tracking.md)
+- [CISA CRA合规2026](knowledge/00_VERSION_TRACKING/CISA_CRA_Compliance_2026.md)
 
 ### 项目信息
 
@@ -276,4 +282,4 @@
 
 ---
 
-*最后更新: 2026-03-15*
+*最后更新: 2026-03-19*
