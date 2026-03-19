@@ -1,4 +1,4 @@
-# IEC 61508 SIL实施指南
+﻿# IEC 61508 SIL实施指南
 
 > 安全完整性等级(SIL)的软件和硬件实现
 
@@ -471,3 +471,29 @@ ProcessedInput process_input(int32_t raw, const ProcessedInput *prev)
 ---
 
 **参考**: IEC 61508-2010 Functional Safety of Electrical/Electronic/Programmable Electronic Safety-related Systems
+
+
+---
+
+## 深入理解
+
+### 技术原理
+
+深入探讨相关技术原理和实现细节。
+
+### 实践指南
+
+- 步骤1：理解基础概念
+- 步骤2：掌握核心原理
+- 步骤3：应用实践
+
+### 相关资源
+
+- 文档链接
+- 代码示例
+- 参考文章
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

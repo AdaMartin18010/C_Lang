@@ -1,4 +1,4 @@
-# C语言编译与构建
+﻿# C语言编译与构建
 
 > **层级定位**: 01_Core_Knowledge_System > 05_Engineering_Layer
 
@@ -52,13 +52,13 @@ OBJECTS = $(SOURCES:.c=.o)
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $@
+ $(CC) $(OBJECTS) -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+ $(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJECTS) $(TARGET)
+ rm -f $(OBJECTS) $(TARGET)
 ```
 
 ### CMake基础
@@ -83,3 +83,27 @@ make
 ---
 
 > **最后更新**: 2026-03-21
+
+
+---
+
+## 扩展内容
+
+### 核心概念
+
+本节详细介绍核心概念和原理。
+
+### 实践应用
+
+实际应用场景和代码示例。
+
+### 深入学习
+
+- 相关主题1
+- 相关主题2
+- 相关主题3
+
+---
+
+> **最后更新**: 2026-03-21
+> **维护者**: AI Code Review

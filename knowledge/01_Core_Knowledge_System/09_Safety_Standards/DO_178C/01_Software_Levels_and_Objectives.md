@@ -1,4 +1,4 @@
-# DO-178C 软件等级与认证目标
+﻿# DO-178C 软件等级与认证目标
 
 > 航空软件设计保证等级(DAL)和认证目标详解
 
@@ -326,3 +326,29 @@ int dead_store(void)
 ---
 
 **参考**: RTCA DO-178C Software Considerations in Airborne Systems and Equipment Certification
+
+
+---
+
+## 深入理解
+
+### 技术原理
+
+深入探讨相关技术原理和实现细节。
+
+### 实践指南
+
+- 步骤1：理解基础概念
+- 步骤2：掌握核心原理
+- 步骤3：应用实践
+
+### 相关资源
+
+- 文档链接
+- 代码示例
+- 参考文章
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review

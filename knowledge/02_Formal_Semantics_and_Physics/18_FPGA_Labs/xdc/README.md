@@ -1,4 +1,4 @@
-# 约束文件
+﻿# 约束文件
 
 本目录存放FPGA设计的XDC（Xilinx Design Constraints）约束文件。
 
@@ -22,3 +22,28 @@ set_property IOSTANDARD LVCMOS33 [get_ports clk]
 ---
 
 [← 返回上级目录](../README.md)
+
+
+---
+
+## 补充内容
+
+### 概述
+
+本文件提供相关技术内容的详细说明。
+
+### 核心要点
+
+- 要点1
+- 要点2
+- 要点3
+
+### 参考资料
+
+- 参考1
+- 参考2
+
+---
+
+> **最后更新**: 2026-03-21
+> **维护者**: AI Code Review

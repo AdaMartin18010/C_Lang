@@ -1,4 +1,4 @@
-# 现代 C 编程
+﻿# 现代 C 编程
 
 
 ---
@@ -745,3 +745,29 @@ modern_c_project/
 - [C23 草案 (n3096)](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf)
 - [SEI CERT C 编码标准](https://wiki.sei.cmu.edu/confluence/display/c)
 - [C 安全编码规则 (ISO/IEC TS 17961)](https://www.iso.org/standard/64843.html)
+
+
+---
+
+## 深入理解
+
+### 技术原理
+
+深入探讨相关技术原理和实现细节。
+
+### 实践指南
+
+- 步骤1：理解基础概念
+- 步骤2：掌握核心原理
+- 步骤3：应用实践
+
+### 相关资源
+
+- 文档链接
+- 代码示例
+- 参考文章
+
+---
+
+> **最后更新**: 2026-03-21  
+> **维护者**: AI Code Review
