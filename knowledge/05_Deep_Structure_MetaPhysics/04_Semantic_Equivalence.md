@@ -1,8 +1,85 @@
+
+---
+
+## 🔗 全面知识关联体系
+
+### 【全局层】知识库导航
+
+| 维度 | 目标文档 | 导航作用 |
+|:-----|:---------|:---------|
+| **总索引** | [../00_GLOBAL_INDEX.md](../00_GLOBAL_INDEX.md) | 完整知识图谱入口，全局视角 |
+| **本模块** | [../README.md](../README.md) | 模块总览与目录导航 |
+| **学习路径** | [../06_Thinking_Representation/06_Learning_Paths/README.md](../06_Thinking_Representation/06_Learning_Paths/README.md) | 阶段化学习路线规划 |
+| **概念映射** | [../06_Thinking_Representation/05_Concept_Mappings/README.md](../06_Thinking_Representation/05_Concept_Mappings/README.md) | 核心概念等价关系图 |
+
+### 【阶段层】学习定位
+
+**当前模块**: 知识库
+**难度等级**: L1-L6
+**前置依赖**: 核心知识体系
+**后续延伸**: 持续学习
+
+```
+学习阶段金字塔:
+    L6 专家层 [形式验证、编译器]
+    L5 高级层 [并发、系统编程] ⬅️ 可能在此
+    L4 进阶层 [指针、内存管理]
+    L3 基础层 [函数、结构体]
+    L2 入门层 [语法、数据类型]
+    L1 零基础 [环境搭建]
+```
+
+### 【层次层】纵向知识链
+
+| 层级 | 关联文档 | 层次关系 |
+|:-----|:---------|:---------|
+| **理论基础** | [../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md](../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | 语义学理论基础 |
+| **核心机制** | [../01_Core_Knowledge_System/02_Core_Layer/README.md](../01_Core_Knowledge_System/02_Core_Layer/README.md) | C语言核心机制 |
+| **标准接口** | [../01_Core_Knowledge_System/04_Standard_Library_Layer/README.md](../01_Core_Knowledge_System/04_Standard_Library_Layer/README.md) | 标准库API |
+| **系统实现** | [../03_System_Technology_Domains/README.md](../03_System_Technology_Domains/README.md) | 系统级实现 |
+
+### 【局部层】横向关联网
+
+| 关联类型 | 目标文档 | 关联说明 |
+|:---------|:---------|:---------|
+| **技术扩展** | [../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md](../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并发编程技术 |
+| **安全规范** | [../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md](../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 安全编码标准 |
+| **工具支持** | [../07_Modern_Toolchain/README.md](../07_Modern_Toolchain/README.md) | 现代开发工具链 |
+| **实践案例** | [../04_Industrial_Scenarios/README.md](../04_Industrial_Scenarios/README.md) | 工业实践场景 |
+
+### 【总体层】知识体系架构
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     总体知识体系架构                          │
+├─────────────────────────────────────────────────────────────┤
+│  01 Core Knowledge          → 核心概念与机制                  │
+│  02 Formal Semantics        → 理论与物理基础                  │
+│  03 System Technology       → 系统级技术领域                  │
+│  04 Industrial Scenarios    → 工业应用场景                    │
+│  05 Deep Structure          → 深层结构与元物理                │
+│  06 Thinking Representation → 思维表征与学习                  │
+│  07 Modern Toolchain        → 现代工具链                      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 【决策层】学习路径选择
+
+| 目标 | 推荐路径 | 关键文档 |
+|:-----|:---------|:---------|
+| **系统学习** | 01 → 02 → 03 → 04 | 按顺序阅读各模块 |
+| **问题导向** | 06决策树 → 相关模块 | [决策树目录](../06_Thinking_Representation/01_Decision_Trees/README.md) |
+| **项目驱动** | 04案例 → 所需知识 | [工业场景](../04_Industrial_Scenarios/README.md) |
+| **深入研究** | 02形式语义 → 11CompCert | [形式语义](../02_Formal_Semantics_and_Physics/README.md) |
+
+---
+
 ---
 
 ## 🔗 文档关联
 
 ### 核心关联
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
@@ -12,6 +89,7 @@
 | [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
 
 ### 扩展阅读
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [软件工程](../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
@@ -52,50 +130,59 @@
 
 ## 📑 目录
 
-- [程序语义等价性](#程序语义等价性)
-  - [1. 概述](#1-概述)
-    - [1.1 等价性的多维度视角](#11-等价性的多维度视角)
-  - [📑 目录](#-目录)
-  - [2. 操作语义 (Operational Semantics)](#2-操作语义-operational-semantics)
-    - [2.1 结构化操作语义 (SOS)](#21-结构化操作语义-sos)
-    - [2.2 大步语义 (Big-Step Semantics)](#22-大步语义-big-step-semantics)
-    - [2.3 操作等价性](#23-操作等价性)
-  - [3. 指称语义 (Denotational Semantics)](#3-指称语义-denotational-semantics)
-    - [3.1 基本思想](#31-基本思想)
-    - [3.2 简单表达式的语义](#32-简单表达式的语义)
-    - [3.3 命令式语言的指称语义](#33-命令式语言的指称语义)
-    - [3.4 域论基础](#34-域论基础)
-    - [3.5 指称等价性](#35-指称等价性)
-  - [4. 公理语义 (Axiomatic Semantics)](#4-公理语义-axiomatic-semantics)
-    - [4.1 霍尔逻辑 (Hoare Logic)](#41-霍尔逻辑-hoare-logic)
-    - [4.2 霍尔逻辑推理规则](#42-霍尔逻辑推理规则)
-    - [4.3 最强后置条件与最弱前置条件](#43-最强后置条件与最弱前置条件)
-    - [4.4 公理等价性](#44-公理等价性)
-  - [5. 上下文等价 (Contextual Equivalence)](#5-上下文等价-contextual-equivalence)
-    - [5.1 定义](#51-定义)
-    - [5.2 上下文的定义](#52-上下文的定义)
-    - [5.3 CIU等价](#53-ciu等价)
-    - [5.4 上下文等价与其他等价的关系](#54-上下文等价与其他等价的关系)
-  - [6. 模拟关系 (Bisimulation)](#6-模拟关系-bisimulation)
-    - [6.1 互模拟 (Bisimulation)](#61-互模拟-bisimulation)
-    - [6.2 近似互模拟 (Applicative Bisimulation)](#62-近似互模拟-applicative-bisimulation)
-    - [6.3 环境互模拟 (Environmental Bisimulation)](#63-环境互模拟-environmental-bisimulation)
-  - [7. C语言语义分析](#7-c语言语义分析)
-    - [7.1 C语言的复杂性](#71-c语言的复杂性)
-    - [7.2 C的操作语义片段](#72-c的操作语义片段)
-    - [7.3 C的内存模型](#73-c的内存模型)
-    - [7.4 未定义行为的影响](#74-未定义行为的影响)
-    - [7.5 C程序的等价性证明](#75-c程序的等价性证明)
-  - [8. 语义等价性的应用](#8-语义等价性的应用)
-    - [8.1 编译器优化验证](#81-编译器优化验证)
-    - [8.2 程序转换正确性](#82-程序转换正确性)
-    - [8.3 安全属性验证](#83-安全属性验证)
-  - [9. 总结与展望](#9-总结与展望)
-  - [参考](#参考)
-  - [深入理解](#深入理解)
-    - [核心原理](#核心原理)
-    - [实践应用](#实践应用)
-    - [最佳实践](#最佳实践)
+- [🔗 全面知识关联体系](#-全面知识关联体系)
+  - [【全局层】知识库导航](#全局层知识库导航)
+  - [【阶段层】学习定位](#阶段层学习定位)
+  - [【层次层】纵向知识链](#层次层纵向知识链)
+  - [【局部层】横向关联网](#局部层横向关联网)
+  - [【总体层】知识体系架构](#总体层知识体系架构)
+  - [【决策层】学习路径选择](#决策层学习路径选择)
+- [🔗 文档关联](#-文档关联)
+  - [核心关联](#核心关联)
+  - [扩展阅读](#扩展阅读)
+- [1. 概述](#1-概述)
+  - [1.1 等价性的多维度视角](#11-等价性的多维度视角)
+- [📑 目录](#-目录)
+- [2. 操作语义 (Operational Semantics)](#2-操作语义-operational-semantics)
+  - [2.1 结构化操作语义 (SOS)](#21-结构化操作语义-sos)
+  - [2.2 大步语义 (Big-Step Semantics)](#22-大步语义-big-step-semantics)
+  - [2.3 操作等价性](#23-操作等价性)
+- [3. 指称语义 (Denotational Semantics)](#3-指称语义-denotational-semantics)
+  - [3.1 基本思想](#31-基本思想)
+  - [3.2 简单表达式的语义](#32-简单表达式的语义)
+  - [3.3 命令式语言的指称语义](#33-命令式语言的指称语义)
+  - [3.4 域论基础](#34-域论基础)
+  - [3.5 指称等价性](#35-指称等价性)
+- [4. 公理语义 (Axiomatic Semantics)](#4-公理语义-axiomatic-semantics)
+  - [4.1 霍尔逻辑 (Hoare Logic)](#41-霍尔逻辑-hoare-logic)
+  - [4.2 霍尔逻辑推理规则](#42-霍尔逻辑推理规则)
+  - [4.3 最强后置条件与最弱前置条件](#43-最强后置条件与最弱前置条件)
+  - [4.4 公理等价性](#44-公理等价性)
+- [5. 上下文等价 (Contextual Equivalence)](#5-上下文等价-contextual-equivalence)
+  - [5.1 定义](#51-定义)
+  - [5.2 上下文的定义](#52-上下文的定义)
+  - [5.3 CIU等价](#53-ciu等价)
+  - [5.4 上下文等价与其他等价的关系](#54-上下文等价与其他等价的关系)
+- [6. 模拟关系 (Bisimulation)](#6-模拟关系-bisimulation)
+  - [6.1 互模拟 (Bisimulation)](#61-互模拟-bisimulation)
+  - [6.2 近似互模拟 (Applicative Bisimulation)](#62-近似互模拟-applicative-bisimulation)
+  - [6.3 环境互模拟 (Environmental Bisimulation)](#63-环境互模拟-environmental-bisimulation)
+- [7. C语言语义分析](#7-c语言语义分析)
+  - [7.1 C语言的复杂性](#71-c语言的复杂性)
+  - [7.2 C的操作语义片段](#72-c的操作语义片段)
+  - [7.3 C的内存模型](#73-c的内存模型)
+  - [7.4 未定义行为的影响](#74-未定义行为的影响)
+  - [7.5 C程序的等价性证明](#75-c程序的等价性证明)
+- [8. 语义等价性的应用](#8-语义等价性的应用)
+  - [8.1 编译器优化验证](#81-编译器优化验证)
+  - [8.2 程序转换正确性](#82-程序转换正确性)
+  - [8.3 安全属性验证](#83-安全属性验证)
+- [9. 总结与展望](#9-总结与展望)
+- [参考](#参考)
+- [深入理解](#深入理解)
+  - [核心原理](#核心原理)
+  - [实践应用](#实践应用)
+  - [最佳实践](#最佳实践)
 
 
 ---

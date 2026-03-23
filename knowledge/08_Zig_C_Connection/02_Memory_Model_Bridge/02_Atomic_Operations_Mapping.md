@@ -1,8 +1,85 @@
+
+---
+
+## 🔗 全面知识关联体系
+
+### 【全局层】知识库导航
+
+| 维度 | 目标文档 | 导航作用 |
+|:-----|:---------|:---------|
+| **总索引** | [../../00_GLOBAL_INDEX.md](../../00_GLOBAL_INDEX.md) | 完整知识图谱入口，全局视角 |
+| **本模块** | [../../README.md](../../README.md) | 模块总览与目录导航 |
+| **学习路径** | [../../06_Thinking_Representation/06_Learning_Paths/README.md](../../06_Thinking_Representation/06_Learning_Paths/README.md) | 阶段化学习路线规划 |
+| **概念映射** | [../../06_Thinking_Representation/05_Concept_Mappings/README.md](../../06_Thinking_Representation/05_Concept_Mappings/README.md) | 核心概念等价关系图 |
+
+### 【阶段层】学习定位
+
+**当前模块**: 知识库
+**难度等级**: L1-L6
+**前置依赖**: 核心知识体系
+**后续延伸**: 持续学习
+
+```
+学习阶段金字塔:
+    L6 专家层 [形式验证、编译器]
+    L5 高级层 [并发、系统编程] ⬅️ 可能在此
+    L4 进阶层 [指针、内存管理]
+    L3 基础层 [函数、结构体]
+    L2 入门层 [语法、数据类型]
+    L1 零基础 [环境搭建]
+```
+
+### 【层次层】纵向知识链
+
+| 层级 | 关联文档 | 层次关系 |
+|:-----|:---------|:---------|
+| **理论基础** | [../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md](../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | 语义学理论基础 |
+| **核心机制** | [../../01_Core_Knowledge_System/02_Core_Layer/README.md](../../01_Core_Knowledge_System/02_Core_Layer/README.md) | C语言核心机制 |
+| **标准接口** | [../../01_Core_Knowledge_System/04_Standard_Library_Layer/README.md](../../01_Core_Knowledge_System/04_Standard_Library_Layer/README.md) | 标准库API |
+| **系统实现** | [../../03_System_Technology_Domains/README.md](../../03_System_Technology_Domains/README.md) | 系统级实现 |
+
+### 【局部层】横向关联网
+
+| 关联类型 | 目标文档 | 关联说明 |
+|:---------|:---------|:---------|
+| **技术扩展** | [../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并发编程技术 |
+| **安全规范** | [../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md](../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 安全编码标准 |
+| **工具支持** | [../../07_Modern_Toolchain/README.md](../../07_Modern_Toolchain/README.md) | 现代开发工具链 |
+| **实践案例** | [../../04_Industrial_Scenarios/README.md](../../04_Industrial_Scenarios/README.md) | 工业实践场景 |
+
+### 【总体层】知识体系架构
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     总体知识体系架构                          │
+├─────────────────────────────────────────────────────────────┤
+│  01 Core Knowledge          → 核心概念与机制                  │
+│  02 Formal Semantics        → 理论与物理基础                  │
+│  03 System Technology       → 系统级技术领域                  │
+│  04 Industrial Scenarios    → 工业应用场景                    │
+│  05 Deep Structure          → 深层结构与元物理                │
+│  06 Thinking Representation → 思维表征与学习                  │
+│  07 Modern Toolchain        → 现代工具链                      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 【决策层】学习路径选择
+
+| 目标 | 推荐路径 | 关键文档 |
+|:-----|:---------|:---------|
+| **系统学习** | 01 → 02 → 03 → 04 | 按顺序阅读各模块 |
+| **问题导向** | 06决策树 → 相关模块 | [决策树目录](../../06_Thinking_Representation/01_Decision_Trees/README.md) |
+| **项目驱动** | 04案例 → 所需知识 | [工业场景](../../04_Industrial_Scenarios/README.md) |
+| **深入研究** | 02形式语义 → 11CompCert | [形式语义](../../02_Formal_Semantics_and_Physics/README.md) |
+
+---
+
 ---
 
 ## 🔗 文档关联
 
 ### 核心关联
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [内存管理](../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
@@ -12,6 +89,7 @@
 | [数组与指针](../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
 
 ### 扩展阅读
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [软件工程](../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
@@ -27,57 +105,66 @@
 
 ## 目录
 
-- [C11 原子操作到 Zig 的完整映射](#c11-原子操作到-zig-的完整映射)
-  - [目录](#目录)
-  - [一、原子操作总览](#一原子操作总览)
-    - [1.1 原子操作对比全景](#11-原子操作对比全景)
-    - [1.2 形式化定义](#12-形式化定义)
-  - [二、原子类型系统](#二原子类型系统)
-    - [2.1 C11 `_Atomic` 类型修饰符](#21-c11-_atomic-类型修饰符)
-    - [2.2 Zig `std.atomic.Value`](#22-zig-stdatomicvalue)
-    - [2.3 类型映射等价性](#23-类型映射等价性)
-    - [2.4 复杂原子类型](#24-复杂原子类型)
-  - [三、原子操作详细映射](#三原子操作详细映射)
-    - [3.1 原子加载 (Atomic Load)](#31-原子加载-atomic-load)
-    - [3.2 原子存储 (Atomic Store)](#32-原子存储-atomic-store)
-    - [3.3 原子交换 (Atomic Exchange)](#33-原子交换-atomic-exchange)
-    - [3.4 比较并交换 (Compare-Exchange)](#34-比较并交换-compare-exchange)
-    - [3.5 Fetch-Op 操作族](#35-fetch-op-操作族)
-  - [四、内存序映射](#四内存序映射)
-    - [4.1 内存序对应表](#41-内存序对应表)
-    - [4.2 Relaxed → Monotonic](#42-relaxed--monotonic)
-    - [4.3 Acquire-Release 语义](#43-acquire-release-语义)
-    - [4.4 Sequential Consistency](#44-sequential-consistency)
-  - [五、原子标志操作](#五原子标志操作)
-    - [5.1 C11 `atomic_flag`](#51-c11-atomic_flag)
-    - [5.2 Zig 等效实现](#52-zig-等效实现)
-  - [六、原子指针操作](#六原子指针操作)
-    - [6.1 原子指针类型](#61-原子指针类型)
-  - [七、栅栏与同步](#七栅栏与同步)
-    - [7.1 线程栅栏 (Thread Fence)](#71-线程栅栏-thread-fence)
-    - [7.2 信号栅栏 (Signal Fence)](#72-信号栅栏-signal-fence)
-  - [八、Lock-Free 属性检查](#八lock-free-属性检查)
-    - [8.1 Lock-Free 定义](#81-lock-free-定义)
-    - [8.2 C11 Lock-Free 检测](#82-c11-lock-free-检测)
-    - [8.3 Zig Lock-Free 保证](#83-zig-lock-free-保证)
-  - [九、实现示例](#九实现示例)
-    - [9.1 高效自旋锁](#91-高效自旋锁)
-    - [9.2 引用计数 (ARC)](#92-引用计数-arc)
-    - [9.3 无锁队列 (Michael-Scott)](#93-无锁队列-michael-scott)
-    - [9.4 读-复制-更新 (RCU) 简化版](#94-读-复制-更新-rcu-简化版)
-  - [十、性能考虑](#十性能考虑)
-    - [10.1 内存序性能层次](#101-内存序性能层次)
-    - [10.2 缓存行优化](#102-缓存行优化)
-    - [10.3 伪共享避免](#103-伪共享避免)
-    - [10.4 平台特定优化](#104-平台特定优化)
-  - [十一、快速参考表](#十一快速参考表)
-    - [11.1 API 映射速查](#111-api-映射速查)
-    - [11.2 内存序速查](#112-内存序速查)
-    - [11.3 常见模式速查](#113-常见模式速查)
-  - [深入理解](#深入理解)
-    - [核心原理](#核心原理)
-    - [实践应用](#实践应用)
-    - [最佳实践](#最佳实践)
+- [🔗 全面知识关联体系](#-全面知识关联体系)
+  - [【全局层】知识库导航](#全局层知识库导航)
+  - [【阶段层】学习定位](#阶段层学习定位)
+  - [【层次层】纵向知识链](#层次层纵向知识链)
+  - [【局部层】横向关联网](#局部层横向关联网)
+  - [【总体层】知识体系架构](#总体层知识体系架构)
+  - [【决策层】学习路径选择](#决策层学习路径选择)
+- [🔗 文档关联](#-文档关联)
+  - [核心关联](#核心关联)
+  - [扩展阅读](#扩展阅读)
+- [目录](#目录)
+- [一、原子操作总览](#一原子操作总览)
+  - [1.1 原子操作对比全景](#11-原子操作对比全景)
+  - [1.2 形式化定义](#12-形式化定义)
+- [二、原子类型系统](#二原子类型系统)
+  - [2.1 C11 `_Atomic` 类型修饰符](#21-c11-_atomic-类型修饰符)
+  - [2.2 Zig `std.atomic.Value`](#22-zig-stdatomicvalue)
+  - [2.3 类型映射等价性](#23-类型映射等价性)
+  - [2.4 复杂原子类型](#24-复杂原子类型)
+- [三、原子操作详细映射](#三原子操作详细映射)
+  - [3.1 原子加载 (Atomic Load)](#31-原子加载-atomic-load)
+  - [3.2 原子存储 (Atomic Store)](#32-原子存储-atomic-store)
+  - [3.3 原子交换 (Atomic Exchange)](#33-原子交换-atomic-exchange)
+  - [3.4 比较并交换 (Compare-Exchange)](#34-比较并交换-compare-exchange)
+  - [3.5 Fetch-Op 操作族](#35-fetch-op-操作族)
+- [四、内存序映射](#四内存序映射)
+  - [4.1 内存序对应表](#41-内存序对应表)
+  - [4.2 Relaxed → Monotonic](#42-relaxed--monotonic)
+  - [4.3 Acquire-Release 语义](#43-acquire-release-语义)
+  - [4.4 Sequential Consistency](#44-sequential-consistency)
+- [五、原子标志操作](#五原子标志操作)
+  - [5.1 C11 `atomic_flag`](#51-c11-atomic_flag)
+  - [5.2 Zig 等效实现](#52-zig-等效实现)
+- [六、原子指针操作](#六原子指针操作)
+  - [6.1 原子指针类型](#61-原子指针类型)
+- [七、栅栏与同步](#七栅栏与同步)
+  - [7.1 线程栅栏 (Thread Fence)](#71-线程栅栏-thread-fence)
+  - [7.2 信号栅栏 (Signal Fence)](#72-信号栅栏-signal-fence)
+- [八、Lock-Free 属性检查](#八lock-free-属性检查)
+  - [8.1 Lock-Free 定义](#81-lock-free-定义)
+  - [8.2 C11 Lock-Free 检测](#82-c11-lock-free-检测)
+  - [8.3 Zig Lock-Free 保证](#83-zig-lock-free-保证)
+- [九、实现示例](#九实现示例)
+  - [9.1 高效自旋锁](#91-高效自旋锁)
+  - [9.2 引用计数 (ARC)](#92-引用计数-arc)
+  - [9.3 无锁队列 (Michael-Scott)](#93-无锁队列-michael-scott)
+  - [9.4 读-复制-更新 (RCU) 简化版](#94-读-复制-更新-rcu-简化版)
+- [十、性能考虑](#十性能考虑)
+  - [10.1 内存序性能层次](#101-内存序性能层次)
+  - [10.2 缓存行优化](#102-缓存行优化)
+  - [10.3 伪共享避免](#103-伪共享避免)
+  - [10.4 平台特定优化](#104-平台特定优化)
+- [十一、快速参考表](#十一快速参考表)
+  - [11.1 API 映射速查](#111-api-映射速查)
+  - [11.2 内存序速查](#112-内存序速查)
+  - [11.3 常见模式速查](#113-常见模式速查)
+- [深入理解](#深入理解)
+  - [核心原理](#核心原理)
+  - [实践应用](#实践应用)
+  - [最佳实践](#最佳实践)
 
 ---
 
