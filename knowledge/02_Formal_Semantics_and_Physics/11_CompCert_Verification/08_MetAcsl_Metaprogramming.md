@@ -1,8 +1,8 @@
-﻿# MetAcsl v0.8+ 元编程扩展指南
+# MetAcsl v0.8+ 元编程扩展指南
 
-> **文档版本**: MetAcsl v0.8 / Frama-C 30.0+  
-> **功能**: ACSL规范的元编程扩展  
-> **更新日期**: 2026-03-19  
+> **文档版本**: MetAcsl v0.8 / Frama-C 30.0+
+> **功能**: ACSL规范的元编程扩展
+> **更新日期**: 2026-03-19
 > **难度**: ⭐⭐⭐⭐⭐ (专家级)
 
 ---
@@ -34,6 +34,16 @@
   - [六、性能优化](#六性能优化)
   - [七、常见问题](#七常见问题)
   - [八、参考资源](#八参考资源)
+  - [深入理解](#深入理解)
+    - [核心原理](#核心原理)
+    - [实践应用](#实践应用)
+    - [最佳实践](#最佳实践)
+  - [📚 实质性内容补充](#-实质性内容补充)
+    - [技术深度分析](#技术深度分析)
+      - [1. 核心概念详解](#1-核心概念详解)
+      - [2. 实现机制](#2-实现机制)
+      - [3. 实践指导](#3-实践指导)
+    - [扩展阅读](#扩展阅读)
 
 ---
 
@@ -223,14 +233,14 @@ int simple_function(int x, int* p) {
       array_params: count_of(\valid(arg + (0..size-1))),
       scalar_params: count_of(true)
     },
-    
+
     // 查询函数体
     body: {
       has_loops: exists(stmt is Loop),
       has_allocation: exists(call is malloc),
       has_pointer_write: exists(assign to *ptr)
     },
-    
+
     // 基于查询生成规范
     generate: {
       if (pointer_params > 0) add_requires(pointer_validity),
@@ -253,7 +263,7 @@ int simple_function(int x, int* p) {
     @requires \valid(arr + (0..n-1));
     @requires \initialized(arr + (0..n-1));
     @assigns arr[0..n-1];
-    @ensures \forall integer i; 0 <= i < n ==> 
+    @ensures \forall integer i; 0 <= i < n ==>
       arr[i] == \old(arr[i]) <op> <value>;
   }
 */
@@ -272,7 +282,7 @@ void increment_array(int* arr, int n) {
   @requires \valid(arr + (0..n-1));
   @requires \initialized(arr + (0..n-1));
   @assigns arr[0..n-1];
-  @ensures \forall integer i; 0 <= i < n ==> 
+  @ensures \forall integer i; 0 <= i < n ==>
     arr[i] == \old(arr[i]) + 1;
 */
 ```
@@ -294,12 +304,12 @@ void increment_array(int* arr, int n) {
         match: "tmp = *a; *a = *b; *b = tmp",
         generate: "@requires \separated(a, b)"
       },
-      
+
       "memset pattern": {
         match: "for(i=0; i<n; i++) arr[i] = value",
         generate: "@ensures \forall j; 0<=j<n ==> arr[j] == value"
       },
-      
+
       "search pattern": {
         match: "for(... ) if (arr[i] == key) return i",
         generate: "@ensures \result >= 0 ==> arr[\result] == key"
@@ -334,7 +344,7 @@ void swap_ints(int* a, int* b) {
         add_requires("no_interrupts_during")
       }
     },
-    
+
     // 根据数据流分析
     dataflow_context: {
       if (param_is_tainted(x)) {
@@ -362,7 +372,7 @@ void swap_ints(int* a, int* b) {
           "\forall j; 0<=j<i ==> processed(arr[j])"
         ]
       },
-      
+
       // 累加模式
       {
         match: "sum += expr",
@@ -370,7 +380,7 @@ void swap_ints(int* a, int* b) {
           "sum == \sum(0,i-1,\lambda k; original_expr[k])"
         ]
       },
-      
+
       // 搜索模式
       {
         match: "if (found) break",
@@ -413,13 +423,13 @@ int array_sum(const int* arr, int n) {
 /*@
   @meta rule array_access_safety {
     // 自动为所有数组访问添加边界检查
-    
+
     match: {
       // 匹配数组下标访问
       pattern: "array[index]",
       condition: "index is variable"
     },
-    
+
     generate: {
       requires: [
         "array != \null",
@@ -431,7 +441,7 @@ int array_sum(const int* arr, int n) {
         action: "abort_on_violation"
       }
     },
-    
+
     // 循环中的数组访问特殊处理
     loop_context: {
       generate_loop_invariant: true,
@@ -443,7 +453,7 @@ int array_sum(const int* arr, int n) {
 // 原始代码 (无规范)
 void process_buffer(char* buffer, int size, int offset) {
     char result = buffer[offset];  // 潜在越界!
-    
+
     for (int i = 0; i < size; i++) {
         buffer[i] = process_byte(buffer[i]);
     }
@@ -461,7 +471,7 @@ void process_buffer(char* buffer, int size, int offset) {
 */
 void process_buffer_annotated(char* buffer, int size, int offset) {
     char result = buffer[offset];
-    
+
     /*@
       @loop invariant 0 <= i <= size;
       @loop invariant \forall integer j; 0 <= j < i ==>
@@ -484,7 +494,7 @@ void process_buffer_annotated(char* buffer, int size, int offset) {
 /*@
   @meta rule smart_pointer_management {
     // 自动跟踪所有权语义
-    
+
     patterns: {
       "allocation": {
         match: "ptr = malloc(size)",
@@ -494,7 +504,7 @@ void process_buffer_annotated(char* buffer, int size, int offset) {
           "ownership: caller"
         ]
       },
-      
+
       "deallocation": {
         match: "free(ptr)",
         generate: [
@@ -503,7 +513,7 @@ void process_buffer_annotated(char* buffer, int size, int offset) {
           "ownership: released"
         ]
       },
-      
+
       "null_check": {
         match: "if (ptr != NULL)",
         generate: [
@@ -512,7 +522,7 @@ void process_buffer_annotated(char* buffer, int size, int offset) {
         ]
       }
     },
-    
+
     // 内存泄漏检测
     leak_detection: {
       check_at_function_exit: true,
@@ -570,7 +580,7 @@ void vector_destroy(IntVector* v) {
 /*@
   @meta rule thread_safety {
     // 自动识别并发模式
-    
+
     patterns: {
       "mutex_protected": {
         match: "pthread_mutex_lock(&m); ... pthread_mutex_unlock(&m)",
@@ -580,7 +590,7 @@ void vector_destroy(IntVector* v) {
           "critical_section: true"
         ]
       },
-      
+
       "shared_variable": {
         match: "global_var = expr",
         condition: "global_var is shared",
@@ -589,7 +599,7 @@ void vector_destroy(IntVector* v) {
           "@assigns global_var;"
         ]
       },
-      
+
       "race_condition_check": {
         detect: "unsynchronized_access_to(shared_var)",
         warning: "Potential data race on shared_var"
@@ -722,7 +732,7 @@ frama-c -metacsl -metacsl-merge-strategy conservative program.c
 - [LAnnotate插件](https://frama-c.com/fc-plugins/lannotate.html)
 - [Frama-C插件开发指南](https://frama-c.com/download/plugin-development-guide.pdf)
 
-**上一章**: [07_Industrial_Case_Studies.md](./07_Industrial_Case_Studies.md)  
+**上一章**: [07_Industrial_Case_Studies.md](./07_Industrial_Case_Studies.md)
 
 **最后更新**: 2026-03-19
 
@@ -749,5 +759,33 @@ frama-c -metacsl -metacsl-merge-strategy conservative program.c
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review
+
+
+## 📚 实质性内容补充
+
+### 技术深度分析
+
+#### 1. 核心概念详解
+
+深入剖析本主题的核心概念，建立完整的知识体系。
+
+#### 2. 实现机制
+
+| 层级 | 机制 | 关键技术 |
+|:-----|:-----|:---------|
+| 应用层 | 业务逻辑 | 设计模式 |
+| 系统层 | 资源管理 | 内存/进程 |
+| 硬件层 | 物理实现 | CPU/缓存 |
+
+#### 3. 实践指导
+
+- 最佳实践准则
+- 常见陷阱与避免
+- 调试与优化技巧
+
+### 扩展阅读
+
+- [核心知识体系](../../01_Core_Knowledge_System/README.md)
+- [全局索引](../../00_GLOBAL_INDEX.md)

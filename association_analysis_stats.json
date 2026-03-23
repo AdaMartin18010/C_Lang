@@ -1,7 +1,7 @@
 [
   {
     "path": "00_GLOBAL_INDEX.md",
-    "total_lines": 306,
+    "total_lines": 326,
     "external_links": 0,
     "internal_links": 98,
     "outgoing_links": [
@@ -423,7 +423,7 @@
   },
   {
     "path": "TOOLCHAIN_IMPROVEMENT_SUMMARY.md",
-    "total_lines": 342,
+    "total_lines": 348,
     "external_links": 0,
     "internal_links": 19,
     "outgoing_links": [
@@ -451,7 +451,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\C23_to_C2y_Roadmap.md",
-    "total_lines": 821,
+    "total_lines": 829,
     "external_links": 0,
     "internal_links": 23,
     "outgoing_links": [
@@ -483,7 +483,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\C2y_Feature_Previews.md",
-    "total_lines": 1424,
+    "total_lines": 1442,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -517,7 +517,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\C2y_New_Proposals_2026.md",
-    "total_lines": 457,
+    "total_lines": 467,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -544,7 +544,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\C2y_Proposal_Tracker.md",
-    "total_lines": 805,
+    "total_lines": 823,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -578,7 +578,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\C2y_to_C34_Roadmap.md",
-    "total_lines": 923,
+    "total_lines": 941,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -612,7 +612,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\CISA_CRA_Compliance_2026.md",
-    "total_lines": 381,
+    "total_lines": 399,
     "external_links": 4,
     "internal_links": 25,
     "outgoing_links": [
@@ -646,7 +646,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\C_Standards_Roadmap.md",
-    "total_lines": 358,
+    "total_lines": 376,
     "external_links": 10,
     "internal_links": 25,
     "outgoing_links": [
@@ -680,7 +680,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\Expansion_Summary_2026-03-14.md",
-    "total_lines": 421,
+    "total_lines": 429,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -714,7 +714,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\GCC_15_C23_Default.md",
-    "total_lines": 3306,
+    "total_lines": 3310,
     "external_links": 4,
     "internal_links": 25,
     "outgoing_links": [
@@ -748,7 +748,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\LLVM_21_C23_Update.md",
-    "total_lines": 425,
+    "total_lines": 429,
     "external_links": 4,
     "internal_links": 25,
     "outgoing_links": [
@@ -782,7 +782,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\LLVM_22_C23_Update.md",
-    "total_lines": 1878,
+    "total_lines": 1882,
     "external_links": 14,
     "internal_links": 17,
     "outgoing_links": [
@@ -808,7 +808,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\MISRA_C_2025_Update_Plan.md",
-    "total_lines": 359,
+    "total_lines": 367,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -842,7 +842,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\README.md",
-    "total_lines": 628,
+    "total_lines": 632,
     "external_links": 0,
     "internal_links": 31,
     "outgoing_links": [
@@ -882,7 +882,7 @@
   },
   {
     "path": "00_VERSION_TRACKING\\Zig_Roadmap_Tracking.md",
-    "total_lines": 503,
+    "total_lines": 521,
     "external_links": 8,
     "internal_links": 25,
     "outgoing_links": [
@@ -916,7 +916,7 @@
   },
   {
     "path": "01_Core_Knowledge_System\\README.md",
-    "total_lines": 364,
+    "total_lines": 370,
     "external_links": 0,
     "internal_links": 69,
     "outgoing_links": [
@@ -994,7 +994,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\README.md",
-    "total_lines": 367,
+    "total_lines": 373,
     "external_links": 0,
     "internal_links": 67,
     "outgoing_links": [
@@ -1070,7 +1070,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\02_Cbindgen_Usage.md",
-    "total_lines": 1552,
+    "total_lines": 1556,
     "external_links": 4,
     "internal_links": 25,
     "outgoing_links": [
@@ -1104,7 +1104,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\03_Edge_Detection.md",
-    "total_lines": 736,
+    "total_lines": 759,
     "external_links": 0,
     "internal_links": 30,
     "outgoing_links": [
@@ -1143,7 +1143,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\03_Hardware_Acceleration.md",
-    "total_lines": 1002,
+    "total_lines": 1021,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1177,7 +1177,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\03_HSM_Integration.md",
-    "total_lines": 1053,
+    "total_lines": 1057,
     "external_links": 5,
     "internal_links": 25,
     "outgoing_links": [
@@ -1211,7 +1211,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\03_JIT_Regex.md",
-    "total_lines": 594,
+    "total_lines": 617,
     "external_links": 0,
     "internal_links": 30,
     "outgoing_links": [
@@ -1250,7 +1250,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\03_Measured_Boot.md",
-    "total_lines": 678,
+    "total_lines": 682,
     "external_links": 4,
     "internal_links": 25,
     "outgoing_links": [
@@ -1284,7 +1284,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\03_Multi_Raft.md",
-    "total_lines": 1096,
+    "total_lines": 1114,
     "external_links": 4,
     "internal_links": 25,
     "outgoing_links": [
@@ -1318,7 +1318,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\03_RDMA_Connection.md",
-    "total_lines": 756,
+    "total_lines": 760,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1352,7 +1352,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\03_Unsafe_Rust_Patterns.md",
-    "total_lines": 745,
+    "total_lines": 764,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1386,7 +1386,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\03_Zigbee_Stack.md",
-    "total_lines": 1511,
+    "total_lines": 1534,
     "external_links": 0,
     "internal_links": 30,
     "outgoing_links": [
@@ -1425,7 +1425,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\04_Garbage_Collection.md",
-    "total_lines": 344,
+    "total_lines": 352,
     "external_links": 2,
     "internal_links": 25,
     "outgoing_links": [
@@ -1459,7 +1459,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\07_Atomic_Operations.md",
-    "total_lines": 263,
+    "total_lines": 271,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1493,7 +1493,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\README.md",
-    "total_lines": 355,
+    "total_lines": 361,
     "external_links": 0,
     "internal_links": 63,
     "outgoing_links": [
@@ -1565,7 +1565,7 @@
   },
   {
     "path": "04_Industrial_Scenarios\\README.md",
-    "total_lines": 311,
+    "total_lines": 317,
     "external_links": 0,
     "internal_links": 50,
     "outgoing_links": [
@@ -1624,7 +1624,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\01_Complexity_Classes.md",
-    "total_lines": 578,
+    "total_lines": 595,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1658,7 +1658,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\02_Isabelle_HOL.md",
-    "total_lines": 371,
+    "total_lines": 377,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1692,7 +1692,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\02_P_vs_NP.md",
-    "total_lines": 663,
+    "total_lines": 680,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1726,7 +1726,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\03_Algorithm_Lower_Bounds.md",
-    "total_lines": 851,
+    "total_lines": 868,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1760,7 +1760,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\03_Binary_Translation.md",
-    "total_lines": 778,
+    "total_lines": 795,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1794,7 +1794,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\03_CBMC_Model_Checking.md",
-    "total_lines": 702,
+    "total_lines": 706,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1828,7 +1828,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\03_Homotopy_Type_Theory.md",
-    "total_lines": 414,
+    "total_lines": 422,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1862,7 +1862,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\04_Dependent_Types.md",
-    "total_lines": 683,
+    "total_lines": 700,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1896,7 +1896,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\04_Sandboxing.md",
-    "total_lines": 1209,
+    "total_lines": 1226,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1930,7 +1930,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\04_Semantic_Equivalence.md",
-    "total_lines": 547,
+    "total_lines": 564,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1964,7 +1964,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\05_Type_Semantics.md",
-    "total_lines": 593,
+    "total_lines": 610,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -1998,7 +1998,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\README.md",
-    "total_lines": 304,
+    "total_lines": 310,
     "external_links": 0,
     "internal_links": 47,
     "outgoing_links": [
@@ -2054,7 +2054,7 @@
   },
   {
     "path": "06_Thinking_Representation\\00_GLOBAL_ARCHITECTURE_MAP.md",
-    "total_lines": 314,
+    "total_lines": 320,
     "external_links": 0,
     "internal_links": 33,
     "outgoing_links": [
@@ -2096,7 +2096,7 @@
   },
   {
     "path": "06_Thinking_Representation\\00_MULTI_DIMENSIONAL_FRAMEWORK.md",
-    "total_lines": 325,
+    "total_lines": 340,
     "external_links": 0,
     "internal_links": 30,
     "outgoing_links": [
@@ -2135,7 +2135,7 @@
   },
   {
     "path": "06_Thinking_Representation\\README.md",
-    "total_lines": 334,
+    "total_lines": 340,
     "external_links": 0,
     "internal_links": 88,
     "outgoing_links": [
@@ -2232,7 +2232,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\README.md",
-    "total_lines": 414,
+    "total_lines": 420,
     "external_links": 7,
     "internal_links": 52,
     "outgoing_links": [
@@ -2293,7 +2293,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\04_Rust_C_Interop_Safety.md",
-    "total_lines": 5129,
+    "total_lines": 5133,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -2327,7 +2327,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\README.md",
-    "total_lines": 381,
+    "total_lines": 387,
     "external_links": 9,
     "internal_links": 21,
     "outgoing_links": [
@@ -2357,7 +2357,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\README.md",
-    "total_lines": 123,
+    "total_lines": 129,
     "external_links": 0,
     "internal_links": 35,
     "outgoing_links": [
@@ -2401,7 +2401,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\数据结构与算法 (Data Structures & Algorithms).md",
-    "total_lines": 292,
+    "total_lines": 298,
     "external_links": 3,
     "internal_links": 27,
     "outgoing_links": [
@@ -2437,7 +2437,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\数据结构与算法.md",
-    "total_lines": 123,
+    "total_lines": 129,
     "external_links": 0,
     "internal_links": 35,
     "outgoing_links": [
@@ -2481,7 +2481,7 @@
   },
   {
     "path": "10_WebAssembly_C\\01_WebAssembly_Introduction_C.md",
-    "total_lines": 2972,
+    "total_lines": 2976,
     "external_links": 11,
     "internal_links": 17,
     "outgoing_links": [
@@ -2507,7 +2507,7 @@
   },
   {
     "path": "10_WebAssembly_C\\02_Emscripten_Advanced_Usage.md",
-    "total_lines": 3584,
+    "total_lines": 3588,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -2541,7 +2541,7 @@
   },
   {
     "path": "10_WebAssembly_C\\03_WASM_Modules_Memory_Management.md",
-    "total_lines": 2737,
+    "total_lines": 2741,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -2575,7 +2575,7 @@
   },
   {
     "path": "10_WebAssembly_C\\04_WASM_Performance_Optimization.md",
-    "total_lines": 2200,
+    "total_lines": 2204,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -2609,7 +2609,7 @@
   },
   {
     "path": "10_WebAssembly_C\\README.md",
-    "total_lines": 328,
+    "total_lines": 334,
     "external_links": 8,
     "internal_links": 17,
     "outgoing_links": [
@@ -2635,7 +2635,7 @@
   },
   {
     "path": "11_Machine_Learning_C\\01_Neural_Network_Basics.md",
-    "total_lines": 2976,
+    "total_lines": 2993,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -2669,7 +2669,7 @@
   },
   {
     "path": "11_Machine_Learning_C\\02_Matrix_Operations_BLAS.md",
-    "total_lines": 521,
+    "total_lines": 525,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -2703,7 +2703,7 @@
   },
   {
     "path": "11_Machine_Learning_C\\03_Embedded_AI_Deployment.md",
-    "total_lines": 6435,
+    "total_lines": 6439,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -2737,7 +2737,7 @@
   },
   {
     "path": "11_Machine_Learning_C\\03_Gradient_Descent_Optimizers.md",
-    "total_lines": 516,
+    "total_lines": 522,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -2764,7 +2764,7 @@
   },
   {
     "path": "11_Machine_Learning_C\\04_CNN_Fundamentals.md",
-    "total_lines": 606,
+    "total_lines": 612,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -2791,7 +2791,7 @@
   },
   {
     "path": "11_Machine_Learning_C\\05_RNN_LSTM_Basics.md",
-    "total_lines": 564,
+    "total_lines": 570,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -2818,7 +2818,7 @@
   },
   {
     "path": "11_Machine_Learning_C\\06_ONNX_Runtime_C.md",
-    "total_lines": 616,
+    "total_lines": 620,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -2845,7 +2845,7 @@
   },
   {
     "path": "11_Machine_Learning_C\\07_llama_cpp_Deployment.md",
-    "total_lines": 695,
+    "total_lines": 699,
     "external_links": 9,
     "internal_links": 17,
     "outgoing_links": [
@@ -2871,7 +2871,7 @@
   },
   {
     "path": "11_Machine_Learning_C\\README.md",
-    "total_lines": 261,
+    "total_lines": 265,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -2897,7 +2897,7 @@
   },
   {
     "path": "12_Practice_Exercises\\01_Basic_Exercises.md",
-    "total_lines": 2882,
+    "total_lines": 2888,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -2923,7 +2923,7 @@
   },
   {
     "path": "12_Practice_Exercises\\02_Pointer_Exercises.md",
-    "total_lines": 491,
+    "total_lines": 497,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -2949,7 +2949,7 @@
   },
   {
     "path": "12_Practice_Exercises\\03_Data_Structure_Projects.md",
-    "total_lines": 517,
+    "total_lines": 523,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -2975,7 +2975,7 @@
   },
   {
     "path": "12_Practice_Exercises\\04_System_Programming_Labs.md",
-    "total_lines": 570,
+    "total_lines": 576,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -3001,7 +3001,7 @@
   },
   {
     "path": "12_Practice_Exercises\\05_Embedded_Challenges.md",
-    "total_lines": 587,
+    "total_lines": 593,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -3027,7 +3027,7 @@
   },
   {
     "path": "12_Practice_Exercises\\06_Performance_Optimization.md",
-    "total_lines": 612,
+    "total_lines": 616,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -3053,7 +3053,7 @@
   },
   {
     "path": "12_Practice_Exercises\\07_Algorithm_Challenges.md",
-    "total_lines": 465,
+    "total_lines": 471,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -3079,7 +3079,7 @@
   },
   {
     "path": "12_Practice_Exercises\\08_Concurrency_Parallelism_Labs.md",
-    "total_lines": 447,
+    "total_lines": 451,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -3105,7 +3105,7 @@
   },
   {
     "path": "12_Practice_Exercises\\09_Security_Coding.md",
-    "total_lines": 519,
+    "total_lines": 523,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -3131,7 +3131,7 @@
   },
   {
     "path": "12_Practice_Exercises\\10_Debugging_Puzzles.md",
-    "total_lines": 749,
+    "total_lines": 753,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -3157,7 +3157,7 @@
   },
   {
     "path": "12_Practice_Exercises\\11_Zig_C_Migration_Projects.md",
-    "total_lines": 631,
+    "total_lines": 635,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -3183,7 +3183,7 @@
   },
   {
     "path": "12_Practice_Exercises\\12_Mini_Projects.md",
-    "total_lines": 533,
+    "total_lines": 539,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -3209,7 +3209,7 @@
   },
   {
     "path": "12_Practice_Exercises\\13_Real_World_Projects.md",
-    "total_lines": 8035,
+    "total_lines": 8039,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -3243,7 +3243,7 @@
   },
   {
     "path": "12_Practice_Exercises\\README.md",
-    "total_lines": 347,
+    "total_lines": 351,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -3269,7 +3269,7 @@
   },
   {
     "path": "14_Video_Tutorials\\00_Video_Course_Outline.md",
-    "total_lines": 1048,
+    "total_lines": 1054,
     "external_links": 74,
     "internal_links": 31,
     "outgoing_links": [
@@ -3309,7 +3309,7 @@
   },
   {
     "path": "14_Video_Tutorials\\README.md",
-    "total_lines": 258,
+    "total_lines": 266,
     "external_links": 0,
     "internal_links": 33,
     "outgoing_links": [
@@ -3351,7 +3351,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\README.md",
-    "total_lines": 233,
+    "total_lines": 239,
     "external_links": 0,
     "internal_links": 19,
     "outgoing_links": [
@@ -3379,7 +3379,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\README.md",
-    "total_lines": 283,
+    "total_lines": 289,
     "external_links": 0,
     "internal_links": 27,
     "outgoing_links": [
@@ -3415,7 +3415,7 @@
   },
   {
     "path": "17_Ada_SPARK\\00_Ada_SPARK_Introduction.md",
-    "total_lines": 371,
+    "total_lines": 377,
     "external_links": 3,
     "internal_links": 22,
     "outgoing_links": [
@@ -3446,7 +3446,7 @@
   },
   {
     "path": "17_Ada_SPARK\\README.md",
-    "total_lines": 214,
+    "total_lines": 220,
     "external_links": 0,
     "internal_links": 35,
     "outgoing_links": [
@@ -3490,7 +3490,7 @@
   },
   {
     "path": "18_Robotics_Physical_Control\\README.md",
-    "total_lines": 263,
+    "total_lines": 269,
     "external_links": 0,
     "internal_links": 27,
     "outgoing_links": [
@@ -3526,7 +3526,7 @@
   },
   {
     "path": "19_Real_Time_Systems\\README.md",
-    "total_lines": 251,
+    "total_lines": 259,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -3560,7 +3560,7 @@
   },
   {
     "path": "templates\\kb-article-template.md",
-    "total_lines": 532,
+    "total_lines": 538,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -3587,7 +3587,7 @@
   },
   {
     "path": "templates\\README.md",
-    "total_lines": 728,
+    "total_lines": 732,
     "external_links": 3,
     "internal_links": 16,
     "outgoing_links": [
@@ -3612,7 +3612,7 @@
   },
   {
     "path": "Zig\\README.md",
-    "total_lines": 2003,
+    "total_lines": 2007,
     "external_links": 11,
     "internal_links": 54,
     "outgoing_links": [
@@ -3675,7 +3675,7 @@
   },
   {
     "path": "Zig\\Zig_Build_System.md",
-    "total_lines": 919,
+    "total_lines": 947,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -3709,7 +3709,7 @@
   },
   {
     "path": "Zig\\Zig_Compiler_Internals.md",
-    "total_lines": 337,
+    "total_lines": 345,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -3743,7 +3743,7 @@
   },
   {
     "path": "Zig\\Zig_Complete_Guide.md",
-    "total_lines": 2063,
+    "total_lines": 2067,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -3777,7 +3777,7 @@
   },
   {
     "path": "Zig\\Zig_Concurrency_Async.md",
-    "total_lines": 1099,
+    "total_lines": 1127,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -3811,7 +3811,7 @@
   },
   {
     "path": "Zig\\Zig_C_Interoperability.md",
-    "total_lines": 1335,
+    "total_lines": 1339,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -3845,7 +3845,7 @@
   },
   {
     "path": "Zig\\Zig_Database_Advanced.md",
-    "total_lines": 1033,
+    "total_lines": 1051,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -3879,7 +3879,7 @@
   },
   {
     "path": "Zig\\Zig_Design_Patterns.md",
-    "total_lines": 582,
+    "total_lines": 600,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -3913,7 +3913,7 @@
   },
   {
     "path": "Zig\\Zig_Distributed_Systems.md",
-    "total_lines": 943,
+    "total_lines": 971,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -3947,7 +3947,7 @@
   },
   {
     "path": "Zig\\Zig_Embedded_Systems.md",
-    "total_lines": 1098,
+    "total_lines": 1126,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -3981,7 +3981,7 @@
   },
   {
     "path": "Zig\\Zig_Formal_Semantics.md",
-    "total_lines": 1135,
+    "total_lines": 1163,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -4829,7 +4829,7 @@
   },
   {
     "path": "18_Robotics_Physical_Control\\01_ROS2_Fundamentals\\README.md",
-    "total_lines": 536,
+    "total_lines": 542,
     "external_links": 0,
     "internal_links": 20,
     "outgoing_links": [
@@ -4858,7 +4858,7 @@
   },
   {
     "path": "18_Robotics_Physical_Control\\02_Kinematics\\README.md",
-    "total_lines": 450,
+    "total_lines": 456,
     "external_links": 0,
     "internal_links": 20,
     "outgoing_links": [
@@ -4887,7 +4887,7 @@
   },
   {
     "path": "18_Robotics_Physical_Control\\03_Dynamics\\README.md",
-    "total_lines": 518,
+    "total_lines": 524,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -4914,7 +4914,7 @@
   },
   {
     "path": "18_Robotics_Physical_Control\\04_Control\\README.md",
-    "total_lines": 556,
+    "total_lines": 562,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -4941,7 +4941,7 @@
   },
   {
     "path": "18_Robotics_Physical_Control\\05_Motor_Control_Advanced\\README.md",
-    "total_lines": 513,
+    "total_lines": 519,
     "external_links": 0,
     "internal_links": 19,
     "outgoing_links": [
@@ -4969,7 +4969,7 @@
   },
   {
     "path": "18_Robotics_Physical_Control\\06_Physics_Simulation\\README.md",
-    "total_lines": 479,
+    "total_lines": 485,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -4996,7 +4996,7 @@
   },
   {
     "path": "18_Robotics_Physical_Control\\07_Computer_Vision_Robotics\\README.md",
-    "total_lines": 504,
+    "total_lines": 510,
     "external_links": 0,
     "internal_links": 20,
     "outgoing_links": [
@@ -5025,7 +5025,7 @@
   },
   {
     "path": "18_Robotics_Physical_Control\\08_Case_Studies\\README.md",
-    "total_lines": 452,
+    "total_lines": 458,
     "external_links": 0,
     "internal_links": 19,
     "outgoing_links": [
@@ -5053,7 +5053,7 @@
   },
   {
     "path": "17_Ada_SPARK\\01_Ada_Basics\\01_Syntax_Types.md",
-    "total_lines": 577,
+    "total_lines": 585,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -5087,7 +5087,7 @@
   },
   {
     "path": "17_Ada_SPARK\\01_Ada_Basics\\02_Packages_Modules.md",
-    "total_lines": 920,
+    "total_lines": 928,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -5121,133 +5121,6 @@
   },
   {
     "path": "17_Ada_SPARK\\01_Ada_Basics\\03_Task_Concurrency.md",
-    "total_lines": 508,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\01_Ada_Basics\\04_Exceptions_Contracts.md",
-    "total_lines": 559,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\01_Ada_Basics\\README.md",
-    "total_lines": 257,
-    "external_links": 0,
-    "internal_links": 16,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "17_Ada_SPARK\\README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\02_SPARK_Verification\\01_SPARK_Overview.md",
-    "total_lines": 454,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\02_SPARK_Verification\\02_Proof_Techniques.md",
     "total_lines": 516,
     "external_links": 0,
     "internal_links": 25,
@@ -5281,35 +5154,8 @@
     "isolation_score": 0
   },
   {
-    "path": "17_Ada_SPARK\\02_SPARK_Verification\\README.md",
-    "total_lines": 234,
-    "external_links": 4,
-    "internal_links": 18,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "17_Ada_SPARK\\02_SPARK_Verification\\01_SPARK_Overview.md",
-      "17_Ada_SPARK\\02_SPARK_Verification\\02_Proof_Techniques.md",
-      "17_Ada_SPARK\\README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\03_Ada_C_Interoperability\\01_Calling_C_from_Ada.md",
-    "total_lines": 576,
+    "path": "17_Ada_SPARK\\01_Ada_Basics\\04_Exceptions_Contracts.md",
+    "total_lines": 567,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -5342,171 +5188,8 @@
     "isolation_score": 0
   },
   {
-    "path": "17_Ada_SPARK\\03_Ada_C_Interoperability\\02_Calling_Ada_from_C.md",
-    "total_lines": 627,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\03_Ada_C_Interoperability\\README.md",
-    "total_lines": 260,
-    "external_links": 1,
-    "internal_links": 18,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "17_Ada_SPARK\\03_Ada_C_Interoperability\\01_Calling_C_from_Ada.md",
-      "17_Ada_SPARK\\03_Ada_C_Interoperability\\02_Calling_Ada_from_C.md",
-      "17_Ada_SPARK\\README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\04_Safety_Standards\\01_DO_178C_with_Ada.md",
-    "total_lines": 425,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\04_Safety_Standards\\02_EN_50128.md",
-    "total_lines": 486,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\04_Safety_Standards\\03_ISO_26262_Ada.md",
-    "total_lines": 712,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\04_Safety_Standards\\README.md",
-    "total_lines": 260,
+    "path": "17_Ada_SPARK\\01_Ada_Basics\\README.md",
+    "total_lines": 263,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -5530,8 +5213,8 @@
     "isolation_score": 0
   },
   {
-    "path": "17_Ada_SPARK\\05_Case_Studies\\01_SPARK_Safe_Stack.md",
-    "total_lines": 285,
+    "path": "17_Ada_SPARK\\02_SPARK_Verification\\01_SPARK_Overview.md",
+    "total_lines": 458,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -5564,287 +5247,7 @@
     "isolation_score": 0
   },
   {
-    "path": "17_Ada_SPARK\\05_Case_Studies\\02_SPARK_Bounded_Buffer.md",
-    "total_lines": 412,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\05_Case_Studies\\03_Boeing_787_DAL_A.md",
-    "total_lines": 742,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\05_Case_Studies\\04_F_35_Lightning_II.md",
-    "total_lines": 680,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\05_Case_Studies\\README.md",
-    "total_lines": 257,
-    "external_links": 0,
-    "internal_links": 16,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "17_Ada_SPARK\\README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\06_Migration_from_C\\01_C_to_Ada_Guide.md",
-    "total_lines": 940,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\06_Migration_from_C\\02_Mixed_C_Ada_Projects.md",
-    "total_lines": 956,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\06_Migration_from_C\\README.md",
-    "total_lines": 268,
-    "external_links": 0,
-    "internal_links": 16,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "17_Ada_SPARK\\README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\07_Decision_Trees\\01_Ada_Task_Scheduling_Debug.md",
-    "total_lines": 607,
-    "external_links": 0,
-    "internal_links": 25,
-    "outgoing_links": [
-      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
-      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
-      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
-      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
-      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
-      "../../../02_Formal_Semantics_and_Physics/README.md",
-      "../../../03_System_Technology_Domains/README.md",
-      "../../../04_Industrial_Scenarios/README.md",
-      "../../../06_Thinking_Representation/README.md",
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\07_Decision_Trees\\README.md",
-    "total_lines": 260,
-    "external_links": 2,
-    "internal_links": 17,
-    "outgoing_links": [
-      "00_GLOBAL_INDEX.md",
-      "README.md",
-      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
-      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
-      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
-      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
-      "03_System_Technology_Domains\\README.md",
-      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
-      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
-      "07_Modern_Toolchain\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-      "04_Industrial_Scenarios\\README.md",
-      "02_Formal_Semantics_and_Physics\\README.md",
-      "17_Ada_SPARK\\07_Decision_Trees\\01_Ada_Task_Scheduling_Debug.md",
-      "17_Ada_SPARK\\README.md"
-    ],
-    "isolation_score": 0
-  },
-  {
-    "path": "17_Ada_SPARK\\08_Comparison_Matrices\\01_Ada_C_Rust_Safety_Matrix.md",
+    "path": "17_Ada_SPARK\\02_SPARK_Verification\\02_Proof_Techniques.md",
     "total_lines": 520,
     "external_links": 0,
     "internal_links": 25,
@@ -5878,8 +5281,605 @@
     "isolation_score": 0
   },
   {
+    "path": "17_Ada_SPARK\\02_SPARK_Verification\\README.md",
+    "total_lines": 240,
+    "external_links": 4,
+    "internal_links": 18,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "17_Ada_SPARK\\02_SPARK_Verification\\01_SPARK_Overview.md",
+      "17_Ada_SPARK\\02_SPARK_Verification\\02_Proof_Techniques.md",
+      "17_Ada_SPARK\\README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\03_Ada_C_Interoperability\\01_Calling_C_from_Ada.md",
+    "total_lines": 584,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\03_Ada_C_Interoperability\\02_Calling_Ada_from_C.md",
+    "total_lines": 631,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\03_Ada_C_Interoperability\\README.md",
+    "total_lines": 266,
+    "external_links": 1,
+    "internal_links": 18,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "17_Ada_SPARK\\03_Ada_C_Interoperability\\01_Calling_C_from_Ada.md",
+      "17_Ada_SPARK\\03_Ada_C_Interoperability\\02_Calling_Ada_from_C.md",
+      "17_Ada_SPARK\\README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\04_Safety_Standards\\01_DO_178C_with_Ada.md",
+    "total_lines": 433,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\04_Safety_Standards\\02_EN_50128.md",
+    "total_lines": 494,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\04_Safety_Standards\\03_ISO_26262_Ada.md",
+    "total_lines": 716,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\04_Safety_Standards\\README.md",
+    "total_lines": 266,
+    "external_links": 0,
+    "internal_links": 16,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "17_Ada_SPARK\\README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\05_Case_Studies\\01_SPARK_Safe_Stack.md",
+    "total_lines": 293,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\05_Case_Studies\\02_SPARK_Bounded_Buffer.md",
+    "total_lines": 420,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\05_Case_Studies\\03_Boeing_787_DAL_A.md",
+    "total_lines": 750,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\05_Case_Studies\\04_F_35_Lightning_II.md",
+    "total_lines": 688,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\05_Case_Studies\\README.md",
+    "total_lines": 263,
+    "external_links": 0,
+    "internal_links": 16,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "17_Ada_SPARK\\README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\06_Migration_from_C\\01_C_to_Ada_Guide.md",
+    "total_lines": 948,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\06_Migration_from_C\\02_Mixed_C_Ada_Projects.md",
+    "total_lines": 960,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\06_Migration_from_C\\README.md",
+    "total_lines": 274,
+    "external_links": 0,
+    "internal_links": 16,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "17_Ada_SPARK\\README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\07_Decision_Trees\\01_Ada_Task_Scheduling_Debug.md",
+    "total_lines": 613,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md",
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\07_Decision_Trees\\README.md",
+    "total_lines": 266,
+    "external_links": 2,
+    "internal_links": 17,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "17_Ada_SPARK\\07_Decision_Trees\\01_Ada_Task_Scheduling_Debug.md",
+      "17_Ada_SPARK\\README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
+    "path": "17_Ada_SPARK\\08_Comparison_Matrices\\01_Ada_C_Rust_Safety_Matrix.md",
+    "total_lines": 528,
+    "external_links": 0,
+    "internal_links": 25,
+    "outgoing_links": [
+      "00_GLOBAL_INDEX.md",
+      "README.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "03_System_Technology_Domains\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "07_Modern_Toolchain\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\README.md",
+      "04_Industrial_Scenarios\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md",
+      "../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md",
+      "../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md",
+      "../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md",
+      "../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md",
+      "../../../02_Formal_Semantics_and_Physics/README.md",
+      "../../../03_System_Technology_Domains/README.md",
+      "../../../04_Industrial_Scenarios/README.md",
+      "../../../06_Thinking_Representation/README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
     "path": "17_Ada_SPARK\\08_Comparison_Matrices\\README.md",
-    "total_lines": 261,
+    "total_lines": 267,
     "external_links": 3,
     "internal_links": 17,
     "outgoing_links": [
@@ -5905,7 +5905,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\01_TinyML_Fundamentals\\01_Introduction_to_TinyML.md",
-    "total_lines": 556,
+    "total_lines": 560,
     "external_links": 4,
     "internal_links": 25,
     "outgoing_links": [
@@ -5939,7 +5939,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\01_TinyML_Fundamentals\\02_TensorFlow_Lite_Micro.md",
-    "total_lines": 727,
+    "total_lines": 731,
     "external_links": 9,
     "internal_links": 25,
     "outgoing_links": [
@@ -5973,7 +5973,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\01_TinyML_Fundamentals\\README.md",
-    "total_lines": 234,
+    "total_lines": 240,
     "external_links": 5,
     "internal_links": 17,
     "outgoing_links": [
@@ -5999,7 +5999,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\02_LLMs_on_Edge\\01_llama_cpp_Embedded_Deployment.md",
-    "total_lines": 613,
+    "total_lines": 617,
     "external_links": 3,
     "internal_links": 25,
     "outgoing_links": [
@@ -6033,7 +6033,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\02_LLMs_on_Edge\\02_GGML_Optimization.md",
-    "total_lines": 1016,
+    "total_lines": 1020,
     "external_links": 11,
     "internal_links": 25,
     "outgoing_links": [
@@ -6067,7 +6067,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\02_LLMs_on_Edge\\README.md",
-    "total_lines": 234,
+    "total_lines": 240,
     "external_links": 5,
     "internal_links": 17,
     "outgoing_links": [
@@ -6093,7 +6093,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\03_AI_Agent_Runtime\\01_ZeroClaw_Overview.md",
-    "total_lines": 508,
+    "total_lines": 512,
     "external_links": 6,
     "internal_links": 16,
     "outgoing_links": [
@@ -6118,7 +6118,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\03_AI_Agent_Runtime\\README.md",
-    "total_lines": 233,
+    "total_lines": 239,
     "external_links": 4,
     "internal_links": 17,
     "outgoing_links": [
@@ -6144,7 +6144,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\04_C_Implementation_Guide\\README.md",
-    "total_lines": 231,
+    "total_lines": 237,
     "external_links": 4,
     "internal_links": 16,
     "outgoing_links": [
@@ -6169,7 +6169,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\05_Case_Studies\\04_ZeroClaw_Edge_Deployment.md",
-    "total_lines": 750,
+    "total_lines": 754,
     "external_links": 1,
     "internal_links": 25,
     "outgoing_links": [
@@ -6203,7 +6203,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\05_Case_Studies\\README.md",
-    "total_lines": 260,
+    "total_lines": 266,
     "external_links": 2,
     "internal_links": 17,
     "outgoing_links": [
@@ -6229,7 +6229,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\06_C_Frameworks\\01_CMSIS_NN.md",
-    "total_lines": 748,
+    "total_lines": 752,
     "external_links": 4,
     "internal_links": 25,
     "outgoing_links": [
@@ -6263,7 +6263,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\06_C_Frameworks\\README.md",
-    "total_lines": 233,
+    "total_lines": 239,
     "external_links": 4,
     "internal_links": 17,
     "outgoing_links": [
@@ -6289,7 +6289,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\07_Hardware_Acceleration\\01_NPU_TPU_C_Interfaces.md",
-    "total_lines": 687,
+    "total_lines": 691,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -6315,7 +6315,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\07_Hardware_Acceleration\\README.md",
-    "total_lines": 233,
+    "total_lines": 239,
     "external_links": 4,
     "internal_links": 17,
     "outgoing_links": [
@@ -6341,7 +6341,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\08_Real_Time_AI\\01_Deterministic_Inference.md",
-    "total_lines": 770,
+    "total_lines": 774,
     "external_links": 4,
     "internal_links": 25,
     "outgoing_links": [
@@ -6375,7 +6375,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\08_Real_Time_AI\\README.md",
-    "total_lines": 262,
+    "total_lines": 268,
     "external_links": 4,
     "internal_links": 17,
     "outgoing_links": [
@@ -6401,7 +6401,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\09_Security_Reliability\\01_AI_Safety_Standards.md",
-    "total_lines": 722,
+    "total_lines": 728,
     "external_links": 4,
     "internal_links": 16,
     "outgoing_links": [
@@ -6426,7 +6426,7 @@
   },
   {
     "path": "16_Embedded_AI_Agents\\09_Security_Reliability\\README.md",
-    "total_lines": 234,
+    "total_lines": 240,
     "external_links": 5,
     "internal_links": 17,
     "outgoing_links": [
@@ -6452,7 +6452,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\01_Rust_vs_C\\01_Technical_Comparison.md",
-    "total_lines": 312,
+    "total_lines": 320,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -6486,7 +6486,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\01_Rust_vs_C\\02_Ownership_vs_Pointers.md",
-    "total_lines": 851,
+    "total_lines": 857,
     "external_links": 4,
     "internal_links": 18,
     "outgoing_links": [
@@ -6513,7 +6513,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\01_Rust_vs_C\\03_Linux_Kernel_Rust_Integration.md",
-    "total_lines": 779,
+    "total_lines": 785,
     "external_links": 4,
     "internal_links": 18,
     "outgoing_links": [
@@ -6540,7 +6540,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\01_Rust_vs_C\\04_C_vs_Rust_Decision_Framework.md",
-    "total_lines": 652,
+    "total_lines": 656,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -6567,7 +6567,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\01_Rust_vs_C\\05_Memory_Safety_Statistics.md",
-    "total_lines": 628,
+    "total_lines": 634,
     "external_links": 11,
     "internal_links": 18,
     "outgoing_links": [
@@ -6594,7 +6594,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\01_Rust_vs_C\\06_DRM_Subsystem_Rust_Case.md",
-    "total_lines": 4421,
+    "total_lines": 4438,
     "external_links": 5,
     "internal_links": 25,
     "outgoing_links": [
@@ -6628,7 +6628,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\01_Rust_vs_C\\06_Migration_Case_Studies.md",
-    "total_lines": 842,
+    "total_lines": 848,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -6655,7 +6655,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\01_Rust_vs_C\\07_FFI_Best_Practices.md",
-    "total_lines": 1581,
+    "total_lines": 1585,
     "external_links": 4,
     "internal_links": 17,
     "outgoing_links": [
@@ -6681,7 +6681,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\01_Rust_vs_C\\08_Incremental_Migration_Guide.md",
-    "total_lines": 961,
+    "total_lines": 965,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -6708,7 +6708,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\01_Rust_vs_C\\README.md",
-    "total_lines": 393,
+    "total_lines": 399,
     "external_links": 18,
     "internal_links": 24,
     "outgoing_links": [
@@ -6741,7 +6741,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\02_Migration_Strategies\\01_Incremental_Migration.md",
-    "total_lines": 1071,
+    "total_lines": 1075,
     "external_links": 6,
     "internal_links": 25,
     "outgoing_links": [
@@ -6775,7 +6775,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\02_Migration_Strategies\\README.md",
-    "total_lines": 231,
+    "total_lines": 237,
     "external_links": 4,
     "internal_links": 16,
     "outgoing_links": [
@@ -6800,7 +6800,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\03_Industry_Cases\\01_Google_Android.md",
-    "total_lines": 914,
+    "total_lines": 931,
     "external_links": 7,
     "internal_links": 25,
     "outgoing_links": [
@@ -6834,7 +6834,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\03_Industry_Cases\\README.md",
-    "total_lines": 234,
+    "total_lines": 240,
     "external_links": 5,
     "internal_links": 16,
     "outgoing_links": [
@@ -6859,7 +6859,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\04_Decision_Frameworks\\01_Language_Selection_Guide.md",
-    "total_lines": 1050,
+    "total_lines": 1054,
     "external_links": 12,
     "internal_links": 25,
     "outgoing_links": [
@@ -6893,7 +6893,7 @@
   },
   {
     "path": "15_Memory_Safe_Languages\\04_Decision_Frameworks\\README.md",
-    "total_lines": 233,
+    "total_lines": 239,
     "external_links": 4,
     "internal_links": 16,
     "outgoing_links": [
@@ -6918,7 +6918,7 @@
   },
   {
     "path": "14_Video_Tutorials\\01_Video_Scripts\\01_Introduction_to_C.md",
-    "total_lines": 623,
+    "total_lines": 638,
     "external_links": 2,
     "internal_links": 30,
     "outgoing_links": [
@@ -6957,7 +6957,7 @@
   },
   {
     "path": "14_Video_Tutorials\\01_Video_Scripts\\02_Pointer_Deep_Dive.md",
-    "total_lines": 991,
+    "total_lines": 997,
     "external_links": 2,
     "internal_links": 16,
     "outgoing_links": [
@@ -6982,7 +6982,7 @@
   },
   {
     "path": "14_Video_Tutorials\\01_Video_Scripts\\03_Memory_Management.md",
-    "total_lines": 918,
+    "total_lines": 924,
     "external_links": 1,
     "internal_links": 30,
     "outgoing_links": [
@@ -7021,7 +7021,7 @@
   },
   {
     "path": "14_Video_Tutorials\\01_Video_Scripts\\04_Concurrency_Patterns.md",
-    "total_lines": 1129,
+    "total_lines": 1135,
     "external_links": 2,
     "internal_links": 30,
     "outgoing_links": [
@@ -7060,7 +7060,7 @@
   },
   {
     "path": "14_Video_Tutorials\\01_Video_Scripts\\05_Safety_Standards.md",
-    "total_lines": 790,
+    "total_lines": 796,
     "external_links": 2,
     "internal_links": 30,
     "outgoing_links": [
@@ -7099,7 +7099,7 @@
   },
   {
     "path": "14_Video_Tutorials\\01_Video_Scripts\\06_Modern_C_C23.md",
-    "total_lines": 1012,
+    "total_lines": 1018,
     "external_links": 2,
     "internal_links": 30,
     "outgoing_links": [
@@ -7138,7 +7138,7 @@
   },
   {
     "path": "14_Video_Tutorials\\01_Video_Scripts\\07_Zig_C_Interoperability.md",
-    "total_lines": 1197,
+    "total_lines": 1203,
     "external_links": 2,
     "internal_links": 30,
     "outgoing_links": [
@@ -7177,7 +7177,7 @@
   },
   {
     "path": "14_Video_Tutorials\\01_Video_Scripts\\08_Embedded_Systems.md",
-    "total_lines": 1772,
+    "total_lines": 1778,
     "external_links": 3,
     "internal_links": 30,
     "outgoing_links": [
@@ -7216,7 +7216,7 @@
   },
   {
     "path": "14_Video_Tutorials\\01_Video_Scripts\\09_Performance_Optimization.md",
-    "total_lines": 1312,
+    "total_lines": 1318,
     "external_links": 2,
     "internal_links": 30,
     "outgoing_links": [
@@ -7255,7 +7255,7 @@
   },
   {
     "path": "14_Video_Tutorials\\01_Video_Scripts\\10_Formal_Verification.md",
-    "total_lines": 1273,
+    "total_lines": 1279,
     "external_links": 3,
     "internal_links": 30,
     "outgoing_links": [
@@ -7294,7 +7294,7 @@
   },
   {
     "path": "14_Video_Tutorials\\01_Video_Scripts\\README.md",
-    "total_lines": 388,
+    "total_lines": 392,
     "external_links": 0,
     "internal_links": 30,
     "outgoing_links": [
@@ -7333,7 +7333,7 @@
   },
   {
     "path": "14_Video_Tutorials\\02_Compiler_Explorer_Integration\\Compiler_Explorer_Guide.md",
-    "total_lines": 574,
+    "total_lines": 578,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -7367,7 +7367,7 @@
   },
   {
     "path": "14_Video_Tutorials\\02_Compiler_Explorer_Integration\\README.md",
-    "total_lines": 520,
+    "total_lines": 526,
     "external_links": 7,
     "internal_links": 16,
     "outgoing_links": [
@@ -7392,7 +7392,7 @@
   },
   {
     "path": "14_Video_Tutorials\\03_Interactive_Exercises\\Exercise_Database_Schema.md",
-    "total_lines": 976,
+    "total_lines": 982,
     "external_links": 0,
     "internal_links": 30,
     "outgoing_links": [
@@ -7431,7 +7431,7 @@
   },
   {
     "path": "14_Video_Tutorials\\03_Interactive_Exercises\\Online_Exercise_Platform_Spec.md",
-    "total_lines": 735,
+    "total_lines": 739,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -7465,7 +7465,7 @@
   },
   {
     "path": "14_Video_Tutorials\\03_Interactive_Exercises\\README.md",
-    "total_lines": 522,
+    "total_lines": 530,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -7499,7 +7499,7 @@
   },
   {
     "path": "14_Video_Tutorials\\04_Video_Production_Guide\\README.md",
-    "total_lines": 226,
+    "total_lines": 232,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -7526,7 +7526,7 @@
   },
   {
     "path": "14_Video_Tutorials\\04_Video_Production_Guide\\Video_Production_Best_Practices.md",
-    "total_lines": 763,
+    "total_lines": 767,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -7560,7 +7560,7 @@
   },
   {
     "path": "14_Video_Tutorials\\04_Video_Production_Guide\\Visual_Design_Guidelines.md",
-    "total_lines": 696,
+    "total_lines": 704,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -7594,7 +7594,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\01_Fundamental_Data_Structures\\01_Linked_List_Complete_Guide.md",
-    "total_lines": 1988,
+    "total_lines": 2017,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -7628,7 +7628,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\01_Fundamental_Data_Structures\\02_Stack_Queue_Complete.md",
-    "total_lines": 2026,
+    "total_lines": 2055,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -7662,7 +7662,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\01_Fundamental_Data_Structures\\03_Hash_Table_Implementation.md",
-    "total_lines": 1537,
+    "total_lines": 1581,
     "external_links": 0,
     "internal_links": 30,
     "outgoing_links": [
@@ -7701,7 +7701,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\01_Fundamental_Data_Structures\\04_Binary_Tree_Fundamentals.md",
-    "total_lines": 1628,
+    "total_lines": 1657,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -7735,7 +7735,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\01_Fundamental_Data_Structures\\05_Heap_Priority_Queue.md",
-    "total_lines": 1759,
+    "total_lines": 1787,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -7769,7 +7769,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\01_Fundamental_Data_Structures\\README.md",
-    "total_lines": 251,
+    "total_lines": 257,
     "external_links": 0,
     "internal_links": 21,
     "outgoing_links": [
@@ -7799,7 +7799,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\02_Fundamental_Algorithms\\01_Sorting_Algorithms_Complete.md",
-    "total_lines": 2799,
+    "total_lines": 2825,
     "external_links": 2,
     "internal_links": 25,
     "outgoing_links": [
@@ -7833,7 +7833,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\02_Fundamental_Algorithms\\02_Searching_Algorithms.md",
-    "total_lines": 1686,
+    "total_lines": 1712,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -7901,7 +7901,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\02_Fundamental_Algorithms\\04_Dynamic_Programming_Basics.md",
-    "total_lines": 1670,
+    "total_lines": 1696,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -7935,7 +7935,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\02_Fundamental_Algorithms\\05_Greedy_Algorithms_Backtracking.md",
-    "total_lines": 1384,
+    "total_lines": 1410,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -7969,7 +7969,7 @@
   },
   {
     "path": "09_Data_Structures_Algorithms\\02_Fundamental_Algorithms\\README.md",
-    "total_lines": 233,
+    "total_lines": 239,
     "external_links": 0,
     "internal_links": 21,
     "outgoing_links": [
@@ -7999,7 +7999,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\01_Type_System_Mapping\\01_C_to_Zig_Type_Correspondence.md",
-    "total_lines": 2475,
+    "total_lines": 2492,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8033,7 +8033,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\01_Type_System_Mapping\\02_Extern_Struct_Equivalence.md",
-    "total_lines": 2424,
+    "total_lines": 2441,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8067,7 +8067,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\01_Type_System_Mapping\\03_Function_Pointer_Compatibility.md",
-    "total_lines": 425,
+    "total_lines": 434,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8101,7 +8101,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\01_Type_System_Mapping\\README.md",
-    "total_lines": 588,
+    "total_lines": 605,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8135,7 +8135,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\02_Memory_Model_Bridge\\01_C11_vs_Zig_Memory_Model.md",
-    "total_lines": 2367,
+    "total_lines": 2384,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8169,7 +8169,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\02_Memory_Model_Bridge\\02_Atomic_Operations_Mapping.md",
-    "total_lines": 1193,
+    "total_lines": 1210,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8203,7 +8203,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\02_Memory_Model_Bridge\\03_Pointer_Provenance_Analysis.md",
-    "total_lines": 2108,
+    "total_lines": 2125,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8237,7 +8237,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\02_Memory_Model_Bridge\\README.md",
-    "total_lines": 384,
+    "total_lines": 390,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -8264,7 +8264,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\03_ABI_Formalization\\01_System_V_ABI_Zig_C.md",
-    "total_lines": 2252,
+    "total_lines": 2269,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8298,7 +8298,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\03_ABI_Formalization\\02_Windows_ABI_Compatibility.md",
-    "total_lines": 729,
+    "total_lines": 746,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8332,7 +8332,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\03_ABI_Formalization\\03_Calling_Convention_Proofs.md",
-    "total_lines": 774,
+    "total_lines": 791,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8366,7 +8366,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\03_ABI_Formalization\\README.md",
-    "total_lines": 481,
+    "total_lines": 487,
     "external_links": 3,
     "internal_links": 25,
     "outgoing_links": [
@@ -8400,7 +8400,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\04_Translation_Validation\\01_Translate_C_Semantics.md",
-    "total_lines": 2114,
+    "total_lines": 2118,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8434,7 +8434,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\04_Translation_Validation\\02_CImport_Correctness.md",
-    "total_lines": 542,
+    "total_lines": 559,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8468,7 +8468,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\04_Translation_Validation\\03_Semantic_Preservation_Proofs.md",
-    "total_lines": 443,
+    "total_lines": 460,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8502,7 +8502,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\04_Translation_Validation\\README.md",
-    "total_lines": 607,
+    "total_lines": 611,
     "external_links": 3,
     "internal_links": 25,
     "outgoing_links": [
@@ -8536,7 +8536,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\05_Migration_Methodology\\01_Incremental_Migration_Patterns.md",
-    "total_lines": 2776,
+    "total_lines": 2799,
     "external_links": 0,
     "internal_links": 30,
     "outgoing_links": [
@@ -8575,7 +8575,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\05_Migration_Methodology\\02_Safety_Improvement_Metrics.md",
-    "total_lines": 385,
+    "total_lines": 402,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8609,7 +8609,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\05_Migration_Methodology\\03_Performance_Comparison_Framework.md",
-    "total_lines": 357,
+    "total_lines": 374,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8643,7 +8643,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\05_Migration_Methodology\\README.md",
-    "total_lines": 661,
+    "total_lines": 667,
     "external_links": 0,
     "internal_links": 18,
     "outgoing_links": [
@@ -8670,7 +8670,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\06_C23_Zig_Parallel\\01_Nullptr_vs_Optional_Pointer.md",
-    "total_lines": 1641,
+    "total_lines": 1658,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8704,7 +8704,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\06_C23_Zig_Parallel\\02_Constexpr_vs_Comptime.md",
-    "total_lines": 3403,
+    "total_lines": 3420,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8738,7 +8738,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\06_C23_Zig_Parallel\\03_Typeof_vs_TypeOf.md",
-    "total_lines": 2995,
+    "total_lines": 3012,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8772,7 +8772,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\06_C23_Zig_Parallel\\README.md",
-    "total_lines": 634,
+    "total_lines": 638,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8806,7 +8806,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\07_Real_World_Migration_Cases\\01_Redis_Data_Structure_Migration.md",
-    "total_lines": 849,
+    "total_lines": 866,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8840,7 +8840,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\07_Real_World_Migration_Cases\\02_SQLite_BTree_Migration.md",
-    "total_lines": 823,
+    "total_lines": 840,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8874,7 +8874,7 @@
   },
   {
     "path": "08_Zig_C_Connection\\07_Real_World_Migration_Cases\\README.md",
-    "total_lines": 359,
+    "total_lines": 367,
     "external_links": 3,
     "internal_links": 25,
     "outgoing_links": [
@@ -8908,7 +8908,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\01_IDE_Editors\\01_VS_Code_Setup.md",
-    "total_lines": 659,
+    "total_lines": 663,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -8942,7 +8942,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\01_IDE_Editors\\02_Neovim_Modern.md",
-    "total_lines": 543,
+    "total_lines": 547,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -8967,7 +8967,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\01_IDE_Editors\\03_CLion_Guide.md",
-    "total_lines": 721,
+    "total_lines": 725,
     "external_links": 3,
     "internal_links": 16,
     "outgoing_links": [
@@ -8992,7 +8992,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\01_IDE_Editors\\04_Zed_Editor.md",
-    "total_lines": 449,
+    "total_lines": 453,
     "external_links": 3,
     "internal_links": 16,
     "outgoing_links": [
@@ -9017,7 +9017,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\01_IDE_Editors\\05_Emacs_Config.md",
-    "total_lines": 456,
+    "total_lines": 460,
     "external_links": 4,
     "internal_links": 16,
     "outgoing_links": [
@@ -9042,7 +9042,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\01_IDE_Editors\\06_IDE_Comparison_Matrix.md",
-    "total_lines": 376,
+    "total_lines": 382,
     "external_links": 0,
     "internal_links": 22,
     "outgoing_links": [
@@ -9073,7 +9073,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\01_IDE_Editors\\README.md",
-    "total_lines": 661,
+    "total_lines": 665,
     "external_links": 6,
     "internal_links": 22,
     "outgoing_links": [
@@ -9104,7 +9104,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\02_Build_Systems_Modern\\01_CMake_Best_Practices.md",
-    "total_lines": 700,
+    "total_lines": 704,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -9138,7 +9138,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\02_Build_Systems_Modern\\01_CMake_Modern_Best_Practices.md",
-    "total_lines": 484,
+    "total_lines": 488,
     "external_links": 3,
     "internal_links": 17,
     "outgoing_links": [
@@ -9164,7 +9164,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\02_Build_Systems_Modern\\02_Meson_Build.md",
-    "total_lines": 877,
+    "total_lines": 881,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -9189,7 +9189,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\02_Build_Systems_Modern\\03_Xmake_Guide.md",
-    "total_lines": 2503,
+    "total_lines": 2507,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -9214,7 +9214,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\02_Build_Systems_Modern\\04_Bazel_C_Projects.md",
-    "total_lines": 1037,
+    "total_lines": 1041,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -9239,7 +9239,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\02_Build_Systems_Modern\\05_Build_System_Comparison.md",
-    "total_lines": 538,
+    "total_lines": 542,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -9264,7 +9264,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\02_Build_Systems_Modern\\README.md",
-    "total_lines": 834,
+    "total_lines": 838,
     "external_links": 6,
     "internal_links": 21,
     "outgoing_links": [
@@ -9294,7 +9294,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\03_CI_CD_DevOps\\01_GitHub_Actions_C.md",
-    "total_lines": 527,
+    "total_lines": 533,
     "external_links": 2,
     "internal_links": 19,
     "outgoing_links": [
@@ -9322,7 +9322,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\03_CI_CD_DevOps\\02_Docker_C_Development.md",
-    "total_lines": 946,
+    "total_lines": 950,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -9347,7 +9347,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\03_CI_CD_DevOps\\03_GitLab_CI_C.md",
-    "total_lines": 297,
+    "total_lines": 303,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -9372,7 +9372,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\03_CI_CD_DevOps\\04_DevSecOps_Integration.md",
-    "total_lines": 1087,
+    "total_lines": 1091,
     "external_links": 0,
     "internal_links": 17,
     "outgoing_links": [
@@ -9398,7 +9398,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\03_CI_CD_DevOps\\05_Containerized_Embedded_Development.md",
-    "total_lines": 4447,
+    "total_lines": 4453,
     "external_links": 5,
     "internal_links": 30,
     "outgoing_links": [
@@ -9437,7 +9437,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\03_CI_CD_DevOps\\README.md",
-    "total_lines": 1283,
+    "total_lines": 1287,
     "external_links": 5,
     "internal_links": 21,
     "outgoing_links": [
@@ -9467,7 +9467,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\04_Package_Management\\01_Conan_Package_Manager.md",
-    "total_lines": 605,
+    "total_lines": 609,
     "external_links": 3,
     "internal_links": 16,
     "outgoing_links": [
@@ -9492,7 +9492,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\04_Package_Management\\02_vcpkg_Guide.md",
-    "total_lines": 613,
+    "total_lines": 617,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -9517,7 +9517,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\04_Package_Management\\03_xrepo_Xmake.md",
-    "total_lines": 638,
+    "total_lines": 642,
     "external_links": 4,
     "internal_links": 16,
     "outgoing_links": [
@@ -9542,7 +9542,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\04_Package_Management\\04_Dependency_Management_Best_Practices.md",
-    "total_lines": 318,
+    "total_lines": 322,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -9567,7 +9567,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\04_Package_Management\\README.md",
-    "total_lines": 696,
+    "total_lines": 700,
     "external_links": 0,
     "internal_links": 21,
     "outgoing_links": [
@@ -9597,7 +9597,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Case_Studies\\01_Redis_Architecture.md",
-    "total_lines": 1334,
+    "total_lines": 1338,
     "external_links": 4,
     "internal_links": 25,
     "outgoing_links": [
@@ -9631,7 +9631,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Case_Studies\\02_SQLite_Engineering.md",
-    "total_lines": 1587,
+    "total_lines": 1593,
     "external_links": 6,
     "internal_links": 30,
     "outgoing_links": [
@@ -9670,7 +9670,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Case_Studies\\03_Nginx_Build_System.md",
-    "total_lines": 466,
+    "total_lines": 470,
     "external_links": 3,
     "internal_links": 25,
     "outgoing_links": [
@@ -9704,7 +9704,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Case_Studies\\04_Linux_Kernel_Toolchain.md",
-    "total_lines": 1052,
+    "total_lines": 1056,
     "external_links": 5,
     "internal_links": 25,
     "outgoing_links": [
@@ -9738,7 +9738,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Case_Studies\\README.md",
-    "total_lines": 648,
+    "total_lines": 652,
     "external_links": 6,
     "internal_links": 21,
     "outgoing_links": [
@@ -9768,7 +9768,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Code_Quality_Toolchain\\01_clang_format_Setup.md",
-    "total_lines": 1121,
+    "total_lines": 1125,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -9827,7 +9827,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Code_Quality_Toolchain\\02_Code_Formatting_Testing.md",
-    "total_lines": 531,
+    "total_lines": 535,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -9861,7 +9861,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Code_Quality_Toolchain\\02_Static_Analysis_Deep_Dive.md",
-    "total_lines": 899,
+    "total_lines": 903,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -9886,7 +9886,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Code_Quality_Toolchain\\03_Code_Example_Validation.md",
-    "total_lines": 339,
+    "total_lines": 343,
     "external_links": 0,
     "internal_links": 25,
     "outgoing_links": [
@@ -9945,7 +9945,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Code_Quality_Toolchain\\04_Code_Coverage_Guide.md",
-    "total_lines": 842,
+    "total_lines": 846,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -9970,7 +9970,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Code_Quality_Toolchain\\05_Code_Review_Automation.md",
-    "total_lines": 894,
+    "total_lines": 898,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -9995,7 +9995,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Code_Quality_Toolchain\\README.md",
-    "total_lines": 827,
+    "total_lines": 831,
     "external_links": 0,
     "internal_links": 21,
     "outgoing_links": [
@@ -10025,7 +10025,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\06_Project_Templates\\01_Modern_C_Project_Template.md",
-    "total_lines": 314,
+    "total_lines": 318,
     "external_links": 0,
     "internal_links": 16,
     "outgoing_links": [
@@ -10050,7 +10050,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\06_Project_Templates\\README.md",
-    "total_lines": 1269,
+    "total_lines": 1273,
     "external_links": 0,
     "internal_links": 21,
     "outgoing_links": [
@@ -10080,7 +10080,7 @@
   },
   {
     "path": "07_Modern_Toolchain\\07_Concurrency_Parallelism\\01_C11_Memory_Model.md",
-    "total_lines": 941,
+    "total_lines": 958,
     "external_links": 4,
     "internal_links": 25,
     "outgoing_links": [
@@ -10850,7 +10850,7 @@
   },
   {
     "path": "06_Thinking_Representation\\01_Mind_Maps\\README.md",
-    "total_lines": 665,
+    "total_lines": 677,
     "external_links": 4,
     "internal_links": 4,
     "outgoing_links": [
@@ -11284,7 +11284,7 @@
   },
   {
     "path": "06_Thinking_Representation\\04_Case_Studies\\01_Network_Server.md",
-    "total_lines": 1016,
+    "total_lines": 1018,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -11394,7 +11394,7 @@
   },
   {
     "path": "06_Thinking_Representation\\04_Case_Studies\\07_Performance_Optimization.md",
-    "total_lines": 620,
+    "total_lines": 622,
     "external_links": 3,
     "internal_links": 15,
     "outgoing_links": [
@@ -11581,7 +11581,7 @@
   },
   {
     "path": "06_Thinking_Representation\\05_Concept_Mappings\\06_Standards_Mapping.md",
-    "total_lines": 486,
+    "total_lines": 503,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -11605,7 +11605,7 @@
   },
   {
     "path": "06_Thinking_Representation\\05_Concept_Mappings\\07_Topic_Dependency_Graph.md",
-    "total_lines": 407,
+    "total_lines": 416,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -11648,7 +11648,7 @@
   },
   {
     "path": "06_Thinking_Representation\\05_Concept_Mappings\\09_Level_Bridging_Chains.md",
-    "total_lines": 548,
+    "total_lines": 557,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -11739,7 +11739,7 @@
   },
   {
     "path": "06_Thinking_Representation\\05_Concept_Mappings\\14_Knowledge_Integration_Hub.md",
-    "total_lines": 437,
+    "total_lines": 446,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -11948,7 +11948,7 @@
   },
   {
     "path": "06_Thinking_Representation\\07_Knowledge_Graph\\01_Knowledge_Graph.md",
-    "total_lines": 713,
+    "total_lines": 715,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -12115,7 +12115,7 @@
   },
   {
     "path": "06_Thinking_Representation\\08_Index\\README.md",
-    "total_lines": 848,
+    "total_lines": 865,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -12341,7 +12341,7 @@
   },
   {
     "path": "06_Thinking_Representation\\10_Concept_Maps\\01_Concept_Mapping_Guide.md",
-    "total_lines": 363,
+    "total_lines": 372,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -12365,7 +12365,7 @@
   },
   {
     "path": "06_Thinking_Representation\\10_Concept_Maps\\02_Pointer_Concept_Map.md",
-    "total_lines": 335,
+    "total_lines": 344,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -12389,7 +12389,7 @@
   },
   {
     "path": "06_Thinking_Representation\\10_Concept_Maps\\03_Memory_Model_Concept_Map.md",
-    "total_lines": 346,
+    "total_lines": 355,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -12413,7 +12413,7 @@
   },
   {
     "path": "06_Thinking_Representation\\10_Concept_Maps\\04_Type_System_Concept_Map.md",
-    "total_lines": 346,
+    "total_lines": 355,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -12437,7 +12437,7 @@
   },
   {
     "path": "06_Thinking_Representation\\10_Concept_Maps\\05_Concurrency_Concept_Map.md",
-    "total_lines": 497,
+    "total_lines": 506,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -12461,7 +12461,7 @@
   },
   {
     "path": "06_Thinking_Representation\\10_Concept_Maps\\06_Compilation_Process_Map.md",
-    "total_lines": 657,
+    "total_lines": 659,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -12495,7 +12495,7 @@
   },
   {
     "path": "06_Thinking_Representation\\10_Concept_Maps\\08_Standard_Library_Concept_Map.md",
-    "total_lines": 696,
+    "total_lines": 705,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -12519,7 +12519,7 @@
   },
   {
     "path": "06_Thinking_Representation\\10_Concept_Maps\\09_Memory_Allocation_Concept_Map.md",
-    "total_lines": 604,
+    "total_lines": 613,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -12543,7 +12543,7 @@
   },
   {
     "path": "06_Thinking_Representation\\10_Concept_Maps\\10_Error_Handling_Concept_Map.md",
-    "total_lines": 622,
+    "total_lines": 631,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -12588,7 +12588,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\01_Formal_Semantics\\01_Operational_Semantics.md",
-    "total_lines": 387,
+    "total_lines": 396,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -13187,7 +13187,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\06_TLA_Plus\\02_PlusCal_Language.md",
-    "total_lines": 1053,
+    "total_lines": 1062,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -13211,7 +13211,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\06_TLA_Plus\\03_Model_Checking.md",
-    "total_lines": 969,
+    "total_lines": 971,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -13235,7 +13235,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\06_TLA_Plus\\04_Distributed_Systems_Specs.md",
-    "total_lines": 1081,
+    "total_lines": 1090,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -13259,7 +13259,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\06_TLA_Plus\\05_C_Verification_with_TLA.md",
-    "total_lines": 1088,
+    "total_lines": 1097,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -13466,7 +13466,7 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\10_Debug_Info_Encoding\\02_CFI_Stack_Reconstruction.md",
-    "total_lines": 999,
+    "total_lines": 1016,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -13824,7 +13824,7 @@
   },
   {
     "path": "04_Industrial_Scenarios\\02_Avionics_Systems\\02_DO_178C.md",
-    "total_lines": 1028,
+    "total_lines": 1045,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -14944,7 +14944,7 @@
   },
   {
     "path": "04_Industrial_Scenarios\\16_MIT_6S081_Labs\\08_Lab8_Lock.md",
-    "total_lines": 824,
+    "total_lines": 826,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -14987,7 +14987,7 @@
   },
   {
     "path": "04_Industrial_Scenarios\\16_MIT_6S081_Labs\\10_Lab10_mmap.md",
-    "total_lines": 829,
+    "total_lines": 838,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -15116,7 +15116,7 @@
   },
   {
     "path": "04_Industrial_Scenarios\\17_CMU_15_213_Labs\\04_Cache_Lab.md",
-    "total_lines": 767,
+    "total_lines": 769,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -15618,6 +15618,19 @@
     "isolation_score": 0.30000000000000004
   },
   {
+    "path": "03_System_Technology_Domains\\01_System_Programming\\06_eBPF_Deep.md",
+    "total_lines": 166,
+    "external_links": 4,
+    "internal_links": 4,
+    "outgoing_links": [
+      "03_System_Technology_Domains\\01_System_Programming\\04_System_Call_Interface.md",
+      "04_Industrial_Scenarios\\13_Linux_Kernel\\README.md",
+      "02_Formal_Semantics_and_Physics\\16_Performance_Analysis_Hardware\\README.md",
+      "03_System_Technology_Domains\\15_Network_Programming\\README.md"
+    ],
+    "isolation_score": 0.6
+  },
+  {
     "path": "03_System_Technology_Domains\\01_Virtual_Machine_Interpreter\\01_Bytecode_VM.md",
     "total_lines": 540,
     "external_links": 0,
@@ -15951,7 +15964,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\05_Wireless_Protocol\\03_Zigbee_Stack.md",
-    "total_lines": 891,
+    "total_lines": 908,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -16155,7 +16168,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\07_Hardware_Security\\05_Secure_Boot_Deep_Dive.md",
-    "total_lines": 3163,
+    "total_lines": 3180,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -16198,7 +16211,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\07_Hardware_Security\\07_EU_CRA_Compliance.md",
-    "total_lines": 3098,
+    "total_lines": 3115,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -16222,7 +16235,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\07_Hardware_Security\\08_Hardware_Root_of_Trust.md",
-    "total_lines": 2934,
+    "total_lines": 2951,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -16246,7 +16259,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\07_Hardware_Security\\09_Side_Channel_Protection.md",
-    "total_lines": 2205,
+    "total_lines": 2222,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -16622,7 +16635,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\13_RDMA_Network\\01_Verbs_API_Detailed.md",
-    "total_lines": 2774,
+    "total_lines": 2791,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -17379,6 +17392,45 @@
     "isolation_score": 0.19999999999999996
   },
   {
+    "path": "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\00_COMPILATION_CHAIN.md",
+    "total_lines": 249,
+    "external_links": 0,
+    "internal_links": 30,
+    "outgoing_links": [
+      "01_Core_Knowledge_System\\03_Construction_Layer\\02_Preprocessor.md",
+      "01_Core_Knowledge_System\\05_Engineering_Layer\\01_Compilation_Build.md",
+      "02_Formal_Semantics_and_Physics\\06_C_Assembly_Mapping\\README.md",
+      "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\README.md",
+      "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\03_Static_Linking_Deep.md",
+      "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\04_Dynamic_Linking_Deep.md",
+      "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\05_Loader_Deep.md",
+      "02_Formal_Semantics_and_Physics\\16_Performance_Analysis_Hardware\\README.md",
+      "03_System_Technology_Domains\\01_System_Programming\\06_eBPF_Deep.md",
+      "01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "01_Core_Knowledge_System\\01_Basic_Layer\\02_Data_Type_System.md",
+      "01_Core_Knowledge_System\\03_Construction_Layer\\02_Preprocessor.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\01_Pointer_Depth.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\02_Memory_Management.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\04_Functions_Scope.md",
+      "01_Core_Knowledge_System\\05_Engineering_Layer\\01_Compilation_Build.md",
+      "01_Core_Knowledge_System\\05_Engineering_Layer\\02_Debug_Techniques.md",
+      "01_Core_Knowledge_System\\05_Engineering_Layer\\03_Performance_Optimization.md",
+      "02_Formal_Semantics_and_Physics\\00_Core_Semantics_Foundations\\01_Operational_Semantics.md",
+      "02_Formal_Semantics_and_Physics\\06_C_Assembly_Mapping\\README.md",
+      "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\README.md",
+      "02_Formal_Semantics_and_Physics\\07_Microarchitecture\\README.md",
+      "02_Formal_Semantics_and_Physics\\16_Performance_Analysis_Hardware\\README.md",
+      "03_System_Technology_Domains\\01_System_Programming\\README.md",
+      "03_System_Technology_Domains\\01_System_Programming\\06_eBPF_Deep.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "03_System_Technology_Domains\\15_Network_Programming\\README.md",
+      "04_Industrial_Scenarios\\13_Linux_Kernel\\README.md",
+      "04_Industrial_Scenarios\\14_Embedded_IoT\\README.md",
+      "04_Industrial_Scenarios\\01_High_Performance\\README.md"
+    ],
+    "isolation_score": 0
+  },
+  {
     "path": "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\01_Relocation_Group_Theory.md",
     "total_lines": 615,
     "external_links": 0,
@@ -17415,6 +17467,55 @@
       "../../../06_Thinking_Representation/README.md"
     ],
     "isolation_score": 0
+  },
+  {
+    "path": "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\03_Static_Linking_Deep.md",
+    "total_lines": 512,
+    "external_links": 0,
+    "internal_links": 7,
+    "outgoing_links": [
+      "01_Core_Knowledge_System\\05_Engineering_Layer\\01_Compilation_Build.md",
+      "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\README.md",
+      "02_Formal_Semantics_and_Physics\\06_C_Assembly_Mapping\\README.md",
+      "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\02_Dynamic_Linking_Category.md",
+      "03_System_Technology_Domains\\01_System_Programming\\05_Memory_Mapped_Files.md",
+      "04_Industrial_Scenarios\\13_Linux_Kernel\\README.md",
+      "04_Industrial_Scenarios\\14_Embedded_IoT\\README.md"
+    ],
+    "isolation_score": 0.30000000000000004
+  },
+  {
+    "path": "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\04_Dynamic_Linking_Deep.md",
+    "total_lines": 619,
+    "external_links": 0,
+    "internal_links": 7,
+    "outgoing_links": [
+      "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\03_Static_Linking_Deep.md",
+      "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\README.md",
+      "03_System_Technology_Domains\\01_System_Programming\\05_Memory_Mapped_Files.md",
+      "03_System_Technology_Domains\\01_System_Programming\\README.md",
+      "04_Industrial_Scenarios\\13_Linux_Kernel\\README.md",
+      "01_Core_Knowledge_System\\05_Engineering_Layer\\03_Performance_Optimization.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\04_Secure_Coding_Guide.md"
+    ],
+    "isolation_score": 0.30000000000000004
+  },
+  {
+    "path": "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\05_Loader_Deep.md",
+    "total_lines": 590,
+    "external_links": 0,
+    "internal_links": 8,
+    "outgoing_links": [
+      "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\04_Dynamic_Linking_Deep.md",
+      "03_System_Technology_Domains\\01_System_Programming\\04_System_Call_Interface.md",
+      "03_System_Technology_Domains\\01_System_Programming\\05_Memory_Mapped_Files.md",
+      "04_Industrial_Scenarios\\13_Linux_Kernel\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\02_Memory_Management.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\04_Secure_Coding_Guide.md",
+      "03_System_Technology_Domains\\01_System_Programming\\08_Binary_Reverse_Engineering.md",
+      "01_Core_Knowledge_System\\09_Safety_Standards\\Vulnerability_Cases\\README.md"
+    ],
+    "isolation_score": 0.19999999999999996
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\08_Linking_Loading_Topology\\README.md",
@@ -17518,7 +17619,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\10_ISA_Machine_Code\\11_ARM64_CPU_Implementation.md",
-    "total_lines": 2794,
+    "total_lines": 2815,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -17542,7 +17643,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\10_ISA_Machine_Code\\12_x86_Microarchitecture_Impl.md",
-    "total_lines": 2362,
+    "total_lines": 2383,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -18543,7 +18644,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\10_ISA_Machine_Code\\06_Control_Unit_Design\\01_Hardwired_Control.md",
-    "total_lines": 1848,
+    "total_lines": 1850,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -18567,7 +18668,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\10_ISA_Machine_Code\\06_Control_Unit_Design\\02_Microprogrammed_Control.md",
-    "total_lines": 1633,
+    "total_lines": 1642,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -18591,7 +18692,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\10_ISA_Machine_Code\\06_Control_Unit_Design\\03_x86_Microcode.md",
-    "total_lines": 1028,
+    "total_lines": 1037,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -18806,7 +18907,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\09_Physical_Machine_Layer\\01_Digital_Logic_Foundations\\01_Transistor_Level.md",
-    "total_lines": 1875,
+    "total_lines": 1884,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -18830,7 +18931,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\09_Physical_Machine_Layer\\01_Digital_Logic_Foundations\\02_Logic_Gates_Implementation.md",
-    "total_lines": 2317,
+    "total_lines": 2336,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -18854,7 +18955,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\09_Physical_Machine_Layer\\01_Digital_Logic_Foundations\\03_Combinational_Circuits.md",
-    "total_lines": 2176,
+    "total_lines": 2185,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -18979,7 +19080,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\09_Physical_Machine_Layer\\03_Memory_Circuits\\01_SR_Latch_and_D_FlipFlop.md",
-    "total_lines": 1386,
+    "total_lines": 1395,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -19073,7 +19174,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\09_Physical_Machine_Layer\\05_Memory_Management_Hardware\\01_MMU_Architecture.md",
-    "total_lines": 2428,
+    "total_lines": 2437,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -19097,7 +19198,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\09_Physical_Machine_Layer\\05_Memory_Management_Hardware\\02_Page_Table_Walker.md",
-    "total_lines": 2201,
+    "total_lines": 2210,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -19121,7 +19222,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\09_Physical_Machine_Layer\\05_Memory_Management_Hardware\\03_TLB_Implementation.md",
-    "total_lines": 1832,
+    "total_lines": 1841,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -19145,7 +19246,7 @@
   },
   {
     "path": "02_Formal_Semantics_and_Physics\\09_Physical_Machine_Layer\\05_Memory_Management_Hardware\\04_Memory_Protection_Unit.md",
-    "total_lines": 1896,
+    "total_lines": 1905,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
@@ -20192,7 +20293,7 @@
   },
   {
     "path": "01_Core_Knowledge_System\\09_Safety_Standards\\CISA_2026_Mandate_Depth.md",
-    "total_lines": 2847,
+    "total_lines": 2849,
     "external_links": 8,
     "internal_links": 15,
     "outgoing_links": [
@@ -21422,7 +21523,7 @@
   },
   {
     "path": "01_Core_Knowledge_System\\07_Modern_C\\C2y_Preview\\05_Typeof_Return.md",
-    "total_lines": 451,
+    "total_lines": 460,
     "external_links": 0,
     "internal_links": 15,
     "outgoing_links": [
