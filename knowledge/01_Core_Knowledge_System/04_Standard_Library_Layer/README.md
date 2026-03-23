@@ -264,11 +264,17 @@
 
 ### 相关资源
 
+#### 标准库实现原理 (深度解析)
+
+- [malloc/free实现](Standard_Library_Internals/01_Malloc_Implementation.md) - ptmalloc、arena、tcache
+- [printf实现](Standard_Library_Internals/02_Printf_Implementation.md) - 变参函数、格式解析
+- [字符串函数优化](Standard_Library_Internals/03_String_Functions_Opt.md) - SIMD、向量化
+
 - 文档链接
 - 代码示例
 - 参考文章
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

@@ -29,7 +29,13 @@
     - [现代构建配置](#现代构建配置)
     - [现代调试技术](#现代调试技术)
   - [示例：现代 C 项目结构](#示例现代-c-项目结构)
+  - [C2y (C27) 提案预览](#c2y-c27-提案预览)
+  - [C23 高级特性实战](#c23-高级特性实战)
   - [延伸阅读](#延伸阅读)
+  - [深入理解](#深入理解)
+    - [技术原理](#技术原理)
+    - [实践指南](#实践指南)
+    - [相关资源](#相关资源)
 
 
 ---
@@ -739,10 +745,25 @@ modern_c_project/
 
 ---
 
+## C2y (C27) 提案预览
+
+C2y是下一个C语言标准，预计2027-2028年发布。以下提案正在审议中：
+
+| 提案 | 特性 | 状态 | 文档 |
+|:-----|:-----|:-----|:-----|
+| N3734 | `defer` 关键字 | 审议中 | [查看文档](C2y_Preview/01_Defer_Keyword.md) |
+| N3753 | Elvis操作符 `?:` | 审议中 | [查看文档](C2y_Preview/02_Elvis_Operator.md) |
+| N3658 | Named Loops | 讨论中 | [查看文档](C2y_Preview/03_Named_Loops.md) |
+
+## C23 高级特性实战
+
+- [_BitInt(N) 位精确整数实战](05_C23_BitInt_Practical.md) - 硬件接口、密码学、定点数应用
+
 ## 延伸阅读
 
 - [C11 标准文档 (ISO/IEC 9899:2011)](https://www.iso.org/standard/57853.html)
 - [C23 草案 (n3096)](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3096.pdf)
+- [C2y 提案日志 (WG14)](https://www.open-std.org/jtc1/sc22/wg14/www/wg14_document_log)
 - [SEI CERT C 编码标准](https://wiki.sei.cmu.edu/confluence/display/c)
 - [C 安全编码规则 (ISO/IEC TS 17961)](https://www.iso.org/standard/64843.html)
 
@@ -769,5 +790,5 @@ modern_c_project/
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

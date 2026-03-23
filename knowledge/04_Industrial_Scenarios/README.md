@@ -184,6 +184,18 @@ graph TB
 
 ---
 
+## 经典C项目源码解读
+
+深入分析工业级开源项目的C代码实现：
+
+| 项目 | 说明 | 文档 |
+|:-----|:-----|:-----|
+| Redis | 高性能内存数据库核心数据结构 | [源码解读](Classic_C_Projects/01_Redis_Data_Structures.md) |
+| SQLite | 嵌入式数据库架构与实现 | [源码解读](Classic_C_Projects/02_SQLite_Architecture.md) |
+| Nginx | 事件驱动高性能Web服务器 | [源码解读](Classic_C_Projects/03_Nginx_Event_Driven.md) |
+
+---
+
 ## 关联知识库
 
 | 目标 | 路径 |
@@ -191,6 +203,7 @@ graph TB
 | 核心基础 | [01_Core_Knowledge_System](../01_Core_Knowledge_System/README.md) |
 | 系统技术 | [03_System_Technology_Domains](../03_System_Technology_Domains/README.md) |
 | 理论基础 | [05_Deep_Structure_MetaPhysics](../05_Deep_Structure_MetaPhysics/README.md) |
+| 经典项目 | [Classic_C_Projects](Classic_C_Projects/README.md) |
 
 ---
 
@@ -223,5 +236,5 @@ graph TB
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

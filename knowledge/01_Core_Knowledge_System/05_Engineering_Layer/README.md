@@ -27,6 +27,11 @@
   - [文档生成](#文档生成)
     - [Doxygen 配置](#doxygen-配置)
     - [文档注释规范](#文档注释规范)
+  - [深入理解](#深入理解)
+    - [技术原理](#技术原理)
+    - [实践指南](#实践指南)
+    - [相关资源](#相关资源)
+      - [编译器优化深度解析](#编译器优化深度解析)
 
 
 ---
@@ -670,11 +675,16 @@ typedef enum {
 
 ### 相关资源
 
+#### 编译器优化深度解析
+
+- [循环优化](Compiler_Optimization_Deep/01_Loop_Optimization.md) - 循环展开、LICM、强度削减
+- [自动向量化](Compiler_Optimization_Deep/02_Auto_Vectorization.md) - SIMD、AVX/NEON编程
+
 - 文档链接
 - 代码示例
 - 参考文章
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-24
 > **维护者**: AI Code Review
