@@ -1,7 +1,7 @@
 [
   {
     "path": "00_GLOBAL_INDEX.md",
-    "total_lines": 229,
+    "total_lines": 230,
     "external_links": 0,
     "internal_links": 83,
     "outgoing_links": [
@@ -3427,11 +3427,18 @@
   },
   {
     "path": "07_Modern_Toolchain\\03_CI_CD_DevOps\\README.md",
-    "total_lines": 1192,
+    "total_lines": 1213,
     "external_links": 5,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\README.md",
+      "07_Modern_Toolchain\\02_Formal_Semantics_and_Physics\\README.md",
+      "07_Modern_Toolchain\\03_System_Technology_Domains\\README.md",
+      "07_Modern_Toolchain\\04_Industrial_Scenarios\\README.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "07_Modern_Toolchain\\04_Package_Management\\01_Conan_Package_Manager.md",
@@ -3475,11 +3482,18 @@
   },
   {
     "path": "07_Modern_Toolchain\\04_Package_Management\\README.md",
-    "total_lines": 605,
+    "total_lines": 626,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\README.md",
+      "07_Modern_Toolchain\\02_Formal_Semantics_and_Physics\\README.md",
+      "07_Modern_Toolchain\\03_System_Technology_Domains\\README.md",
+      "07_Modern_Toolchain\\04_Industrial_Scenarios\\README.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "07_Modern_Toolchain\\05_Case_Studies\\01_Redis_Architecture.md",
@@ -3515,11 +3529,18 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Case_Studies\\README.md",
-    "total_lines": 557,
+    "total_lines": 578,
     "external_links": 6,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\README.md",
+      "07_Modern_Toolchain\\02_Formal_Semantics_and_Physics\\README.md",
+      "07_Modern_Toolchain\\03_System_Technology_Domains\\README.md",
+      "07_Modern_Toolchain\\04_Industrial_Scenarios\\README.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "07_Modern_Toolchain\\05_Code_Quality_Toolchain\\01_clang_format_Setup.md",
@@ -3597,11 +3618,18 @@
   },
   {
     "path": "07_Modern_Toolchain\\05_Code_Quality_Toolchain\\README.md",
-    "total_lines": 736,
+    "total_lines": 757,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\README.md",
+      "07_Modern_Toolchain\\02_Formal_Semantics_and_Physics\\README.md",
+      "07_Modern_Toolchain\\03_System_Technology_Domains\\README.md",
+      "07_Modern_Toolchain\\04_Industrial_Scenarios\\README.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "07_Modern_Toolchain\\06_Project_Templates\\01_Modern_C_Project_Template.md",
@@ -3615,11 +3643,18 @@
   },
   {
     "path": "07_Modern_Toolchain\\06_Project_Templates\\README.md",
-    "total_lines": 1178,
+    "total_lines": 1199,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\README.md",
+      "07_Modern_Toolchain\\02_Formal_Semantics_and_Physics\\README.md",
+      "07_Modern_Toolchain\\03_System_Technology_Domains\\README.md",
+      "07_Modern_Toolchain\\04_Industrial_Scenarios\\README.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "07_Modern_Toolchain\\07_Concurrency_Parallelism\\01_C11_Memory_Model.md",
@@ -3802,11 +3837,18 @@
   },
   {
     "path": "07_Modern_Toolchain\\12_Modern_C_Standards\\README.md",
-    "total_lines": 618,
+    "total_lines": 639,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\README.md",
+      "07_Modern_Toolchain\\02_Formal_Semantics_and_Physics\\README.md",
+      "07_Modern_Toolchain\\03_System_Technology_Domains\\README.md",
+      "07_Modern_Toolchain\\04_Industrial_Scenarios\\README.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "07_Modern_Toolchain\\13_Comprehensive_Examples\\01_High_Performance_Server.md",
@@ -3818,13 +3860,19 @@
   },
   {
     "path": "07_Modern_Toolchain\\13_Comprehensive_Examples\\README.md",
-    "total_lines": 1046,
+    "total_lines": 1067,
     "external_links": 0,
-    "internal_links": 1,
+    "internal_links": 7,
     "outgoing_links": [
-      "07_Modern_Toolchain\\13_Comprehensive_Examples\\req, resp"
+      "07_Modern_Toolchain\\13_Comprehensive_Examples\\req, resp",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\README.md",
+      "07_Modern_Toolchain\\02_Formal_Semantics_and_Physics\\README.md",
+      "07_Modern_Toolchain\\03_System_Technology_Domains\\README.md",
+      "07_Modern_Toolchain\\04_Industrial_Scenarios\\README.md",
+      "07_Modern_Toolchain\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
     ],
-    "isolation_score": 0.9
+    "isolation_score": 0.30000000000000004
   },
   {
     "path": "07_Modern_Toolchain\\13_Zig_C_Interop\\01_Zig_C_Interoperability.md",
@@ -3981,10 +4029,20 @@
   },
   {
     "path": "06_Thinking_Representation\\01_Decision_Trees\\README.md",
-    "total_lines": 1043,
+    "total_lines": 1080,
     "external_links": 0,
-    "internal_links": 27,
+    "internal_links": 37,
     "outgoing_links": [
+      "06_Thinking_Representation\\01_Decision_Trees\\01_Memory_Leak_Diagnosis.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\02_Segfault_Troubleshooting.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\12_Performance_Optimization_Tree.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\06_Debugging.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\02_Memory_Management.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\01_Pointer_Depth.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "01_Core_Knowledge_System\\05_Engineering_Layer\\02_Debug_Techniques.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\05_Concept_Mappings\\README.md",
+      "06_Thinking_Representation\\01_Decision_Trees\\06_Learning_Paths\\README.md",
       "06_Thinking_Representation\\01_Decision_Trees\\01_Memory_Leak_Diagnosis.md",
       "06_Thinking_Representation\\01_Decision_Trees\\02_Segfault_Troubleshooting.md",
       "06_Thinking_Representation\\01_Decision_Trees\\03_Performance_Bottleneck.md",
@@ -4185,11 +4243,18 @@
   },
   {
     "path": "06_Thinking_Representation\\03_Decision_Trees\\README.md",
-    "total_lines": 1174,
+    "total_lines": 1195,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "06_Thinking_Representation\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "06_Thinking_Representation\\01_Core_Knowledge_System\\README.md",
+      "06_Thinking_Representation\\02_Formal_Semantics_and_Physics\\README.md",
+      "06_Thinking_Representation\\03_System_Technology_Domains\\README.md",
+      "06_Thinking_Representation\\04_Industrial_Scenarios\\README.md",
+      "06_Thinking_Representation\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "06_Thinking_Representation\\03_Mind_Maps\\02_Memory_Model_Map.md",
@@ -4456,10 +4521,18 @@
   },
   {
     "path": "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
-    "total_lines": 834,
+    "total_lines": 872,
     "external_links": 0,
-    "internal_links": 14,
+    "internal_links": 22,
     "outgoing_links": [
+      "06_Thinking_Representation\\05_Concept_Mappings\\08_Concept_Equivalence_Graph.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\09_Level_Bridging_Chains.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\10_Theory_Unification_Mapping.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\12_Theorem_Dependency_Network.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\13_Global_Invariants.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\06_Learning_Paths\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\07_Knowledge_Graph\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\01_Decision_Trees\\README.md",
       "06_Thinking_Representation\\05_Concept_Mappings\\08_Concept_Equivalence_Graph.md",
       "06_Thinking_Representation\\05_Concept_Mappings\\09_Level_Bridging_Chains.md",
       "06_Thinking_Representation\\05_Concept_Mappings\\10_Theory_Unification_Mapping.md",
@@ -4694,11 +4767,18 @@
   },
   {
     "path": "06_Thinking_Representation\\07_Knowledge_Graph\\README.md",
-    "total_lines": 688,
+    "total_lines": 724,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "06_Thinking_Representation\\05_Concept_Mappings\\README.md",
+      "06_Thinking_Representation\\05_Concept_Mappings\\08_Concept_Equivalence_Graph.md",
+      "06_Thinking_Representation\\06_Learning_Paths\\README.md",
+      "01_Core_Knowledge_System\\README.md",
+      "02_Formal_Semantics_and_Physics\\README.md",
+      "03_System_Technology_Domains\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "06_Thinking_Representation\\08_Index\\01_Global_Index.md",
@@ -5116,11 +5196,18 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\02_Algebraic_Topology\\README.md",
-    "total_lines": 549,
+    "total_lines": 570,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\README.md",
+      "05_Deep_Structure_MetaPhysics\\02_Formal_Semantics_and_Physics\\README.md",
+      "05_Deep_Structure_MetaPhysics\\03_System_Technology_Domains\\README.md",
+      "05_Deep_Structure_MetaPhysics\\04_Industrial_Scenarios\\README.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\03_Verification_Energy\\01_Coq_Verification.md",
@@ -5140,11 +5227,18 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\03_Verification_Energy\\README.md",
-    "total_lines": 820,
+    "total_lines": 841,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\README.md",
+      "05_Deep_Structure_MetaPhysics\\02_Formal_Semantics_and_Physics\\README.md",
+      "05_Deep_Structure_MetaPhysics\\03_System_Technology_Domains\\README.md",
+      "05_Deep_Structure_MetaPhysics\\04_Industrial_Scenarios\\README.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\04_Formal_Verification_Energy\\01_WP_Energy_Landscape.md",
@@ -5178,11 +5272,18 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\04_Formal_Verification_Energy\\README.md",
-    "total_lines": 1017,
+    "total_lines": 1038,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\README.md",
+      "05_Deep_Structure_MetaPhysics\\02_Formal_Semantics_and_Physics\\README.md",
+      "05_Deep_Structure_MetaPhysics\\03_System_Technology_Domains\\README.md",
+      "05_Deep_Structure_MetaPhysics\\04_Industrial_Scenarios\\README.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\05_Computational_Complexity\\01_Complexity_Classes.md",
@@ -5343,11 +5444,18 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\06_Standard_Library_Physics\\README.md",
-    "total_lines": 1004,
+    "total_lines": 1025,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\README.md",
+      "05_Deep_Structure_MetaPhysics\\02_Formal_Semantics_and_Physics\\README.md",
+      "05_Deep_Structure_MetaPhysics\\03_System_Technology_Domains\\README.md",
+      "05_Deep_Structure_MetaPhysics\\04_Industrial_Scenarios\\README.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\06_TLA_Plus\\01_TLA_Introduction.md",
@@ -5443,11 +5551,18 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\08_Debugging_Tools\\README.md",
-    "total_lines": 814,
+    "total_lines": 835,
     "external_links": 4,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\README.md",
+      "05_Deep_Structure_MetaPhysics\\02_Formal_Semantics_and_Physics\\README.md",
+      "05_Deep_Structure_MetaPhysics\\03_System_Technology_Domains\\README.md",
+      "05_Deep_Structure_MetaPhysics\\04_Industrial_Scenarios\\README.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\09_Linking_Algebraic_Topology\\01_Relocation_Group_Action.md",
@@ -5467,11 +5582,18 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\09_Linking_Algebraic_Topology\\README.md",
-    "total_lines": 496,
+    "total_lines": 517,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\README.md",
+      "05_Deep_Structure_MetaPhysics\\02_Formal_Semantics_and_Physics\\README.md",
+      "05_Deep_Structure_MetaPhysics\\03_System_Technology_Domains\\README.md",
+      "05_Deep_Structure_MetaPhysics\\04_Industrial_Scenarios\\README.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\10_Debug_Info_Encoding\\01_DWARF_Deserialization.md",
@@ -5491,11 +5613,18 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\10_Debug_Info_Encoding\\README.md",
-    "total_lines": 677,
+    "total_lines": 698,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 6,
+    "outgoing_links": [
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\README.md",
+      "05_Deep_Structure_MetaPhysics\\02_Formal_Semantics_and_Physics\\README.md",
+      "05_Deep_Structure_MetaPhysics\\03_System_Technology_Domains\\README.md",
+      "05_Deep_Structure_MetaPhysics\\04_Industrial_Scenarios\\README.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md"
+    ],
+    "isolation_score": 0.4
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\11_Heterogeneous_Memory\\01_CUDA_Unified_Memory.md",
@@ -5567,14 +5696,20 @@
   },
   {
     "path": "05_Deep_Structure_MetaPhysics\\13_Self_Modifying_Code\\README.md",
-    "total_lines": 1087,
+    "total_lines": 1108,
     "external_links": 0,
-    "internal_links": 2,
+    "internal_links": 8,
     "outgoing_links": [
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\01_Basic_Layer\\01_Syntax_Elements.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\README.md",
+      "05_Deep_Structure_MetaPhysics\\02_Formal_Semantics_and_Physics\\README.md",
+      "05_Deep_Structure_MetaPhysics\\03_System_Technology_Domains\\README.md",
+      "05_Deep_Structure_MetaPhysics\\04_Industrial_Scenarios\\README.md",
+      "05_Deep_Structure_MetaPhysics\\01_Core_Knowledge_System\\09_Safety_Standards\\README.md",
       "05_Deep_Structure_MetaPhysics\\13_Self_Modifying_Code\\first_num",
       "05_Deep_Structure_MetaPhysics\\13_Self_Modifying_Code\\next_num"
     ],
-    "isolation_score": 0.8
+    "isolation_score": 0.19999999999999996
   },
   {
     "path": "04_Industrial_Scenarios\\01_Automotive_ABS\\01_ABS_System.md",
@@ -5594,11 +5729,16 @@
   },
   {
     "path": "04_Industrial_Scenarios\\01_Automotive_ABS\\README.md",
-    "total_lines": 1577,
+    "total_lines": 1608,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 4,
+    "outgoing_links": [
+      "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\README.md",
+      "04_Industrial_Scenarios\\14_Embedded_IoT\\README.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\03_Real_Time_Systems.md",
+      "06_Thinking_Representation\\09_State_Machines\\README.md"
+    ],
+    "isolation_score": 0.6
   },
   {
     "path": "04_Industrial_Scenarios\\02_Automotive_ECU\\01_CAN_Bus_Protocol.md",
@@ -5778,11 +5918,19 @@
   },
   {
     "path": "04_Industrial_Scenarios\\05_Game_Engine\\README.md",
-    "total_lines": 1274,
+    "total_lines": 1305,
     "external_links": 0,
-    "internal_links": 0,
-    "outgoing_links": [],
-    "isolation_score": 1.0
+    "internal_links": 7,
+    "outgoing_links": [
+      "01_Core_Knowledge_System\\02_Core_Layer\\02_Memory_Management.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\05_Arrays_Pointers.md",
+      "01_Core_Knowledge_System\\03_Construction_Layer\\01_Structures_Unions.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "03_System_Technology_Domains\\17_Graphics_Rendering\\README.md",
+      "02_Formal_Semantics_and_Physics\\07_Microarchitecture\\README.md",
+      "02_Formal_Semantics_and_Physics\\16_Performance_Analysis_Hardware\\README.md"
+    ],
+    "isolation_score": 0.30000000000000004
   },
   {
     "path": "04_Industrial_Scenarios\\06_Quantum_Computing\\01_Quantum_Classical_Interface.md",
@@ -6033,15 +6181,26 @@
   },
   {
     "path": "04_Industrial_Scenarios\\13_Linux_Kernel\\README.md",
-    "total_lines": 1456,
+    "total_lines": 1484,
     "external_links": 0,
-    "internal_links": 3,
+    "internal_links": 14,
     "outgoing_links": [
+      "02_Formal_Semantics_and_Physics\\06_C_Assembly_Mapping\\README.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\02_Memory_Management.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "03_System_Technology_Domains\\01_System_Programming\\04_System_Call_Interface.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\02_Memory_Management.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "03_System_Technology_Domains\\01_System_Programming\\02_File_System_Operations.md",
+      "03_System_Technology_Domains\\15_Network_Programming\\README.md",
+      "04_Industrial_Scenarios\\01_System_Programming\\06_Device_Driver_Basics.md",
+      "04_Industrial_Scenarios\\14_Embedded_IoT\\README.md",
+      "01_Core_Knowledge_System\\05_Engineering_Layer\\03_Performance_Optimization.md",
       "04_Industrial_Scenarios\\13_Linux_Kernel\\01_Page_Table_Operations.md",
       "04_Industrial_Scenarios\\13_Linux_Kernel\\02_Cache_Coherence.md",
       "04_Industrial_Scenarios\\README.md"
     ],
-    "isolation_score": 0.7
+    "isolation_score": 0
   },
   {
     "path": "04_Industrial_Scenarios\\14_Embedded_IoT\\03_FreeRTOS_vs_Zephyr_Comparison.md",
@@ -6053,10 +6212,16 @@
   },
   {
     "path": "04_Industrial_Scenarios\\14_Embedded_IoT\\README.md",
-    "total_lines": 195,
+    "total_lines": 225,
     "external_links": 4,
-    "internal_links": 17,
+    "internal_links": 23,
     "outgoing_links": [
+      "01_Core_Knowledge_System\\08_Application_Domains\\02_Embedded_Systems.md",
+      "01_Core_Knowledge_System\\02_Core_Layer\\02_Memory_Management.md",
+      "03_System_Technology_Domains\\14_Concurrency_Parallelism\\README.md",
+      "03_System_Technology_Domains\\05_Wireless_Protocol\\README.md",
+      "03_System_Technology_Domains\\06_Security_Boot\\README.md",
+      "03_System_Technology_Domains\\07_Hardware_Security\\README.md",
       "04_Industrial_Scenarios\\14_Embedded_IoT\\ESP32\\README.md",
       "04_Industrial_Scenarios\\14_Embedded_IoT\\RPi_Pico\\README.md",
       "04_Industrial_Scenarios\\14_Embedded_IoT\\RaspberryPi\\README.md",
@@ -7200,7 +7365,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\16_Rust_Interoperability\\README.md",
-    "total_lines": 907,
+    "total_lines": 914,
     "external_links": 4,
     "internal_links": 6,
     "outgoing_links": [
@@ -7223,7 +7388,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\17_Graphics_Rendering\\README.md",
-    "total_lines": 232,
+    "total_lines": 235,
     "external_links": 0,
     "internal_links": 10,
     "outgoing_links": [

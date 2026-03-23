@@ -55,6 +55,27 @@ pkg-config 是 Unix 系统中用于检索已安装库编译参数的工具，是
 
 ```bash
 # 查询库信息
+---
+
+## 🔗 文档关联
+
+### 前置知识
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [C语言基础](../01_Core_Knowledge_System/01_Basic_Layer/01_Syntax_Elements.md) | 基础依赖 | 语法基础 |
+| [核心知识体系](../01_Core_Knowledge_System/README.md) | 知识基础 | C语言核心概念 |
+
+### 横向关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [形式语义](../02_Formal_Semantics_and_Physics/README.md) | 理论支撑 | 形式化方法 |
+| [系统技术](../03_System_Technology_Domains/README.md) | 技术应用 | 系统级开发 |
+
+### 后续延伸
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [工业场景](../04_Industrial_Scenarios/README.md) | 实际应用 | 工业实践 |
+| [安全标准](../01_Core_Knowledge_System/09_Safety_Standards/README.md) | 安全规范 | 安全编码 |
 pkg-config --libs libssl          # 获取链接参数
 pkg-config --cflags libssl        # 获取编译参数
 pkg-config --exists libssl        # 检查库是否存在

@@ -1,5 +1,38 @@
 ﻿# 嵌入式 IoT 开发指南
 
+> **层级定位**: 04_Industrial_Scenarios > 14_Embedded_IoT
+> **难度级别**: L3 应用 → L4 分析
+> **预估学习时间**: 40-60 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [嵌入式系统](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | 理论基础 | 嵌入式基础概念 |
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 内存受限优化 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并行基础 | 多核处理器 |
+
+### 硬件平台
+
+| 平台 | 特点 | 应用场景 |
+|:-----|:-----|:---------|
+| ESP32 | WiFi/BLE | 物联网设备 |
+| RPi Pico | 双核实时 | 实时控制 |
+| Raspberry Pi | 嵌入式Linux | 工业网关 |
+| STM32 | 低功耗 | 传感器节点 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [无线协议](../../03_System_Technology_Domains/05_Wireless_Protocol/README.md) | 通信技术 | IoT通信协议 |
+| [安全启动](../../03_System_Technology_Domains/06_Security_Boot/README.md) | 安全基础 | 设备安全启动 |
+| [硬件安全](../../03_System_Technology_Domains/07_Hardware_Security/README.md) | 安全加固 | 硬件安全机制 |
+
 > 真实硬件平台实战：ESP32、树莓派 Pico、Raspberry Pi、工控系统
 
 ---

@@ -1,5 +1,39 @@
 ﻿# C 语言游戏引擎开发
 
+> **层级定位**: 04_Industrial_Scenarios > 05_Game_Engine
+> **难度级别**: L4 分析
+> **预估学习时间**: 40-50 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 内存池、对象池 |
+| [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心基础 | ECS内存布局 |
+| [结构体](../../01_Core_Knowledge_System/03_Construction_Layer/01_Structures_Unions.md) | 构造基础 | 组件系统设计 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并行基础 | 多线程渲染 |
+
+### 核心系统
+
+| 系统 | 技术 | 关联文档 |
+|:-----|:-----|:---------|
+| ECS | 内存布局 | 数据结构、内存管理 |
+| 渲染 | GPU编程 | 图形渲染、SIMD |
+| 物理 | 数值计算 | 浮点运算、优化 |
+| 音频 | 实时处理 | 信号处理、并发 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [图形渲染](../../03_System_Technology_Domains/17_Graphics_Rendering/README.md) | 渲染系统 | GPU渲染管线 |
+| [SIMD优化](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 性能优化 | 向量化计算 |
+| [性能分析](../../02_Formal_Semantics_and_Physics/16_Performance_Analysis_Hardware/README.md) | 性能调优 | 游戏性能分析 |
+
 本目录包含使用 C 语言开发游戏引擎的核心技术与最佳实践，涵盖从底层架构到高级系统设计的完整知识体系。
 
 ---
@@ -7,6 +41,10 @@
 ## 目录
 
 - [C 语言游戏引擎开发](#c-语言游戏引擎开发)
+  - [🔗 文档关联](#-文档关联)
+    - [前置知识](#前置知识)
+    - [核心系统](#核心系统)
+    - [后续延伸](#后续延伸)
   - [目录](#目录)
   - [1. 游戏引擎架构概述](#1-游戏引擎架构概述)
     - [1.1 分层架构设计](#11-分层架构设计)

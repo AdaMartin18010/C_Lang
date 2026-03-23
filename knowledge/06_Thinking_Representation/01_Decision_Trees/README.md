@@ -1,5 +1,38 @@
 ﻿# 决策树 - 问题诊断与故障排查
 
+> **层级定位**: 06_Thinking_Representation > 01_Decision_Trees
+> **难度级别**: L3 应用
+> **预估学习时间**: 10-15 小时
+
+---
+
+## 🔗 文档关联
+
+### 问题诊断体系
+
+| 问题类型 | 决策树文档 | 关联知识 |
+|:-----|:---------|:---------|
+| 内存泄漏 | [内存泄漏诊断](01_Memory_Leak_Diagnosis.md) | 内存管理、Valgrind |
+| 段错误 | [段错误排查](02_Segfault_Troubleshooting.md) | 指针、内存保护 |
+| 性能瓶颈 | [性能优化](12_Performance_Optimization_Tree.md) | Profiling、优化 |
+| 并发问题 | [并发调试](../../03_System_Technology_Domains/14_Concurrency_Parallelism/06_Debugging.md) | 线程、锁、原子性 |
+
+### 与核心知识关联
+
+| 核心知识 | 诊断应用 | 文档 |
+|:-----|:---------|:-----|
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 泄漏诊断 | 内存泄漏决策树 |
+| [指针深度](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 非法访问 | 段错误决策树 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 死锁竞争 | 并发决策树 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [调试技术](../../01_Core_Knowledge_System/05_Engineering_Layer/02_Debug_Techniques.md) | 工具支持 | 调试工具使用 |
+| [概念映射](05_Concept_Mappings/README.md) | 知识关联 | 问题-知识映射 |
+| [学习路径](06_Learning_Paths/README.md) | 能力构建 | 问题→学习→解决 |
+
 本目录包含一系列结构化决策树文档，用于系统化诊断和解决C语言开发中的常见问题。
 通过逻辑分支结构，帮助开发者快速定位问题根源并找到解决方案。
 
@@ -8,6 +41,10 @@
 ## 目录
 
 - [决策树 - 问题诊断与故障排查](#决策树---问题诊断与故障排查)
+  - [🔗 文档关联](#-文档关联)
+    - [问题诊断体系](#问题诊断体系)
+    - [与核心知识关联](#与核心知识关联)
+    - [后续延伸](#后续延伸)
   - [目录](#目录)
   - [1. 决策树方法概述](#1-决策树方法概述)
     - [1.1 什么是决策树方法](#11-什么是决策树方法)
