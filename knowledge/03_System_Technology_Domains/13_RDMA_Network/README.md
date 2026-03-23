@@ -446,5 +446,5 @@ printf("  Speed: %d\n", port_attr.active_speed);
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

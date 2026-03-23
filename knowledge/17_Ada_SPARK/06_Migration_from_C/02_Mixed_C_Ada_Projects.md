@@ -126,7 +126,7 @@ project Mixed_Project is
          "-std=c11",      -- C11标准
          "-I", "src/c/include"  -- 头文件路径
       );
-      
+
       -- Ada编译器选项
       for Switches ("Ada") use (
          "-O2",
@@ -195,33 +195,33 @@ all: dirs c_libs $(TARGET)
 
 # 创建目录
 dirs:
-	mkdir -p $(OBJ_DIR) $(BIN_DIR)
+ mkdir -p $(OBJ_DIR) $(BIN_DIR)
 
 # 编译C库
 c_libs: $(OBJ_DIR)/engine.o $(OBJ_DIR)/utils.o
 
 $(OBJ_DIR)/%.o: $(SRC_C)/core/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+ $(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_C)/platform/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+ $(CC) $(CFLAGS) -c $< -o $@
 
 # 构建主程序（使用gprbuild）
 $(TARGET): c_libs
-	$(GPRBUILD) $(GPRFLAGS) $(GPR_FILE)
+ $(GPRBUILD) $(GPRFLAGS) $(GPR_FILE)
 
 # 测试
 test: all
-	./run_tests.sh
+ ./run_tests.sh
 
 # 清理
 clean:
-	rm -rf $(OBJ_DIR) $(BIN_DIR)
-	gprclean -P $(GPR_FILE)
+ rm -rf $(OBJ_DIR) $(BIN_DIR)
+ gprclean -P $(GPR_FILE)
 
 # 完整构建（包括SPARK验证）
 verify:
-	gnatprove -P $(GPR_FILE) --level=2
+ gnatprove -P $(GPR_FILE) --level=2
 
 .PHONY: all dirs c_libs clean test verify
 ```
@@ -266,6 +266,7 @@ add_custom_target(ada_app ALL DEPENDS ${CMAKE_BINARY_DIR}/mixed_app)
 ### 3.1 C到Ada绑定模式
 
 **C接口（保持不变）**:
+
 ```c
 // sensor_driver.h
 #ifndef SENSOR_DRIVER_H
@@ -288,6 +289,7 @@ void sensor_close(void);
 ```
 
 **Ada绑定层**:
+
 ```ada
 -- sensor_driver_binding.ads
 with Interfaces.C;
@@ -295,7 +297,7 @@ with Interfaces.C.Strings;
 
 package Sensor_Driver_Binding is
    use Interfaces.C;
-   
+
    -- C结构体映射
    type Sensor_Data is record
       Timestamp   : unsigned;
@@ -304,7 +306,7 @@ package Sensor_Driver_Binding is
       Status      : unsigned_char;
    end record
    with Convention => C_Pass_By_Copy;
-   
+
    -- C函数导入
    function Sensor_Init (
       Device_Path : Strings.chars_ptr
@@ -313,7 +315,7 @@ package Sensor_Driver_Binding is
       Import => True,
       Convention => C,
       External_Name => "sensor_init";
-   
+
    function Sensor_Read (
       Data : access Sensor_Data
    ) return int
@@ -321,26 +323,27 @@ package Sensor_Driver_Binding is
       Import => True,
       Convention => C,
       External_Name => "sensor_read";
-   
+
    procedure Sensor_Close
    with
       Import => True,
       Convention => C,
       External_Name => "sensor_close";
-   
+
    -- Ada友好包装（类型安全）
    Sensor_Error : exception;
-   
+
    procedure Initialize (Device_Path : String);
    function Read_Data return Sensor_Data;
    procedure Close;
-   
+
 private
    Initialized : Boolean := False;
 end Sensor_Driver_Binding;
 ```
 
 **Ada包装实现**:
+
 ```ada
 -- sensor_driver_binding.adb
 with Ada.Exceptions;
@@ -353,11 +356,11 @@ package body Sensor_Driver_Binding is
    begin
       Result := Sensor_Init (C_Path);
       Strings.Free (C_Path);
-      
+
       if Result /= 0 then
          raise Sensor_Error with "Failed to initialize sensor: " & Device_Path;
       end if;
-      
+
       Initialized := True;
    end Initialize;
 
@@ -368,13 +371,13 @@ package body Sensor_Driver_Binding is
       if not Initialized then
          raise Sensor_Error with "Sensor not initialized";
       end if;
-      
+
       Result := Sensor_Read (Data'Access);
-      
+
       if Result /= 0 then
          raise Sensor_Error with "Sensor read failed";
       end if;
-      
+
       return Data;
    end Read_Data;
 
@@ -392,6 +395,7 @@ end Sensor_Driver_Binding;
 ### 3.2 Ada到C导出模式
 
 **Ada库（被C调用）**:
+
 ```ada
 -- math_utils.ads
 package Math_Utils is
@@ -421,6 +425,7 @@ end Math_Utils;
 ```
 
 **C头文件（供C代码使用）**:
+
 ```c
 // math_utils_ada.h
 #ifndef MATH_UTILS_ADA_H
@@ -439,6 +444,7 @@ extern float compute_stats(float* values, unsigned int count);
 ### 4.1 GDB调试混合代码
 
 **启动调试会话**:
+
 ```bash
 # 编译时添加调试信息
 gprbuild -P mixed_project.gpr -XBUILD=debug
@@ -457,6 +463,7 @@ gdb ./bin/mixed_app
 ```
 
 **GDB技巧**:
+
 ```gdb
 # 查看Ada记录类型
 (gdb) p sensor_data
@@ -474,6 +481,7 @@ $2 = {1.0, 2.0, 3.0, ...}
 ### 4.2 GNAT调试工具
 
 **GPS (GNAT Programming Studio)**:
+
 ```
 功能:
 ├── 可视化断点设置
@@ -491,6 +499,7 @@ $2 = {1.0, 2.0, 3.0, ...}
 ```
 
 **GNATstudio命令行**:
+
 ```bash
 # 代码导航
 gnatfind -P mixed_project.gpr Sensor_Read
@@ -505,6 +514,7 @@ gnatcheck -P mixed_project.gpr --rules=rules.txt
 ### 4.3 内存调试
 
 **Valgrind与混合代码**:
+
 ```bash
 # 内存泄漏检测
 valgrind --leak-check=full ./bin/mixed_app
@@ -517,6 +527,7 @@ valgrind --vgdb=yes --vgdb-error=0 ./bin/mixed_app
 ```
 
 **AddressSanitizer**:
+
 ```ada
 -- 编译器选项添加
 for Switches ("C") use ("-fsanitize=address", "-fno-omit-frame-pointer");
@@ -584,17 +595,17 @@ package body Test_Sensor_Binding is
    begin
       Sensor_Driver_Binding.Initialize ("/dev/sensor0");
       Data := Sensor_Driver_Binding.Read_Data;
-      
+
       AUnit.Assertions.Assert (
          Data.Status = 0,
          "Invalid sensor status"
       );
-      
+
       Sensor_Driver_Binding.Close;
    end Test_Read_Data;
 
    -- 更多测试...
-   
+
 end Test_Sensor_Binding;
 ```
 
@@ -608,28 +619,28 @@ with C_Legacy_Module;
 
 procedure Integration_Test is
    use Sensor_Driver_Binding;
-   
+
    Raw_Data    : Sensor_Data;
    Processed   : Data_Processor.Processed_Data;
 begin
    -- 端到端测试流程
    Put_Line ("Starting integration test...");
-   
+
    -- 1. 初始化C硬件层
    Initialize ("/dev/sensor0");
-   
+
    -- 2. 读取传感器数据（C驱动）
    Raw_Data := Read_Data;
-   
+
    -- 3. Ada处理层处理
    Processed := Data_Processor.Process (Raw_Data);
-   
+
    -- 4. 调用C遗留模块验证
    C_Legacy_Module.Verify (Processed);
-   
+
    -- 5. 清理
    Close;
-   
+
    Put_Line ("Integration test passed!");
 exception
    when others =>
@@ -653,47 +664,47 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Install GNAT
       run: |
         sudo apt-get update
         sudo apt-get install -y gnat gprbuild
-    
+
     - name: Install C dependencies
       run: |
         sudo apt-get install -y build-essential
-    
+
     - name: Build C components
       run: |
         make c_libs
-    
+
     - name: Build Ada application
       run: |
         gprbuild -P mixed_project.gpr
-    
+
     - name: Run C unit tests
       run: |
         make test-c
-    
+
     - name: Run Ada unit tests
       run: |
         make test-ada
-    
+
     - name: Run integration tests
       run: |
         make test-integration
-    
+
     - name: Static analysis (Ada)
       run: |
         gnatcheck -P mixed_project.gpr
-    
+
     - name: SPARK verification
       run: |
         gnatprove -P mixed_project.gpr --level=1
-    
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -749,6 +760,7 @@ spark_verify:
 ### 7.1 边界调用优化
 
 **减少边界穿越**:
+
 ```ada
 -- 低效：频繁调用C函数
 for I in 1 .. 1000 loop
@@ -770,7 +782,7 @@ end loop;
 -- 针对不同架构优化
 project Mixed_Optimized is
    for Target ("Ada") use "arm-eabi";  -- 嵌入式ARM
-   
+
    package Compiler is
       -- C优化
       for Switches ("C") use (
@@ -779,7 +791,7 @@ project Mixed_Optimized is
          "-mfpu=neon",
          "-mfloat-abi=hard"
       );
-      
+
       -- Ada优化
       for Switches ("Ada") use (
          "-O3",
@@ -848,5 +860,5 @@ strace -e trace=open,close,read,write ./bin/mixed_app
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

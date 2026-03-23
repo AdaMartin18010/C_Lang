@@ -58,7 +58,7 @@ int match(State *start, const char *text);
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review
 
 
@@ -84,6 +84,7 @@ void example_function() {
     // 实现细节
 }
 ``n
+
 ### 实践应用
 
 - **应用场景1**: 详细描述
@@ -99,8 +100,8 @@ void example_function() {
 
 ---
 
-> **最后更新**: 2026-03-21  
-> **维护者**: AI Code Review  
+> **最后更新**: 2026-03-21
+> **维护者**: AI Code Review
 > **内容深度**: L3 (标准)
 
 
@@ -128,6 +129,7 @@ void implementation_example() {
     // 清理资源
 }
 ``n
+
 ### 实践应用
 
 - **应用场景1**: 工业控制系统
@@ -143,8 +145,8 @@ void implementation_example() {
 
 ---
 
-> **最后更新**: 2026-03-21  
-> **维护者**: AI Code Review  
+> **最后更新**: 2026-03-21
+> **维护者**: AI Code Review
 > **内容深度**: L3+ (标准+)
 
 
@@ -164,6 +166,7 @@ void example(void) {
     // 实现逻辑
 }
 ``n
+
 ### 应用指南
 
 - 指南1
@@ -172,7 +175,7 @@ void example(void) {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review
 
 
@@ -198,5 +201,5 @@ void example(void) {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

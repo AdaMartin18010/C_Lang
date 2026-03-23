@@ -127,6 +127,10 @@ Speedup:    7.4x
     - [使用perf](#使用perf)
     - [使用Intel VTune (或AMD uProf)](#使用intel-vtune-或amd-uprof)
     - [使用Cachegrind](#使用cachegrind)
+  - [深入理解](#深入理解)
+    - [核心原理](#核心原理)
+    - [实践应用](#实践应用)
+    - [最佳实践](#最佳实践)
 
 
 ---
@@ -533,5 +537,5 @@ cg_annotate cachegrind.out.*
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

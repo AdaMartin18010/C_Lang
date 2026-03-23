@@ -9,6 +9,7 @@
 ### 1.1 目标
 
 构建一个面向C语言学习者的在线练习平台，提供：
+
 - 交互式编程练习
 - 实时代码评测
 - 个性化学习路径
@@ -35,18 +36,21 @@
 ### 2.1 用户系统
 
 #### 2.1.1 认证与授权
+
 - 邮箱/手机号注册
 - 第三方登录 (GitHub, Google)
 - 密码重置
 - 双因素认证 (可选)
 
 #### 2.1.2 用户档案
+
 - 基本信息管理
 - 学习偏好设置
 - 技能评估
 - 学习历史记录
 
 #### 2.1.3 权限管理
+
 - 普通用户
 - 高级会员
 - 管理员
@@ -55,12 +59,14 @@
 ### 2.2 练习系统
 
 #### 2.2.1 题库管理
+
 - 多级分类 (知识点/难度/类型)
 - 标签系统
 - 题目搜索和过滤
 - 题目收藏
 
 #### 2.2.2 练习模式
+
 | 模式 | 说明 | 适用场景 |
 |-----|------|---------|
 | 练习模式 | 不限时，可查看提示 | 学习新知识 |
@@ -69,6 +75,7 @@
 | 考试模式 | 模拟真实考试 | 考前准备 |
 
 #### 2.2.3 题目类型
+
 1. **代码编写题**
    - 函数实现
    - 完整程序
@@ -114,18 +121,21 @@
 ```
 
 #### 2.3.2 安全沙箱
+
 - 容器隔离 (Docker/Kata Containers)
 - 资源限制 (CPU时间、内存、磁盘)
 - 系统调用过滤 (seccomp-bpf)
 - 网络隔离
 
 #### 2.3.3 支持的编译器
+
 - GCC 11/12/13
 - Clang 14/15/16
 - MSVC (Windows)
 - 嵌入式编译器 (arm-none-eabi-gcc)
 
 #### 2.3.4 评测结果
+
 - 编译信息
 - 运行结果
 - 测试用例详情
@@ -136,18 +146,21 @@
 ### 2.4 学习系统
 
 #### 2.4.1 学习路径
+
 - 预设学习路线 (入门 → 进阶 → 专家)
 - 自定义学习路径
 - 知识点依赖图
 - 学习进度追踪
 
 #### 2.4.2 自适应学习
+
 - 根据表现调整难度
 - 薄弱环节强化
 - 智能推荐题目
 - 遗忘曲线复习
 
 #### 2.4.3 成就系统
+
 - 徽章 (首次通过、连续正确、全星通过)
 - 积分和等级
 - 排行榜
@@ -156,17 +169,20 @@
 ### 2.5 社区功能
 
 #### 2.5.1 讨论区
+
 - 题目讨论
 - 题解分享
 - 技术问答
 - 经验分享
 
 #### 2.5.2 代码分享
+
 - 公开题解
 - 代码片段
 - 学习笔记
 
 #### 2.5.3 协作功能
+
 - 学习小组
 - 编程竞赛
 - 结对编程 (可选)
@@ -174,17 +190,20 @@
 ### 2.6 管理后台
 
 #### 2.6.1 内容管理
+
 - 题目CRUD
 - 测试用例管理
 - 分类和标签管理
 - 内容审核
 
 #### 2.6.2 用户管理
+
 - 用户信息查看
 - 权限管理
 - 行为分析
 
 #### 2.6.3 系统监控
+
 - 评测队列状态
 - 系统资源使用
 - 错误日志
@@ -253,24 +272,28 @@
 ### 3.2 技术栈选择
 
 #### 3.2.1 后端服务
+
 - **语言**: Go (主要), Rust (评测), Python (ML/分析)
 - **框架**: Gin / Echo (Go), FastAPI (Python)
 - **RPC**: gRPC + Protocol Buffers
 - **API**: REST + GraphQL
 
 #### 3.2.2 前端
+
 - **框架**: React 18 + TypeScript
 - **状态管理**: Zustand / Redux Toolkit
 - **UI组件**: Ant Design / Chakra UI
 - **代码编辑**: Monaco Editor (VS Code同款)
 
 #### 3.2.3 数据库
+
 - **主库**: PostgreSQL 14+
 - **缓存**: Redis Cluster
 - **搜索**: Elasticsearch
 - **时序**: ClickHouse
 
 #### 3.2.4 基础设施
+
 - **容器**: Docker + Kubernetes
 - **CI/CD**: GitHub Actions / GitLab CI
 - **监控**: Prometheus + Grafana
@@ -313,14 +336,14 @@ type SandboxConfig struct {
     MaxCPU    time.Duration  // CPU时间限制
     MaxMemory int64          // 内存限制 (bytes)
     MaxOutput int64          // 输出限制
-    
+
     // 文件系统
     ReadOnlyDirs  []string   // 只读目录
     WritableDirs  []string   // 可写目录
-    
+
     // 网络
     AllowNetwork  bool       // 是否允许网络
-    
+
     // 系统调用
     SeccompProfile string    // seccomp配置
 }
@@ -336,6 +359,7 @@ type SandboxConfig struct {
 ### 4.1 核心表结构
 
 #### 4.1.1 用户相关
+
 ```sql
 -- 用户表
 CREATE TABLE users (
@@ -361,6 +385,7 @@ CREATE TABLE user_profiles (
 ```
 
 #### 4.1.2 题目相关
+
 ```sql
 -- 题目表
 CREATE TABLE problems (
@@ -399,6 +424,7 @@ CREATE TABLE categories (
 ```
 
 #### 4.1.3 提交记录
+
 ```sql
 -- 提交表
 CREATE TABLE submissions (
@@ -461,6 +487,7 @@ problem:{problem_id}:accepted_count -> Integer
 ### 5.1 REST API
 
 #### 5.1.1 题目接口
+
 ```http
 GET    /api/v1/problems              # 获取题目列表
 GET    /api/v1/problems/{slug}       # 获取题目详情
@@ -470,6 +497,7 @@ DELETE /api/v1/problems/{id}         # 删除题目 (管理员)
 ```
 
 #### 5.1.2 提交接口
+
 ```http
 POST   /api/v1/submissions            # 提交代码
 GET    /api/v1/submissions/{id}       # 获取提交详情
@@ -611,5 +639,5 @@ Phase 3: 2个月
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

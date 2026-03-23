@@ -78,6 +78,7 @@
 ### 2.2 Hello World对比
 
 **C版本**:
+
 ```c
 #include <stdio.h>
 
@@ -90,6 +91,7 @@ int main(void) {
 ```
 
 **Ada版本**:
+
 ```ada
 with Ada.Text_IO;
 
@@ -103,6 +105,7 @@ end Hello;
 ### 2.3 控制流迁移
 
 **C控制流**:
+
 ```c
 // if-else
 if (x > 0) {
@@ -132,6 +135,7 @@ case (cmd) {
 ```
 
 **Ada等效**:
+
 ```ada
 -- if-elsif-else
 if X > 0 then
@@ -182,6 +186,7 @@ end case;
 ### 3.2 强类型转换
 
 **C（弱类型，危险）**:
+
 ```c
 typedef float Meters;
 typedef float Seconds;
@@ -194,6 +199,7 @@ float speed = distance / time;  // 单位混乱
 ```
 
 **Ada（强类型，安全）**:
+
 ```ada
 type Meters is new Float;
 type Seconds is new Float;
@@ -206,13 +212,14 @@ Time     : Seconds := 10.0;
 -- Speed : Meters_Per_Second := Distance / Time;
 
 -- 正确做法：显式转换
-Speed : Meters_Per_Second := 
+Speed : Meters_Per_Second :=
    Meters_Per_Second (Float (Distance) / Float (Time));
 ```
 
 ### 3.3 范围约束迁移
 
 **C（无范围检查）**:
+
 ```c
 // 只能依赖命名约定和注释
 typedef unsigned char Percentage;  // 希望是0-100
@@ -221,6 +228,7 @@ Percentage p = 150;  // 允许！危险
 ```
 
 **Ada（自动范围检查）**:
+
 ```ada
 -- 编译器强制执行范围
 subtype Percentage is Integer range 0 .. 100;
@@ -233,6 +241,7 @@ P : Percentage := 50;     -- OK
 ### 3.4 结构体迁移
 
 **C结构体**:
+
 ```c
 typedef struct {
     int x;
@@ -245,6 +254,7 @@ printf("Point %s at (%d,%d)\n", p.name, p.x, p.y);
 ```
 
 **Ada记录**:
+
 ```ada
 type Point is record
    X, Y : Integer;
@@ -278,6 +288,7 @@ Put_Line ("Point " & P.Name & " at (" & P.X'Image & "," & P.Y'Image & ")");
 ### 4.2 简单指针迁移
 
 **C代码**:
+
 ```c
 int value = 42;
 int *ptr = &value;
@@ -286,6 +297,7 @@ printf("Value: %d\n", *ptr);
 ```
 
 **Ada代码**:
+
 ```ada
 declare
    Value : aliased Integer := 42;  -- aliased允许取地址
@@ -299,6 +311,7 @@ end;
 ### 4.3 动态内存分配迁移
 
 **C代码**:
+
 ```c
 int* create_array(size_t n) {
     int* arr = malloc(n * sizeof(int));
@@ -315,11 +328,12 @@ void destroy_array(int* arr) {
 ```
 
 **Ada代码（使用池化访问类型）**:
+
 ```ada
 package Dynamic_Arrays is
    type Int_Array is array (Natural range <>) of Integer;
    type Int_Array_Access is access Int_Array;
-   
+
    function Create_Array (N : Natural) return Int_Array_Access;
    -- 自动内存管理或显式释放
 end Dynamic_Arrays;
@@ -338,6 +352,7 @@ end Dynamic_Arrays;
 ### 4.4 链表迁移
 
 **C链表**:
+
 ```c
 typedef struct Node {
     int data;
@@ -359,31 +374,32 @@ void insert(Node** head, int data) {
 ```
 
 **Ada链表（使用受控类型自动管理）**:
+
 ```ada
 with Ada.Finalization;
 
 package Linked_Lists is
    type Node is private;
    type List is tagged private;
-   
+
    procedure Insert (L : in out List; Data : Integer);
    function Head (L : List) return Integer;
    function Is_Empty (L : List) return Boolean;
-   
+
 private
    type Node_Record;
    type Node_Access is access Node_Record;
-   
+
    type Node_Record is record
       Data : Integer;
       Next : Node_Access;
    end record;
-   
+
    type List is new Ada.Finalization.Controlled with record
       Head : Node_Access;
       Size : Natural := 0;
    end record;
-   
+
    overriding procedure Finalize (L : in out List);  -- 自动释放
 end Linked_Lists;
 ```
@@ -391,6 +407,7 @@ end Linked_Lists;
 ### 4.5 函数指针迁移
 
 **C函数指针**:
+
 ```c
 typedef int (*Comparator)(const void*, const void*);
 
@@ -404,13 +421,14 @@ void sort(void* arr, size_t n, size_t size, Comparator cmp);
 ```
 
 **Ada（使用泛型替代）**:
+
 ```ada
 generic
    type Element_Type is private;
    with function "<" (L, R : Element_Type) return Boolean is <>;
 package Generic_Sort is
    type Array_Type is array (Positive range <>) of Element_Type;
-   
+
    procedure Sort (Arr : in out Array_Type);
 end Generic_Sort;
 
@@ -430,6 +448,7 @@ Int_Sort.Sort (Numbers);  -- 类型安全
 ### 5.1 常量宏迁移
 
 **C宏**:
+
 ```c
 #define MAX_SIZE 100
 #define PI 3.14159
@@ -437,6 +456,7 @@ Int_Sort.Sort (Numbers);  -- 类型安全
 ```
 
 **Ada常量**:
+
 ```ada
 Max_Size : constant := 100;
 Pi       : constant := 3.14159;
@@ -446,6 +466,7 @@ Version  : constant String := "1.0.0";
 ### 5.2 函数式宏迁移
 
 **C宏（危险）**:
+
 ```c
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
 #define SQUARE(x) ((x) * (x))
@@ -455,6 +476,7 @@ int s = SQUARE(i++);      // 危险！i++执行两次
 ```
 
 **Ada泛型函数**:
+
 ```ada
 generic
    type Element_Type is private;
@@ -480,6 +502,7 @@ M : Integer := Int_Max (5, 3);  -- 安全，无重复求值
 ### 5.3 泛型容器迁移
 
 **C宏容器（代码膨胀，类型不安全）**:
+
 ```c
 #define DEFINE_STACK(TYPE, NAME, SIZE) \
     typedef struct { \
@@ -495,28 +518,29 @@ DEFINE_STACK(float, Float, 100)
 ```
 
 **Ada泛型包（类型安全，无重复代码）**:
+
 ```ada
 generic
    type Element_Type is private;
    Max_Size : in Positive;
 package Generic_Stack is
    type Stack is limited private;
-   
+
    Overflow  : exception;
    Underflow : exception;
-   
+
    procedure Push (S : in out Stack; Item : Element_Type)
       with Pre => not Is_Full (S) or else raise Overflow;
-   
+
    procedure Pop (S : in out Stack; Item : out Element_Type)
       with Pre => not Is_Empty (S) or else raise Underflow;
-   
+
    function Is_Empty (S : Stack) return Boolean;
    function Is_Full (S : Stack) return Boolean;
-   
+
 private
    type Element_Array is array (1 .. Max_Size) of Element_Type;
-   
+
    type Stack is record
       Data : Element_Array;
       Top  : Natural range 0 .. Max_Size := 0;
@@ -535,6 +559,7 @@ package Float_Stack is new Generic_Stack (Float, 100);
 ### 6.1 建立互操作层
 
 **C头文件（保持不变）**:
+
 ```c
 // legacy_math.h
 #ifndef LEGACY_MATH_H
@@ -547,13 +572,14 @@ int validate_input(int min, int max, int value);
 ```
 
 **Ada绑定（自动或手写）**:
+
 ```ada
 -- legacy_math_binding.ads
 with Interfaces.C;
 
 package Legacy_Math_Binding is
    use Interfaces.C;
-   
+
    function Compute_Average (
       Values : access double;
       Count  : size_t
@@ -562,7 +588,7 @@ package Legacy_Math_Binding is
       Import => True,
       Convention => C,
       External_Name => "compute_average";
-   
+
    function Validate_Input (
       Min_Value : int;
       Max_Value : int;
@@ -572,7 +598,7 @@ package Legacy_Math_Binding is
       Import => True,
       Convention => C,
       External_Name => "validate_input";
-   
+
    -- Ada友好包装
    function Safe_Average (Values : Double_Array) return Double;
 end Legacy_Math_Binding;
@@ -676,6 +702,7 @@ end My_Project;
 **问题**: C从0开始，Ada通常从1开始
 
 **C代码**:
+
 ```c
 int arr[10];
 for (int i = 0; i < 10; i++) {
@@ -684,6 +711,7 @@ for (int i = 0; i < 10; i++) {
 ```
 
 **Ada代码（可选从0开始）**:
+
 ```ada
 -- 方案1: 保持0索引
 Arr : array (0 .. 9) of Integer;
@@ -701,6 +729,7 @@ end loop;
 ### 7.2 字符串处理
 
 **C代码**:
+
 ```c
 char name[32];
 strcpy(name, "John");
@@ -708,6 +737,7 @@ printf("Hello %s\n", name);
 ```
 
 **Ada代码**:
+
 ```ada
 -- 定长字符串
 Name : String (1 .. 32) := (others => ' ');
@@ -725,6 +755,7 @@ Put_Line ("Hello " & To_String (Name));
 ### 7.3 错误处理
 
 **C代码**:
+
 ```c
 FILE* fp = fopen("data.txt", "r");
 if (fp == NULL) {
@@ -736,6 +767,7 @@ fclose(fp);
 ```
 
 **Ada代码**:
+
 ```ada
 with Ada.Text_IO;
 
@@ -812,5 +844,5 @@ end Read_File;
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

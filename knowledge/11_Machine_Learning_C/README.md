@@ -141,7 +141,7 @@ gcc -o nn nn.c -lopenblas -lpthread -lm -O3 -mavx2
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review
 
 
@@ -169,6 +169,7 @@ void implementation_example() {
     // 清理资源
 }
 ``n
+
 ### 实践应用
 
 - **应用场景1**: 工业控制系统
@@ -184,6 +185,6 @@ void implementation_example() {
 
 ---
 
-> **最后更新**: 2026-03-21  
-> **维护者**: AI Code Review  
+> **最后更新**: 2026-03-21
+> **维护者**: AI Code Review
 > **内容深度**: L3+ (标准+)

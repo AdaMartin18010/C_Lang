@@ -160,17 +160,17 @@ int mm_init(void) {
     /* 创建初始空堆 */
     if ((heap_listp = mem_sbrk(4 * WSIZE)) == (void *)-1)
         return -1;
-    
+
     PUT(heap_listp, 0);                           // 对齐填充
     PUT(heap_listp + (1 * WSIZE), PACK(DSIZE, 1)); // 序言块头部
     PUT(heap_listp + (2 * WSIZE), PACK(DSIZE, 1)); // 序言块脚部
     PUT(heap_listp + (3 * WSIZE), PACK(0, 1));     // 结尾块头部
     heap_listp += (2 * WSIZE);
-    
+
     /* 用CHUNKSIZE字节扩展空堆 */
     if (extend_heap(CHUNKSIZE / WSIZE) == NULL)
         return -1;
-    
+
     return 0;
 }
 
@@ -180,17 +180,17 @@ int mm_init(void) {
 static void *extend_heap(size_t words) {
     char *bp;
     size_t size;
-    
+
     /* 分配偶数个字以保持对齐 */
     size = (words % 2) ? (words + 1) * WSIZE : words * WSIZE;
     if ((long)(bp = mem_sbrk(size)) == -1)
         return NULL;
-    
+
     /* 初始化空闲块头部/脚部和结尾块头部 */
     PUT(HDRP(bp), PACK(size, 0));         // 空闲块头部
     PUT(FTRP(bp), PACK(size, 0));         // 空闲块脚部
     PUT(HDRP(NEXT_BLKP(bp)), PACK(0, 1)); // 新结尾块头部
-    
+
     /* 如果前一个块空闲，则合并 */
     return coalesce(bp);
 }
@@ -207,19 +207,19 @@ static void *coalesce(void *bp) {
     size_t prev_alloc = GET_ALLOC(FTRP(PREV_BLKP(bp)));
     size_t next_alloc = GET_ALLOC(HDRP(NEXT_BLKP(bp)));
     size_t size = GET_SIZE(HDRP(bp));
-    
+
     /* 情况1: 前后都是已分配的 */
     if (prev_alloc && next_alloc) {
         return bp;
     }
-    
+
     /* 情况2: 后面是空闲的 */
     else if (prev_alloc && !next_alloc) {
         size += GET_SIZE(HDRP(NEXT_BLKP(bp)));
         PUT(HDRP(bp), PACK(size, 0));
         PUT(FTRP(bp), PACK(size, 0));
     }
-    
+
     /* 情况3: 前面是空闲的 */
     else if (!prev_alloc && next_alloc) {
         size += GET_SIZE(HDRP(PREV_BLKP(bp)));
@@ -227,16 +227,16 @@ static void *coalesce(void *bp) {
         PUT(HDRP(PREV_BLKP(bp)), PACK(size, 0));
         bp = PREV_BLKP(bp);
     }
-    
+
     /* 情况4: 前后都是空闲的 */
     else {
-        size += GET_SIZE(HDRP(PREV_BLKP(bp))) + 
+        size += GET_SIZE(HDRP(PREV_BLKP(bp))) +
                 GET_SIZE(FTRP(NEXT_BLKP(bp)));
         PUT(HDRP(PREV_BLKP(bp)), PACK(size, 0));
         PUT(FTRP(NEXT_BLKP(bp)), PACK(size, 0));
         bp = PREV_BLKP(bp);
     }
-    
+
     return bp;
 }
 ```
@@ -251,23 +251,23 @@ void *mm_malloc(size_t size) {
     size_t asize;      // 调整后的块大小
     size_t extendsize; // 如果没有合适块则扩展堆
     char *bp;
-    
+
     /* 忽略虚假请求 */
     if (size == 0)
         return NULL;
-    
+
     /* 调整为对齐要求 */
     if (size <= DSIZE)
         asize = 2 * DSIZE;
     else
         asize = DSIZE * ((size + (DSIZE) + (DSIZE - 1)) / DSIZE);
-    
+
     /* 搜索空闲块 */
     if ((bp = find_fit(asize)) != NULL) {
         place(bp, asize);
         return bp;
     }
-    
+
     /* 没有找到合适的块，获取更多内存 */
     extendsize = MAX(asize, CHUNKSIZE);
     if ((bp = extend_heap(extendsize / WSIZE)) == NULL)
@@ -281,7 +281,7 @@ void *mm_malloc(size_t size) {
  */
 void mm_free(void *bp) {
     size_t size = GET_SIZE(HDRP(bp));
-    
+
     PUT(HDRP(bp), PACK(size, 0));
     PUT(FTRP(bp), PACK(size, 0));
     coalesce(bp);
@@ -292,7 +292,7 @@ void mm_free(void *bp) {
  */
 static void *find_fit(size_t asize) {
     void *bp;
-    
+
     for (bp = heap_listp; GET_SIZE(HDRP(bp)) > 0; bp = NEXT_BLKP(bp)) {
         if (!GET_ALLOC(HDRP(bp)) && (asize <= GET_SIZE(HDRP(bp)))) {
             return bp;
@@ -306,7 +306,7 @@ static void *find_fit(size_t asize) {
  */
 static void place(void *bp, size_t asize) {
     size_t csize = GET_SIZE(HDRP(bp));
-    
+
     if ((csize - asize) >= (2 * DSIZE)) {
         // 分割块
         PUT(HDRP(bp), PACK(asize, 1));
@@ -331,32 +331,32 @@ static void place(void *bp, size_t asize) {
 void *mm_realloc(void *ptr, size_t size) {
     size_t oldsize;
     void *newptr;
-    
+
     /* 如果ptr为NULL，等价于malloc */
     if (ptr == NULL) {
         return mm_malloc(size);
     }
-    
+
     /* 如果size为0，等价于free */
     if (size == 0) {
         mm_free(ptr);
         return NULL;
     }
-    
+
     /* 否则，分配新块并复制数据 */
     newptr = mm_malloc(size);
     if (newptr == NULL)
         return NULL;
-    
+
     /* 复制旧数据 */
     oldsize = GET_SIZE(HDRP(ptr));
     if (size < oldsize)
         oldsize = size;
     memcpy(newptr, ptr, oldsize);
-    
+
     /* 释放旧块 */
     mm_free(ptr);
-    
+
     return newptr;
 }
 ```
@@ -413,7 +413,7 @@ static void remove_free_block(void *bp) {
         SET_PTR(SUCC_PTR(PRED(bp)), SUCC(bp));
     else
         free_list_head = SUCC(bp);
-    
+
     if (SUCC(bp) != NULL)
         SET_PTR(PRED_PTR(SUCC(bp)), PRED(bp));
 }
@@ -426,7 +426,7 @@ static void *coalesce(void *bp) {
     size_t prev_alloc = GET_ALLOC(FTRP(PREV_BLKP(bp)));
     size_t next_alloc = GET_ALLOC(HDRP(NEXT_BLKP(bp)));
     size_t size = GET_SIZE(HDRP(bp));
-    
+
     if (prev_alloc && next_alloc) {
         // 情况1: 直接插入
         insert_free_block(bp);
@@ -449,13 +449,13 @@ static void *coalesce(void *bp) {
     else {
         // 情况4: 与前后都合并
         remove_free_block(NEXT_BLKP(bp));
-        size += GET_SIZE(HDRP(PREV_BLKP(bp))) + 
+        size += GET_SIZE(HDRP(PREV_BLKP(bp))) +
                 GET_SIZE(FTRP(NEXT_BLKP(bp)));
         PUT(HDRP(PREV_BLKP(bp)), PACK(size, 0));
         PUT(FTRP(NEXT_BLKP(bp)), PACK(size, 0));
         bp = PREV_BLKP(bp);
     }
-    
+
     return bp;
 }
 ```
@@ -511,7 +511,7 @@ static int get_size_class(size_t size) {
 static void insert_block(void *bp) {
     size_t size = GET_SIZE(HDRP(bp));
     int class = get_size_class(size);
-    
+
     void *head = size_class_heads[class];
     PRED(bp) = NULL;
     SUCC(bp) = head;
@@ -524,12 +524,12 @@ static void insert_block(void *bp) {
 static void remove_block(void *bp) {
     size_t size = GET_SIZE(HDRP(bp));
     int class = get_size_class(size);
-    
+
     if (PRED(bp) != NULL)
         SUCC(PRED(bp)) = SUCC(bp);
     else
         size_class_heads[class] = SUCC(bp);
-    
+
     if (SUCC(bp) != NULL)
         PRED(SUCC(bp)) = PRED(bp);
 }
@@ -537,7 +537,7 @@ static void remove_block(void *bp) {
 // 在大小类中搜索
 static void *find_fit(size_t asize) {
     int class = get_size_class(asize);
-    
+
     for (int i = class; i < SIZE_CLASS_COUNT; i++) {
         void *bp = size_class_heads[i];
         while (bp != NULL) {
@@ -574,10 +574,10 @@ static void *find_fit(size_t asize) {
 void *mm_realloc(void *ptr, size_t size) {
     if (ptr == NULL) return mm_malloc(size);
     if (size == 0) { mm_free(ptr); return NULL; }
-    
+
     size_t old_size = GET_SIZE(HDRP(ptr));
     size_t asize = ALIGN(size + DSIZE);
-    
+
     // 如果新大小更小或相同，可能不需要移动
     if (asize <= old_size) {
         // 如果可以分割
@@ -591,10 +591,10 @@ void *mm_realloc(void *ptr, size_t size) {
         }
         return ptr;
     }
-    
+
     // 检查下一块是否空闲且足够大
     void *next = NEXT_BLKP(ptr);
-    if (!GET_ALLOC(HDRP(next)) && 
+    if (!GET_ALLOC(HDRP(next)) &&
         old_size + GET_SIZE(HDRP(next)) >= asize) {
         remove_block(next);
         size_t total = old_size + GET_SIZE(HDRP(next));
@@ -611,7 +611,7 @@ void *mm_realloc(void *ptr, size_t size) {
         }
         return ptr;
     }
-    
+
     // 否则分配新块并复制
     void *new_ptr = mm_malloc(size);
     memcpy(new_ptr, ptr, old_size - DSIZE);
@@ -671,5 +671,5 @@ make debug
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

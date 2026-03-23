@@ -390,5 +390,5 @@ int copyinstr(pagetable_t pagetable, char *dst, uint64 srcva, uint64 max);
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

@@ -23,6 +23,7 @@ ESP32 是乐鑫科技（Espressif）推出的系列高性能、低功耗 WiFi + 
 ## ⭐ 核心特性
 
 ### 1. 无线连接能力
+
 - **WiFi**: 支持 802.11 b/g/n，最高 150 Mbps
 - **蓝牙**: BLE 5.0（部分型号支持经典蓝牙）
 - **共存机制**: WiFi + 蓝牙同时工作，智能调度
@@ -43,6 +44,7 @@ ESP32 是乐鑫科技（Espressif）推出的系列高性能、低功耗 WiFi + 
 | Touch | 10 通道 | 电容触摸感应 |
 
 ### 3. 系统特性
+
 - **FreeRTOS**: 原生支持，双核任务调度
 - **内存**: 512KB SRAM + 4-16MB Flash
 - **安全**: 支持 Flash 加密、数字签名、HMAC
@@ -53,24 +55,28 @@ ESP32 是乐鑫科技（Espressif）推出的系列高性能、低功耗 WiFi + 
 ## 🎯 应用场景
 
 ### 1. 智能家居
+
 - 智能插座、智能开关
 - 温湿度监测器
 - 智能门锁
 - 安防监控系统
 
 ### 2. 工业物联网
+
 - 设备状态监测
 - 工业网关
 - 预测性维护
 - 环境监测站
 
 ### 3. 消费电子
+
 - 可穿戴设备
 - 智能音箱
 - 智能玩具
 - 健康监测设备
 
 ### 4. 农业物联网
+
 - 精准灌溉系统
 - 温室环境监测
 - 土壤墒情监测
@@ -92,6 +98,7 @@ ESP32 是乐鑫科技（Espressif）推出的系列高性能、低功耗 WiFi + 
 ### 软件要求
 
 #### Windows 环境
+
 ```powershell
 # 1. 下载 ESP-IDF 工具安装器
 # 访问: https://dl.espressif.com/dl/esp-idf/
@@ -103,6 +110,7 @@ idf.py --version
 ```
 
 #### Linux/macOS 环境
+
 ```bash
 # 安装依赖
 sudo apt-get install git wget flex bison gperf python3 python3-pip \
@@ -206,7 +214,7 @@ static const char *TAG = "MAIN";
 void app_main(void)
 {
     ESP_LOGI(TAG, "Hello ESP32!");
-    
+
     int counter = 0;
     while (1) {
         ESP_LOGI(TAG, "Counter: %d", counter++);
@@ -246,25 +254,28 @@ void app_main(void)
 ### 调试技巧
 
 1. **使用 JTAG 调试**
+
    ```bash
    # 启动 OpenOCD
    openocd -f interface/ftdi/esp32_devkitj_v1.cfg -f target/esp32s3.cfg
-   
+
    # 在另一个终端启动 GDB
    xtensa-esp32s3-elf-gdb build/my_project.elf
    (gdb) target remote :3333
    ```
 
 2. **内存调试**
+
    ```c
    // 检查堆内存
    ESP_LOGI(TAG, "Free heap: %d bytes", esp_get_free_heap_size());
-   
+
    // 检查栈使用
    ESP_LOGI(TAG, "Minimum free heap: %d bytes", esp_get_minimum_free_heap_size());
    ```
 
 3. **性能分析**
+
    ```bash
    # 启用应用程序追踪
    idf.py menuconfig
@@ -276,12 +287,14 @@ void app_main(void)
 ## 📖 推荐学习路径
 
 ### 初学者路径
+
 1. 阅读 [01_ESP32_Complete_Guide.md](./01_ESP32_Complete_Guide.md) 第 1-3 章
 2. 完成 GPIO 控制示例
 3. 学习 WiFi Station 模式连接
 4. 尝试 MQTT 通信示例
 
 ### 进阶路径
+
 1. 深入学习 FreeRTOS 任务管理
 2. 掌握 BLE GATT 服务开发
 3. 学习低功耗模式优化
@@ -297,15 +310,15 @@ void app_main(void)
 
 ## 📞 支持与资源
 
-- **官方文档**: https://docs.espressif.com/projects/esp-idf/
-- **GitHub**: https://github.com/espressif/esp-idf
-- **论坛**: https://esp32.com/
+- **官方文档**: <https://docs.espressif.com/projects/esp-idf/>
+- **GitHub**: <https://github.com/espressif/esp-idf>
+- **论坛**: <https://esp32.com/>
 - **示例代码**: `$IDF_PATH/examples/`
 
 ---
 
-> **最后更新**: 2026-03-17  
-> **维护者**: C_Lang Knowledge Base Team  
+> **最后更新**: 2026-03-17
+> **维护者**: C_Lang Knowledge Base Team
 > **版本**: ESP-IDF v5.1+
 
 
@@ -331,5 +344,5 @@ void app_main(void)
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review
