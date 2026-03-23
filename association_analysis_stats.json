@@ -1,7 +1,7 @@
 [
   {
     "path": "00_GLOBAL_INDEX.md",
-    "total_lines": 326,
+    "total_lines": 332,
     "external_links": 0,
     "internal_links": 98,
     "outgoing_links": [
@@ -16807,7 +16807,7 @@
   },
   {
     "path": "03_System_Technology_Domains\\14_Concurrency_Parallelism\\07_Lock_Free_Data_Structures.md",
-    "total_lines": 298,
+    "total_lines": 301,
     "external_links": 3,
     "internal_links": 4,
     "outgoing_links": [
@@ -20182,7 +20182,7 @@
   },
   {
     "path": "01_Core_Knowledge_System\\07_Modern_C\\02_C23_New_Features_Deep.md",
-    "total_lines": 332,
+    "total_lines": 335,
     "external_links": 1,
     "internal_links": 4,
     "outgoing_links": [
