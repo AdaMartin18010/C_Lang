@@ -1,5 +1,35 @@
 ﻿# 无线协议开发
 
+> **层级定位**: 03_System_Technology_Domains > 05_Wireless_Protocol
+> **难度级别**: L4 分析 → L5 专家
+> **预估学习时间**: 20-25 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [嵌入式系统](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | 应用场景 | 嵌入式无线开发 |
+| [系统编程](../01_System_Programming/README.md) | 系统基础 | 设备驱动、中断 |
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 缓冲区管理 |
+
+### 核心技术
+| 协议 | 频段 | 应用场景 |
+|:-----|:-----|:---------|
+| BLE | 2.4GHz | 低功耗设备 |
+| WiFi | 2.4/5GHz | 高速数据传输 |
+| LoRa | Sub-GHz | 远距离物联网 |
+| Zigbee | 2.4GHz | mesh网络 |
+
+### 后续延伸
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [硬件安全](../07_Hardware_Security/README.md) | 安全通信 | 无线安全、加密 |
+| [安全启动](../06_Security_Boot/README.md) | 安全基础 | 固件安全 |
+| [计算机视觉](../03_Computer_Vision/README.md) | 边缘AI | 无线视频传输 |
+
 ## 概述
 
 无线协议开发是嵌入式系统领域的核心技术之一，涉及射频通信、协议栈实现、功耗优化和实时数据处理。本章节深入探讨无线通信基础原理、蓝牙协议栈架构、WiFi 协议机制，以及基于 C 语言的嵌入式无线开发实践。

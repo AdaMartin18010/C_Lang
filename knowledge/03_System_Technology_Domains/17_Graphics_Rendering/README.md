@@ -1,7 +1,37 @@
 ﻿# 图形渲染 (Graphics Rendering)
 
-> **模块**: 03_System_Technology_Domains | **子模块**: 17_Graphics_Rendering
-> **最后更新**: 2026-03-14 | **状态**: ✅ 已完成
+> **层级定位**: 03_System_Technology_Domains > 17_Graphics_Rendering
+> **难度级别**: L5 专家
+> **预估学习时间**: 20-25 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | GPU内存管理 |
+| [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心基础 | 纹理、缓冲区 |
+| [并发编程](../14_Concurrency_Parallelism/README.md) | 并行基础 | GPU并行计算 |
+
+### 技术栈
+
+| API | 平台 | 用途 |
+|:-----|:-----|:-----|
+| CUDA | NVIDIA | GPU计算 |
+| OpenGL/Vulkan | 跨平台 | 图形渲染 |
+| DirectX 12 | Windows | 游戏图形 |
+| Metal | Apple | 移动图形 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [计算机视觉](../03_Computer_Vision/README.md) | GPU加速 | 图像处理加速 |
+| [微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 硬件基础 | GPU架构 |
+| [游戏引擎](../../04_Industrial_Scenarios/05_Game_Engine/README.md) | 应用场景 | 渲染引擎 |
 
 ---
 

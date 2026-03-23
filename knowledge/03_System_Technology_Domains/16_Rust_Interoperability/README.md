@@ -1,11 +1,47 @@
 ﻿# Rust 与 C 互操作
 
+> **层级定位**: 03_System_Technology_Domains > 16_Rust_Interoperability
+> **难度级别**: L4 分析
+> **预估学习时间**: 15-20 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [函数与作用域](../../01_Core_Knowledge_System/02_Core_Layer/04_Functions_Scope.md) | C基础 | 函数ABI、调用约定 |
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 所有权、生命周期 |
+| [指针深度](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心基础 | 裸指针、unsafe |
+
+### FFI技术
+
+| 方向 | 工具 | 说明 |
+|:-----|:-----|:-----|
+| Rust→C | extern "C" | 调用C库 |
+| C→Rust | cbindgen | 生成C头文件 |
+| 内存 | 所有权 | 安全传递 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [安全编码](../../01_Core_Knowledge_System/09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全FFI | 跨语言安全 |
+| [内存安全](../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/05_Undefined_Behavior_Semantics.md) | 理论保障 | UB边界 |
+| [现代工具链](../../07_Modern_Toolchain/README.md) | 开发工具 | Cargo、Bindgen |
+
 
 ---
 
 ## 📑 目录
 
 - [Rust 与 C 互操作](#rust-与-c-互操作)
+  - [🔗 文档关联](#-文档关联)
+    - [前置知识](#前置知识)
+    - [FFI技术](#ffi技术)
+    - [后续延伸](#后续延伸)
   - [📑 目录](#-目录)
   - [概述](#概述)
   - [FFI 基础](#ffi-基础)

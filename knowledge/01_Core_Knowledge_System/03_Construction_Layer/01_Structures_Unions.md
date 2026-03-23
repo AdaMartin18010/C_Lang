@@ -12,8 +12,9 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | 结构体内存布局、对齐与填充、位域、联合体、柔性数组成员 |
-| **前置知识** | 数据类型系统、指针、内存对齐 |
-| **后续延伸** | 面向对象模式、序列化、网络协议解析 |
+| **前置知识** | [数据类型系统](../../01_Basic_Layer/02_Data_Type_System.md)、[指针](../../02_Core_Layer/01_Pointer_Depth.md)、[内存管理](../../02_Core_Layer/02_Memory_Management.md) |
+| **后续延伸** | [内存布局优化](../../02_Core_Layer/02_Memory_Management.md#缓存优化)、[序列化](../../04_Standard_Library_Layer/02_Data_Structures/README.md)、[网络协议](../../03_System_Technology_Domains/11_Network_Programming/README.md) |
+| **横向关联** | [类型双关](../../02_Core_Layer/08_Type_Punning.md)、[对齐不变式](../../../06_Thinking_Representation/05_Concept_Mappings/13_Global_Invariants.md#对齐不变式)、[层次桥接链](../../../06_Thinking_Representation/05_Concept_Mappings/09_Level_Bridging_Chains.md) |
 | **权威来源** | K&R Ch6, CSAPP Ch3.9, Modern C Level 2, C11 6.7.2.1 |
 
 ---
@@ -290,5 +291,5 @@ void write_header_safe(FILE *fp, struct Header *h) {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

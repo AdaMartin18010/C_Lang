@@ -1,7 +1,39 @@
 ﻿# CompCert 形式化验证
 
-> **定位**: 形式语义与物理层 | **主题**: 编译器正确性证明 | **工具**: Coq/Rocq
-> ⚠️ **重要限制**: CompCert 3.17 仅支持 **C99/C11/C17**，**不支持 C23**。请勿使用 C23 特性进行验证。
+> **层级定位**: 02 Formal Semantics and Physics / 11 CompCert_Verification
+> **主题**: 编译器正确性证明 | **工具**: Coq/Rocq
+> **难度级别**: L5 专家 → L6 研究者
+> **预估学习时间**: 40-60 小时
+> ⚠️ **重要限制**: CompCert 3.17 仅支持 **C99/C11/C17**，**不支持 C23**
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [操作语义](../00_Core_Semantics_Foundations/01_Operational_Semantics.md) | 理论基础 | 语义保持证明 |
+| [指称语义](../00_Core_Semantics_Foundations/02_Denotational_Semantics.md) | 理论基础 | 数学语义模型 |
+| [C类型理论](../00_Core_Semantics_Foundations/04_C_Type_Theory.md) | 类型基础 | 类型系统形式化 |
+| [C与汇编映射](../06_C_Assembly_Mapping/README.md) | 编译基础 | 编译过程理解 |
+
+### 工具链
+
+| 工具 | 文档 | 用途 |
+|:-----|:-----|:-----|
+| Frama-C | [Frama-C指南](04_Frama_C_2024_Guide.md) | 前置条件验证 |
+| VST | [VST分离逻辑](02_VST_Separation_Logic_Practical.md) | 程序逻辑验证 |
+| WP | [WP教程](06_WP_Tutorial.md) |  weakest precondition |
+| Eva | [Eva教程](05_Eva_Tutorial.md) | 抽象解释分析 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [安全编码](../../01_Core_Knowledge_System/09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全应用 | 形式化方法在安全中的应用 |
+| [MISRA C](../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 合规验证 | 形式化验证与编码标准 |
 
 ---
 
@@ -22,6 +54,10 @@
 ## 目录
 
 - [CompCert 形式化验证](#compcert-形式化验证)
+  - [🔗 文档关联](#-文档关联)
+    - [前置知识](#前置知识)
+    - [工具链](#工具链)
+    - [后续延伸](#后续延伸)
   - [文档索引](#文档索引)
   - [目录](#目录)
   - [CompCert 概述](#compcert-概述)
@@ -47,6 +83,10 @@
     - [特色内容](#特色内容)
   - [奖项和认可](#奖项和认可)
   - [参考资料](#参考资料)
+  - [深入理解](#深入理解)
+    - [核心原理](#核心原理)
+    - [实践应用](#实践应用)
+    - [最佳实践](#最佳实践)
 
 ---
 
@@ -384,5 +424,5 @@ int safe_access(int *array, int length, int index) {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

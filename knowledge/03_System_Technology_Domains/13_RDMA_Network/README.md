@@ -1,5 +1,37 @@
 ﻿# RDMA 网络编程
 
+> **层级定位**: 03_System_Technology_Domains > 13_RDMA_Network
+> **难度级别**: L5 专家
+> **预估学习时间**: 20-25 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [网络编程](../15_Network_Programming/README.md) | 基础网络 | Socket API、TCP/IP |
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 内存注册、Pinning |
+| [物理机器层](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/README.md) | 硬件基础 | PCIe、DMA机制 |
+
+### RDMA实现
+
+| 实现 | 特点 | 适用场景 |
+|:-----|:-----|:---------|
+| InfiniBand | 专用网络 | HPC数据中心 |
+| RoCE | 以太网融合 | 企业网络 |
+| iWARP | TCP/IP兼容 | 广域网 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [分布式共识](../08_Distributed_Consensus/README.md) | 应用加速 | 低延迟共识协议 |
+| [高性能日志](../09_High_Performance_Log/README.md) | 存储加速 | 零拷贝日志写入 |
+| [内存数据库](../11_In_Memory_Database/README.md) | 数据库加速 | 分布式内存池 |
+
 ## 概述
 
 RDMA（Remote Direct Memory Access，远程直接内存访问）是一种高性能网络技术，允许网络适配器直接访问应用程序内存，无需操作系统内核介入，从而实现超低延迟和高吞吐量的数据传输。

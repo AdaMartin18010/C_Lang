@@ -7,6 +7,34 @@
 
 ---
 
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [C类型系统](../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 基础依赖 | C类型理论形式化基础 |
+| [未定义行为](../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 实践关联 | UB的形式化定义 |
+| [逻辑基础](../../05_Deep_Structure_MetaPhysics/01_Mathematical_Foundations/01_Logic_Systems.md) | 数学基础 | 数理逻辑、集合论 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [C11内存模型](../01_Game_Semantics/02_C11_Memory_Model.md) | 并发语义 | 并发操作语义 |
+| [CompCert验证](../11_CompCert_Verification/README.md) | 验证应用 | 编译器形式化验证 |
+| [Frama-C/WP](../11_CompCert_Verification/06_WP_Tutorial.md) | 工具应用 | 程序验证工具 |
+
+### 三大语义范式
+
+| 文档 | 范式 | 应用场景 |
+|:-----|:-----|:---------|
+| [操作语义](01_Operational_Semantics.md) | 小步骤/大步骤 | 解释器实现、类型系统 |
+| [指称语义](02_Denotational_Semantics.md) | 数学函数 | 编译器验证、程序分析 |
+| [公理语义](03_Axiomatic_Semantics_Hoare.md) | Hoare逻辑 | 程序验证、正确性证明 |
+
+---
+
 ## 模块概述
 
 形式语义学通过数学方法精确定义程序的含义。
@@ -242,5 +270,5 @@ C#minor → Cminor → ... → 汇编
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

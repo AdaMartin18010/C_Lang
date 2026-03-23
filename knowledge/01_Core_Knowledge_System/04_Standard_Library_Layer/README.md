@@ -5,6 +5,45 @@
 
 ---
 
+## 🔗 文档关联网络
+
+### 前置知识 (核心层)
+
+| 文档 | 关系 | 说明 |
+|:-----|:-----|:-----|
+| [指针深度](../02_Core_Layer/01_Pointer_Depth.md) | 知识基础 | 字符串操作、缓冲区处理 |
+| [内存管理](../02_Core_Layer/02_Memory_Management.md) | 安全基础 | malloc/free标准实现 |
+| [函数与作用域](../02_Core_Layer/04_Functions_Scope.md) | 知识基础 | 函数调用机制 |
+
+### 本层关联
+
+| 文档 | 关系 | 说明 |
+|:-----|:-----|:-----|
+| [C11线程库](10_Threads_C11.md) | 并发扩展 | 多线程标准支持 |
+| [标准I/O](01_Standard_IO/README.md) | I/O核心 | 文件操作基础 |
+| [C23标准库](C23_Standard_Library/README.md) | 版本演进 | 最新标准特性 |
+
+### 后续延伸
+
+| 文档 | 关系 | 说明 |
+|:-----|:-----|:-----|
+| [POSIX系统编程](../09_Safety_Standards/POSIX_1_2024/01_POSIX_System_Programming.md) | 系统扩展 | POSIX扩展接口 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 高级应用 | 线程安全函数使用 |
+| [安全编码](../09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全实践 | 安全函数使用规范 |
+
+### 版本演进路径
+
+```
+C89标准库 → C99标准库 → C11标准库 → C17修复 → C23新特性
+   │            │            │            │          │
+   └────────────┴────────────┴────────────┴──────────┘
+                        │
+                        ▼
+                  平台特定扩展(POSIX/Win32)
+```
+
+---
+
 ## 目录概述
 
 本目录全面介绍**ISO C标准库**，涵盖从C89到C23各个版本的库函数。

@@ -5,6 +5,40 @@
 
 ---
 
+## 🔗 文档关联网络
+
+### 前置知识 (基础层)
+
+| 文档 | 关系 | 说明 |
+|:-----|:-----|:-----|
+| [数据类型系统](../01_Basic_Layer/02_Data_Type_System.md) | 知识基础 | 指针类型、复合类型基础 |
+| [运算符与表达式](../01_Basic_Layer/03_Operators_Expressions.md) | 知识基础 | 地址运算、sizeof运算 |
+| [控制流程](../01_Basic_Layer/04_Control_Flow.md) | 知识基础 | 函数控制、循环结构 |
+
+### 横向关联 (构造层)
+
+| 文档 | 关系 | 说明 |
+|:-----|:-----|:-----|
+| [结构体与联合体](../03_Construction_Layer/01_Structures_Unions.md) | 结构关联 | 复杂数据结构实现 |
+| [预处理器](../03_Construction_Layer/02_Preprocessor.md) | 功能关联 | 宏与类型的交互 |
+
+### 后续延伸 (标准库/工程层)
+
+| 文档 | 关系 | 说明 |
+|:-----|:-----|:-----|
+| [标准I/O库](../04_Standard_Library_Layer/01_Standard_IO/README.md) | 实践应用 | FILE指针、缓冲机制 |
+| [内存管理安全](../09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全延伸 | 指针安全最佳实践 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 高级应用 | 多线程内存模型 |
+
+### 深层关联 (思维表征)
+
+| 文档 | 关系 | 说明 |
+|:-----|:-----|:-----|
+| [概念等价性图谱](../../06_Thinking_Representation/05_Concept_Mappings/08_Concept_Equivalence_Graph.md) | 理论深化 | 指针↔数组↔偏移等价 |
+| [层次桥接链](../../06_Thinking_Representation/05_Concept_Mappings/09_Level_Bridging_Chains.md) | 学习路径 | 基础→核心→高级进阶 |
+
+---
+
 ## 目录概述
 
 本目录涵盖C语言**最核心的概念和机制**，是区分C语言与其他高级语言的关键所在。
@@ -219,5 +253,5 @@
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

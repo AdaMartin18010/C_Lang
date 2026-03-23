@@ -1,8 +1,44 @@
 ﻿# 持久内存编程
 
+> **层级定位**: 03_System_Technology_Domains > 12_Persistent_Memory
+> **难度级别**: L5 专家
+> **预估学习时间**: 20-25 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 内存语义、屏障 |
+| [内存映射](../../01_System_Programming/05_Memory_Mapped_Files.md) | 系统基础 | mmap机制 |
+| [内存数据库](../11_In_Memory_Database/README.md) | 应用场景 | 持久化存储 |
+
+### 核心技术
+
+| 技术 | 说明 | 关联 |
+|:-----|:-----|:-----|
+| Intel Optane | 持久内存硬件 | 硬件架构 |
+| PMDK | 持久内存开发套件 | 编程模型 |
+| 事务内存 | ACID保证 | 并发控制 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [C11内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md) | 一致性模型 | 持久内存序 |
+| [并发编程](../14_Concurrency_Parallelism/README.md) | 事务实现 | 乐观并发控制 |
+| [存储系统](../../04_Industrial_Scenarios/01_High_Performance/README.md) | 系统架构 | 存储引擎设计 |
+
 ## 目录
 
 - [持久内存编程](#持久内存编程)
+  - [🔗 文档关联](#-文档关联)
+    - [前置知识](#前置知识)
+    - [核心技术](#核心技术)
+    - [后续延伸](#后续延伸)
   - [目录](#目录)
   - [持久内存概述](#持久内存概述)
     - [什么是持久内存](#什么是持久内存)

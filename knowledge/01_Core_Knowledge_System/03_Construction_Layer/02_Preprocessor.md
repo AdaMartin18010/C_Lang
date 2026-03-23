@@ -2,7 +2,7 @@
 
 > **层级定位**: 01_Core_Knowledge_System > 03_Construction_Layer
 > **难度级别**: L3-L4
-> **前置知识**: C语言基础
+> **前置知识**: [语法要素](../../01_Basic_Layer/01_Syntax_Elements.md)、[编译过程](../../05_Engineering/01_Compilation_Build.md)
 
 ---
 

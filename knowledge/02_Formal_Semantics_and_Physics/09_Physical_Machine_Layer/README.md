@@ -1,6 +1,39 @@
 ﻿# 物理机器层 (Physical Machine Layer)
 
-## 目录概述
+> **层级定位**: 02 Formal Semantics and Physics / 09 Physical_Machine_Layer
+> **难度级别**: L4 分析 → L5 专家
+> **预估学习时间**: 25-30 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [微架构](../07_Microarchitecture/README.md) | 架构基础 | 处理器设计概念 |
+| [ISA机器码](../10_ISA_Machine_Code/README.md) | 指令基础 | 指令集架构 |
+| [数字逻辑门](01_Digital_Logic_Gates.md) | 电路基础 | 逻辑门实现 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [硬件描述](../13_Hardware_Description/README.md) | 设计实现 | HDL硬件设计 |
+| [FPGA实验](../18_FPGA_Labs/README.md) | 实践验证 | 硬件实现实验 |
+| [工业案例](../20_Industrial_Case_Studies/README.md) | 实际应用 | 真实处理器实现 |
+
+### 硬件层次
+
+```
+晶体管 → 逻辑门 → 功能单元(ALU) → CPU核心 → 多核处理器 → 系统
+   │        │          │            │          │          │
+   └────────┴──────────┴────────────┴──────────┴──────────┘
+                          │
+                          ▼
+                    本层重点：微架构实现
+```
 
 本目录深入探讨**计算机体系结构的物理实现层**，系统阐述CPU微架构、内存层次结构、缓存一致性协议以及分支预测机制等核心主题。
 
@@ -527,5 +560,5 @@ long perf_event_open(struct perf_event_attr *hw_event,
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

@@ -12,8 +12,10 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | 内存布局、堆分配器、内存泄漏、缓冲区溢出、对齐、内存模型、分配器算法、内存池、零拷贝 |
-| **前置知识** | 指针、数据类型系统、结构体、操作系统基础 |
-| **后续延伸** | 垃圾回收原理、虚拟内存、性能优化、自定义分配器 |
+| **前置知识** | [指针深度解析](../02_Core_Layer/01_Pointer_Depth.md)、[数据类型系统](../../01_Basic_Layer/02_Data_Type_System.md)、[结构体](../../03_Construction_Layer/01_Structures_Unions.md)、操作系统基础 |
+| **后续延伸** | [性能优化](../05_Engineering/03_Performance_Optimization.md)、[并发内存模型](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/01_C11_Memory_Model.md)、[自定义分配器](../../../04_Industrial_Scenarios/01_High_Performance/03_Memory_Optimization/01_Custom_Allocators.md)、[虚拟内存](../../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/02_Virtual_Memory.md) |
+| **横向关联** | [缓冲区溢出案例](../../09_Safety_Standards/Vulnerability_Cases/01_Buffer_Overflow_Cases.md)、[内存调试技巧](../../05_Engineering/02_Debug_Techniques.md)、[C11对齐支持](../07_Modern_C/03_C23_Core_Features.md) |
+| **深层理论** | [全局不变式](../../../06_Thinking_Representation/05_Concept_Mappings/13_Global_Invariants.md)、[层次桥接链](../../../06_Thinking_Representation/05_Concept_Mappings/09_Level_Bridging_Chains.md) |
 | **权威来源** | K&R Ch8.7, CSAPP Ch9, Modern C Level 2, CERT MEM系列, Drepper "What Every Programmer Should Know About Memory" |
 
 ---
@@ -116,6 +118,10 @@
       - [8.3.3 调试与发布配置](#833-调试与发布配置)
   - [🔗 权威来源引用](#-权威来源引用)
   - [✅ 质量验收清单](#-质量验收清单)
+  - [深入理解](#深入理解)
+    - [技术原理](#技术原理)
+    - [实践指南](#实践指南)
+    - [相关资源](#相关资源)
 
 
 ---
@@ -2977,5 +2983,5 @@ struct Optimized {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

@@ -1,6 +1,36 @@
 ﻿# 指令集与机器码 (ISA & Machine Code)
 
-## 目录概述
+> **层级定位**: 02 Formal Semantics and Physics / 10 ISA_Machine_Code
+> **难度级别**: L4 分析 → L5 专家
+> **预估学习时间**: 20-25 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [C与汇编映射](../06_C_Assembly_Mapping/README.md) | 汇编基础 | 汇编到机器码 |
+| [微架构](../07_Microarchitecture/README.md) | 执行基础 | 指令执行机制 |
+| [数据类型系统](../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 数据表示 | 数据编码 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [物理机器层](../09_Physical_Machine_Layer/README.md) | 硬件实现 | CPU物理实现 |
+| [RISC-V实现](08_RISCV_CPU_Complete/README.md) | 完整实现 | 处理器设计与实现 |
+| [系统调用](../../03_System_Technology_Domains/01_System_Programming/04_System_Call_Interface.md) | 系统接口 | 特权指令、系统调用 |
+
+### 主流ISA
+
+| ISA | 文档 | 特点 |
+|:-----|:-----|:-----|
+| x86-64 | [x86实现](12_x86_Microarchitecture_Impl.md) | CISC复杂指令 |
+| ARM64 | [ARM64实现](11_ARM64_CPU_Implementation.md) | RISC定长指令 |
+| RISC-V | [RISC-V实现](08_RISCV_CPU_Complete/README.md) | 开源模块化 |
 
 本目录深入探讨**指令集架构(Instruction Set Architecture, ISA)**与机器码表示，系统阐述x86-64/ARM64/RISC-V三大主流ISA、指令编码机制、反汇编技术以及ELF文件格式。
 
@@ -594,5 +624,5 @@ void disassemble_text(const char *filename) {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

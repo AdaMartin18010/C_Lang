@@ -1,7 +1,36 @@
 ﻿# 内存数据库：高性能数据引擎
 
 > **层级定位**: 03 System Technology Domains / 11 In-Memory Database
-> **学习路径**: 从数据结构到工业级存储引擎
+> **难度级别**: L4 分析
+> **预估学习时间**: 25-30 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [数据结构](../../06_Thinking_Representation/04_Data_Structures/README.md) | 算法基础 | B+树、哈希表 |
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 内存池、分配器 |
+| [并发编程](../14_Concurrency_Parallelism/README.md) | 并行基础 | 锁、无锁结构 |
+
+### 核心技术
+
+| 结构 | 特点 | 代表系统 |
+|:-----|:-----|:---------|
+| B+树 | 读优化、范围查询 | MySQL、PostgreSQL |
+| LSM树 | 写优化、顺序写 | RocksDB、LevelDB |
+| LRU缓存 | O(1)访问、淘汰策略 | Redis、Memcached |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [持久内存](../12_Persistent_Memory/README.md) | 持久化 | 内存数据库持久化 |
+| [RDMA网络](../13_RDMA_Network/README.md) | 分布式 | 远程内存访问 |
+| [分布式共识](../08_Distributed_Consensus/README.md) | 分布式 | 多副本一致性 |
 
 ---
 

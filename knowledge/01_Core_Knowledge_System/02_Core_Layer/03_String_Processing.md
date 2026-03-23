@@ -7,6 +7,33 @@
 
 ---
 
+## 🔗 文档关联
+
+### 前置依赖
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [数组与指针](05_Arrays_Pointers.md) | 核心依赖 | 字符数组、指针遍历 |
+| [内存管理](02_Memory_Management.md) | 安全基础 | 缓冲区分配、溢出防护 |
+| [指针深度](01_Pointer_Depth.md) | 知识基础 | 指针运算、const修饰 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [标准I/O库](../04_Standard_Library_Layer/01_Standard_IO/README.md) | 直接关联 | 格式化输入输出 |
+| [安全编码规范](../09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全延伸 | 字符串安全最佳实践 |
+| [正则引擎](../../03_System_Technology_Domains/02_Regex_Engine/01_NFA_Implementation.md) | 进阶应用 | 复杂文本处理 |
+
+### 横向关联
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [国际化支持](../11_Internationalization/README.md) | 功能扩展 | 宽字符、多语言处理 |
+| [MISRA C安全规范](../09_Safety_Standards/MISRA_C_2023/README.md) | 安全标准 | 字符串操作安全规则 |
+
+---
+
 ## 📋 本节概要
 
 | 属性 | 内容 |
@@ -363,5 +390,5 @@ p[1] = 'a';  // 破坏多字节序列！
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

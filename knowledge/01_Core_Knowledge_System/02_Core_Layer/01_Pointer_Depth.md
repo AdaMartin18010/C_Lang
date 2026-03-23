@@ -12,8 +12,10 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | 指针语义、指针-数组区别、指针算术、函数指针、复杂声明、const限定、形式化模型 |
-| **前置知识** | 数据类型系统、内存地址概念、数组基础、二进制表示 |
-| **后续延伸** | 动态内存管理、数据结构实现、函数式编程模式、编译器实现 |
+| **前置知识** | [数据类型系统](../../01_Basic_Layer/02_Data_Type_System.md)、内存地址概念、[数组基础](../../01_Basic_Layer/05_Arrays_Pointers.md)、二进制表示 |
+| **后续延伸** | [动态内存管理](../02_Memory_Management.md)、[数据结构实现](../../../09_Data_Structures_Algorithms/README.md)、[函数式编程模式](../../../08_Zig_C_Connection/05_Migration_Methodology/README.md)、[并发内存模型](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) |
+| **横向关联** | [数组与指针对比](./05_Arrays_Pointers.md#数组与指针的关系)、[函数指针](./03_Function_Pointers.md)、[复杂声明解析](../06_Advanced_Layer/04_Complex_Declarations.md) |
+| **深层理论** | [指针的形式化语义](../../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/01_Operational_Semantics.md)、[概念等价性](../../../06_Thinking_Representation/05_Concept_Mappings/08_Concept_Equivalence_Graph.md) |
 | **权威来源** | K&R Ch5, Expert C Programming Ch3/4, CSAPP Ch3.8, Modern C Level 2, ISO C11 §6.5 |
 
 ---
@@ -110,6 +112,10 @@
   - [🔗 第十部分：权威来源引用](#-第十部分权威来源引用)
     - [主要参考](#主要参考)
   - [✅ 质量验收清单](#-质量验收清单)
+  - [深入理解](#深入理解)
+    - [技术原理](#技术原理)
+    - [实践指南](#实践指南)
+    - [相关资源](#相关资源)
 
 
 ---
@@ -2337,5 +2343,5 @@ After: **pp=42, pp=(nil)
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

@@ -1,12 +1,40 @@
 ﻿# C 语言工程实践
 
 > **定位**: 核心知识体系 / 工程实践 | **主题**: 软件工程方法在 C 项目中的应用
+> **前置知识**: [内存管理](../02_Core_Layer/02_Memory_Management.md)、[结构体](../03_Construction_Layer/01_Structures_Unions.md)、[编译构建](./01_Compilation_Build.md)
+> **关联理论**: [全局不变式](../../06_Thinking_Representation/05_Concept_Mappings/13_Global_Invariants.md)、[层次桥接链](../../06_Thinking_Representation/05_Concept_Mappings/09_Level_Bridging_Chains.md)
+
+---
+
+## 快速导航
+
+### 前置知识
+
+- [内存管理](../02_Core_Layer/02_Memory_Management.md) - 所有权模型基础
+- [结构体](../03_Construction_Layer/01_Structures_Unions.md) - 数据封装
+- [函数指针](../02_Core_Layer/01_Pointer_Depth.md) - 回调机制
+
+### 后续延伸
+
+- [代码质量工具链](../../07_Modern_Toolchain/05_Code_Quality_Toolchain/README.md) - 自动化检查
+- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) - 多线程工程
+- [安全标准](../09_Safety_Standards/README.md) - 合规开发
+
+### 实践关联
+
+- [状态机设计](../../06_Thinking_Representation/09_State_Machines/README.md) - 复杂逻辑组织
+- [调试技术](./02_Debug_Techniques.md) - 问题定位
+- [性能优化](./03_Performance_Optimization.md) - 效率提升
 
 ---
 
 ## 目录
 
 - [C 语言工程实践](#c-语言工程实践)
+  - [快速导航](#快速导航)
+    - [前置知识](#前置知识)
+    - [后续延伸](#后续延伸)
+    - [实践关联](#实践关联)
   - [目录](#目录)
   - [C 项目工程化概述](#c-项目工程化概述)
   - [代码组织与模块化](#代码组织与模块化)
@@ -28,6 +56,10 @@
     - [测试覆盖率](#测试覆盖率)
   - [持续集成配置](#持续集成配置)
     - [GitHub Actions 示例](#github-actions-示例)
+  - [深入理解](#深入理解)
+    - [技术原理](#技术原理)
+    - [实践指南](#实践指南)
+    - [相关资源](#相关资源)
 
 ---
 
@@ -492,5 +524,5 @@ jobs:
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

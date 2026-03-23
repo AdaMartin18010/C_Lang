@@ -7,6 +7,35 @@
 
 ---
 
+## 🔗 文档关联
+
+### 前置依赖
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [编译与构建](01_Compilation_Build.md) | 工具基础 | -g调试选项 |
+| [内存管理](../02_Core_Layer/02_Memory_Management.md) | 问题诊断 | 内存相关bug分析 |
+| [指针深度](../02_Core_Layer/01_Pointer_Depth.md) | 问题诊断 | 指针错误调试 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [性能优化](03_Performance_Optimization.md) | 性能调试 | Perf性能分析 |
+| [安全编码](../09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全调试 | 安全漏洞检测 |
+| [现代工具链](../../07_Modern_Toolchain/README.md) | 工具进阶 | 现代调试工具 |
+
+### 调试技术链
+
+| 工具 | 用途 | 关联文档 |
+|:-----|:-----|:---------|
+| GDB/LLDB | 交互式调试 | 编译构建、指针深度 |
+| Valgrind | 内存检测 | 内存管理 |
+| Sanitizers | 运行时检查 | 安全编码 |
+| Perf | 性能分析 | 性能优化 |
+
+---
+
 ## 📋 本节概要
 
 | 属性 | 内容 |
@@ -321,5 +350,5 @@ void log_message(LogLevel level, const char *file, int line,
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

@@ -1,6 +1,36 @@
 ﻿# 虚拟机与解释器
 
 > **层级定位**: 03_System_Technology_Domains > 01_Virtual_Machine_Interpreter
+> **难度级别**: L4 分析
+> **预估学习时间**: 15-20 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [指针深度](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心基础 | 虚拟机数据结构设计 |
+| [函数指针](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心基础 | 指令分发、跳转表 |
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | GC、内存分配 |
+
+### 本层内容
+
+| 文档 | 主题 | 关联 |
+|:-----|:-----|:-----|
+| [字节码虚拟机](01_Bytecode_VM.md) | 栈式VM | 编译器后端、内存模型 |
+| [寄存器虚拟机](02_Register_VM.md) | 寄存器VM | ISA架构、性能优化 |
+| [JIT编译](03_JIT_Compilation.md) | 即时编译 | 编译原理、代码生成 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [C与汇编映射](../../02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/README.md) | 代码生成 | JIT代码生成 |
+| [编译器优化](../../02_Formal_Semantics_and_Physics/12_Compiler_Optimization/README.md) | 优化技术 | JIT优化 |
+| [正则引擎](../02_Regex_Engine/README.md) | 应用实例 | 正则引擎VM实现 |
 
 ---
 

@@ -1,6 +1,37 @@
 ﻿# C语言性能优化
 
 > **层级定位**: 01_Core_Knowledge_System > 05_Engineering_Layer
+> **对应标准**: ISO C, POSIX
+> **难度级别**: L3 应用 → L4 分析
+> **预估学习时间**: 6-8 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置依赖
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [编译与构建](01_Compilation_Build.md) | 优化基础 | -O优化选项 |
+| [调试技术](02_Debug_Techniques.md) | 性能测量 | Perf性能分析 |
+| [内存管理](../02_Core_Layer/02_Memory_Management.md) | 优化基础 | 内存访问模式 |
+| [数组与指针](../02_Core_Layer/05_Arrays_Pointers.md) | 优化基础 | 缓存友好访问 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [高级性能优化](04_Performance_Optimization_Advanced.md) | 专家进阶 | 微架构级优化 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并行优化 | 多线程并行 |
+| [现代CPU架构](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/05_Modern_CPU_Architectures_2024.md) | 硬件基础 | 微架构优化依据 |
+
+### 横向关联
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 理论深化 | CPU微架构与优化 |
+| [缓存优化](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/05_Modern_CPU_Architectures_2024.md#缓存优化) | 硬件关联 | 缓存层次结构 |
 
 ---
 

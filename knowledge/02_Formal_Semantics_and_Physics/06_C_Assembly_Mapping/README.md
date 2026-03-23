@@ -1,6 +1,35 @@
 ﻿# C与汇编映射 (C-to-Assembly Mapping)
 
-## 目录概述
+> **层级定位**: 02 Formal Semantics and Physics / 06 C_Assembly_Mapping
+> **难度级别**: L4 分析 → L5 专家
+> **预估学习时间**: 15-20 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [编译与构建](../../01_Core_Knowledge_System/05_Engineering_Layer/01_Compilation_Build.md) | 流程基础 | 编译过程理解 |
+| [指针深度](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心基础 | 地址计算、指针语义 |
+| [函数与作用域](../../01_Core_Knowledge_System/02_Core_Layer/04_Functions_Scope.md) | 调用约定 | 函数调用机制 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [链接加载](../08_Linking_Loading_Topology/README.md) | 流程延伸 | 汇编到可执行文件 |
+| [ISA机器码](../10_ISA_Machine_Code/README.md) | 编码深化 | 指令编码细节 |
+| [微架构](../07_Microarchitecture/README.md) | 执行优化 | 处理器执行机制 |
+
+### 横向关联
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [操作语义](../00_Core_Semantics_Foundations/01_Operational_Semantics.md) | 理论深化 | 编译的形式化语义 |
+| [编译器优化](../12_Compiler_Optimization/README.md) | 优化阶段 | 中间表示与优化 |
 
 本目录系统阐述**C语言到汇编语言的编译映射机制**，深入探讨编译器代码生成、调用约定、内联汇编技术以及ABI兼容性等核心主题。
 
@@ -581,5 +610,5 @@ return φ(x0, x1);  // φ函数合并不同路径的值
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

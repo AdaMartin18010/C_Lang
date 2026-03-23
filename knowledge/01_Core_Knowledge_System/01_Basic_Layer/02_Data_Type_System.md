@@ -12,8 +12,10 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | 整数编码(补码)、IEEE 754浮点、类型转换规则、对齐与填充、整型提升 |
-| **前置知识** | 二进制/十六进制表示、基本变量声明 |
-| **后续延伸** | 位运算、指针算术、内存布局、序列化/反序列化 |
+| **前置知识** | [语法要素](./01_Syntax_Elements.md)、[运算符与表达式](../03_Operators_Expressions.md)、二进制/十六进制表示 |
+| **后续延伸** | [指针算术](../../02_Core_Layer/01_Pointer_Depth.md)、[内存布局](../../02_Core_Layer/02_Memory_Management.md)、[结构体对齐](../../03_Construction_Layer/01_Structures_Unions.md)、[类型双关](../../02_Core_Layer/08_Type_Punning.md) |
+| **横向关联** | [IEEE 754浮点专题](../01_Basic_Layer/IEEE_754_Floating_Point/README.md)、[整数溢出案例](../../09_Safety_Standards/Vulnerability_Cases/03_Integer_Overflow_Cases.md)、[类型提升规则](../03_Operators_Expressions.md#整型提升) |
+| **深层理论** | [概念等价性](../../../06_Thinking_Representation/05_Concept_Mappings/08_Concept_Equivalence_Graph.md)、[类型系统理论](../../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/04_C_Type_Theory.md) |
 | **权威来源** | K&R Ch2, CSAPP Ch2.1-2.4, C11标准 6.2, Modern C Level 1-2 |
 
 ---
@@ -73,6 +75,10 @@
     - [主要参考](#主要参考)
     - [延伸阅读](#延伸阅读)
   - [✅ 质量验收清单](#-质量验收清单)
+  - [深入理解](#深入理解)
+    - [技术原理](#技术原理)
+    - [实践指南](#实践指南)
+    - [相关资源](#相关资源)
 
 
 ---
@@ -1151,5 +1157,5 @@ bool safe_mul_size_t_v3(size_t a, size_t b, size_t *result) {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

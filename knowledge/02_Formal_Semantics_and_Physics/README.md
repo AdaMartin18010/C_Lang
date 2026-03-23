@@ -2,6 +2,36 @@
 
 > **对应标准**: ISO C标准、IEEE POSIX、CompCert Verified Compiler
 > **完成度**: 100% | **预估学习时间**: 100-120小时
+> **难度级别**: L5-L6 (专家级)
+
+---
+
+## 🔗 模块关联网络
+
+### 与核心知识体系关联
+
+| 文档 | 关系 | 说明 |
+|:-----|:-----|:-----|
+| [指针深度](../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 基础依赖 | 内存模型理解 |
+| [内存管理](../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 基础依赖 | 内存语义基础 |
+| [C11内存模型](01_Game_Semantics/02_C11_Memory_Model.md) | 理论深化 | 并发内存模型 |
+| [编译与构建](../01_Core_Knowledge_System/05_Engineering_Layer/01_Compilation_Build.md) | 实践关联 | 编译流程理解 |
+
+### 模块内部结构
+
+```
+核心语义基础 → 博弈语义/余代数 → C-汇编映射 → 链接加载 → ISA机器码
+      │                                                │
+      └──→ CompCert验证 ←── 物理机器层 ←── 微架构 ←───┘
+```
+
+### 与系统技术领域关联
+
+| 文档 | 关系 | 说明 |
+|:-----|:-----|:-----|
+| [并发编程](../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 应用延伸 | 内存模型应用 |
+| [系统编程](../03_System_Technology_Domains/01_System_Programming/README.md) | 系统实现 | 底层系统调用 |
+| [性能优化](../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md) | 优化应用 | 微架构优化 |
 >
 > **新增内容 (2026-03-14)**:
 >
@@ -262,5 +292,5 @@ graph TB
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

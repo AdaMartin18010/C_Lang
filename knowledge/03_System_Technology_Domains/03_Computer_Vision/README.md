@@ -1,6 +1,36 @@
 ﻿# 计算机视觉
 
 > **层级定位**: 03_System_Technology_Domains > 03_Computer_Vision
+> **难度级别**: L4 分析
+> **预估学习时间**: 15-20 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心基础 | 图像矩阵操作 |
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 图像缓冲区管理 |
+| [系统编程](../01_System_Programming/README.md) | 系统基础 | V4L2设备操作 |
+
+### 核心技术
+
+| 技术 | 文档 | 算法基础 |
+|:-----|:-----|:---------|
+| V4L2 | [V4L2捕获](01_V4L2_Capture.md) | 视频采集框架 |
+| 光流 | [光流算法](02_Optical_Flow.md) | Lucas-Kanade |
+| 边缘检测 | [边缘检测](03_Edge_Detection.md) | Canny算法 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [视频编解码](../04_Video_Codec/README.md) | 视频处理 | 视频流处理 |
+| [SIMD优化](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 性能优化 | 向量化图像处理 |
+| [硬件加速](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | 嵌入式 | GPU/DSP加速 |
 
 ---
 

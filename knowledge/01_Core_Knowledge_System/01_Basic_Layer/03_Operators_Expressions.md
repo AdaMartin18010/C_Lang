@@ -12,8 +12,10 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | 运算符优先级、求值顺序、整数提升、类型转换 |
-| **前置知识** | 语法要素、数据类型 |
-| **后续延伸** | 复杂表达式、副作用、优化 |
+| **前置知识** | [语法要素](./01_Syntax_Elements.md)、[数据类型系统](./02_Data_Type_System.md) |
+| **后续延伸** | [控制流与函数](./04_Control_Flow.md)、[指针算术](../../02_Core_Layer/01_Pointer_Depth.md#指针运算)、[位运算](./06_Bit_Operations.md) |
+| **横向关联** | [整数溢出案例](../../09_Safety_Standards/Vulnerability_Cases/03_Integer_Overflow_Cases.md)、[未定义行为](../../02_Formal_Semantics/00_Core_Semantics_Foundations/05_Undefined_Behavior_Semantics.md) |
+| **深层理论** | [表达式求值语义](../../02_Formal_Semantics/00_Core_Semantics_Foundations/01_Operational_Semantics.md) |
 | **权威来源** | K&R Ch2.11-2.12, C11标准 6.5, CERT EXP系列 |
 
 ---
@@ -54,6 +56,10 @@
     - [陷阱 EXP05: 复杂的优先级错误](#陷阱-exp05-复杂的优先级错误)
     - [陷阱 EXP06: 求值顺序依赖](#陷阱-exp06-求值顺序依赖)
   - [✅ 质量验收清单](#-质量验收清单)
+  - [深入理解](#深入理解)
+    - [技术原理](#技术原理)
+    - [实践指南](#实践指南)
+    - [相关资源](#相关资源)
 
 
 ---
@@ -665,5 +671,5 @@ int x = val1 + val2;
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

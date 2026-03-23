@@ -1,6 +1,36 @@
 ﻿# C语言编译与构建
 
 > **层级定位**: 01_Core_Knowledge_System > 05_Engineering_Layer
+> **对应标准**: ISO C, POSIX
+> **难度级别**: L3 应用
+> **预估学习时间**: 4-6 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置依赖
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [预处理器](../03_Construction_Layer/02_Preprocessor.md) | 编译阶段 | 预处理是第一阶段 |
+| [语法要素](../01_Basic_Layer/01_Syntax_Elements.md) | 知识基础 | 源代码结构 |
+| [内存管理](../02_Core_Layer/02_Memory_Management.md) | 链接理解 | 符号解析、重定位 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [现代工具链](../../07_Modern_Toolchain/02_Build_Systems_Modern/README.md) | 工具进阶 | CMake、Ninja等现代构建系统 |
+| [调试技术](02_Debug_Techniques.md) | 开发支持 | -g选项与调试信息 |
+| [性能优化](03_Performance_Optimization.md) | 优化编译 | -O选项与编译器优化 |
+
+### 横向关联
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [链接加载](../../02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/README.md) | 理论深化 | 链接器内部原理 |
+| [微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 优化基础 | CPU架构与编译优化 |
 
 ---
 

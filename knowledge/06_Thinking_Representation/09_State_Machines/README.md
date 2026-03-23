@@ -25,7 +25,24 @@
 
 ---
 
-## 内容导航
+## 关联导航
+
+### 前置知识
+
+- [C语言基础](../../01_Core_Knowledge_System/01_Basic_Layer/01_Syntax_Elements.md) - 基本语法和控制流
+- [函数指针](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md#函数指针) - 状态机实现的关键机制
+- [结构体](../../01_Core_Knowledge_System/03_Construction_Layer/01_Structures_Unions.md) - 状态数据组织
+
+### 后续延伸
+
+- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) - 多线程状态机
+- [嵌入式系统设计](../../04_Industrial_Scenarios/14_Embedded_IoT/README.md) - 实际应用场景
+- [编译器实现](../../02_Formal_Semantics_and_Physics/11_CompCert_Verification/README.md) - 词法分析状态机
+
+### 横向关联
+
+- [层次桥接链](../../05_Concept_Mappings/09_Level_Bridging_Chains.md) - 理解实现模式演进
+- [概念等价性](../../05_Concept_Mappings/08_Concept_Equivalence_Graph.md) - 不同实现本质相同
 
 ### 核心内容
 

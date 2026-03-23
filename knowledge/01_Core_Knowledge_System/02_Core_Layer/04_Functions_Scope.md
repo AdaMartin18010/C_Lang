@@ -7,6 +7,33 @@
 
 ---
 
+## 🔗 文档关联
+
+### 前置依赖
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [语法要素](../01_Basic_Layer/01_Syntax_Elements.md) | 知识基础 | 函数定义语法、声明语法 |
+| [控制流程](../01_Basic_Layer/04_Control_Flow.md) | 知识基础 | return语句、流程控制 |
+| [数据类型系统](../01_Basic_Layer/02_Data_Type_System.md) | 知识基础 | 函数类型、参数类型 |
+
+### 后续延伸
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [函数指针](03_Function_Pointers.md) | 直接延伸 | 函数作为一等公民 |
+| [内存管理](02_Memory_Management.md) | 间接关联 | 生命周期与作用域 |
+| [工程实践](../05_Engineering/README.md) | 应用场景 | 模块化设计、代码组织 |
+
+### 横向关联
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [预处理器](../03_Construction_Layer/02_Preprocessor.md) | 功能关联 | 宏与函数的区别 |
+| [递归实现](../../06_Thinking_Representation/05_Algorithm_Implementation.md) | 应用场景 | 递归函数设计模式 |
+
+---
+
 ## 📋 本节概要
 
 | 属性 | 内容 |
@@ -405,5 +432,5 @@ unsigned long long fib(int n) {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

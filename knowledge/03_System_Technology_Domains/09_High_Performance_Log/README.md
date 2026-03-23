@@ -1,5 +1,34 @@
 ﻿# 高性能日志系统
 
+> **层级定位**: 03_System_Technology_Domains > 09_High_Performance_Log
+> **难度级别**: L4 分析
+> **预估学习时间**: 12-15 小时
+
+---
+
+## 🔗 文档关联
+
+### 前置知识
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 缓冲区、内存池 |
+| [并发编程](../14_Concurrency_Parallelism/README.md) | 并行基础 | 无锁队列、原子操作 |
+| [系统编程](../01_System_Programming/README.md) | 系统基础 | 文件I/O、mmap |
+
+### 优化技术
+| 技术 | 优势 | 关联 |
+|:-----|:-----|:-----|
+| 零拷贝 | 减少内核拷贝 | writev、mmap |
+| 异步 | 解耦生产消费 | 无锁环形缓冲区 |
+| 结构化 | 机器可读 | JSON、二进制 |
+
+### 后续延伸
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [RDMA网络](../13_RDMA_Network/README.md) | 远程日志 | 零拷贝网络传输 |
+| [持久内存](../12_Persistent_Memory/README.md) | 持久化 | 持久化日志 |
+| [内存数据库](../11_In_Memory_Database/README.md) | 存储 | 日志存储系统 |
+
 
 ---
 
