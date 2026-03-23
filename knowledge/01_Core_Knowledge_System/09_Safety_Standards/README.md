@@ -185,9 +185,9 @@ DO-178C (航空，独立发展但与MISRA兼容)
 | 漏洞类型 | CWE | 危害 | 文档 |
 |:---------|:----|:-----|:-----|
 | 缓冲区溢出 | CWE-121/122 | 代码执行 | [案例分析](Vulnerability_Cases/01_Buffer_Overflow_Cases.md) |
-| Use-After-Free | CWE-416 | 内存破坏 | 待补充 |
-| 整数溢出 | CWE-190 | 内存破坏 | 待补充 |
-| 格式化字符串 | CWE-134 | 信息泄露 | 待补充 |
+| Use-After-Free | CWE-416 | 内存破坏 | [案例分析](Vulnerability_Cases/02_Use_After_Free_Cases.md) |
+| 整数溢出 | CWE-190 | 内存破坏 | [案例分析](Vulnerability_Cases/03_Integer_Overflow_Cases.md) |
+| 格式化字符串 | CWE-134 | 信息泄露 | [案例分析](Vulnerability_Cases/04_Format_String_Cases.md) |
 
 ---
 

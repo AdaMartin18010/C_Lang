@@ -32,11 +32,11 @@
 | 主题 | 文件 | 难度 | 预计时间 | 状态 |
 |:-----|:-----|:----:|:--------:|:----:|
 | 状态机核心概念 | [01_Core_Concept_State_Machines.md](./01_Core_Concept_State_Machines.md) | ⭐⭐⭐ | 1.5h | 🟢 |
-| Switch-Case实现模式 | [02_Switch_Case_Implementation.md](./02_Switch_Case_Implementation.md) | ⭐⭐⭐ | 1h | 🟡 |
-| 查表法实现模式 | [03_Table_Driven_Implementation.md](./03_Table_Driven_Implementation.md) | ⭐⭐⭐⭐ | 1.5h | 🟡 |
-| 函数指针实现模式 | [04_Function_Pointer_Implementation.md](./04_Function_Pointer_Implementation.md) | ⭐⭐⭐⭐ | 2h | 🟡 |
-| 层次状态机(HSM) | [05_Hierarchical_State_Machines.md](./05_Hierarchical_State_Machines.md) | ⭐⭐⭐⭐⭐ | 2h | 🟡 |
-| 状态机测试与调试 | [06_Testing_and_Debugging.md](./06_Testing_and_Debugging.md) | ⭐⭐⭐⭐ | 1h | 🟡 |
+| Switch-Case实现模式 | [02_Switch_Case_Implementation.md](./02_Switch_Case_Implementation.md) | ⭐⭐⭐ | 1h | 🟢 |
+| 查表法实现模式 | [03_Table_Driven_Implementation.md](./03_Table_Driven_Implementation.md) | ⭐⭐⭐⭐ | 1.5h | 🟢 |
+| 函数指针实现模式 | [04_Function_Pointer_Implementation.md](./04_Function_Pointer_Implementation.md) | ⭐⭐⭐⭐ | 2h | 🟢 |
+| 层次状态机(HSM) | [05_Hierarchical_State_Machines.md](./05_Hierarchical_State_Machines.md) | ⭐⭐⭐⭐⭐ | 2h | 🟢 |
+| 状态机测试与调试 | [06_Testing_and_Debugging.md](./06_Testing_and_Debugging.md) | ⭐⭐⭐⭐ | 1h | 🟢 |
 
 ### 实践资源
 
@@ -393,7 +393,7 @@ void traffic_fsm_handle_event(TrafficState* state, Event event, uint32_t elapsed
 | 版本 | 日期 | 变更说明 | 作者 |
 |:-----|:-----|:---------|:-----|
 | 1.0 | 2026-03-19 | 初始创建，从空壳README深化为完整模块 | AI Code Review |
-| 1.1 | - | 待补充代码示例和实验 | - |
+| 1.1 | 2026-03-24 | 完成全部5个实现文件 | AI Code Review |
 
 ---
 
