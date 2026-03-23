@@ -1,46 +1,69 @@
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 ﻿# C到硬件的Pragma指令详解
 
 ## 目录
 
-- [C到硬件的Pragma指令详解](#c到硬件的pragma指令详解)
-  - [目录](#目录)
-  - [1. Pragma概述](#1-pragma概述)
-    - [1.1 Pragma的作用](#11-pragma的作用)
-    - [1.2 Pragma分类速查](#12-pragma分类速查)
-  - [2. INTERFACE Pragma详解](#2-interface-pragma详解)
-    - [2.1 基本语法](#21-基本语法)
-    - [2.2 标量接口模式](#22-标量接口模式)
-    - [2.3 存储器接口模式](#23-存储器接口模式)
-    - [2.4 AXI总线接口模式](#24-axi总线接口模式)
-    - [2.5 控制接口模式](#25-控制接口模式)
-  - [3. PIPELINE Pragma详解](#3-pipeline-pragma详解)
-    - [3.1 基本语法与选项](#31-基本语法与选项)
-    - [3.2 II（启动间隔）详解](#32-ii启动间隔详解)
-    - [3.3 PIPELINE OFF - 禁用流水线](#33-pipeline-off---禁用流水线)
-    - [3.4 REWIND选项 - 循环间流水线](#34-rewind选项---循环间流水线)
-    - [3.5 流水线风格](#35-流水线风格)
-  - [4. UNROLL Pragma详解](#4-unroll-pragma详解)
-    - [4.1 基本语法与选项](#41-基本语法与选项)
-    - [4.2 完全展开](#42-完全展开)
-    - [4.3 部分展开](#43-部分展开)
-    - [4.4 区域展开](#44-区域展开)
-    - [4.5 UNROLL与其他指令组合](#45-unroll与其他指令组合)
-  - [5. ARRAY\_PARTITION Pragma详解](#5-array_partition-pragma详解)
-    - [5.1 基本语法与选项](#51-基本语法与选项)
-    - [5.2 Complete分区](#52-complete分区)
-    - [5.3 Block分区](#53-block分区)
-    - [5.4 Cyclic分区](#54-cyclic分区)
-    - [5.5 分区策略选择](#55-分区策略选择)
-  - [6. DATAFLOW Pragma详解](#6-dataflow-pragma详解)
-    - [6.1 基本语法与选项](#61-基本语法与选项)
-    - [6.2 DATAFLOW基本原理](#62-dataflow基本原理)
-    - [6.3 STREAM指令配置](#63-stream指令配置)
-    - [6.4 DATAFLOW使用约束](#64-dataflow使用约束)
-    - [6.5 复杂DATAFLOW设计](#65-复杂dataflow设计)
-  - [7. 完整示例：综合运用](#7-完整示例综合运用)
-    - [7.1 图像卷积加速器（综合示例）](#71-图像卷积加速器综合示例)
-    - [7.2 优化效果对比](#72-优化效果对比)
-  - [总结](#总结)
+- [1. Pragma概述](#1-pragma概述)
+  - [1.1 Pragma的作用](#11-pragma的作用)
+  - [1.2 Pragma分类速查](#12-pragma分类速查)
+- [2. INTERFACE Pragma详解](#2-interface-pragma详解)
+  - [2.1 基本语法](#21-基本语法)
+  - [2.2 标量接口模式](#22-标量接口模式)
+  - [2.3 存储器接口模式](#23-存储器接口模式)
+  - [2.4 AXI总线接口模式](#24-axi总线接口模式)
+  - [2.5 控制接口模式](#25-控制接口模式)
+- [3. PIPELINE Pragma详解](#3-pipeline-pragma详解)
+  - [3.1 基本语法与选项](#31-基本语法与选项)
+  - [3.2 II（启动间隔）详解](#32-ii启动间隔详解)
+  - [3.3 PIPELINE OFF - 禁用流水线](#33-pipeline-off---禁用流水线)
+  - [3.4 REWIND选项 - 循环间流水线](#34-rewind选项---循环间流水线)
+  - [3.5 流水线风格](#35-流水线风格)
+- [4. UNROLL Pragma详解](#4-unroll-pragma详解)
+  - [4.1 基本语法与选项](#41-基本语法与选项)
+  - [4.2 完全展开](#42-完全展开)
+  - [4.3 部分展开](#43-部分展开)
+  - [4.4 区域展开](#44-区域展开)
+  - [4.5 UNROLL与其他指令组合](#45-unroll与其他指令组合)
+- [5. ARRAY\_PARTITION Pragma详解](#5-array_partition-pragma详解)
+  - [5.1 基本语法与选项](#51-基本语法与选项)
+  - [5.2 Complete分区](#52-complete分区)
+  - [5.3 Block分区](#53-block分区)
+  - [5.4 Cyclic分区](#54-cyclic分区)
+  - [5.5 分区策略选择](#55-分区策略选择)
+- [6. DATAFLOW Pragma详解](#6-dataflow-pragma详解)
+  - [6.1 基本语法与选项](#61-基本语法与选项)
+  - [6.2 DATAFLOW基本原理](#62-dataflow基本原理)
+  - [6.3 STREAM指令配置](#63-stream指令配置)
+  - [6.4 DATAFLOW使用约束](#64-dataflow使用约束)
+  - [6.5 复杂DATAFLOW设计](#65-复杂dataflow设计)
+- [7. 完整示例：综合运用](#7-完整示例综合运用)
+  - [7.1 图像卷积加速器（综合示例）](#71-图像卷积加速器综合示例)
+  - [7.2 优化效果对比](#72-优化效果对比)
+- [总结](#总结)
+- [深入理解](#深入理解)
+  - [核心原理](#核心原理)
+  - [实践应用](#实践应用)
+  - [最佳实践](#最佳实践)
 
 ---
 
@@ -1573,5 +1596,5 @@ void pixel_to_axis(
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

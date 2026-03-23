@@ -1,3 +1,24 @@
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 ﻿# C23标准库扩展完全参考
 
 > **层级定位**: 01 Core Knowledge System / 04 Standard Library Layer
@@ -9,55 +30,58 @@
 
 ## 目录
 
-- [C23标准库扩展完全参考](#c23标准库扩展完全参考)
-  - [目录](#目录)
-  - [📋 本节概要](#-本节概要)
-  - [🧠 知识结构思维导图](#-知识结构思维导图)
-  - [📖 核心概念详解](#-核心概念详解)
-  - [1. \<stdbit.h\> - 位操作标准化](#1-stdbith---位操作标准化)
-    - [1.1 设计目标与特性](#11-设计目标与特性)
-    - [1.2 字节序常量](#12-字节序常量)
-    - [1.3 字节序转换函数](#13-字节序转换函数)
-    - [1.4 前导零计数函数 (Count Leading Zeros)](#14-前导零计数函数-count-leading-zeros)
-    - [1.5 前导一计数函数 (Count Leading Ones)](#15-前导一计数函数-count-leading-ones)
-    - [1.6 尾随零计数函数 (Count Trailing Zeros)](#16-尾随零计数函数-count-trailing-zeros)
-    - [1.7 尾随一计数函数 (Count Trailing Ones)](#17-尾随一计数函数-count-trailing-ones)
-    - [1.8 1的位数统计 (Population Count)](#18-1的位数统计-population-count)
-    - [1.9 单一位检测函数](#19-单一位检测函数)
-    - [1.10 位宽度计算函数](#110-位宽度计算函数)
-    - [1.11 位向上/向下取整函数](#111-位向上向下取整函数)
-    - [1.12 \<stdbit.h\> 完整综合示例](#112-stdbith-完整综合示例)
-  - [2. \<stdckdint.h\> - 安全整数运算](#2-stdckdinth---安全整数运算)
-    - [2.1 设计目标](#21-设计目标)
-    - [2.2 函数签名与语义](#22-函数签名与语义)
-    - [2.3 加法溢出检测](#23-加法溢出检测)
-    - [2.4 减法溢出检测](#24-减法溢出检测)
-    - [2.5 乘法溢出检测](#25-乘法溢出检测)
-    - [2.6 复合安全运算模式](#26-复合安全运算模式)
-    - [2.7 与此前方法的对比](#27-与此前方法的对比)
-  - [3. \<string.h\> 增强](#3-stringh-增强)
-    - [3.1 memset\_explicit - 安全内存清除](#31-memset_explicit---安全内存清除)
-    - [3.2 strdup 和 strndup - 动态字符串复制](#32-strdup-和-strndup---动态字符串复制)
-    - [3.3 strlcpy 和 strlcat - 安全字符串操作](#33-strlcpy-和-strlcat---安全字符串操作)
-  - [4. \<time.h\> 增强](#4-timeh-增强)
-    - [4.1 timespec\_getres - 时钟分辨率查询](#41-timespec_getres---时钟分辨率查询)
-    - [4.2 timespec\_get 更新](#42-timespec_get-更新)
-  - [5. \<stdalign.h\> 更新](#5-stdalignh-更新)
-  - [6. \<stdnoreturn.h\> 更新](#6-stdnoreturnh-更新)
-  - [🔄 多维矩阵对比](#-多维矩阵对比)
-    - [C23新增标准库特性对比](#c23新增标准库特性对比)
-    - [字符串函数安全性对比](#字符串函数安全性对比)
-    - [整数溢出检测方法对比](#整数溢出检测方法对比)
-  - [⚠️ 常见陷阱](#️-常见陷阱)
-    - [陷阱 C23-LIB-01: ckd\_add返回值语义混淆](#陷阱-c23-lib-01-ckd_add返回值语义混淆)
-    - [陷阱 C23-LIB-02: strlcpy返回值误解](#陷阱-c23-lib-02-strlcpy返回值误解)
-    - [陷阱 C23-LIB-03: strdup内存泄漏](#陷阱-c23-lib-03-strdup内存泄漏)
-    - [陷阱 C23-LIB-04: memset\_explicit 滥用](#陷阱-c23-lib-04-memset_explicit-滥用)
-    - [陷阱 C23-LIB-05: stdbit函数类型不匹配](#陷阱-c23-lib-05-stdbit函数类型不匹配)
-  - [🛠️ 实现注意事项](#️-实现注意事项)
-    - [编译器支持状态](#编译器支持状态)
-    - [回退实现策略](#回退实现策略)
-  - [✅ 质量验收清单](#-质量验收清单)
+- [目录](#目录)
+- [📋 本节概要](#-本节概要)
+- [🧠 知识结构思维导图](#-知识结构思维导图)
+- [📖 核心概念详解](#-核心概念详解)
+- [1. \<stdbit.h\> - 位操作标准化](#1-stdbith---位操作标准化)
+  - [1.1 设计目标与特性](#11-设计目标与特性)
+  - [1.2 字节序常量](#12-字节序常量)
+  - [1.3 字节序转换函数](#13-字节序转换函数)
+  - [1.4 前导零计数函数 (Count Leading Zeros)](#14-前导零计数函数-count-leading-zeros)
+  - [1.5 前导一计数函数 (Count Leading Ones)](#15-前导一计数函数-count-leading-ones)
+  - [1.6 尾随零计数函数 (Count Trailing Zeros)](#16-尾随零计数函数-count-trailing-zeros)
+  - [1.7 尾随一计数函数 (Count Trailing Ones)](#17-尾随一计数函数-count-trailing-ones)
+  - [1.8 1的位数统计 (Population Count)](#18-1的位数统计-population-count)
+  - [1.9 单一位检测函数](#19-单一位检测函数)
+  - [1.10 位宽度计算函数](#110-位宽度计算函数)
+  - [1.11 位向上/向下取整函数](#111-位向上向下取整函数)
+  - [1.12 \<stdbit.h\> 完整综合示例](#112-stdbith-完整综合示例)
+- [2. \<stdckdint.h\> - 安全整数运算](#2-stdckdinth---安全整数运算)
+  - [2.1 设计目标](#21-设计目标)
+  - [2.2 函数签名与语义](#22-函数签名与语义)
+  - [2.3 加法溢出检测](#23-加法溢出检测)
+  - [2.4 减法溢出检测](#24-减法溢出检测)
+  - [2.5 乘法溢出检测](#25-乘法溢出检测)
+  - [2.6 复合安全运算模式](#26-复合安全运算模式)
+  - [2.7 与此前方法的对比](#27-与此前方法的对比)
+- [3. \<string.h\> 增强](#3-stringh-增强)
+  - [3.1 memset\_explicit - 安全内存清除](#31-memset_explicit---安全内存清除)
+  - [3.2 strdup 和 strndup - 动态字符串复制](#32-strdup-和-strndup---动态字符串复制)
+  - [3.3 strlcpy 和 strlcat - 安全字符串操作](#33-strlcpy-和-strlcat---安全字符串操作)
+- [4. \<time.h\> 增强](#4-timeh-增强)
+  - [4.1 timespec\_getres - 时钟分辨率查询](#41-timespec_getres---时钟分辨率查询)
+  - [4.2 timespec\_get 更新](#42-timespec_get-更新)
+- [5. \<stdalign.h\> 更新](#5-stdalignh-更新)
+- [6. \<stdnoreturn.h\> 更新](#6-stdnoreturnh-更新)
+- [🔄 多维矩阵对比](#-多维矩阵对比)
+  - [C23新增标准库特性对比](#c23新增标准库特性对比)
+  - [字符串函数安全性对比](#字符串函数安全性对比)
+  - [整数溢出检测方法对比](#整数溢出检测方法对比)
+- [⚠️ 常见陷阱](#️-常见陷阱)
+  - [陷阱 C23-LIB-01: ckd\_add返回值语义混淆](#陷阱-c23-lib-01-ckd_add返回值语义混淆)
+  - [陷阱 C23-LIB-02: strlcpy返回值误解](#陷阱-c23-lib-02-strlcpy返回值误解)
+  - [陷阱 C23-LIB-03: strdup内存泄漏](#陷阱-c23-lib-03-strdup内存泄漏)
+  - [陷阱 C23-LIB-04: memset\_explicit 滥用](#陷阱-c23-lib-04-memset_explicit-滥用)
+  - [陷阱 C23-LIB-05: stdbit函数类型不匹配](#陷阱-c23-lib-05-stdbit函数类型不匹配)
+- [🛠️ 实现注意事项](#️-实现注意事项)
+  - [编译器支持状态](#编译器支持状态)
+  - [回退实现策略](#回退实现策略)
+- [✅ 质量验收清单](#-质量验收清单)
+- [深入理解](#深入理解)
+  - [技术原理](#技术原理)
+  - [实践指南](#实践指南)
+  - [相关资源](#相关资源)
 
 ## 📋 本节概要
 
@@ -2267,5 +2291,5 @@ void better_practice(void) {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

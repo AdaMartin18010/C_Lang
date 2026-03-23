@@ -1,3 +1,24 @@
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 ﻿# <stdckdint.h> 完全参考手册 (C23)
 
 > **标准**: ISO/IEC 9899:2024 | **头文件**: `<stdckdint.h>` | **难度**: ⭐⭐⭐⭐
@@ -6,18 +27,21 @@
 
 ## 目录
 
-- [\<stdckdint.h\> 完全参考手册 (C23)](#stdckdinth-完全参考手册-c23)
-  - [目录](#目录)
-  - [一、概述](#一概述)
-    - [1.1 安全整数运算需求](#11-安全整数运算需求)
-    - [1.2 与传统方法的对比](#12-与传统方法的对比)
-  - [二、核心 API](#二核心-api)
-    - [2.1 ckd\_add - 检查加法](#21-ckd_add---检查加法)
-    - [2.2 ckd\_sub - 检查减法](#22-ckd_sub---检查减法)
-    - [2.3 ckd\_mul - 检查乘法](#23-ckd_mul---检查乘法)
-  - [三、形式化语义](#三形式化语义)
-  - [四、与 Zig 对比](#四与-zig-对比)
-  - [五、实战案例](#五实战案例)
+- [目录](#目录)
+- [一、概述](#一概述)
+  - [1.1 安全整数运算需求](#11-安全整数运算需求)
+  - [1.2 与传统方法的对比](#12-与传统方法的对比)
+- [二、核心 API](#二核心-api)
+  - [2.1 ckd\_add - 检查加法](#21-ckd_add---检查加法)
+  - [2.2 ckd\_sub - 检查减法](#22-ckd_sub---检查减法)
+  - [2.3 ckd\_mul - 检查乘法](#23-ckd_mul---检查乘法)
+- [三、形式化语义](#三形式化语义)
+- [四、与 Zig 对比](#四与-zig-对比)
+- [五、实战案例](#五实战案例)
+- [深入理解](#深入理解)
+  - [技术原理](#技术原理)
+  - [实践指南](#实践指南)
+  - [相关资源](#相关资源)
 
 ---
 
@@ -346,5 +370,5 @@ uint32_t safe_sequence_add(uint32_t seq, uint32_t offset) {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

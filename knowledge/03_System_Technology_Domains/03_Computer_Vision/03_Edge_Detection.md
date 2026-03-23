@@ -1,3 +1,24 @@
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 ﻿# Canny边缘检测算法C语言实现
 
 
@@ -5,31 +26,30 @@
 
 ## 📑 目录
 
-- [Canny边缘检测算法C语言实现](#canny边缘检测算法c语言实现)
-  - [📑 目录](#-目录)
-  - [1. 边缘检测理论基础](#1-边缘检测理论基础)
-    - [1.1 边缘检测概述](#11-边缘检测概述)
-    - [1.2 边缘检测算子对比](#12-边缘检测算子对比)
-    - [1.3 Canny算法优势](#13-canny算法优势)
-  - [2. Canny算法四步骤详解](#2-canny算法四步骤详解)
-    - [2.1 高斯滤波(Gaussian Smoothing)](#21-高斯滤波gaussian-smoothing)
-    - [2.2 梯度计算(Gradient Computation)](#22-梯度计算gradient-computation)
-    - [2.3 非极大值抑制(Non-Maximum Suppression)](#23-非极大值抑制non-maximum-suppression)
-    - [2.4 双阈值检测(Double Threshold)](#24-双阈值检测double-threshold)
-  - [3. 完整C语言实现](#3-完整c语言实现)
-    - [3.1 数据结构定义](#31-数据结构定义)
-    - [3.2 PPM图像I/O实现](#32-ppm图像io实现)
-    - [3.3 Canny算法核心实现](#33-canny算法核心实现)
-    - [3.4 主程序和示例](#34-主程序和示例)
-  - [4. 优化技巧与实时处理](#4-优化技巧与实时处理)
-    - [4.1 性能优化策略](#41-性能优化策略)
-    - [4.2 实时处理优化要点](#42-实时处理优化要点)
-    - [4.3 固定点优化版本](#43-固定点优化版本)
-  - [5. 总结](#5-总结)
-  - [深入理解](#深入理解)
-    - [核心原理](#核心原理)
-    - [实践应用](#实践应用)
-    - [最佳实践](#最佳实践)
+- [📑 目录](#-目录)
+- [1. 边缘检测理论基础](#1-边缘检测理论基础)
+  - [1.1 边缘检测概述](#11-边缘检测概述)
+  - [1.2 边缘检测算子对比](#12-边缘检测算子对比)
+  - [1.3 Canny算法优势](#13-canny算法优势)
+- [2. Canny算法四步骤详解](#2-canny算法四步骤详解)
+  - [2.1 高斯滤波(Gaussian Smoothing)](#21-高斯滤波gaussian-smoothing)
+  - [2.2 梯度计算(Gradient Computation)](#22-梯度计算gradient-computation)
+  - [2.3 非极大值抑制(Non-Maximum Suppression)](#23-非极大值抑制non-maximum-suppression)
+  - [2.4 双阈值检测(Double Threshold)](#24-双阈值检测double-threshold)
+- [3. 完整C语言实现](#3-完整c语言实现)
+  - [3.1 数据结构定义](#31-数据结构定义)
+  - [3.2 PPM图像I/O实现](#32-ppm图像io实现)
+  - [3.3 Canny算法核心实现](#33-canny算法核心实现)
+  - [3.4 主程序和示例](#34-主程序和示例)
+- [4. 优化技巧与实时处理](#4-优化技巧与实时处理)
+  - [4.1 性能优化策略](#41-性能优化策略)
+  - [4.2 实时处理优化要点](#42-实时处理优化要点)
+  - [4.3 固定点优化版本](#43-固定点优化版本)
+- [5. 总结](#5-总结)
+- [深入理解](#深入理解)
+  - [核心原理](#核心原理)
+  - [实践应用](#实践应用)
+  - [最佳实践](#最佳实践)
 
 
 ---

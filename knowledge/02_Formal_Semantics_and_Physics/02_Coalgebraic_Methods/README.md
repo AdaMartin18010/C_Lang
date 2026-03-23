@@ -1,3 +1,24 @@
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 ﻿# 余代数方法 (Coalgebraic Methods)
 
 > **定位**: 形式语义与物理层 | **主题**: 系统行为的数学基础 | **难度**: ⭐⭐⭐⭐⭐
@@ -6,30 +27,33 @@
 
 ## 目录
 
-- [余代数方法 (Coalgebraic Methods)](#余代数方法-coalgebraic-methods)
-  - [目录](#目录)
-  - [余代数概述](#余代数概述)
-    - [余代数定义](#余代数定义)
-  - [终余代数与系统行为](#终余代数与系统行为)
-    - [终余代数存在性](#终余代数存在性)
-    - [常见系统作为余代数](#常见系统作为余代数)
-    - [流 (Stream) 的终余代数](#流-stream-的终余代数)
-  - [互模拟 (Bisimulation)](#互模拟-bisimulation)
-    - [定义](#定义)
-    - [最大互模拟](#最大互模拟)
-    - [互模拟证明示例](#互模拟证明示例)
-  - [在程序语义中的应用](#在程序语义中的应用)
-    - [操作语义作为余代数](#操作语义作为余代数)
-    - [进程代数 (Process Algebra)](#进程代数-process-algebra)
-    - [程序等价性](#程序等价性)
-  - [Coinduction 原理](#coinduction-原理)
-    - [归纳 vs 共归纳](#归纳-vs-共归纳)
-    - [Coinduction 证明模式](#coinduction-证明模式)
-    - [应用：证明流相等](#应用证明流相等)
-  - [在 C 语言中的应用](#在-c-语言中的应用)
-    - [状态机作为余代数](#状态机作为余代数)
-    - [惰性求值与流处理](#惰性求值与流处理)
-  - [参考资料](#参考资料)
+- [目录](#目录)
+- [余代数概述](#余代数概述)
+  - [余代数定义](#余代数定义)
+- [终余代数与系统行为](#终余代数与系统行为)
+  - [终余代数存在性](#终余代数存在性)
+  - [常见系统作为余代数](#常见系统作为余代数)
+  - [流 (Stream) 的终余代数](#流-stream-的终余代数)
+- [互模拟 (Bisimulation)](#互模拟-bisimulation)
+  - [定义](#定义)
+  - [最大互模拟](#最大互模拟)
+  - [互模拟证明示例](#互模拟证明示例)
+- [在程序语义中的应用](#在程序语义中的应用)
+  - [操作语义作为余代数](#操作语义作为余代数)
+  - [进程代数 (Process Algebra)](#进程代数-process-algebra)
+  - [程序等价性](#程序等价性)
+- [Coinduction 原理](#coinduction-原理)
+  - [归纳 vs 共归纳](#归纳-vs-共归纳)
+  - [Coinduction 证明模式](#coinduction-证明模式)
+  - [应用：证明流相等](#应用证明流相等)
+- [在 C 语言中的应用](#在-c-语言中的应用)
+  - [状态机作为余代数](#状态机作为余代数)
+  - [惰性求值与流处理](#惰性求值与流处理)
+- [参考资料](#参考资料)
+- [深入理解](#深入理解)
+  - [核心原理](#核心原理)
+  - [实践应用](#实践应用)
+  - [最佳实践](#最佳实践)
 
 ---
 
@@ -392,5 +416,5 @@ IntStream* filter(IntStream* s, bool (*pred)(int)) {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

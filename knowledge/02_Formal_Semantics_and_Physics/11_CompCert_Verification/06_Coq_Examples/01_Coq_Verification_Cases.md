@@ -38,6 +38,23 @@
   - [8. 循环不变量](#8-循环不变量)
     - [8.1 循环不变量的形式化方法](#81-循环不变量的形式化方法)
     - [8.2 对应的C代码](#82-对应的c代码)
+  - [9. 分离逻辑基础](#9-分离逻辑基础)
+    - [9.1 分离逻辑的形式化](#91-分离逻辑的形式化)
+    - [9.2 分离逻辑验证示例](#92-分离逻辑验证示例)
+  - [10. 实际项目：二叉搜索树完整验证](#10-实际项目二叉搜索树完整验证)
+    - [10.1 二叉搜索树的数学定义](#101-二叉搜索树的数学定义)
+    - [10.2 完整测试和优化](#102-完整测试和优化)
+  - [11. 从C到Coq的映射](#11-从c到coq的映射)
+    - [11.1 C语言构造的Coq建模](#111-c语言构造的coq建模)
+    - [11.2 实践建议和工作流程](#112-实践建议和工作流程)
+    - [6. 工具推荐](#6-工具推荐)
+    - [7. 常见问题与解决方案](#7-常见问题与解决方案)
+  - [总结](#总结)
+  - [参考文献](#参考文献)
+  - [深入理解](#深入理解)
+    - [核心原理](#核心原理)
+    - [实践应用](#实践应用)
+    - [最佳实践](#最佳实践)
 
 ---
 
@@ -64,6 +81,27 @@ Coq在程序验证领域的应用主要通过以下方式：
 
 ```bash
 # 添加PPA仓库
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 sudo add-apt-repository ppa:coq/stable
 sudo apt-get update
 
@@ -3336,7 +3374,7 @@ Definition dom (h : heap) : list addr :=
 
 (* 堆不相交 *)
 Definition heap_disjoint (h1 h2 : heap) : Prop :=
-  forall a, 
+  forall a,
     (exists v, h1 a = Some v) -> h2 a = None.
 
 (* 堆联合 *)
@@ -3519,11 +3557,11 @@ Definition write_spec (a : addr) (v : value) : heap -> Prop :=
 (* ============================================================ *)
 
 (* 单链表节点：值+下一个指针 *)
-Fixpoint list_seg (a : addr) (l : list value) (end_addr : addr) 
+Fixpoint list_seg (a : addr) (l : list value) (end_addr : addr)
   : heap -> Prop :=
   match l with
   | [] => fun h => a = end_addr /\ emp h
-  | v :: vs => fun h => 
+  | v :: vs => fun h =>
       EX a',
         [[a <> end_addr]] *
         (a |-> v) *
@@ -3576,7 +3614,7 @@ typedef struct Node {
     struct Node* next;
 } Node;
 
-/* 
+/*
  * 规范: {list(p, xs)}
  *       list_length(p)
  *       {ret = len(xs) /\\ list(p, xs)}
@@ -3625,11 +3663,11 @@ Node* list_append(Node* p, int value) {
     Node* new_node = (Node*)malloc(sizeof(Node));
     new_node->value = value;
     new_node->next = NULL;
-    
+
     if (p == NULL) {
         return new_node;
     }
-    
+
     Node* current = p;
     while (current->next != NULL) {
         current = current->next;
@@ -3703,7 +3741,7 @@ void allocator_init(size_t size) {
  */
 void* allocator_alloc(size_t n) {
     Block** current = &free_list;
-    
+
     while (*current != NULL) {
         if ((*current)->size >= n) {
             Block* block = *current;
@@ -3743,22 +3781,22 @@ void allocator_free(void* ptr, size_t n) {
 
 void test_list_operations() {
     Node* list = NULL;
-    
+
     /* 测试prepend */
     list = list_prepend(list, 3);
     list = list_prepend(list, 2);
     list = list_prepend(list, 1);
-    
+
     assert(list_length_iter(list) == 3);
-    
+
     /* 测试pop */
     assert(list_pop(&list) == 1);
     assert(list_pop(&list) == 2);
-    
+
     /* 测试append */
     list = list_append(list, 4);
     assert(list_length_iter(list) == 2);
-    
+
     free_list(list);
     printf("List operations tests passed!\n");
 }
@@ -3789,8 +3827,8 @@ Inductive tree : Type :=
 
 (* 示例树 *)
 Example tree_example : tree :=
-  Node 5 
-    (Node 3 
+  Node 5
+    (Node 3
       (Node 1 Empty Empty)
       (Node 4 Empty Empty))
     (Node 8
@@ -4128,7 +4166,7 @@ BSTNode* bst_create_node(int key) {
 }
 
 /* 查找 */
-/* 
+/*
  * 规范: {BST(t)}
  *       bst_search(t, key)
  *       {ret = true <-> key \\in tree_keys(t)}
@@ -4156,14 +4194,14 @@ BSTNode* bst_insert(BSTNode* root, int key) {
     if (root == NULL) {
         return bst_create_node(key);
     }
-    
+
     if (key < root->key) {
         root->left = bst_insert(root->left, key);
     } else if (key > root->key) {
         root->right = bst_insert(root->right, key);
     }
     /* 如果key已存在，不重复插入 */
-    
+
     return root;
 }
 
@@ -4203,7 +4241,7 @@ BSTNode* bst_find_max(BSTNode* root) {
  */
 BSTNode* bst_delete(BSTNode* root, int key) {
     if (root == NULL) return NULL;
-    
+
     if (key < root->key) {
         root->left = bst_delete(root->left, key);
     } else if (key > root->key) {
@@ -4264,10 +4302,10 @@ void bst_free(BSTNode* root) {
  */
 int bst_height(BSTNode* root) {
     if (root == NULL) return -1;
-    
+
     int left_height = bst_height(root->left);
     int right_height = bst_height(root->right);
-    
+
     return 1 + (left_height > right_height ? left_height : right_height);
 }
 
@@ -4285,11 +4323,11 @@ int bst_size(BSTNode* root) {
  */
 bool is_valid_bst_helper(BSTNode* root, int min_val, int max_val) {
     if (root == NULL) return true;
-    
+
     if (root->key <= min_val || root->key >= max_val) {
         return false;
     }
-    
+
     return is_valid_bst_helper(root->left, min_val, root->key) &&
            is_valid_bst_helper(root->right, root->key, max_val);
 }
@@ -4304,7 +4342,7 @@ bool is_valid_bst(BSTNode* root) {
 
 void test_bst_operations() {
     BSTNode* root = NULL;
-    
+
     /* 测试插入 */
     root = bst_insert(root, 50);
     root = bst_insert(root, 30);
@@ -4313,37 +4351,37 @@ void test_bst_operations() {
     root = bst_insert(root, 40);
     root = bst_insert(root, 60);
     root = bst_insert(root, 80);
-    
+
     assert(is_valid_bst(root));
     assert(bst_size(root) == 7);
-    
+
     /* 测试查找 */
     assert(bst_search(root, 40) == true);
     assert(bst_search(root, 100) == false);
-    
+
     /* 测试最值 */
     assert(bst_find_min(root)->key == 20);
     assert(bst_find_max(root)->key == 80);
-    
+
     /* 测试删除（叶子节点） */
     root = bst_delete(root, 20);
     assert(is_valid_bst(root));
     assert(bst_search(root, 20) == false);
-    
+
     /* 测试删除（有一个子节点） */
     root = bst_delete(root, 30);
     assert(is_valid_bst(root));
     assert(bst_search(root, 30) == false);
-    
+
     /* 测试删除（有两个子节点） */
     root = bst_delete(root, 50);
     assert(is_valid_bst(root));
     assert(bst_search(root, 50) == false);
-    
+
     printf("Inorder traversal: ");
     bst_inorder(root);
     printf("\n");
-    
+
     bst_free(root);
     printf("BST tests passed!\n");
 }
@@ -4353,7 +4391,7 @@ void test_bst_stress() {
     BSTNode* root = NULL;
     int keys[1000];
     int n = 0;
-    
+
     /* 随机插入 */
     for (int i = 0; i < 1000; i++) {
         int key = rand() % 10000;
@@ -4363,7 +4401,7 @@ void test_bst_stress() {
             assert(is_valid_bst(root));
         }
     }
-    
+
     /* 随机删除 */
     for (int i = 0; i < n / 2; i++) {
         int idx = rand() % n;
@@ -4373,7 +4411,7 @@ void test_bst_stress() {
             assert(is_valid_bst(root));
         }
     }
-    
+
     bst_free(root);
     printf("BST stress test passed!\n");
 }
@@ -4399,31 +4437,31 @@ Import ListNotations.
 
 (* 基本类型映射 *)
 Module TypeMapping.
-  
+
   (* C int -> Coq Z *)
   Definition c_int := Z.
-  
+
   (* C unsigned -> Coq N *)
   Definition c_unsigned := N.
-  
+
   (* C char -> Coq ascii *)
   Definition c_char := Ascii.ascii.
-  
+
   (* C bool -> Coq bool *)
   Definition c_bool := bool.
-  
+
   (* C void* -> Coq的选项类型 *)
   Definition c_void_ptr (A : Type) := option A.
-  
+
   (* C数组 -> Coq列表 *)
   Definition c_array (A : Type) := list A.
-  
+
   (* C结构体 -> Coq记录 *)
   Record c_point := mkPoint {
     x : c_int;
     y : c_int
   }.
-  
+
   (* C联合体 -> Coq变体 *)
   Inductive c_value :=
     | VInt : c_int -> c_value
@@ -4437,51 +4475,51 @@ End TypeMapping.
 (* ============================================================ *)
 
 Module MemoryModel.
-  
+
   (* 内存地址 *)
   Definition addr := Z.
-  
+
   (* 内存块：起始地址和大小 *)
   Record mem_block := mkMemBlock {
     start : addr;
     size : Z;
     contents : Z -> option Z  (* 地址偏移 -> 值 *)
   }.
-  
+
   (* 完整内存状态 *)
   Definition memory := addr -> option mem_block.
-  
+
   (* 空内存 *)
   Definition empty_memory : memory := fun _ => None.
-  
+
   (* 分配内存 *)
-  Definition malloc (mem : memory) (size : Z) 
+  Definition malloc (mem : memory) (size : Z)
     : option (addr * memory) :=
     (* 简化模型：假设总能分配到新地址 *)
     let new_addr := 1000 in  (* 简化的地址分配 *)
-    let block := mkMemBlock new_addr size 
+    let block := mkMemBlock new_addr size
       (fun off => if (0 <=? off) && (off <? size) then Some 0 else None) in
-    Some (new_addr, 
+    Some (new_addr,
           fun a => if a =? new_addr then Some block else mem a).
-  
+
   (* 释放内存 *)
   Definition free (mem : memory) (ptr : addr) : memory :=
     fun a => if a =? ptr then None else mem a.
-  
+
   (* 读取内存 *)
   Definition load (mem : memory) (ptr : addr) : option Z :=
     match mem ptr with
     | None => None
     | Some block => contents block 0
     end.
-  
+
   (* 写入内存 *)
-  Definition store (mem : memory) (ptr : addr) (val : Z) 
+  Definition store (mem : memory) (ptr : addr) (val : Z)
     : option memory :=
     match mem ptr with
     | None => None
     | Some block =>
-        let new_block := mkMemBlock 
+        let new_block := mkMemBlock
           (start block) (size block)
           (fun off => if off =? 0 then Some val else contents block off) in
         Some (fun a => if a =? ptr then Some new_block else mem a)
@@ -4494,13 +4532,13 @@ End MemoryModel.
 (* ============================================================ *)
 
 Module ControlFlow.
-  
+
   (* C if-else -> Coq if表达式 *)
   Definition c_if_else {A : Type} (cond : bool) (then_val else_val : A) : A :=
     if cond then then_val else else_val.
-  
+
   (* C while循环 -> Coq递归函数 *)
-  Fixpoint c_while {A : Type} (cond : A -> bool) (body : A -> A) 
+  Fixpoint c_while {A : Type} (cond : A -> bool) (body : A -> A)
     (fuel : nat) (state : A) : A :=
     match fuel with
     | 0 => state  (* 燃料耗尽 *)
@@ -4510,14 +4548,14 @@ Module ControlFlow.
         else
           state
     end.
-  
+
   (* C for循环 -> Coq折叠 *)
   Definition c_for {A : Type} (init : A) (cond : A -> bool)
     (incr : A -> A) (body : A -> A) (fuel : nat) : A :=
     c_while cond (fun s => incr (body s)) fuel init.
-  
+
   (* C switch -> Coq匹配 *)
-  Definition c_switch {A B : Type} (expr : A) 
+  Definition c_switch {A B : Type} (expr : A)
     (cases : list (A * B)) (default : B) : B :=
     match find (fun p => fst p =? expr) cases with
     | Some (_, result) => result
@@ -4532,21 +4570,21 @@ End ControlFlow.
 
 Module ExpressionTranslation.
   Import TypeMapping.
-  
+
   (* 算术表达式 *)
   Definition c_add (a b : c_int) : c_int := a + b.
   Definition c_sub (a b : c_int) : c_int := a - b.
   Definition c_mul (a b : c_int) : c_int := a * b.
   Definition c_div (a b : c_int) : option c_int :=
     if b =? 0 then None else Some (a / b).
-  
+
   (* 位运算 *)
   Definition c_and (a b : Z) : Z := Z.land a b.
   Definition c_or (a b : Z) : Z := Z.lor a b.
   Definition c_xor (a b : Z) : Z := Z.lxor a b.
   Definition c_shl (a b : Z) : Z := Z.shiftl a b.
   Definition c_shr (a b : Z) : Z := Z.shiftr a b.
-  
+
   (* 比较运算 *)
   Definition c_eq (a b : c_int) : bool := a =? b.
   Definition c_ne (a b : c_int) : bool := negb (a =? b).
@@ -4554,12 +4592,12 @@ Module ExpressionTranslation.
   Definition c_le (a b : c_int) : bool := a <=? b.
   Definition c_gt (a b : c_int) : bool := b <? a.
   Definition c_ge (a b : c_int) : bool := b <=? a.
-  
+
   (* 逻辑运算 *)
   Definition c_lnot (a : bool) : bool := negb a.
   Definition c_land (a b : bool) : bool := a && b.
   Definition c_lor (a b : bool) : bool := a || b.
-  
+
   (* 三元运算符 *)
   Definition c_ternary {A : Type} (cond : bool) (t e : A) : A :=
     if cond then t else e.
@@ -4570,7 +4608,7 @@ End ExpressionTranslation.
 (* 5. 完整示例：将C函数翻译为Coq *)
 (* ============================================================ *)
 
-(* 
+(*
 C代码：
 int factorial(int n) {
     int result = 1;
@@ -4587,42 +4625,42 @@ Module TranslationExample.
   Import TypeMapping.
   Import ControlFlow.
   Import ExpressionTranslation.
-  
+
   (* 状态记录 *)
   Record factorial_state := mkFactorialState {
     n_val : c_int;
     result : c_int;
     i_val : c_int
   }.
-  
+
   (* 初始化 *)
   Definition factorial_init (n : c_int) : factorial_state :=
     mkFactorialState n 1 1.
-  
+
   (* 循环条件 *)
   Definition factorial_cond (s : factorial_state) : bool :=
     c_le (i_val s) (n_val s).
-  
+
   (* 循环体 *)
   Definition factorial_body (s : factorial_state) : factorial_state :=
-    mkFactorialState 
+    mkFactorialState
       (n_val s)
       (c_mul (result s) (i_val s))
       (c_add (i_val s) 1).
-  
+
   (* 完整函数 *)
   Definition factorial (n : c_int) (fuel : nat) : c_int :=
-    let final_state := c_while factorial_cond factorial_body fuel 
+    let final_state := c_while factorial_cond factorial_body fuel
                                (factorial_init n) in
     result final_state.
-  
+
   (* 验证与数学阶乘等价 *)
   Fixpoint factorial_math (n : nat) : nat :=
     match n with
     | 0 => 1
     | S m => (S m) * factorial_math m
     end.
-  
+
   (* 正确性定理 *)
   Theorem factorial_correct : forall (n : nat) fuel,
     fuel >= n ->
@@ -4641,7 +4679,7 @@ End TranslationExample.
 
 (* CompCert使用的Clight是C的简化子集 *)
 Module ClightSubset.
-  
+
   (* Clight类型 *)
   Inductive ctype :=
     | Tint : ctype                    (* 整数 *)
@@ -4649,9 +4687,9 @@ Module ClightSubset.
     | Tarray : ctype -> Z -> ctype    (* 数组 *)
     | Tfunction : list ctype -> ctype -> ctype  (* 函数 *)
     | Tstruct : ident -> list (ident * ctype) -> ctype.  (* 结构体 *)
-  
+
   with ident := Ident : nat -> ident.
-  
+
   (* Clight表达式 *)
   Inductive cexpr :=
     | Econst_int : Z -> cexpr
@@ -4661,15 +4699,15 @@ Module ClightSubset.
     | Eaddrof : cexpr -> cexpr
     | Ebinop : binop -> cexpr -> cexpr -> cexpr
     | Eunop : unop -> cexpr -> cexpr
-  
+
   with binop :=
     | Oadd | Osub | Omul | Odiv | Omod
     | Oeq | One | Olt | Ole | Ogt | Oge
     | Oand | Oor | Oxor | Oshl | Oshr.
-  
+
   with unop :=
     | Oneg | Onotbool | Onotint.
-  
+
   (* Clight语句 *)
   Inductive cstmt :=
     | Sskip : cstmt
@@ -4729,24 +4767,24 @@ Qed.
 
 (* 对于没有VST的环境，我们提供一个简化版的验证框架 *)
 Module SimpleVST.
-  
+
   (* 函数契约 *)
   Record funspec {A B : Type} := mkFunSpec {
     pre : A -> Prop;    (* 前置条件 *)
     post : A -> B -> Prop  (* 后置条件 *)
   }.
-  
+
   (* 函数正确性 *)
   Definition correct {A B : Type} (f : A -> B) (spec : funspec) : Prop :=
     forall a, pre spec a -> post spec a (f a).
-  
+
   (* 示例：验证加法函数 *)
   Definition add_spec : @funspec (Z * Z) Z := mkFunSpec
     (fun '(x, y) => True)  (* 总是成立 *)
     (fun '(x, y) r => r = x + y).
-  
+
   Definition add (p : Z * Z) : Z := fst p + snd p.
-  
+
   Theorem add_correct : correct add add_spec.
   Proof.
     unfold correct, add_spec, add.
@@ -4827,7 +4865,7 @@ End SimpleVST.
    Extraction "bst.ml" binary_search_tree.
    ```
 
-2. **对比测试**
+1. **对比测试**
    - 用随机输入测试C和Coq版本
    - 验证输出一致
 
@@ -4850,6 +4888,7 @@ End SimpleVST.
 | 内存模型复杂 | 使用分离逻辑简化 |
 | 循环不变量难找 | 从后向前推导 |
 | 自动战术失败 | 手动引导证明步骤 |
+
 ```
 
 ---
@@ -4914,5 +4953,5 @@ End SimpleVST.
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

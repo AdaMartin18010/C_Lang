@@ -1,11 +1,49 @@
 ﻿# 版本跟踪与知识库导航
 
+> **层级定位**: 00_VERSION_TRACKING
+> **难度级别**: L1 入门
+> **预估学习时间**: 2-3 小时
+
+---
+
+## 🔗 文档关联
+
+### 版本演进路径
+
+| 文档 | 标准 | 关键特性 |
+|:-----|:-----|:---------|
+| [C89](../01_Core_Knowledge_System/04_Standard_Library_Layer/01_C89_Library.md) | C89 | 基础语言 |
+| [C99](../01_Core_Knowledge_System/04_Standard_Library_Layer/02_C99_Library.md) | C99 | 变长数组、复数 |
+| [C11](../01_Core_Knowledge_System/04_Standard_Library_Layer/03_C11_Library.md) | C11 | 多线程、原子操作 |
+| [C17](../01_Core_Knowledge_System/04_Standard_Library_Layer/04_C17_C23_Library.md) | C17 | 缺陷修复 |
+| [C23](../01_Core_Knowledge_System/04_Standard_Library_Layer/C23_Standard_Library/README.md) | C23 | 现代特性 |
+| [C2y路线图](C23_to_C2y_Roadmap.md) | C2y | 未来演进 |
+
+### 核心知识关联
+
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [现代C编程](../01_Core_Knowledge_System/07_Modern_C/README.md) | 特性应用 | C23新特性详解 |
+| [MISRA C:2023](../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 安全标准 | 版本合规 |
+| [安全编码](../01_Core_Knowledge_System/09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全实践 | 版本安全考量 |
+
+### 全局索引
+
+| 文档 | 用途 | 说明 |
+|:-----|:-----|:-----|
+| [全局索引](../00_GLOBAL_INDEX.md) | 知识导航 | 完整知识图谱 |
+| [核心知识体系](../01_Core_Knowledge_System/README.md) | 学习入口 | 核心内容索引 |
+
 
 ---
 
 ## 📑 目录
 
 - [版本跟踪与知识库导航](#版本跟踪与知识库导航)
+  - [🔗 文档关联](#-文档关联)
+    - [版本演进路径](#版本演进路径)
+    - [核心知识关联](#核心知识关联)
+    - [全局索引](#全局索引)
   - [📑 目录](#-目录)
   - [概述](#概述)
   - [版本命名规范](#版本命名规范)

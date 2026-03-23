@@ -1,5 +1,32 @@
 ﻿# 视频教程 (Video Tutorials)
 
+> **层级定位**: 14_Video_Tutorials
+> **难度级别**: L1-L5 全阶段
+> **预估学习时间**: 60+ 小时
+
+---
+
+## 🔗 文档关联
+
+### 视频课程与知识对应
+| 视频 | 对应文档 | 主题 |
+|:-----|:---------|:-----|
+| [指针深度](01_Video_Scripts/02_Pointer_Deep_Dive.md) | [指针深度](../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 指针系统 |
+| [内存管理](01_Video_Scripts/03_Memory_Management.md) | [内存管理](../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 内存安全 |
+| [并发模式](01_Video_Scripts/04_Concurrency_Patterns.md) | [并发编程](../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 多线程 |
+| [安全标准](01_Video_Scripts/05_Safety_Standards.md) | [MISRA C](../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 安全编码 |
+| [现代C](01_Video_Scripts/06_Modern_C_C23.md) | [C23特性](../01_Core_Knowledge_System/07_Modern_C/README.md) | C23新特性 |
+| [嵌入式](01_Video_Scripts/08_Embedded_Systems.md) | [嵌入式IoT](../04_Industrial_Scenarios/14_Embedded_IoT/README.md) | 嵌入式开发 |
+| [性能优化](01_Video_Scripts/09_Performance_Optimization.md) | [性能优化](../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md) | 优化技术 |
+| [形式验证](01_Video_Scripts/10_Formal_Verification.md) | [CompCert](../02_Formal_Semantics_and_Physics/11_CompCert_Verification/README.md) | 形式化方法 |
+
+### 学习路径
+| 路径 | 视频 | 文档 |
+|:-----|:-----|:-----|
+| 入门 | 01-Introduction | [语法基础](../01_Core_Knowledge_System/01_Basic_Layer/01_Syntax_Elements.md) |
+| 进阶 | 02-04 | 核心层+并发 |
+| 高级 | 05-10 | 安全+现代C+形式验证 |
+
 本目录包含C语言学习相关的视频教程资源、课程大纲和制作指南。
 
 ## 📚 内容结构

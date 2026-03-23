@@ -1,3 +1,24 @@
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../../../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../../../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../../../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../../../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../../../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../../../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../../../../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../../../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../../../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../../../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 ﻿# MISRA C:2023 偏离记录
 
 ## 偏离申请模板
@@ -105,6 +126,7 @@ void example_function() {
     // 实现细节
 }
 ``n
+
 ### 实践应用
 
 - **应用场景1**: 详细描述
@@ -120,8 +142,8 @@ void example_function() {
 
 ---
 
-> **最后更新**: 2026-03-21  
-> **维护者**: AI Code Review  
+> **最后更新**: 2026-03-21
+> **维护者**: AI Code Review
 > **内容深度**: L3 (标准)
 
 
@@ -141,6 +163,7 @@ void concept_demo() {
     // 实现逻辑
 }
 ``n
+
 ### 实践应用
 
 - 应用案例1
@@ -155,7 +178,7 @@ void concept_demo() {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review
 
 
@@ -183,6 +206,7 @@ void implementation_example() {
     // 清理资源
 }
 ``n
+
 ### 实践应用
 
 - **应用场景1**: 工业控制系统
@@ -198,8 +222,8 @@ void implementation_example() {
 
 ---
 
-> **最后更新**: 2026-03-21  
-> **维护者**: AI Code Review  
+> **最后更新**: 2026-03-21
+> **维护者**: AI Code Review
 > **内容深度**: L3+ (标准+)
 
 
@@ -219,6 +243,7 @@ void example(void) {
     // 实现逻辑
 }
 ``n
+
 ### 应用指南
 
 - 指南1
@@ -227,7 +252,7 @@ void example(void) {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review
 
 
@@ -253,5 +278,5 @@ void example(void) {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

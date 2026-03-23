@@ -1,8 +1,29 @@
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 # ISO 26262 - 道路车辆功能安全
 
-> **层级定位**: 01_Core_Knowledge_System > 09_Safety_Standards > ISO_26262  
-> **难度级别**: ⭐⭐⭐⭐⭐ L5  
-> **前置知识**: 功能安全基础、C语言高级、嵌入式系统  
+> **层级定位**: 01_Core_Knowledge_System > 09_Safety_Standards > ISO_26262
+> **难度级别**: ⭐⭐⭐⭐⭐ L5
+> **前置知识**: 功能安全基础、C语言高级、嵌入式系统
 > **参考标准**: ISO 26262:2018 (第二版)
 
 ---
@@ -71,14 +92,14 @@ int process_steering_angle(SteeringAngle_Signal* primary,
                           SteeringAngle_Signal* redundant)
 {
     uint32_t current_time = get_system_time_ms();
-    
+
     /* 1. 时间监控 (新鲜度检查) */
     if ((current_time - primary->timestamp_ms) > STEERING_ANGLE_TIMEOUT_MS) {
         primary->valid = 0;
         log_safety_error(ERROR_STEERING_TIMEOUT);
         return ERROR;
     }
-    
+
     /* 2. 范围检查 */
     if (primary->angle_deg < -STEERING_ANGLE_MAX_DEG ||
         primary->angle_deg > STEERING_ANGLE_MAX_DEG) {
@@ -86,7 +107,7 @@ int process_steering_angle(SteeringAngle_Signal* primary,
         log_safety_error(ERROR_STEERING_RANGE);
         return ERROR;
     }
-    
+
     /* 3. 冗余一致性检查 (ASIL D) */
     if (redundant != NULL) {
         float diff = fabsf(primary->angle_deg - redundant->angle_deg);
@@ -95,7 +116,7 @@ int process_steering_angle(SteeringAngle_Signal* primary,
             return ERROR;
         }
     }
-    
+
     primary->valid = 1;
     return OK;
 }
@@ -121,15 +142,15 @@ void safety_monitor_task(void)
     while (1) {
         /* 监控应用层输出 */
         SafetyCheckResult result = check_application_outputs();
-        
+
         if (result.fault_detected) {
             /* 触发安全状态 */
             enter_safe_state(result.fault_type);
         }
-        
+
         /* ASIL D: 看门狗喂狗 */
         watchdog_refresh();
-        
+
         sleep_ms(SAFETY_MONITOR_PERIOD_MS);
     }
 }
@@ -143,12 +164,12 @@ int validate_torque_calculation(PedalData* data, float* output)
 {
     float torque1 = calculate_torque_method1(data);
     float torque2 = calculate_torque_method2(data);
-    
+
     /* 交叉比较 */
     if (fabsf(torque1 - torque2) > TORQUE_TOLERANCE) {
         return ERROR_CALCULATION_MISMATCH;
     }
-    
+
     *output = torque1;  /* 或取平均值 */
     return OK;
 }
@@ -191,7 +212,7 @@ typedef struct {
 void sequence_checkpoint(SequenceMonitor* sm, uint32_t point_id)
 {
     sm->current_sequence |= (1 << point_id);
-    
+
     if ((sm->current_sequence & sm->checkpoint_mask) != sm->expected_sequence) {
         /* 序列错误，触发安全响应 */
         handle_sequence_error();
@@ -254,10 +275,10 @@ int E2E_protect(E2E_Header* header, uint8_t* data, uint16_t length)
 {
     /* 1. 更新计数器 */
     header->counter++;
-    
+
     /* 2. 计算CRC (包含Data ID) */
     header->crc = calculate_crc8(data, length, header->data_id);
-    
+
     return E2E_OK;
 }
 
@@ -268,11 +289,11 @@ int E2E_check(E2E_Header* header, uint8_t* data, uint16_t length)
     if (header->crc != expected_crc) {
         return E2E_ERROR_CRC;
     }
-    
+
     /* 2. 检查计数器 (检测丢失/重复/乱序) */
     static uint8_t last_counter = 0;
     int8_t delta = (int8_t)(header->counter - last_counter);
-    
+
     if (delta == 0) {
         return E2E_ERROR_REPEATED;
     } else if (delta > 1) {
@@ -280,7 +301,7 @@ int E2E_check(E2E_Header* header, uint8_t* data, uint16_t length)
     } else if (delta < 0) {
         return E2E_ERROR_WRONG_SEQ;  /* 乱序 */
     }
-    
+
     last_counter = header->counter;
     return E2E_OK;
 }
@@ -325,7 +346,7 @@ void start_deadline_monitor(DeadlineMonitor* dm, uint32_t deadline_us)
 int check_deadline(DeadlineMonitor* dm)
 {
     if (!dm->monitoring_active) return OK;
-    
+
     uint32_t elapsed = get_micros() - dm->start_time;
     if (elapsed > dm->deadline) {
         dm->monitoring_active = 0;
@@ -357,19 +378,19 @@ int process_vehicle_speed(uint32_t raw_sensor_value)
     if (raw_sensor_value == 0) {
         return ERROR_INVALID_INPUT;
     }
-    
+
     /* 合理性检查 */
     uint32_t speed_kmh = raw_to_kmh(raw_sensor_value);
     if (speed_kmh > 400) {  /* 超过任何车辆的最大速度 */
         return ERROR_IMPLAUSIBLE;
     }
-    
+
     /* 速率限制检查 */
     static uint32_t last_speed = 0;
     if (abs((int)speed_kmh - (int)last_speed) > MAX_ACCEL_RATE) {
         return ERROR_RATE_EXCEEDED;
     }
-    
+
     last_speed = speed_kmh;
     return (int)speed_kmh;
 }
@@ -384,7 +405,7 @@ typedef enum {
 Std_ReturnType safety_critical_function(void)
 {
     Std_ReturnType result = E_NOT_OK;
-    
+
     /* 所有路径必须设置result */
     if (precondition_check()) {
         if (execute_safety_action()) {
@@ -395,7 +416,7 @@ Std_ReturnType safety_critical_function(void)
     } else {
         result = E_UNKNOWN;
     }
-    
+
     return result;
 }
 ```
@@ -422,6 +443,6 @@ Std_ReturnType safety_critical_function(void)
 
 ---
 
-> **最后更新**: 2026-03-21  
-> **维护者**: AI Code Review  
+> **最后更新**: 2026-03-21
+> **维护者**: AI Code Review
 > **内容深度**: L5 (研究级)

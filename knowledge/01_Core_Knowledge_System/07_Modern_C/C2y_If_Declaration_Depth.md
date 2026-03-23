@@ -60,6 +60,10 @@
     - [8.3 使用方法](#83-使用方法)
   - [参考资源](#参考资源)
   - [总结](#总结)
+  - [深入理解](#深入理解)
+    - [核心概念](#核心概念)
+    - [实践应用](#实践应用)
+    - [学习建议](#学习建议)
 
 ---
 
@@ -2789,6 +2793,27 @@ Clang 22 开始实验性支持 C2y 的 if 声明特性：
 
 ```bash
 # 启用 C2y 模式
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 clang -std=c2y -c source.c
 
 # 或明确指定 C2y 版本
@@ -2908,5 +2933,5 @@ C2y if 声明是一项重要的语言特性，它：
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

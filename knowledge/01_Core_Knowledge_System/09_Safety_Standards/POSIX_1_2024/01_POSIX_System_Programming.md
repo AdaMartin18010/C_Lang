@@ -33,6 +33,21 @@
     - [9.2 UDP Socket编程](#92-udp-socket编程)
   - [10. 实时扩展](#10-实时扩展)
     - [10.1 POSIX实时特性](#101-posix实时特性)
+  - [11. 实际项目: POSIX兼容Shell实现](#11-实际项目-posix兼容shell实现)
+    - [11.1 项目概述](#111-项目概述)
+    - [11.2 完整Shell实现代码](#112-完整shell实现代码)
+    - [11.3 Shell测试用例](#113-shell测试用例)
+    - [11.4 Makefile](#114-makefile)
+    - [11.5 使用示例](#115-使用示例)
+  - [12. 附录](#12-附录)
+    - [12.1 POSIX版本宏定义](#121-posix版本宏定义)
+    - [12.2 常用头文件](#122-常用头文件)
+    - [12.3 编译选项](#123-编译选项)
+  - [总结](#总结)
+  - [深入理解](#深入理解)
+    - [核心概念](#核心概念)
+    - [实践应用](#实践应用)
+    - [学习建议](#学习建议)
 
 ---
 
@@ -169,6 +184,27 @@ int main(void) {
 
 ```bash
 # Linux/gcc
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 gcc -o posix_version_check posix_version_check.c -D_POSIX_C_SOURCE=202405L
 
 # 运行
@@ -4226,6 +4262,7 @@ int main(void) {
 ### 11.1 项目概述
 
 本章节实现一个简化但功能完整的POSIX兼容Shell，演示以下核心概念：
+
 - 命令解析和执行
 - 输入输出重定向
 - 管道
@@ -4240,7 +4277,7 @@ int main(void) {
  * @file posix_shell.c
  * @brief POSIX兼容Shell实现
  * @description 一个简化但功能完整的Shell，展示POSIX系统编程实践
- * 
+ *
  * 功能特性:
  * - 命令执行（带参数）
  * - 输入/输出重定向 (<, >, >>)
@@ -4304,29 +4341,29 @@ void init_shell(void) {
     /* 确保Shell在交互式模式下运行在前台 */
     shell_terminal = STDIN_FILENO;
     shell_pgid = getpgrp();
-    
+
     /* 如果Shell不是进程组长，则设置为进程组长 */
     while (tcgetpgrp(shell_terminal) != shell_pgid) {
         kill(-shell_pgid, SIGTTIN);
     }
-    
+
     /* 忽略交互式作业控制信号 */
     signal(SIGINT, SIG_IGN);
     signal(SIGQUIT, SIG_IGN);
     signal(SIGTSTP, SIG_IGN);
     signal(SIGTTIN, SIG_IGN);
     signal(SIGTTOU, SIG_IGN);
-    
+
     /* 将自己放入新的进程组，并获取终端控制 */
     shell_pgid = getpid();
     if (setpgid(shell_pgid, shell_pgid) < 0) {
         perror("Couldn't put the shell in its own process group");
         exit(1);
     }
-    
+
     tcsetpgrp(shell_terminal, shell_pgid);
     tcgetattr(shell_terminal, &shell_tmodes);
-    
+
     /* 初始化作业表 */
     memset(jobs, 0, sizeof(jobs));
 }
@@ -4337,7 +4374,7 @@ void init_shell(void) {
 void make_prompt(char *prompt, size_t size) {
     char cwd[1024];
     const char *home = getenv("HOME");
-    
+
     if (getcwd(cwd, sizeof(cwd)) != NULL) {
         /* 用~替换HOME目录 */
         if (home && strstr(cwd, home) == cwd) {
@@ -4359,12 +4396,12 @@ void make_prompt(char *prompt, size_t size) {
 int parse_args(char *line, char **args) {
     int argc = 0;
     char *p = line;
-    
+
     while (*p && argc < MAX_ARGS - 1) {
         /* 跳过空白 */
         while (*p && isspace((unsigned char)*p)) p++;
         if (!*p) break;
-        
+
         /* 处理引号 */
         if (*p == '"' || *p == '\'') {
             char quote = *p++;
@@ -4378,7 +4415,7 @@ int parse_args(char *line, char **args) {
         }
         argc++;
     }
-    
+
     args[argc] = NULL;
     return argc;
 }
@@ -4408,14 +4445,14 @@ char *find_redirect(char **args, const char *symbol) {
  */
 int handle_input_redirect(char *filename) {
     if (!filename) return 0;
-    
+
     int fd = open(filename, O_RDONLY);
     if (fd < 0) {
         perror(filename);
         free(filename);
         return -1;
     }
-    
+
     dup2(fd, STDIN_FILENO);
     close(fd);
     free(filename);
@@ -4427,21 +4464,21 @@ int handle_input_redirect(char *filename) {
  */
 int handle_output_redirect(char *filename, int append) {
     if (!filename) return 0;
-    
+
     int flags = O_WRONLY | O_CREAT;
     if (append) {
         flags |= O_APPEND;
     } else {
         flags |= O_TRUNC;
     }
-    
+
     int fd = open(filename, flags, 0644);
     if (fd < 0) {
         perror(filename);
         free(filename);
         return -1;
     }
-    
+
     dup2(fd, STDOUT_FILENO);
     close(fd);
     free(filename);
@@ -4454,12 +4491,12 @@ int handle_output_redirect(char *filename, int append) {
 int execute_command(char **args, int background) {
     pid_t pid;
     int status;
-    
+
     /* 处理重定向 */
     char *infile = find_redirect(args, "<");
     char *outfile = find_redirect(args, ">");
     char *appendfile = find_redirect(args, ">>");
-    
+
     if (outfile && appendfile) {
         fprintf(stderr, "Cannot use both > and >>\n");
         free(infile);
@@ -4467,7 +4504,7 @@ int execute_command(char **args, int background) {
         free(appendfile);
         return 1;
     }
-    
+
     pid = fork();
     if (pid == 0) {
         /* 子进程 */
@@ -4476,7 +4513,7 @@ int execute_command(char **args, int background) {
         signal(SIGTSTP, SIG_DFL);
         signal(SIGTTIN, SIG_DFL);
         signal(SIGTTOU, SIG_DFL);
-        
+
         /* 处理重定向 */
         if (infile && handle_input_redirect(infile) < 0) {
             exit(1);
@@ -4487,7 +4524,7 @@ int execute_command(char **args, int background) {
         if (appendfile && handle_output_redirect(appendfile, 1) < 0) {
             exit(1);
         }
-        
+
         /* 执行命令 */
         execvp(args[0], args);
         perror(args[0]);
@@ -4496,7 +4533,7 @@ int execute_command(char **args, int background) {
         perror("fork");
         return 1;
     }
-    
+
     /* 父进程 */
     if (!background) {
         waitpid(pid, &status, WUNTRACED);
@@ -4522,7 +4559,7 @@ int execute_pipeline(char **commands, int num_commands) {
     int pipes[MAX_PIPES][2];
     pid_t pids[MAX_PIPES];
     char *args[MAX_ARGS];
-    
+
     /* 创建所有管道 */
     for (int i = 0; i < num_commands - 1; i++) {
         if (pipe(pipes[i]) == -1) {
@@ -4530,17 +4567,17 @@ int execute_pipeline(char **commands, int num_commands) {
             return 1;
         }
     }
-    
+
     /* 创建子进程 */
     for (int i = 0; i < num_commands; i++) {
         parse_args(commands[i], args);
         if (!args[0]) continue;
-        
+
         pids[i] = fork();
         if (pids[i] == 0) {
             /* 子进程 */
             signal(SIGINT, SIG_DFL);
-            
+
             /* 如果不是第一个命令，从上一个管道读取 */
             if (i > 0) {
                 dup2(pipes[i - 1][0], STDIN_FILENO);
@@ -4549,13 +4586,13 @@ int execute_pipeline(char **commands, int num_commands) {
             if (i < num_commands - 1) {
                 dup2(pipes[i][1], STDOUT_FILENO);
             }
-            
+
             /* 关闭所有管道描述符 */
             for (int j = 0; j < num_commands - 1; j++) {
                 close(pipes[j][0]);
                 close(pipes[j][1]);
             }
-            
+
             execvp(args[0], args);
             perror(args[0]);
             exit(127);
@@ -4564,19 +4601,19 @@ int execute_pipeline(char **commands, int num_commands) {
             return 1;
         }
     }
-    
+
     /* 父进程：关闭所有管道 */
     for (int i = 0; i < num_commands - 1; i++) {
         close(pipes[i][0]);
         close(pipes[i][1]);
     }
-    
+
     /* 等待所有子进程 */
     int status;
     for (int i = 0; i < num_commands; i++) {
         waitpid(pids[i], &status, 0);
     }
-    
+
     return WIFEXITED(status) ? WEXITSTATUS(status) : 1;
 }
 
@@ -4592,7 +4629,7 @@ int builtin_cd(char **args) {
             return 1;
         }
     }
-    
+
     if (chdir(dir) != 0) {
         perror("cd");
         return 1;
@@ -4625,7 +4662,7 @@ int builtin_export(char **args) {
         }
         return 0;
     }
-    
+
     /* 设置环境变量 */
     char *eq = strchr(args[1], '=');
     if (eq) {
@@ -4645,7 +4682,7 @@ int builtin_jobs(void) {
     for (int i = 0; i < num_jobs; i++) {
         int status;
         pid_t result = waitpid(jobs[i].pgid, &status, WNOHANG);
-        
+
         if (result == 0) {
             /* 仍在运行 */
             printf("[%d] %s %s\n", i + 1,
@@ -4676,7 +4713,7 @@ int builtin_echo(char **args) {
  */
 int try_builtin(char **args) {
     if (!args[0]) return 1;
-    
+
     if (strcmp(args[0], "cd") == 0) {
         builtin_cd(args);
         return 1;
@@ -4700,7 +4737,7 @@ int try_builtin(char **args) {
         builtin_echo(args);
         return 1;
     }
-    
+
     return 0;
 }
 
@@ -4713,17 +4750,17 @@ int try_builtin(char **args) {
 int parse_pipes(char *line, char **commands) {
     int num = 0;
     char *token = strtok(line, "|");
-    
+
     while (token && num < MAX_PIPES) {
         /* 去掉前后空白 */
         while (*token && isspace((unsigned char)*token)) token++;
         char *end = token + strlen(token) - 1;
         while (end > token && isspace((unsigned char)*end)) *end-- = '\0';
-        
+
         commands[num++] = token;
         token = strtok(NULL, "|");
     }
-    
+
     return num;
 }
 
@@ -4744,13 +4781,13 @@ void shell_loop(void) {
     char prompt[PROMPT_SIZE];
     char *commands[MAX_PIPES];
     char *args[MAX_ARGS];
-    
+
     /* 设置SIGCHLD处理 */
     signal(SIGCHLD, sigchld_handler);
-    
+
     while (1) {
         make_prompt(prompt, sizeof(prompt));
-        
+
         /* 读取输入 */
         input = readline(prompt);
         if (!input) {
@@ -4758,7 +4795,7 @@ void shell_loop(void) {
             printf("\nexit\n");
             break;
         }
-        
+
         /* 忽略空行 */
         char *p = input;
         while (*p && isspace((unsigned char)*p)) p++;
@@ -4766,10 +4803,10 @@ void shell_loop(void) {
             free(input);
             continue;
         }
-        
+
         /* 添加到历史 */
         add_history(input);
-        
+
         /* 检查后台执行 */
         int background = 0;
         size_t len = strlen(input);
@@ -4782,10 +4819,10 @@ void shell_loop(void) {
                 input[--len] = '\0';
             }
         }
-        
+
         /* 解析管道 */
         int num_commands = parse_pipes(input, commands);
-        
+
         if (num_commands == 1) {
             /* 单个命令 */
             parse_args(commands[0], args);
@@ -4796,7 +4833,7 @@ void shell_loop(void) {
             /* 管道命令 */
             execute_pipeline(commands, num_commands);
         }
-        
+
         /* 处理完成的作业 */
         if (got_sigchld) {
             got_sigchld = 0;
@@ -4809,7 +4846,7 @@ void shell_loop(void) {
                 }
             }
         }
-        
+
         free(input);
     }
 }
@@ -4820,15 +4857,15 @@ void shell_loop(void) {
 int main(int argc, char **argv) {
     (void)argc;
     (void)argv;
-    
+
     printf("╔══════════════════════════════════════════╗\n");
     printf("║     POSIX Shell - 系统编程示例           ║\n");
     printf("║  演示: fork, exec, pipe, signal, job     ║\n");
     printf("╚══════════════════════════════════════════╝\n\n");
-    
+
     init_shell();
     shell_loop();
-    
+
     return 0;
 }
 ```
@@ -4855,11 +4892,11 @@ int main(int argc, char **argv) {
  */
 void test_parse_args(void) {
     printf("测试命令解析...\n");
-    
+
     char line[] = "ls -la /home";
     char *args[256];
     int argc = 0;
-    
+
     char *p = line;
     while (*p && argc < 255) {
         while (*p && *p == ' ') p++;
@@ -4870,12 +4907,12 @@ void test_parse_args(void) {
         argc++;
     }
     args[argc] = NULL;
-    
+
     assert(argc == 3);
     assert(strcmp(args[0], "ls") == 0);
     assert(strcmp(args[1], "-la") == 0);
     assert(strcmp(args[2], "/home") == 0);
-    
+
     printf("命令解析测试通过\n");
 }
 
@@ -4884,17 +4921,17 @@ void test_parse_args(void) {
  */
 void test_parse_pipes(void) {
     printf("测试管道解析...\n");
-    
+
     char line[] = "cat file.txt | grep pattern | wc -l";
     char *commands[16];
     int num = 0;
-    
+
     char *token = strtok(line, "|");
     while (token && num < 16) {
         commands[num++] = token;
         token = strtok(NULL, "|");
     }
-    
+
     assert(num == 3);
     printf("管道解析测试通过\n");
 }
@@ -4904,11 +4941,11 @@ void test_parse_pipes(void) {
  */
 void test_redirect_detection(void) {
     printf("测试重定向检测...\n");
-    
+
     char line[] = "cat < input.txt > output.txt";
     assert(strstr(line, "<") != NULL);
     assert(strstr(line, ">") != NULL);
-    
+
     printf("重定向检测测试通过\n");
 }
 
@@ -4917,15 +4954,15 @@ void test_redirect_detection(void) {
  */
 void test_environment(void) {
     printf("测试环境变量...\n");
-    
+
     setenv("TEST_VAR", "test_value", 1);
     char *val = getenv("TEST_VAR");
     assert(val != NULL);
     assert(strcmp(val, "test_value") == 0);
-    
+
     unsetenv("TEST_VAR");
     assert(getenv("TEST_VAR") == NULL);
-    
+
     printf("环境变量测试通过\n");
 }
 
@@ -4934,12 +4971,12 @@ void test_environment(void) {
  */
 void run_tests(void) {
     printf("\n=== 运行Shell功能测试 ===\n\n");
-    
+
     test_parse_args();
     test_parse_pipes();
     test_redirect_detection();
     test_environment();
-    
+
     printf("\n=== 所有测试通过 ===\n");
 }
 
@@ -4966,16 +5003,16 @@ TEST_TARGET = test_shell
 all: $(TARGET) $(TEST_TARGET)
 
 $(TARGET): posix_shell.c
-	$(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
+ $(CC) $(CFLAGS) -o $@ $< $(LDFLAGS)
 
 $(TEST_TARGET): test_shell.c
-	$(CC) $(CFLAGS) -o $@ $<
+ $(CC) $(CFLAGS) -o $@ $<
 
 test: $(TEST_TARGET)
-	./$(TEST_TARGET)
+ ./$(TEST_TARGET)
 
 clean:
-	rm -f $(TARGET) $(TEST_TARGET)
+ rm -f $(TARGET) $(TEST_TARGET)
 ```
 
 ### 11.5 使用示例
@@ -5079,8 +5116,8 @@ gcc -std=c99 -D_POSIX_C_SOURCE=202405L -lrt -o program program.c
 
 ---
 
-*文档版本: 1.0*  
-*最后更新: 2024年*  
+*文档版本: 1.0*
+*最后更新: 2024年*
 *基于: POSIX.1-2024 (IEEE Std 1003.1-2024)*
 
 
@@ -5106,5 +5143,5 @@ gcc -std=c99 -D_POSIX_C_SOURCE=202405L -lrt -o program program.c
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

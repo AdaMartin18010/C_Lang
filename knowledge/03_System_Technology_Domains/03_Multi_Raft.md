@@ -1,3 +1,24 @@
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 ﻿# Multi-Raft分布式共识
 
 
@@ -5,39 +26,38 @@
 
 ## 📑 目录
 
-- [Multi-Raft分布式共识](#multi-raft分布式共识)
-  - [📑 目录](#-目录)
-  - [一、Raft算法回顾](#一raft算法回顾)
-    - [1.1 Raft核心概念](#11-raft核心概念)
-    - [1.2 Raft基本流程](#12-raft基本流程)
-    - [1.3 Raft安全性保证](#13-raft安全性保证)
-  - [二、Multi-Raft设计](#二multi-raft设计)
-    - [2.1 为什么需要Multi-Raft](#21-为什么需要multi-raft)
-    - [2.2 Multi-Raft核心架构](#22-multi-raft核心架构)
-    - [2.3 消息路由与处理](#23-消息路由与处理)
-    - [2.4 Batch优化](#24-batch优化)
-  - [三、数据分片](#三数据分片)
-    - [3.1 Region设计](#31-region设计)
-    - [3.2 分片路由](#32-分片路由)
-    - [3.3 Region分裂与合并](#33-region分裂与合并)
-  - [四、领导均衡](#四领导均衡)
-    - [4.1 领导分布问题](#41-领导分布问题)
-    - [4.2 领导均衡调度器](#42-领导均衡调度器)
-    - [4.3 领导转移实现](#43-领导转移实现)
-  - [五、成员变更](#五成员变更)
-    - [5.1 Joint Consensus成员变更](#51-joint-consensus成员变更)
-    - [5.2 成员变更流程](#52-成员变更流程)
-    - [5.3 Learner节点](#53-learner节点)
-  - [六、TiKV实现参考](#六tikv实现参考)
-    - [6.1 TiKV架构概览](#61-tikv架构概览)
-    - [6.2 TiKV关键代码结构](#62-tikv关键代码结构)
-    - [6.3 Local Reader优化](#63-local-reader优化)
-    - [6.4 Multi-Raft性能优化总结](#64-multi-raft性能优化总结)
-  - [参考资料](#参考资料)
-  - [深入理解](#深入理解)
-    - [核心原理](#核心原理)
-    - [实践应用](#实践应用)
-    - [最佳实践](#最佳实践)
+- [📑 目录](#-目录)
+- [一、Raft算法回顾](#一raft算法回顾)
+  - [1.1 Raft核心概念](#11-raft核心概念)
+  - [1.2 Raft基本流程](#12-raft基本流程)
+  - [1.3 Raft安全性保证](#13-raft安全性保证)
+- [二、Multi-Raft设计](#二multi-raft设计)
+  - [2.1 为什么需要Multi-Raft](#21-为什么需要multi-raft)
+  - [2.2 Multi-Raft核心架构](#22-multi-raft核心架构)
+  - [2.3 消息路由与处理](#23-消息路由与处理)
+  - [2.4 Batch优化](#24-batch优化)
+- [三、数据分片](#三数据分片)
+  - [3.1 Region设计](#31-region设计)
+  - [3.2 分片路由](#32-分片路由)
+  - [3.3 Region分裂与合并](#33-region分裂与合并)
+- [四、领导均衡](#四领导均衡)
+  - [4.1 领导分布问题](#41-领导分布问题)
+  - [4.2 领导均衡调度器](#42-领导均衡调度器)
+  - [4.3 领导转移实现](#43-领导转移实现)
+- [五、成员变更](#五成员变更)
+  - [5.1 Joint Consensus成员变更](#51-joint-consensus成员变更)
+  - [5.2 成员变更流程](#52-成员变更流程)
+  - [5.3 Learner节点](#53-learner节点)
+- [六、TiKV实现参考](#六tikv实现参考)
+  - [6.1 TiKV架构概览](#61-tikv架构概览)
+  - [6.2 TiKV关键代码结构](#62-tikv关键代码结构)
+  - [6.3 Local Reader优化](#63-local-reader优化)
+  - [6.4 Multi-Raft性能优化总结](#64-multi-raft性能优化总结)
+- [参考资料](#参考资料)
+- [深入理解](#深入理解)
+  - [核心原理](#核心原理)
+  - [实践应用](#实践应用)
+  - [最佳实践](#最佳实践)
 
 
 ---

@@ -1,52 +1,71 @@
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 ﻿# 硬件加速技术
 
 ## 目录
 
-- [硬件加速技术](#硬件加速技术)
-  - [目录](#目录)
-  - [概述](#概述)
-    - [硬件加速的优势](#硬件加速的优势)
-    - [应用场景](#应用场景)
-  - [SIMD指令集](#simd指令集)
-    - [SSE（Streaming SIMD Extensions）](#ssestreaming-simd-extensions)
-      - [SSE版本演进](#sse版本演进)
-      - [SSE寄存器结构](#sse寄存器结构)
-      - [SSE编程示例](#sse编程示例)
-    - [AVX（Advanced Vector Extensions）](#avxadvanced-vector-extensions)
-      - [AVX版本特性](#avx版本特性)
-      - [AVX寄存器结构](#avx寄存器结构)
-      - [AVX编程示例](#avx编程示例)
-    - [NEON（ARM架构）](#neonarm架构)
-      - [NEON特性](#neon特性)
-      - [NEON寄存器映射](#neon寄存器映射)
-      - [NEON编程示例](#neon编程示例)
-  - [GPU加速](#gpu加速)
-    - [CUDA（Compute Unified Device Architecture）](#cudacompute-unified-device-architecture)
-      - [CUDA编程模型](#cuda编程模型)
-      - [CUDA内存层次](#cuda内存层次)
-      - [CUDA编程示例](#cuda编程示例)
-    - [OpenCL](#opencl)
-      - [OpenCL架构](#opencl架构)
-      - [OpenCL编程示例](#opencl编程示例)
-  - [FPGA加速](#fpga加速)
-    - [FPGA架构](#fpga架构)
-    - [FPGA开发流程](#fpga开发流程)
-    - [HLS（高层次综合）示例](#hls高层次综合示例)
-    - [FPGA应用场景](#fpga应用场景)
-  - [DMA技术](#dma技术)
-    - [DMA工作原理](#dma工作原理)
-    - [DMA传输模式](#dma传输模式)
-    - [DMA配置示例（STM32）](#dma配置示例stm32)
-  - [硬件加速器设计](#硬件加速器设计)
-    - [加速器架构设计](#加速器架构设计)
-    - [卷积神经网络加速器设计](#卷积神经网络加速器设计)
-    - [硬件加速器性能评估](#硬件加速器性能评估)
-    - [典型加速器对比](#典型加速器对比)
-  - [总结](#总结)
-  - [深入理解](#深入理解)
-    - [核心原理](#核心原理)
-    - [实践应用](#实践应用)
-    - [最佳实践](#最佳实践)
+- [概述](#概述)
+  - [硬件加速的优势](#硬件加速的优势)
+  - [应用场景](#应用场景)
+- [SIMD指令集](#simd指令集)
+  - [SSE（Streaming SIMD Extensions）](#ssestreaming-simd-extensions)
+    - [SSE版本演进](#sse版本演进)
+    - [SSE寄存器结构](#sse寄存器结构)
+    - [SSE编程示例](#sse编程示例)
+  - [AVX（Advanced Vector Extensions）](#avxadvanced-vector-extensions)
+    - [AVX版本特性](#avx版本特性)
+    - [AVX寄存器结构](#avx寄存器结构)
+    - [AVX编程示例](#avx编程示例)
+  - [NEON（ARM架构）](#neonarm架构)
+    - [NEON特性](#neon特性)
+    - [NEON寄存器映射](#neon寄存器映射)
+    - [NEON编程示例](#neon编程示例)
+- [GPU加速](#gpu加速)
+  - [CUDA（Compute Unified Device Architecture）](#cudacompute-unified-device-architecture)
+    - [CUDA编程模型](#cuda编程模型)
+    - [CUDA内存层次](#cuda内存层次)
+    - [CUDA编程示例](#cuda编程示例)
+  - [OpenCL](#opencl)
+    - [OpenCL架构](#opencl架构)
+    - [OpenCL编程示例](#opencl编程示例)
+- [FPGA加速](#fpga加速)
+  - [FPGA架构](#fpga架构)
+  - [FPGA开发流程](#fpga开发流程)
+  - [HLS（高层次综合）示例](#hls高层次综合示例)
+  - [FPGA应用场景](#fpga应用场景)
+- [DMA技术](#dma技术)
+  - [DMA工作原理](#dma工作原理)
+  - [DMA传输模式](#dma传输模式)
+  - [DMA配置示例（STM32）](#dma配置示例stm32)
+- [硬件加速器设计](#硬件加速器设计)
+  - [加速器架构设计](#加速器架构设计)
+  - [卷积神经网络加速器设计](#卷积神经网络加速器设计)
+  - [硬件加速器性能评估](#硬件加速器性能评估)
+  - [典型加速器对比](#典型加速器对比)
+- [总结](#总结)
+- [深入理解](#深入理解)
+  - [核心原理](#核心原理)
+  - [实践应用](#实践应用)
+  - [最佳实践](#最佳实践)
 
 ---
 

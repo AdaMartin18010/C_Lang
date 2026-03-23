@@ -1,3 +1,24 @@
+---
+
+## 🔗 文档关联
+
+### 核心关联
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [内存管理](../../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度](../../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程](../../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [数据类型](../../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针](../../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+
+### 扩展阅读
+| 文档 | 关系类型 | 说明 |
+|:-----|:---------|:-----|
+| [软件工程](../../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 ﻿# 乘除法器 (Multiplier & Divider)
 
 ## 目录
@@ -151,27 +172,27 @@
   被乘数: 0000 1011
   乘数:       1101
   积:   0000 0000 0000
-  
+
 时钟周期1 (乘数LSB=1):
   积 = 积 + 被乘数 = 0000 0000 + 0000 1011 = 0000 1011
   被乘数左移: 0001 0110
   乘数右移:       0110
-  
+
 时钟周期2 (乘数LSB=0):
   积不变: 0000 1011
   被乘数左移: 0010 1100
   乘数右移:       0011
-  
+
 时钟周期3 (乘数LSB=1):
   积 = 0000 1011 + 0010 1100 = 0011 0111
   被乘数左移: 0101 1000
   乘数右移:       0001
-  
+
 时钟周期4 (乘数LSB=1):
   积 = 0011 0111 + 0101 1000 = 1000 1111
   被乘数左移: 1011 0000
   乘数右移:       0000
-  
+
 最终结果: 1000 1111 (143) ✓
 ```
 
@@ -279,14 +300,14 @@ module shift_add_multiplier (
                     if (mplier_reg[0]) begin
                         product <= product + mcand_reg;
                     end
-                    
+
                     // 被乘数左移，乘数右移
                     mcand_reg <= mcand_reg << 1;
                     mplier_reg <= mplier_reg >> 1;
-                    
+
                     // 计数器递减
                     counter <= counter - 1'b1;
-                    
+
                     // 检查是否完成
                     if (counter == 4'd1) begin
                         state <= DONE;
@@ -381,16 +402,16 @@ module shift_add_multiplier_tb;
             multiplicand = mcand;
             multiplier = mplier;
             expected = mcand * mplier;
-            
+
             @(posedge clk);
             start = 1;
             @(posedge clk);
             start = 0;
-            
+
             // 等待完成
             wait(done);
             @(posedge clk);
-            
+
             if (product === expected) begin
                 $display("   %3d    │  %3d   │    %5d   │   %5d   │ PASS",
                          mcand, mplier, expected, product);
@@ -398,7 +419,7 @@ module shift_add_multiplier_tb;
                 $display("   %3d    │  %3d   │    %5d   │   %5d   │ FAIL",
                          mcand, mplier, expected, product);
             end
-            
+
             #20;
         end
     endtask
@@ -416,30 +437,30 @@ endmodule
 
 ```
     移位乘法器时序图 (8位 × 8位):
-    
+
     Clock:  ─┐ ┌─┐ ┌─┐ ┌─┐ ┌─┐ ┌─┐ ┌─┐ ┌─┐ ┌─┐ ┌─┐ ┌─┐ ┌─┐ ┌─┐ ┌─┐ ┌─┐
             └─┘ └─┘ └─┘ └─┘ └─┘ └─┘ └─┘ └─┘ └─┘ └─┘ └─┘ └─┘ └─┘ └─┘ └─┘
-            
+
     Start:  ───┐     ┌───────────────────────────────────────────────────
                └─────┘
-               
+
     State:  IDLE  LOAD   CALC    CALC    CALC    ...    CALC    DONE   IDLE
-            
+
     Counter:  X    8      7       6       5              1       0      X
-    
+
     mplier_reg:
             X   1101    0110    0011    0001    ...    0000
-            
+
     LSB:        1       0       1       1       ...     0
-    
+
     mcand_reg:
             X  00001011 00010110 00101100 01011000 ... 00000000
-            
+
     Product:0   0      1011    1011    110111  10001111 10001111
-            
+
     Done:   ───────────────────────────────────────────────────┐     ┌───
                                                                └─────┘
-    
+
     总周期数 = 位数 + 2 (LOAD和DONE周期)
 ```
 
@@ -455,7 +476,7 @@ endmodule
 
 ```
     4×4阵列乘法器结构:
-    
+
     A3 ─────────────────────────►
     A2 ───────────────────────►
     A1 ─────────────────────►
@@ -497,7 +518,7 @@ endmodule
 
 ```
     4×4阵列乘法器详细电路:
-    
+
          A3    A2    A1    A0
          │     │     │     │
          ▼     ▼     ▼     ▼
@@ -541,7 +562,7 @@ endmodule
          │     │     └──────────►
          │     └────────────────►
          └──────────────────────►
-    
+
     P7    P6    P5    P4    P3    P2
 ```
 
@@ -549,7 +570,7 @@ endmodule
 
 ```
     斜向进位阵列乘法器 (更优的延迟):
-    
+
                A3B0  A2B0  A1B0  A0B0
                   ╲   ╱     ╲   ╱
                    ╲ ╱       ╲ ╱
@@ -580,7 +601,7 @@ endmodule
           │         │
           ▼         ▼
           P         P
-          
+
     延迟 = (n-1) × t_FA + t_HA (斜向进位)
 ```
 
@@ -599,7 +620,7 @@ module array_multiplier_4x4 (
 
     // 部分积
     wire [3:0] pp0, pp1, pp2, pp3;
-    
+
     // 生成部分积 (AND阵列)
     assign pp0 = {a[3]&b[0], a[2]&b[0], a[1]&b[0], a[0]&b[0]};
     assign pp1 = {a[3]&b[1], a[2]&b[1], a[1]&b[1], a[0]&b[1]};
@@ -663,12 +684,12 @@ module wallace_multiplier_8x8 (
 
     // 第一级：使用全加器压缩部分积
     // (简化表示，实际Wallace树需要多层压缩)
-    
+
     wire [15:0] sum_level1, carry_level1;
-    
+
     // 使用generate生成Wallace树结构
     // 这里使用简化的行为级描述
-    
+
     assign {carry_level1, sum_level1} = a * b;
 
     // 最终加法
@@ -717,13 +738,13 @@ module array_multiplier_tb;
         // 显示部分测试用例
         a = 4'd10; b = 4'd12; #1;
         $display("   %h    │   %h    │     %h      │ %0d × %0d = %0d", a, b, product, a, b, product);
-        
+
         a = 4'd15; b = 4'd15; #1;
         $display("   %h    │   %h    │     %h      │ %0d × %0d = %0d", a, b, product, a, b, product);
-        
+
         a = 4'd7; b = 4'd8; #1;
         $display("   %h    │   %h    │     %h      │ %0d × %0d = %0d", a, b, product, a, b, product);
-        
+
         a = 4'd0; b = 4'd9; #1;
         $display("   %h    │   %h    │     %h      │ %0d × %0d = %0d", a, b, product, a, b, product);
 
@@ -745,22 +766,22 @@ endmodule
 
 ```
     阵列乘法器时序 (纯组合逻辑):
-    
+
     A/B输入:  ────┐                          ┌───────────
                 └──────────────────────────┘
-                
+
     部分积:   ─────────┐  ┌──┐  ┌───────────┐
                      └──┘  └──┘
-                     
+
     进位链:   ─────────────┐  ┌──┐  ┌───────┐
                          └──┘  └──┘
-                         
+
     Product:  ─────────────────┐  ┌──┐  ┌───┐
   (稳定)                       └──┘  └──┘
-    
+
     总延迟 = (n-1) × t_FA + t_AND
            ≈ 7 × 150ps + 30ps = 1.08ns (对于8×8)
-    
+
     注意：由于是组合逻辑，没有时钟边沿触发
     输出在经过传播延迟后稳定
 ```
@@ -801,10 +822,10 @@ Booth编码表 (当前位 vs 前一位):
 乘数: 1 0 1 1 0 0 0 (补一位0)
       ↑ ↑ ↑ ↑ ↑ ↑
       0 1 0 1 0 0  (位对)
-      
+
 解释:
 i=0: 00 → 无操作
-i=1: 00 → 无操作  
+i=1: 00 → 无操作
 i=2: 10 → 减被乘数 (Y+=-M)
 i=3: 01 → 加被乘数 (Y+=+M)
 i=4: 10 → 减被乘数 (Y+=-2M)
@@ -965,7 +986,7 @@ module booth_multiplier (
                     // 算术右移2位
                     accum <= {{2{accum[31]}}, accum[31:2]};
                     multiplier_reg <= {2'b00, multiplier_reg[16:2]};
-                    
+
                     count <= count - 1'b1;
                     if (count == 4'd1) begin
                         state <= DONE;
@@ -1037,16 +1058,16 @@ module booth_multiplier_tb;
 
         // 正数乘法
         test_multiply(16'd100, 16'd200);
-        
+
         // 有符号数乘法
         test_signed(-16'd50, 16'd30);
         test_signed(16'd25, -16'd40);
         test_signed(-16'd100, -16'd50);
-        
+
         // 边界值
         test_multiply(16'h7FFF, 16'd2);   // 最大正数 × 2
         test_multiply(16'h8000, 16'd1);   // 最小负数
-        
+
         // 大数乘法
         test_multiply(16'd12345, 16'd6789);
 
@@ -1063,15 +1084,15 @@ module booth_multiplier_tb;
             multiplicand = mcand;
             multiplier = mplier;
             expected = mcand * mplier;
-            
+
             @(posedge clk);
             start = 1;
             @(posedge clk);
             start = 0;
-            
+
             wait(done);
             @(posedge clk);
-            
+
             if ($signed(product) === expected) begin
                 $display(" %6d   │  %6d  │  %11d │  %11d  │ PASS",
                          mcand, mplier, expected, $signed(product));
@@ -1079,7 +1100,7 @@ module booth_multiplier_tb;
                 $display(" %6d   │  %6d  │  %11d │  %11d  │ FAIL",
                          mcand, mplier, expected, $signed(product));
             end
-            
+
             #20;
         end
     endtask
@@ -1093,15 +1114,15 @@ module booth_multiplier_tb;
             multiplicand = mcand;
             multiplier = mplier;
             expected = mcand * mplier;
-            
+
             @(posedge clk);
             start = 1;
             @(posedge clk);
             start = 0;
-            
+
             wait(done);
             @(posedge clk);
-            
+
             if (product === expected) begin
                 $display(" %6d   │  %6d  │  %11d │  %11d  │ PASS",
                          mcand, mplier, expected, product);
@@ -1109,7 +1130,7 @@ module booth_multiplier_tb;
                 $display(" %6d   │  %6d  │  %11d │  %11d  │ FAIL",
                          mcand, mplier, expected, product);
             end
-            
+
             #20;
         end
     endtask
@@ -1248,7 +1269,7 @@ endmodule
 最终结果:
   商 = 0010 (2)
   余数 = 0001 (1)
-  
+
 验证: 7 = 3 × 2 + 1 ✓
 ```
 
@@ -1345,7 +1366,7 @@ module restoring_divider (
                         rem_reg <= temp[7:0];
                         quot_reg[0] <= 1'b1;
                     end
-                    
+
                     count <= count - 1'b1;
                     if (count == 4'd1) begin
                         state <= DONE;
@@ -1425,11 +1446,11 @@ module restoring_divider_tb;
         test_divide(8'd255, 8'd16);
         test_divide(8'd50, 8'd7);
         test_divide(8'd128, 8'd2);
-        
+
         // 边界测试
         test_divide(8'd0, 8'd5);
         test_divide(8'd5, 8'd5);
-        
+
         // 除零测试
         test_divide_zero(8'd100, 8'd0);
 
@@ -1448,15 +1469,15 @@ module restoring_divider_tb;
             divisor = divsr;
             expected_q = divid / divsr;
             expected_r = divid % divsr;
-            
+
             @(posedge clk);
             start = 1;
             @(posedge clk);
             start = 0;
-            
+
             wait(done);
             @(posedge clk);
-            
+
             if (quotient === expected_q && remainder === expected_r) begin
                 $display("  %3d   │  %3d  │  %3d  │  %3d  │ %0d = %0d×%0d + %0d",
                          divid, divsr, quotient, remainder,
@@ -1465,7 +1486,7 @@ module restoring_divider_tb;
                 $display("  %3d   │  %3d  │  %3d  │  %3d  │ FAIL (expected %0d, %0d)",
                          divid, divsr, quotient, remainder, expected_q, expected_r);
             end
-            
+
             #20;
         end
     endtask
@@ -1477,21 +1498,21 @@ module restoring_divider_tb;
         begin
             dividend = divid;
             divisor = divsr;
-            
+
             @(posedge clk);
             start = 1;
             @(posedge clk);
             start = 0;
-            
+
             wait(done);
             @(posedge clk);
-            
+
             if (divide_by_zero) begin
                 $display("  %3d   │  %3d  │  ---  │  ---  │ 除零错误检测成功", divid, divsr);
             end else begin
                 $display("  %3d   │  %3d  │  %3d  │  %3d  │ 除零错误检测失败", divid, divsr, quotient, remainder);
             end
-            
+
             #20;
         end
     endtask
@@ -1544,7 +1565,7 @@ endmodule
   每个周期: 移位 → 加法或减法
   平均周期操作数: 2
   最后可能需要一次恢复
-  
+
 速度提升: 约20%
 ```
 
@@ -1680,11 +1701,11 @@ module non_restoring_divider (
                         // 余数为正，执行减法
                         rem_reg <= rem_reg - {1'b0, divsr_reg};
                     end
-                    
+
                     // 确定当前余数符号和商位
                     // (需要在下一个周期才能得到正确符号)
                     state <= OPERATE;  // 等待运算完成
-                    
+
                     // 简化为组合逻辑判断
                     if (rem_reg[8]) begin  // 结果为负
                         quot_reg[0] <= 1'b0;
@@ -1693,7 +1714,7 @@ module non_restoring_divider (
                         quot_reg[0] <= 1'b1;
                         rem_sign <= 1'b0;
                     end
-                    
+
                     count <= count - 1'b1;
                     if (count == 4'd1) begin
                         state <= FINAL_RESTORE;
@@ -1738,11 +1759,11 @@ module divider_comparison_tb;
     reg         start;
     reg  [7:0]  dividend;
     reg  [7:0]  divisor;
-    
+
     wire [7:0]  quotient_rest;
     wire [7:0]  remainder_rest;
     wire        done_rest;
-    
+
     wire [7:0]  quotient_nonrest;
     wire [7:0]  remainder_nonrest;
     wire        done_nonrest;
@@ -1811,7 +1832,7 @@ module divider_comparison_tb;
         begin
             dividend = divid;
             divisor = divsr;
-            
+
             // 测试恢复余数除法器
             start_time_rest = $time;
             @(posedge clk);
@@ -1821,13 +1842,13 @@ module divider_comparison_tb;
             wait(done_rest);
             end_time_rest = $time;
             @(posedge clk);
-            
+
             $display(" 恢复余数除法    │  %3d   │  %3d  │  %3d  │  %3d  │  %2d",
-                     divid, divsr, quotient_rest, remainder_rest, 
+                     divid, divsr, quotient_rest, remainder_rest,
                      (end_time_rest - start_time_rest) / 10);
-            
+
             #20;
-            
+
             // 测试非恢复余数除法器
             start_time_non = $time;
             @(posedge clk);
@@ -1837,11 +1858,11 @@ module divider_comparison_tb;
             wait(done_nonrest);
             end_time_non = $time;
             @(posedge clk);
-            
+
             $display(" 非恢复余数除法  │  %3d   │  %3d  │  %3d  │  %3d  │  %2d",
                      divid, divsr, quotient_nonrest, remainder_nonrest,
                      (end_time_non - start_time_non) / 10);
-            
+
             $display("--------------------------------------------------------------");
             #20;
         end
@@ -1908,7 +1929,7 @@ endmodule
 
 ```
     不同乘法器延迟对比 (32位):
-    
+
     延迟(ns)
     100 ┤                                          ╭──── 移位乘法器
         │                                    ╭────╯
@@ -1922,7 +1943,7 @@ endmodule
         │                      ╭────╯
       0 ┼────────────────────────────────────────────► 时钟频率(MHz)
         0    50   100  150  200  250  300  350  400
-        
+
     关键频率点:
     - 移位乘法器: 任何频率都适用 (时序电路)
     - 阵列乘法器: 最高约100MHz
@@ -1933,7 +1954,7 @@ endmodule
 
 ```
     32位乘法器面积估算 (等效门数):
-    
+
     ┌─────────────────────────────────────────────────────────┐
     │                                                         │
     │   面积                                                  │
@@ -2022,21 +2043,21 @@ int main() {
     int32_t b = 50000;
     int32_t prod = a * b;  // 溢出! 2,500,000,000 > INT_MAX
     printf("%d * %d = %d\n", a, b, prod);  // 未定义行为
-    
+
     // 安全检测
     if (a > INT32_MAX / b) {
         printf("Multiplication would overflow!\n");
     }
-    
+
     // 使用更大类型
     int64_t safe_prod = (int64_t)a * b;
     printf("Safe: %ld\n", safe_prod);
-    
+
     // 除法溢出 (特殊情况)
     int32_t min = INT32_MIN;
     int32_t neg1 = -1;
     // int32_t bad = min / neg1;  // 溢出! |INT_MIN| > INT_MAX
-    
+
     return 0;
 }
 ```
@@ -2116,5 +2137,5 @@ int main() {
 
 ---
 
-> **最后更新**: 2026-03-21  
+> **最后更新**: 2026-03-21
 > **维护者**: AI Code Review

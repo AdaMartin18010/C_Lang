@@ -116,9 +116,9 @@ def process_file(filepath):
 def main():
     # 获取所有孤立文档（0链接的文档）
     isolated_docs = []
-    for doc in stats.get('doc_stats', []):
-        if doc.get('internal_links', 0) == 0:
-            isolated_docs.append(doc['path'])
+    for doc in stats:  # stats is a list
+        if isinstance(doc, dict) and doc.get('internal_links', 0) == 0:
+            isolated_docs.append(doc.get('path', ''))
     
     print(f"发现 {len(isolated_docs)} 个孤立文档")
     
