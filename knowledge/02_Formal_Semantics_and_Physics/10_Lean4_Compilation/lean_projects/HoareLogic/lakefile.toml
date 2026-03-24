@@ -1,0 +1,19 @@
+name = "HoareLogic"
+version = "0.1.0"
+defaultTargets = ["HoareLogic"]
+
+[[lean_lib]]
+name = "Hoare"
+
+[[lean_exe]]
+name = "hoare"
+root = "Main"
+
+[dependencies]
+std = { git = "https://github.com/leanprover/std4.git", rev = "v4.6.0" }
+
+[leanOptions]
+pp.unicode.fun = true
+pp.proofs.withType = false
+autoImplicit = false
+relaxedAutoImplicit = false

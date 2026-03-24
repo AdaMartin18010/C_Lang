@@ -1,0 +1,19 @@
+name = "DenotationalSemantics"
+version = "0.1.0"
+defaultTargets = ["DenotationalSemantics"]
+
+[[lean_lib]]
+name = "Denotational"
+
+[[lean_exe]]
+name = "denotational"
+root = "Main"
+
+[dependencies]
+std = { git = "https://github.com/leanprover/std4.git", rev = "v4.6.0" }
+
+[leanOptions]
+pp.unicode.fun = true
+pp.proofs.withType = false
+autoImplicit = false
+relaxedAutoImplicit = false

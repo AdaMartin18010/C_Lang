@@ -1,0 +1,19 @@
+name = "OperationalSemantics"
+version = "0.1.0"
+defaultTargets = ["OperationalSemantics"]
+
+[[lean_lib]]
+name = "Operational"
+
+[[lean_exe]]
+name = "operational"
+root = "Main"
+
+[dependencies]
+std = { git = "https://github.com/leanprover/std4.git", rev = "v4.6.0" }
+
+[leanOptions]
+pp.unicode.fun = true
+pp.proofs.withType = false
+autoImplicit = false
+relaxedAutoImplicit = false
