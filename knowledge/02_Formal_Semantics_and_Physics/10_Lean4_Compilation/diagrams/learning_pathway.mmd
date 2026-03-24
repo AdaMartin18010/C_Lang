@@ -1,0 +1,48 @@
+```mermaid
+flowchart TD
+    Start([开始Lean之旅]) --> Basics[基础阶段]
+    
+    Basics --> TPIL[Theorem Proving in Lean 4]
+    Basics --> FPIL[Functional Programming in Lean]
+    Basics --> NNG[Natural Number Game]
+    
+    TPIL --> Intermediate[进阶阶段]
+    FPIL --> Intermediate
+    NNG --> Intermediate
+    
+    Intermediate --> MIL[Mathematics in Lean]
+    Intermediate --> Meta[Metaprogramming in Lean 4]
+    Intermediate --> Project1[小型形式化项目]
+    
+    MIL --> Advanced[高级阶段]
+    Meta --> Advanced
+    Project1 --> Advanced
+    
+    Advanced --> MathlibContrib[贡献Mathlib]
+    Advanced --> CustomTactics[开发自定义策略]
+    Advanced --> ReadSource[阅读Mathlib源码]
+    
+    MathlibContrib --> Expert[专家阶段]
+    CustomTactics --> Expert
+    ReadSource --> Expert
+    
+    Expert --> LargeProject[大型形式化项目]
+    Expert --> PaperFormal[学术论文形式化]
+    Expert --> ToolDev[工具链开发]
+    Expert --> Community[社区贡献]
+    
+    LargeProject --> Research[研究阶段]
+    PaperFormal --> Research
+    ToolDev --> Research
+    Community --> Research
+    
+    Research --> OpenProblems[解决开放问题]
+    Research --> NewMath[新数学形式化]
+    Research --> ImproveTool[改进Lean工具链]
+    
+    style Start fill:#90EE90
+    style Research fill:#FFD700
+    style OpenProblems fill:#FF6B6B
+    style NewMath fill:#4ECDC4
+    style ImproveTool fill:#95E1D3
+```

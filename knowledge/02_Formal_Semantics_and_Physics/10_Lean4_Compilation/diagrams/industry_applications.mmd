@@ -1,0 +1,39 @@
+```mermaid
+flowchart LR
+    subgraph "工业验证"
+        A[AWS s2n-bignum]
+        B[Microsoft<br/>Project Everest]
+        C[区块链验证]
+        D[操作系统<br/>seL4]
+    end
+    
+    subgraph "应用领域"
+        E[TLS/SSL<br/>证书验证]
+        F[HTTPS栈<br/>形式化]
+        G[智能合约<br/>安全]
+        H[内核安全
+        信息流]
+    end
+    
+    subgraph "验证目标"
+        I[功能正确性]
+        J[内存安全]
+        K[密码学正确]
+        L[无副作用]
+    end
+    
+    subgraph "使用技术"
+        M[汇编验证]
+        N[F*/Low*]
+        O[Lean 4]
+        P[Isabelle/HOL]
+    end
+    
+    A --> E --> I --> M
+    B --> F --> K --> N
+    C --> G --> J --> O
+    D --> H --> L --> P
+    
+    O -.-> A
+    O -.-> C
+```

@@ -1,0 +1,58 @@
+```mermaid
+graph BT
+    Type --> AddSemigroup
+    Type --> MulSemigroup
+    
+    AddSemigroup --> AddMonoid
+    MulSemigroup --> Monoid
+    
+    AddMonoid --> AddGroup
+    Monoid --> Group
+    
+    AddGroup --> AddCommGroup
+    Group --> CommGroup
+    
+    AddMonoid --> Semiring
+    Monoid --> Semiring
+    Semiring --> Ring
+    AddCommGroup --> Ring
+    
+    Ring --> CommRing
+    
+    CommRing --> IntegralDomain
+    IntegralDomain --> Field
+    
+    Field --> DiscreteField
+    
+    Ring --> Module
+    AddCommGroup --> Module
+    
+    Module --> VectorSpace
+    Field -.-> VectorSpace
+    
+    VectorSpace --> NormedSpace
+    NormedSpace --> BanachSpace
+    
+    VectorSpace --> InnerProductSpace
+    InnerProductSpace --> HilbertSpace
+    BanachSpace -.-> HilbertSpace
+    
+    Ring --> Algebra
+    CommRing -.-> Algebra
+    
+    Semiring --> ModuleCat
+    Module --> ModuleCat
+    
+    Group --> GroupCat
+    CommGroup --> CommGroupCat
+    
+    Ring --> RingCat
+    CommRing --> CommRingCat
+    
+    Field --> FieldCat
+    
+    style Type fill:#E1F5FE
+    style Field fill:#FFCDD2
+    style HilbertSpace fill:#C8E6C9
+    style VectorSpace fill:#FFF9C4
+```

@@ -1,0 +1,52 @@
+```mermaid
+graph TB
+    subgraph "Lean 4 核心"
+        A[Kernel<br/>类型检查器] --> B[Elaborator<br/>精化器]
+        B --> C[Compiler<br/>编译器]
+        C --> D[IR优化]
+        D --> E[C代码生成]
+        D --> F[LLVM后端]
+    end
+    
+    subgraph "元编程层"
+        G[Macro系统] --> B
+        H[MetaM Monad] --> B
+        I[Tactic框架] --> H
+    end
+    
+    subgraph "标准库"
+        J[Std4] --> K[数据结构]
+        J --> L[IO系统]
+        J --> M[并发原语]
+    end
+    
+    subgraph "数学库"
+        N[Mathlib4] --> O[Algebra代数]
+        N --> P[Analysis分析]
+        N --> Q[Topology拓扑]
+        N --> R[NumberTheory数论]
+        N --> S[Geometry几何]
+        N --> T[Combinatorics组合]
+        N --> U[Probability概率]
+    end
+    
+    subgraph "工具生态"
+        V[Lake<br/>包管理] --> W[构建系统]
+        X[Aesop<br/>自动证明] --> I
+        Y[ProofWidgets<br/>可视化] --> Z[交互式UI]
+        AA[DocGen4<br/>文档] --> AB[API文档]
+    end
+    
+    subgraph "AI集成"
+        AC[LeanCopilot] --> AD[策略生成]
+        AE[LeanDojo] --> AF[ML数据集]
+        AG[LLMStep] --> AH[LLM集成]
+    end
+    
+    B --> J
+    B --> N
+    E --> L
+    N --> V
+    I --> X
+    J --> Y
+```
