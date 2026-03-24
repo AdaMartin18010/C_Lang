@@ -107,7 +107,7 @@ CFLAGS="-O0 -g -fsanitize=address,undefined,leak -fno-omit-frame-pointer"
 
 ---
 
-**返回**: [对比矩阵总览](./README.md) | [思维表征总览](../README.md)
+**返回**: [对比矩阵总览](./readme.md) | [思维表征总览](../readme.md)
 
 
 ---
@@ -167,6 +167,6 @@ CFLAGS="-O0 -g -fsanitize=address,undefined,leak -fno-omit-frame-pointer"
 
 ### 实践关联
 
-- [概念映射](05_Concept_Mappings/README.md)
-- [学习路径](06_Learning_Paths/README.md)
-- [决策树](01_Decision_Trees/README.md)
+- [概念映射](05_Concept_Mappings/readme.md)
+- [学习路径](06_Learning_Paths/readme.md)
+- [决策树](01_Decision_Trees/readme.md)

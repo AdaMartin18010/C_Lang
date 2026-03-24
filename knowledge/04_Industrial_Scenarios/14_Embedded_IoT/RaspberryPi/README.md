@@ -248,7 +248,7 @@ echo 'DISTRO_FEATURES:append = " systemd"' >> conf/local.conf
 
 ## 📚 与主文档的关系
 
-本目录是 [14_Embedded_IoT](../README.md) 中复杂嵌入式系统开发的核心内容，与 MCU 平台形成互补。
+本目录是 [14_Embedded_IoT](../readme.md) 中复杂嵌入式系统开发的核心内容，与 MCU 平台形成互补。
 
 ### 文档架构
 
@@ -266,10 +266,10 @@ RaspberryPi/
 
 | 本目录特性 | 对比平台 | 技术差异 |
 |:-----------|:---------|:---------|
-| 完整 Linux 系统 | [../RPi_Pico](../RPi_Pico/README.md) | 裸机 vs Linux，应用场景不同 |
-| 内存管理 | [../Memory_Constrained](../Memory_Constrained/README.md) | GB 级 vs KB 级，策略截然不同 |
-| 网络协议栈 | [../IoT_Protocols](../IoT_Protocols/README.md) | 内核协议栈 vs 用户态实现 |
-| 实时性 | [../Baremetal](../Baremetal/README.md) | PREEMPT_RT vs 裸机中断 |
+| 完整 Linux 系统 | [../RPi_Pico](../RPi_Pico/readme.md) | 裸机 vs Linux，应用场景不同 |
+| 内存管理 | [../Memory_Constrained](../Memory_Constrained/readme.md) | GB 级 vs KB 级，策略截然不同 |
+| 网络协议栈 | [../IoT_Protocols](../IoT_Protocols/readme.md) | 内核协议栈 vs 用户态实现 |
+| 实时性 | [../Baremetal](../Baremetal/readme.md) | PREEMPT_RT vs 裸机中断 |
 
 ### 选型建议
 
@@ -490,7 +490,7 @@ int main() {
 
 ## 🔗 返回上级
 
-[← 返回 14_Embedded_IoT 目录](../README.md)
+[← 返回 14_Embedded_IoT 目录](../readme.md)
 
 ---
 

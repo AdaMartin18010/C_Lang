@@ -48,7 +48,7 @@ MISRA C是嵌入式领域最权威的C语言编码规范，广泛应用于汽车
 
 ---
 
-[← 返回 MISRA_C_2023 目录](../README.md)
+[← 返回 MISRA_C_2023 目录](../readme.md)
 
 
 ---
@@ -279,5 +279,5 @@ void example(void) {
 
 ### 扩展阅读
 
-- [核心知识体系](../../01_Core_Knowledge_System/README.md)
+- [核心知识体系](../../01_Core_Knowledge_System/readme.md)
 - [全局索引](../../00_GLOBAL_INDEX.md)

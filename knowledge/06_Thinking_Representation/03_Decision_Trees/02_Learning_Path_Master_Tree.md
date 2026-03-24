@@ -496,7 +496,7 @@ Level 6: 专家水平
 
 ---
 
-**返回**: [决策树总览](./README.md) | [学习路径详细指南](../06_Learning_Paths/README.md) | [全局架构图](../00_GLOBAL_ARCHITECTURE_MAP.md)
+**返回**: [决策树总览](./readme.md) | [学习路径详细指南](../06_Learning_Paths/readme.md) | [全局架构图](../00_GLOBAL_ARCHITECTURE_MAP.md)
 
 
 ---

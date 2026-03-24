@@ -30,7 +30,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [结构体与联合体](../03_Construction_Layer/01_Structures_Unions.md) | 结构关联 | 数组成员、结构体数组 |
-| [状态机](../../06_Thinking_Representation/09_State_Machines/README.md) | 应用场景 | 状态转换表实现 |
+| [状态机](../../06_Thinking_Representation/09_State_Machines/readme.md) | 应用场景 | 状态转换表实现 |
 
 ---
 

@@ -497,8 +497,8 @@ void __attribute__((interrupt)) timer_isr(void) {
 ## 相关资源
 
 - [GoF设计模式](https://en.wikipedia.org/wiki/Design_Patterns)
-- [C语言设计模式实践](../../07_Modern_Toolchain/08_Design_Patterns/README.md)
-- [并发编程指南](../../07_Modern_Toolchain/07_Concurrency_Parallelism/README.md)
+- [C语言设计模式实践](../../07_Modern_Toolchain/08_Design_Patterns/readme.md)
+- [并发编程指南](../../07_Modern_Toolchain/07_Concurrency_Parallelism/readme.md)
 - [嵌入式系统设计](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md)
 
 ---

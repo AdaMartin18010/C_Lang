@@ -545,7 +545,7 @@ Qed.
 ### 前置知识
 
 - [构造即正确](./01_Correctness_by_Construction.md)
-- [类型系统](../05_Type_Semantics/README.md)
+- [类型系统](../05_Type_Semantics/readme.md)
 
 ### 后续延伸
 

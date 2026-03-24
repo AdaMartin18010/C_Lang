@@ -883,7 +883,7 @@ int invoke_cap(cnode_t* cnode, unsigned slot, uint32_t op, void* args) {
 
 ---
 
-**← [返回工具链主页](../README.md)**
+**← [返回工具链主页](../readme.md)**
 
 
 ---
@@ -947,4 +947,4 @@ void demonstrate_concept() {
 
 - [编译构建](../../01_Core_Knowledge_System/05_Engineering_Layer/01_Compilation_Build.md)
 - [性能优化](../../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
-- [工具链总览](../README.md)
+- [工具链总览](../readme.md)

@@ -317,7 +317,7 @@
 
 ---
 
-**返回**: [知识图谱总览](./README.md) | [全局架构图](../00_GLOBAL_ARCHITECTURE_MAP.md)
+**返回**: [知识图谱总览](./readme.md) | [全局架构图](../00_GLOBAL_ARCHITECTURE_MAP.md)
 
 
 ---

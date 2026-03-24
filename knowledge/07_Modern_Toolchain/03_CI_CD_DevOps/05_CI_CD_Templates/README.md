@@ -563,8 +563,8 @@ def notifyBuild(String buildStatus = 'STARTED') {
 
 ## 🔗 相关资源
 
-- [返回上级目录](../README.md)
-- [并发并行](../../07_Concurrency_Parallelism/README.md) - 构建优化相关
+- [返回上级目录](../readme.md)
+- [并发并行](../../07_Concurrency_Parallelism/readme.md) - 构建优化相关
 - [GitHub Actions文档](https://docs.github.com/en/actions)
 - [GitLab CI文档](https://docs.gitlab.com/ee/ci/)
 - [Jenkins文档](https://www.jenkins.io/doc/)
@@ -635,4 +635,4 @@ void demonstrate_concept() {
 
 - [编译构建](../../01_Core_Knowledge_System/05_Engineering_Layer/01_Compilation_Build.md)
 - [性能优化](../../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
-- [工具链总览](../README.md)
+- [工具链总览](../readme.md)

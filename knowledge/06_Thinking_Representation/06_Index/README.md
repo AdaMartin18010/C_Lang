@@ -24,13 +24,13 @@
 
 ## 相关模块
 
-- [思维导图](../01_Mind_Maps/README.md) - 可视化知识结构
-- [对比矩阵](../02_Comparison_Matrices/README.md) - 横向对比不同概念
-- [知识图谱](../07_Knowledge_Graph/README.md) - 完整的知识网络
+- [思维导图](../01_Mind_Maps/readme.md) - 可视化知识结构
+- [对比矩阵](../02_Comparison_Matrices/readme.md) - 横向对比不同概念
+- [知识图谱](../07_Knowledge_Graph/readme.md) - 完整的知识网络
 
 ---
 
-> **返回导航**: [思维表达模块](../README.md) | [知识库总览](../../README.md)
+> **返回导航**: [思维表达模块](../readme.md) | [知识库总览](../../readme.md)
 
 
 ---

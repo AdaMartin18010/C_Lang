@@ -373,8 +373,8 @@ git branch -D misra-c2025-migration  # 如有问题，删除迁移分支
 ### A. 参考文档
 
 - [MISRA C:2025 主索引](./00_MISRA_C_2025_Index.md)
-- [MISRA C:2025 README](./README.md)
-- [MISRA C:2023 参考](../MISRA_C_2023/README.md)
+- [MISRA C:2025 README](./readme.md)
+- [MISRA C:2023 参考](../MISRA_C_2023/readme.md)
 
 ### B. 模板文件
 

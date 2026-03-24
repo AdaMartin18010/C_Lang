@@ -187,19 +187,19 @@
 
 ### 向上导航
 
-- [← 返回父目录: 核心知识体系](../README.md)
-- [← 返回根目录: 知识库首页](../../README.md)
+- [← 返回父目录: 核心知识体系](../readme.md)
+- [← 返回根目录: 知识库首页](../../readme.md)
 
 ### 前置知识
 
-- **[← 02 Core Layer: 核心层](../02_Core_Layer/README.md)** - 指针、内存管理
-- **[← 03 Construction Layer: 构造层](../03_Construction_Layer/README.md)** - 结构体、位域
-- **[← 05 Engineering Layer: 工程层](../05_Engineering_Layer/README.md)** - 编译优化
+- **[← 02 Core Layer: 核心层](../02_Core_Layer/readme.md)** - 指针、内存管理
+- **[← 03 Construction Layer: 构造层](../03_Construction_Layer/readme.md)** - 结构体、位域
+- **[← 05 Engineering Layer: 工程层](../05_Engineering_Layer/readme.md)** - 编译优化
 
 ### 横向关联
 
-- **[→ 04 Industrial Scenarios: 工业场景](../../04_Industrial_Scenarios/README.md)** - 汽车ABS、航空电子、高频交易
-- **[→ 03 System Technology: 系统技术](../../03_System_Technology_Domains/README.md)** - 并发、网络、安全启动
+- **[→ 04 Industrial Scenarios: 工业场景](../../04_Industrial_Scenarios/readme.md)** - 汽车ABS、航空电子、高频交易
+- **[→ 03 System Technology: 系统技术](../../03_System_Technology_Domains/readme.md)** - 并发、网络、安全启动
 
 ---
 

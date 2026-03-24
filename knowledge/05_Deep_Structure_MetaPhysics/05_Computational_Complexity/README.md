@@ -65,7 +65,7 @@ P ⊆ NP ⊆ PSPACE ⊆ EXPTIME ⊆ NEXPTIME
 
 ---
 
-> 返回: [上层目录](../README.md)
+> 返回: [上层目录](../readme.md)
 
 
 ---
@@ -235,5 +235,5 @@ void example(void) {
 
 ### 扩展阅读
 
-- [核心知识体系](../../01_Core_Knowledge_System/README.md)
+- [核心知识体系](../../01_Core_Knowledge_System/readme.md)
 - [全局索引](../../00_GLOBAL_INDEX.md)

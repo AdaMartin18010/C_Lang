@@ -248,7 +248,7 @@ GDB常用命令
 
 ---
 
-**返回**: [决策树总览](./README.md) | [思维表征总览](../README.md) | [调试技术](../../01_Core_Knowledge_System/05_Engineering_Layer/02_Debug_Techniques.md)
+**返回**: [决策树总览](./readme.md) | [思维表征总览](../readme.md) | [调试技术](../../01_Core_Knowledge_System/05_Engineering_Layer/02_Debug_Techniques.md)
 
 
 ---

@@ -456,8 +456,8 @@ export int add(int a, int b) {
 
 ## 🔗 相关资源
 
-- [返回上级目录](../README.md)
-- [CI/CD模板](../03_CI_CD_DevOps/05_CI_CD_Templates/README.md) - 自动化构建
+- [返回上级目录](../readme.md)
+- [CI/CD模板](../03_CI_CD_DevOps/05_CI_CD_Templates/readme.md) - 自动化构建
 - [Ninja文档](https://ninja-build.org/manual.html)
 - [ccache文档](https://ccache.dev/manual/)
 - [distcc文档](https://distcc.github.io/)
@@ -528,4 +528,4 @@ void demonstrate_concept() {
 
 - [编译构建](../../01_Core_Knowledge_System/05_Engineering_Layer/01_Compilation_Build.md)
 - [性能优化](../../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
-- [工具链总览](../README.md)
+- [工具链总览](../readme.md)

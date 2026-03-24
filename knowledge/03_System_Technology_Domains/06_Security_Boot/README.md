@@ -12,9 +12,9 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [硬件安全](../07_Hardware_Security/README.md) | 安全基础 | TrustZone、TEE |
+| [硬件安全](../07_Hardware_Security/readme.md) | 安全基础 | TrustZone、TEE |
 | [嵌入式开发](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | 应用场景 | 嵌入式安全启动 |
-| [C与汇编映射](../../02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/README.md) | 底层基础 | Boot代码实现 |
+| [C与汇编映射](../../02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/readme.md) | 底层基础 | Boot代码实现 |
 
 ### 启动流程
 
@@ -30,7 +30,7 @@
 |:-----|:---------|:-----|
 | [可信启动](03_Measured_Boot.md) | 信任扩展 | 远程证明 |
 | [安全编码](../../01_Core_Knowledge_System/09_Safety_Standards/04_Secure_Coding_Guide.md) | 代码安全 | 固件安全编码 |
-| [MISRA C](../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 安全标准 | 嵌入式安全标准 |
+| [MISRA C](../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md) | 安全标准 | 嵌入式安全标准 |
 
 ---
 

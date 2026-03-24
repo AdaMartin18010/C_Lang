@@ -28,9 +28,9 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [C与汇编映射](../../02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/README.md) | 代码生成 | JIT代码生成 |
-| [编译器优化](../../02_Formal_Semantics_and_Physics/12_Compiler_Optimization/README.md) | 优化技术 | JIT优化 |
-| [正则引擎](../02_Regex_Engine/README.md) | 应用实例 | 正则引擎VM实现 |
+| [C与汇编映射](../../02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/readme.md) | 代码生成 | JIT代码生成 |
+| [编译器优化](../../02_Formal_Semantics_and_Physics/12_Compiler_Optimization/readme.md) | 优化技术 | JIT优化 |
+| [正则引擎](../02_Regex_Engine/readme.md) | 应用实例 | 正则引擎VM实现 |
 
 ---
 

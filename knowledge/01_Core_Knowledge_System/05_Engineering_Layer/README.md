@@ -15,7 +15,7 @@
 |:-----|:-----|:-----|
 | [预处理器](../03_Construction_Layer/02_Preprocessor.md) | 构建基础 | 条件编译、宏定义 |
 | [函数与作用域](../02_Core_Layer/04_Functions_Scope.md) | 代码组织 | 模块化设计基础 |
-| [标准库](../04_Standard_Library_Layer/README.md) | 工具依赖 | 测试框架、日志库 |
+| [标准库](../04_Standard_Library_Layer/readme.md) | 工具依赖 | 测试框架、日志库 |
 
 ### 本层关联
 
@@ -29,8 +29,8 @@
 
 | 文档 | 关系 | 说明 |
 |:-----|:-----|:-----|
-| [现代工具链](../../07_Modern_Toolchain/README.md) | 工具支持 | IDE、构建系统、CI/CD |
-| [持续集成](../../03_System_Technology_Domains/13_DevOps_Toolchain/README.md) | 自动化 | 自动化构建部署 |
+| [现代工具链](../../07_Modern_Toolchain/readme.md) | 工具支持 | IDE、构建系统、CI/CD |
+| [持续集成](../../03_System_Technology_Domains/13_DevOps_Toolchain/readme.md) | 自动化 | 自动化构建部署 |
 | [MISRA C工具](../09_Safety_Standards/MISRA_C_2023/tools/01_MISRA_Toolchain_Guide.md) | 合规检查 | 静态分析工具链 |
 
 ### 工程实践体系

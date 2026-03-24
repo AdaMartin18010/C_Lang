@@ -12,9 +12,9 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [计算机视觉](../03_Computer_Vision/README.md) | 图像基础 | 图像处理基础 |
+| [计算机视觉](../03_Computer_Vision/readme.md) | 图像基础 | 图像处理基础 |
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 帧缓冲区管理 |
-| [并发编程](../14_Concurrency_Parallelism/README.md) | 并行基础 | 多线程编解码 |
+| [并发编程](../14_Concurrency_Parallelism/readme.md) | 并行基础 | 多线程编解码 |
 
 ### 核心技术
 
@@ -29,8 +29,8 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [硬件加速](../03_Hardware_Acceleration.md) | 性能优化 | VAAPI/VDPAU |
-| [SIMD优化](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 性能优化 | 向量化编码 |
-| [网络编程](../15_Network_Programming/README.md) | 流媒体 | RTSP/RTP传输 |
+| [SIMD优化](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/readme.md) | 性能优化 | 向量化编码 |
+| [网络编程](../15_Network_Programming/readme.md) | 流媒体 | RTSP/RTP传输 |
 
 
 ---

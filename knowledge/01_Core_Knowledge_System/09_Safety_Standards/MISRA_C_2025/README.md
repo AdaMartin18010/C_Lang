@@ -214,13 +214,13 @@ MISRA_C_2025/
 
 ### 相关标准
 
-- [MISRA C:2023](../MISRA_C_2023/README.md) - 前一版本
+- [MISRA C:2023](../MISRA_C_2023/readme.md) - 前一版本
 - ISO/IEC 9899:2024 (C23标准)
 - [CERT C 安全编码标准](https://wiki.sei.cmu.edu/confluence/display/c)
 
 ### 工具资源
 
-- [工具链指南](./tools/README.md)
+- [工具链指南](./tools/readme.md)
 
 ---
 

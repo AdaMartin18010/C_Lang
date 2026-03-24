@@ -2,7 +2,7 @@
 
 > **层级**: L5 (原理层)
 > **目标**: 系统性掌握分布式共识理论，理解Paxos、Raft等算法的原理与实现
-> **关联**: [分布式系统基础](../08_Distributed_Systems/README.md) | [网络编程](../05_Network_Programming/README.md)
+> **关联**: [分布式系统基础](../08_Distributed_Systems/readme.md) | [网络编程](../05_Network_Programming/readme.md)
 
 ---
 

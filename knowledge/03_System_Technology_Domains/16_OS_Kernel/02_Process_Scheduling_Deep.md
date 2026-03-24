@@ -428,7 +428,7 @@ static int migrate_task(struct task_struct *p, int src_cpu, int dst_cpu)
 ### 前置知识
 
 - [Linux内核模块编程](./01_Linux_Kernel_Module_Programming.md)
-- [并发编程](../14_Concurrency_Parallelism/README.md)
+- [并发编程](../14_Concurrency_Parallelism/readme.md)
 
 ### 后续延伸
 

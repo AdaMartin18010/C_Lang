@@ -556,8 +556,8 @@ Reply:
 
 ### 前置知识
 
-- [并发编程](../14_Concurrency_Parallelism/README.md)
-- [网络编程](../15_Network_Programming/README.md)
+- [并发编程](../14_Concurrency_Parallelism/readme.md)
+- [网络编程](../15_Network_Programming/readme.md)
 
 ### 后续延伸
 

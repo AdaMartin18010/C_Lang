@@ -14,7 +14,7 @@
 | **核心概念** | 整数编码(补码)、IEEE 754浮点、类型转换规则、对齐与填充、整型提升 |
 | **前置知识** | [语法要素](./01_Syntax_Elements.md)、[运算符与表达式](../03_Operators_Expressions.md)、二进制/十六进制表示 |
 | **后续延伸** | [指针算术](../../02_Core_Layer/01_Pointer_Depth.md)、[内存布局](../../02_Core_Layer/02_Memory_Management.md)、[结构体对齐](../../03_Construction_Layer/01_Structures_Unions.md)、[类型双关](../../02_Core_Layer/08_Type_Punning.md) |
-| **横向关联** | [IEEE 754浮点专题](../01_Basic_Layer/IEEE_754_Floating_Point/README.md)、[整数溢出案例](../../09_Safety_Standards/Vulnerability_Cases/03_Integer_Overflow_Cases.md)、[类型提升规则](../03_Operators_Expressions.md#整型提升) |
+| **横向关联** | [IEEE 754浮点专题](../01_Basic_Layer/IEEE_754_Floating_Point/readme.md)、[整数溢出案例](../../09_Safety_Standards/Vulnerability_Cases/03_Integer_Overflow_Cases.md)、[类型提升规则](../03_Operators_Expressions.md#整型提升) |
 | **深层理论** | [概念等价性](../../../06_Thinking_Representation/05_Concept_Mappings/08_Concept_Equivalence_Graph.md)、[类型系统理论](../../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/04_C_Type_Theory.md) |
 | **权威来源** | K&R Ch2, CSAPP Ch2.1-2.4, C11标准 6.2, Modern C Level 1-2 |
 

@@ -8,9 +8,9 @@
 | 维度 | 目标文档 | 导航作用 |
 |:-----|:---------|:---------|
 | **总索引** | [../00_GLOBAL_INDEX.md](../00_GLOBAL_INDEX.md) | 完整知识图谱入口，全局视角 |
-| **本模块** | [../README.md](../README.md) | 模块总览与目录导航 |
-| **学习路径** | [../06_Thinking_Representation/06_Learning_Paths/README.md](../06_Thinking_Representation/06_Learning_Paths/README.md) | 阶段化学习路线规划 |
-| **概念映射** | [../06_Thinking_Representation/05_Concept_Mappings/README.md](../06_Thinking_Representation/05_Concept_Mappings/README.md) | 核心概念等价关系图 |
+| **本模块** | [../readme.md](../readme.md) | 模块总览与目录导航 |
+| **学习路径** | [../06_Thinking_Representation/06_Learning_Paths/readme.md](../06_Thinking_Representation/06_Learning_Paths/readme.md) | 阶段化学习路线规划 |
+| **概念映射** | [../06_Thinking_Representation/05_Concept_Mappings/readme.md](../06_Thinking_Representation/05_Concept_Mappings/readme.md) | 核心概念等价关系图 |
 
 ### 【阶段层】学习定位
 
@@ -33,19 +33,19 @@
 
 | 层级 | 关联文档 | 层次关系 |
 |:-----|:---------|:---------|
-| **理论基础** | [../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md](../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | 语义学理论基础 |
-| **核心机制** | [../01_Core_Knowledge_System/02_Core_Layer/README.md](../01_Core_Knowledge_System/02_Core_Layer/README.md) | C语言核心机制 |
-| **标准接口** | [../01_Core_Knowledge_System/04_Standard_Library_Layer/README.md](../01_Core_Knowledge_System/04_Standard_Library_Layer/README.md) | 标准库API |
-| **系统实现** | [../03_System_Technology_Domains/README.md](../03_System_Technology_Domains/README.md) | 系统级实现 |
+| **理论基础** | [../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md](../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md) | 语义学理论基础 |
+| **核心机制** | [../01_Core_Knowledge_System/02_Core_Layer/readme.md](../01_Core_Knowledge_System/02_Core_Layer/readme.md) | C语言核心机制 |
+| **标准接口** | [../01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md](../01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md) | 标准库API |
+| **系统实现** | [../03_System_Technology_Domains/readme.md](../03_System_Technology_Domains/readme.md) | 系统级实现 |
 
 ### 【局部层】横向关联网
 
 | 关联类型 | 目标文档 | 关联说明 |
 |:---------|:---------|:---------|
-| **技术扩展** | [../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md](../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并发编程技术 |
-| **安全规范** | [../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md](../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 安全编码标准 |
-| **工具支持** | [../07_Modern_Toolchain/README.md](../07_Modern_Toolchain/README.md) | 现代开发工具链 |
-| **实践案例** | [../04_Industrial_Scenarios/README.md](../04_Industrial_Scenarios/README.md) | 工业实践场景 |
+| **技术扩展** | [../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md](../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 并发编程技术 |
+| **安全规范** | [../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md](../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md) | 安全编码标准 |
+| **工具支持** | [../07_Modern_Toolchain/readme.md](../07_Modern_Toolchain/readme.md) | 现代开发工具链 |
+| **实践案例** | [../04_Industrial_Scenarios/readme.md](../04_Industrial_Scenarios/readme.md) | 工业实践场景 |
 
 ### 【总体层】知识体系架构
 
@@ -68,9 +68,9 @@
 | 目标 | 推荐路径 | 关键文档 |
 |:-----|:---------|:---------|
 | **系统学习** | 01 → 02 → 03 → 04 | 按顺序阅读各模块 |
-| **问题导向** | 06决策树 → 相关模块 | [决策树目录](../06_Thinking_Representation/01_Decision_Trees/README.md) |
-| **项目驱动** | 04案例 → 所需知识 | [工业场景](../04_Industrial_Scenarios/README.md) |
-| **深入研究** | 02形式语义 → 11CompCert | [形式语义](../02_Formal_Semantics_and_Physics/README.md) |
+| **问题导向** | 06决策树 → 相关模块 | [决策树目录](../06_Thinking_Representation/01_Decision_Trees/readme.md) |
+| **项目驱动** | 04案例 → 所需知识 | [工业场景](../04_Industrial_Scenarios/readme.md) |
+| **深入研究** | 02形式语义 → 11CompCert | [形式语义](../02_Formal_Semantics_and_Physics/readme.md) |
 
 ---
 
@@ -95,7 +95,7 @@ C语言入门基础，零基础学习起点。
 | [04_Control_Flow.md](./01_Basic_Layer/04_Control_Flow.md) | 控制流 | L2 | ISO C §6.8 | 200+ |
 
 **前置知识**: 无
-**后续延伸**: [02_Core_Layer](./02_Core_Layer/README.md)
+**后续延伸**: [02_Core_Layer](./02_Core_Layer/readme.md)
 
 ---
 
@@ -111,8 +111,8 @@ C语言核心概念，程序设计的基石。
 | [04_Functions_Scope.md](./02_Core_Layer/04_Functions_Scope.md) | 函数与作用域 | L2-L4 | ISO C §6.2.1, §6.7 | 787 |
 | [05_Arrays_Pointers.md](./02_Core_Layer/05_Arrays_Pointers.md) | 数组与指针 | L3-L5 | ISO C §6.5.2.1 | 895 |
 
-**前置知识**: [01_Basic_Layer](./01_Basic_Layer/README.md)
-**后续延伸**: [03_Construction_Layer](./03_Construction_Layer/README.md)
+**前置知识**: [01_Basic_Layer](./01_Basic_Layer/readme.md)
+**后续延伸**: [03_Construction_Layer](./03_Construction_Layer/readme.md)
 
 ---
 
@@ -126,8 +126,8 @@ C语言核心概念，程序设计的基石。
 | [02_Preprocessor.md](./03_Construction_Layer/02_Preprocessor.md) | 预处理器 | L3 | ISO C §6.10 | 200+ |
 | [03_Modularization_Linking.md](./03_Construction_Layer/03_Modularization_Linking.md) | 模块化与链接 | L4 | ISO C §5.1.1.2 | 200+ |
 
-**前置知识**: [02_Core_Layer](./02_Core_Layer/README.md)
-**后续延伸**: [04_Standard_Library_Layer](./04_Standard_Library_Layer/README.md)
+**前置知识**: [02_Core_Layer](./02_Core_Layer/readme.md)
+**后续延伸**: [04_Standard_Library_Layer](./04_Standard_Library_Layer/readme.md)
 
 ---
 
@@ -143,8 +143,8 @@ ISO C标准库各版本详解。
 | [04_C17_C23_Library.md](./04_Standard_Library_Layer/04_C17_C23_Library.md) | C17/C23标准库 | L4 | ISO/IEC 9899:2018 | 200+ |
 | [10_Threads_C11.md](./04_Standard_Library_Layer/10_Threads_C11.md) | C11线程库 | L4 | ISO C §7.26 | 200+ |
 
-**前置知识**: [03_Construction_Layer](./03_Construction_Layer/README.md)
-**后续延伸**: [05_Engineering_Layer](./05_Engineering_Layer/README.md)
+**前置知识**: [03_Construction_Layer](./03_Construction_Layer/readme.md)
+**后续延伸**: [05_Engineering_Layer](./05_Engineering_Layer/readme.md)
 
 ---
 
@@ -166,8 +166,8 @@ ISO C标准库各版本详解。
 |:-----|:-----|:----:|:---------|:--------:|
 | [01_Makefile.md](./05_Engineering/01_Build_System/01_Makefile.md) | Makefile构建 | L2-L4 | POSIX Make | 444 |
 
-**前置知识**: [04_Standard_Library_Layer](./04_Standard_Library_Layer/README.md)
-**后续延伸**: [06_Advanced_Layer](./06_Advanced_Layer/README.md)
+**前置知识**: [04_Standard_Library_Layer](./04_Standard_Library_Layer/readme.md)
+**后续延伸**: [06_Advanced_Layer](./06_Advanced_Layer/readme.md)
 
 ---
 
@@ -181,8 +181,8 @@ ISO C标准库各版本详解。
 | [02_Undefined_Behavior.md](./06_Advanced_Layer/02_Undefined_Behavior.md) | 未定义行为 | L4 | ISO C Annex J | 200+ |
 | [03_Portability.md](./06_Advanced_Layer/03_Portability.md) | 可移植性 | L4 | POSIX, C99 | 200+ |
 
-**前置知识**: [05_Engineering_Layer](./05_Engineering_Layer/README.md)
-**后续延伸**: [07_Modern_C](./07_Modern_C/README.md)
+**前置知识**: [05_Engineering_Layer](./05_Engineering_Layer/readme.md)
+**后续延伸**: [07_Modern_C](./07_Modern_C/readme.md)
 
 ---
 
@@ -195,8 +195,8 @@ C11/C17现代特性与扩展。
 | [01_C11_Features.md](./07_Modern_C/01_C11_Features.md) | C11特性 | L4 | ISO C11 §6.7.3, §7.17 | 200+ |
 | [02_C17_C23_Features.md](./07_Modern_C/02_C17_C23_Features.md) | C17/C23特性 | L4 | ISO C17, C23 Draft | 200+ |
 
-**前置知识**: [06_Advanced_Layer](./06_Advanced_Layer/README.md)
-**后续延伸**: [08_Application_Domains](./08_Application_Domains/README.md)
+**前置知识**: [06_Advanced_Layer](./06_Advanced_Layer/readme.md)
+**后续延伸**: [08_Application_Domains](./08_Application_Domains/readme.md)
 
 ---
 
@@ -211,8 +211,8 @@ C11/C17现代特性与扩展。
 | [03_Infrastructure_Software.md](./08_Application_Domains/03_Infrastructure_Software.md) | 基础设施软件 | L4 | Databases, Servers | 200+ |
 | [04_High_Performance_Computing.md](./08_Application_Domains/04_High_Performance_Computing.md) | 高性能计算 | L5 | HPC, SIMD | 200+ |
 
-**前置知识**: [07_Modern_C](./07_Modern_C/README.md)
-**后续延伸**: [02_Formal_Semantics_and_Physics](../02_Formal_Semantics_and_Physics/README.md)
+**前置知识**: [07_Modern_C](./07_Modern_C/readme.md)
+**后续延伸**: [02_Formal_Semantics_and_Physics](../02_Formal_Semantics_and_Physics/readme.md)
 
 ---
 
@@ -268,11 +268,11 @@ C11/C17现代特性与扩展。
 
 | 目标 | 路径 | 关系 |
 |:-----|:-----|:-----|
-| 形式语义与物理 | [02_Formal_Semantics_and_Physics](../02_Formal_Semantics_and_Physics/README.md) | 底层实现原理 |
-| 系统技术领域 | [03_System_Technology_Domains](../03_System_Technology_Domains/README.md) | 系统级实现 |
-| 工业场景 | [04_Industrial_Scenarios](../04_Industrial_Scenarios/README.md) | 实际应用案例 |
-| 深层结构 | [05_Deep_Structure_MetaPhysics](../05_Deep_Structure_MetaPhysics/README.md) | 理论基础 |
-| 思维工具 | [06_Thinking_Representation](../06_Thinking_Representation/README.md) | 学习方法 |
+| 形式语义与物理 | [02_Formal_Semantics_and_Physics](../02_Formal_Semantics_and_Physics/readme.md) | 底层实现原理 |
+| 系统技术领域 | [03_System_Technology_Domains](../03_System_Technology_Domains/readme.md) | 系统级实现 |
+| 工业场景 | [04_Industrial_Scenarios](../04_Industrial_Scenarios/readme.md) | 实际应用案例 |
+| 深层结构 | [05_Deep_Structure_MetaPhysics](../05_Deep_Structure_MetaPhysics/readme.md) | 理论基础 |
+| 思维工具 | [06_Thinking_Representation](../06_Thinking_Representation/readme.md) | 学习方法 |
 
 ---
 
@@ -340,7 +340,7 @@ graph TD
 
 ---
 
-> **返回导航**: [知识库总览](../README.md) | [上层目录](..)
+> **返回导航**: [知识库总览](../readme.md) | [上层目录](..)
 
 
 ---

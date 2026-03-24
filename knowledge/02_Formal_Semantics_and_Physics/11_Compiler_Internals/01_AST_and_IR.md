@@ -369,7 +369,7 @@ public:
 
 ### 前置知识
 
-- [编译过程概述](../README.md)
+- [编译过程概述](../readme.md)
 - [C语言文法](../../../01_Core_Knowledge_System/00_Introduction/02_C_Language_Grammar.md)
 
 ### 后续延伸

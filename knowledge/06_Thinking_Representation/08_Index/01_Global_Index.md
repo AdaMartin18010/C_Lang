@@ -7,18 +7,18 @@
 |:-----|:---------|:-----|
 | [内存管理](../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
 | [指针深度](../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
-| [并发编程](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 核心关联 | 并发编程基础 |
+| [并发编程](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 核心关联 | 并发编程基础 |
 | [数据类型](../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
 | [数组与指针](../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
 
 ### 扩展阅读
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [软件工程](../../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
-| [形式语义](../../../02_Formal_Semantics_and_Physics/README.md) | 核心关联 | 形式语义基础 |
-| [系统技术](../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
-| [工业场景](../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
-| [思维表征](../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
+| [软件工程](../../../01_Core_Knowledge_System/05_Engineering_Layer/readme.md) | 核心关联 | 软件工程基础 |
+| [形式语义](../../../02_Formal_Semantics_and_Physics/readme.md) | 核心关联 | 形式语义基础 |
+| [系统技术](../../../03_System_Technology_Domains/readme.md) | 核心关联 | 系统技术基础 |
+| [工业场景](../../../04_Industrial_Scenarios/readme.md) | 核心关联 | 工业场景基础 |
+| [思维表征](../../../06_Thinking_Representation/readme.md) | 核心关联 | 思维表征基础 |
 ﻿# C语言知识库全局索引
 
 > **层级定位**: 06 Thinking Representation / 08 Index
@@ -603,34 +603,34 @@
 - 01_Basic_Layer/02_Data_Type_System.md
 - 01_Basic_Layer/03_Operators_Expressions.md
 - 01_Basic_Layer/04_Control_Flow.md
-- 01_Core/04_Standard_Library_Layer/01_Standard_IO/01_stdio_File_IO.md
-- 01_Core/05_Engineering/01_Makefile.md
+- 01_Core_Knowledge_System/04_Standard_Library_Layer/01_Standard_IO/01_stdio_File_IO.md
+- 01_Core_Knowledge_System/05_Engineering/01_Makefile.md
 
 ### L3 - 中级 (开发者)
 
-- 01_Core/02_Core_Layer/01_Pointer_Depth.md
-- 01_Core/02_Core_Layer/02_Memory_Management.md
-- 01_Core/02_Core_Layer/03_String_Processing.md
-- 01_Core/02_Core_Layer/04_Functions_Scope.md
-- 01_Core/02_Core_Layer/05_Arrays_Pointers.md
-- 01_Core/03_Construction_Layer/*.md
-- 03_System/14_Concurrency_Parallelism/01_POSIX_Threads.md
-- 03_System/15_Network_Programming/01_Socket_Programming.md
+- 01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md
+- 01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md
+- 01_Core_Knowledge_System/02_Core_Layer/03_String_Processing.md
+- 01_Core_Knowledge_System/02_Core_Layer/04_Functions_Scope.md
+- 01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md
+- 01_Core_Knowledge_System/03_Construction_Layer/*.md
+- 03_System_Technology_Domains/14_Concurrency_Parallelism/01_POSIX_Threads.md
+- 03_System_Technology_Domains/15_Network_Programming/01_Socket_Programming.md
 
 ### L4 - 高级 (专家)
 
-- 01_Core/06_Advanced_Layer/*.md
-- 01_Core/07_Modern_C/*.md
-- 03_System/01_Virtual_Machine_Interpreter/*.md
-- 03_System/02_Regex_Engine/*.md
-- 03_System/08_Distributed_Consensus/*.md
+- 01_Core_Knowledge_System/06_Advanced_Layer/*.md
+- 01_Core_Knowledge_System/07_Modern_C/*.md
+- 03_System_Technology_Domains/01_Virtual_Machine_Interpreter/*.md
+- 03_System_Technology_Domains/02_Regex_Engine/*.md
+- 03_System_Technology_Domains/08_Distributed_Consensus/*.md
 
 ### L5 - 专家 (架构师)
 
 - 02_Formal_Semantics/10_ISA_Machine_Code/*.md
-- 03_System/04_Video_Codec/*.md
-- 03_System/06_Security_Boot/*.md
-- 03_System/12_RDMA_Networking/*.md
+- 03_System_Technology_Domains/04_Video_Codec/*.md
+- 03_System_Technology_Domains/06_Security_Boot/*.md
+- 03_System_Technology_Domains/12_RDMA_Networking/*.md
 - 04_Industrial_Scenarios/**/*.md
 
 ### L6 - 大师 (研究者)
@@ -698,7 +698,7 @@
 |:-----|:---------|
 | 嵌入式开发 | 02_Embedded_Systems.md, 01_OS_Kernel.md |
 | 游戏开发 | 05_Game_Engine/*.md |
-| 系统编程 | 03_System/**/*.md |
+| 系统编程 | 03_System_Technology_Domains/**/*.md |
 | 形式化验证 | 05_Deep_Structure/03_Verification_Energy/*.md |
 | 性能优化 | 03_Performance_Optimization.md |
 

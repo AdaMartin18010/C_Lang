@@ -2,7 +2,7 @@
 
 > **层级**: L4 (方法论层) + L3 (系统层)
 > **目标**: 深入理解Linux容器技术原理，掌握Namespace、Cgroups、容器运行时实现
-> **关联**: [Linux内核模块](../03_OS_Internals/05_Linux_Kernel_Module_Programming.md) | [系统编程](../01_System_Programming/README.md)
+> **关联**: [Linux内核模块](../03_OS_Internals/05_Linux_Kernel_Module_Programming.md) | [系统编程](../01_System_Programming/readme.md)
 
 ---
 

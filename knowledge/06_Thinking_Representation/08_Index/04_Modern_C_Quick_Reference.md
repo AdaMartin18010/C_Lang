@@ -238,7 +238,7 @@ thread_local int tls_var;  // 需要头文件
 
 ---
 
-**返回**: [索引总览](./README.md) | [思维表征总览](../README.md) | [现代C特性](../../01_Core_Knowledge_System/07_Modern_C/03_C23_Core_Features.md)
+**返回**: [索引总览](./readme.md) | [思维表征总览](../readme.md) | [现代C特性](../../01_Core_Knowledge_System/07_Modern_C/03_C23_Core_Features.md)
 
 
 ---

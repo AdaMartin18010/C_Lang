@@ -2,7 +2,7 @@
 
 > **层级**: L4 (方法论层) + L3 (系统层)
 > **目标**: 掌握DPDK内核旁路技术，实现用户态高性能网络处理
-> **关联**: [高性能服务器设计](../06_High_Performance_Server/README.md) | [Linux内核模块](../03_OS_Internals/05_Linux_Kernel_Module_Programming.md)
+> **关联**: [高性能服务器设计](../06_High_Performance_Server/readme.md) | [Linux内核模块](../03_OS_Internals/05_Linux_Kernel_Module_Programming.md)
 
 ---
 

@@ -918,10 +918,10 @@ size_t safe_strncpy(char *dest, const char *src, size_t n)
 
 ## 延伸阅读
 
-- [核心层 - 指针与内存](../02_Core_Layer/README.md)
-- [构造层 - 结构体与联合体](../03_Construction_Layer/README.md)
-- [标准库层 - I/O 与字符串](../04_Standard_Library_Layer/README.md)
-- [现代 C 编程](../07_Modern_C/README.md)
+- [核心层 - 指针与内存](../02_Core_Layer/readme.md)
+- [构造层 - 结构体与联合体](../03_Construction_Layer/readme.md)
+- [标准库层 - I/O 与字符串](../04_Standard_Library_Layer/readme.md)
+- [现代 C 编程](../07_Modern_C/readme.md)
 
 
 ---

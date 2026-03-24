@@ -14,15 +14,15 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [物理机器层](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/README.md) | 硬件基础 | CPU微架构实现 |
-| [微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 架构基础 | 处理器安全特性 |
-| [ISA机器码](../../02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/README.md) | 指令基础 | 特权指令、安全扩展 |
+| [物理机器层](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/readme.md) | 硬件基础 | CPU微架构实现 |
+| [微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/readme.md) | 架构基础 | 处理器安全特性 |
+| [ISA机器码](../../02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/readme.md) | 指令基础 | 特权指令、安全扩展 |
 
 ### 核心技术
 
 | 技术 | 标准 | 关联文档 |
 |:-----|:-----|:---------|
-| TrustZone | ARM | [安全启动](../06_Security_Boot/README.md) |
+| TrustZone | ARM | [安全启动](../06_Security_Boot/readme.md) |
 | SGX | Intel | 机密计算 |
 | TPM 2.0 | TCG | 可信计算 |
 
@@ -30,9 +30,9 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [安全启动](../06_Security_Boot/README.md) | 应用场景 | 硬件安全启动实现 |
+| [安全启动](../06_Security_Boot/readme.md) | 应用场景 | 硬件安全启动实现 |
 | [安全编码](../../01_Core_Knowledge_System/09_Safety_Standards/04_Secure_Coding_Guide.md) | 软件安全 | 密码学安全编码 |
-| [形式化验证](../../02_Formal_Semantics_and_Physics/11_CompCert_Verification/README.md) | 验证保障 | 安全属性证明 |
+| [形式化验证](../../02_Formal_Semantics_and_Physics/11_CompCert_Verification/readme.md) | 验证保障 | 安全属性证明 |
 
 ---
 

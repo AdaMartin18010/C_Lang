@@ -14,7 +14,7 @@
 |:-----|:---------|:-----|
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 内存语义、屏障 |
 | [内存映射](../../01_System_Programming/05_Memory_Mapped_Files.md) | 系统基础 | mmap机制 |
-| [内存数据库](../11_In_Memory_Database/README.md) | 应用场景 | 持久化存储 |
+| [内存数据库](../11_In_Memory_Database/readme.md) | 应用场景 | 持久化存储 |
 
 ### 核心技术
 
@@ -29,8 +29,8 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [C11内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md) | 一致性模型 | 持久内存序 |
-| [并发编程](../14_Concurrency_Parallelism/README.md) | 事务实现 | 乐观并发控制 |
-| [存储系统](../../04_Industrial_Scenarios/01_High_Performance/README.md) | 系统架构 | 存储引擎设计 |
+| [并发编程](../14_Concurrency_Parallelism/readme.md) | 事务实现 | 乐观并发控制 |
+| [存储系统](../../04_Industrial_Scenarios/01_High_Performance/readme.md) | 系统架构 | 存储引擎设计 |
 
 ## 目录
 

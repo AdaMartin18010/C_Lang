@@ -493,12 +493,12 @@ ELF文件结构（简化）：
 ### 前置知识
 
 - [AST与IR](./01_AST_and_IR.md)
-- [计算机体系结构](../09_Physical_Machine_Layer/README.md)
+- [计算机体系结构](../09_Physical_Machine_Layer/readme.md)
 
 ### 后续延伸
 
 - [优化技术](./03_Optimization_Techniques.md)
-- [链接与加载](../08_Linking_Loading_Topology/README.md)
+- [链接与加载](../08_Linking_Loading_Topology/readme.md)
 
 ### 参考
 

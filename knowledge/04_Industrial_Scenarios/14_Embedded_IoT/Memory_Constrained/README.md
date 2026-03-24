@@ -256,7 +256,7 @@ brew install avr-gcc avrdude
 
 ## 📚 与主文档的关系
 
-本目录是 [14_Embedded_IoT](../README.md) 的核心基础技术，为其他平台提供优化思路。
+本目录是 [14_Embedded_IoT](../readme.md) 的核心基础技术，为其他平台提供优化思路。
 
 ### 文档架构
 
@@ -275,10 +275,10 @@ Memory_Constrained/
 
 | 本目录技术 | 关联平台 | 应用方式 |
 |:-----------|:---------|:---------|
-| 内存池 | [../ESP32](../ESP32/README.md) | 避免堆碎片，提高稳定性 |
-| 代码优化 | [../RPi_Pico](../RPi_Pico/README.md) | 减小固件体积 |
-| 位域操作 | [../Baremetal](../Baremetal/README.md) | 寄存器访问优化 |
-| 数据结构压缩 | [../IoT_Protocols](../IoT_Protocols/README.md) | 协议包优化 |
+| 内存池 | [../ESP32](../ESP32/readme.md) | 避免堆碎片，提高稳定性 |
+| 代码优化 | [../RPi_Pico](../RPi_Pico/readme.md) | 减小固件体积 |
+| 位域操作 | [../Baremetal](../Baremetal/readme.md) | 寄存器访问优化 |
+| 数据结构压缩 | [../IoT_Protocols](../IoT_Protocols/readme.md) | 协议包优化 |
 
 ### 适用平台对比
 
@@ -591,7 +591,7 @@ void memory_print_stats(void) {
 
 ## 🔗 返回上级
 
-[← 返回 14_Embedded_IoT 目录](../README.md)
+[← 返回 14_Embedded_IoT 目录](../readme.md)
 
 ---
 

@@ -8,9 +8,9 @@
 | 维度 | 目标文档 | 导航作用 |
 |:-----|:---------|:---------|
 | **总索引** | [../00_GLOBAL_INDEX.md](../00_GLOBAL_INDEX.md) | 完整知识图谱入口，全局视角 |
-| **本模块** | [../README.md](../README.md) | 模块总览与目录导航 |
-| **学习路径** | [../06_Thinking_Representation/06_Learning_Paths/README.md](../06_Thinking_Representation/06_Learning_Paths/README.md) | 阶段化学习路线规划 |
-| **概念映射** | [../06_Thinking_Representation/05_Concept_Mappings/README.md](../06_Thinking_Representation/05_Concept_Mappings/README.md) | 核心概念等价关系图 |
+| **本模块** | [../readme.md](../readme.md) | 模块总览与目录导航 |
+| **学习路径** | [../06_Thinking_Representation/06_Learning_Paths/readme.md](../06_Thinking_Representation/06_Learning_Paths/readme.md) | 阶段化学习路线规划 |
+| **概念映射** | [../06_Thinking_Representation/05_Concept_Mappings/readme.md](../06_Thinking_Representation/05_Concept_Mappings/readme.md) | 核心概念等价关系图 |
 
 ### 【阶段层】学习定位
 
@@ -33,19 +33,19 @@
 
 | 层级 | 关联文档 | 层次关系 |
 |:-----|:---------|:---------|
-| **理论基础** | [../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md](../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | 语义学理论基础 |
-| **核心机制** | [../01_Core_Knowledge_System/02_Core_Layer/README.md](../01_Core_Knowledge_System/02_Core_Layer/README.md) | C语言核心机制 |
-| **标准接口** | [../01_Core_Knowledge_System/04_Standard_Library_Layer/README.md](../01_Core_Knowledge_System/04_Standard_Library_Layer/README.md) | 标准库API |
-| **系统实现** | [../03_System_Technology_Domains/README.md](../03_System_Technology_Domains/README.md) | 系统级实现 |
+| **理论基础** | [../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md](../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md) | 语义学理论基础 |
+| **核心机制** | [../01_Core_Knowledge_System/02_Core_Layer/readme.md](../01_Core_Knowledge_System/02_Core_Layer/readme.md) | C语言核心机制 |
+| **标准接口** | [../01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md](../01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md) | 标准库API |
+| **系统实现** | [../03_System_Technology_Domains/readme.md](../03_System_Technology_Domains/readme.md) | 系统级实现 |
 
 ### 【局部层】横向关联网
 
 | 关联类型 | 目标文档 | 关联说明 |
 |:---------|:---------|:---------|
-| **技术扩展** | [../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md](../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并发编程技术 |
-| **安全规范** | [../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md](../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 安全编码标准 |
-| **工具支持** | [../07_Modern_Toolchain/README.md](../07_Modern_Toolchain/README.md) | 现代开发工具链 |
-| **实践案例** | [../04_Industrial_Scenarios/README.md](../04_Industrial_Scenarios/README.md) | 工业实践场景 |
+| **技术扩展** | [../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md](../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 并发编程技术 |
+| **安全规范** | [../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md](../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md) | 安全编码标准 |
+| **工具支持** | [../07_Modern_Toolchain/readme.md](../07_Modern_Toolchain/readme.md) | 现代开发工具链 |
+| **实践案例** | [../04_Industrial_Scenarios/readme.md](../04_Industrial_Scenarios/readme.md) | 工业实践场景 |
 
 ### 【总体层】知识体系架构
 
@@ -68,9 +68,9 @@
 | 目标 | 推荐路径 | 关键文档 |
 |:-----|:---------|:---------|
 | **系统学习** | 01 → 02 → 03 → 04 | 按顺序阅读各模块 |
-| **问题导向** | 06决策树 → 相关模块 | [决策树目录](../06_Thinking_Representation/01_Decision_Trees/README.md) |
-| **项目驱动** | 04案例 → 所需知识 | [工业场景](../04_Industrial_Scenarios/README.md) |
-| **深入研究** | 02形式语义 → 11CompCert | [形式语义](../02_Formal_Semantics_and_Physics/README.md) |
+| **问题导向** | 06决策树 → 相关模块 | [决策树目录](../06_Thinking_Representation/01_Decision_Trees/readme.md) |
+| **项目驱动** | 04案例 → 所需知识 | [工业场景](../04_Industrial_Scenarios/readme.md) |
+| **深入研究** | 02形式语义 → 11CompCert | [形式语义](../02_Formal_Semantics_and_Physics/readme.md) |
 
 ---
 
@@ -105,8 +105,8 @@
 
 | 文档 | 关系 | 说明 |
 |:-----|:-----|:-----|
-| [并发编程](../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 应用延伸 | 内存模型应用 |
-| [系统编程](../03_System_Technology_Domains/01_System_Programming/README.md) | 系统实现 | 底层系统调用 |
+| [并发编程](../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 应用延伸 | 内存模型应用 |
+| [系统编程](../03_System_Technology_Domains/01_System_Programming/readme.md) | 系统实现 | 底层系统调用 |
 | [性能优化](../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md) | 优化应用 | 微架构优化 |
 >
 > **新增内容 (2026-03-14)**:
@@ -125,7 +125,7 @@
 
 | 文件 | 主题 | 难度 | 参考来源 | 代码行数 |
 |:-----|:-----|:----:|:---------|:--------:|
-| [00_Core_Semantics_Foundations/README.md](./00_Core_Semantics_Foundations/README.md) | 模块概述与学习路径 | L5 | 本模块 | - |
+| [00_Core_Semantics_Foundations/readme.md](./00_Core_Semantics_Foundations/readme.md) | 模块概述与学习路径 | L5 | 本模块 | - |
 | [00_Core_Semantics_Foundations/01_Operational_Semantics.md](./00_Core_Semantics_Foundations/01_Operational_Semantics.md) | 操作语义基础 | L5 | Plotkin, Winskel | 438 |
 | [00_Core_Semantics_Foundations/02_Denotational_Semantics.md](./00_Core_Semantics_Foundations/02_Denotational_Semantics.md) | 指称语义基础 | L6 | Scott, Strachey | 382 |
 | [00_Core_Semantics_Foundations/03_Axiomatic_Semantics_Hoare.md](./00_Core_Semantics_Foundations/03_Axiomatic_Semantics_Hoare.md) | 公理语义与Hoare逻辑 | L5 | Hoare (1969) | 456 |
@@ -133,7 +133,7 @@
 | [00_Core_Semantics_Foundations/05_Undefined_Behavior_Semantics.md](./00_Core_Semantics_Foundations/05_Undefined_Behavior_Semantics.md) | 未定义行为语义边界 | L6 | C标准 §3.4.3 | 468 |
 
 **前置知识**: 数理逻辑、集合论、递归论
-**关联**: [11_CompCert_Verification](./11_CompCert_Verification/README.md)
+**关联**: [11_CompCert_Verification](./11_CompCert_Verification/readme.md)
 
 ---
 
@@ -161,7 +161,7 @@
 | [02_Bisimulation.md](./02_Coalgebraic_Methods/02_Bisimulation.md) | 互模拟关系 | L6 | Milner, Sangiorgi | 538 |
 
 **前置知识**: 范畴论、代数数据结构
-**关联**: [03_System_Technology_Domains/08_Distributed_Consensus](../03_System_Technology_Domains/08_Distributed_Consensus/README.md)
+**关联**: [03_System_Technology_Domains/08_Distributed_Consensus](../03_System_Technology_Domains/08_Distributed_Consensus/readme.md)
 
 ---
 
@@ -202,7 +202,7 @@
 | [02_Embodied_Cognition.md](./04_Cognitive_Representation/02_Embodied_Cognition.md) | 具身认知 | L5 | Lakoff, Nunez | 442 |
 
 **前置知识**: 认知心理学
-**关联**: [06_Thinking_Representation/01_Decision_Trees](../06_Thinking_Representation/01_Decision_Trees/README.md)
+**关联**: [06_Thinking_Representation/01_Decision_Trees](../06_Thinking_Representation/01_Decision_Trees/readme.md)
 
 ---
 
@@ -216,7 +216,7 @@
 | [02_Randomized_Algorithms.md](./05_Quantum_Random_Computing/02_Randomized_Algorithms.md) | 随机化算法 | L5 | Motwani, Raghavan | 447 |
 
 **前置知识**: 线性代数、概率论
-**关联**: [04_Industrial_Scenarios/06_Quantum_Computing](../04_Industrial_Scenarios/06_Quantum_Computing/README.md)
+**关联**: [04_Industrial_Scenarios/06_Quantum_Computing](../04_Industrial_Scenarios/06_Quantum_Computing/readme.md)
 
 ---
 
@@ -243,10 +243,10 @@ C语言构造到机器代码的形式化映射。
 |:-----|:-----|:----:|:---------|:--------:|
 | [01_Cycle_Accurate_Semantics.md](./07_Microarchitecture/01_Cycle_Accurate_Semantics.md) | 周期精确语义 | L6 | Sail ISA Spec | 267 |
 | [02_Speculative_Execution.md](./07_Microarchitecture/02_Speculative_Execution.md) | 推测执行 | L6 | Kocher et al. (Spectre) | 388 |
-| [README.md](./07_Microarchitecture/README.md) | 微架构与性能编程 | L5 | Intel/AMD手册 | 692 |
+| [readme.md](./07_Microarchitecture/readme.md) | 微架构与性能编程 | L5 | Intel/AMD手册 | 692 |
 
 **前置知识**: 计算机体系结构
-**关联**: [04_Industrial_Scenarios/03_High_Frequency_Trading](../04_Industrial_Scenarios/03_High_Frequency_Trading/README.md)
+**关联**: [04_Industrial_Scenarios/03_High_Frequency_Trading](../04_Industrial_Scenarios/03_High_Frequency_Trading/readme.md)
 
 ---
 
@@ -256,12 +256,12 @@ CPU微架构、内存层次结构、缓存一致性。
 
 | 文件 | 主题 | 难度 | 参考来源 | 代码行数 |
 |:-----|:-----|:----:|:---------|:--------:|
-| [README.md](./09_Physical_Machine_Layer/README.md) | 物理机器层概述 | L4 | Hennessy & Patterson | 472 |
+| [readme.md](./09_Physical_Machine_Layer/readme.md) | 物理机器层概述 | L4 | Hennessy & Patterson | 472 |
 | [01_CPU_Microarchitecture_Detail.md](./09_Physical_Machine_Layer/01_CPU_Microarchitecture_Detail.md) | CPU微架构详解 | L5 | Agner Fog | 24758 |
 | [05_Modern_CPU_Architectures_2024.md](./09_Physical_Machine_Layer/05_Modern_CPU_Architectures_2024.md) | 现代CPU架构2024 | L5 | Intel/AMD/ARM手册 | 18956 |
 
 **前置知识**: 数字逻辑、计算机组成原理
-**关联**: [04_Industrial_Scenarios/03_High_Frequency_Trading](../04_Industrial_Scenarios/03_High_Frequency_Trading/README.md)
+**关联**: [04_Industrial_Scenarios/03_High_Frequency_Trading](../04_Industrial_Scenarios/03_High_Frequency_Trading/readme.md)
 
 ---
 
@@ -271,7 +271,7 @@ CPU微架构、内存层次结构、缓存一致性。
 
 | 文件 | 主题 | 难度 | 参考来源 | 代码行数 |
 |:-----|:-----|:----:|:---------|:--------:|
-| [README.md](./11_CompCert_Verification/README.md) | CompCert概述 | L6 | CompCert.org | - |
+| [readme.md](./11_CompCert_Verification/readme.md) | CompCert概述 | L6 | CompCert.org | - |
 | [01_Compcert_Overview.md](./11_CompCert_Verification/01_Compcert_Overview.md) | CompCert架构 | L6 | Xavier Leroy | - |
 | [02_VST_Separation_Logic_Practical.md](./11_CompCert_Verification/02_VST_Separation_Logic_Practical.md) | VST分离逻辑实战 | L6 | POPL 2024 | 20491 |
 
@@ -333,9 +333,9 @@ graph TB
 
 | 目标 | 路径 |
 |:-----|:-----|
-| 核心基础 | [01_Core_Knowledge_System](../01_Core_Knowledge_System/README.md) |
-| 系统技术 | [03_System_Technology_Domains](../03_System_Technology_Domains/README.md) |
-| 深层结构 | [05_Deep_Structure_MetaPhysics](../05_Deep_Structure_MetaPhysics/README.md) |
+| 核心基础 | [01_Core_Knowledge_System](../01_Core_Knowledge_System/readme.md) |
+| 系统技术 | [03_System_Technology_Domains](../03_System_Technology_Domains/readme.md) |
+| 深层结构 | [05_Deep_Structure_MetaPhysics](../05_Deep_Structure_MetaPhysics/readme.md) |
 
 ---
 
@@ -343,7 +343,7 @@ graph TB
 
 ---
 
-> **返回导航**: [知识库总览](../README.md) | [上层目录](..)
+> **返回导航**: [知识库总览](../readme.md) | [上层目录](..)
 
 
 ---

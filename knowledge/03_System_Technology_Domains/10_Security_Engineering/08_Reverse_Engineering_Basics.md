@@ -431,8 +431,8 @@ void trace_process(pid_t pid) {
 
 ### 前置知识
 
-- [汇编语言基础](../../02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/README.md)
-- [链接与加载](../../02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/README.md)
+- [汇编语言基础](../../02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/readme.md)
+- [链接与加载](../../02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/readme.md)
 
 ### 后续延伸
 

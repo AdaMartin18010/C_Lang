@@ -36,11 +36,11 @@ coqide 01_Swap_Proof.v
 ## 相关资源
 
 - [CompCert验证目录](../) - 返回上级目录
-- [Isabelle/HOL案例](../05_Practical_Verification_Cases/README.md) - 其他证明工具
+- [Isabelle/HOL案例](../05_Practical_Verification_Cases/readme.md) - 其他证明工具
 
 ---
 
-> **返回导航**: [CompCert验证](../README.md) | [形式语义总览](../../README.md)
+> **返回导航**: [CompCert验证](../readme.md) | [形式语义总览](../../readme.md)
 
 
 ---

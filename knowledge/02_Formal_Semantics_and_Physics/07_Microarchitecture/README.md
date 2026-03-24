@@ -13,7 +13,7 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [C与汇编映射](../06_C_Assembly_Mapping/README.md) | 指令基础 | 汇编指令执行 |
+| [C与汇编映射](../06_C_Assembly_Mapping/readme.md) | 指令基础 | 汇编指令执行 |
 | [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 代码模式 | 缓存友好访问模式 |
 | [性能优化](../../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md) | 优化实践 | 软件层面优化 |
 
@@ -21,16 +21,16 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [物理机器层](../09_Physical_Machine_Layer/README.md) | 硬件实现 | CPU物理实现 |
-| [ISA机器码](../10_ISA_Machine_Code/README.md) | 指令架构 | 指令集与微架构接口 |
-| [编译器优化](../12_Compiler_Optimization/README.md) | 优化生成 | 编译器生成优化代码 |
+| [物理机器层](../09_Physical_Machine_Layer/readme.md) | 硬件实现 | CPU物理实现 |
+| [ISA机器码](../10_ISA_Machine_Code/readme.md) | 指令架构 | 指令集与微架构接口 |
+| [编译器优化](../12_Compiler_Optimization/readme.md) | 优化生成 | 编译器生成优化代码 |
 
 ### 横向关联
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 多核架构 | 缓存一致性、内存序 |
-| [性能分析硬件](../16_Performance_Analysis_Hardware/README.md) | 性能测量 | PMU、Perf工具 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 多核架构 | 缓存一致性、内存序 |
+| [性能分析硬件](../16_Performance_Analysis_Hardware/readme.md) | 性能测量 | PMU、Perf工具 |
 
 > 现代 CPU 并非简单的顺序执行机器，而是复杂的动态优化引擎，只有理解其内部机制，才能编写出与硬件"同频共振"的高效代码。
 

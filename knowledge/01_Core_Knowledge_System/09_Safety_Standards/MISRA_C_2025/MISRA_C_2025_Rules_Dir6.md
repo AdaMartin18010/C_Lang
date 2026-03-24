@@ -800,5 +800,5 @@ static_assert(sizeof(uintptr_t) >= sizeof(void *), "pointer size");
 
 ### 扩展阅读
 
-- [核心知识体系](../../01_Core_Knowledge_System/README.md)
+- [核心知识体系](../../01_Core_Knowledge_System/readme.md)
 - [全局索引](../../00_GLOBAL_INDEX.md)

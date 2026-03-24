@@ -2,7 +2,7 @@
 
 > **层级**: L4 (方法论层)  
 > **目标**: 掌握GPU并行计算原理，理解CUDA编程模型与性能优化  
-> **关联**: [性能工程](../05_Performance_Engineering/README.md) | [并行计算](../04_Concurrency_and_Parallelism/README.md)
+> **关联**: [性能工程](../05_Performance_Engineering/readme.md) | [并行计算](../04_Concurrency_and_Parallelism/readme.md)
 
 ---
 

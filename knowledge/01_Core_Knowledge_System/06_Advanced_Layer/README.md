@@ -779,6 +779,6 @@ static const int squares[] = { TABLE_16(SQUARE) };
 - 调试与优化技巧
 
 ### 扩展阅读
-- [核心知识体系](../../01_Core_Knowledge_System/README.md)
+- [核心知识体系](../../01_Core_Knowledge_System/readme.md)
 - [全局索引](../../00_GLOBAL_INDEX.md)
 

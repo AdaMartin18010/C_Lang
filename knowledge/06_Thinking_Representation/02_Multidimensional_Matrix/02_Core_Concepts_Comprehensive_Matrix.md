@@ -222,7 +222,7 @@
 
 ---
 
-**返回**: [多维矩阵总览](./README.md) | [全局架构图](../00_GLOBAL_ARCHITECTURE_MAP.md)
+**返回**: [多维矩阵总览](./readme.md) | [全局架构图](../00_GLOBAL_ARCHITECTURE_MAP.md)
 
 
 ---

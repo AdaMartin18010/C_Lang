@@ -326,9 +326,9 @@ graph TD
 
 ## 🔗 相关资源
 
-- [返回上级目录](../README.md)
-- [应用场景树](../04_Application_Scenario_Trees/README.md) - 了解C语言应用领域
-- [现代工具链](../../07_Modern_Toolchain/README.md) - 掌握现代C开发工具
+- [返回上级目录](../readme.md)
+- [应用场景树](../04_Application_Scenario_Trees/readme.md) - 了解C语言应用领域
+- [现代工具链](../../07_Modern_Toolchain/readme.md) - 掌握现代C开发工具
 
 ---
 

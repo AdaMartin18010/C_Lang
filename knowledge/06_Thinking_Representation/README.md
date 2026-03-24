@@ -8,9 +8,9 @@
 | 维度 | 目标文档 | 导航作用 |
 |:-----|:---------|:---------|
 | **总索引** | [../00_GLOBAL_INDEX.md](../00_GLOBAL_INDEX.md) | 完整知识图谱入口，全局视角 |
-| **本模块** | [../README.md](../README.md) | 模块总览与目录导航 |
-| **学习路径** | [../06_Thinking_Representation/06_Learning_Paths/README.md](../06_Thinking_Representation/06_Learning_Paths/README.md) | 阶段化学习路线规划 |
-| **概念映射** | [../06_Thinking_Representation/05_Concept_Mappings/README.md](../06_Thinking_Representation/05_Concept_Mappings/README.md) | 核心概念等价关系图 |
+| **本模块** | [../readme.md](../readme.md) | 模块总览与目录导航 |
+| **学习路径** | [../06_Thinking_Representation/06_Learning_Paths/readme.md](../06_Thinking_Representation/06_Learning_Paths/readme.md) | 阶段化学习路线规划 |
+| **概念映射** | [../06_Thinking_Representation/05_Concept_Mappings/readme.md](../06_Thinking_Representation/05_Concept_Mappings/readme.md) | 核心概念等价关系图 |
 
 ### 【阶段层】学习定位
 
@@ -33,19 +33,19 @@
 
 | 层级 | 关联文档 | 层次关系 |
 |:-----|:---------|:---------|
-| **理论基础** | [../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md](../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | 语义学理论基础 |
-| **核心机制** | [../01_Core_Knowledge_System/02_Core_Layer/README.md](../01_Core_Knowledge_System/02_Core_Layer/README.md) | C语言核心机制 |
-| **标准接口** | [../01_Core_Knowledge_System/04_Standard_Library_Layer/README.md](../01_Core_Knowledge_System/04_Standard_Library_Layer/README.md) | 标准库API |
-| **系统实现** | [../03_System_Technology_Domains/README.md](../03_System_Technology_Domains/README.md) | 系统级实现 |
+| **理论基础** | [../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md](../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md) | 语义学理论基础 |
+| **核心机制** | [../01_Core_Knowledge_System/02_Core_Layer/readme.md](../01_Core_Knowledge_System/02_Core_Layer/readme.md) | C语言核心机制 |
+| **标准接口** | [../01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md](../01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md) | 标准库API |
+| **系统实现** | [../03_System_Technology_Domains/readme.md](../03_System_Technology_Domains/readme.md) | 系统级实现 |
 
 ### 【局部层】横向关联网
 
 | 关联类型 | 目标文档 | 关联说明 |
 |:---------|:---------|:---------|
-| **技术扩展** | [../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md](../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并发编程技术 |
-| **安全规范** | [../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md](../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 安全编码标准 |
-| **工具支持** | [../07_Modern_Toolchain/README.md](../07_Modern_Toolchain/README.md) | 现代开发工具链 |
-| **实践案例** | [../04_Industrial_Scenarios/README.md](../04_Industrial_Scenarios/README.md) | 工业实践场景 |
+| **技术扩展** | [../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md](../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 并发编程技术 |
+| **安全规范** | [../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md](../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md) | 安全编码标准 |
+| **工具支持** | [../07_Modern_Toolchain/readme.md](../07_Modern_Toolchain/readme.md) | 现代开发工具链 |
+| **实践案例** | [../04_Industrial_Scenarios/readme.md](../04_Industrial_Scenarios/readme.md) | 工业实践场景 |
 
 ### 【总体层】知识体系架构
 
@@ -68,9 +68,9 @@
 | 目标 | 推荐路径 | 关键文档 |
 |:-----|:---------|:---------|
 | **系统学习** | 01 → 02 → 03 → 04 | 按顺序阅读各模块 |
-| **问题导向** | 06决策树 → 相关模块 | [决策树目录](../06_Thinking_Representation/01_Decision_Trees/README.md) |
-| **项目驱动** | 04案例 → 所需知识 | [工业场景](../04_Industrial_Scenarios/README.md) |
-| **深入研究** | 02形式语义 → 11CompCert | [形式语义](../02_Formal_Semantics_and_Physics/README.md) |
+| **问题导向** | 06决策树 → 相关模块 | [决策树目录](../06_Thinking_Representation/01_Decision_Trees/readme.md) |
+| **项目驱动** | 04案例 → 所需知识 | [工业场景](../04_Industrial_Scenarios/readme.md) |
+| **深入研究** | 02形式语义 → 11CompCert | [形式语义](../02_Formal_Semantics_and_Physics/readme.md) |
 
 ---
 
@@ -161,7 +161,7 @@
 | 文件 | 主题 | 场景 |
 |:-----|:-----|:-----|
 | [01_Industry_Application_Scenario_Tree.md](04_Application_Scenario_Trees/01_Industry_Application_Scenario_Tree.md) | 行业应用场景 | 多行业覆盖 | ✅ |
-| [README.md](04_Application_Scenario_Trees/README.md) | 场景说明文档 | 概述 | ✅ |
+| [readme.md](04_Application_Scenario_Trees/readme.md) | 场景说明文档 | 概述 | ✅ |
 
 ---
 
@@ -179,7 +179,7 @@
 
 ### 08_Index - 索引与导航
 
-> 注：学习路径已移至 [06_Learning_Paths](./06_Learning_Paths/README.md)
+> 注：学习路径已移至 [06_Learning_Paths](./06_Learning_Paths/readme.md)
 
 快速查找工具。
 
@@ -232,19 +232,19 @@ graph TB
 
 ### 遇到问题时
 
-1. 查阅 [01_Decision_Trees](./01_Decision_Trees/README.md) 进行故障诊断
-2. 参考 [04_Case_Studies](./04_Case_Studies/README.md) 看类似问题如何解决
+1. 查阅 [01_Decision_Trees](./01_Decision_Trees/readme.md) 进行故障诊断
+2. 参考 [04_Case_Studies](./04_Case_Studies/readme.md) 看类似问题如何解决
 
 ### 技术选型时
 
-1. 查阅 [02_Comparison_Matrices](./02_Comparison_Matrices/README.md) 对比不同方案
-2. 参考 [04_Application_Scenario_Trees](./04_Application_Scenario_Trees/README.md) 看场景匹配
+1. 查阅 [02_Comparison_Matrices](./02_Comparison_Matrices/readme.md) 对比不同方案
+2. 参考 [04_Application_Scenario_Trees](./04_Application_Scenario_Trees/readme.md) 看场景匹配
 
 ### 学习新知识时
 
-1. 查看 [03_Mind_Maps](./03_Mind_Maps/README.md) 了解知识结构
+1. 查看 [03_Mind_Maps](./03_Mind_Maps/readme.md) 了解知识结构
 2. 跟随 [07_Knowledge_Graph/02_Learning_Paths.md](./07_Knowledge_Graph/02_Learning_Paths.md) 学习
-3. 理解 [05_Concept_Mappings](./05_Concept_Mappings/README.md) 中的概念关联
+3. 理解 [05_Concept_Mappings](./05_Concept_Mappings/readme.md) 中的概念关联
 
 ### 快速查找时
 
@@ -257,11 +257,11 @@ graph TB
 
 | 目标 | 关系 |
 |:-----|:-----|
-| [01_Core_Knowledge_System](../01_Core_Knowledge_System/README.md) | 提供导航和思维工具 |
-| [02_Formal_Semantics_and_Physics](../02_Formal_Semantics_and_Physics/README.md) | 可视化抽象概念 |
-| [03_System_Technology_Domains](../03_System_Technology_Domains/README.md) | 案例和决策支持 |
-| [04_Industrial_Scenarios](../04_Industrial_Scenarios/README.md) | 工业场景映射 |
-| [05_Deep_Structure_MetaPhysics](../05_Deep_Structure_MetaPhysics/README.md) | 理论概念可视化 |
+| [01_Core_Knowledge_System](../01_Core_Knowledge_System/readme.md) | 提供导航和思维工具 |
+| [02_Formal_Semantics_and_Physics](../02_Formal_Semantics_and_Physics/readme.md) | 可视化抽象概念 |
+| [03_System_Technology_Domains](../03_System_Technology_Domains/readme.md) | 案例和决策支持 |
+| [04_Industrial_Scenarios](../04_Industrial_Scenarios/readme.md) | 工业场景映射 |
+| [05_Deep_Structure_MetaPhysics](../05_Deep_Structure_MetaPhysics/readme.md) | 理论概念可视化 |
 
 ---
 
@@ -269,14 +269,14 @@ graph TB
 
 | 问题类型 | 推荐工具 | 文件 |
 |:---------|:---------|:-----|
-| "出错了怎么办？" | 决策树 | [01_Decision_Trees](./01_Decision_Trees/README.md) |
-| "选A还是选B？" | 对比矩阵 | [02_Comparison_Matrices](./02_Comparison_Matrices/README.md) |
-| "整体结构是什么？" | 思维导图 | [03_Mind_Maps](./03_Mind_Maps/README.md) |
-| "实际怎么用？" | 案例研究 | [04_Case_Studies](./04_Case_Studies/README.md) |
-| "这些概念什么关系？" | 概念映射 | [05_Concept_Mappings](./05_Concept_Mappings/README.md) |
-| "适合什么场景？" | 应用场景 | [04_Application_Scenario_Trees](./04_Application_Scenario_Trees/README.md) |
-| "从哪里开始学？" | 知识图谱 | [07_Knowledge_Graph](./07_Knowledge_Graph/README.md) |
-| "怎么快速找到？" | 索引 | [08_Index](./08_Index/README.md) |
+| "出错了怎么办？" | 决策树 | [01_Decision_Trees](./01_Decision_Trees/readme.md) |
+| "选A还是选B？" | 对比矩阵 | [02_Comparison_Matrices](./02_Comparison_Matrices/readme.md) |
+| "整体结构是什么？" | 思维导图 | [03_Mind_Maps](./03_Mind_Maps/readme.md) |
+| "实际怎么用？" | 案例研究 | [04_Case_Studies](./04_Case_Studies/readme.md) |
+| "这些概念什么关系？" | 概念映射 | [05_Concept_Mappings](./05_Concept_Mappings/readme.md) |
+| "适合什么场景？" | 应用场景 | [04_Application_Scenario_Trees](./04_Application_Scenario_Trees/readme.md) |
+| "从哪里开始学？" | 知识图谱 | [07_Knowledge_Graph](./07_Knowledge_Graph/readme.md) |
+| "怎么快速找到？" | 索引 | [08_Index](./08_Index/readme.md) |
 
 ---
 
@@ -310,7 +310,7 @@ graph TB
 
 ---
 
-> **返回导航**: [知识库总览](../README.md) | [上层目录](..)
+> **返回导航**: [知识库总览](../readme.md) | [上层目录](..)
 
 
 ---

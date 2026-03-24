@@ -307,9 +307,9 @@ void* alloc_hugepage(size_t size) {
 ### 前置知识
 
 - [内存管理](02_Memory_Management.md)
-- [内存对齐与布局](./README.md)
+- [内存对齐与布局](./readme.md)
 
 ### 后续延伸
 
-- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md)
+- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md)
 - [性能优化](../05_Engineering_Layer/03_Performance_Optimization.md)

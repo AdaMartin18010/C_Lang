@@ -8,12 +8,12 @@
 
 | 标准 | 应用领域 | 文档状态 |
 |:-----|:---------|:--------:|
-| [MISRA C:2023](./MISRA_C_2023/README.md) | 汽车、航空、工业 | ✅ 完成(220条规则+工具) |
-| [IEEE 754-2019](../01_Basic_Layer/IEEE_754_Floating_Point/README.md) | 浮点运算 | ✅ 完成(核心) |
-| [ISO 26262](./ISO_26262/README.md) | 汽车功能安全 | ✅ 完成(概述+ASIL分解) |
-| [DO-178C](./DO_178C/README.md) | 航空软件 | ✅ 完成(概述+MC/DC) |
-| [IEC 61508](./IEC_61508/README.md) | 工业功能安全 | ✅ 完成(概述+SIL实施) |
-| [POSIX.1-2024](./POSIX_1_2024/README.md) | 可移植操作系统 | ✅ 完成(概述) |
+| [MISRA C:2023](./MISRA_C_2023/readme.md) | 汽车、航空、工业 | ✅ 完成(220条规则+工具) |
+| [IEEE 754-2019](../01_Basic_Layer/IEEE_754_Floating_Point/readme.md) | 浮点运算 | ✅ 完成(核心) |
+| [ISO 26262](./ISO_26262/readme.md) | 汽车功能安全 | ✅ 完成(概述+ASIL分解) |
+| [DO-178C](./DO_178C/readme.md) | 航空软件 | ✅ 完成(概述+MC/DC) |
+| [IEC 61508](./IEC_61508/readme.md) | 工业功能安全 | ✅ 完成(概述+SIL实施) |
+| [POSIX.1-2024](./POSIX_1_2024/readme.md) | 可移植操作系统 | ✅ 完成(概述) |
 | [快速参考指南](./00_Quick_Reference_Guide.md) | 全部标准 | ✅ 完成(速查表) |
 
 ---

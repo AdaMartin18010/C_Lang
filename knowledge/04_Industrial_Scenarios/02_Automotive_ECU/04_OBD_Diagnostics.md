@@ -542,7 +542,7 @@ const dtc_entry_t* lookup_dtc(uint16_t code) {
 
 ---
 
-> **返回导航**: [工业场景目录](../README.md) | [知识库总览](../../00_INDEX.md)
+> **返回导航**: [工业场景目录](../readme.md) | [知识库总览](../../00_INDEX.md)
 
 
 ---
@@ -595,5 +595,5 @@ const dtc_entry_t* lookup_dtc(uint16_t code) {
 
 ### 扩展阅读
 
-- [核心知识体系](../../01_Core_Knowledge_System/README.md)
+- [核心知识体系](../../01_Core_Knowledge_System/readme.md)
 - [全局索引](../../00_GLOBAL_INDEX.md)

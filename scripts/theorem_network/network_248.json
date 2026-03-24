@@ -1,0 +1,2687 @@
+{
+  "nodes": [
+    {
+      "id": "BRIDGE::BT-1",
+      "name": "BT-1",
+      "category": "桥梁定理",
+      "type": "theorem",
+      "description": "形式化验证："
+    },
+    {
+      "id": "BRIDGE::BT-2",
+      "name": "BT-2",
+      "category": "桥梁定理",
+      "type": "theorem",
+      "description": "形式化验证："
+    },
+    {
+      "id": "BRIDGE::BT-3",
+      "name": "BT-3",
+      "category": "桥梁定理",
+      "type": "theorem",
+      "description": "形式化验证："
+    },
+    {
+      "id": "BRIDGE::BT-4",
+      "name": "BT-4",
+      "category": "桥梁定理",
+      "type": "theorem",
+      "description": "形式化验证："
+    },
+    {
+      "id": "BRIDGE::BT-5",
+      "name": "BT-5",
+      "category": "桥梁定理",
+      "type": "theorem",
+      "description": "形式化验证："
+    },
+    {
+      "id": "BRIDGE::BT-1-A",
+      "name": "BT-1-A",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "极限存在性"
+    },
+    {
+      "id": "BRIDGE::BT-1-B",
+      "name": "BT-1-B",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "单调性保持"
+    },
+    {
+      "id": "BRIDGE::BT-1-C",
+      "name": "BT-1-C",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "连续性"
+    },
+    {
+      "id": "BRIDGE::BT-2-A",
+      "name": "BT-2-A",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "提取良定义性"
+    },
+    {
+      "id": "BRIDGE::BT-2-B",
+      "name": "BT-2-B",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "求值上下文分解"
+    },
+    {
+      "id": "BRIDGE::BT-2-C",
+      "name": "BT-2-C",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "正规化"
+    },
+    {
+      "id": "BRIDGE::BT-3-A",
+      "name": "BT-3-A",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "wp的单调性"
+    },
+    {
+      "id": "BRIDGE::BT-3-B",
+      "name": "BT-3-B",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "wp的合取性"
+    },
+    {
+      "id": "BRIDGE::BT-3-C",
+      "name": "BT-3-C",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "wp的连续性"
+    },
+    {
+      "id": "BRIDGE::BT-4-A",
+      "name": "BT-4-A",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "关系的确定性"
+    },
+    {
+      "id": "BRIDGE::BT-4-B",
+      "name": "BT-4-B",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "全函数性"
+    },
+    {
+      "id": "BRIDGE::BT-4-C",
+      "name": "BT-4-C",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "一致性保持"
+    },
+    {
+      "id": "BRIDGE::BT-5-A",
+      "name": "BT-5-A",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "路径存在性"
+    },
+    {
+      "id": "BRIDGE::BT-5-B",
+      "name": "BT-5-B",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "不变式保持"
+    },
+    {
+      "id": "BRIDGE::BT-5-C",
+      "name": "BT-5-C",
+      "category": "桥梁定理",
+      "type": "lemma",
+      "description": "终止性"
+    },
+    {
+      "id": "MANUAL::assignRule",
+      "name": "assignRule",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "赋值规则"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "name": "assignRule",
+      "category": "公理语义",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) assignRule from Lean file"
+    },
+    {
+      "id": "MANUAL::leaderCompleteness",
+      "name": "leaderCompleteness",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "领导者完备性"
+    },
+    {
+      "id": "MANUAL::preservation",
+      "name": "preservation",
+      "category": "操作语义",
+      "type": "theorem",
+      "description": "类型保持定理"
+    },
+    {
+      "id": "MANUAL::logMatchingLemma",
+      "name": "logMatchingLemma",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "日志匹配性引理"
+    },
+    {
+      "id": "MANUAL::whileRule",
+      "name": "whileRule",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "循环规则"
+    },
+    {
+      "id": "MANUAL::voteUniqueness",
+      "name": "voteUniqueness",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "投票唯一性"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "name": "leaderCompleteness",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) leaderCompleteness from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::preservation",
+      "name": "preservation",
+      "category": "操作语义",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) preservation from Lean file"
+    },
+    {
+      "id": "MANUAL::logPrefixConsistency",
+      "name": "logPrefixConsistency",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "日志前缀一致性"
+    },
+    {
+      "id": "MANUAL::seqRule",
+      "name": "seqRule",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "序列规则"
+    },
+    {
+      "id": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::electionSafety",
+      "name": "electionSafety",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem electionSafety"
+    },
+    {
+      "id": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::stateMachineSafety",
+      "name": "stateMachineSafety",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem stateMachineSafety"
+    },
+    {
+      "id": "MD::DISTRIBUTED_SEMANTICS::electionSafety",
+      "name": "electionSafety",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem electionSafety"
+    },
+    {
+      "id": "MANUAL::electionSafety",
+      "name": "electionSafety",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "选举安全性"
+    },
+    {
+      "id": "MANUAL::voteTermConsistency",
+      "name": "voteTermConsistency",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "投票任期一致性"
+    },
+    {
+      "id": "MANUAL::stateMachineSafety",
+      "name": "stateMachineSafety",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "状态机安全性"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logMatchingLemma",
+      "name": "logMatchingLemma",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) logMatchingLemma from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::whileRule",
+      "name": "whileRule",
+      "category": "公理语义",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) whileRule from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteUniqueness",
+      "name": "voteUniqueness",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) voteUniqueness from Lean file"
+    },
+    {
+      "id": "MANUAL::progress",
+      "name": "progress",
+      "category": "操作语义",
+      "type": "theorem",
+      "description": "进展定理"
+    },
+    {
+      "id": "MANUAL::ifRule",
+      "name": "ifRule",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "条件规则"
+    },
+    {
+      "id": "MANUAL::commitRuleCurrentTerm",
+      "name": "commitRuleCurrentTerm",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "提交规则当前任期"
+    },
+    {
+      "id": "MANUAL::termMonotonicity",
+      "name": "termMonotonicity",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "任期单调性"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logPrefixConsistency",
+      "name": "logPrefixConsistency",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) logPrefixConsistency from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::seqRule",
+      "name": "seqRule",
+      "category": "公理语义",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) seqRule from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::electionSafety",
+      "name": "electionSafety",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) electionSafety from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteTermConsistency",
+      "name": "voteTermConsistency",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) voteTermConsistency from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::stateMachineSafety",
+      "name": "stateMachineSafety",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) stateMachineSafety from Lean file"
+    },
+    {
+      "id": "MANUAL::safety",
+      "name": "safety",
+      "category": "操作语义",
+      "type": "theorem",
+      "description": "安全性定理"
+    },
+    {
+      "id": "MANUAL::substitution",
+      "name": "substitution",
+      "category": "操作语义",
+      "type": "theorem",
+      "description": "替换引理"
+    },
+    {
+      "id": "MANUAL::weakening",
+      "name": "weakening",
+      "category": "操作语义",
+      "type": "theorem",
+      "description": "弱化引理"
+    },
+    {
+      "id": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::选举安全性",
+      "name": "选举安全性",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem 选举安全性"
+    },
+    {
+      "id": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::日志匹配性",
+      "name": "日志匹配性",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem 日志匹配性"
+    },
+    {
+      "id": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::ElectionSafety",
+      "name": "ElectionSafety",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem ElectionSafety"
+    },
+    {
+      "id": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::logMatching",
+      "name": "logMatching",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem logMatching"
+    },
+    {
+      "id": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::StateMachineSafety",
+      "name": "StateMachineSafety",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem StateMachineSafety"
+    },
+    {
+      "id": "MD::DISTRIBUTED_SEMANTICS::选举安全性",
+      "name": "选举安全性",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem 选举安全性"
+    },
+    {
+      "id": "MD::DISTRIBUTED_SEMANTICS::logMatching",
+      "name": "logMatching",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem logMatching"
+    },
+    {
+      "id": "MD::02_Leader_Election::选举安全性",
+      "name": "选举安全性",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem 选举安全性"
+    },
+    {
+      "id": "MD::04_Distributed_Systems_Specs::LogMatching",
+      "name": "LogMatching",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem LogMatching"
+    },
+    {
+      "id": "MD::04_Distributed_Systems_Specs::StateMachineSafety",
+      "name": "StateMachineSafety",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem StateMachineSafety"
+    },
+    {
+      "id": "MD::04_Distributed_Systems_Specs::LeaderCompleteness",
+      "name": "LeaderCompleteness",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem LeaderCompleteness"
+    },
+    {
+      "id": "MD::04_Distributed_Systems_Specs::ElectionSafety",
+      "name": "ElectionSafety",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem ElectionSafety"
+    },
+    {
+      "id": "MD::05_C_Verification_with_TLA::StateMachineSafety",
+      "name": "StateMachineSafety",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "theorem StateMachineSafety"
+    },
+    {
+      "id": "MANUAL::indirectCommit",
+      "name": "indirectCommit",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "间接提交"
+    },
+    {
+      "id": "MANUAL::committedLogPrefix",
+      "name": "committedLogPrefix",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "已提交日志前缀"
+    },
+    {
+      "id": "MANUAL::systemTermMonotonicity",
+      "name": "systemTermMonotonicity",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "系统任期单调性"
+    },
+    {
+      "id": "MANUAL::leaderLogMonotonicity",
+      "name": "leaderLogMonotonicity",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "Leader日志单调性"
+    },
+    {
+      "id": "MANUAL::raftSafety",
+      "name": "raftSafety",
+      "category": "分布式系统",
+      "type": "theorem",
+      "description": "Raft安全性综合"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::progress",
+      "name": "progress",
+      "category": "操作语义",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) progress from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::ifRule",
+      "name": "ifRule",
+      "category": "公理语义",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) ifRule from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::commitRuleCurrentTerm",
+      "name": "commitRuleCurrentTerm",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) commitRuleCurrentTerm from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::termMonotonicity",
+      "name": "termMonotonicity",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) termMonotonicity from Lean file"
+    },
+    {
+      "id": "MANUAL::soundness",
+      "name": "soundness",
+      "category": "操作语义",
+      "type": "theorem",
+      "description": "健全性定理"
+    },
+    {
+      "id": "MANUAL::determinism",
+      "name": "determinism",
+      "category": "操作语义",
+      "type": "theorem",
+      "description": "确定性定理"
+    },
+    {
+      "id": "MANUAL::normalization",
+      "name": "normalization",
+      "category": "操作语义",
+      "type": "theorem",
+      "description": "规范化定理"
+    },
+    {
+      "id": "MANUAL::consequenceRule",
+      "name": "consequenceRule",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "推论规则"
+    },
+    {
+      "id": "MANUAL::skipRule",
+      "name": "skipRule",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "跳过规则"
+    },
+    {
+      "id": "MANUAL::verifySwap",
+      "name": "verifySwap",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "交换验证"
+    },
+    {
+      "id": "MANUAL::verifyIncr",
+      "name": "verifyIncr",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "递增验证"
+    },
+    {
+      "id": "MANUAL::verifyAbs",
+      "name": "verifyAbs",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "绝对值验证"
+    },
+    {
+      "id": "MANUAL::verifyDecr",
+      "name": "verifyDecr",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "递减验证"
+    },
+    {
+      "id": "MANUAL::verifyFactorial",
+      "name": "verifyFactorial",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "阶乘验证"
+    },
+    {
+      "id": "MANUAL::verifySum",
+      "name": "verifySum",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "求和验证"
+    },
+    {
+      "id": "MANUAL::verifyGCD",
+      "name": "verifyGCD",
+      "category": "公理语义",
+      "type": "theorem",
+      "description": "GCD验证"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::value_irreducible",
+      "name": "value_irreducible",
+      "category": "操作语义",
+      "type": "lemma\\s+(\\w+)",
+      "description": "lemma\\s+(\\w+) value_irreducible from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::type_of_value",
+      "name": "type_of_value",
+      "category": "操作语义",
+      "type": "lemma\\s+(\\w+)",
+      "description": "lemma\\s+(\\w+) type_of_value from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::weakening",
+      "name": "weakening",
+      "category": "操作语义",
+      "type": "lemma\\s+(\\w+)",
+      "description": "lemma\\s+(\\w+) weakening from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::substitution",
+      "name": "substitution",
+      "category": "操作语义",
+      "type": "lemma\\s+(\\w+)",
+      "description": "lemma\\s+(\\w+) substitution from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::safety",
+      "name": "safety",
+      "category": "操作语义",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) safety from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Main.lean::printHeader",
+      "name": "printHeader",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) printHeader from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Main.lean::printSection",
+      "name": "printSection",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) printSection from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Main.lean::printState",
+      "name": "printState",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) printState from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Main.lean::demoNodeStateMachine",
+      "name": "demoNodeStateMachine",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) demoNodeStateMachine from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Main.lean::demoLogOperations",
+      "name": "demoLogOperations",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) demoLogOperations from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Main.lean::demoElectionRPC",
+      "name": "demoElectionRPC",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) demoElectionRPC from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Main.lean::demoLogReplication",
+      "name": "demoLogReplication",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) demoLogReplication from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Main.lean::demoSafetyInvariants",
+      "name": "demoSafetyInvariants",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) demoSafetyInvariants from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Main.lean::demoPaxosComparison",
+      "name": "demoPaxosComparison",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) demoPaxosComparison from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Main.lean::demoIndustrialCases",
+      "name": "demoIndustrialCases",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) demoIndustrialCases from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Main.lean::main",
+      "name": "main",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) main from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::EntryCreatedAt",
+      "name": "EntryCreatedAt",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) EntryCreatedAt from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::EntryCommittedIn",
+      "name": "EntryCommittedIn",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) EntryCommittedIn from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::WasLeaderIn",
+      "name": "WasLeaderIn",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) WasLeaderIn from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::LeaderLogCompletenessInvariant",
+      "name": "LeaderLogCompletenessInvariant",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) LeaderLogCompletenessInvariant from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::leaderLogCompletenessPreserved",
+      "name": "leaderLogCompletenessPreserved",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) leaderLogCompletenessPreserved from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::StateMachineSafetyInvariant",
+      "name": "StateMachineSafetyInvariant",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) StateMachineSafetyInvariant from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::StrongStateMachineSafety",
+      "name": "StrongStateMachineSafety",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) StrongStateMachineSafety from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::stateMachineSafetyProof",
+      "name": "stateMachineSafetyProof",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) stateMachineSafetyProof from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::TermMonotonicityInvariant",
+      "name": "TermMonotonicityInvariant",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) TermMonotonicityInvariant from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::nodeTermMonotonicity",
+      "name": "nodeTermMonotonicity",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) nodeTermMonotonicity from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::entryTermMonotonicity",
+      "name": "entryTermMonotonicity",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) entryTermMonotonicity from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::LogPrefixConsistency",
+      "name": "LogPrefixConsistency",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) LogPrefixConsistency from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::VoteConsistency",
+      "name": "VoteConsistency",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) VoteConsistency from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::LeaderUniqueness",
+      "name": "LeaderUniqueness",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) LeaderUniqueness from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::invariantsPreserved",
+      "name": "invariantsPreserved",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) invariantsPreserved from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::AllRaftInvariants",
+      "name": "AllRaftInvariants",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) AllRaftInvariants from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::allInvariantsHold",
+      "name": "allInvariantsHold",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) allInvariantsHold from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::TLAInvariant",
+      "name": "TLAInvariant",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) TLAInvariant from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::verifyTLAInvariants",
+      "name": "verifyTLAInvariants",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) verifyTLAInvariants from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Invariants.lean::HybridVerification",
+      "name": "HybridVerification",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) HybridVerification from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::NetworkAssumption",
+      "name": "NetworkAssumption",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) NetworkAssumption from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::ClockSynchronization",
+      "name": "ClockSynchronization",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) ClockSynchronization from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::CrashRecoveryAssumption",
+      "name": "CrashRecoveryAssumption",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) CrashRecoveryAssumption from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::LivenessAssumptions",
+      "name": "LivenessAssumptions",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) LivenessAssumptions from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::electionCompleteness",
+      "name": "electionCompleteness",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) electionCompleteness from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::electionTermination",
+      "name": "electionTermination",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) electionTermination from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::termProgress",
+      "name": "termProgress",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) termProgress from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::logReplicationCompleteness",
+      "name": "logReplicationCompleteness",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) logReplicationCompleteness from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::commitProgress",
+      "name": "commitProgress",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) commitProgress from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::eventualConsistency",
+      "name": "eventualConsistency",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) eventualConsistency from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::strongEventualConsistency",
+      "name": "strongEventualConsistency",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) strongEventualConsistency from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::LinearizationPoint",
+      "name": "LinearizationPoint",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) LinearizationPoint from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::linearizability",
+      "name": "linearizability",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) linearizability from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::leaderFaultTolerance",
+      "name": "leaderFaultTolerance",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) leaderFaultTolerance from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::networkPartitionRecovery",
+      "name": "networkPartitionRecovery",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) networkPartitionRecovery from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::RaftLivenessProperties",
+      "name": "RaftLivenessProperties",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) RaftLivenessProperties from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::raftLiveness",
+      "name": "raftLiveness",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) raftLiveness from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::maxElectionTime",
+      "name": "maxElectionTime",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) maxElectionTime from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::maxReplicationTime",
+      "name": "maxReplicationTime",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) maxReplicationTime from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Liveness.lean::maxCommitLatency",
+      "name": "maxCommitLatency",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) maxCommitLatency from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::RequestVoteArgs",
+      "name": "RequestVoteArgs",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) RequestVoteArgs from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::RequestVoteReply",
+      "name": "RequestVoteReply",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) RequestVoteReply from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::AppendEntriesArgs",
+      "name": "AppendEntriesArgs",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) AppendEntriesArgs from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::AppendEntriesReply",
+      "name": "AppendEntriesReply",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) AppendEntriesReply from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::ClientRequestArgs",
+      "name": "ClientRequestArgs",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) ClientRequestArgs from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::ClientReply",
+      "name": "ClientReply",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) ClientReply from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::mkRequest",
+      "name": "mkRequest",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) mkRequest from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::logUpToDate",
+      "name": "logUpToDate",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) logUpToDate from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::mkReply",
+      "name": "mkReply",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) mkReply from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::mkHeartbeat",
+      "name": "mkHeartbeat",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) mkHeartbeat from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::mkAppend",
+      "name": "mkAppend",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) mkAppend from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::handleRequestVote",
+      "name": "handleRequestVote",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) handleRequestVote from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::handleAppendEntries",
+      "name": "handleAppendEntries",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) handleAppendEntries from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::handleRequestVoteReply",
+      "name": "handleRequestVoteReply",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) handleRequestVoteReply from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::handleAppendEntriesReply",
+      "name": "handleAppendEntriesReply",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) handleAppendEntriesReply from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::broadcastHeartbeat",
+      "name": "broadcastHeartbeat",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) broadcastHeartbeat from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::sendEntriesTo",
+      "name": "sendEntriesTo",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) sendEntriesTo from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Message.lean::tryCommit",
+      "name": "tryCommit",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) tryCommit from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::ProposalNumber",
+      "name": "ProposalNumber",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) ProposalNumber from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::lt",
+      "name": "lt",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) lt from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::le",
+      "name": "le",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) le from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::compare",
+      "name": "compare",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) compare from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::Proposal",
+      "name": "Proposal",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) Proposal from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::Proposer",
+      "name": "Proposer",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) Proposer from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::Acceptor",
+      "name": "Acceptor",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) Acceptor from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::Learner",
+      "name": "Learner",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) Learner from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::Message",
+      "name": "Message",
+      "category": "分布式系统",
+      "type": "inductive\\s+(\\w+)",
+      "description": "inductive\\s+(\\w+) Message from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::sendPrepare",
+      "name": "sendPrepare",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) sendPrepare from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::handlePrepare",
+      "name": "handlePrepare",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) handlePrepare from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::handlePromise",
+      "name": "handlePromise",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) handlePromise from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::hasQuorumPromises",
+      "name": "hasQuorumPromises",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) hasQuorumPromises from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::chooseValue",
+      "name": "chooseValue",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) chooseValue from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::sendAcceptRequest",
+      "name": "sendAcceptRequest",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) sendAcceptRequest from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::handleAcceptRequest",
+      "name": "handleAcceptRequest",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) handleAcceptRequest from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::handleAccepted",
+      "name": "handleAccepted",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) handleAccepted from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::hasQuorumAccepts",
+      "name": "hasQuorumAccepts",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) hasQuorumAccepts from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::paxosSafety",
+      "name": "paxosSafety",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) paxosSafety from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::proposalNumberUniqueness",
+      "name": "proposalNumberUniqueness",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) proposalNumberUniqueness from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::MultiPaxosInstance",
+      "name": "MultiPaxosInstance",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) MultiPaxosInstance from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::MultiPaxos",
+      "name": "MultiPaxos",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) MultiPaxos from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::ComplexityComparison",
+      "name": "ComplexityComparison",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) ComplexityComparison from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::comparePaxosRaft",
+      "name": "comparePaxosRaft",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) comparePaxosRaft from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::paxosRaftEquivalence",
+      "name": "paxosRaftEquivalence",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) paxosRaftEquivalence from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Paxos.lean::paxosLiveness",
+      "name": "paxosLiveness",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) paxosLiveness from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::isLeader",
+      "name": "isLeader",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) isLeader from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::isCandidate",
+      "name": "isCandidate",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) isCandidate from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::isFollower",
+      "name": "isFollower",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) isFollower from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::isCommitted",
+      "name": "isCommitted",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) isCommitted from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::isApplied",
+      "name": "isApplied",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) isApplied from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::indirectCommit",
+      "name": "indirectCommit",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) indirectCommit from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::committedLogPrefix",
+      "name": "committedLogPrefix",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) committedLogPrefix from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::systemTermMonotonicity",
+      "name": "systemTermMonotonicity",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) systemTermMonotonicity from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderLogMonotonicity",
+      "name": "leaderLogMonotonicity",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) leaderLogMonotonicity from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::RaftSafetyProperties",
+      "name": "RaftSafetyProperties",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) RaftSafetyProperties from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::raftSafety",
+      "name": "raftSafety",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) raftSafety from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::Role",
+      "name": "Role",
+      "category": "分布式系统",
+      "type": "inductive\\s+(\\w+)",
+      "description": "inductive\\s+(\\w+) Role from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::toString",
+      "name": "toString",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) toString from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::LogEntry",
+      "name": "LogEntry",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) LogEntry from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::mk",
+      "name": "mk",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) mk from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::contentEq",
+      "name": "contentEq",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) contentEq from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::empty",
+      "name": "empty",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) empty from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::length",
+      "name": "length",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) length from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::lastIndex",
+      "name": "lastIndex",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) lastIndex from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::getEntry",
+      "name": "getEntry",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) getEntry from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::termAt",
+      "name": "termAt",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) termAt from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::append",
+      "name": "append",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) append from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::truncateTo",
+      "name": "truncateTo",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) truncateTo from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::lastTerm",
+      "name": "lastTerm",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) lastTerm from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::contains",
+      "name": "contains",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) contains from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::isMoreUpToDate",
+      "name": "isMoreUpToDate",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) isMoreUpToDate from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::consistentUpTo",
+      "name": "consistentUpTo",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) consistentUpTo from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::prefixMatchProperty",
+      "name": "prefixMatchProperty",
+      "category": "分布式系统",
+      "type": "theorem\\s+(\\w+)",
+      "description": "theorem\\s+(\\w+) prefixMatchProperty from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::NodeState",
+      "name": "NodeState",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) NodeState from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::init",
+      "name": "init",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) init from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::canVoteFor",
+      "name": "canVoteFor",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) canVoteFor from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::incrementTerm",
+      "name": "incrementTerm",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) incrementTerm from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::becomeCandidate",
+      "name": "becomeCandidate",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) becomeCandidate from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::becomeLeader",
+      "name": "becomeLeader",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) becomeLeader from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::becomeFollower",
+      "name": "becomeFollower",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) becomeFollower from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::appendEntry",
+      "name": "appendEntry",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) appendEntry from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::setCommitIndex",
+      "name": "setCommitIndex",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) setCommitIndex from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::canCommit",
+      "name": "canCommit",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) canCommit from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::ClusterConfig",
+      "name": "ClusterConfig",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) ClusterConfig from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::SystemState",
+      "name": "SystemState",
+      "category": "分布式系统",
+      "type": "structure\\s+(\\w+)",
+      "description": "structure\\s+(\\w+) SystemState from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::Message",
+      "name": "Message",
+      "category": "分布式系统",
+      "type": "inductive\\s+(\\w+)",
+      "description": "inductive\\s+(\\w+) Message from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::getNode",
+      "name": "getNode",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) getNode from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::updateNode",
+      "name": "updateNode",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) updateNode from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::Event",
+      "name": "Event",
+      "category": "分布式系统",
+      "type": "inductive\\s+(\\w+)",
+      "description": "inductive\\s+(\\w+) Event from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\State.lean::Action",
+      "name": "Action",
+      "category": "分布式系统",
+      "type": "inductive\\s+(\\w+)",
+      "description": "inductive\\s+(\\w+) Action from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testInitialState",
+      "name": "testInitialState",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testInitialState from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testBecomeCandidate",
+      "name": "testBecomeCandidate",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testBecomeCandidate from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testBecomeLeader",
+      "name": "testBecomeLeader",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testBecomeLeader from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testTermIncrement",
+      "name": "testTermIncrement",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testTermIncrement from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testBecomeFollower",
+      "name": "testBecomeFollower",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testBecomeFollower from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testLogAppend",
+      "name": "testLogAppend",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testLogAppend from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testLogGetEntry",
+      "name": "testLogGetEntry",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testLogGetEntry from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testLogTruncate",
+      "name": "testLogTruncate",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testLogTruncate from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testLogConsistency",
+      "name": "testLogConsistency",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testLogConsistency from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testCanVoteFor",
+      "name": "testCanVoteFor",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testCanVoteFor from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testCannotVoteTwice",
+      "name": "testCannotVoteTwice",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testCannotVoteTwice from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testHandleRequestVote",
+      "name": "testHandleRequestVote",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testHandleRequestVote from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testRejectLowerTerm",
+      "name": "testRejectLowerTerm",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testRejectLowerTerm from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testHandleAppendEntries",
+      "name": "testHandleAppendEntries",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testHandleAppendEntries from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testRejectMissingPrevLog",
+      "name": "testRejectMissingPrevLog",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testRejectMissingPrevLog from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testHigherTermConvertToFollower",
+      "name": "testHigherTermConvertToFollower",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testHigherTermConvertToFollower from Lean file"
+    },
+    {
+      "id": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Tests\\RaftTest.lean::testElectionSafety",
+      "name": "testElectionSafety",
+      "category": "分布式系统",
+      "type": "def\\s+(\\w+)",
+      "description": "def\\s+(\\w+) testElectionSafety from Lean file"
+    }
+  ],
+  "edges": [
+    {
+      "source": "BRIDGE::BT-1",
+      "target": "BRIDGE::BT-1-A",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-1",
+      "target": "BRIDGE::BT-1-B",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-1",
+      "target": "BRIDGE::BT-1-C",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-2",
+      "target": "BRIDGE::BT-2-A",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-2",
+      "target": "BRIDGE::BT-2-B",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-2",
+      "target": "BRIDGE::BT-2-C",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-2",
+      "target": "BRIDGE::BT-1",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-3",
+      "target": "BRIDGE::BT-3-A",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-3",
+      "target": "BRIDGE::BT-3-B",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-3",
+      "target": "BRIDGE::BT-3-C",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-3",
+      "target": "BRIDGE::BT-1",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-3",
+      "target": "BRIDGE::BT-2",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-4",
+      "target": "BRIDGE::BT-4-A",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-4",
+      "target": "BRIDGE::BT-4-B",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-4",
+      "target": "BRIDGE::BT-4-C",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-4",
+      "target": "BRIDGE::BT-2",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-4",
+      "target": "BRIDGE::BT-3",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-5",
+      "target": "BRIDGE::BT-5-A",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-5",
+      "target": "BRIDGE::BT-5-B",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-5",
+      "target": "BRIDGE::BT-5-C",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-5",
+      "target": "BRIDGE::BT-1",
+      "type": "depends_on"
+    },
+    {
+      "source": "BRIDGE::BT-5",
+      "target": "BRIDGE::BT-3",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::leaderCompleteness",
+      "target": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::leaderCompleteness",
+      "target": "MD::DISTRIBUTED_SEMANTICS::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::leaderCompleteness",
+      "target": "MANUAL::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::leaderCompleteness",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::leaderCompleteness",
+      "target": "MANUAL::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::leaderCompleteness",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::preservation",
+      "target": "MANUAL::substitution",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::preservation",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::substitution",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::preservation",
+      "target": "MANUAL::weakening",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::preservation",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::weakening",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::whileRule",
+      "target": "MANUAL::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::whileRule",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "target": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "target": "MD::DISTRIBUTED_SEMANTICS::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "target": "MANUAL::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "target": "MANUAL::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::preservation",
+      "target": "MANUAL::substitution",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::preservation",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::substitution",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::preservation",
+      "target": "MANUAL::weakening",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::preservation",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::weakening",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::logPrefixConsistency",
+      "target": "MANUAL::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::logPrefixConsistency",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::seqRule",
+      "target": "MANUAL::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::seqRule",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::electionSafety",
+      "target": "MANUAL::voteUniqueness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::electionSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteUniqueness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::electionSafety",
+      "target": "MANUAL::voteTermConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::electionSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteTermConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::stateMachineSafety",
+      "target": "MANUAL::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::stateMachineSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::stateMachineSafety",
+      "target": "MANUAL::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::stateMachineSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::stateMachineSafety",
+      "target": "MANUAL::logPrefixConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::stateMachineSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logPrefixConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS::electionSafety",
+      "target": "MANUAL::voteUniqueness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS::electionSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteUniqueness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS::electionSafety",
+      "target": "MANUAL::voteTermConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "MD::DISTRIBUTED_SEMANTICS::electionSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteTermConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::electionSafety",
+      "target": "MANUAL::voteUniqueness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::electionSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteUniqueness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::electionSafety",
+      "target": "MANUAL::voteTermConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::electionSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteTermConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::voteTermConsistency",
+      "target": "MANUAL::voteUniqueness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::voteTermConsistency",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteUniqueness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::stateMachineSafety",
+      "target": "MANUAL::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::stateMachineSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::stateMachineSafety",
+      "target": "MANUAL::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::stateMachineSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::stateMachineSafety",
+      "target": "MANUAL::logPrefixConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::stateMachineSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logPrefixConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::whileRule",
+      "target": "MANUAL::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::whileRule",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::progress",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::type_of_value",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::ifRule",
+      "target": "MANUAL::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::ifRule",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::commitRuleCurrentTerm",
+      "target": "MANUAL::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::commitRuleCurrentTerm",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logPrefixConsistency",
+      "target": "MANUAL::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logPrefixConsistency",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::seqRule",
+      "target": "MANUAL::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::seqRule",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::electionSafety",
+      "target": "MANUAL::voteUniqueness",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::electionSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteUniqueness",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::electionSafety",
+      "target": "MANUAL::voteTermConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::electionSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteTermConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteTermConsistency",
+      "target": "MANUAL::voteUniqueness",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteTermConsistency",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::voteUniqueness",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::stateMachineSafety",
+      "target": "MANUAL::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::stateMachineSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::stateMachineSafety",
+      "target": "MANUAL::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::stateMachineSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logMatchingLemma",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::stateMachineSafety",
+      "target": "MANUAL::logPrefixConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::stateMachineSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logPrefixConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::safety",
+      "target": "MANUAL::preservation",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::safety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::preservation",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::safety",
+      "target": "MANUAL::progress",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::safety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::progress",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::indirectCommit",
+      "target": "MANUAL::commitRuleCurrentTerm",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::indirectCommit",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::commitRuleCurrentTerm",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::committedLogPrefix",
+      "target": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::stateMachineSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::committedLogPrefix",
+      "target": "MANUAL::stateMachineSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::committedLogPrefix",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::stateMachineSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::committedLogPrefix",
+      "target": "MANUAL::logPrefixConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::committedLogPrefix",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logPrefixConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::systemTermMonotonicity",
+      "target": "MANUAL::termMonotonicity",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::systemTermMonotonicity",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::termMonotonicity",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::leaderLogMonotonicity",
+      "target": "MANUAL::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::leaderLogMonotonicity",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::raftSafety",
+      "target": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::raftSafety",
+      "target": "MD::DISTRIBUTED_SEMANTICS::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::raftSafety",
+      "target": "MANUAL::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::raftSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::raftSafety",
+      "target": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::stateMachineSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::raftSafety",
+      "target": "MANUAL::stateMachineSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::raftSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::stateMachineSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::raftSafety",
+      "target": "MANUAL::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::raftSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::progress",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::type_of_value",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::ifRule",
+      "target": "MANUAL::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::ifRule",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::commitRuleCurrentTerm",
+      "target": "MANUAL::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::commitRuleCurrentTerm",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::soundness",
+      "target": "MANUAL::safety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::soundness",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::safety",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::soundness",
+      "target": "MANUAL::preservation",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::soundness",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::preservation",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::determinism",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::value_irreducible",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::normalization",
+      "target": "MANUAL::progress",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::normalization",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::progress",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::normalization",
+      "target": "MANUAL::preservation",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::normalization",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::preservation",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::consequenceRule",
+      "target": "MANUAL::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::consequenceRule",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifySwap",
+      "target": "MANUAL::seqRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifySwap",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::seqRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifySwap",
+      "target": "MANUAL::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifySwap",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyIncr",
+      "target": "MANUAL::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyIncr",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyAbs",
+      "target": "MANUAL::ifRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyAbs",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::ifRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyAbs",
+      "target": "MANUAL::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyAbs",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyDecr",
+      "target": "MANUAL::whileRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyDecr",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::whileRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyDecr",
+      "target": "MANUAL::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyDecr",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyFactorial",
+      "target": "MANUAL::whileRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyFactorial",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::whileRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyFactorial",
+      "target": "MANUAL::seqRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyFactorial",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::seqRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyFactorial",
+      "target": "MANUAL::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyFactorial",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::assignRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifySum",
+      "target": "MANUAL::whileRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifySum",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::whileRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifySum",
+      "target": "MANUAL::seqRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifySum",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::seqRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyGCD",
+      "target": "MANUAL::whileRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyGCD",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::whileRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyGCD",
+      "target": "MANUAL::ifRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "MANUAL::verifyGCD",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\HoareLogic\\Hoare\\Rules.lean::ifRule",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::safety",
+      "target": "MANUAL::preservation",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::safety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::preservation",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::safety",
+      "target": "MANUAL::progress",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::safety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\OperationalSemantics\\Operational\\Properties.lean::progress",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::indirectCommit",
+      "target": "MANUAL::commitRuleCurrentTerm",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::indirectCommit",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::commitRuleCurrentTerm",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::committedLogPrefix",
+      "target": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::stateMachineSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::committedLogPrefix",
+      "target": "MANUAL::stateMachineSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::committedLogPrefix",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::stateMachineSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::committedLogPrefix",
+      "target": "MANUAL::logPrefixConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::committedLogPrefix",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::logPrefixConsistency",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::systemTermMonotonicity",
+      "target": "MANUAL::termMonotonicity",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::systemTermMonotonicity",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::termMonotonicity",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderLogMonotonicity",
+      "target": "MANUAL::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderLogMonotonicity",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::raftSafety",
+      "target": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::raftSafety",
+      "target": "MD::DISTRIBUTED_SEMANTICS::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::raftSafety",
+      "target": "MANUAL::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::raftSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::electionSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::raftSafety",
+      "target": "MD::DISTRIBUTED_SEMANTICS_DEEPENED::stateMachineSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::raftSafety",
+      "target": "MANUAL::stateMachineSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::raftSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::stateMachineSafety",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::raftSafety",
+      "target": "MANUAL::leaderCompleteness",
+      "type": "depends_on"
+    },
+    {
+      "source": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::raftSafety",
+      "target": "knowledge\\02_Formal_Semantics_and_Physics\\10_Lean4_Compilation\\lean_projects\\DistributedConsensus\\Raft\\Safety.lean::leaderCompleteness",
+      "type": "depends_on"
+    }
+  ]
+}

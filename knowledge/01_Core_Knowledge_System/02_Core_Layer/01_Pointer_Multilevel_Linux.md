@@ -30,7 +30,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [C11内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md) | 理论深化 | 并发环境下的指针安全 |
-| [Linux系统编程](../../03_System_Technology_Domains/01_System_Programming/README.md) | 系统应用 | 系统调用中的指针使用 |
+| [Linux系统编程](../../03_System_Technology_Domains/01_System_Programming/readme.md) | 系统应用 | 系统调用中的指针使用 |
 
 ---
 

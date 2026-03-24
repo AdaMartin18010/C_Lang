@@ -689,9 +689,9 @@ void deoptimize(OptimizedFrame *frame) {
 
 ## 相关链接
 
-- [父目录: 深层结构与元物理学](../README.md)
-- [形式语义学](../01_Formal_Semantics/README.md)
-- [C到汇编映射](../../02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/README.md)
+- [父目录: 深层结构与元物理学](../readme.md)
+- [形式语义学](../01_Formal_Semantics/readme.md)
+- [C到汇编映射](../../02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/readme.md)
 
 ---
 

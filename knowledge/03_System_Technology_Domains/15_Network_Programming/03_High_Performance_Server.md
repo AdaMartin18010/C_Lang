@@ -404,14 +404,14 @@ void handle_read_et(int fd) {
 
 ### 前置知识
 
-- [网络编程基础](./README.md)
-- [并发编程](../14_Concurrency_Parallelism/README.md)
+- [网络编程基础](./readme.md)
+- [并发编程](../14_Concurrency_Parallelism/readme.md)
 - [性能优化](../../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
 
 ### 后续延伸
 
 - [DPDK高性能网络](../01_System_Programming/07_High_Performance_Networking.md)
-- [RDMA网络](../13_RDMA_Network/README.md)
+- [RDMA网络](../13_RDMA_Network/readme.md)
 
 ### 参考
 

@@ -12,17 +12,17 @@
 
 | 组件 | 功能 | 关联文档 |
 |:-----|:-----|:---------|
-| 概念实体 | 知识点表示 | [概念映射](../05_Concept_Mappings/README.md) |
+| 概念实体 | 知识点表示 | [概念映射](../05_Concept_Mappings/readme.md) |
 | 关系图谱 | 知识关联 | [概念等价性](../05_Concept_Mappings/08_Concept_Equivalence_Graph.md) |
-| 学习路径 | 知识导航 | [学习路径](../06_Learning_Paths/README.md) |
+| 学习路径 | 知识导航 | [学习路径](../06_Learning_Paths/readme.md) |
 
 ### 与核心知识体系关联
 
 | 核心模块 | 图谱表示 | 说明 |
 |:-----|:---------|:---------|
-| [01 Core Knowledge](../../01_Core_Knowledge_System/README.md) | 核心概念节点 | 基础、核心、构造层 |
-| [02 Formal Semantics](../../02_Formal_Semantics_and_Physics/README.md) | 理论节点 | 语义、物理层 |
-| [03 System Tech](../../03_System_Technology_Domains/README.md) | 应用节点 | 系统技术领域 |
+| [01 Core Knowledge](../../01_Core_Knowledge_System/readme.md) | 核心概念节点 | 基础、核心、构造层 |
+| [02 Formal Semantics](../../02_Formal_Semantics_and_Physics/readme.md) | 理论节点 | 语义、物理层 |
+| [03 System Tech](../../03_System_Technology_Domains/readme.md) | 应用节点 | 系统技术领域 |
 
 ### 应用场景
 

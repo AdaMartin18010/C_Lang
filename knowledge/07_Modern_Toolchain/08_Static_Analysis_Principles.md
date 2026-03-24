@@ -443,7 +443,7 @@ def context_sensitive_taint_analysis(program):
 ### 前置理论
 
 - [形式化方法原理](../02_Formal_Semantics_and_Physics/13_Formal_Methods/01_Correctness_by_Construction.md)
-- [类型系统理论](../02_Formal_Semantics_and_Physics/05_Type_Semantics/README.md)
+- [类型系统理论](../02_Formal_Semantics_and_Physics/05_Type_Semantics/readme.md)
 
 ### 实践工具
 

@@ -14,7 +14,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [C11标准库](03_C11_Library.md) | 版本基础 | C11是前一版本 |
-| [现代C编程](../07_Modern_C/README.md) | 语言特性 | C23语言新特性 |
+| [现代C编程](../07_Modern_C/readme.md) | 语言特性 | C23语言新特性 |
 | [位运算](../01_Basic_Layer/06_Bit_Operations.md) | 知识基础 | stdbit.h基础 |
 
 ### 版本演进链
@@ -25,7 +25,7 @@
 | [C99库](02_C99_Library.md) | C99 | 复数、宽字符 |
 | [C11库](03_C11_Library.md) | C11 | 线程、原子操作 |
 | 本文档 | C17/C23 | 修复与新特性 |
-| [C23库参考](C23_Standard_Library/README.md) | C23 | 完整参考 |
+| [C23库参考](C23_Standard_Library/readme.md) | C23 | 完整参考 |
 
 ### 后续延伸
 

@@ -1,0 +1,509 @@
+graph TD
+    BRIDGE__BT-1["BT-1"]
+    style BRIDGE__BT-1 fill:#e74c3c
+    BRIDGE__BT-2["BT-2"]
+    style BRIDGE__BT-2 fill:#e74c3c
+    BRIDGE__BT-3["BT-3"]
+    style BRIDGE__BT-3 fill:#e74c3c
+    BRIDGE__BT-4["BT-4"]
+    style BRIDGE__BT-4 fill:#e74c3c
+    BRIDGE__BT-5["BT-5"]
+    style BRIDGE__BT-5 fill:#e74c3c
+    MD__BRIDGE_THEOREMS_DEEPENED__BT-1-A["BT-1-A"]
+    style MD__BRIDGE_THEOREMS_DEEPENED__BT-1-A fill:#9e9e9e
+    MD__BRIDGE_THEOREMS_DEEPENED__BT-1-B["BT-1-B"]
+    style MD__BRIDGE_THEOREMS_DEEPENED__BT-1-B fill:#9e9e9e
+    MD__BRIDGE_THEOREMS_DEEPENED__BT-1-C["BT-1-C"]
+    style MD__BRIDGE_THEOREMS_DEEPENED__BT-1-C fill:#9e9e9e
+    MD__BRIDGE_THEOREMS_DEEPENED__BT-2-A["BT-2-A"]
+    style MD__BRIDGE_THEOREMS_DEEPENED__BT-2-A fill:#9e9e9e
+    MD__BRIDGE_THEOREMS_DEEPENED__BT-2-B["BT-2-B"]
+    style MD__BRIDGE_THEOREMS_DEEPENED__BT-2-B fill:#9e9e9e
+    MD__BRIDGE_THEOREMS_DEEPENED__BT-2-C["BT-2-C"]
+    style MD__BRIDGE_THEOREMS_DEEPENED__BT-2-C fill:#9e9e9e
+    MD__BRIDGE_THEOREMS_DEEPENED__BT-3-A["BT-3-A"]
+    style MD__BRIDGE_THEOREMS_DEEPENED__BT-3-A fill:#9e9e9e
+    MD__BRIDGE_THEOREMS_DEEPENED__BT-3-B["BT-3-B"]
+    style MD__BRIDGE_THEOREMS_DEEPENED__BT-3-B fill:#9e9e9e
+    MD__BRIDGE_THEOREMS_DEEPENED__BT-3-C["BT-3-C"]
+    style MD__BRIDGE_THEOREMS_DEEPENED__BT-3-C fill:#9e9e9e
+    MD__BRIDGE_THEOREMS_DEEPENED__BT-4-A["BT-4-A"]
+    style MD__BRIDGE_THEOREMS_DEEPENED__BT-4-A fill:#9e9e9e
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__printHeader["printHeader"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__printHeader fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__printSection["printSection"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__printSection fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__printState["printState"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__printState fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoNodeStateMachine["demoNodeStateMachine"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoNodeStateMachine fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoLogOperations["demoLogOperations"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoLogOperations fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoElectionRPC["demoElectionRPC"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoElectionRPC fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoLogReplication["demoLogReplication"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoLogReplication fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoSafetyInvariants["demoSafetyInvariants"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoSafetyInvariants fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoPaxosComparison["demoPaxosComparison"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoPaxosComparison fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoIndustrialCases["demoIndustrialCases"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__demoIndustrialCases fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__main["main"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Main_lean__main fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Properties_lean__safety["safety"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Properties_lean__safety fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__EntryCreatedAt["EntryCreatedAt"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__EntryCreatedAt fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__EntryCommittedIn["EntryCommittedIn"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__EntryCommittedIn fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__WasLeaderIn["WasLeaderIn"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__WasLeaderIn fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__LeaderLogCompletenessInvariant["LeaderLogCompletenessInvariant"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__LeaderLogCompletenessInvariant fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__leaderLogCompletenessPreserved["leaderLogCompletenessPreserved"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__leaderLogCompletenessPreserved fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__StateMachineSafetyInvariant["StateMachineSafetyInvariant"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__StateMachineSafetyInvariant fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__StrongStateMachineSafety["StrongStateMachineSafety"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__StrongStateMachineSafety fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__stateMachineSafetyProof["stateMachineSafetyProof"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__stateMachineSafetyProof fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Main_lean__demoBasic["demoBasic"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Main_lean__demoBasic fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Main_lean__demoFunctions["demoFunctions"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Main_lean__demoFunctions fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Main_lean__demoLetBindings["demoLetBindings"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Main_lean__demoLetBindings fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Main_lean__demoTypeChecking["demoTypeChecking"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Main_lean__demoTypeChecking fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Main_lean__demoEvaluationTrace["demoEvaluationTrace"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Main_lean__demoEvaluationTrace fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Main_lean__main["main"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Main_lean__main fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__TypeError["TypeError"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__TypeError fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__TypeResult["TypeResult"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__TypeResult fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__typeCheck["typeCheck"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__typeCheck fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__EvalResult["EvalResult"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__EvalResult fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__evalStep["evalStep"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__evalStep fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__evalN["evalN"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__evalN fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__eval["eval"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__eval fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__evalBig["evalBig"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__evalBig fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__evalBigStep["evalBigStep"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__evalBigStep fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__traceEval["traceEval"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__traceEval fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__getEvalTrace["getEvalTrace"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__getEvalTrace fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__showEvalResult["showEvalResult"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Evaluator_lean__showEvalResult fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Properties_lean__value_irreducible["value_irreducible"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Properties_lean__value_irreducible fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Properties_lean__type_of_value["type_of_value"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Properties_lean__type_of_value fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Properties_lean__type_soundness["type_soundness"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Properties_lean__type_soundness fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Tests\EvaluatorTest_lean__testType["testType"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Tests\EvaluatorTest_lean__testType fill:#2ecc71
+    MD__09_Type_Systems_Deep_Dive__安全性["安全性"]
+    style MD__09_Type_Systems_Deep_Dive__安全性 fill:#3f51b5
+    MD__04_C_Type_Theory__类型保持["类型保持"]
+    style MD__04_C_Type_Theory__类型保持 fill:#3f51b5
+    MD__04_C_Type_Theory__安全性["安全性"]
+    style MD__04_C_Type_Theory__安全性 fill:#3f51b5
+    MD__04_C_Type_Theory__进展["进展"]
+    style MD__04_C_Type_Theory__进展 fill:#3f51b5
+    MD__CASE_STUDY_TYPECHECKER__进展["进展"]
+    style MD__CASE_STUDY_TYPECHECKER__进展 fill:#3f51b5
+    MD__CASE_STUDY_TYPECHECKER__安全性["安全性"]
+    style MD__CASE_STUDY_TYPECHECKER__安全性 fill:#3f51b5
+    MD__TYPE_THEORY_CORRELATION__类型保持["类型保持"]
+    style MD__TYPE_THEORY_CORRELATION__类型保持 fill:#3f51b5
+    MD__Z2_CoC_Extended_Depth__安全性["安全性"]
+    style MD__Z2_CoC_Extended_Depth__安全性 fill:#3f51b5
+    MD__Z6_Linear_Types_Extended__安全性["安全性"]
+    style MD__Z6_Linear_Types_Extended__安全性 fill:#3f51b5
+    MD__Z6_Linear_Types_Memory__安全性["安全性"]
+    style MD__Z6_Linear_Types_Memory__安全性 fill:#3f51b5
+    MD__HISTORY_Type_Theory__类型保持["类型保持"]
+    style MD__HISTORY_Type_Theory__类型保持 fill:#3f51b5
+    MD__02_Dependent_Type_Theory__类型保持["类型保持"]
+    style MD__02_Dependent_Type_Theory__类型保持 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoHoareRules["demoHoareRules"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoHoareRules fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoWP["demoWP"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoWP fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoVerification["demoVerification"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoVerification fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoInvariants["demoInvariants"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoInvariants fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoExecution["demoExecution"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoExecution fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__main["main"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__main fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__Assertion["Assertion"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__Assertion fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__HoareTriple["HoareTriple"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__HoareTriple fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__skipRule["skipRule"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__skipRule fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__assignRule["assignRule"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__assignRule fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__seqRule["seqRule"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__seqRule fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__ifRule["ifRule"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__ifRule fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__whileRule["whileRule"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__whileRule fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__consequenceRule["consequenceRule"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__consequenceRule fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__weakenPre["weakenPre"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__weakenPre fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__strengthenPost["strengthenPost"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__strengthenPost fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__isInvariant["isInvariant"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__isInvariant fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__verifyInvariant["verifyInvariant"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__verifyInvariant fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__factInvariant["factInvariant"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__factInvariant fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__constAssign["constAssign"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__constAssign fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__swapAssign["swapAssign"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__swapAssign fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__ifFalseSkip["ifFalseSkip"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__ifFalseSkip fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__hoare_sound["hoare_sound"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__hoare_sound fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__PartialCorrectness["PartialCorrectness"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__PartialCorrectness fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__TotalCorrectness["TotalCorrectness"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__TotalCorrectness fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Main_lean__demoDomains["demoDomains"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Main_lean__demoDomains fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Main_lean__demoSemantics["demoSemantics"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Main_lean__demoSemantics fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Main_lean__demoContinuity["demoContinuity"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Main_lean__demoContinuity fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Main_lean__demoFixedPoint["demoFixedPoint"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Main_lean__demoFixedPoint fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Main_lean__demoCalculations["demoCalculations"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Main_lean__demoCalculations fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Main_lean__main["main"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Main_lean__main fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__const_continuous["const_continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__const_continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__id_continuous["id_continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__id_continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__fst_continuous["fst_continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__fst_continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__snd_continuous["snd_continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__snd_continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__compose_continuous["compose_continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__compose_continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__pair_continuous["pair_continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__pair_continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__apply_continuous["apply_continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__apply_continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__curry_continuous["curry_continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__curry_continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__uncurry_continuous["uncurry_continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__uncurry_continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__lift_map_continuous["lift_map_continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__lift_map_continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__cond_continuous["cond_continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__cond_continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__semantics_continuous["semantics_continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Continuity_lean__semantics_continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Domain_lean__IsChain["IsChain"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Domain_lean__IsChain fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Domain_lean__UpperBound["UpperBound"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Domain_lean__UpperBound fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__linearSearch["linearSearch"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__linearSearch fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__verifyLinearSearch["verifyLinearSearch"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__verifyLinearSearch fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Safety_lean__leaderCompleteness["leaderCompleteness"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Safety_lean__leaderCompleteness fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Safety_lean__indirectCommit["indirectCommit"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Safety_lean__indirectCommit fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__setCommitIndex["setCommitIndex"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__setCommitIndex fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__ClusterConfig["ClusterConfig"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__ClusterConfig fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testCommitIndexMonotonic["testCommitIndexMonotonic"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testCommitIndexMonotonic fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Tests\MeaningTest_lean__testContinuous["testContinuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Tests\MeaningTest_lean__testContinuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Tests\MeaningTest_lean__testContinuity["testContinuity"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Tests\MeaningTest_lean__testContinuity fill:#9b59b6
+    MD__ARCHITECTURE_FORMAL_VERIFICATION__安全性["安全性"]
+    style MD__ARCHITECTURE_FORMAL_VERIFICATION__安全性 fill:#3f51b5
+    MD__EXERCISES_SOLUTIONS__进展["进展"]
+    style MD__EXERCISES_SOLUTIONS__进展 fill:#3f51b5
+    MD__EXERCISES_SOLUTIONS__类型保持["类型保持"]
+    style MD__EXERCISES_SOLUTIONS__类型保持 fill:#3f51b5
+    MD__HIERARCHICAL_RELATIONS_FORMALIZED__类型保持["类型保持"]
+    style MD__HIERARCHICAL_RELATIONS_FORMALIZED__类型保持 fill:#3f51b5
+    MD__INDUSTRY_COMPILER_VERIFICATION__安全性["安全性"]
+    style MD__INDUSTRY_COMPILER_VERIFICATION__安全性 fill:#3f51b5
+    MD__OPEN_SOURCE_GOVERNANCE__类型保持["类型保持"]
+    style MD__OPEN_SOURCE_GOVERNANCE__类型保持 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test12["test12"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test12 fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\FixedPoint_lean__iterate["iterate"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\FixedPoint_lean__iterate fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\FixedPoint_lean__fact_body["fact_body"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\FixedPoint_lean__fact_body fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Message_lean__logUpToDate["logUpToDate"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Message_lean__logUpToDate fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__ComplexityComparison["ComplexityComparison"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__ComplexityComparison fill:#1abc9c
+    MD__COURSE_CS242_DESIGN__安全性["安全性"]
+    style MD__COURSE_CS242_DESIGN__安全性 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test4["test4"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test4 fill:#f39c12
+    MD__01_Container_Technology_Deep_Dive__安全性["安全性"]
+    style MD__01_Container_Technology_Deep_Dive__安全性 fill:#3f51b5
+    MD__AI_ASSISTED_LEARNING__类型保持["类型保持"]
+    style MD__AI_ASSISTED_LEARNING__类型保持 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__MultiPaxosInstance["MultiPaxosInstance"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__MultiPaxosInstance fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testLogGetEntry["testLogGetEntry"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testLogGetEntry fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test7["test7"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test7 fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Liveness_lean__NetworkAssumption["NetworkAssumption"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Liveness_lean__NetworkAssumption fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Meaning_lean__factorial["factorial"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Meaning_lean__factorial fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__prefixMatchProperty["prefixMatchProperty"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__prefixMatchProperty fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Liveness_lean__termProgress["termProgress"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Liveness_lean__termProgress fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test2["test2"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test2 fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testLogConsistency["testLogConsistency"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testLogConsistency fill:#1abc9c
+    MANUAL__tco_correctness["tco_correctness"]
+    style MANUAL__tco_correctness fill:#e91e63
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__incrementTerm["incrementTerm"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__incrementTerm fill:#1abc9c
+    MANUAL__termMonotonicity["termMonotonicity"]
+    style MANUAL__termMonotonicity fill:#1abc9c
+    MD__01_Operational_Semantics__安全性["安全性"]
+    style MD__01_Operational_Semantics__安全性 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__calcWP_correct["calcWP_correct"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__calcWP_correct fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__runAllTests["runAllTests"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__runAllTests fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testBecomeLeader["testBecomeLeader"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testBecomeLeader fill:#1abc9c
+    MD__COURSE_6_035_DESIGN__安全性["安全性"]
+    style MD__COURSE_6_035_DESIGN__安全性 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testInitialState["testInitialState"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testInitialState fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Safety_lean__committedLogPrefix["committedLogPrefix"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Safety_lean__committedLogPrefix fill:#1abc9c
+    MD__04_Lean4_C_Complete_Thematic_Analysis__安全性["安全性"]
+    style MD__04_Lean4_C_Complete_Thematic_Analysis__安全性 fill:#3f51b5
+    MD__ISO_IEC_STANDARDS__安全性["安全性"]
+    style MD__ISO_IEC_STANDARDS__安全性 fill:#3f51b5
+    MD__THEOREM_DEPENDENCY_GRAPH__类型保持["类型保持"]
+    style MD__THEOREM_DEPENDENCY_GRAPH__类型保持 fill:#3f51b5
+    MD__OPEN_SOURCE_GOVERNANCE__进展["进展"]
+    style MD__OPEN_SOURCE_GOVERNANCE__进展 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_characterization["wp_characterization"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_characterization fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Message_lean__handleAppendEntriesReply["handleAppendEntriesReply"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Message_lean__handleAppendEntriesReply fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__proposalNumberUniqueness["proposalNumberUniqueness"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__proposalNumberUniqueness fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testLeaderLogCompleteness["testLeaderLogCompleteness"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testLeaderLogCompleteness fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Tests\EvaluatorTest_lean__test19["test19"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Tests\EvaluatorTest_lean__test19 fill:#2ecc71
+    MANUAL__whileRule["whileRule"]
+    style MANUAL__whileRule fill:#f39c12
+    MANUAL__electionSafety["electionSafety"]
+    style MANUAL__electionSafety fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__nodeTermMonotonicity["nodeTermMonotonicity"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__nodeTermMonotonicity fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Message_lean__ClientRequestArgs["ClientRequestArgs"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Message_lean__ClientRequestArgs fill:#1abc9c
+    MANUAL__verifyIncr["verifyIncr"]
+    style MANUAL__verifyIncr fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testHigherTermConvertToFollower["testHigherTermConvertToFollower"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testHigherTermConvertToFollower fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__Acceptor["Acceptor"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__Acceptor fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__arraySum["arraySum"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__arraySum fill:#f39c12
+    MD__EMBEDDED_SEMANTICS__安全性["安全性"]
+    style MD__EMBEDDED_SEMANTICS__安全性 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__paxosSafety["paxosSafety"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__paxosSafety fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\FixedPoint_lean__ℕ["ℕ"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\FixedPoint_lean__ℕ fill:#9b59b6
+    MD__06_Lab6_SoC_Integration__安全性["安全性"]
+    style MD__06_Lab6_SoC_Integration__安全性 fill:#3f51b5
+    BRIDGE__BT-4-C["BT-4-C"]
+    style BRIDGE__BT-4-C fill:#e74c3c
+    BRIDGE__BT-3-C["BT-3-C"]
+    style BRIDGE__BT-3-C fill:#e74c3c
+    BRIDGE__BT-3-A["BT-3-A"]
+    style BRIDGE__BT-3-A fill:#e74c3c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\FixedPoint_lean__fact["fact"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\FixedPoint_lean__fact fill:#9b59b6
+    MD__DISTRIBUTED_SEMANTICS__选举安全性["选举安全性"]
+    style MD__DISTRIBUTED_SEMANTICS__选举安全性 fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testCannotVoteTwice["testCannotVoteTwice"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testCannotVoteTwice fill:#1abc9c
+    MD__COURSE_6_824_DESIGN__安全性定理["安全性定理"]
+    style MD__COURSE_6_824_DESIGN__安全性定理 fill:#3f51b5
+    MD__SEMANTIC_FINAL_STAGE_PLAN__类型保持["类型保持"]
+    style MD__SEMANTIC_FINAL_STAGE_PLAN__类型保持 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testHandleRequestVote["testHandleRequestVote"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testHandleRequestVote fill:#1abc9c
+    MD__05_Eva_Tutorial__安全性["安全性"]
+    style MD__05_Eva_Tutorial__安全性 fill:#3f51b5
+    MD__Z1_Rust_Ownership_Formalized__安全性["安全性"]
+    style MD__Z1_Rust_Ownership_Formalized__安全性 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Safety_lean__isApplied["isApplied"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Safety_lean__isApplied fill:#1abc9c
+    MD__01_Operational_Semantics__进展["进展"]
+    style MD__01_Operational_Semantics__进展 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__append["append"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__append fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__sendPrepare["sendPrepare"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__sendPrepare fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__VoteConsistency["VoteConsistency"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__VoteConsistency fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__AllRaftInvariants["AllRaftInvariants"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__AllRaftInvariants fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__factInvariant["factInvariant"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__factInvariant fill:#f39c12
+    MD__DISTRIBUTED_SEMANTICS_DEEPENED__stateMachineSafety["stateMachineSafety"]
+    style MD__DISTRIBUTED_SEMANTICS_DEEPENED__stateMachineSafety fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Message_lean__mkHeartbeat["mkHeartbeat"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Message_lean__mkHeartbeat fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__le["le"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__le fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__sp_skip["sp_skip"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__sp_skip fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\FixedPoint_lean__Admissible["Admissible"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\FixedPoint_lean__Admissible fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Tests\MeaningTest_lean__test5["test5"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Tests\MeaningTest_lean__test5 fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__TLAInvariant["TLAInvariant"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__TLAInvariant fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Tests\EvaluatorTest_lean__runAllTests["runAllTests"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Tests\EvaluatorTest_lean__runAllTests fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Message_lean__mkAppend["mkAppend"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Message_lean__mkAppend fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Tests\MeaningTest_lean__testCase["testCase"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Tests\MeaningTest_lean__testCase fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_if["wp_if"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_if fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Tests\EvaluatorTest_lean__test2["test2"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Tests\EvaluatorTest_lean__test2 fill:#2ecc71
+    MD__HETEROGENEOUS_SEMANTICS__安全性["安全性"]
+    style MD__HETEROGENEOUS_SEMANTICS__安全性 fill:#3f51b5
+    MD__DISTRIBUTED_SEMANTICS__logMatching["logMatching"]
+    style MD__DISTRIBUTED_SEMANTICS__logMatching fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\FixedPoint_lean__fix_mono["fix_mono"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\FixedPoint_lean__fix_mono fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testTermIncrement["testTermIncrement"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testTermIncrement fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__paxosLiveness["paxosLiveness"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Paxos_lean__paxosLiveness fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Properties_lean__Normalizes["Normalizes"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Properties_lean__Normalizes fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__LogPrefixConsistency["LogPrefixConsistency"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Invariants_lean__LogPrefixConsistency fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Tests\EvaluatorTest_lean__test18["test18"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Tests\EvaluatorTest_lean__test18 fill:#2ecc71
+    MANUAL__closure_conversion_correctness["closure_conversion_correctness"]
+    style MANUAL__closure_conversion_correctness fill:#e91e63
+    MD__02_Paxos_Implementation__安全性["安全性"]
+    style MD__02_Paxos_Implementation__安全性 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Tests\MeaningTest_lean__test4["test4"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Tests\MeaningTest_lean__test4 fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Domain_lean__MonotoneFn["MonotoneFn"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Domain_lean__MonotoneFn fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Semantics_lean__IsValue["IsValue"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Semantics_lean__IsValue fill:#2ecc71
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testLogAppend["testLogAppend"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Tests\RaftTest_lean__testLogAppend fill:#1abc9c
+    MANUAL__leaderLogMonotonicity["leaderLogMonotonicity"]
+    style MANUAL__leaderLogMonotonicity fill:#1abc9c
+    MD__THEMATIC_INDEX_EXTENDED__安全性["安全性"]
+    style MD__THEMATIC_INDEX_EXTENDED__安全性 fill:#3f51b5
+    MD__06_Operational_Semantics_Formal__类型保持["类型保持"]
+    style MD__06_Operational_Semantics_Formal__类型保持 fill:#3f51b5
+    MD__03_Lean4_C_Multidimensional_Theory_Text__类型保持["类型保持"]
+    style MD__03_Lean4_C_Multidimensional_Theory_Text__类型保持 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Safety_lean__electionSafety["electionSafety"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Safety_lean__electionSafety fill:#1abc9c
+    MD__04_Distributed_Systems_Specs__StateMachineSafety["StateMachineSafety"]
+    style MD__04_Distributed_Systems_Specs__StateMachineSafety fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__canCommit["canCommit"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__canCommit fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_weakest["wp_weakest"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_weakest fill:#f39c12
+    MD__DISTRIBUTED_SEMANTICS__electionSafety["electionSafety"]
+    style MD__DISTRIBUTED_SEMANTICS__electionSafety fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_seq["wp_seq"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_seq fill:#f39c12
+    MD__Z7_FFI_Boundary_Extended__安全性["安全性"]
+    style MD__Z7_FFI_Boundary_Extended__安全性 fill:#3f51b5
+    MD__COMPLETE_CORRELATION_MAP__类型保持["类型保持"]
+    style MD__COMPLETE_CORRELATION_MAP__类型保持 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Properties_lean__Safe["Safe"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Operational\Properties_lean__Safe fill:#2ecc71
+    MANUAL__verifyFactorial["verifyFactorial"]
+    style MANUAL__verifyFactorial fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__Action["Action"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\State_lean__Action fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Syntax_lean__ex2["ex2"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Syntax_lean__ex2 fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__VCResult["VCResult"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__VCResult fill:#f39c12
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Tests\EvaluatorTest_lean__test16["test16"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\OperationalSemantics\Tests\EvaluatorTest_lean__test16 fill:#2ecc71
+    MD__01_POSIX_Threads__进展["进展"]
+    style MD__01_POSIX_Threads__进展 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Safety_lean__isLeader["isLeader"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DistributedConsensus\Raft\Safety_lean__isLeader fill:#1abc9c
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Domain_lean__Continuous["Continuous"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Domain_lean__Continuous fill:#9b59b6
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__verifyIncr["verifyIncr"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__verifyIncr fill:#f39c12
+    MD__SEMANTICS_UNIFICATION__类型保持["类型保持"]
+    style MD__SEMANTICS_UNIFICATION__类型保持 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__absProgram["absProgram"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__absProgram fill:#f39c12
+    MD__COURSE_DESIGN__类型保持["类型保持"]
+    style MD__COURSE_DESIGN__类型保持 fill:#3f51b5
+    knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Meaning_lean__Tm["Tm"]
+    style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\DenotationalSemantics\Denotational\Meaning_lean__Tm fill:#9b59b6
+
+    BRIDGE__BT-1 --> MD__BRIDGE_THEOREMS_DEEPENED__BT-1-A
+    BRIDGE__BT-1 --> MD__BRIDGE_THEOREMS_DEEPENED__BT-1-B
+    BRIDGE__BT-1 --> MD__BRIDGE_THEOREMS_DEEPENED__BT-1-C
+    BRIDGE__BT-2 --> MD__BRIDGE_THEOREMS_DEEPENED__BT-2-A
+    BRIDGE__BT-2 --> MD__BRIDGE_THEOREMS_DEEPENED__BT-2-B
+    BRIDGE__BT-2 --> MD__BRIDGE_THEOREMS_DEEPENED__BT-2-C
+    BRIDGE__BT-3 --> MD__BRIDGE_THEOREMS_DEEPENED__BT-3-A
+    BRIDGE__BT-3 --> MD__BRIDGE_THEOREMS_DEEPENED__BT-3-B
+    BRIDGE__BT-3 --> MD__BRIDGE_THEOREMS_DEEPENED__BT-3-C
+    BRIDGE__BT-4 --> MD__BRIDGE_THEOREMS_DEEPENED__BT-4-A
+    BRIDGE__BT-4 --> BRIDGE__BT-4-C

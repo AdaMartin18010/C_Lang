@@ -732,12 +732,12 @@ graph TB
 
 | 关联模块 | 关联内容 | 技术交集 | 应用场景 |
 |:---------|:---------|:---------|:---------|
-| [02_Automotive_ECU](../02_Automotive_ECU/README.md) | CAN总线协议 | ISO 11898, CAN FD, CANopen | 汽车网络通信 |
-| [02_Avionics_Systems](../02_Avionics_Systems/README.md) | 航空总线 | ARINC 429, MIL-STD-1553 | 航空电子通信 |
-| [04_5G_Baseband](../04_5G_Baseband/README.md) | 无线通信 | 5G uRLLC, 时间同步 | 工业无线 |
-| [14_Embedded_IoT](../14_Embedded_IoT/README.md) | 物联网协议 | MQTT, CoAP, LoRa | 工业物联网 |
-| [13_Linux_Kernel](../13_Linux_Kernel/README.md) | 驱动开发 | SocketCAN, 网络驱动 | Linux工业网关 |
-| [03_High_Frequency_Trading](../03_High_Frequency_Trading/README.md) | 低延迟通信 | DPDK, 内核旁路 | 高频数据采集 |
+| [02_Automotive_ECU](../02_Automotive_ECU/readme.md) | CAN总线协议 | ISO 11898, CAN FD, CANopen | 汽车网络通信 |
+| [02_Avionics_Systems](../02_Avionics_Systems/readme.md) | 航空总线 | ARINC 429, MIL-STD-1553 | 航空电子通信 |
+| [04_5G_Baseband](../04_5G_Baseband/readme.md) | 无线通信 | 5G uRLLC, 时间同步 | 工业无线 |
+| [14_Embedded_IoT](../14_Embedded_IoT/readme.md) | 物联网协议 | MQTT, CoAP, LoRa | 工业物联网 |
+| [13_Linux_Kernel](../13_Linux_Kernel/readme.md) | 驱动开发 | SocketCAN, 网络驱动 | Linux工业网关 |
+| [03_High_Frequency_Trading](../03_High_Frequency_Trading/readme.md) | 低延迟通信 | DPDK, 内核旁路 | 高频数据采集 |
 
 ### 8.2 知识依赖关系
 
@@ -812,7 +812,7 @@ graph BT
 ---
 
 > **文档维护**: 本指南持续更新，如有问题请提交Issue
-> **返回导航**: [04_Industrial_Scenarios](../README.md) | [知识库总览](../../README.md)
+> **返回导航**: [04_Industrial_Scenarios](../readme.md) | [知识库总览](../../readme.md)
 
 
 ---

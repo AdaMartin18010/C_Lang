@@ -13,7 +13,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [指针深度](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心基础 | 状态机指针实现 |
-| [状态机](../../06_Thinking_Representation/09_State_Machines/README.md) | 理论基础 | NFA/DFA状态机 |
+| [状态机](../../06_Thinking_Representation/09_State_Machines/readme.md) | 理论基础 | NFA/DFA状态机 |
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 状态分配管理 |
 
 ### 实现方法
@@ -27,7 +27,7 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [虚拟机](../01_Virtual_Machine_Interpreter/README.md) | 实现技术 | 正则引擎VM实现 |
+| [虚拟机](../01_Virtual_Machine_Interpreter/readme.md) | 实现技术 | 正则引擎VM实现 |
 | [字符串处理](../../01_Core_Knowledge_System/02_Core_Layer/03_String_Processing.md) | 基础操作 | 字符串匹配基础 |
 
 ---

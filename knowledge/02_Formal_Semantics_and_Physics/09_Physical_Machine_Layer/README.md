@@ -12,17 +12,17 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [微架构](../07_Microarchitecture/README.md) | 架构基础 | 处理器设计概念 |
-| [ISA机器码](../10_ISA_Machine_Code/README.md) | 指令基础 | 指令集架构 |
+| [微架构](../07_Microarchitecture/readme.md) | 架构基础 | 处理器设计概念 |
+| [ISA机器码](../10_ISA_Machine_Code/readme.md) | 指令基础 | 指令集架构 |
 | [数字逻辑门](01_Digital_Logic_Gates.md) | 电路基础 | 逻辑门实现 |
 
 ### 后续延伸
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [硬件描述](../13_Hardware_Description/README.md) | 设计实现 | HDL硬件设计 |
-| [FPGA实验](../18_FPGA_Labs/README.md) | 实践验证 | 硬件实现实验 |
-| [工业案例](../20_Industrial_Case_Studies/README.md) | 实际应用 | 真实处理器实现 |
+| [硬件描述](../13_Hardware_Description/readme.md) | 设计实现 | HDL硬件设计 |
+| [FPGA实验](../18_FPGA_Labs/readme.md) | 实践验证 | 硬件实现实验 |
+| [工业案例](../20_Industrial_Case_Studies/readme.md) | 实际应用 | 真实处理器实现 |
 
 ### 硬件层次
 
@@ -527,9 +527,9 @@ long perf_event_open(struct perf_event_attr *hw_event,
 
 ## 相关链接
 
-- [父目录: 形式语义与物理学](../README.md)
-- [ISA与机器码](../10_ISA_Machine_Code/README.md)
-- [形式语义学](../../05_Deep_Structure_MetaPhysics/01_Formal_Semantics/README.md)
+- [父目录: 形式语义与物理学](../readme.md)
+- [ISA与机器码](../10_ISA_Machine_Code/readme.md)
+- [形式语义学](../../05_Deep_Structure_MetaPhysics/01_Formal_Semantics/readme.md)
 
 ---
 

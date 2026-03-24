@@ -339,10 +339,10 @@ void measure_cache() {
 ## 关联导航
 
 ### 前置知识
-- [微架构](../README.md)
+- [微架构](../readme.md)
 - [性能优化](../../../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
 - [数组与指针](../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md)
 
 ### 后续延伸
 - [SIMD优化](./04_SIMD_Optimization.md)
-- [并发编程](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md)
+- [并发编程](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md)

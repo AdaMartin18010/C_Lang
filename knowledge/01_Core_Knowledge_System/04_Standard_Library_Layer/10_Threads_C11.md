@@ -15,13 +15,13 @@
 |:-----|:---------|:-----|
 | [内存管理](../02_Core_Layer/02_Memory_Management.md) | 核心基础 | 线程安全内存分配 |
 | [函数与作用域](../02_Core_Layer/04_Functions_Scope.md) | 知识基础 | 线程入口函数、作用域规则 |
-| [标准I/O](01_Standard_IO/README.md) | 实践关联 | 线程安全的I/O操作 |
+| [标准I/O](01_Standard_IO/readme.md) | 实践关联 | 线程安全的I/O操作 |
 
 ### 后续延伸
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 高级主题 | 更全面的并发技术 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 高级主题 | 更全面的并发技术 |
 | [C11内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md) | 理论深化 | 内存序、happens-before |
 | [无锁编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/05_Lock_Free.md) | 专家进阶 | 原子操作高级应用 |
 

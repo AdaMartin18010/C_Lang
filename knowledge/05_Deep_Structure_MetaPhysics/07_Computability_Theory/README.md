@@ -54,7 +54,7 @@
 
 - **可判定性**：给定一个问题，是否存在算法能在有限时间内给出答案？
 - **可计算性**：给定一个函数，是否存在算法能计算其值？
-- [复杂性](../05_Computational_Complexity/README.md)：解决问题需要多少资源（时间、空间）？
+- [复杂性](../05_Computational_Complexity/readme.md)：解决问题需要多少资源（时间、空间）？
 
 ---
 
@@ -773,5 +773,5 @@ void state_machine_step(State *s) {
 
 ### 扩展阅读
 
-- [核心知识体系](../../01_Core_Knowledge_System/README.md)
+- [核心知识体系](../../01_Core_Knowledge_System/readme.md)
 - [全局索引](../../00_GLOBAL_INDEX.md)

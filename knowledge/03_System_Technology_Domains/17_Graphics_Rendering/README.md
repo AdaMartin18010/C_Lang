@@ -14,7 +14,7 @@
 |:-----|:---------|:-----|
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | GPU内存管理 |
 | [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心基础 | 纹理、缓冲区 |
-| [并发编程](../14_Concurrency_Parallelism/README.md) | 并行基础 | GPU并行计算 |
+| [并发编程](../14_Concurrency_Parallelism/readme.md) | 并行基础 | GPU并行计算 |
 
 ### 技术栈
 
@@ -29,9 +29,9 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [计算机视觉](../03_Computer_Vision/README.md) | GPU加速 | 图像处理加速 |
-| [微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 硬件基础 | GPU架构 |
-| [游戏引擎](../../04_Industrial_Scenarios/05_Game_Engine/README.md) | 应用场景 | 渲染引擎 |
+| [计算机视觉](../03_Computer_Vision/readme.md) | GPU加速 | 图像处理加速 |
+| [微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/readme.md) | 硬件基础 | GPU架构 |
+| [游戏引擎](../../04_Industrial_Scenarios/05_Game_Engine/readme.md) | 应用场景 | 渲染引擎 |
 
 ---
 
@@ -83,12 +83,12 @@ GPU编程关键问题
 
 ## 相关模块
 
-- [05_Game_Engine](../../04_Industrial_Scenarios/05_Game_Engine/README.md) - 游戏引擎（含GPU内存、ECS架构）
-- [11_Heterogeneous_Memory](../../05_Deep_Structure_MetaPhysics/11_Heterogeneous_Memory/README.md) - 异构内存（CUDA统一内存）
+- [05_Game_Engine](../../04_Industrial_Scenarios/05_Game_Engine/readme.md) - 游戏引擎（含GPU内存、ECS架构）
+- [11_Heterogeneous_Memory](../../05_Deep_Structure_MetaPhysics/11_Heterogeneous_Memory/readme.md) - 异构内存（CUDA统一内存）
 
 ---
 
-> 返回: [上层目录](../README.md)
+> 返回: [上层目录](../readme.md)
 
 
 ---

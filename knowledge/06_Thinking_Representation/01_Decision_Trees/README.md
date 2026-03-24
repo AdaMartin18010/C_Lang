@@ -23,15 +23,15 @@
 |:-----|:---------|:-----|
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 泄漏诊断 | 内存泄漏决策树 |
 | [指针深度](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 非法访问 | 段错误决策树 |
-| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 死锁竞争 | 并发决策树 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 死锁竞争 | 并发决策树 |
 
 ### 后续延伸
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [调试技术](../../01_Core_Knowledge_System/05_Engineering_Layer/02_Debug_Techniques.md) | 工具支持 | 调试工具使用 |
-| [概念映射](05_Concept_Mappings/README.md) | 知识关联 | 问题-知识映射 |
-| [学习路径](06_Learning_Paths/README.md) | 能力构建 | 问题→学习→解决 |
+| [概念映射](05_Concept_Mappings/readme.md) | 知识关联 | 问题-知识映射 |
+| [学习路径](06_Learning_Paths/readme.md) | 能力构建 | 问题→学习→解决 |
 
 本目录包含一系列结构化决策树文档，用于系统化诊断和解决C语言开发中的常见问题。
 通过逻辑分支结构，帮助开发者快速定位问题根源并找到解决方案。
@@ -1049,8 +1049,8 @@ flowchart LR
 
 ---
 
-**← [返回上级目录](../README.md)**
-**← [返回知识库根目录](../../README.md)**
+**← [返回上级目录](../readme.md)**
+**← [返回知识库根目录](../../readme.md)**
 
 
 ---

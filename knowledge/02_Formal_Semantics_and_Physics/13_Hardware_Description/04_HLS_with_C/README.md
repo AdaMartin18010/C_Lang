@@ -10,7 +10,7 @@
 | [02_C_to_Hardware_Pragma.md](./02_C_to_Hardware_Pragma.md) | C到硬件的Pragma指令 |
 | [03_HLS_Optimization.md](./03_HLS_Optimization.md) | HLS优化技术 |
 
-[← 返回上级](../README.md)
+[← 返回上级](../readme.md)
 
 
 ---

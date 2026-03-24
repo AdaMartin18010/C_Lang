@@ -23,14 +23,14 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [高级性能优化](04_Performance_Optimization_Advanced.md) | 专家进阶 | 微架构级优化 |
-| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并行优化 | 多线程并行 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 并行优化 | 多线程并行 |
 | [现代CPU架构](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/05_Modern_CPU_Architectures_2024.md) | 硬件基础 | 微架构优化依据 |
 
 ### 横向关联
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 理论深化 | CPU微架构与优化 |
+| [微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/readme.md) | 理论深化 | CPU微架构与优化 |
 | [缓存优化](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/05_Modern_CPU_Architectures_2024.md#缓存优化) | 硬件关联 | 缓存层次结构 |
 
 ---

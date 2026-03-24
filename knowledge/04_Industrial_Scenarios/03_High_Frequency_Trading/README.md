@@ -1104,7 +1104,7 @@ void parse_sbe_batch_simd(const struct rte_mbuf **pkts, uint16_t nb_pkts,
 
 ---
 
-> [← 返回上级目录](../README.md)
+> [← 返回上级目录](../readme.md)
 >
 > **最后更新**: 2026-03-13
 >

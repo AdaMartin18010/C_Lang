@@ -381,8 +381,8 @@ conan lock create conanfile.py --update=pkg1 --lockfile-out=conan.lock
 
 ### 前置知识
 
-- [构建系统](./02_Build_Systems/README.md)
-- [CMake详解](../03_Modern_Toolchain/README.md)
+- [构建系统](./02_Build_Systems/readme.md)
+- [CMake详解](../03_Modern_Toolchain/readme.md)
 
 ### 后续延伸
 

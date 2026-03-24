@@ -211,7 +211,7 @@ int array_sum(int *a, int n) {
 
 ### 前置知识
 
-- [霍尔逻辑与类型理论](../05_Type_Semantics/README.md)
+- [霍尔逻辑与类型理论](../05_Type_Semantics/readme.md)
 - [并发程序验证](../14_Concurrency_Parallelism/06_Formal_Verification.md)
 
 ### 后续延伸

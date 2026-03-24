@@ -332,7 +332,7 @@
 
 ## 📚 与主文档的关系
 
-本目录是 [14_Embedded_IoT](../README.md) 的通信协议核心，为各硬件平台提供协议实现参考。
+本目录是 [14_Embedded_IoT](../readme.md) 的通信协议核心，为各硬件平台提供协议实现参考。
 
 ### 文档架构
 
@@ -357,10 +357,10 @@ IoT_Protocols/
 
 | 本目录协议 | 目标平台 | 集成要点 |
 |:-----------|:---------|:---------|
-| MQTT | [../ESP32](../ESP32/README.md) | 配合 WiFi 客户端使用 |
-| CoAP | [../RPi_Pico](../RPi_Pico/README.md) | 轻量级 UDP 实现 |
-| Modbus | [../RaspberryPi](../RaspberryPi/README.md) | 工业网关应用 |
-| 协议优化 | [../Memory_Constrained](../Memory_Constrained/README.md) | 缓冲区管理 |
+| MQTT | [../ESP32](../ESP32/readme.md) | 配合 WiFi 客户端使用 |
+| CoAP | [../RPi_Pico](../RPi_Pico/readme.md) | 轻量级 UDP 实现 |
+| Modbus | [../RaspberryPi](../RaspberryPi/readme.md) | 工业网关应用 |
+| 协议优化 | [../Memory_Constrained](../Memory_Constrained/readme.md) | 缓冲区管理 |
 
 ---
 
@@ -557,7 +557,7 @@ int main() {
 
 ## 🔗 返回上级
 
-[← 返回 14_Embedded_IoT 目录](../README.md)
+[← 返回 14_Embedded_IoT 目录](../readme.md)
 
 ---
 

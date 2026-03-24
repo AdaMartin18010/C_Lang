@@ -2,7 +2,7 @@
 
 > **层级**: L4 (方法论层) + L3 (系统层)
 > **目标**: 掌握安全关键系统 (Safety-Critical Systems) 的设计原则、编码标准与验证方法
-> **关联**: [内存安全](../02_Security/06_Memory_Security_Deep_Dive.md) | [MISRA C](../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023_Guide.md) | [形式化验证](../05_Program_Verification/README.md)
+> **关联**: [内存安全](../02_Security/06_Memory_Security_Deep_Dive.md) | [MISRA C](../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023_Guide.md) | [形式化验证](../05_Program_Verification/readme.md)
 
 ---
 

@@ -16,13 +16,13 @@
 
 ### 后续延伸
 
-- [代码质量工具链](../../07_Modern_Toolchain/05_Code_Quality_Toolchain/README.md) - 自动化检查
-- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) - 多线程工程
-- [安全标准](../09_Safety_Standards/README.md) - 合规开发
+- [代码质量工具链](../../07_Modern_Toolchain/05_Code_Quality_Toolchain/readme.md) - 自动化检查
+- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) - 多线程工程
+- [安全标准](../09_Safety_Standards/readme.md) - 合规开发
 
 ### 实践关联
 
-- [状态机设计](../../06_Thinking_Representation/09_State_Machines/README.md) - 复杂逻辑组织
+- [状态机设计](../../06_Thinking_Representation/09_State_Machines/readme.md) - 复杂逻辑组织
 - [调试技术](./02_Debug_Techniques.md) - 问题定位
 - [性能优化](./03_Performance_Optimization.md) - 效率提升
 

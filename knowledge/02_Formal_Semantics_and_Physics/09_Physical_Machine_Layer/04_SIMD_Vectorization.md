@@ -324,7 +324,7 @@ void report_performance(double time_sec, int n, int flops_per_element) {
 
 ### 前置知识
 
-- [计算机体系结构](../README.md)
+- [计算机体系结构](../readme.md)
 - [性能优化](../../07_Microarchitecture/03_Cache_Optimization_Practical.md)
 
 ### 后续延伸

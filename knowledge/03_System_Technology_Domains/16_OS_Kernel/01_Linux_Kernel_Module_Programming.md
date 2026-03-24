@@ -633,8 +633,8 @@ hrtimer_cancel(&timer);  // 取消并等待完成
 ### 前置知识
 
 - [系统调用机制](../13_System_Call_Implementation.md)
-- [并发编程](../14_Concurrency_Parallelism/README.md)
-- [内存管理](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/05_Memory_Management_Hardware/README.md)
+- [并发编程](../14_Concurrency_Parallelism/readme.md)
+- [内存管理](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/05_Memory_Management_Hardware/readme.md)
 
 ### 后续延伸
 

@@ -231,7 +231,7 @@
 
 ---
 
-**知识库入口**: [01_Core_Knowledge_System/00_Introduction/README.md](./01_Core_Knowledge_System/00_Introduction/README.md)
+**知识库入口**: [01_Core_Knowledge_System/00_Introduction/readme.md](./01_Core_Knowledge_System/00_Introduction/readme.md)
 
 **最新更新**: 2026-03-24 | **文档数**: 993 | **总行数**: 719,150 | **总大小**: 28.2 MB
 

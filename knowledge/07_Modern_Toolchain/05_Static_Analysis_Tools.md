@@ -565,7 +565,7 @@ jobs:
 ### 前置知识
 
 - [编译器前端与AST](../02_Formal_Semantics_and_Physics/11_Compiler_Internals/01_AST_and_IR.md)
-- [Clang工具链](./README.md)
+- [Clang工具链](./readme.md)
 
 ### 后续延伸
 

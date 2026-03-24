@@ -23,7 +23,7 @@
 |:-----|:---------|:-----|
 | [C11标准库](03_C11_Library.md) | 版本演进 | 线程与并发支持 |
 | [C17/C23库](04_C17_C23_Library.md) | 版本演进 | 现代C特性 |
-| [国际化](../11_Internationalization/README.md) | 功能应用 | 宽字符、本地化 |
+| [国际化](../11_Internationalization/readme.md) | 功能应用 | 宽字符、本地化 |
 
 ### 关键新增
 

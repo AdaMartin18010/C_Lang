@@ -1142,7 +1142,7 @@ void execute_response(threat_response_t response, const threat_event_t *event) {
 - [01_TPM2_TSS.md](./01_TPM2_TSS.md) - TPM2技术细节
 - [02_Key_Sealing.md](./02_Key_Sealing.md) - 密钥密封技术
 - [03_HSM_Integration.md](./03_HSM_Integration.md) - HSM集成
-- [../06_Security_Boot/README.md](../06_Security_Boot/README.md) - 安全启动
+- [../06_Security_Boot/readme.md](../06_Security_Boot/readme.md) - 安全启动
 
 
 ---

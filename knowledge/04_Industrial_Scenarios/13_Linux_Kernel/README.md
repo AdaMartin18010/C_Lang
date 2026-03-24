@@ -11,9 +11,9 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [C与汇编映射](../../02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/README.md) | 底层基础 | 内核汇编代码 |
+| [C与汇编映射](../../02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/readme.md) | 底层基础 | 内核汇编代码 |
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 内核内存子系统 |
-| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并行基础 | 内核并发、锁机制 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 并行基础 | 内核并发、锁机制 |
 | [系统调用](../../03_System_Technology_Domains/01_System_Programming/04_System_Call_Interface.md) | 系统基础 | 用户空间接口 |
 
 ### 内核子系统
@@ -21,16 +21,16 @@
 | 子系统 | 关联文档 | 核心概念 |
 |:-----|:---------|:---------|
 | 内存管理 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 页表、slab分配器 |
-| 进程调度 | [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 调度策略、上下文切换 |
+| 进程调度 | [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 调度策略、上下文切换 |
 | 文件系统 | [系统编程](../../03_System_Technology_Domains/01_System_Programming/02_File_System_Operations.md) | VFS、缓冲区缓存 |
-| 网络栈 | [网络编程](../../03_System_Technology_Domains/15_Network_Programming/README.md) | 协议栈、socket |
+| 网络栈 | [网络编程](../../03_System_Technology_Domains/15_Network_Programming/readme.md) | 协议栈、socket |
 
 ### 后续延伸
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [设备驱动](../01_System_Programming/06_Device_Driver_Basics.md) | 驱动开发 | 字符/块设备驱动 |
-| [嵌入式Linux](../14_Embedded_IoT/README.md) | 应用场景 | 嵌入式系统集成 |
+| [嵌入式Linux](../14_Embedded_IoT/readme.md) | 应用场景 | 嵌入式系统集成 |
 | [性能优化](../../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md) | 性能调优 | 内核性能优化 |
 
 ---
@@ -1457,7 +1457,7 @@ static void rcu_update_example(struct my_data **global_ptr,
 
 ---
 
-> [← 返回上级目录](../README.md)
+> [← 返回上级目录](../readme.md)
 >
 > **最后更新**: 2026-03-13
 >

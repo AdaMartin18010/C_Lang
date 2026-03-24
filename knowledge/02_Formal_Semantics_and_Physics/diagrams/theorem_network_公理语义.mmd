@@ -1,0 +1,97 @@
+graph TD
+    subgraph 公理语义
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoHoareRules["demoHoareRules"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoHoareRules fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoWP["demoWP"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoWP fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoVerification["demoVerification"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoVerification fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoInvariants["demoInvariants"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoInvariants fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoExecution["demoExecution"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__demoExecution fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__main["main"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Main_lean__main fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__Assertion["Assertion"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__Assertion fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__HoareTriple["HoareTriple"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__HoareTriple fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__skipRule["skipRule"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__skipRule fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__assignRule["assignRule"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__assignRule fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__seqRule["seqRule"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__seqRule fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__ifRule["ifRule"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__ifRule fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__whileRule["whileRule"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__whileRule fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__consequenceRule["consequenceRule"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__consequenceRule fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__weakenPre["weakenPre"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__weakenPre fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__strengthenPost["strengthenPost"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__strengthenPost fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__isInvariant["isInvariant"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__isInvariant fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__verifyInvariant["verifyInvariant"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__verifyInvariant fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__factInvariant["factInvariant"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__factInvariant fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__constAssign["constAssign"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__constAssign fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__swapAssign["swapAssign"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__swapAssign fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__ifFalseSkip["ifFalseSkip"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__ifFalseSkip fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__hoare_sound["hoare_sound"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__hoare_sound fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__PartialCorrectness["PartialCorrectness"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__PartialCorrectness fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__TotalCorrectness["TotalCorrectness"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Rules_lean__TotalCorrectness fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__linearSearch["linearSearch"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__linearSearch fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__verifyLinearSearch["verifyLinearSearch"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__verifyLinearSearch fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test12["test12"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test12 fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test4["test4"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test4 fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test7["test7"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test7 fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test2["test2"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__test2 fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__calcWP_correct["calcWP_correct"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__calcWP_correct fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__runAllTests["runAllTests"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Tests\VerificationTest_lean__runAllTests fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_characterization["wp_characterization"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_characterization fill:#f39c12
+        MANUAL__whileRule["whileRule"]
+        style MANUAL__whileRule fill:#f39c12
+        MANUAL__verifyIncr["verifyIncr"]
+        style MANUAL__verifyIncr fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__arraySum["arraySum"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__arraySum fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__factInvariant["factInvariant"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__factInvariant fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__sp_skip["sp_skip"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__sp_skip fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_if["wp_if"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_if fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_weakest["wp_weakest"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_weakest fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_seq["wp_seq"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\WP_lean__wp_seq fill:#f39c12
+        MANUAL__verifyFactorial["verifyFactorial"]
+        style MANUAL__verifyFactorial fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Syntax_lean__ex2["ex2"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Syntax_lean__ex2 fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__VCResult["VCResult"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__VCResult fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__verifyIncr["verifyIncr"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__verifyIncr fill:#f39c12
+        knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__absProgram["absProgram"]
+        style knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects\HoareLogic\Hoare\Verification_lean__absProgram fill:#f39c12
+    end

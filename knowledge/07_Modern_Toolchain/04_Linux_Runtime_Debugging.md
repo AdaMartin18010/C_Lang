@@ -694,8 +694,8 @@ void setup_memory_watch(void *addr, size_t len) {
 
 ### 前置知识
 
-- [ptrace系统调用](../../03_System_Technology_Domains/01_System_Programming/README.md)
-- [ELF文件格式](../../02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/README.md)
+- [ptrace系统调用](../../03_System_Technology_Domains/01_System_Programming/readme.md)
+- [ELF文件格式](../../02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/readme.md)
 - [eBPF深度](../../03_System_Technology_Domains/01_System_Programming/06_eBPF_Deep.md)
 
 ### 后续延伸

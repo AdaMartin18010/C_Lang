@@ -579,11 +579,11 @@ int main(int argc, char **argv) {
 
 ### 后续延伸
 
-- [Linux内核](../../04_Industrial_Scenarios/13_Linux_Kernel/README.md)
+- [Linux内核](../../04_Industrial_Scenarios/13_Linux_Kernel/readme.md)
 - [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md)
 - [安全机制](../../01_Core_Knowledge_System/09_Safety_Standards/04_Secure_Coding_Guide.md)
 
 ### 实践关联
 
 - [逆向工程](../../03_System_Technology_Domains/01_System_Programming/08_Binary_Reverse_Engineering.md)
-- [漏洞利用](../../01_Core_Knowledge_System/09_Safety_Standards/Vulnerability_Cases/README.md)
+- [漏洞利用](../../01_Core_Knowledge_System/09_Safety_Standards/Vulnerability_Cases/readme.md)

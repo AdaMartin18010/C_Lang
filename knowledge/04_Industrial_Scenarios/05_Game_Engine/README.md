@@ -15,7 +15,7 @@
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 内存池、对象池 |
 | [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心基础 | ECS内存布局 |
 | [结构体](../../01_Core_Knowledge_System/03_Construction_Layer/01_Structures_Unions.md) | 构造基础 | 组件系统设计 |
-| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并行基础 | 多线程渲染 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 并行基础 | 多线程渲染 |
 
 ### 核心系统
 
@@ -30,9 +30,9 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [图形渲染](../../03_System_Technology_Domains/17_Graphics_Rendering/README.md) | 渲染系统 | GPU渲染管线 |
-| [SIMD优化](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 性能优化 | 向量化计算 |
-| [性能分析](../../02_Formal_Semantics_and_Physics/16_Performance_Analysis_Hardware/README.md) | 性能调优 | 游戏性能分析 |
+| [图形渲染](../../03_System_Technology_Domains/17_Graphics_Rendering/readme.md) | 渲染系统 | GPU渲染管线 |
+| [SIMD优化](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/readme.md) | 性能优化 | 向量化计算 |
+| [性能分析](../../02_Formal_Semantics_and_Physics/16_Performance_Analysis_Hardware/readme.md) | 性能调优 | 游戏性能分析 |
 
 本目录包含使用 C 语言开发游戏引擎的核心技术与最佳实践，涵盖从底层架构到高级系统设计的完整知识体系。
 

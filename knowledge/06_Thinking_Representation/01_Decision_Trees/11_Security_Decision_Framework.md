@@ -278,7 +278,7 @@ GCC/Clang:
 
 ---
 
-**返回**: [决策树总览](./README.md) | [思维表征总览](../README.md) | [安全标准](../../01_Core_Knowledge_System/09_Safety_Standards/README.md)
+**返回**: [决策树总览](./readme.md) | [思维表征总览](../readme.md) | [安全标准](../../01_Core_Knowledge_System/09_Safety_Standards/readme.md)
 
 
 ---

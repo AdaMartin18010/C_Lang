@@ -2,7 +2,7 @@
 
 > **层级**: L0 (案例层) + L3 (系统层)
 > **目标**: 完整实现生产级B-Tree存储引擎，理解数据库内核设计原理
-> **关联**: [高级数据结构](../01_Core_Knowledge_System/05_Data_Structures_Algorithms/README.md) | [文件系统](../03_System_Technology_Domains/03_OS_Internals/README.md)
+> **关联**: [高级数据结构](../01_Core_Knowledge_System/05_Data_Structures_Algorithms/readme.md) | [文件系统](../03_System_Technology_Domains/03_OS_Internals/readme.md)
 
 ---
 

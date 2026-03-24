@@ -427,7 +427,7 @@ ASan优化示例：
 ### 理论基础
 
 - [抽象解释](../02_Formal_Semantics_and_Physics/13_Formal_Methods/01_Correctness_by_Construction.md)
-- [并发模型](../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md)
+- [并发模型](../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md)
 
 ### 工具实践
 

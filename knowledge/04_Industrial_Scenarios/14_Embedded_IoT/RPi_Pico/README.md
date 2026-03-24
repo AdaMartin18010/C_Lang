@@ -262,7 +262,7 @@ source ~/.zshrc
 
 ## 📚 与主文档的关系
 
-本目录是 [14_Embedded_IoT](../README.md) 双核实时控制专题的核心内容，与相邻目录形成技术互补。
+本目录是 [14_Embedded_IoT](../readme.md) 双核实时控制专题的核心内容，与相邻目录形成技术互补。
 
 ### 文档架构
 
@@ -482,7 +482,7 @@ int main() {
 
 ## 🔗 返回上级
 
-[← 返回 14_Embedded_IoT 目录](../README.md)
+[← 返回 14_Embedded_IoT 目录](../readme.md)
 
 ---
 

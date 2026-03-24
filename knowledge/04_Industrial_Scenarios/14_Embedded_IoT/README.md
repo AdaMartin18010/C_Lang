@@ -14,7 +14,7 @@
 |:-----|:---------|:-----|
 | [嵌入式系统](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | 理论基础 | 嵌入式基础概念 |
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 内存受限优化 |
-| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并行基础 | 多核处理器 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 并行基础 | 多核处理器 |
 
 ### 硬件平台
 
@@ -29,9 +29,9 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [无线协议](../../03_System_Technology_Domains/05_Wireless_Protocol/README.md) | 通信技术 | IoT通信协议 |
-| [安全启动](../../03_System_Technology_Domains/06_Security_Boot/README.md) | 安全基础 | 设备安全启动 |
-| [硬件安全](../../03_System_Technology_Domains/07_Hardware_Security/README.md) | 安全加固 | 硬件安全机制 |
+| [无线协议](../../03_System_Technology_Domains/05_Wireless_Protocol/readme.md) | 通信技术 | IoT通信协议 |
+| [安全启动](../../03_System_Technology_Domains/06_Security_Boot/readme.md) | 安全基础 | 设备安全启动 |
+| [硬件安全](../../03_System_Technology_Domains/07_Hardware_Security/readme.md) | 安全加固 | 硬件安全机制 |
 
 > 真实硬件平台实战：ESP32、树莓派 Pico、Raspberry Pi、工控系统
 
@@ -41,12 +41,12 @@
 
 | 目录 | 内容 | 适用硬件 |
 |:-----|:-----|:---------|
-| [ESP32](./ESP32/README.md) | ESP32-S3/C3 完整开发指南 | ESP32 DevKit |
-| [RPi_Pico](./RPi_Pico/README.md) | RP2040 双核开发 | Raspberry Pi Pico |
-| [RaspberryPi](./RaspberryPi/README.md) | 嵌入式 Linux 开发 | RPi 4/5/CM4 |
-| [Industrial_Linux](./Industrial_Linux/README.md) | 工控 Linux 系统 | 工业 PC |
-| [Memory_Constrained](./Memory_Constrained/README.md) | 内存受限系统设计 | 8/16位 MCU |
-| [IoT_Protocols](./IoT_Protocols/README.md) | 轻量级协议实现 | 所有 IoT 平台 |
+| [ESP32](./ESP32/readme.md) | ESP32-S3/C3 完整开发指南 | ESP32 DevKit |
+| [RPi_Pico](./RPi_Pico/readme.md) | RP2040 双核开发 | Raspberry Pi Pico |
+| [RaspberryPi](./RaspberryPi/readme.md) | 嵌入式 Linux 开发 | RPi 4/5/CM4 |
+| [Industrial_Linux](./Industrial_Linux/readme.md) | 工控 Linux 系统 | 工业 PC |
+| [Memory_Constrained](./Memory_Constrained/readme.md) | 内存受限系统设计 | 8/16位 MCU |
+| [IoT_Protocols](./IoT_Protocols/readme.md) | 轻量级协议实现 | 所有 IoT 平台 |
 
 ---
 

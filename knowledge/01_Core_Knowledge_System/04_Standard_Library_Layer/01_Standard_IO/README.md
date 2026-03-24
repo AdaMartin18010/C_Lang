@@ -29,7 +29,7 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [状态机](../../../06_Thinking_Representation/09_State_Machines/README.md) | 实现机制 | FILE状态转换 |
+| [状态机](../../../06_Thinking_Representation/09_State_Machines/readme.md) | 实现机制 | FILE状态转换 |
 | [内存映射](../../03_System_Technology_Domains/01_System_Programming/05_Memory_Mapped_Files.md) | 性能优化 | 替代方案对比 |
 
 ## 目录
@@ -676,8 +676,8 @@ void thread_local_io(FILE *fp) {
 ### 相关文件
 
 - [01_stdio_File_IO.md](./01_stdio_File_IO.md) - 文件 I/O 基础
-- [07_Modern_Toolchain: 并发并行](../../../07_Modern_Toolchain/07_Concurrency_Parallelism/README.md) - 多线程I/O与缓冲
-- [05_Deep_Structure: 标准库物理](../../../05_Deep_Structure_MetaPhysics/06_Standard_Library_Physics/README.md) - I/O底层实现原理
+- [07_Modern_Toolchain: 并发并行](../../../07_Modern_Toolchain/07_Concurrency_Parallelism/readme.md) - 多线程I/O与缓冲
+- [05_Deep_Structure: 标准库物理](../../../05_Deep_Structure_MetaPhysics/06_Standard_Library_Physics/readme.md) - I/O底层实现原理
 
 ### 总结
 

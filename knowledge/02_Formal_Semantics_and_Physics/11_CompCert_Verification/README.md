@@ -17,7 +17,7 @@
 | [操作语义](../00_Core_Semantics_Foundations/01_Operational_Semantics.md) | 理论基础 | 语义保持证明 |
 | [指称语义](../00_Core_Semantics_Foundations/02_Denotational_Semantics.md) | 理论基础 | 数学语义模型 |
 | [C类型理论](../00_Core_Semantics_Foundations/04_C_Type_Theory.md) | 类型基础 | 类型系统形式化 |
-| [C与汇编映射](../06_C_Assembly_Mapping/README.md) | 编译基础 | 编译过程理解 |
+| [C与汇编映射](../06_C_Assembly_Mapping/readme.md) | 编译基础 | 编译过程理解 |
 
 ### 工具链
 
@@ -33,7 +33,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [安全编码](../../01_Core_Knowledge_System/09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全应用 | 形式化方法在安全中的应用 |
-| [MISRA C](../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 合规验证 | 形式化验证与编码标准 |
+| [MISRA C](../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md) | 合规验证 | 形式化验证与编码标准 |
 
 ---
 

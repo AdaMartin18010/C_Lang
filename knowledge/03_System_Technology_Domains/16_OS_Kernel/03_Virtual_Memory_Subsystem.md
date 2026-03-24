@@ -536,7 +536,7 @@ Elf64_Ehdr *elf = addr;
 
 ### 前置知识
 
-- [内存管理硬件](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/05_Memory_Management_Hardware/README.md)
+- [内存管理硬件](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/05_Memory_Management_Hardware/readme.md)
 - [Linux内核模块编程](./01_Linux_Kernel_Module_Programming.md)
 
 ### 后续延伸

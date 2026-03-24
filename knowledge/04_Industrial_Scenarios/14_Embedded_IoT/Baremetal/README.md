@@ -294,7 +294,7 @@ openocd -f interface/stlink.cfg -f target/stm32f1x.cfg \
 
 ## 📚 与主文档的关系
 
-本目录是 [14_Embedded_IoT](../README.md) 的底层基础，与上层技术栈形成完整知识体系。
+本目录是 [14_Embedded_IoT](../readme.md) 的底层基础，与上层技术栈形成完整知识体系。
 
 ### 文档架构
 
@@ -316,15 +316,15 @@ Baremetal/
 ```
 应用层
     │
-    ├── [../IoT_Protocols/](../IoT_Protocols/README.md) - MQTT/CoAP/HTTP
+    ├── [../IoT_Protocols/](../IoT_Protocols/readme.md) - MQTT/CoAP/HTTP
     │
 中间层
     │
-    ├── [../Memory_Constrained/](../Memory_Constrained/README.md) - 内存管理
+    ├── [../Memory_Constrained/](../Memory_Constrained/readme.md) - 内存管理
     │
 硬件抽象层
     │
-    ├── [../RPi_Pico/](../RPi_Pico/README.md) - SDK API
+    ├── [../RPi_Pico/](../RPi_Pico/readme.md) - SDK API
     │
 裸机层 (本目录)
     │
@@ -599,7 +599,7 @@ void HardFault_Handler_C(uint32_t *stackFrame) {
 
 ## 🔗 返回上级
 
-[← 返回 14_Embedded_IoT 目录](../README.md)
+[← 返回 14_Embedded_IoT 目录](../readme.md)
 
 ---
 

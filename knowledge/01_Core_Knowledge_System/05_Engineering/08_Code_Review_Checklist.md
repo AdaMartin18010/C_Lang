@@ -14,23 +14,23 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [内存管理](../02_Core_Layer/02_Memory_Management.md) | 安全检查 | UAF、内存泄漏审查 |
-| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 安全检查 | 数据竞争、死锁审查 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 安全检查 | 数据竞争、死锁审查 |
 | [安全编码规范](../09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全基础 | 安全编码规则 |
 
 ### 后续延伸
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [MISRA C:2023](../09_Safety_Standards/MISRA_C_2023/README.md) | 合规标准 | 汽车级代码规范 |
-| [CERT C](../09_Safety_Standards/CERT_C_2024/README.md) | 安全标准 | 安全编码标准 |
-| [静态分析工具](../../07_Modern_Toolchain/05_Code_Quality_Toolchain/README.md) | 自动化 | 自动化代码检查 |
+| [MISRA C:2023](../09_Safety_Standards/MISRA_C_2023/readme.md) | 合规标准 | 汽车级代码规范 |
+| [CERT C](../09_Safety_Standards/CERT_C_2024/readme.md) | 安全标准 | 安全编码标准 |
+| [静态分析工具](../../07_Modern_Toolchain/05_Code_Quality_Toolchain/readme.md) | 自动化 | 自动化代码检查 |
 
 ### 横向关联
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [软件工程层](../05_Engineering_Layer/README.md) | 流程关联 | 审查流程工程化 |
-| [形式化验证](../../02_Formal_Semantics_and_Physics/11_CompCert_Verification/README.md) | 验证深化 | 机器验证替代人工审查 |
+| [软件工程层](../05_Engineering_Layer/readme.md) | 流程关联 | 审查流程工程化 |
+| [形式化验证](../../02_Formal_Semantics_and_Physics/11_CompCert_Verification/readme.md) | 验证深化 | 机器验证替代人工审查 |
 
 ---
 

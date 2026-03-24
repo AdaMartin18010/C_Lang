@@ -530,7 +530,7 @@ jobs:
 ### 前置知识
 
 - [内存安全](../../01_Core_Knowledge_System/02_Core_Layer/01_Memory_Model.md)
-- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md)
+- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md)
 
 ### 后续延伸
 

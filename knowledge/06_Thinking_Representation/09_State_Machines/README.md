@@ -35,9 +35,9 @@
 
 ### 后续延伸
 
-- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) - 多线程状态机
-- [嵌入式系统设计](../../04_Industrial_Scenarios/14_Embedded_IoT/README.md) - 实际应用场景
-- [编译器实现](../../02_Formal_Semantics_and_Physics/11_CompCert_Verification/README.md) - 词法分析状态机
+- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) - 多线程状态机
+- [嵌入式系统设计](../../04_Industrial_Scenarios/14_Embedded_IoT/readme.md) - 实际应用场景
+- [编译器实现](../../02_Formal_Semantics_and_Physics/11_CompCert_Verification/readme.md) - 词法分析状态机
 
 ### 横向关联
 
@@ -382,9 +382,9 @@ void traffic_fsm_handle_event(TrafficState* state, Event event, uint32_t elapsed
 
 ### 相关模块
 
-- [并发编程](../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) - 状态机与多线程结合
-- [嵌入式系统](../04_Industrial_Scenarios/14_Embedded_IoT/README.md) - 嵌入式状态机应用
-- [设计模式](../07_Modern_Toolchain/08_Design_Patterns/README.md) - State模式详解
+- [并发编程](../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) - 状态机与多线程结合
+- [嵌入式系统](../04_Industrial_Scenarios/14_Embedded_IoT/readme.md) - 嵌入式状态机应用
+- [设计模式](../07_Modern_Toolchain/08_Design_Patterns/readme.md) - State模式详解
 
 ---
 

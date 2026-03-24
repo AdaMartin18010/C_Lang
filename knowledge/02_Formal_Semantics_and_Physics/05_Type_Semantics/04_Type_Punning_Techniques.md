@@ -404,14 +404,14 @@ void process_misaligned(void *ptr) {
 
 ### 前置知识
 
-- [类型系统](./README.md)
+- [类型系统](./readme.md)
 - [内存布局](../../../01_Core_Knowledge_System/02_Core_Layer/01_Memory_Model.md)
-- [严格别名规则](../../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md)
+- [严格别名规则](../../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md)
 
 ### 后续延伸
 
 - [SIMD编程](../09_Physical_Machine_Layer/04_SIMD_Vectorization.md)
-- [网络编程](../../../03_System_Technology_Domains/15_Network_Programming/README.md)
+- [网络编程](../../../03_System_Technology_Domains/15_Network_Programming/readme.md)
 
 ### 参考
 

@@ -150,12 +150,12 @@ int trace_sys_enter(struct bpf_raw_tracepoint_args *ctx) {
 ### 前置知识
 
 - [系统调用](./04_System_Call_Interface.md)
-- [Linux内核](../../04_Industrial_Scenarios/13_Linux_Kernel/README.md)
-- [性能分析](../../02_Formal_Semantics_and_Physics/16_Performance_Analysis_Hardware/README.md)
+- [Linux内核](../../04_Industrial_Scenarios/13_Linux_Kernel/readme.md)
+- [性能分析](../../02_Formal_Semantics_and_Physics/16_Performance_Analysis_Hardware/readme.md)
 
 ### 后续延伸
 
-- [网络编程](../15_Network_Programming/README.md)
+- [网络编程](../15_Network_Programming/readme.md)
 - [Cilium容器网络](https://cilium.io)
 - [Falco安全监控](https://falco.org)
 

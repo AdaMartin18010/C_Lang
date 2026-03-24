@@ -603,14 +603,14 @@ readelf -V ./program
 ### 前置知识
 
 - [静态链接深度解析](./03_Static_Linking_Deep.md)
-- [ELF文件格式](./README.md#目标文件格式)
+- [ELF文件格式](./readme.md#目标文件格式)
 - [虚拟内存](../../03_System_Technology_Domains/01_System_Programming/05_Memory_Mapped_Files.md)
 
 ### 后续延伸
 
 - [加载器工作原理](#动态链接器工作原理)
-- [系统编程](../../03_System_Technology_Domains/01_System_Programming/README.md)
-- [内核模块](../../04_Industrial_Scenarios/13_Linux_Kernel/README.md)
+- [系统编程](../../03_System_Technology_Domains/01_System_Programming/readme.md)
+- [内核模块](../../04_Industrial_Scenarios/13_Linux_Kernel/readme.md)
 
 ### 实践关联
 

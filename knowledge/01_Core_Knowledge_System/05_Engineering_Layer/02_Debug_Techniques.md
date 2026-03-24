@@ -23,7 +23,7 @@
 |:-----|:---------|:-----|
 | [性能优化](03_Performance_Optimization.md) | 性能调试 | Perf性能分析 |
 | [安全编码](../09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全调试 | 安全漏洞检测 |
-| [现代工具链](../../07_Modern_Toolchain/README.md) | 工具进阶 | 现代调试工具 |
+| [现代工具链](../../07_Modern_Toolchain/readme.md) | 工具进阶 | 现代调试工具 |
 
 ### 调试技术链
 

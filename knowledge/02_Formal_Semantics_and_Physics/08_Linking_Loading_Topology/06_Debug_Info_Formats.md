@@ -409,13 +409,13 @@ void remove_breakpoint(pid_t pid, void *addr) {
 ### 前置知识
 
 - [静态链接深度](./03_Static_Linking_Deep.md)
-- [ELF文件格式](../08_Linking_Loading_Topology/README.md)
+- [ELF文件格式](../08_Linking_Loading_Topology/readme.md)
 - [x86-64汇编](../10_ISA_Machine_Code/01_x86_64_Assembly.md)
 
 ### 后续延伸
 
 - [GDB调试器实现](../16_OS_Kernel/05_GDB_Debugger_Implementation.md)
-- [性能分析工具](../16_Performance_Analysis_Hardware/README.md)
+- [性能分析工具](../16_Performance_Analysis_Hardware/readme.md)
 
 ### 参考
 

@@ -276,7 +276,7 @@ MISRA C:2025官方文档需要通过以下渠道购买：
 
 ## 相关文档
 
-- [MISRA C:2025 README](./README.md)
+- [MISRA C:2025 README](./readme.md)
 - [MISRA C:2023 参考](../MISRA_C_2023/00_MISRA_C_2023_Index.md)
 
 ---

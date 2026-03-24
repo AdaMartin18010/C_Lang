@@ -325,14 +325,14 @@ void process_with_prefetch(int *data, int n) {
 
 ### 前置知识
 
-- [微架构](../README.md)
-- [并发编程](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md)
+- [微架构](../readme.md)
+- [并发编程](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md)
 - [C11内存模型](../../01_Game_Semantics/02_C11_Memory_Model.md)
 
 ### 后续延伸
 
 - [缓存优化实战](../../07_Microarchitecture/03_Cache_Optimization_Practical.md)
-- [性能分析硬件](../../16_Performance_Analysis_Hardware/README.md)
+- [性能分析硬件](../../16_Performance_Analysis_Hardware/readme.md)
 
 ### 参考
 

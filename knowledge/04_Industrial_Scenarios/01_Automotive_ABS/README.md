@@ -12,10 +12,10 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [MISRA C](../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 安全标准 | 汽车级编码规范 |
-| [嵌入式IoT](../14_Embedded_IoT/README.md) | 硬件基础 | 嵌入式开发实践 |
+| [MISRA C](../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md) | 安全标准 | 汽车级编码规范 |
+| [嵌入式IoT](../14_Embedded_IoT/readme.md) | 硬件基础 | 嵌入式开发实践 |
 | [实时系统](../../03_System_Technology_Domains/14_Concurrency_Parallelism/03_Real_Time_Systems.md) | 实时基础 | 实时调度 |
-| [状态机](../../06_Thinking_Representation/09_State_Machines/README.md) | 设计模式 | 控制逻辑实现 |
+| [状态机](../../06_Thinking_Representation/09_State_Machines/readme.md) | 设计模式 | 控制逻辑实现 |
 
 ### 核心技术
 

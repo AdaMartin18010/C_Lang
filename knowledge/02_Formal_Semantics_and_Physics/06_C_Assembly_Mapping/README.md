@@ -20,16 +20,16 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [链接加载](../08_Linking_Loading_Topology/README.md) | 流程延伸 | 汇编到可执行文件 |
-| [ISA机器码](../10_ISA_Machine_Code/README.md) | 编码深化 | 指令编码细节 |
-| [微架构](../07_Microarchitecture/README.md) | 执行优化 | 处理器执行机制 |
+| [链接加载](../08_Linking_Loading_Topology/readme.md) | 流程延伸 | 汇编到可执行文件 |
+| [ISA机器码](../10_ISA_Machine_Code/readme.md) | 编码深化 | 指令编码细节 |
+| [微架构](../07_Microarchitecture/readme.md) | 执行优化 | 处理器执行机制 |
 
 ### 横向关联
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [操作语义](../00_Core_Semantics_Foundations/01_Operational_Semantics.md) | 理论深化 | 编译的形式化语义 |
-| [编译器优化](../12_Compiler_Optimization/README.md) | 优化阶段 | 中间表示与优化 |
+| [编译器优化](../12_Compiler_Optimization/readme.md) | 优化阶段 | 中间表示与优化 |
 
 本目录系统阐述**C语言到汇编语言的编译映射机制**，深入探讨编译器代码生成、调用约定、内联汇编技术以及ABI兼容性等核心主题。
 
@@ -566,9 +566,9 @@ return φ(x0, x1);  // φ函数合并不同路径的值
 
 ## 相关链接
 
-- [父目录: 形式语义与物理学](../README.md)
-- [形式语义学](../../05_Deep_Structure_MetaPhysics/01_Formal_Semantics/README.md)
-- [ISA与机器码](../10_ISA_Machine_Code/README.md)
+- [父目录: 形式语义与物理学](../readme.md)
+- [形式语义学](../../05_Deep_Structure_MetaPhysics/01_Formal_Semantics/readme.md)
+- [ISA与机器码](../10_ISA_Machine_Code/readme.md)
 
 ---
 

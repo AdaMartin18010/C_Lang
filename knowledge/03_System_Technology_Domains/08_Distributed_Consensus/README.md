@@ -12,8 +12,8 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [网络编程](../15_Network_Programming/README.md) | 通信基础 | RPC、消息传递 |
-| [并发编程](../14_Concurrency_Parallelism/README.md) | 同步基础 | 分布式锁、一致性 |
+| [网络编程](../15_Network_Programming/readme.md) | 通信基础 | RPC、消息传递 |
+| [并发编程](../14_Concurrency_Parallelism/readme.md) | 同步基础 | 分布式锁、一致性 |
 | [C11内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md) | 理论支撑 | 一致性模型 |
 
 ### 算法分类
@@ -28,9 +28,9 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [RDMA网络](../13_RDMA_Network/README.md) | 高性能通信 | 低延迟共识 |
+| [RDMA网络](../13_RDMA_Network/readme.md) | 高性能通信 | 低延迟共识 |
 | [嵌入式系统](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | 应用场景 | 边缘设备共识 |
-| [状态机](../../06_Thinking_Representation/09_State_Machines/README.md) | 理论基础 | 复制状态机 |
+| [状态机](../../06_Thinking_Representation/09_State_Machines/readme.md) | 理论基础 | 复制状态机 |
 
 ---
 
@@ -1239,7 +1239,7 @@ void ttp_execute_agreement(ttp_node_t *node) {
 
 ---
 
-> [← 返回上级目录](../README.md)
+> [← 返回上级目录](../readme.md)
 >
 > **最后更新**: 2026-03-13
 >

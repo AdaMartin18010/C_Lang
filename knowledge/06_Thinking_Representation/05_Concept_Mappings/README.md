@@ -30,9 +30,9 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [学习路径](06_Learning_Paths/README.md) | 路径规划 | 概念依赖关系 |
-| [知识图谱](07_Knowledge_Graph/README.md) | 可视化 | 知识网络图 |
-| [决策树](01_Decision_Trees/README.md) | 问题诊断 | 概念选择决策 |
+| [学习路径](06_Learning_Paths/readme.md) | 路径规划 | 概念依赖关系 |
+| [知识图谱](07_Knowledge_Graph/readme.md) | 可视化 | 知识网络图 |
+| [决策树](01_Decision_Trees/readme.md) | 问题诊断 | 概念选择决策 |
 
 ## 概述
 

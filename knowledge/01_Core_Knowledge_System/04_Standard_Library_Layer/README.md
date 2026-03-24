@@ -20,15 +20,15 @@
 | 文档 | 关系 | 说明 |
 |:-----|:-----|:-----|
 | [C11线程库](10_Threads_C11.md) | 并发扩展 | 多线程标准支持 |
-| [标准I/O](01_Standard_IO/README.md) | I/O核心 | 文件操作基础 |
-| [C23标准库](C23_Standard_Library/README.md) | 版本演进 | 最新标准特性 |
+| [标准I/O](01_Standard_IO/readme.md) | I/O核心 | 文件操作基础 |
+| [C23标准库](C23_Standard_Library/readme.md) | 版本演进 | 最新标准特性 |
 
 ### 后续延伸
 
 | 文档 | 关系 | 说明 |
 |:-----|:-----|:-----|
 | [POSIX系统编程](../09_Safety_Standards/POSIX_1_2024/01_POSIX_System_Programming.md) | 系统扩展 | POSIX扩展接口 |
-| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 高级应用 | 线程安全函数使用 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 高级应用 | 线程安全函数使用 |
 | [安全编码](../09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全实践 | 安全函数使用规范 |
 
 ### 版本演进路径
@@ -69,7 +69,7 @@ C89标准库 → C99标准库 → C11标准库 → C17修复 → C23新特性
 | 03 | [03_C11_Library.md](./03_C11_Library.md) | C11标准库 | ⭐⭐⭐⭐ | stdalign、stdatomic、stdnoreturn、threads、uchar、边界检查接口 | 6个 |
 | 04 | [04_C17_C23_Library.md](./04_C17_C23_Library.md) | C17/C23标准库 | ⭐⭐⭐ | C17修复、C23新特性(constexpr、typeof、nullptr) | - |
 | 10 | [10_Threads_C11.md](./10_Threads_C11.md) | C11线程库 | ⭐⭐⭐⭐ | threads.h、互斥锁、条件变量、线程本地存储 | threads.h |
-| - | [01_Standard_IO/](./01_Standard_IO/README.md) | 标准I/O子目录 | ⭐⭐⭐ | 文件操作详解 | stdio.h |
+| - | [01_Standard_IO/](./01_Standard_IO/readme.md) | 标准I/O子目录 | ⭐⭐⭐ | 文件操作详解 | stdio.h |
 
 ### 子目录
 
@@ -236,26 +236,26 @@ C89标准库 → C99标准库 → C11标准库 → C17修复 → C23新特性
 
 ### 向上导航
 
-- [← 返回父目录: 核心知识体系](../README.md)
-- [← 返回根目录: 知识库首页](../../README.md)
+- [← 返回父目录: 核心知识体系](../readme.md)
+- [← 返回根目录: 知识库首页](../../readme.md)
 
 ### 前置知识
 
-- **[← 01 Basic Layer: 基础层](../01_Basic_Layer/README.md)** - 数据类型、运算符基础
-- **[← 02 Core Layer: 核心层](../02_Core_Layer/README.md)** - 指针、内存管理是理解标准库的前提
-- **[← 03 Construction Layer: 构造层](../03_Construction_Layer/README.md)** - 结构体、联合体相关知识
+- **[← 01 Basic Layer: 基础层](../01_Basic_Layer/readme.md)** - 数据类型、运算符基础
+- **[← 02 Core Layer: 核心层](../02_Core_Layer/readme.md)** - 指针、内存管理是理解标准库的前提
+- **[← 03 Construction Layer: 构造层](../03_Construction_Layer/readme.md)** - 结构体、联合体相关知识
 
 ### 后续延伸
 
-- **[→ 05 Engineering Layer: 工程层](../05_Engineering_Layer/README.md)** - 构建系统、代码质量
-- **[→ 06 Advanced Layer: 高级层](../06_Advanced_Layer/README.md)** - 未定义行为、可移植性
-- **[→ 07 Modern C: 现代C](../07_Modern_C/README.md)** - C11/C17/C23特性详解
+- **[→ 05 Engineering Layer: 工程层](../05_Engineering_Layer/readme.md)** - 构建系统、代码质量
+- **[→ 06 Advanced Layer: 高级层](../06_Advanced_Layer/readme.md)** - 未定义行为、可移植性
+- **[→ 07 Modern C: 现代C](../07_Modern_C/readme.md)** - C11/C17/C23特性详解
 
 ### 横向关联
 
 - **[→ 03 System Technology: POSIX线程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/01_POSIX_Threads.md)** - C11线程与POSIX线程对比
-- **[→ 05 Deep Structure: 标准库物理](../../05_Deep_Structure_MetaPhysics/06_Standard_Library_Physics/README.md)** - malloc、memcpy等底层实现原理
-- **[→ 06 Thinking: 对比矩阵目录](../../06_Thinking_Representation/02_Comparison_Matrices/README.md)** - 类型、同步、I/O等对比
+- **[→ 05 Deep Structure: 标准库物理](../../05_Deep_Structure_MetaPhysics/06_Standard_Library_Physics/readme.md)** - malloc、memcpy等底层实现原理
+- **[→ 06 Thinking: 对比矩阵目录](../../06_Thinking_Representation/02_Comparison_Matrices/readme.md)** - 类型、同步、I/O等对比
 
 ### 问题诊断
 

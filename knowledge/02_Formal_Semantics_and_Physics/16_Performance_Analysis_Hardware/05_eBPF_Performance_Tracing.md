@@ -408,7 +408,7 @@ int BPF_USDT(libc_setjmp) {
 ### 前置知识
 
 - [eBPF深度](../../03_System_Technology_Domains/01_System_Programming/06_eBPF_Deep.md)
-- [性能分析硬件](./README.md)
+- [性能分析硬件](./readme.md)
 - [Linux Perf教程](./02_Linux_Perf_Tutorial.md)
 
 ### 后续延伸

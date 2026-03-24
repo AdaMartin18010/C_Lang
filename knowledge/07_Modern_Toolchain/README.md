@@ -8,9 +8,9 @@
 | 维度 | 目标文档 | 导航作用 |
 |:-----|:---------|:---------|
 | **总索引** | [../00_GLOBAL_INDEX.md](../00_GLOBAL_INDEX.md) | 完整知识图谱入口，全局视角 |
-| **本模块** | [../README.md](../README.md) | 模块总览与目录导航 |
-| **学习路径** | [../06_Thinking_Representation/06_Learning_Paths/README.md](../06_Thinking_Representation/06_Learning_Paths/README.md) | 阶段化学习路线规划 |
-| **概念映射** | [../06_Thinking_Representation/05_Concept_Mappings/README.md](../06_Thinking_Representation/05_Concept_Mappings/README.md) | 核心概念等价关系图 |
+| **本模块** | [../readme.md](../readme.md) | 模块总览与目录导航 |
+| **学习路径** | [../06_Thinking_Representation/06_Learning_Paths/readme.md](../06_Thinking_Representation/06_Learning_Paths/readme.md) | 阶段化学习路线规划 |
+| **概念映射** | [../06_Thinking_Representation/05_Concept_Mappings/readme.md](../06_Thinking_Representation/05_Concept_Mappings/readme.md) | 核心概念等价关系图 |
 
 ### 【阶段层】学习定位
 
@@ -33,19 +33,19 @@
 
 | 层级 | 关联文档 | 层次关系 |
 |:-----|:---------|:---------|
-| **理论基础** | [../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md](../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | 语义学理论基础 |
-| **核心机制** | [../01_Core_Knowledge_System/02_Core_Layer/README.md](../01_Core_Knowledge_System/02_Core_Layer/README.md) | C语言核心机制 |
-| **标准接口** | [../01_Core_Knowledge_System/04_Standard_Library_Layer/README.md](../01_Core_Knowledge_System/04_Standard_Library_Layer/README.md) | 标准库API |
-| **系统实现** | [../03_System_Technology_Domains/README.md](../03_System_Technology_Domains/README.md) | 系统级实现 |
+| **理论基础** | [../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md](../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md) | 语义学理论基础 |
+| **核心机制** | [../01_Core_Knowledge_System/02_Core_Layer/readme.md](../01_Core_Knowledge_System/02_Core_Layer/readme.md) | C语言核心机制 |
+| **标准接口** | [../01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md](../01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md) | 标准库API |
+| **系统实现** | [../03_System_Technology_Domains/readme.md](../03_System_Technology_Domains/readme.md) | 系统级实现 |
 
 ### 【局部层】横向关联网
 
 | 关联类型 | 目标文档 | 关联说明 |
 |:---------|:---------|:---------|
-| **技术扩展** | [../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md](../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并发编程技术 |
-| **安全规范** | [../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md](../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 安全编码标准 |
-| **工具支持** | [../07_Modern_Toolchain/README.md](../07_Modern_Toolchain/README.md) | 现代开发工具链 |
-| **实践案例** | [../04_Industrial_Scenarios/README.md](../04_Industrial_Scenarios/README.md) | 工业实践场景 |
+| **技术扩展** | [../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md](../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 并发编程技术 |
+| **安全规范** | [../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md](../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md) | 安全编码标准 |
+| **工具支持** | [../07_Modern_Toolchain/readme.md](../07_Modern_Toolchain/readme.md) | 现代开发工具链 |
+| **实践案例** | [../04_Industrial_Scenarios/readme.md](../04_Industrial_Scenarios/readme.md) | 工业实践场景 |
 
 ### 【总体层】知识体系架构
 
@@ -68,9 +68,9 @@
 | 目标 | 推荐路径 | 关键文档 |
 |:-----|:---------|:---------|
 | **系统学习** | 01 → 02 → 03 → 04 | 按顺序阅读各模块 |
-| **问题导向** | 06决策树 → 相关模块 | [决策树目录](../06_Thinking_Representation/01_Decision_Trees/README.md) |
-| **项目驱动** | 04案例 → 所需知识 | [工业场景](../04_Industrial_Scenarios/README.md) |
-| **深入研究** | 02形式语义 → 11CompCert | [形式语义](../02_Formal_Semantics_and_Physics/README.md) |
+| **问题导向** | 06决策树 → 相关模块 | [决策树目录](../06_Thinking_Representation/01_Decision_Trees/readme.md) |
+| **项目驱动** | 04案例 → 所需知识 | [工业场景](../04_Industrial_Scenarios/readme.md) |
+| **深入研究** | 02形式语义 → 11CompCert | [形式语义](../02_Formal_Semantics_and_Physics/readme.md) |
 
 ---
 
@@ -206,7 +206,7 @@
 | [02_Docker_C_Development.md](./03_CI_CD_DevOps/02_Docker_C_Development.md) | Docker容器化 | L3 | ⭐⭐⭐⭐⭐ |
 | [03_GitLab_CI_C.md](./03_CI_CD_DevOps/03_GitLab_CI_C.md) | GitLab CI/CD | L3 | ⭐⭐⭐⭐ |
 | [04_DevSecOps_Integration.md](./03_CI_CD_DevOps/04_DevSecOps_Integration.md) | DevSecOps集成 | L4 | ⭐⭐⭐⭐ |
-| [05_CI_CD_Templates/](./03_CI_CD_DevOps/05_CI_CD_Templates/README.md) | CI/CD模板库 | L2 | ⭐⭐⭐⭐⭐ |
+| [05_CI_CD_Templates/](./03_CI_CD_DevOps/05_CI_CD_Templates/readme.md) | CI/CD模板库 | L2 | ⭐⭐⭐⭐⭐ |
 
 **前置知识**: Git基础、YAML语法
 **关键决策**: 选择合适的CI/CD平台
@@ -269,9 +269,9 @@ C语言依赖管理解决方案。
 | 模板 | 构建系统 | 特点 |
 |:-----|:---------|:-----|
 | [01_Modern_C_Project_Template.md](./06_Project_Templates/01_Modern_C_Project_Template.md) | 通用 | 项目结构最佳实践 |
-| [02_CMake_Project_Template](./06_Project_Templates/README.md) | CMake | 现代CMake模板 |
-| [03_Meson_Project_Template](./06_Project_Templates/README.md) | Meson | Meson项目模板 |
-| [04_Xmake_Project_Template](./06_Project_Templates/README.md) | Xmake | Xmake项目模板 |
+| [02_CMake_Project_Template](./06_Project_Templates/readme.md) | CMake | 现代CMake模板 |
+| [03_Meson_Project_Template](./06_Project_Templates/readme.md) | Meson | Meson项目模板 |
+| [04_Xmake_Project_Template](./06_Project_Templates/readme.md) | Xmake | Xmake项目模板 |
 
 **前置知识**: 构建系统选择
 **使用方法**: 复制模板开始新项目
@@ -328,9 +328,9 @@ Phase 4: 质量门禁设置 (1周)
 
 | 目标模块 | 关系 |
 |:---------|:-----|
-| [01_Core_Knowledge_System](../01_Core_Knowledge_System/README.md) | 工具链是语言知识的延伸 |
-| [05_Engineering_Layer](../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 本模块是其现代化扩展 |
-| [04_Industrial_Scenarios](../04_Industrial_Scenarios/README.md) | 工具链在工业场景中的应用 |
+| [01_Core_Knowledge_System](../01_Core_Knowledge_System/readme.md) | 工具链是语言知识的延伸 |
+| [05_Engineering_Layer](../01_Core_Knowledge_System/05_Engineering_Layer/readme.md) | 本模块是其现代化扩展 |
+| [04_Industrial_Scenarios](../04_Industrial_Scenarios/readme.md) | 工具链在工业场景中的应用 |
 
 ---
 
@@ -390,7 +390,7 @@ Phase 4: 质量门禁设置 (1周)
 
 ---
 
-**← [返回知识库根目录](../README.md)**
+**← [返回知识库根目录](../readme.md)**
 
 
 ---

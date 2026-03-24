@@ -26,9 +26,9 @@
 
 | 文档 | 关系 | 说明 |
 |:-----|:-----|:-----|
-| [标准I/O库](../04_Standard_Library_Layer/01_Standard_IO/README.md) | 实践应用 | FILE指针、缓冲机制 |
+| [标准I/O库](../04_Standard_Library_Layer/01_Standard_IO/readme.md) | 实践应用 | FILE指针、缓冲机制 |
 | [内存管理安全](../09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全延伸 | 指针安全最佳实践 |
-| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 高级应用 | 多线程内存模型 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 高级应用 | 多线程内存模型 |
 
 ### 深层关联 (思维表征)
 
@@ -182,23 +182,23 @@
 
 ### 向上导航
 
-- [← 返回父目录: 核心知识体系](../README.md)
-- [← 返回根目录: 知识库首页](../../README.md)
+- [← 返回父目录: 核心知识体系](../readme.md)
+- [← 返回根目录: 知识库首页](../../readme.md)
 
 ### 前置知识
 
-- **[← 01 Basic Layer: 基础层](../01_Basic_Layer/README.md)** - 必须完成基础语法学习
+- **[← 01 Basic Layer: 基础层](../01_Basic_Layer/readme.md)** - 必须完成基础语法学习
 - 需要熟练掌握数据类型、运算符、控制流
 
 ### 后续延伸
 
-- **[→ 03 Construction Layer: 构造层](../03_Construction_Layer/README.md)** - 结构体、联合体、预处理器
-- **[→ 04 Standard Library Layer: 标准库层](../04_Standard_Library_Layer/README.md)** - 标准库函数详解
-- **[→ 03 System Technology: 系统技术](../../03_System_Technology_Domains/README.md)** - 线程、网络、并发
+- **[→ 03 Construction Layer: 构造层](../03_Construction_Layer/readme.md)** - 结构体、联合体、预处理器
+- **[→ 04 Standard Library Layer: 标准库层](../04_Standard_Library_Layer/readme.md)** - 标准库函数详解
+- **[→ 03 System Technology: 系统技术](../../03_System_Technology_Domains/readme.md)** - 线程、网络、并发
 
 ### 横向关联
 
-- **[→ 05 Deep Structure: 内存模型](../../05_Deep_Structure_MetaPhysics/README.md)** - 深入理解内存模型
+- **[→ 05 Deep Structure: 内存模型](../../05_Deep_Structure_MetaPhysics/readme.md)** - 深入理解内存模型
 - **[→ 02 Formal Semantics: C11内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md)** - 并发内存模型
 - **[→ 06 Thinking: 指针内存映射](../../06_Thinking_Representation/05_Concept_Mappings/01_Pointer_Memory_Mapping.md)** - 可视化理解
 

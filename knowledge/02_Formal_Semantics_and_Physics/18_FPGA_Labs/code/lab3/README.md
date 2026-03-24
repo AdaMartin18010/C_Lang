@@ -65,7 +65,7 @@
 
 ---
 
-[← 返回Lab3](../README.md) | [← 返回代码目录](../README.md)
+[← 返回Lab3](../readme.md) | [← 返回代码目录](../readme.md)
 
 
 ---
@@ -232,5 +232,5 @@ void implementation_example() {
 
 ### 扩展阅读
 
-- [核心知识体系](../../01_Core_Knowledge_System/README.md)
+- [核心知识体系](../../01_Core_Knowledge_System/readme.md)
 - [全局索引](../../00_GLOBAL_INDEX.md)

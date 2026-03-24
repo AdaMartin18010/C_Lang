@@ -1635,8 +1635,8 @@ int sum_array(int *arr, int n) {
 | 层级 | 文档 | 作用 |
 |:-----|:-----|:-----|
 | 总索引 | [../../../00_GLOBAL_INDEX.md](../../../00_GLOBAL_INDEX.md) | 完整知识图谱入口 |
-| 本模块 | [../../../README.md](../../../README.md) | 模块总览与导航 |
-| 学习路径 | [../../../06_Thinking_Representation/06_Learning_Paths/README.md](../../../06_Thinking_Representation/06_Learning_Paths/README.md) | 推荐学习路线 |
+| 本模块 | [../../../readme.md](../../../readme.md) | 模块总览与导航 |
+| 学习路径 | [../../../06_Thinking_Representation/06_Learning_Paths/readme.md](../../../06_Thinking_Representation/06_Learning_Paths/readme.md) | 推荐学习路线 |
 
 ### 2. 前置知识依赖
 | 文档 | 关系 | 掌握要求 |
@@ -1648,22 +1648,22 @@ int sum_array(int *arr, int n) {
 ### 3. 同层横向关联
 | 文档 | 关系 | 互补内容 |
 |:-----|:-----|:---------|
-| [../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 技术扩展 | 并发编程技术 |
-| [../../../02_Formal_Semantics_and_Physics/README.md](../../../02_Formal_Semantics_and_Physics/README.md) | 理论支撑 | 形式化方法 |
-| [../../../04_Industrial_Scenarios/README.md](../../../04_Industrial_Scenarios/README.md) | 实践应用 | 工业实践案例 |
+| [../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 技术扩展 | 并发编程技术 |
+| [../../../02_Formal_Semantics_and_Physics/readme.md](../../../02_Formal_Semantics_and_Physics/readme.md) | 理论支撑 | 形式化方法 |
+| [../../../04_Industrial_Scenarios/readme.md](../../../04_Industrial_Scenarios/readme.md) | 实践应用 | 工业实践案例 |
 
 ### 4. 深层理论关联
 | 文档 | 关系 | 理论深度 |
 |:-----|:-----|:---------|
-| [../../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md](../../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | 语义基础 | 操作语义、类型理论 |
-| [../../../06_Thinking_Representation/05_Concept_Mappings/README.md](../../../06_Thinking_Representation/05_Concept_Mappings/README.md) | 概念映射 | 知识关联网络 |
+| [../../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md](../../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md) | 语义基础 | 操作语义、类型理论 |
+| [../../../06_Thinking_Representation/05_Concept_Mappings/readme.md](../../../06_Thinking_Representation/05_Concept_Mappings/readme.md) | 概念映射 | 知识关联网络 |
 
 ### 5. 后续进阶延伸
 | 文档 | 关系 | 进阶方向 |
 |:-----|:-----|:---------|
-| [../../../03_System_Technology_Domains/README.md](../../../03_System_Technology_Domains/README.md) | 系统技术 | 系统级开发 |
-| [../../../01_Core_Knowledge_System/09_Safety_Standards/README.md](../../../01_Core_Knowledge_System/09_Safety_Standards/README.md) | 安全标准 | 安全编码规范 |
-| [../../../07_Modern_Toolchain/README.md](../../../07_Modern_Toolchain/README.md) | 工具链 | 现代开发工具 |
+| [../../../03_System_Technology_Domains/readme.md](../../../03_System_Technology_Domains/readme.md) | 系统技术 | 系统级开发 |
+| [../../../01_Core_Knowledge_System/09_Safety_Standards/readme.md](../../../01_Core_Knowledge_System/09_Safety_Standards/readme.md) | 安全标准 | 安全编码规范 |
+| [../../../07_Modern_Toolchain/readme.md](../../../07_Modern_Toolchain/readme.md) | 工具链 | 现代开发工具 |
 
 ### 6. 阶段学习定位
 ```
@@ -1679,7 +1679,7 @@ int sum_array(int *arr, int n) {
 
 ### 7. 局部索引
 本文件所属模块的详细内容：
-- 参见本模块 [README.md](../../../README.md)
+- 参见本模块 [readme.md](../../../readme.md)
 - 相关子目录文档
 
 # 控制信号分析

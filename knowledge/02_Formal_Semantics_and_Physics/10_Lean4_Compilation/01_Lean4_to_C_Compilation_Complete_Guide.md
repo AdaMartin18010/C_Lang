@@ -2,7 +2,7 @@
 
 > **层级**: L5 (原理层) + L4 (方法论层)
 > **目标**: 全面理解 Lean 4 编译器架构，掌握 Lean 4 到 C 的代码生成机制与 FFI 互操作
-> **关联**: [形式化语义基础](../01_Formal_Semantics_Foundations.md) | [类型系统](../09_Type_Systems_Deep_Dive.md) | [程序验证](../05_Program_Verification/README.md)
+> **关联**: [形式化语义基础](../01_Formal_Semantics_Foundations.md) | [类型系统](../09_Type_Systems_Deep_Dive.md) | [程序验证](../05_Program_Verification/readme.md)
 
 ---
 

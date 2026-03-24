@@ -14,7 +14,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [编译与构建](../../01_Core_Knowledge_System/05_Engineering_Layer/01_Compilation_Build.md) | 流程基础 | 编译过程 |
-| [C与汇编映射](../06_C_Assembly_Mapping/README.md) | 目标文件 | 汇编器输出 |
+| [C与汇编映射](../06_C_Assembly_Mapping/readme.md) | 目标文件 | 汇编器输出 |
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 运行时 | 程序内存布局 |
 
 ### 后续延伸
@@ -22,8 +22,8 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [动态链接](../../03_System_Technology_Domains/01_System_Programming/03_Dynamic_Linking.md) | 运行时 | 动态链接器 |
-| [系统编程](../../03_System_Technology_Domains/01_System_Programming/README.md) | 系统调用 | 加载器接口 |
-| [形式化验证](../11_CompCert_Verification/README.md) | 正确性 | 链接正确性证明 |
+| [系统编程](../../03_System_Technology_Domains/01_System_Programming/readme.md) | 系统调用 | 加载器接口 |
+| [形式化验证](../11_CompCert_Verification/readme.md) | 正确性 | 链接正确性证明 |
 
 ### 关键概念链
 

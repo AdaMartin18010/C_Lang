@@ -306,7 +306,7 @@ int btree_search_concurrent(btree_t *tree, const void *key, void *value) {
 ## 关联导航
 
 - [内存管理](../01_System_Programming/07_Memory_Allocator_Design.md)
-- [并发控制](../14_Concurrency_Parallelism/README.md)
+- [并发控制](../14_Concurrency_Parallelism/readme.md)
 
 ## 参考
 

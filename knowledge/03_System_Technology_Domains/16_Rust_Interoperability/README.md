@@ -30,7 +30,7 @@
 |:-----|:---------|:-----|
 | [安全编码](../../01_Core_Knowledge_System/09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全FFI | 跨语言安全 |
 | [内存安全](../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/05_Undefined_Behavior_Semantics.md) | 理论保障 | UB边界 |
-| [现代工具链](../../07_Modern_Toolchain/README.md) | 开发工具 | Cargo、Bindgen |
+| [现代工具链](../../07_Modern_Toolchain/readme.md) | 开发工具 | Cargo、Bindgen |
 
 
 ---

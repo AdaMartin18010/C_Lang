@@ -273,9 +273,9 @@ C语言技能树
 
 ### 按应用场景
 
-- **[工业场景](../../04_Industrial_Scenarios/README.md)** - 汽车、航空、通信系统
-- **[系统技术](../../03_System_Technology_Domains/README.md)** - 数据库、网络、安全启动
-- **[形式语义](../../05_Deep_Structure_MetaPhysics/README.md)** - 理论深度研究
+- **[工业场景](../../04_Industrial_Scenarios/readme.md)** - 汽车、航空、通信系统
+- **[系统技术](../../03_System_Technology_Domains/readme.md)** - 数据库、网络、安全启动
+- **[形式语义](../../05_Deep_Structure_MetaPhysics/readme.md)** - 理论深度研究
 
 ---
 

@@ -413,14 +413,14 @@ cat /sys/kernel/slab/kmalloc-256/alloc_calls
 
 ### 前置知识
 
-- [Linux内核开发](./README.md)
+- [Linux内核开发](./readme.md)
 - [调试技术](../../01_Core_Knowledge_System/05_Engineering_Layer/02_Debug_Techniques.md)
 - [eBPF深度](../../03_System_Technology_Domains/01_System_Programming/06_eBPF_Deep.md)
 
 ### 后续延伸
 
-- [性能优化](../01_High_Performance/README.md)
-- [内核安全](../06_Security/README.md)
+- [性能优化](../01_High_Performance/readme.md)
+- [内核安全](../06_Security/readme.md)
 
 ### 参考
 

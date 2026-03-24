@@ -2,7 +2,7 @@
 
 > **层级**: L4 (方法论层)
 > **目标**: 掌握系统化性能分析方法论，从数据采集到优化决策
-> **关联**: [动态分析原理](09_Dynamic_Analysis_Principles.md) | [性能工程](../../05_Performance_Engineering/README.md) | [eBPF深度探索](05_eBPF_Deep_Exploration.md)
+> **关联**: [动态分析原理](09_Dynamic_Analysis_Principles.md) | [性能工程](../../05_Performance_Engineering/readme.md) | [eBPF深度探索](05_eBPF_Deep_Exploration.md)
 
 ---
 

@@ -13,9 +13,9 @@
 | 维度 | 目标文档 | 导航作用 |
 |:-----|:---------|:---------|
 | **全局索引** | [../../00_GLOBAL_INDEX.md](../../00_GLOBAL_INDEX.md) | 完整知识图谱入口 |
-| **本模块** | [../README.md](../README.md) | 思维表征总览 |
-| **概念映射** | [../05_Concept_Mappings/README.md](../05_Concept_Mappings/README.md) | 概念等价关系 |
-| **决策树** | [../01_Decision_Trees/README.md](../01_Decision_Trees/README.md) | 问题诊断决策 |
+| **本模块** | [../readme.md](../readme.md) | 思维表征总览 |
+| **概念映射** | [../05_Concept_Mappings/readme.md](../05_Concept_Mappings/readme.md) | 概念等价关系 |
+| **决策树** | [../01_Decision_Trees/readme.md](../01_Decision_Trees/readme.md) | 问题诊断决策 |
 
 ### 【阶段层】学习阶段图谱
 

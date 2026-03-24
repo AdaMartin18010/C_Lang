@@ -22,7 +22,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [C11内存模型](../01_Game_Semantics/02_C11_Memory_Model.md) | 并发语义 | 并发操作语义 |
-| [CompCert验证](../11_CompCert_Verification/README.md) | 验证应用 | 编译器形式化验证 |
+| [CompCert验证](../11_CompCert_Verification/readme.md) | 验证应用 | 编译器形式化验证 |
 | [Frama-C/WP](../11_CompCert_Verification/06_WP_Tutorial.md) | 工具应用 | 程序验证工具 |
 
 ### 三大语义范式
@@ -229,9 +229,9 @@ C#minor → Cminor → ... → 汇编
 
 | 模块 | 路径 | 关系 |
 |:-----|:-----|:-----|
-| 博弈语义 | [../01_Game_Semantics/README.md](../01_Game_Semantics/README.md) | 高级语义理论 |
-| 余代数方法 | [../02_Coalgebraic_Methods/README.md](../02_Coalgebraic_Methods/README.md) | 无限行为形式化 |
-| CompCert验证 | [../11_CompCert_Verification/README.md](../11_CompCert_Verification/README.md) | 应用验证 |
+| 博弈语义 | [../01_Game_Semantics/readme.md](../01_Game_Semantics/readme.md) | 高级语义理论 |
+| 余代数方法 | [../02_Coalgebraic_Methods/readme.md](../02_Coalgebraic_Methods/readme.md) | 无限行为形式化 |
+| CompCert验证 | [../11_CompCert_Verification/readme.md](../11_CompCert_Verification/readme.md) | 应用验证 |
 | C11内存模型 | [../01_Game_Semantics/02_C11_Memory_Model.md](../01_Game_Semantics/02_C11_Memory_Model.md) | 并发语义 |
 
 ---

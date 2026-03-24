@@ -1,8 +1,8 @@
 # C语言知识库 v4.0 - 完整版
 
 > **完成度**: **100%** ✅ | **文件数**: 483 | **总行数**: 271,000+ | **最后更新**: 2026-03-14
-> **状态**: 100%完成 | **新模块**: [形式语义基础](./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | [机器学习](./11_Machine_Learning_C/README.md)
-> **Zig语言**: [Zig知识库](./Zig/README.md) ✅ 100%完成 (41文档/855KB)
+> **状态**: 100%完成 | **新模块**: [形式语义基础](./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md) | [机器学习](./11_Machine_Learning_C/readme.md)
+> **Zig语言**: [Zig知识库](./zig/readme.md) ✅ 100%完成 (41文档/855KB)
 
 ---
 
@@ -169,14 +169,14 @@
 
 | 角色 | 推荐文档 |
 |------|----------|
-| 初学者 | [Zig/README.md](./Zig/README.md) → [Zig_Complete_Guide.md](./Zig/Zig_Complete_Guide.md) |
-| 进阶开发者 | [Zig_C_Interoperability.md](./Zig/Zig_C_Interoperability.md) → [Zig_Concurrency_Async.md](./Zig/Zig_Concurrency_Async.md) |
-| 专家 | [Zig_Distributed_Systems.md](./Zig/Zig_Distributed_Systems.md) → [Zig_Security_Cryptography.md](./Zig/Zig_Security_Cryptography.md) |
+| 初学者 | [zig/readme.md](./zig/readme.md) → [Zig_Complete_Guide.md](./zig/Zig_Complete_Guide.md) |
+| 进阶开发者 | [Zig_C_Interoperability.md](./zig/Zig_C_Interoperability.md) → [Zig_Concurrency_Async.md](./zig/Zig_Concurrency_Async.md) |
+| 专家 | [Zig_Distributed_Systems.md](./zig/Zig_Distributed_Systems.md) → [Zig_Security_Cryptography.md](./zig/Zig_Security_Cryptography.md) |
 
 ### 📊 完成报告
 
-- [100% 完成报告](./Zig/ZIG_100_PERCENT_REPORT.md)
-- [知识库状态](./Zig/ZIG_KNOWLEDGE_BASE_STATUS.md)
+- [100% 完成报告](./zig/ZIG_100_PERCENT_REPORT.md)
+- [知识库状态](./zig/ZIG_KNOWLEDGE_BASE_STATUS.md)
 
 ---
     - [1.1 什么是本知识库](#11-什么是本知识库)
@@ -606,7 +606,7 @@ void abs_control_loop(void) {
 
 - **当前状态**: 框架搭建完成，内容开发进行中
 - **预计完成**: 2026-05-12
-- **路线图**: [可持续推进路线图](./07_Modern_Toolchain/SUSTAINABLE_ROADMAP.md)
+- **路线图**: [可持续推进路线图](../../SUSTAINABLE_ROADMAP_2026.md)
 
 ---
 
@@ -1187,9 +1187,9 @@ knowledge/
 | 维度 | 目标文档 | 导航作用 |
 |:-----|:---------|:---------|
 | **总索引** | [./00_GLOBAL_INDEX.md](./00_GLOBAL_INDEX.md) | 完整知识图谱入口，全局视角 |
-| **本模块** | [./README.md](./README.md) | 模块总览与目录导航 |
-| **学习路径** | [./06_Thinking_Representation/06_Learning_Paths/README.md](./06_Thinking_Representation/06_Learning_Paths/README.md) | 阶段化学习路线规划 |
-| **概念映射** | [./06_Thinking_Representation/05_Concept_Mappings/README.md](./06_Thinking_Representation/05_Concept_Mappings/README.md) | 核心概念等价关系图 |
+| **本模块** | [./readme.md](./readme.md) | 模块总览与目录导航 |
+| **学习路径** | [./06_Thinking_Representation/06_Learning_Paths/readme.md](./06_Thinking_Representation/06_Learning_Paths/readme.md) | 阶段化学习路线规划 |
+| **概念映射** | [./06_Thinking_Representation/05_Concept_Mappings/readme.md](./06_Thinking_Representation/05_Concept_Mappings/readme.md) | 核心概念等价关系图 |
 
 ### 【阶段层】学习定位
 **当前模块**: 知识库  
@@ -1210,18 +1210,18 @@ knowledge/
 ### 【层次层】纵向知识链
 | 层级 | 关联文档 | 层次关系 |
 |:-----|:---------|:---------|
-| **理论基础** | [./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md](./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | 语义学理论基础 |
-| **核心机制** | [./01_Core_Knowledge_System/02_Core_Layer/README.md](./01_Core_Knowledge_System/02_Core_Layer/README.md) | C语言核心机制 |
-| **标准接口** | [./01_Core_Knowledge_System/04_Standard_Library_Layer/README.md](./01_Core_Knowledge_System/04_Standard_Library_Layer/README.md) | 标准库API |
-| **系统实现** | [./03_System_Technology_Domains/README.md](./03_System_Technology_Domains/README.md) | 系统级实现 |
+| **理论基础** | [./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md](./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md) | 语义学理论基础 |
+| **核心机制** | [./01_Core_Knowledge_System/02_Core_Layer/readme.md](./01_Core_Knowledge_System/02_Core_Layer/readme.md) | C语言核心机制 |
+| **标准接口** | [./01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md](./01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md) | 标准库API |
+| **系统实现** | [./03_System_Technology_Domains/readme.md](./03_System_Technology_Domains/readme.md) | 系统级实现 |
 
 ### 【局部层】横向关联网
 | 关联类型 | 目标文档 | 关联说明 |
 |:---------|:---------|:---------|
-| **技术扩展** | [./03_System_Technology_Domains/14_Concurrency_Parallelism/README.md](./03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并发编程技术 |
-| **安全规范** | [./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md](./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 安全编码标准 |
-| **工具支持** | [./07_Modern_Toolchain/README.md](./07_Modern_Toolchain/README.md) | 现代开发工具链 |
-| **实践案例** | [./04_Industrial_Scenarios/README.md](./04_Industrial_Scenarios/README.md) | 工业实践场景 |
+| **技术扩展** | [./03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md](./03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 并发编程技术 |
+| **安全规范** | [./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md](./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md) | 安全编码标准 |
+| **工具支持** | [./07_Modern_Toolchain/readme.md](./07_Modern_Toolchain/readme.md) | 现代开发工具链 |
+| **实践案例** | [./04_Industrial_Scenarios/readme.md](./04_Industrial_Scenarios/readme.md) | 工业实践场景 |
 
 ### 【总体层】知识体系架构
 ```
@@ -1242,9 +1242,9 @@ knowledge/
 | 目标 | 推荐路径 | 关键文档 |
 |:-----|:---------|:---------|
 | **系统学习** | 01 → 02 → 03 → 04 | 按顺序阅读各模块 |
-| **问题导向** | 06决策树 → 相关模块 | [决策树目录](./06_Thinking_Representation/01_Decision_Trees/README.md) |
-| **项目驱动** | 04案例 → 所需知识 | [工业场景](./04_Industrial_Scenarios/README.md) |
-| **深入研究** | 02形式语义 → 11CompCert | [形式语义](./02_Formal_Semantics_and_Physics/README.md) |
+| **问题导向** | 06决策树 → 相关模块 | [决策树目录](./06_Thinking_Representation/01_Decision_Trees/readme.md) |
+| **项目驱动** | 04案例 → 所需知识 | [工业场景](./04_Industrial_Scenarios/readme.md) |
+| **深入研究** | 02形式语义 → 11CompCert | [形式语义](./02_Formal_Semantics_and_Physics/readme.md) |
 
 ---
 
@@ -1621,7 +1621,7 @@ Issue模板：
 
     ## 相关文档
 
-    - [返回知识库根目录](../README.md)
+    - [返回知识库根目录](../readme.md)
     - [全局索引](00_INDEX.md)
 
     ## 参考

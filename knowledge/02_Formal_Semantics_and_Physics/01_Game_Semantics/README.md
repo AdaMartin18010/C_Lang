@@ -733,8 +733,8 @@ bool implements(const Behavior *impl, const Behavior *spec)
 
 ## 延伸阅读
 
-- [线性逻辑](../03_Linear_Logic/README.md)
-- [余代数方法](../02_Coalgebraic_Methods/README.md)
+- [线性逻辑](../03_Linear_Logic/readme.md)
+- [余代数方法](../02_Coalgebraic_Methods/readme.md)
 - [进程代数](https://en.wikipedia.org/wiki/Process_calculus)
 - [Game Semantics](https://en.wikipedia.org/wiki/Game_semantics)
 - Abramsky, S., & McCusker, G. (1999). Game Semantics. In *Computational Logic*.
@@ -791,5 +791,5 @@ bool implements(const Behavior *impl, const Behavior *spec)
 
 ### 扩展阅读
 
-- [核心知识体系](../../01_Core_Knowledge_System/README.md)
+- [核心知识体系](../../01_Core_Knowledge_System/readme.md)
 - [全局索引](../../00_GLOBAL_INDEX.md)

@@ -279,27 +279,27 @@
 
 | 阶段 | 描述 | 目录 | 时间 | 文件数 | 难度 |
 |:-----|:-----|:-----|:----:|:------:|:----:|
-| 🌱 入门 | 零基础起步 | [01_Basic_Layer](./01_Core_Knowledge_System/01_Basic_Layer/README.md) | 20h | 4 | ⭐ |
-| 🌿 基础 | 核心语法 | [02_Core_Layer](./01_Core_Knowledge_System/02_Core_Layer/README.md) | 30h | 5 | ⭐⭐ |
-| 🌲 进阶 | 数据结构 | [03_Construction_Layer](./01_Core_Knowledge_System/03_Construction_Layer/README.md) | 20h | 3 | ⭐⭐⭐ |
-| 📚 标准库 | C89-C23演进 | [04_Standard_Library_Layer](./01_Core_Knowledge_System/04_Standard_Library_Layer/README.md) | 25h | 6 | ⭐⭐⭐ |
-| 🏗️ 工程 | 构建调试优化 | [05_Engineering_Layer](./01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 30h | 5 | ⭐⭐⭐⭐ |
-| 🌳 高级 | 系统编程 | [06_Advanced_Layer](./01_Core_Knowledge_System/06_Advanced_Layer/README.md) | 30h | 3 | ⭐⭐⭐⭐ |
-| 🏔️ 专家 | 系统实现 | [03_System_Technology_Domains](./03_System_Technology_Domains/README.md) | 100h | 85+ | ⭐⭐⭐⭐⭐ |
-| 🔬 大师 | 形式理论 | [05_Deep_Structure_MetaPhysics](./05_Deep_Structure_MetaPhysics/README.md) | 150h | 65+ | ⭐⭐⭐⭐⭐ |
+| 🌱 入门 | 零基础起步 | [01_Basic_Layer](./01_Core_Knowledge_System/01_Basic_Layer/readme.md) | 20h | 4 | ⭐ |
+| 🌿 基础 | 核心语法 | [02_Core_Layer](./01_Core_Knowledge_System/02_Core_Layer/readme.md) | 30h | 5 | ⭐⭐ |
+| 🌲 进阶 | 数据结构 | [03_Construction_Layer](./01_Core_Knowledge_System/03_Construction_Layer/readme.md) | 20h | 3 | ⭐⭐⭐ |
+| 📚 标准库 | C89-C23演进 | [04_Standard_Library_Layer](./01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md) | 25h | 6 | ⭐⭐⭐ |
+| 🏗️ 工程 | 构建调试优化 | [05_Engineering_Layer](./01_Core_Knowledge_System/05_Engineering_Layer/readme.md) | 30h | 5 | ⭐⭐⭐⭐ |
+| 🌳 高级 | 系统编程 | [06_Advanced_Layer](./01_Core_Knowledge_System/06_Advanced_Layer/readme.md) | 30h | 3 | ⭐⭐⭐⭐ |
+| 🏔️ 专家 | 系统实现 | [03_System_Technology_Domains](./03_System_Technology_Domains/readme.md) | 100h | 85+ | ⭐⭐⭐⭐⭐ |
+| 🔬 大师 | 形式理论 | [05_Deep_Structure_MetaPhysics](./05_Deep_Structure_MetaPhysics/readme.md) | 150h | 65+ | ⭐⭐⭐⭐⭐ |
 
 ### 2.2 按应用场景
 
 | 场景 | 目录 | 关键文件 | 文件数 | 前置要求 |
 |:-----|:-----|:---------|:------:|:---------|
-| 嵌入式开发 | [04_Industrial_Scenarios/01_Automotive_ABS](./04_Industrial_Scenarios/01_Automotive_ABS/README.md) | ABS, AUTOSAR, 硬实时 | 2 | 指针、内存、中断 |
-| 高性能计算 | [04_Industrial_Scenarios/04_5G_Baseband](./04_Industrial_Scenarios/04_5G_Baseband/README.md) | SIMD, NEON, DMA | 2 | 并发、向量化 |
-| 网络编程 | [03_System_Technology_Domains/13_RDMA_Network](./03_System_Technology_Domains/13_RDMA_Network/README.md) | Verbs API, Socket | 5 | 系统调用、内存 |
-| 游戏开发 | [04_Industrial_Scenarios/05_Game_Engine](./04_Industrial_Scenarios/05_Game_Engine/README.md) | GPU内存, ECS架构 | 3 | 数据结构、并发 |
-| 安全启动 | [03_System_Technology_Domains/06_Security_Boot](./03_System_Technology_Domains/06_Security_Boot/README.md) | TrustZone, TPM2 | 5 | 系统编程、加密 |
-| 形式验证 | [05_Deep_Structure_MetaPhysics/03_Verification_Energy](./05_Deep_Structure_MetaPhysics/03_Verification_Energy/README.md) | Coq, 分离逻辑 | 2 | 形式语义、逻辑 |
-| 数据库 | [03_System_Technology_Domains/11_In_Memory_Database](./03_System_Technology_Domains/11_In_Memory_Database/README.md) | B+树, LRU, RESP | 3 | 数据结构、网络 |
-| 虚拟化 | [03_System_Technology_Domains/01_Virtual_Machine_Interpreter](./03_System_Technology_Domains/01_Virtual_Machine_Interpreter/README.md) | 字节码VM, 寄存器VM | 2 | 编译原理、汇编 |
+| 嵌入式开发 | [04_Industrial_Scenarios/01_Automotive_ABS](./04_Industrial_Scenarios/01_Automotive_ABS/readme.md) | ABS, AUTOSAR, 硬实时 | 2 | 指针、内存、中断 |
+| 高性能计算 | [04_Industrial_Scenarios/04_5G_Baseband](./04_Industrial_Scenarios/04_5G_Baseband/readme.md) | SIMD, NEON, DMA | 2 | 并发、向量化 |
+| 网络编程 | [03_System_Technology_Domains/13_RDMA_Network](./03_System_Technology_Domains/13_RDMA_Network/readme.md) | Verbs API, Socket | 5 | 系统调用、内存 |
+| 游戏开发 | [04_Industrial_Scenarios/05_Game_Engine](./04_Industrial_Scenarios/05_Game_Engine/readme.md) | GPU内存, ECS架构 | 3 | 数据结构、并发 |
+| 安全启动 | [03_System_Technology_Domains/06_Security_Boot](./03_System_Technology_Domains/06_Security_Boot/readme.md) | TrustZone, TPM2 | 5 | 系统编程、加密 |
+| 形式验证 | [05_Deep_Structure_MetaPhysics/03_Verification_Energy](./05_Deep_Structure_MetaPhysics/03_Verification_Energy/readme.md) | Coq, 分离逻辑 | 2 | 形式语义、逻辑 |
+| 数据库 | [03_System_Technology_Domains/11_In_Memory_Database](./03_System_Technology_Domains/11_In_Memory_Database/readme.md) | B+树, LRU, RESP | 3 | 数据结构、网络 |
+| 虚拟化 | [03_System_Technology_Domains/01_Virtual_Machine_Interpreter](./03_System_Technology_Domains/01_Virtual_Machine_Interpreter/readme.md) | 字节码VM, 寄存器VM | 2 | 编译原理、汇编 |
 
 ### 2.3 按问题类型
 
@@ -310,8 +310,8 @@
 | 性能瓶颈分析 | [性能瓶颈分析决策树](./06_Thinking_Representation/01_Decision_Trees/03_Performance_Bottleneck.md) | 1小时 |
 | 并发调试 | [并发调试决策树](./06_Thinking_Representation/01_Decision_Trees/05_Concurrency_Debug.md) | 2小时 |
 | 编译链接错误 | [编译链接决策树](./06_Thinking_Representation/01_Decision_Trees/04_Compilation_Error.md) | 15分钟 |
-| 技术选型对比 | [对比矩阵集合](./06_Thinking_Representation/02_Multidimensional_Matrix/README.md) | 即时 |
-| 概念理解映射 | [概念映射集合](./06_Thinking_Representation/05_Concept_Mappings/README.md) | 即时 |
+| 技术选型对比 | [对比矩阵集合](./06_Thinking_Representation/02_Multidimensional_Matrix/readme.md) | 即时 |
+| 概念理解映射 | [概念映射集合](./06_Thinking_Representation/05_Concept_Mappings/readme.md) | 即时 |
 
 ---
 
@@ -944,13 +944,13 @@ graph TD
 
 | 标准 | 组织 | 适用范围 | 核心要求 | 参考文档 |
 |:-----|:-----|:---------|:---------|:---------|
-| **MISRA C:2025** | MISRA | 安全关键系统 | C11/C17编码规范(225条规则) | [MISRA_C_2023/README.md](./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) |
-| **SEI CERT C:2024** | SEI/CMU | 软件安全 | 安全编码标准、C23支持 | [CERT_C_2024/README.md](./01_Core_Knowledge_System/09_Safety_Standards/CERT_C_2024/README.md) |
-| **ISO/IEC TS 17961** | ISO/IEC | C语言安全 | 可静态分析安全规则 | [ISO_IEC_TS_17961/README.md](./01_Core_Knowledge_System/09_Safety_Standards/ISO_IEC_TS_17961/README.md) |
-| **MISRA C:2025** | MISRA | 安全关键系统 | C11/C17/C23编码规范 | [MISRA_C_2025/README.md](./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2025/README.md) |
+| **MISRA C:2025** | MISRA | 安全关键系统 | C11/C17编码规范(225条规则) | [MISRA_C_2023/readme.md](./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md) |
+| **SEI CERT C:2024** | SEI/CMU | 软件安全 | 安全编码标准、C23支持 | [CERT_C_2024/readme.md](./01_Core_Knowledge_System/09_Safety_Standards/CERT_C_2024/readme.md) |
+| **ISO/IEC TS 17961** | ISO/IEC | C语言安全 | 可静态分析安全规则 | [ISO_IEC_TS_17961/readme.md](./01_Core_Knowledge_System/09_Safety_Standards/ISO_IEC_TS_17961/readme.md) |
+| **MISRA C:2025** | MISRA | 安全关键系统 | C11/C17/C23编码规范 | [MISRA_C_2025/readme.md](./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2025/readme.md) |
 | **CISA CRA 2026** | CISA | 网络安全 | 欧盟网络韧性法案合规 | [CISA_CRA_Compliance_2026.md](./00_VERSION_TRACKING/CISA_CRA_Compliance_2026.md) |
 | **MISRA C:2012** | 汽车工业软件可靠性协会 | 汽车电子 | 编码规范、安全检查 | [01_Automotive_ABS/01_ABS_System.md](./04_Industrial_Scenarios/01_Automotive_ABS/01_ABS_System.md) |
-| **IEEE 754-2019** | IEEE | 浮点运算 | 浮点数表示与运算标准 | [IEEE_754_Floating_Point/](./01_Core_Knowledge_System/01_Basic_Layer/IEEE_754_Floating_Point/README.md) |
+| **IEEE 754-2019** | IEEE | 浮点运算 | 浮点数表示与运算标准 | [IEEE_754_Floating_Point/](./01_Core_Knowledge_System/01_Basic_Layer/IEEE_754_Floating_Point/readme.md) |
 | **CERT C** | SEI/CMU | 安全关键系统 | 安全编码标准 | [02_Code_Quality.md](./01_Core_Knowledge_System/05_Engineering_Layer/02_Code_Quality.md) |
 | **ISO 26262** | ISO | 汽车功能安全 | ASIL等级、安全生命周期 | [02_Hard_RealTime.md](./04_Industrial_Scenarios/01_Automotive_ABS/02_Hard_RealTime.md) |
 | **DO-178C** | RTCA | 航空软件 | 软件认证、验证 | - |
@@ -1688,11 +1688,11 @@ graph TD
 
 #### Zig编程语言知识库
 
-> **位置**: `knowledge/Zig/` | **定位**: 完整Zig语言参考
+> **位置**: `knowledge/zig/` | **定位**: 完整Zig语言参考
 > **关联**: 与 `08_Zig_C_Connection/` 形式化连接模块互补
 
 ```text
-knowledge/Zig/                               # Zig完整知识库
+knowledge/zig/                               # Zig完整知识库
 ├── README.md                                # 总览与导航 (51 KB)
 ├── Zig_Complete_Guide.md                    # 完整指南 (49 KB)
 ├── Zig_C_Interoperability.md                # C互操作 (32 KB)
@@ -1722,7 +1722,7 @@ knowledge/Zig/                               # Zig完整知识库
 
 **使用建议**:
 
-- **Zig学习者**: 直接从 `knowledge/Zig/README.md` 开始
+- **Zig学习者**: 直接从 `knowledge/zig/README.md` 开始
 - **C→Zig迁移者**: 结合 `08_Zig_C_Connection/` 形式化连接模块
 - **互操作开发**: 同时参考两个模块的C互操作内容
 
@@ -2135,9 +2135,9 @@ timeline
 | 维度 | 目标文档 | 导航作用 |
 |:-----|:---------|:---------|
 | **总索引** | [./00_GLOBAL_INDEX.md](./00_GLOBAL_INDEX.md) | 完整知识图谱入口，全局视角 |
-| **本模块** | [./README.md](./README.md) | 模块总览与目录导航 |
-| **学习路径** | [./06_Thinking_Representation/06_Learning_Paths/README.md](./06_Thinking_Representation/06_Learning_Paths/README.md) | 阶段化学习路线规划 |
-| **概念映射** | [./06_Thinking_Representation/05_Concept_Mappings/README.md](./06_Thinking_Representation/05_Concept_Mappings/README.md) | 核心概念等价关系图 |
+| **本模块** | [./readme.md](./readme.md) | 模块总览与目录导航 |
+| **学习路径** | [./06_Thinking_Representation/06_Learning_Paths/readme.md](./06_Thinking_Representation/06_Learning_Paths/readme.md) | 阶段化学习路线规划 |
+| **概念映射** | [./06_Thinking_Representation/05_Concept_Mappings/readme.md](./06_Thinking_Representation/05_Concept_Mappings/readme.md) | 核心概念等价关系图 |
 
 ### 【阶段层】学习定位
 **当前模块**: 知识库  
@@ -2158,18 +2158,18 @@ timeline
 ### 【层次层】纵向知识链
 | 层级 | 关联文档 | 层次关系 |
 |:-----|:---------|:---------|
-| **理论基础** | [./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md](./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | 语义学理论基础 |
-| **核心机制** | [./01_Core_Knowledge_System/02_Core_Layer/README.md](./01_Core_Knowledge_System/02_Core_Layer/README.md) | C语言核心机制 |
-| **标准接口** | [./01_Core_Knowledge_System/04_Standard_Library_Layer/README.md](./01_Core_Knowledge_System/04_Standard_Library_Layer/README.md) | 标准库API |
-| **系统实现** | [./03_System_Technology_Domains/README.md](./03_System_Technology_Domains/README.md) | 系统级实现 |
+| **理论基础** | [./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md](./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md) | 语义学理论基础 |
+| **核心机制** | [./01_Core_Knowledge_System/02_Core_Layer/readme.md](./01_Core_Knowledge_System/02_Core_Layer/readme.md) | C语言核心机制 |
+| **标准接口** | [./01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md](./01_Core_Knowledge_System/04_Standard_Library_Layer/readme.md) | 标准库API |
+| **系统实现** | [./03_System_Technology_Domains/readme.md](./03_System_Technology_Domains/readme.md) | 系统级实现 |
 
 ### 【局部层】横向关联网
 | 关联类型 | 目标文档 | 关联说明 |
 |:---------|:---------|:---------|
-| **技术扩展** | [./03_System_Technology_Domains/14_Concurrency_Parallelism/README.md](./03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 并发编程技术 |
-| **安全规范** | [./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md](./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md) | 安全编码标准 |
-| **工具支持** | [./07_Modern_Toolchain/README.md](./07_Modern_Toolchain/README.md) | 现代开发工具链 |
-| **实践案例** | [./04_Industrial_Scenarios/README.md](./04_Industrial_Scenarios/README.md) | 工业实践场景 |
+| **技术扩展** | [./03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md](./03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 并发编程技术 |
+| **安全规范** | [./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md](./01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/readme.md) | 安全编码标准 |
+| **工具支持** | [./07_Modern_Toolchain/readme.md](./07_Modern_Toolchain/readme.md) | 现代开发工具链 |
+| **实践案例** | [./04_Industrial_Scenarios/readme.md](./04_Industrial_Scenarios/readme.md) | 工业实践场景 |
 
 ### 【总体层】知识体系架构
 ```
@@ -2190,9 +2190,9 @@ timeline
 | 目标 | 推荐路径 | 关键文档 |
 |:-----|:---------|:---------|
 | **系统学习** | 01 → 02 → 03 → 04 | 按顺序阅读各模块 |
-| **问题导向** | 06决策树 → 相关模块 | [决策树目录](./06_Thinking_Representation/01_Decision_Trees/README.md) |
-| **项目驱动** | 04案例 → 所需知识 | [工业场景](./04_Industrial_Scenarios/README.md) |
-| **深入研究** | 02形式语义 → 11CompCert | [形式语义](./02_Formal_Semantics_and_Physics/README.md) |
+| **问题导向** | 06决策树 → 相关模块 | [决策树目录](./06_Thinking_Representation/01_Decision_Trees/readme.md) |
+| **项目驱动** | 04案例 → 所需知识 | [工业场景](./04_Industrial_Scenarios/readme.md) |
+| **深入研究** | 02形式语义 → 11CompCert | [形式语义](./02_Formal_Semantics_and_Physics/readme.md) |
 
 ---
 

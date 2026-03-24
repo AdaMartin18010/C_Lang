@@ -141,7 +141,7 @@ source ~/.bashrc
 
 ## 📚 与主文档的关系
 
-本目录是 [14_Embedded_IoT](../README.md) 的核心组成部分，专门聚焦于 ESP32 平台的开发技术。
+本目录是 [14_Embedded_IoT](../readme.md) 的核心组成部分，专门聚焦于 ESP32 平台的开发技术。
 
 ### 内容组织
 
@@ -304,7 +304,7 @@ void app_main(void)
 
 ## 🔗 返回上级
 
-[← 返回 14_Embedded_IoT 目录](../README.md)
+[← 返回 14_Embedded_IoT 目录](../readme.md)
 
 ---
 

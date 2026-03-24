@@ -43,7 +43,7 @@
 | Vivado HLS入门 | [02_Vivado_HLS_Introduction.md](./02_Vivado_HLS_Introduction.md) | ⭐⭐⭐⭐ | 4h | 🟡 |
 | C到硬件的Pragma | [03_C_to_Hardware_Pragma.md](./03_C_to_Hardware_Pragma.md) | ⭐⭐⭐⭐ | 3h | 🟡 |
 | HLS优化技术 | [04_HLS_Optimization.md](./04_HLS_Optimization.md) | ⭐⭐⭐⭐⭐ | 4h | 🟡 |
-| HLS实践案例 | [04_HLS_with_C/README.md](./04_HLS_with_C/README.md) | ⭐⭐⭐⭐ | 3h | 🔴 |
+| HLS实践案例 | [04_HLS_with_C/readme.md](./04_HLS_with_C/readme.md) | ⭐⭐⭐⭐ | 3h | 🔴 |
 
 ### 实践资源
 
@@ -498,9 +498,9 @@ Performance Estimates
 
 ### 相关模块
 
-- [数字逻辑基础](../09_Physical_Machine_Layer/01_Digital_Logic_Foundations/README.md)
-- [FPGA实验](../18_FPGA_Labs/README.md)
-- [C到硬件映射](../14_C_to_Hardware_Mapping/README.md)
+- [数字逻辑基础](../09_Physical_Machine_Layer/01_Digital_Logic_Foundations/readme.md)
+- [FPGA实验](../18_FPGA_Labs/readme.md)
+- [C到硬件映射](../14_C_to_Hardware_Mapping/readme.md)
 
 ---
 

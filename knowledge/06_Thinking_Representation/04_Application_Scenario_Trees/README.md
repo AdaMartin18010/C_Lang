@@ -383,9 +383,9 @@ flowchart TD
 
 ## 🔗 相关资源
 
-- [返回上级目录](../README.md)
-- [思维导图](../03_Mind_Maps/README.md) - 建立知识体系
-- [现代工具链](../../07_Modern_Toolchain/README.md) - 掌握开发工具
+- [返回上级目录](../readme.md)
+- [思维导图](../03_Mind_Maps/readme.md) - 建立知识体系
+- [现代工具链](../../07_Modern_Toolchain/readme.md) - 掌握开发工具
 
 ---
 
