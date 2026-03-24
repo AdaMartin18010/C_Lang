@@ -1825,9 +1825,87 @@ void safe_write(char *buf, size_t buf_size, const char *str) {
 
 ---
 
+## 🔷 GCC 15 支持状态
+
+### 版本信息
+
+| 属性 | 详情 |
+|------|------|
+| **GCC版本** | GCC 15.1+ |
+| **发布日期** | 2025年4月 |
+| **支持状态** | ✅ 完整支持 |
+| **编译选项** | `-std=c2y` 或 `-std=gnu2y` |
+
+### 功能支持详情
+
+| 特性 | 支持状态 | 版本 | 说明 |
+|------|----------|------|------|
+| `_Countof` 基本用法 | ✅ 完整 | 15+ | `size_t n = _Countof(arr);` |
+| 多维数组支持 | ✅ 完整 | 15+ | `_Countof(matrix[0])` 获取列数 |
+| VLA支持 | ✅ 完整 | 15+ | 变长数组运行期计数 |
+| 指针错误检测 | ✅ 完整 | 15+ | 编译期错误提示 |
+| 编译期求值 | ✅ 是 | 15+ | 编译期确定结果 |
+
+### 编译示例
+
+```bash
+# 基本用法
+gcc -std=c2y -o program program.c
+
+# 检查支持
+gcc -std=c2y -dM -E - < /dev/null | grep __STDC_VERSION__
+# 输出: #define __STDC_VERSION__ 202400L
+
+# 编译期验证
+$ cat test.c
+int main(void) {
+    int arr[10];
+    size_t n = _Countof(arr);
+    static_assert(n == 10);
+    return 0;
+}
+$ gcc -std=c2y test.c -o test && ./test
+# 成功编译运行
+```
+
+### 与sizeof的性能对比
+
+| 操作 | 编译结果 | 说明 |
+|------|----------|------|
+| `_Countof(arr)` | 编译期常量 | 与 `sizeof` 相同效率 |
+| `sizeof(arr)/sizeof(arr[0])` | 编译期常量 | 相同效率，更冗长 |
+| `_Countof(vla)` | 运行期计算 | VLA需要运行期计数 |
+
+### GCC特有优化
+
+- **常量折叠**: `_Countof` 在编译期完全求值
+- **数组边界检查**: 与 `-Warray-bounds` 协同工作
+- **VLA优化**: 高效处理变长数组计数
+
+---
+
 ## 8. 编译器支持
 
-### 8.1 Clang 21+支持
+### 8.1 GCC 15+ 支持
+
+#### 8.1.1 支持版本
+
+- **GCC 15**：完整支持 `_Countof` 操作符（推荐）
+- **GCC 14**：实验性支持
+- **更早版本**：不支持，使用兼容宏
+
+#### 8.1.2 使用方法
+
+```bash
+# 使用C2y标准（推荐）
+gcc -std=c2y -o program program.c
+gcc -std=gnu2y -o program program.c
+
+# 检查GCC版本
+gcc --version
+```
+
+### 8.2 Clang 21+支持
 
 #### 8.1.1 支持版本
 

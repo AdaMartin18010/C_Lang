@@ -3362,6 +3362,39 @@ ATTR_NODISCARD int example_function(void);
 
 ---
 
+## 🔗 C2y 特性交叉链接
+
+GCC 15 同时支持 C23 和 C2y（下一代C标准）的许多新特性。以下是详细文档链接：
+
+### C2y 语言特性文档
+
+| 特性 | 文档链接 | GCC 15 支持 |
+|------|----------|-------------|
+| `defer` 语句 | [C2y_Defer_Depth.md](../01_Core_Knowledge_System/07_Modern_C/C2y_Defer_Depth.md) | ✅ 完整支持 |
+| `_Countof` 操作符 | [C2y_Countof_Depth.md](../01_Core_Knowledge_System/07_Modern_C/C2y_Countof_Depth.md) | ✅ 完整支持 |
+| `if` 声明语句 | [C2y_If_Declaration_Depth.md](../01_Core_Knowledge_System/07_Modern_C/C2y_If_Declaration_Depth.md) | ✅ 完整支持 |
+| 特性预览总览 | [C2y_Feature_Previews.md](C2y_Feature_Previews.md) | 部分支持 |
+| 提案跟踪 | [C2y_Proposal_Tracker.md](C2y_Proposal_Tracker.md) | 持续更新 |
+
+### C2y 编译选项
+
+```bash
+# 启用C2y支持（GCC 15+）
+gcc -std=c2y source.c -o output
+gcc -std=gnu2y source.c -o output
+
+# 同时启用C23和C2y特性检查
+gcc -std=c2y -Wc23-c2y-compat source.c
+```
+
+### C23/C2y 路线图
+
+完整的C23到C2y演进路线图请参考：
+- [C23_C2Y_ROADMAP.md](../05_C_Language_Standards/C23_C2Y_ROADMAP.md)
+- [C23_C2Y_SUPPORT_MATRIX.md](../05_C_Language_Standards/C23_C2Y_SUPPORT_MATRIX.md)
+
+---
+
 ## 附录
 
 ### A. 参考链接

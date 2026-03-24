@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识图谱可视化 - C_Lang知识库</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        .node-doc {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .node-doc:hover {
+            filter: brightness(1.1);
+        }
+        
+        .link-doc {
+            stroke-opacity: 0.4;
+            transition: all 0.3s ease;
+        }
+        
+        .link-doc:hover {
+            stroke-opacity: 0.8;
+            stroke-width: 2px;
+        }
+        
+        .cluster-hull {
+            fill-opacity: 0.1;
+            stroke-opacity: 0.3;
+            stroke-width: 2px;
+            stroke-dasharray: 5,5;
+        }
+
+        .preview-panel {
+            max-height: 200px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .topic-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: white;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1><span class="icon">🕸️</span> C_Lang 知识库全景图谱</h1>
+        <div class="nav-links">
+            <a href="theorem_network.html">定理网络</a>
+            <a href="lean_ecosystem.html">Lean生态</a>
+            <a href="knowledge_graph.html" class="active">知识图谱</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>🔍 搜索文档</h3>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="输入文档名称...">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <h3>📊 统计信息</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="value" id="stat-docs">200</div>
+                    <div class="label">核心文档</div>
+                </div>
+                <div class="stat-card secondary">
+                    <div class="value" id="stat-links">0</div>
+                    <div class="label">链接关系</div>
+                </div>
+                <div class="stat-card accent">
+                    <div class="value" id="stat-topics">9</div>
+                    <div class="label">主题聚类</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="value" id="stat-avg-rank">0</div>
+                    <div class="label">平均排名</div>
+                </div>
+            </div>
+
+            <h3>🏷️ 主题过滤</h3>
+            <div class="filter-section">
+                <div class="filter-options" id="topic-filters">
+                    <!-- 动态生成 -->
+                </div>
+            </div>
+
+            <h3>⚙️ 视图选项</h3>
+            <div class="filter-section">
+                <div class="filter-option">
+                    <input type="checkbox" id="show-clusters" checked>
+                    <label for="show-clusters">显示聚类边界</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="show-labels">
+                    <label for="show-labels">显示节点标签</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="highlight-hubs">
+                    <label for="highlight-hubs">高亮Hub节点</label>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="btn-reset" style="width: 100%; margin-top: 10px;">
+                🔄 重置视图
+            </button>
+
+            <h3>ℹ️ 使用说明</h3>
+            <div style="font-size: 0.85rem; color: #7f8c8d; line-height: 1.6;">
+                <p>• <strong>悬停</strong>：查看文档信息</p>
+                <p>• <strong>点击</strong>：查看文档预览</p>
+                <p>• <strong>拖拽</strong>：移动节点</p>
+                <p>• <strong>滚轮</strong>：缩放视图</p>
+                <p>• 节点大小代表PageRank得分</p>
+                <p>• 颜色代表所属主题</p>
+            </div>
+        </aside>
+
+        <main class="viz-container" id="viz-container">
+            <svg class="viz-svg" id="viz-svg"></svg>
+            
+            <div class="controls">
+                <button class="control-btn" id="btn-zoom-in" title="放大">+</button>
+                <button class="control-btn" id="btn-zoom-out" title="缩小">−</button>
+                <button class="control-btn" id="btn-fit" title="适应屏幕">⊡</button>
+            </div>
+
+            <div class="legend" id="legend">
+                <h4>主题聚类</h4>
+                <!-- 动态生成 -->
+            </div>
+
+            <div class="detail-panel" id="detail-panel">
+                <button class="close-btn" id="close-detail">×</button>
+                <h3 id="detail-title">文档详情</h3>
+                <div class="detail-content" id="detail-content"></div>
+            </div>
+        </main>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // 全局变量
+        let svg, g, simulation, nodes, links, clusters;
+        let width, height;
+        let selectedNode = null;
+        let zoom;
+
+        // 主题颜色
+        const topicColors = {
+            "core": "#3498db",
+            "semantics": "#2ecc71",
+            "system": "#e74c3c",
+            "industrial": "#f39c12",
+            "standards": "#9b59b6",
+            "deep": "#1abc9c",
+            "thinking": "#e91e63",
+            "embedded": "#34495e",
+            "other": "#95a5a6"
+        };
+
+        const topicLabels = {
+            "core": "核心知识",
+            "semantics": "形式语义",
+            "system": "系统技术",
+            "industrial": "工业场景",
+            "standards": "标准规范",
+            "deep": "深层结构",
+            "thinking": "思维表示",
+            "embedded": "嵌入式",
+            "other": "其他"
+        };
+
+        // 初始化
+        async function init() {
+            const container = document.getElementById('viz-container');
+            width = container.clientWidth;
+            height = container.clientHeight;
+
+            svg = d3.select('#viz-svg')
+                .attr('width', width)
+                .attr('height', height);
+
+            zoom = d3.zoom()
+                .scaleExtent([0.1, 4])
+                .on('zoom', (event) => {
+                    g.attr('transform', event.transform);
+                });
+
+            svg.call(zoom);
+            g = svg.append('g');
+
+            await loadData();
+            initUI();
+            render();
+        }
+
+        // 加载数据
+        async function loadData() {
+            try {
+                const response = await fetch('data/knowledge_graph.json');
+                const data = await response.json();
+                
+                nodes = data.nodes.map(d => ({...d}));
+                links = data.links.map(d => ({...d}));
+
+                // 计算聚类
+                computeClusters();
+
+                // 更新统计
+                document.getElementById('stat-links').textContent = links.length;
+                const avgRank = nodes.reduce((sum, n) => sum + (n.pagerank || 0), 0) / nodes.length;
+                document.getElementById('stat-avg-rank').textContent = avgRank.toFixed(1);
+
+                // 生成过滤器和图例
+                generateTopicFilters();
+                generateLegend();
+            } catch (error) {
+                console.error('Failed to load data:', error);
+                generateMockData();
+            }
+        }
+
+        // 计算聚类凸包
+        function computeClusters() {
+            clusters = {};
+            nodes.forEach(n => {
+                const topic = n.topic || 'other';
+                if (!clusters[topic]) {
+                    clusters[topic] = [];
+                }
+                clusters[topic].push(n);
+            });
+        }
+
+        // 生成模拟数据
+        function generateMockData() {
+            const topics = Object.keys(topicColors);
+            nodes = [];
+            links = [];
+
+            // 生成节点
+            for (let i = 0; i < 200; i++) {
+                const topic = topics[Math.floor(Math.random() * topics.length)];
+                const pagerank = Math.random() * 20 + 1;
+                nodes.push({
+                    id: `doc${i}`,
+                    name: `Document ${i}`,
+                    path: `knowledge/topic${i}/doc${i}.md`,
+                    topic: topic,
+                    topic_color: topicColors[topic],
+                    size: pagerank * 3 + 5,
+                    pagerank: pagerank,
+                    internal_links: Math.floor(Math.random() * 50),
+                    external_links: Math.floor(Math.random() * 20),
+                    line_count: Math.floor(Math.random() * 1000) + 100
+                });
+            }
+
+            // 生成链接
+            for (let i = 0; i < 400; i++) {
+                const source = nodes[Math.floor(Math.random() * nodes.length)];
+                const target = nodes[Math.floor(Math.random() * nodes.length)];
+                if (source !== target && Math.random() > 0.7) {
+                    links.push({
+                        source: source.id,
+                        target: target.id,
+                        type: 'references'
+                    });
+                }
+            }
+
+            computeClusters();
+            generateTopicFilters();
+            generateLegend();
+        }
+
+        // 渲染可视化
+        function render() {
+            g.selectAll('*').remove();
+
+            // 绘制聚类边界（如果启用）
+            if (document.getElementById('show-clusters').checked) {
+                drawClusterHulls();
+            }
+
+            // 创建力导向模拟
+            simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(links).id(d => d.id).distance(80))
+                .force('charge', d3.forceManyBody().strength(-100))
+                .force('center', d3.forceCenter(width / 2, height / 2))
+                .force('collision', d3.forceCollide().radius(d => d.size / 2 + 5))
+                .force('cluster', forceCluster());
+
+            // 绘制边
+            const link = g.append('g')
+                .attr('class', 'links')
+                .selectAll('line')
+                .data(links)
+                .enter().append('line')
+                .attr('class', 'link-doc')
+                .attr('stroke', '#bdc3c7')
+                .attr('stroke-width', 1);
+
+            // 绘制节点
+            const node = g.append('g')
+                .attr('class', 'nodes')
+                .selectAll('circle')
+                .data(nodes)
+                .enter().append('circle')
+                .attr('class', 'node-doc')
+                .attr('r', d => d.size)
+                .attr('fill', d => d.topic_color)
+                .attr('stroke', '#fff')
+                .attr('stroke-width', 1.5)
+                .attr('opacity', 0.8)
+                .call(d3.drag()
+                    .on('start', dragstarted)
+                    .on('drag', dragged)
+                    .on('end', dragended));
+
+            // 事件绑定
+            node.on('mouseover', (event, d) => {
+                showTooltip(event, d);
+                highlightNeighbors(d, node, link);
+            })
+            .on('mouseout', () => {
+                hideTooltip();
+                resetHighlight(node, link);
+            })
+            .on('click', (event, d) => {
+                selectNode(d);
+            });
+
+            // 标签（仅显示高分节点）
+            const showLabels = document.getElementById('show-labels').checked;
+            if (showLabels) {
+                g.append('g')
+                    .attr('class', 'labels')
+                    .selectAll('text')
+                    .data(nodes.filter(d => d.pagerank > 15))
+                    .enter().append('text')
+                    .attr('class', 'node-label')
+                    .attr('dy', d => d.size + 12)
+                    .text(d => d.name)
+                    .style('font-size', '10px')
+                    .style('fill', '#34495e');
+            }
+
+            // 模拟更新位置
+            simulation.on('tick', () => {
+                link
+                    .attr('x1', d => d.source.x)
+                    .attr('y1', d => d.source.y)
+                    .attr('x2', d => d.target.x)
+                    .attr('y2', d => d.target.y);
+
+                node
+                    .attr('cx', d => d.x)
+                    .attr('cy', d => d.y);
+
+                if (showLabels) {
+                    g.selectAll('.node-label')
+                        .attr('x', d => d.x)
+                        .attr('y', d => d.y);
+                }
+
+                // 更新聚类边界
+                if (document.getElementById('show-clusters').checked) {
+                    updateClusterHulls();
+                }
+            });
+
+            // 高亮Hub节点
+            if (document.getElementById('highlight-hubs').checked) {
+                const hubThreshold = 15;
+                node.attr('stroke', d => d.pagerank > hubThreshold ? '#e74c3c' : '#fff')
+                    .attr('stroke-width', d => d.pagerank > hubThreshold ? 3 : 1.5);
+            }
+        }
+
+        // 聚类力
+        function forceCluster() {
+            const strength = 0.05;
+            return function(alpha) {
+                for (const topic in clusters) {
+                    const clusterNodes = clusters[topic];
+                    if (clusterNodes.length === 0) continue;
+
+                    const cx = clusterNodes.reduce((sum, n) => sum + n.x, 0) / clusterNodes.length;
+                    const cy = clusterNodes.reduce((sum, n) => sum + n.y, 0) / clusterNodes.length;
+
+                    clusterNodes.forEach(n => {
+                        n.vx += (cx - n.x) * strength * alpha;
+                        n.vy += (cy - n.y) * strength * alpha;
+                    });
+                }
+            };
+        }
+
+        // 绘制聚类边界
+        function drawClusterHulls() {
+            const hulls = g.append('g').attr('class', 'cluster-hulls');
+
+            for (const topic in clusters) {
+                const clusterNodes = clusters[topic];
+                if (clusterNodes.length < 3) continue;
+
+                const points = clusterNodes.map(n => [n.x, n.y]);
+                const hull = d3.polygonHull(points);
+
+                if (hull) {
+                    const expandedHull = expandHull(hull, 30);
+                    hulls.append('path')
+                        .attr('class', 'cluster-hull')
+                        .attr('id', `hull-${topic}`)
+                        .attr('d', `M${expandedHull.join('L')}Z`)
+                        .attr('fill', topicColors[topic])
+                        .attr('stroke', topicColors[topic]);
+                }
+            }
+        }
+
+        // 更新聚类边界位置
+        function updateClusterHulls() {
+            for (const topic in clusters) {
+                const clusterNodes = clusters[topic];
+                if (clusterNodes.length < 3) continue;
+
+                const points = clusterNodes.map(n => [n.x, n.y]);
+                const hull = d3.polygonHull(points);
+
+                if (hull) {
+                    const expandedHull = expandHull(hull, 30);
+                    g.select(`#hull-${topic}`)
+                        .attr('d', `M${expandedHull.join('L')}Z`);
+                }
+            }
+        }
+
+        // 扩展凸包
+        function expandHull(hull, padding) {
+            const centroid = d3.polygonCentroid(hull);
+            return hull.map(p => {
+                const dx = p[0] - centroid[0];
+                const dy = p[1] - centroid[1];
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                const scale = (dist + padding) / dist;
+                return [centroid[0] + dx * scale, centroid[1] + dy * scale];
+            });
+        }
+
+        // 高亮邻居
+        function highlightNeighbors(d, nodeSelection, linkSelection) {
+            const connected = new Set();
+            connected.add(d.id);
+            
+            links.forEach(l => {
+                if (l.source.id === d.id) connected.add(l.target.id);
+                if (l.target.id === d.id) connected.add(l.source.id);
+            });
+
+            nodeSelection.style('opacity', n => connected.has(n.id) ? 1 : 0.2);
+            linkSelection.style('opacity', l => 
+                l.source.id === d.id || l.target.id === d.id ? 0.8 : 0.1
+            );
+        }
+
+        // 重置高亮
+        function resetHighlight(nodeSelection, linkSelection) {
+            nodeSelection.style('opacity', 0.8);
+            linkSelection.style('opacity', 0.4);
+        }
+
+        // 显示工具提示
+        function showTooltip(event, d) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.innerHTML = `
+                <h4>${d.name}</h4>
+                <p>
+                    <span class="topic-tag" style="background: ${d.topic_color};">
+                        ${topicLabels[d.topic] || d.topic}
+                    </span>
+                </p>
+                <p>PageRank: ${d.pagerank.toFixed(2)}</p>
+                <div class="meta">
+                    <div>内链: ${d.internal_links} | 外链: ${d.external_links}</div>
+                    <div>行数: ${d.line_count}</div>
+                </div>
+            `;
+            tooltip.style.left = (event.pageX + 15) + 'px';
+            tooltip.style.top = (event.pageY + 15) + 'px';
+            tooltip.classList.add('visible');
+        }
+
+        function hideTooltip() {
+            document.getElementById('tooltip').classList.remove('visible');
+        }
+
+        // 选择节点
+        function selectNode(d) {
+            selectedNode = d;
+            showDetailPanel(d);
+        }
+
+        // 显示详情面板
+        function showDetailPanel(d) {
+            const panel = document.getElementById('detail-panel');
+            const title = document.getElementById('detail-title');
+            const content = document.getElementById('detail-content');
+
+            title.textContent = d.name;
+            content.innerHTML = `
+                <div class="field">
+                    <div class="field-label">主题</div>
+                    <div class="field-value">
+                        <span class="topic-tag" style="background: ${d.topic_color};">
+                            ${topicLabels[d.topic] || d.topic}
+                        </span>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="field-label">PageRank 得分</div>
+                    <div class="field-value">${d.pagerank.toFixed(2)}</div>
+                </div>
+                <div class="field">
+                    <div class="field-label">链接统计</div>
+                    <div class="field-value">
+                        内部链接: ${d.internal_links} | 
+                        外部链接: ${d.external_links}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="field-label">文档大小</div>
+                    <div class="field-value">${d.line_count} 行</div>
+                </div>
+                <div class="field">
+                    <div class="field-label">文件路径</div>
+                    <div class="field-value" style="font-family: monospace; font-size: 0.8rem;">
+                        ${d.path}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="field-label">文档预览</div>
+                    <div class="preview-panel">
+                        这是一个示例文档预览区域。<br>
+                        在实际部署中，这里将显示文档的前几行内容。<br>
+                        文档主题: ${topicLabels[d.topic] || d.topic}<br>
+                        PageRank排名: ${d.pagerank.toFixed(2)}
+                    </div>
+                </div>
+            `;
+
+            panel.classList.add('visible');
+        }
+
+        // 生成主题过滤器
+        function generateTopicFilters() {
+            const container = document.getElementById('topic-filters');
+            
+            Object.entries(topicLabels).forEach(([topic, label]) => {
+                const count = nodes.filter(n => n.topic === topic).length;
+                const div = document.createElement('div');
+                div.className = 'filter-option';
+                div.innerHTML = `
+                    <input type="checkbox" checked id="filter-${topic}" data-topic="${topic}">
+                    <div class="color-dot" style="background: ${topicColors[topic]};"></div>
+                    <label for="filter-${topic}">${label}</label>
+                    <span class="count">${count}</span>
+                `;
+                container.appendChild(div);
+            });
+
+            // 绑定事件
+            container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                cb.addEventListener('change', applyFilters);
+            });
+        }
+
+        // 生成图例
+        function generateLegend() {
+            const legend = document.getElementById('legend');
+            legend.innerHTML = '<h4>主题聚类</h4>';
+            
+            Object.entries(topicLabels).forEach(([topic, label]) => {
+                const div = document.createElement('div');
+                div.className = 'legend-item';
+                div.innerHTML = `
+                    <div class="legend-color" style="background: ${topicColors[topic]};"></div>
+                    <span>${label}</span>
+                `;
+                legend.appendChild(div);
+            });
+        }
+
+        // 应用过滤器
+        function applyFilters() {
+            const checkedTopics = new Set();
+            document.querySelectorAll('#topic-filters input:checked').forEach(cb => {
+                checkedTopics.add(cb.dataset.topic);
+            });
+
+            g.selectAll('.node-doc')
+                .style('display', d => checkedTopics.has(d.topic) ? 'block' : 'none');
+
+            g.selectAll('.link-doc')
+                .style('display', d => 
+                    checkedTopics.has(d.source.topic) && 
+                    checkedTopics.has(d.target.topic) ? 'block' : 'none'
+                );
+
+            g.selectAll('.cluster-hull')
+                .style('display', d => checkedTopics.has(d) ? 'block' : 'none');
+        }
+
+        // 搜索功能
+        function searchDocument(query) {
+            if (!query) {
+                g.selectAll('.node-doc').style('opacity', 0.8);
+                return;
+            }
+
+            const matched = nodes.filter(n => 
+                n.name.toLowerCase().includes(query.toLowerCase()) ||
+                n.path.toLowerCase().includes(query.toLowerCase())
+            );
+
+            g.selectAll('.node-doc')
+                .style('opacity', d => {
+                    const isMatch = matched.some(m => m.id === d.id);
+                    return isMatch ? 1 : 0.1;
+                })
+                .attr('stroke', d => {
+                    const isMatch = matched.some(m => m.id === d.id);
+                    return isMatch ? '#e74c3c' : '#fff';
+                })
+                .attr('stroke-width', d => {
+                    const isMatch = matched.some(m => m.id === d.id);
+                    return isMatch ? 3 : 1.5;
+                });
+        }
+
+        // 拖拽功能
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+
+        // UI初始化
+        function initUI() {
+            // 搜索
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                searchDocument(e.target.value);
+            });
+
+            // 视图选项
+            document.getElementById('show-clusters').addEventListener('change', render);
+            document.getElementById('show-labels').addEventListener('change', render);
+            document.getElementById('highlight-hubs').addEventListener('change', render);
+
+            // 关闭详情面板
+            document.getElementById('close-detail').addEventListener('click', () => {
+                document.getElementById('detail-panel').classList.remove('visible');
+            });
+
+            // 控制按钮
+            document.getElementById('btn-zoom-in').addEventListener('click', () => {
+                svg.transition().call(zoom.scaleBy, 1.3);
+            });
+
+            document.getElementById('btn-zoom-out').addEventListener('click', () => {
+                svg.transition().call(zoom.scaleBy, 0.7);
+            });
+
+            document.getElementById('btn-fit').addEventListener('click', () => {
+                svg.transition().call(zoom.transform, d3.zoomIdentity);
+            });
+
+            // 重置按钮
+            document.getElementById('btn-reset').addEventListener('click', () => {
+                svg.transition().call(zoom.transform, d3.zoomIdentity);
+                document.getElementById('search-input').value = '';
+                searchDocument('');
+                document.querySelectorAll('#topic-filters input').forEach(cb => {
+                    cb.checked = true;
+                });
+                applyFilters();
+            });
+        }
+
+        // 窗口大小改变
+        window.addEventListener('resize', () => {
+            const container = document.getElementById('viz-container');
+            width = container.clientWidth;
+            height = container.clientHeight;
+            svg.attr('width', width).attr('height', height);
+            simulation.force('center', d3.forceCenter(width / 2, height / 2));
+            simulation.alpha(0.3).restart();
+        });
+
+        // 启动
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

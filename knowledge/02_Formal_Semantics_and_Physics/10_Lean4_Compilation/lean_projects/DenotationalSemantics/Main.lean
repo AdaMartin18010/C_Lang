@@ -15,6 +15,8 @@ import Denotational.Domain
 import Denotational.Meaning
 import Denotational.Continuity
 import Denotational.FixedPoint
+import Denotational.AesopConfig
+import Denotational.AesopTests
 import Tests.MeaningTest
 
 namespace Denotational.Main

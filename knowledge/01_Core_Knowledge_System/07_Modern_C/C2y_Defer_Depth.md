@@ -2931,9 +2931,104 @@ void debug_wrong_order(void) {
 
 ---
 
+## 🔷 GCC 15 支持状态
+
+### 版本信息
+
+| 属性 | 详情 |
+|------|------|
+| **GCC版本** | GCC 15.1+ |
+| **发布日期** | 2025年4月 |
+| **支持状态** | ✅ 完整支持 |
+| **默认标准** | C23（使用 `-std=c2y` 启用C2y特性） |
+
+### 编译选项
+
+```bash
+# 启用C2y defer支持
+gcc -std=c2y source.c -o output
+
+# GNU扩展模式（推荐）
+gcc -std=gnu2y source.c -o output
+
+# 检查C2y版本宏
+gcc -std=c2y -dM -E - < /dev/null | grep __STDC_VERSION__
+# 输出: #define __STDC_VERSION__ 202400L
+```
+
+### 功能支持详情
+
+| 特性 | 支持状态 | 版本 | 备注 |
+|------|----------|------|------|
+| `defer` 语句 | ✅ 完整 | 15+ | 完整语义支持 |
+| `defer` 块 | ✅ 完整 | 15+ | `{...}` 语法 |
+| 多defer堆叠 | ✅ 完整 | 15+ | LIFO执行顺序 |
+| longjmp交互 | ✅ 完整 | 15+ | 正确处理 |
+| setjmp交互 | ✅ 完整 | 15+ | 正确处理 |
+| 嵌套函数 | ✅ 完整 | 15+ | 支持 |
+| 与cleanup属性兼容 | ✅ 是 | 15+ | 可共存 |
+
+### 与GCC扩展的互操作
+
+```c
+// defer 可以与 GCC cleanup 属性共存
+void cleanup_func(int *p) {
+    printf("Cleanup called\n");
+}
+
+void example(void) {
+    int x __attribute__((cleanup(cleanup_func))) = 42;
+    defer printf("defer executed\n");
+    
+    // 退出时执行顺序:
+    // 1. defer 语句 (LIFO)
+    // 2. cleanup 属性 (LIFO)
+}
+```
+
+### 已知问题与限制
+
+| 问题 | 状态 | 解决方案 |
+|------|------|----------|
+| 与旧版gdb兼容性 | ⚠️ | 使用gdb 15+ |
+| 代码覆盖率检测 | ✅ | gcov完全支持 |
+| 静态分析 | ✅ | -fanalyzer支持 |
+
+### 与其他编译器对比
+
+| 特性 | GCC 15 | Clang 20 | MSVC |
+|------|--------|----------|------|
+| `defer` | ✅ | ✅ | ❌ |
+| 完整语义 | ✅ | ✅ | N/A |
+| 优化支持 | ✅ 优秀 | ✅ 优秀 | N/A |
+| 诊断信息 | ✅ 详细 | ✅ 详细 | N/A |
+
+---
+
 ## 8. 编译器支持
 
-### 8.1 Clang支持
+### 8.1 GCC支持
+
+#### 8.1.1 版本要求
+
+- **GCC 15+**：完整支持C2y `defer`（推荐）
+- **GCC 14**：实验性支持，部分特性
+- **更早版本**：不支持
+
+#### 8.1.2 使用方法
+
+```bash
+# 基本编译
+gcc -std=c2y source.c -o output
+
+# 启用所有C2y特性
+gcc -std=c2y -Wall -Wextra source.c -o output
+
+# 生成汇编查看defer的实现
+gcc -std=c2y -S source.c -o output.s
+```
+
+### 8.2 Clang支持
 
 #### 8.1.1 版本要求
 

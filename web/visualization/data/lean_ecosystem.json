@@ -1,0 +1,584 @@
+{
+  "nodes": [
+    {
+      "id": "Lean_4_Ecosystem",
+      "name": "Lean 4 Ecosystem",
+      "type": "root",
+      "size": 50,
+      "description": "",
+      "depth": 0
+    },
+    {
+      "id": "语言核心",
+      "name": "语言核心",
+      "type": "category",
+      "size": 50,
+      "description": "",
+      "depth": 1
+    },
+    {
+      "id": "Lean_4_内核",
+      "name": "Lean 4 内核",
+      "type": "component",
+      "size": 100,
+      "description": "自举内核实现",
+      "depth": 2
+    },
+    {
+      "id": "类型检查器",
+      "name": "类型检查器",
+      "type": "component",
+      "size": 80,
+      "description": "依赖类型检查",
+      "depth": 2
+    },
+    {
+      "id": "编译器前端",
+      "name": "编译器前端",
+      "type": "component",
+      "size": 90,
+      "description": "Parser/Elaborator",
+      "depth": 2
+    },
+    {
+      "id": "编译器后端",
+      "name": "编译器后端",
+      "type": "component",
+      "size": 85,
+      "description": "IR → C/LLVM",
+      "depth": 2
+    },
+    {
+      "id": "运行时系统",
+      "name": "运行时系统",
+      "type": "component",
+      "size": 75,
+      "description": "引用计数 + 任务调度",
+      "depth": 2
+    },
+    {
+      "id": "数学图书馆",
+      "name": "数学图书馆",
+      "type": "category",
+      "size": 50,
+      "description": "",
+      "depth": 1
+    },
+    {
+      "id": "Mathlib4",
+      "name": "Mathlib4",
+      "type": "library",
+      "size": 4200,
+      "description": "420万+行代码，18万+定理",
+      "depth": 2
+    },
+    {
+      "id": "Algebra",
+      "name": "Algebra",
+      "type": "math",
+      "size": 800,
+      "description": "群论、环论、域论",
+      "depth": 2
+    },
+    {
+      "id": "Analysis",
+      "name": "Analysis",
+      "type": "math",
+      "size": 600,
+      "description": "实分析、复分析",
+      "depth": 2
+    },
+    {
+      "id": "Topology",
+      "name": "Topology",
+      "type": "math",
+      "size": 500,
+      "description": "点集拓扑、代数拓扑",
+      "depth": 2
+    },
+    {
+      "id": "NumberTheory",
+      "name": "NumberTheory",
+      "type": "math",
+      "size": 400,
+      "description": "解析数论、代数数论",
+      "depth": 2
+    },
+    {
+      "id": "核心组件",
+      "name": "核心组件",
+      "type": "category",
+      "size": 50,
+      "description": "",
+      "depth": 1
+    },
+    {
+      "id": "Std4",
+      "name": "Std4",
+      "type": "library",
+      "size": 300,
+      "description": "标准库",
+      "depth": 2
+    },
+    {
+      "id": "Aesop",
+      "name": "Aesop",
+      "type": "tool",
+      "size": 150,
+      "description": "自动化证明策略",
+      "depth": 2
+    },
+    {
+      "id": "Lake",
+      "name": "Lake",
+      "type": "tool",
+      "size": 120,
+      "description": "构建工具",
+      "depth": 2
+    },
+    {
+      "id": "LeanInk",
+      "name": "LeanInk",
+      "type": "tool",
+      "size": 80,
+      "description": "文档生成",
+      "depth": 2
+    },
+    {
+      "id": "mathport",
+      "name": "mathport",
+      "type": "tool",
+      "size": 100,
+      "description": "Lean 3→4迁移工具",
+      "depth": 2
+    },
+    {
+      "id": "领域框架",
+      "name": "领域框架",
+      "type": "category",
+      "size": 50,
+      "description": "",
+      "depth": 1
+    },
+    {
+      "id": "SciLean",
+      "name": "SciLean",
+      "type": "framework",
+      "size": 200,
+      "description": "科学计算",
+      "depth": 2
+    },
+    {
+      "id": "LeanCopilot",
+      "name": "LeanCopilot",
+      "type": "framework",
+      "size": 180,
+      "description": "AI辅助证明",
+      "depth": 2
+    },
+    {
+      "id": "Polyrith",
+      "name": "Polyrith",
+      "type": "framework",
+      "size": 100,
+      "description": "算术求解器",
+      "depth": 2
+    },
+    {
+      "id": "SMTLean",
+      "name": "SMTLean",
+      "type": "framework",
+      "size": 120,
+      "description": "SMT集成",
+      "depth": 2
+    },
+    {
+      "id": "Duper",
+      "name": "Duper",
+      "type": "framework",
+      "size": 90,
+      "description": "超归结定理证明器",
+      "depth": 2
+    },
+    {
+      "id": "形式化项目",
+      "name": "形式化项目",
+      "type": "category",
+      "size": 50,
+      "description": "",
+      "depth": 1
+    },
+    {
+      "id": "Liquid_Tensor_Experiment",
+      "name": "Liquid Tensor Experiment",
+      "type": "project",
+      "size": 300,
+      "description": "Liquid Tensor猜想",
+      "depth": 2
+    },
+    {
+      "id": "Prime_Number_Theorem",
+      "name": "Prime Number Theorem",
+      "type": "project",
+      "size": 200,
+      "description": "素数定理形式化",
+      "depth": 2
+    },
+    {
+      "id": "Sphere_Eversion",
+      "name": "Sphere Eversion",
+      "type": "project",
+      "size": 250,
+      "description": "球面外翻",
+      "depth": 2
+    },
+    {
+      "id": "FLT_Formalization",
+      "name": "FLT Formalization",
+      "type": "project",
+      "size": 400,
+      "description": "费马大定理",
+      "depth": 2
+    }
+  ],
+  "links": [
+    {
+      "source": "Lean_4_Ecosystem",
+      "target": "语言核心",
+      "type": "contains"
+    },
+    {
+      "source": "语言核心",
+      "target": "Lean_4_内核",
+      "type": "contains"
+    },
+    {
+      "source": "语言核心",
+      "target": "类型检查器",
+      "type": "contains"
+    },
+    {
+      "source": "语言核心",
+      "target": "编译器前端",
+      "type": "contains"
+    },
+    {
+      "source": "语言核心",
+      "target": "编译器后端",
+      "type": "contains"
+    },
+    {
+      "source": "语言核心",
+      "target": "运行时系统",
+      "type": "contains"
+    },
+    {
+      "source": "Lean_4_Ecosystem",
+      "target": "数学图书馆",
+      "type": "contains"
+    },
+    {
+      "source": "数学图书馆",
+      "target": "Mathlib4",
+      "type": "contains"
+    },
+    {
+      "source": "数学图书馆",
+      "target": "Algebra",
+      "type": "contains"
+    },
+    {
+      "source": "数学图书馆",
+      "target": "Analysis",
+      "type": "contains"
+    },
+    {
+      "source": "数学图书馆",
+      "target": "Topology",
+      "type": "contains"
+    },
+    {
+      "source": "数学图书馆",
+      "target": "NumberTheory",
+      "type": "contains"
+    },
+    {
+      "source": "Lean_4_Ecosystem",
+      "target": "核心组件",
+      "type": "contains"
+    },
+    {
+      "source": "核心组件",
+      "target": "Std4",
+      "type": "contains"
+    },
+    {
+      "source": "核心组件",
+      "target": "Aesop",
+      "type": "contains"
+    },
+    {
+      "source": "核心组件",
+      "target": "Lake",
+      "type": "contains"
+    },
+    {
+      "source": "核心组件",
+      "target": "LeanInk",
+      "type": "contains"
+    },
+    {
+      "source": "核心组件",
+      "target": "mathport",
+      "type": "contains"
+    },
+    {
+      "source": "Lean_4_Ecosystem",
+      "target": "领域框架",
+      "type": "contains"
+    },
+    {
+      "source": "领域框架",
+      "target": "SciLean",
+      "type": "contains"
+    },
+    {
+      "source": "领域框架",
+      "target": "LeanCopilot",
+      "type": "contains"
+    },
+    {
+      "source": "领域框架",
+      "target": "Polyrith",
+      "type": "contains"
+    },
+    {
+      "source": "领域框架",
+      "target": "SMTLean",
+      "type": "contains"
+    },
+    {
+      "source": "领域框架",
+      "target": "Duper",
+      "type": "contains"
+    },
+    {
+      "source": "Lean_4_Ecosystem",
+      "target": "形式化项目",
+      "type": "contains"
+    },
+    {
+      "source": "形式化项目",
+      "target": "Liquid_Tensor_Experiment",
+      "type": "contains"
+    },
+    {
+      "source": "形式化项目",
+      "target": "Prime_Number_Theorem",
+      "type": "contains"
+    },
+    {
+      "source": "形式化项目",
+      "target": "Sphere_Eversion",
+      "type": "contains"
+    },
+    {
+      "source": "形式化项目",
+      "target": "FLT_Formalization",
+      "type": "contains"
+    }
+  ],
+  "stats": {
+    "total_nodes": 30,
+    "total_links": 29
+  },
+  "mathlib_coverage": {
+    "name": "Mathlib4 Coverage",
+    "children": [
+      {
+        "name": "代数",
+        "value": 800,
+        "children": [
+          {
+            "name": "群论",
+            "value": 200
+          },
+          {
+            "name": "环论",
+            "value": 180
+          },
+          {
+            "name": "域论",
+            "value": 150
+          },
+          {
+            "name": "模论",
+            "value": 120
+          },
+          {
+            "name": "同调代数",
+            "value": 150
+          }
+        ]
+      },
+      {
+        "name": "分析",
+        "value": 600,
+        "children": [
+          {
+            "name": "实分析",
+            "value": 150
+          },
+          {
+            "name": "复分析",
+            "value": 120
+          },
+          {
+            "name": "泛函分析",
+            "value": 130
+          },
+          {
+            "name": "测度论",
+            "value": 100
+          },
+          {
+            "name": "微分方程",
+            "value": 100
+          }
+        ]
+      },
+      {
+        "name": "拓扑",
+        "value": 500,
+        "children": [
+          {
+            "name": "点集拓扑",
+            "value": 150
+          },
+          {
+            "name": "代数拓扑",
+            "value": 120
+          },
+          {
+            "name": "微分拓扑",
+            "value": 100
+          },
+          {
+            "name": "代数几何",
+            "value": 130
+          }
+        ]
+      },
+      {
+        "name": "数论",
+        "value": 400,
+        "children": [
+          {
+            "name": "解析数论",
+            "value": 120
+          },
+          {
+            "name": "代数数论",
+            "value": 150
+          },
+          {
+            "name": "丢番图方程",
+            "value": 80
+          },
+          {
+            "name": "算术几何",
+            "value": 50
+          }
+        ]
+      },
+      {
+        "name": "线性代数",
+        "value": 450,
+        "children": [
+          {
+            "name": "矩阵论",
+            "value": 150
+          },
+          {
+            "name": "张量代数",
+            "value": 100
+          },
+          {
+            "name": "表示论",
+            "value": 120
+          },
+          {
+            "name": "多线性代数",
+            "value": 80
+          }
+        ]
+      },
+      {
+        "name": "组合",
+        "value": 300,
+        "children": [
+          {
+            "name": "图论",
+            "value": 120
+          },
+          {
+            "name": "枚举组合",
+            "value": 80
+          },
+          {
+            "name": "极值组合",
+            "value": 60
+          },
+          {
+            "name": "设计理论",
+            "value": 40
+          }
+        ]
+      },
+      {
+        "name": "几何",
+        "value": 350,
+        "children": [
+          {
+            "name": "欧氏几何",
+            "value": 80
+          },
+          {
+            "name": "微分几何",
+            "value": 120
+          },
+          {
+            "name": "黎曼几何",
+            "value": 100
+          },
+          {
+            "name": "辛几何",
+            "value": 50
+          }
+        ]
+      },
+      {
+        "name": "逻辑",
+        "value": 250,
+        "children": [
+          {
+            "name": "模型论",
+            "value": 80
+          },
+          {
+            "name": "证明论",
+            "value": 70
+          },
+          {
+            "name": "递归论",
+            "value": 50
+          },
+          {
+            "name": "集合论",
+            "value": 50
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -15,6 +15,8 @@ import Hoare.Syntax
 import Hoare.Rules
 import Hoare.WP
 import Hoare.Verification
+import Hoare.AesopConfig
+import Hoare.AesopTests
 import Tests.VerificationTest
 
 namespace Hoare.Main

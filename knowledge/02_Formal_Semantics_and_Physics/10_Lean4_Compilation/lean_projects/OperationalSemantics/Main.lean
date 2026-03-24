@@ -15,6 +15,8 @@ import Operational.Syntax
 import Operational.Semantics
 import Operational.Evaluator
 import Operational.Properties
+import Operational.AesopConfig
+import Operational.AesopTests
 import Tests.EvaluatorTest
 
 namespace Operational.Main

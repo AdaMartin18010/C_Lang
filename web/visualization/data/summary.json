@@ -1,0 +1,20 @@
+{
+  "export_time": "2026-03-25",
+  "datasets": {
+    "theorem_network": {
+      "nodes": 403,
+      "links": 125,
+      "description": "248个定理的依赖关系网络"
+    },
+    "lean_ecosystem": {
+      "nodes": 30,
+      "links": 29,
+      "description": "Lean 4生态系统层次结构"
+    },
+    "knowledge_graph": {
+      "nodes": 200,
+      "links": 927,
+      "description": "Top 200核心文档的知识图谱"
+    }
+  }
+}

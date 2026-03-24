@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定理网络可视化 - C_Lang知识库</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        .critical-node {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 2px #e74c3c); }
+            to { filter: drop-shadow(0 0 8px #e74c3c); }
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1><span class="icon">🔗</span> C_Lang 定理网络可视化</h1>
+        <div class="nav-links">
+            <a href="theorem_network.html" class="active">定理网络</a>
+            <a href="lean_ecosystem.html">Lean生态</a>
+            <a href="knowledge_graph.html">知识图谱</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>🔍 搜索定理</h3>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="输入定理名称...">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <h3>📊 统计信息</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="value" id="stat-nodes">0</div>
+                    <div class="label">定理总数</div>
+                </div>
+                <div class="stat-card secondary">
+                    <div class="value" id="stat-links">0</div>
+                    <div class="label">依赖关系</div>
+                </div>
+            </div>
+
+            <h3>🏷️ 类别过滤</h3>
+            <div class="filter-section">
+                <div class="filter-options" id="category-filters">
+                    <!-- 动态生成 -->
+                </div>
+            </div>
+
+            <h3>✨ 特殊模式</h3>
+            <div class="filter-section">
+                <button class="btn btn-primary" id="btn-critical-path" style="width: 100%; margin-bottom: 10px;">
+                    🔴 显示关键路径
+                </button>
+                <button class="btn btn-secondary" id="btn-reset" style="width: 100%;">
+                    🔄 重置视图
+                </button>
+            </div>
+
+            <h3>ℹ️ 使用说明</h3>
+            <div style="font-size: 0.85rem; color: #7f8c8d; line-height: 1.6;">
+                <p>• <strong>悬停</strong>：查看定理详情</p>
+                <p>• <strong>点击</strong>：高亮依赖链</p>
+                <p>• <strong>拖拽</strong>：移动节点</p>
+                <p>• <strong>滚轮</strong>：缩放视图</p>
+                <p>• 红色发光节点为关键路径定理</p>
+            </div>
+        </aside>
+
+        <main class="viz-container" id="viz-container">
+            <svg class="viz-svg" id="viz-svg"></svg>
+            
+            <div class="controls">
+                <button class="control-btn" id="btn-zoom-in" title="放大">+</button>
+                <button class="control-btn" id="btn-zoom-out" title="缩小">−</button>
+                <button class="control-btn" id="btn-fit" title="适应屏幕">⊡</button>
+            </div>
+
+            <div class="legend">
+                <h4>图例</h4>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #2ecc71;"></div>
+                    <span>操作语义</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #3498db;"></div>
+                    <span>指称语义</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f39c12;"></div>
+                    <span>公理语义</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #1abc9c;"></div>
+                    <span>分布式系统</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #e74c3c;"></div>
+                    <span>桥梁定理</span>
+                </div>
+            </div>
+
+            <div class="detail-panel" id="detail-panel">
+                <button class="close-btn" id="close-detail">×</button>
+                <h3 id="detail-title">定理详情</h3>
+                <div class="detail-content" id="detail-content"></div>
+            </div>
+        </main>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // 全局变量
+        let svg, g, simulation, nodes, links;
+        let width, height;
+        let selectedNode = null;
+        let showCriticalPath = false;
+        
+        // 类别颜色
+        const categoryColors = {
+            "操作语义": "#2ecc71",
+            "指称语义": "#3498db",
+            "公理语义": "#f39c12",
+            "分布式系统": "#1abc9c",
+            "桥梁定理": "#e74c3c",
+            "其他": "#95a5a6"
+        };
+
+        // 关键路径上的定理
+        const criticalPathTheorems = [
+            "indirectCommit", "commitRuleCurrentTerm", "leaderCompleteness",
+            "electionSafety", "voteTermConsistency", "voteUniqueness"
+        ];
+
+        // 初始化
+        async function init() {
+            const container = document.getElementById('viz-container');
+            width = container.clientWidth;
+            height = container.clientHeight;
+
+            svg = d3.select('#viz-svg')
+                .attr('width', width)
+                .attr('height', height);
+
+            // 添加缩放行为
+            const zoom = d3.zoom()
+                .scaleExtent([0.1, 4])
+                .on('zoom', (event) => {
+                    g.attr('transform', event.transform);
+                });
+
+            svg.call(zoom);
+
+            g = svg.append('g');
+
+            // 加载数据
+            await loadData();
+
+            // 初始化UI
+            initUI();
+
+            // 渲染
+            render();
+        }
+
+        // 加载数据
+        async function loadData() {
+            try {
+                const response = await fetch('data/theorem_network.json');
+                const data = await response.json();
+                
+                nodes = data.nodes.map(d => ({...d}));
+                links = data.links.map(d => ({...d}));
+
+                // 更新统计
+                document.getElementById('stat-nodes').textContent = nodes.length;
+                document.getElementById('stat-links').textContent = links.length;
+
+                // 生成分类过滤器
+                generateCategoryFilters();
+            } catch (error) {
+                console.error('Failed to load data:', error);
+                // 使用模拟数据
+                generateMockData();
+            }
+        }
+
+        // 生成模拟数据（当真实数据加载失败时）
+        function generateMockData() {
+            const categories = Object.keys(categoryColors);
+            nodes = [];
+            links = [];
+
+            // 生成节点
+            for (let i = 0; i < 50; i++) {
+                const category = categories[Math.floor(Math.random() * categories.length)];
+                const isCritical = criticalPathTheorems.includes(`theorem${i}`);
+                nodes.push({
+                    id: `theorem${i}`,
+                    name: `Theorem ${i}`,
+                    category: category,
+                    color: categoryColors[category],
+                    description: `This is theorem ${i} in ${category}`,
+                    in_degree: Math.floor(Math.random() * 5),
+                    out_degree: Math.floor(Math.random() * 5),
+                    centrality: Math.floor(Math.random() * 10),
+                    is_critical: isCritical,
+                    is_isolated: Math.random() > 0.8
+                });
+            }
+
+            // 生成边
+            for (let i = 0; i < 80; i++) {
+                const source = nodes[Math.floor(Math.random() * nodes.length)].id;
+                const target = nodes[Math.floor(Math.random() * nodes.length)].id;
+                if (source !== target) {
+                    links.push({ source, target, type: 'depends_on' });
+                }
+            }
+
+            document.getElementById('stat-nodes').textContent = nodes.length;
+            document.getElementById('stat-links').textContent = links.length;
+            generateCategoryFilters();
+        }
+
+        // 生成分类过滤器
+        function generateCategoryFilters() {
+            const container = document.getElementById('category-filters');
+            const categories = {};
+            
+            nodes.forEach(n => {
+                categories[n.category] = (categories[n.category] || 0) + 1;
+            });
+
+            Object.entries(categories).forEach(([category, count]) => {
+                const div = document.createElement('div');
+                div.className = 'filter-option';
+                div.innerHTML = `
+                    <input type="checkbox" checked id="filter-${category}" data-category="${category}">
+                    <div class="color-dot" style="background: ${categoryColors[category] || '#95a5a6'};"></div>
+                    <label for="filter-${category}">${category}</label>
+                    <span class="count">${count}</span>
+                `;
+                container.appendChild(div);
+            });
+
+            // 绑定事件
+            container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                cb.addEventListener('change', applyFilters);
+            });
+        }
+
+        // 渲染可视化
+        function render() {
+            // 清除旧内容
+            g.selectAll('*').remove();
+
+            // 创建力导向模拟
+            simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(links).id(d => d.id).distance(100))
+                .force('charge', d3.forceManyBody().strength(-300))
+                .force('center', d3.forceCenter(width / 2, height / 2))
+                .force('collision', d3.forceCollide().radius(d => Math.sqrt(d.centrality || 1) * 5 + 20));
+
+            // 绘制边
+            const link = g.append('g')
+                .attr('class', 'links')
+                .selectAll('line')
+                .data(links)
+                .enter().append('line')
+                .attr('class', 'link')
+                .attr('stroke-width', d => Math.sqrt(d.value || 1));
+
+            // 绘制节点组
+            const node = g.append('g')
+                .attr('class', 'nodes')
+                .selectAll('g')
+                .data(nodes)
+                .enter().append('g')
+                .attr('class', d => `node ${d.is_critical ? 'critical-node' : ''}`)
+                .call(d3.drag()
+                    .on('start', dragstarted)
+                    .on('drag', dragged)
+                    .on('end', dragended));
+
+            // 节点圆形
+            node.append('circle')
+                .attr('class', 'node-circle')
+                .attr('r', d => Math.sqrt(d.centrality || 1) * 4 + 8)
+                .attr('fill', d => d.color)
+                .attr('stroke', d => d.is_critical ? '#e74c3c' : '#fff')
+                .attr('stroke-width', d => d.is_critical ? 3 : 2);
+
+            // 节点标签（只显示中心性高的）
+            node.append('text')
+                .attr('class', 'node-label')
+                .attr('dy', d => Math.sqrt(d.centrality || 1) * 4 + 22)
+                .text(d => d.centrality > 5 ? d.name : '');
+
+            // 事件绑定
+            node.on('mouseover', (event, d) => {
+                showTooltip(event, d);
+            })
+            .on('mouseout', hideTooltip)
+            .on('click', (event, d) => {
+                selectNode(d, node, link);
+            });
+
+            // 模拟更新位置
+            simulation.on('tick', () => {
+                link
+                    .attr('x1', d => d.source.x)
+                    .attr('y1', d => d.source.y)
+                    .attr('x2', d => d.target.x)
+                    .attr('y2', d => d.target.y);
+
+                node.attr('transform', d => `translate(${d.x},${d.y})`);
+            });
+        }
+
+        // 显示工具提示
+        function showTooltip(event, d) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.innerHTML = `
+                <h4>${d.name}</h4>
+                <p><span class="category-badge" style="background: ${d.color};">${d.category}</span></p>
+                <p>${d.description || '无描述'}</p>
+                <div class="meta">
+                    <div>入度: ${d.in_degree || 0} | 出度: ${d.out_degree || 0}</div>
+                    <div>中心性: ${d.centrality || 0}</div>
+                    ${d.is_critical ? '<div style="color: #e74c3c;">⭐ 关键路径定理</div>' : ''}
+                </div>
+            `;
+            tooltip.style.left = (event.pageX + 15) + 'px';
+            tooltip.style.top = (event.pageY + 15) + 'px';
+            tooltip.classList.add('visible');
+        }
+
+        // 隐藏工具提示
+        function hideTooltip() {
+            document.getElementById('tooltip').classList.remove('visible');
+        }
+
+        // 选择节点
+        function selectNode(d, nodeSelection, linkSelection) {
+            selectedNode = d;
+            
+            // 高亮依赖链
+            const connectedNodes = new Set();
+            const connectedLinks = new Set();
+            
+            connectedNodes.add(d.id);
+            
+            // 上游依赖
+            links.forEach(l => {
+                if (l.target.id === d.id) {
+                    connectedNodes.add(l.source.id);
+                    connectedLinks.add(l);
+                }
+            });
+            
+            // 下游依赖
+            links.forEach(l => {
+                if (l.source.id === d.id) {
+                    connectedNodes.add(l.target.id);
+                    connectedLinks.add(l);
+                }
+            });
+
+            // 应用高亮
+            nodeSelection.classed('dimmed', n => !connectedNodes.has(n.id));
+            linkSelection.classed('dimmed', l => !connectedLinks.has(l));
+            linkSelection.classed('highlighted', l => connectedLinks.has(l));
+
+            // 显示详情面板
+            showDetailPanel(d);
+        }
+
+        // 显示详情面板
+        function showDetailPanel(d) {
+            const panel = document.getElementById('detail-panel');
+            const title = document.getElementById('detail-title');
+            const content = document.getElementById('detail-content');
+
+            title.textContent = d.name;
+            content.innerHTML = `
+                <div class="field">
+                    <div class="field-label">类别</div>
+                    <div class="field-value">
+                        <span class="category-badge" style="background: ${d.color};">${d.category}</span>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="field-label">描述</div>
+                    <div class="field-value">${d.description || '无描述信息'}</div>
+                </div>
+                <div class="field">
+                    <div class="field-label">依赖统计</div>
+                    <div class="field-value">
+                        被引用: ${d.in_degree || 0} | 
+                        引用其他: ${d.out_degree || 0} |
+                        中心性: ${d.centrality || 0}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="field-label">特殊标记</div>
+                    <div class="field-value">
+                        ${d.is_critical ? '✅ 关键路径定理<br>' : ''}
+                        ${d.is_isolated ? '⚠️ 孤立定理（无依赖关系）' : '🔗 有关联定理'}
+                    </div>
+                </div>
+                ${d.file_path ? `
+                <div class="field">
+                    <div class="field-label">文件位置</div>
+                    <div class="field-value" style="font-family: monospace; font-size: 0.8rem;">${d.file_path}</div>
+                </div>
+                ` : ''}
+            `;
+
+            panel.classList.add('visible');
+        }
+
+        // 应用过滤器
+        function applyFilters() {
+            const checkedCategories = new Set();
+            document.querySelectorAll('#category-filters input:checked').forEach(cb => {
+                checkedCategories.add(cb.dataset.category);
+            });
+
+            g.selectAll('.node')
+                .style('opacity', d => checkedCategories.has(d.category) ? 1 : 0.1);
+
+            g.selectAll('.link')
+                .style('opacity', d => 
+                    checkedCategories.has(d.source.category) && 
+                    checkedCategories.has(d.target.category) ? 0.6 : 0.05
+                );
+        }
+
+        // 显示关键路径
+        function toggleCriticalPath() {
+            showCriticalPath = !showCriticalPath;
+            
+            if (showCriticalPath) {
+                // 高亮关键路径
+                const criticalNodes = new Set(criticalPathTheorems);
+                
+                g.selectAll('.node')
+                    .classed('dimmed', d => !criticalNodes.has(d.name));
+                
+                g.selectAll('.link')
+                    .classed('dimmed', d => 
+                        !criticalNodes.has(d.source.name) || 
+                        !criticalNodes.has(d.target.name)
+                    )
+                    .classed('path-highlight', d => 
+                        criticalNodes.has(d.source.name) && 
+                        criticalNodes.has(d.target.name)
+                    );
+                
+                document.getElementById('btn-critical-path').textContent = '🔄 恢复正常视图';
+            } else {
+                resetView();
+                document.getElementById('btn-critical-path').textContent = '🔴 显示关键路径';
+            }
+        }
+
+        // 重置视图
+        function resetView() {
+            g.selectAll('.node').classed('dimmed', false);
+            g.selectAll('.link')
+                .classed('dimmed', false)
+                .classed('highlighted', false)
+                .classed('path-highlight', false);
+            
+            document.getElementById('detail-panel').classList.remove('visible');
+            selectedNode = null;
+        }
+
+        // 搜索功能
+        function searchNode(query) {
+            if (!query) {
+                g.selectAll('.node').style('opacity', 1);
+                return;
+            }
+
+            const matched = nodes.filter(n => 
+                n.name.toLowerCase().includes(query.toLowerCase())
+            );
+
+            g.selectAll('.node')
+                .style('opacity', d => {
+                    const isMatch = matched.some(m => m.id === d.id);
+                    return isMatch ? 1 : 0.2;
+                });
+
+            if (matched.length > 0) {
+                const firstMatch = matched[0];
+                // 移动到匹配节点
+                const scale = 2;
+                const x = -firstMatch.x * scale + width / 2;
+                const y = -firstMatch.y * scale + height / 2;
+                
+                svg.transition()
+                    .duration(750)
+                    .call(d3.zoom().transform, d3.zoomIdentity.translate(x, y).scale(scale));
+            }
+        }
+
+        // 拖拽功能
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+
+        // UI初始化
+        function initUI() {
+            // 搜索
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                searchNode(e.target.value);
+            });
+
+            // 关键路径按钮
+            document.getElementById('btn-critical-path').addEventListener('click', toggleCriticalPath);
+
+            // 重置按钮
+            document.getElementById('btn-reset').addEventListener('click', () => {
+                resetView();
+                showCriticalPath = false;
+                document.getElementById('btn-critical-path').textContent = '🔴 显示关键路径';
+                document.getElementById('search-input').value = '';
+            });
+
+            // 关闭详情面板
+            document.getElementById('close-detail').addEventListener('click', () => {
+                document.getElementById('detail-panel').classList.remove('visible');
+            });
+
+            // 缩放控制
+            document.getElementById('btn-zoom-in').addEventListener('click', () => {
+                svg.transition().call(d3.zoom().scaleBy, 1.3);
+            });
+
+            document.getElementById('btn-zoom-out').addEventListener('click', () => {
+                svg.transition().call(d3.zoom().scaleBy, 0.7);
+            });
+
+            document.getElementById('btn-fit').addEventListener('click', () => {
+                svg.transition().call(d3.zoom().transform, d3.zoomIdentity);
+            });
+        }
+
+        // 窗口大小改变
+        window.addEventListener('resize', () => {
+            const container = document.getElementById('viz-container');
+            width = container.clientWidth;
+            height = container.clientHeight;
+            svg.attr('width', width).attr('height', height);
+            simulation.force('center', d3.forceCenter(width / 2, height / 2));
+            simulation.alpha(0.3).restart();
+        });
+
+        // 启动
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

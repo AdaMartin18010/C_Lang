@@ -11,6 +11,7 @@ root = "Main"
 
 [dependencies]
 std = { git = "https://github.com/leanprover/std4.git", rev = "v4.6.0" }
+aesop = { git = "https://github.com/leanprover-community/aesop", rev = "v4.6.0" }
 
 [leanOptions]
 pp.unicode.fun = true

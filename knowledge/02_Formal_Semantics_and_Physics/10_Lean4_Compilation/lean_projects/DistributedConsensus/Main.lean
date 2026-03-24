@@ -21,6 +21,8 @@ import Raft.Safety
 import Raft.Liveness
 import Raft.Invariants
 import Raft.Paxos
+import Raft.AesopConfig
+import Raft.AesopTests
 
 namespace DistributedConsensus
 

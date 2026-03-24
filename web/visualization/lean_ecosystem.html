@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lean生态可视化 - C_Lang知识库</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <style>
+        .tree-node circle {
+            fill: white;
+            stroke: var(--primary);
+            stroke-width: 3px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tree-node circle:hover {
+            fill: var(--primary);
+            r: 8;
+        }
+        
+        .tree-node text {
+            font-size: 12px;
+            fill: var(--text);
+        }
+        
+        .tree-link {
+            fill: none;
+            stroke: #bdc3c7;
+            stroke-width: 2px;
+        }
+        
+        .tree-link.highlighted {
+            stroke: var(--accent);
+            stroke-width: 3px;
+        }
+        
+        .node-collapsed circle {
+            fill: var(--warning);
+            stroke: var(--warning);
+        }
+        
+        .node-expanded circle {
+            fill: var(--secondary);
+            stroke: var(--secondary);
+        }
+        
+        .sunburst-path {
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        
+        .sunburst-path:hover {
+            opacity: 0.8;
+        }
+
+        .view-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 200;
+        }
+        
+        .view-toggle button {
+            padding: 8px 16px;
+            margin-right: 10px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .view-toggle button.active,
+        .view-toggle button:hover {
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <h1><span class="icon">🌿</span> C_Lang Lean 4 生态系统可视化</h1>
+        <div class="nav-links">
+            <a href="theorem_network.html">定理网络</a>
+            <a href="lean_ecosystem.html" class="active">Lean生态</a>
+            <a href="knowledge_graph.html">知识图谱</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>🔍 搜索组件</h3>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="输入组件名称...">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <h3>📊 统计信息</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="value" id="stat-nodes">0</div>
+                    <div class="label">组件总数</div>
+                </div>
+                <div class="stat-card secondary">
+                    <div class="value" id="stat-depth">0</div>
+                    <div class="label">最大深度</div>
+                </div>
+            </div>
+
+            <h3>🏷️ 组件类型</h3>
+            <div class="filter-section">
+                <div class="filter-options" id="type-filters">
+                    <!-- 动态生成 -->
+                </div>
+            </div>
+
+            <h3>🌐 视图模式</h3>
+            <div class="filter-section">
+                <button class="btn btn-primary" id="btn-tree-view" style="width: 100%; margin-bottom: 10px;">
+                    🌳 树状视图
+                </button>
+                <button class="btn btn-secondary" id="btn-radial-view" style="width: 100%; margin-bottom: 10px;">
+                    ⭕ 径向视图
+                </button>
+                <button class="btn" id="btn-sunburst-view" style="width: 100%; background: #9b59b6; color: white;">
+                    ☀️ 数学覆盖（旭日图）
+                </button>
+            </div>
+
+            <h3>ℹ️ 使用说明</h3>
+            <div style="font-size: 0.85rem; color: #7f8c8d; line-height: 1.6;">
+                <p>• <strong>点击节点</strong>：展开/折叠子树</p>
+                <p>• <strong>拖拽</strong>：移动布局（部分视图）</p>
+                <p>• <strong>滚轮</strong>：缩放视图</p>
+                <p>• 绿色节点：已展开</p>
+                <p>• 橙色节点：可展开</p>
+            </div>
+        </aside>
+
+        <main class="viz-container" id="viz-container">
+            <div class="view-toggle">
+                <button class="active" id="toggle-layout">切换布局</button>
+                <button id="reset-view">重置视图</button>
+            </div>
+
+            <svg class="viz-svg" id="viz-svg"></svg>
+            
+            <div class="controls">
+                <button class="control-btn" id="btn-zoom-in" title="放大">+</button>
+                <button class="control-btn" id="btn-zoom-out" title="缩小">−</button>
+                <button class="control-btn" id="btn-fit" title="适应屏幕">⊡</button>
+                <button class="control-btn" id="btn-collapse" title="全部折叠">−−</button>
+                <button class="control-btn" id="btn-expand" title="全部展开">++</button>
+            </div>
+
+            <div class="legend" id="legend">
+                <h4>组件类型</h4>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #3498db;"></div>
+                    <span>语言核心</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #e74c3c;"></div>
+                    <span>数学库</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #2ecc71;"></div>
+                    <span>核心组件</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f39c12;"></div>
+                    <span>领域框架</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #9b59b6;"></div>
+                    <span>形式化项目</span>
+                </div>
+            </div>
+
+            <div class="detail-panel" id="detail-panel">
+                <button class="close-btn" id="close-detail">×</button>
+                <h3 id="detail-title">组件详情</h3>
+                <div class="detail-content" id="detail-content"></div>
+            </div>
+        </main>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // 全局变量
+        let svg, g, root, tree, i = 0;
+        let width, height;
+        let currentView = 'tree'; // 'tree', 'radial', 'sunburst'
+        let zoom;
+
+        // 类型颜色
+        const typeColors = {
+            'root': '#2c3e50',
+            'category': '#3498db',
+            'component': '#2ecc71',
+            'library': '#e74c3c',
+            'tool': '#f39c12',
+            'framework': '#9b59b6',
+            'math': '#1abc9c',
+            'project': '#e91e63',
+            'unknown': '#95a5a6'
+        };
+
+        // 初始化
+        async function init() {
+            const container = document.getElementById('viz-container');
+            width = container.clientWidth;
+            height = container.clientHeight;
+
+            svg = d3.select('#viz-svg')
+                .attr('width', width)
+                .attr('height', height);
+
+            zoom = d3.zoom()
+                .scaleExtent([0.1, 4])
+                .on('zoom', (event) => {
+                    g.attr('transform', event.transform);
+                });
+
+            svg.call(zoom);
+            g = svg.append('g');
+
+            await loadData();
+            initUI();
+            renderTree();
+        }
+
+        // 加载数据
+        async function loadData() {
+            try {
+                const response = await fetch('data/lean_ecosystem.json');
+                const data = await response.json();
+                
+                // 构建层次结构
+                const hierarchyData = buildHierarchy(data.nodes, data.links);
+                root = d3.hierarchy(hierarchyData);
+                
+                // 更新统计
+                document.getElementById('stat-nodes').textContent = data.nodes.length;
+                document.getElementById('stat-depth').textContent = 
+                    d3.max(data.nodes, d => d.depth) + 1;
+                
+                generateTypeFilters(data.nodes);
+            } catch (error) {
+                console.error('Failed to load data:', error);
+                // 使用内置数据
+                loadBuiltInData();
+            }
+        }
+
+        // 构建层次结构
+        function buildHierarchy(nodes, links) {
+            const nodeMap = new Map();
+            nodes.forEach(n => nodeMap.set(n.id, { ...n, children: [] }));
+            
+            let rootNode = null;
+            links.forEach(l => {
+                const parent = nodeMap.get(l.source);
+                const child = nodeMap.get(l.target);
+                if (parent && child) {
+                    parent.children.push(child);
+                }
+            });
+            
+            // 找到根节点
+            const childrenIds = new Set(links.map(l => l.target));
+            const rootId = nodes.find(n => !childrenIds.has(n.id))?.id;
+            rootNode = nodeMap.get(rootId);
+            
+            return rootNode || { name: 'Lean 4', children: [] };
+        }
+
+        // 加载内置数据
+        function loadBuiltInData() {
+            const data = {
+                name: "Lean 4 Ecosystem",
+                type: "root",
+                children: [
+                    {
+                        name: "语言核心",
+                        type: "category",
+                        children: [
+                            { name: "Lean 4 内核", type: "component", size: 100, description: "自举内核实现" },
+                            { name: "类型检查器", type: "component", size: 80, description: "依赖类型检查" },
+                            { name: "编译器前端", type: "component", size: 90, description: "Parser/Elaborator" },
+                            { name: "编译器后端", type: "component", size: 85, description: "IR → C/LLVM" },
+                            { name: "运行时系统", type: "component", size: 75, description: "引用计数 + 任务调度" }
+                        ]
+                    },
+                    {
+                        name: "数学图书馆",
+                        type: "category",
+                        children: [
+                            { name: "Mathlib4", type: "library", size: 4200, description: "420万+行代码，18万+定理" },
+                            { name: "Algebra", type: "math", size: 800, description: "群论、环论、域论" },
+                            { name: "Analysis", type: "math", size: 600, description: "实分析、复分析" },
+                            { name: "Topology", type: "math", size: 500, description: "点集拓扑、代数拓扑" },
+                            { name: "NumberTheory", type: "math", size: 400, description: "解析数论、代数数论" }
+                        ]
+                    },
+                    {
+                        name: "核心组件",
+                        type: "category",
+                        children: [
+                            { name: "Std4", type: "library", size: 300, description: "标准库" },
+                            { name: "Aesop", type: "tool", size: 150, description: "自动化证明策略" },
+                            { name: "Lake", type: "tool", size: 120, description: "构建工具" },
+                            { name: "LeanInk", type: "tool", size: 80, description: "文档生成" },
+                            { name: "mathport", type: "tool", size: 100, description: "Lean 3→4迁移工具" }
+                        ]
+                    },
+                    {
+                        name: "领域框架",
+                        type: "category",
+                        children: [
+                            { name: "SciLean", type: "framework", size: 200, description: "科学计算" },
+                            { name: "LeanCopilot", type: "framework", size: 180, description: "AI辅助证明" },
+                            { name: "Polyrith", type: "framework", size: 100, description: "算术求解器" },
+                            { name: "SMTLean", type: "framework", size: 120, description: "SMT集成" },
+                            { name: "Duper", type: "framework", size: 90, description: "超归结定理证明器" }
+                        ]
+                    },
+                    {
+                        name: "形式化项目",
+                        type: "category",
+                        children: [
+                            { name: "Liquid Tensor Experiment", type: "project", size: 300, description: "Liquid Tensor猜想" },
+                            { name: "Prime Number Theorem", type: "project", size: 200, description: "素数定理形式化" },
+                            { name: "Sphere Eversion", type: "project", size: 250, description: "球面外翻" },
+                            { name: "FLT Formalization", type: "project", size: 400, description: "费马大定理" }
+                        ]
+                    }
+                ]
+            };
+
+            root = d3.hierarchy(data);
+            document.getElementById('stat-nodes').textContent = countNodes(data);
+            document.getElementById('stat-depth').textContent = getDepth(data);
+        }
+
+        // 计算节点数
+        function countNodes(node) {
+            let count = 1;
+            if (node.children) {
+                node.children.forEach(c => count += countNodes(c));
+            }
+            return count;
+        }
+
+        // 计算深度
+        function getDepth(node, depth = 1) {
+            if (!node.children || node.children.length === 0) return depth;
+            return Math.max(...node.children.map(c => getDepth(c, depth + 1)));
+        }
+
+        // 渲染树状视图
+        function renderTree() {
+            currentView = 'tree';
+            g.selectAll('*').remove();
+
+            const margin = { top: 20, right: 120, bottom: 20, left: 120 };
+            const treeWidth = width - margin.left - margin.right;
+            const treeHeight = height - margin.top - margin.bottom;
+
+            tree = d3.tree().size([treeHeight, treeWidth]);
+
+            root.x0 = treeHeight / 2;
+            root.y0 = 0;
+
+            // 初始化折叠状态
+            if (root.children) {
+                root.children.forEach(collapse);
+            }
+
+            updateTree(root);
+
+            // 居中显示
+            const initialTransform = d3.zoomIdentity
+                .translate(margin.left, margin.top)
+                .scale(0.8);
+            svg.call(zoom.transform, initialTransform);
+        }
+
+        // 更新树
+        function updateTree(source) {
+            const treeData = tree(root);
+            const nodes = treeData.descendants();
+            const links = treeData.links();
+
+            // 节点
+            const node = g.selectAll('g.tree-node')
+                .data(nodes, d => d.id || (d.id = ++i));
+
+            const nodeEnter = node.enter().append('g')
+                .attr('class', d => `tree-node ${d.children || d._children ? 'node-collapsed' : ''}`)
+                .attr('transform', d => `translate(${source.y0},${source.x0})`)
+                .on('click', clickNode)
+                .on('mouseover', showTooltip)
+                .on('mouseout', hideTooltip);
+
+            nodeEnter.append('circle')
+                .attr('r', d => d.data.size ? Math.sqrt(d.data.size) / 3 + 5 : 6)
+                .style('fill', d => d._children ? typeColors[d.data.type] || '#fff' : '#fff')
+                .style('stroke', d => typeColors[d.data.type] || '#3498db');
+
+            nodeEnter.append('text')
+                .attr('dy', '.35em')
+                .attr('x', d => d.children || d._children ? -13 : 13)
+                .attr('text-anchor', d => d.children || d._children ? 'end' : 'start')
+                .text(d => d.data.name)
+                .style('fill-opacity', 1);
+
+            const nodeUpdate = node.merge(nodeEnter).transition()
+                .duration(500)
+                .attr('transform', d => `translate(${d.y},${d.x})`);
+
+            nodeUpdate.select('circle')
+                .attr('r', d => d.data.size ? Math.sqrt(d.data.size) / 3 + 5 : 6)
+                .style('fill', d => d._children ? typeColors[d.data.type] || '#fff' : '#fff')
+                .style('stroke', d => typeColors[d.data.type] || '#3498db');
+
+            nodeUpdate.select('text')
+                .style('fill-opacity', 1);
+
+            const nodeExit = node.exit().transition()
+                .duration(500)
+                .attr('transform', d => `translate(${source.y},${source.x})`)
+                .remove();
+
+            nodeExit.select('circle').attr('r', 1e-6);
+            nodeExit.select('text').style('fill-opacity', 1e-6);
+
+            // 连线
+            const link = g.selectAll('path.tree-link')
+                .data(links, d => d.target.id);
+
+            const linkEnter = link.enter().insert('path', 'g')
+                .attr('class', 'tree-link')
+                .attr('d', d => {
+                    const o = { x: source.x0, y: source.y0 };
+                    return diagonal(o, o);
+                });
+
+            link.merge(linkEnter).transition()
+                .duration(500)
+                .attr('d', d => diagonal(d.source, d.target));
+
+            link.exit().transition()
+                .duration(500)
+                .attr('d', d => {
+                    const o = { x: source.x, y: source.y };
+                    return diagonal(o, o);
+                })
+                .remove();
+
+            nodes.forEach(d => {
+                d.x0 = d.x;
+                d.y0 = d.y;
+            });
+        }
+
+        // 对角线生成器
+        function diagonal(s, d) {
+            return `M ${s.y} ${s.x}
+                    C ${(s.y + d.y) / 2} ${s.x},
+                      ${(s.y + d.y) / 2} ${d.x},
+                      ${d.y} ${d.x}`;
+        }
+
+        // 渲染径向视图
+        function renderRadial() {
+            currentView = 'radial';
+            g.selectAll('*').remove();
+
+            const radius = Math.min(width, height) / 2 - 100;
+
+            tree = d3.tree()
+                .size([2 * Math.PI, radius])
+                .separation((a, b) => (a.parent == b.parent ? 1 : 2) / a.depth);
+
+            if (root.children) {
+                root.children.forEach(collapse);
+            }
+
+            const treeData = tree(root);
+            const nodes = treeData.descendants();
+            const links = treeData.links();
+
+            // 连线
+            g.selectAll('path')
+                .data(links)
+                .enter().append('path')
+                .attr('class', 'tree-link')
+                .attr('d', d3.linkRadial()
+                    .angle(d => d.x)
+                    .radius(d => d.y));
+
+            // 节点
+            const node = g.selectAll('g')
+                .data(nodes)
+                .enter().append('g')
+                .attr('class', 'tree-node')
+                .attr('transform', d => `
+                    rotate(${d.x * 180 / Math.PI - 90})
+                    translate(${d.y},0)
+                `)
+                .on('click', clickNode)
+                .on('mouseover', showTooltip)
+                .on('mouseout', hideTooltip);
+
+            node.append('circle')
+                .attr('r', d => d.data.size ? Math.sqrt(d.data.size) / 5 + 4 : 5)
+                .attr('fill', d => d._children ? typeColors[d.data.type] : '#fff')
+                .attr('stroke', d => typeColors[d.data.type] || '#3498db');
+
+            node.append('text')
+                .attr('dy', '0.31em')
+                .attr('x', d => d.x < Math.PI === !d.children ? 10 : -10)
+                .attr('text-anchor', d => d.x < Math.PI === !d.children ? 'start' : 'end')
+                .attr('transform', d => d.x >= Math.PI ? 'rotate(180)' : null)
+                .text(d => d.data.name)
+                .style('font-size', '10px');
+
+            // 居中
+            svg.call(zoom.transform, d3.zoomIdentity.translate(width/2, height/2).scale(0.7));
+        }
+
+        // 渲染旭日图（数学覆盖）
+        function renderSunburst() {
+            currentView = 'sunburst';
+            g.selectAll('*').remove();
+
+            const radius = Math.min(width, height) / 2 - 20;
+
+            // 创建分区布局
+            const partition = d3.partition()
+                .size([2 * Math.PI, radius]);
+
+            // 加载mathlib覆盖数据
+            d3.json('data/lean_ecosystem.json').then(data => {
+                const rootData = d3.hierarchy(data.mathlib_coverage)
+                    .sum(d => d.value)
+                    .sort((a, b) => b.value - a.value);
+
+                partition(rootData);
+
+                const arc = d3.arc()
+                    .startAngle(d => d.x0)
+                    .endAngle(d => d.x1)
+                    .innerRadius(d => d.y0)
+                    .outerRadius(d => d.y1);
+
+                const color = d3.scaleOrdinal(d3.schemeCategory10);
+
+                const path = g.selectAll('path')
+                    .data(rootData.descendants())
+                    .enter().append('path')
+                    .attr('class', 'sunburst-path')
+                    .attr('d', arc)
+                    .style('fill', d => color((d.children ? d : d.parent).data.name))
+                    .style('stroke', '#fff')
+                    .on('click', clickSunburst)
+                    .on('mouseover', showSunburstTooltip)
+                    .on('mouseout', hideTooltip);
+
+                // 标签
+                g.selectAll('text')
+                    .data(rootData.descendants().filter(d => d.depth === 1))
+                    .enter().append('text')
+                    .attr('transform', d => {
+                        const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
+                        const y = (d.y0 + d.y1) / 2;
+                        return `rotate(${x - 90}) translate(${y},0) rotate(${x < 180 ? 0 : 180})`;
+                    })
+                    .attr('dy', '0.35em')
+                    .text(d => d.data.name)
+                    .style('text-anchor', 'middle')
+                    .style('font-size', '11px')
+                    .style('fill', '#fff')
+                    .style('font-weight', 'bold');
+
+                svg.call(zoom.transform, d3.zoomIdentity.translate(width/2, height/2));
+            }).catch(() => {
+                // 显示提示
+                g.append('text')
+                    .attr('x', width/2)
+                    .attr('y', height/2)
+                    .attr('text-anchor', 'middle')
+                    .text('数学覆盖数据加载失败')
+                    .style('font-size', '16px')
+                    .style('fill', '#e74c3c');
+            });
+        }
+
+        // 折叠节点
+        function collapse(d) {
+            if (d.children) {
+                d._children = d.children;
+                d._children.forEach(collapse);
+                d.children = null;
+            }
+        }
+
+        // 展开节点
+        function expand(d) {
+            if (d._children) {
+                d.children = d._children;
+                d.children.forEach(expand);
+                d._children = null;
+            }
+        }
+
+        // 点击节点
+        function clickNode(event, d) {
+            if (d.children) {
+                d._children = d.children;
+                d.children = null;
+            } else {
+                d.children = d._children;
+                d._children = null;
+            }
+
+            if (currentView === 'tree') {
+                updateTree(d);
+            } else if (currentView === 'radial') {
+                renderRadial();
+            }
+
+            showDetailPanel(d.data);
+        }
+
+        // 点击旭日图
+        function clickSunburst(event, d) {
+            showDetailPanel({
+                name: d.data.name,
+                type: 'math',
+                size: d.value,
+                description: `包含 ${d.value} 个相关定理/定义`
+            });
+        }
+
+        // 显示工具提示
+        function showTooltip(event, d) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.innerHTML = `
+                <h4>${d.data.name}</h4>
+                <p>类型: ${d.data.type || '未知'}</p>
+                ${d.data.size ? `<p>规模: ${d.data.size}K行/定理</p>` : ''}
+                ${d.data.description ? `<p>${d.data.description}</p>` : ''}
+                <div class="meta">
+                    ${d.children || d._children ? '点击展开/折叠' : '叶子节点'}
+                </div>
+            `;
+            tooltip.style.left = (event.pageX + 15) + 'px';
+            tooltip.style.top = (event.pageY + 15) + 'px';
+            tooltip.classList.add('visible');
+        }
+
+        function showSunburstTooltip(event, d) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.innerHTML = `
+                <h4>${d.data.name}</h4>
+                <p>规模: ${d.value}</p>
+                <p>层级: ${d.depth === 0 ? '根' : d.depth === 1 ? '领域' : '子领域'}</p>
+            `;
+            tooltip.style.left = (event.pageX + 15) + 'px';
+            tooltip.style.top = (event.pageY + 15) + 'px';
+            tooltip.classList.add('visible');
+        }
+
+        function hideTooltip() {
+            document.getElementById('tooltip').classList.remove('visible');
+        }
+
+        // 显示详情面板
+        function showDetailPanel(data) {
+            const panel = document.getElementById('detail-panel');
+            const title = document.getElementById('detail-title');
+            const content = document.getElementById('detail-content');
+
+            title.textContent = data.name;
+            content.innerHTML = `
+                <div class="field">
+                    <div class="field-label">类型</div>
+                    <div class="field-value">
+                        <span class="category-badge" style="background: ${typeColors[data.type] || '#95a5a6'};">
+                            ${data.type || '未知'}
+                        </span>
+                    </div>
+                </div>
+                ${data.size ? `
+                <div class="field">
+                    <div class="field-label">规模</div>
+                    <div class="field-value">${data.size}K 行代码/定理</div>
+                </div>
+                ` : ''}
+                <div class="field">
+                    <div class="field-label">描述</div>
+                    <div class="field-value">${data.description || '暂无描述'}</div>
+                </div>
+            `;
+
+            panel.classList.add('visible');
+        }
+
+        // 生成类型过滤器
+        function generateTypeFilters(nodes) {
+            const container = document.getElementById('type-filters');
+            const types = [...new Set(nodes.map(n => n.type))];
+            
+            types.forEach(type => {
+                const count = nodes.filter(n => n.type === type).length;
+                const div = document.createElement('div');
+                div.className = 'filter-option';
+                div.innerHTML = `
+                    <input type="checkbox" checked id="filter-${type}" data-type="${type}">
+                    <div class="color-dot" style="background: ${typeColors[type] || '#95a5a6'};"></div>
+                    <label for="filter-${type}">${type}</label>
+                    <span class="count">${count}</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // 搜索功能
+        function searchComponent(query) {
+            if (!query) {
+                g.selectAll('.tree-node').style('opacity', 1);
+                return;
+            }
+
+            g.selectAll('.tree-node').style('opacity', d => {
+                const match = d.data.name.toLowerCase().includes(query.toLowerCase());
+                return match ? 1 : 0.2;
+            });
+        }
+
+        // UI初始化
+        function initUI() {
+            // 视图切换
+            document.getElementById('btn-tree-view').addEventListener('click', () => {
+                renderTree();
+                setActiveButton('btn-tree-view');
+            });
+
+            document.getElementById('btn-radial-view').addEventListener('click', () => {
+                renderRadial();
+                setActiveButton('btn-radial-view');
+            });
+
+            document.getElementById('btn-sunburst-view').addEventListener('click', () => {
+                renderSunburst();
+                setActiveButton('btn-sunburst-view');
+            });
+
+            // 搜索
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                searchComponent(e.target.value);
+            });
+
+            // 关闭详情
+            document.getElementById('close-detail').addEventListener('click', () => {
+                document.getElementById('detail-panel').classList.remove('visible');
+            });
+
+            // 控制按钮
+            document.getElementById('btn-zoom-in').addEventListener('click', () => {
+                svg.transition().call(zoom.scaleBy, 1.3);
+            });
+
+            document.getElementById('btn-zoom-out').addEventListener('click', () => {
+                svg.transition().call(zoom.scaleBy, 0.7);
+            });
+
+            document.getElementById('btn-fit').addEventListener('click', () => {
+                svg.transition().call(zoom.transform, d3.zoomIdentity);
+            });
+
+            document.getElementById('btn-collapse').addEventListener('click', () => {
+                if (root.children) {
+                    root.children.forEach(collapse);
+                }
+                if (currentView === 'tree') renderTree();
+                else if (currentView === 'radial') renderRadial();
+            });
+
+            document.getElementById('btn-expand').addEventListener('click', () => {
+                if (root._children) {
+                    root._children.forEach(expand);
+                }
+                if (currentView === 'tree') renderTree();
+                else if (currentView === 'radial') renderRadial();
+            });
+
+            // 切换布局
+            document.getElementById('toggle-layout').addEventListener('click', () => {
+                if (currentView === 'tree') {
+                    renderRadial();
+                    setActiveButton('btn-radial-view');
+                } else {
+                    renderTree();
+                    setActiveButton('btn-tree-view');
+                }
+            });
+
+            // 重置视图
+            document.getElementById('reset-view').addEventListener('click', () => {
+                svg.transition().call(zoom.transform, d3.zoomIdentity);
+                document.getElementById('search-input').value = '';
+                searchComponent('');
+            });
+        }
+
+        function setActiveButton(id) {
+            document.querySelectorAll('.filter-section .btn').forEach(btn => {
+                btn.style.opacity = '0.7';
+            });
+            document.getElementById(id).style.opacity = '1';
+        }
+
+        // 窗口大小改变
+        window.addEventListener('resize', () => {
+            const container = document.getElementById('viz-container');
+            width = container.clientWidth;
+            height = container.clientHeight;
+            svg.attr('width', width).attr('height', height);
+            
+            if (currentView === 'tree') renderTree();
+            else if (currentView === 'radial') renderRadial();
+            else if (currentView === 'sunburst') renderSunburst();
+        });
+
+        // 启动
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
