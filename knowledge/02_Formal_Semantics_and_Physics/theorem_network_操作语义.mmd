@@ -1,0 +1,62 @@
+```mermaid
+graph TD
+    subgraph 操作语义
+        MANUAL__preservation["preservation"]
+        style MANUAL__preservation fill:#2ecc71
+        knowledge\02_Formal_Semantics_["preservation"]
+        style knowledge\02_Formal_Semantics_ fill:#2ecc71
+        MANUAL__progress["progress"]
+        style MANUAL__progress fill:#2ecc71
+        MANUAL__safety["safety"]
+        style MANUAL__safety fill:#2ecc71
+        MANUAL__substitution["substitution"]
+        style MANUAL__substitution fill:#2ecc71
+        MANUAL__weakening["weakening"]
+        style MANUAL__weakening fill:#2ecc71
+        knowledge\02_Formal_Semantics_["progress"]
+        style knowledge\02_Formal_Semantics_ fill:#2ecc71
+        MANUAL__soundness["soundness"]
+        style MANUAL__soundness fill:#2ecc71
+        MANUAL__determinism["determinism"]
+        style MANUAL__determinism fill:#2ecc71
+        MANUAL__normalization["normalization"]
+        style MANUAL__normalization fill:#2ecc71
+        knowledge\02_Formal_Semantics_["value_irreducible"]
+        style knowledge\02_Formal_Semantics_ fill:#2ecc71
+        knowledge\02_Formal_Semantics_["type_of_value"]
+        style knowledge\02_Formal_Semantics_ fill:#2ecc71
+        knowledge\02_Formal_Semantics_["weakening"]
+        style knowledge\02_Formal_Semantics_ fill:#2ecc71
+        knowledge\02_Formal_Semantics_["substitution"]
+        style knowledge\02_Formal_Semantics_ fill:#2ecc71
+        knowledge\02_Formal_Semantics_["safety"]
+        style knowledge\02_Formal_Semantics_ fill:#2ecc71
+    end
+    MANUAL__preservation --> MANUAL__substitution
+    MANUAL__preservation --> knowledge\02_Formal_Semantics_
+    MANUAL__preservation --> MANUAL__weakening
+    MANUAL__preservation --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__substitution
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__weakening
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    MANUAL__progress --> knowledge\02_Formal_Semantics_
+    MANUAL__safety --> MANUAL__preservation
+    MANUAL__safety --> knowledge\02_Formal_Semantics_
+    MANUAL__safety --> MANUAL__progress
+    MANUAL__safety --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    MANUAL__soundness --> MANUAL__safety
+    MANUAL__soundness --> knowledge\02_Formal_Semantics_
+    MANUAL__soundness --> MANUAL__preservation
+    MANUAL__soundness --> knowledge\02_Formal_Semantics_
+    MANUAL__determinism --> knowledge\02_Formal_Semantics_
+    MANUAL__normalization --> MANUAL__progress
+    MANUAL__normalization --> knowledge\02_Formal_Semantics_
+    MANUAL__normalization --> MANUAL__preservation
+    MANUAL__normalization --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__preservation
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__progress
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+```

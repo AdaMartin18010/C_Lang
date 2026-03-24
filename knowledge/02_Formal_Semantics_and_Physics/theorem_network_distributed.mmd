@@ -1,0 +1,202 @@
+```mermaid
+graph TD
+    MANUAL__leaderCompleteness["leaderCompleteness"]
+    style MANUAL__leaderCompleteness fill:#1abc9c
+    knowledge\02_Formal_Semantics_["leaderCompleteness"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    MD__DISTRIBUTED_SEMANTICS_DEEP["stateMachineSafety"]
+    style MD__DISTRIBUTED_SEMANTICS_DEEP fill:#1abc9c
+    MANUAL__stateMachineSafety["stateMachineSafety"]
+    style MANUAL__stateMachineSafety fill:#1abc9c
+    knowledge\02_Formal_Semantics_["stateMachineSafety"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    MANUAL__raftSafety["raftSafety"]
+    style MANUAL__raftSafety fill:#1abc9c
+    knowledge\02_Formal_Semantics_["raftSafety"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    MD__DISTRIBUTED_SEMANTICS_DEEP["electionSafety"]
+    style MD__DISTRIBUTED_SEMANTICS_DEEP fill:#1abc9c
+    MD__DISTRIBUTED_SEMANTICS__ele["electionSafety"]
+    style MD__DISTRIBUTED_SEMANTICS__ele fill:#1abc9c
+    MANUAL__electionSafety["electionSafety"]
+    style MANUAL__electionSafety fill:#1abc9c
+    knowledge\02_Formal_Semantics_["electionSafety"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    MANUAL__logMatchingLemma["logMatchingLemma"]
+    style MANUAL__logMatchingLemma fill:#1abc9c
+    MANUAL__logPrefixConsistency["logPrefixConsistency"]
+    style MANUAL__logPrefixConsistency fill:#1abc9c
+    knowledge\02_Formal_Semantics_["logMatchingLemma"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    knowledge\02_Formal_Semantics_["logPrefixConsistency"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    MANUAL__voteUniqueness["voteUniqueness"]
+    style MANUAL__voteUniqueness fill:#1abc9c
+    MANUAL__voteTermConsistency["voteTermConsistency"]
+    style MANUAL__voteTermConsistency fill:#1abc9c
+    knowledge\02_Formal_Semantics_["voteUniqueness"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    knowledge\02_Formal_Semantics_["voteTermConsistency"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    MANUAL__committedLogPrefix["committedLogPrefix"]
+    style MANUAL__committedLogPrefix fill:#1abc9c
+    knowledge\02_Formal_Semantics_["committedLogPrefix"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    MANUAL__commitRuleCurrentTerm["commitRuleCurrentTerm"]
+    style MANUAL__commitRuleCurrentTerm fill:#1abc9c
+    knowledge\02_Formal_Semantics_["commitRuleCurrentTerm"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    MANUAL__termMonotonicity["termMonotonicity"]
+    style MANUAL__termMonotonicity fill:#1abc9c
+    MANUAL__indirectCommit["indirectCommit"]
+    style MANUAL__indirectCommit fill:#1abc9c
+    MANUAL__systemTermMonotonicity["systemTermMonotonicity"]
+    style MANUAL__systemTermMonotonicity fill:#1abc9c
+    MANUAL__leaderLogMonotonicity["leaderLogMonotonicity"]
+    style MANUAL__leaderLogMonotonicity fill:#1abc9c
+    knowledge\02_Formal_Semantics_["termMonotonicity"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    knowledge\02_Formal_Semantics_["indirectCommit"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    knowledge\02_Formal_Semantics_["systemTermMonotonicity"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    knowledge\02_Formal_Semantics_["leaderLogMonotonicity"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    MD__DISTRIBUTED_SEMANTICS_DEEP["选举安全性"]
+    style MD__DISTRIBUTED_SEMANTICS_DEEP fill:#1abc9c
+    MD__DISTRIBUTED_SEMANTICS_DEEP["日志匹配性"]
+    style MD__DISTRIBUTED_SEMANTICS_DEEP fill:#1abc9c
+    MD__DISTRIBUTED_SEMANTICS_DEEP["ElectionSafety"]
+    style MD__DISTRIBUTED_SEMANTICS_DEEP fill:#1abc9c
+    MD__DISTRIBUTED_SEMANTICS_DEEP["logMatching"]
+    style MD__DISTRIBUTED_SEMANTICS_DEEP fill:#1abc9c
+    MD__DISTRIBUTED_SEMANTICS_DEEP["StateMachineSafety"]
+    style MD__DISTRIBUTED_SEMANTICS_DEEP fill:#1abc9c
+    MD__DISTRIBUTED_SEMANTICS__选举安["选举安全性"]
+    style MD__DISTRIBUTED_SEMANTICS__选举安 fill:#1abc9c
+    MD__DISTRIBUTED_SEMANTICS__log["logMatching"]
+    style MD__DISTRIBUTED_SEMANTICS__log fill:#1abc9c
+    MD__02_Leader_Election__选举安全性["选举安全性"]
+    style MD__02_Leader_Election__选举安全性 fill:#1abc9c
+    MD__04_Distributed_Systems_Spe["LogMatching"]
+    style MD__04_Distributed_Systems_Spe fill:#1abc9c
+    MD__04_Distributed_Systems_Spe["StateMachineSafety"]
+    style MD__04_Distributed_Systems_Spe fill:#1abc9c
+    MD__04_Distributed_Systems_Spe["LeaderCompleteness"]
+    style MD__04_Distributed_Systems_Spe fill:#1abc9c
+    MD__04_Distributed_Systems_Spe["ElectionSafety"]
+    style MD__04_Distributed_Systems_Spe fill:#1abc9c
+    MD__05_C_Verification_with_TLA["StateMachineSafety"]
+    style MD__05_C_Verification_with_TLA fill:#1abc9c
+    knowledge\02_Formal_Semantics_["printHeader"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    knowledge\02_Formal_Semantics_["printSection"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    knowledge\02_Formal_Semantics_["printState"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    knowledge\02_Formal_Semantics_["demoNodeStateMachine"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    knowledge\02_Formal_Semantics_["demoLogOperations"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+    knowledge\02_Formal_Semantics_["demoElectionRPC"]
+    style knowledge\02_Formal_Semantics_ fill:#1abc9c
+
+    MANUAL__leaderCompleteness --> MD__DISTRIBUTED_SEMANTICS_DEEP
+    MANUAL__leaderCompleteness --> MD__DISTRIBUTED_SEMANTICS__ele
+    MANUAL__leaderCompleteness --> MANUAL__electionSafety
+    MANUAL__leaderCompleteness --> knowledge\02_Formal_Semantics_
+    MANUAL__leaderCompleteness --> MANUAL__logMatchingLemma
+    MANUAL__leaderCompleteness --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MD__DISTRIBUTED_SEMANTICS_DEEP
+    knowledge\02_Formal_Semantics_ --> MD__DISTRIBUTED_SEMANTICS__ele
+    knowledge\02_Formal_Semantics_ --> MANUAL__electionSafety
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__logMatchingLemma
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    MANUAL__logPrefixConsistency --> MANUAL__logMatchingLemma
+    MANUAL__logPrefixConsistency --> knowledge\02_Formal_Semantics_
+    MD__DISTRIBUTED_SEMANTICS_DEEP --> MANUAL__voteUniqueness
+    MD__DISTRIBUTED_SEMANTICS_DEEP --> knowledge\02_Formal_Semantics_
+    MD__DISTRIBUTED_SEMANTICS_DEEP --> MANUAL__voteTermConsistency
+    MD__DISTRIBUTED_SEMANTICS_DEEP --> knowledge\02_Formal_Semantics_
+    MD__DISTRIBUTED_SEMANTICS_DEEP --> MANUAL__leaderCompleteness
+    MD__DISTRIBUTED_SEMANTICS_DEEP --> knowledge\02_Formal_Semantics_
+    MD__DISTRIBUTED_SEMANTICS_DEEP --> MANUAL__logMatchingLemma
+    MD__DISTRIBUTED_SEMANTICS_DEEP --> knowledge\02_Formal_Semantics_
+    MD__DISTRIBUTED_SEMANTICS_DEEP --> MANUAL__logPrefixConsistency
+    MD__DISTRIBUTED_SEMANTICS_DEEP --> knowledge\02_Formal_Semantics_
+    MD__DISTRIBUTED_SEMANTICS__ele --> MANUAL__voteUniqueness
+    MD__DISTRIBUTED_SEMANTICS__ele --> knowledge\02_Formal_Semantics_
+    MD__DISTRIBUTED_SEMANTICS__ele --> MANUAL__voteTermConsistency
+    MD__DISTRIBUTED_SEMANTICS__ele --> knowledge\02_Formal_Semantics_
+    MANUAL__electionSafety --> MANUAL__voteUniqueness
+    MANUAL__electionSafety --> knowledge\02_Formal_Semantics_
+    MANUAL__electionSafety --> MANUAL__voteTermConsistency
+    MANUAL__electionSafety --> knowledge\02_Formal_Semantics_
+    MANUAL__voteTermConsistency --> MANUAL__voteUniqueness
+    MANUAL__voteTermConsistency --> knowledge\02_Formal_Semantics_
+    MANUAL__stateMachineSafety --> MANUAL__leaderCompleteness
+    MANUAL__stateMachineSafety --> knowledge\02_Formal_Semantics_
+    MANUAL__stateMachineSafety --> MANUAL__logMatchingLemma
+    MANUAL__stateMachineSafety --> knowledge\02_Formal_Semantics_
+    MANUAL__stateMachineSafety --> MANUAL__logPrefixConsistency
+    MANUAL__stateMachineSafety --> knowledge\02_Formal_Semantics_
+    MANUAL__commitRuleCurrentTerm --> MANUAL__leaderCompleteness
+    MANUAL__commitRuleCurrentTerm --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__logMatchingLemma
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__voteUniqueness
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__voteTermConsistency
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__voteUniqueness
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__leaderCompleteness
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__logMatchingLemma
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__logPrefixConsistency
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    MANUAL__indirectCommit --> MANUAL__commitRuleCurrentTerm
+    MANUAL__indirectCommit --> knowledge\02_Formal_Semantics_
+    MANUAL__committedLogPrefix --> MD__DISTRIBUTED_SEMANTICS_DEEP
+    MANUAL__committedLogPrefix --> MANUAL__stateMachineSafety
+    MANUAL__committedLogPrefix --> knowledge\02_Formal_Semantics_
+    MANUAL__committedLogPrefix --> MANUAL__logPrefixConsistency
+    MANUAL__committedLogPrefix --> knowledge\02_Formal_Semantics_
+    MANUAL__systemTermMonotonicity --> MANUAL__termMonotonicity
+    MANUAL__systemTermMonotonicity --> knowledge\02_Formal_Semantics_
+    MANUAL__leaderLogMonotonicity --> MANUAL__leaderCompleteness
+    MANUAL__leaderLogMonotonicity --> knowledge\02_Formal_Semantics_
+    MANUAL__raftSafety --> MD__DISTRIBUTED_SEMANTICS_DEEP
+    MANUAL__raftSafety --> MD__DISTRIBUTED_SEMANTICS__ele
+    MANUAL__raftSafety --> MANUAL__electionSafety
+    MANUAL__raftSafety --> knowledge\02_Formal_Semantics_
+    MANUAL__raftSafety --> MD__DISTRIBUTED_SEMANTICS_DEEP
+    MANUAL__raftSafety --> MANUAL__stateMachineSafety
+    MANUAL__raftSafety --> knowledge\02_Formal_Semantics_
+    MANUAL__raftSafety --> MANUAL__leaderCompleteness
+    MANUAL__raftSafety --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__leaderCompleteness
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__commitRuleCurrentTerm
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MD__DISTRIBUTED_SEMANTICS_DEEP
+    knowledge\02_Formal_Semantics_ --> MANUAL__stateMachineSafety
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__logPrefixConsistency
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__termMonotonicity
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__leaderCompleteness
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MD__DISTRIBUTED_SEMANTICS_DEEP
+    knowledge\02_Formal_Semantics_ --> MD__DISTRIBUTED_SEMANTICS__ele
+    knowledge\02_Formal_Semantics_ --> MANUAL__electionSafety
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MD__DISTRIBUTED_SEMANTICS_DEEP
+    knowledge\02_Formal_Semantics_ --> MANUAL__stateMachineSafety
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__leaderCompleteness
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+```

@@ -1,0 +1,81 @@
+```mermaid
+graph TD
+    subgraph 公理语义
+        MANUAL__assignRule["assignRule"]
+        style MANUAL__assignRule fill:#f39c12
+        knowledge\02_Formal_Semantics_["assignRule"]
+        style knowledge\02_Formal_Semantics_ fill:#f39c12
+        MANUAL__whileRule["whileRule"]
+        style MANUAL__whileRule fill:#f39c12
+        MANUAL__seqRule["seqRule"]
+        style MANUAL__seqRule fill:#f39c12
+        knowledge\02_Formal_Semantics_["whileRule"]
+        style knowledge\02_Formal_Semantics_ fill:#f39c12
+        MANUAL__ifRule["ifRule"]
+        style MANUAL__ifRule fill:#f39c12
+        knowledge\02_Formal_Semantics_["seqRule"]
+        style knowledge\02_Formal_Semantics_ fill:#f39c12
+        knowledge\02_Formal_Semantics_["ifRule"]
+        style knowledge\02_Formal_Semantics_ fill:#f39c12
+        MANUAL__consequenceRule["consequenceRule"]
+        style MANUAL__consequenceRule fill:#f39c12
+        MANUAL__skipRule["skipRule"]
+        style MANUAL__skipRule fill:#f39c12
+        MANUAL__verifySwap["verifySwap"]
+        style MANUAL__verifySwap fill:#f39c12
+        MANUAL__verifyIncr["verifyIncr"]
+        style MANUAL__verifyIncr fill:#f39c12
+        MANUAL__verifyAbs["verifyAbs"]
+        style MANUAL__verifyAbs fill:#f39c12
+        MANUAL__verifyDecr["verifyDecr"]
+        style MANUAL__verifyDecr fill:#f39c12
+        MANUAL__verifyFactorial["verifyFactorial"]
+        style MANUAL__verifyFactorial fill:#f39c12
+        MANUAL__verifySum["verifySum"]
+        style MANUAL__verifySum fill:#f39c12
+        MANUAL__verifyGCD["verifyGCD"]
+        style MANUAL__verifyGCD fill:#f39c12
+    end
+    MANUAL__whileRule --> MANUAL__assignRule
+    MANUAL__whileRule --> knowledge\02_Formal_Semantics_
+    MANUAL__seqRule --> MANUAL__assignRule
+    MANUAL__seqRule --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__assignRule
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    MANUAL__ifRule --> MANUAL__assignRule
+    MANUAL__ifRule --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__assignRule
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    knowledge\02_Formal_Semantics_ --> MANUAL__assignRule
+    knowledge\02_Formal_Semantics_ --> knowledge\02_Formal_Semantics_
+    MANUAL__consequenceRule --> MANUAL__assignRule
+    MANUAL__consequenceRule --> knowledge\02_Formal_Semantics_
+    MANUAL__verifySwap --> MANUAL__seqRule
+    MANUAL__verifySwap --> knowledge\02_Formal_Semantics_
+    MANUAL__verifySwap --> MANUAL__assignRule
+    MANUAL__verifySwap --> knowledge\02_Formal_Semantics_
+    MANUAL__verifyIncr --> MANUAL__assignRule
+    MANUAL__verifyIncr --> knowledge\02_Formal_Semantics_
+    MANUAL__verifyAbs --> MANUAL__ifRule
+    MANUAL__verifyAbs --> knowledge\02_Formal_Semantics_
+    MANUAL__verifyAbs --> MANUAL__assignRule
+    MANUAL__verifyAbs --> knowledge\02_Formal_Semantics_
+    MANUAL__verifyDecr --> MANUAL__whileRule
+    MANUAL__verifyDecr --> knowledge\02_Formal_Semantics_
+    MANUAL__verifyDecr --> MANUAL__assignRule
+    MANUAL__verifyDecr --> knowledge\02_Formal_Semantics_
+    MANUAL__verifyFactorial --> MANUAL__whileRule
+    MANUAL__verifyFactorial --> knowledge\02_Formal_Semantics_
+    MANUAL__verifyFactorial --> MANUAL__seqRule
+    MANUAL__verifyFactorial --> knowledge\02_Formal_Semantics_
+    MANUAL__verifyFactorial --> MANUAL__assignRule
+    MANUAL__verifyFactorial --> knowledge\02_Formal_Semantics_
+    MANUAL__verifySum --> MANUAL__whileRule
+    MANUAL__verifySum --> knowledge\02_Formal_Semantics_
+    MANUAL__verifySum --> MANUAL__seqRule
+    MANUAL__verifySum --> knowledge\02_Formal_Semantics_
+    MANUAL__verifyGCD --> MANUAL__whileRule
+    MANUAL__verifyGCD --> knowledge\02_Formal_Semantics_
+    MANUAL__verifyGCD --> MANUAL__ifRule
+    MANUAL__verifyGCD --> knowledge\02_Formal_Semantics_
+```
