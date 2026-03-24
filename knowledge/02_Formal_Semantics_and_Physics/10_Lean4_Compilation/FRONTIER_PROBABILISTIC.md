@@ -80,13 +80,13 @@
 
 **离散随机变量**:
 
-```
+```text
 X: Ω → ℕ  满足  X⁻¹({n}) ∈ ℱ  对所有 n ∈ ℕ
 ```
 
 **连续随机变量**:
 
-```
+```text
 X: Ω → ℝ  满足  X⁻¹((a,b]) ∈ ℱ  对所有 a < b
 ```
 
@@ -144,13 +144,13 @@ structure ProbabilityMeasure (Ω : Type u) [MeasurableSpace Ω] where
 
 **定义 2.3.1** (条件概率). 给定 P(B) > 0:
 
-```
+```text
 P(A|B) = P(A ∩ B) / P(B)
 ```
 
 **定理 2.3.1** (贝叶斯定理).
 
-```
+```text
 P(H|D) = P(D|H) · P(H) / P(D)
 ```
 
@@ -163,7 +163,7 @@ P(H|D) = P(D|H) · P(H) / P(D)
 
 **贝叶斯推断作为程序变换**:
 
-```
+```text
 let x ~ prior in
 let y ~ likelihood(x) in
 observe y = data
@@ -175,7 +175,7 @@ observe y = data
 
 **定义 2.4.1** (Giry单子). 在可测空间范畴 Meas 上:
 
-```
+```text
 𝒢(X) = {μ: X → [0,∞] | μ 是概率测度}
 ```
 
@@ -343,7 +343,7 @@ M, N ::= x | λx.M | M N | c
 
 **分布表达式**:
 
-```
+```text
 D ::= Normal(μ, σ) | Bernoulli(p) | Uniform(a, b) | ...
 ```
 
@@ -371,19 +371,19 @@ inductive ProbTerm where
 
 **采样语义** (sampling semantics):
 
-```
+```text
 ⟨sample(D), σ, ω⟩ ⇓ ⟨v, σ, ω'⟩    其中 v ~ D, ω' 是剩余随机性
 ```
 
 **观测语义**:
 
-```
+```text
 ⟨observe(E, D), σ, ω⟩ ⇓ ⟨(), σ', ω⟩    若 ⟦E⟧σ = v 且 weight = D.density(v)
 ```
 
 **权重语义**:
 
-```
+```text
 ⟨factor(w), σ, ω⟩ ⇓ ⟨(), σ · w, ω⟩
 ```
 
@@ -416,7 +416,7 @@ def sampleNormal (μ σ : ℝ) : SamplerM ℝ := fun s =>
 
 **类型指称**:
 
-```
+```text
 〚Real〛 = ℝ
 〚τ → σ〛 = 〚τ〛 → 𝒢(〚σ〛)
 〚Dist(τ)〛 = 𝒢(〚τ〛)
@@ -424,7 +424,7 @@ def sampleNormal (μ σ : ℝ) : SamplerM ℝ := fun s =>
 
 **项指称** (带权重的测度):
 
-```
+```text
 〚x〛ρ = δ_{ρ(x)}
 〚λx.M〛ρ = λv. 〚M〛ρ[x↦v]
 〚M N〛ρ = ∫ 〚N〛ρ(dv) · 〚M〛ρ[v]
@@ -454,7 +454,7 @@ def denoteTerm (env : String → ℝ) : ProbTerm → WeightedMeasure ℝ
 
 **概率类型**:
 
-```
+```text
 τ, σ ::= Real | Bool | τ × σ | τ → σ | Dist(τ) | M(τ)
 ```
 
@@ -462,7 +462,7 @@ def denoteTerm (env : String → ℝ) : ProbTerm → WeightedMeasure ℝ
 
 **类型规则**:
 
-```
+```text
 Γ ⊢ D: Dist(τ)
 ────────────────
 Γ ⊢ sample(D): M(τ)
@@ -478,7 +478,7 @@ def denoteTerm (env : String → ℝ) : ProbTerm → WeightedMeasure ℝ
 
 **概率类型与单子对应**:
 
-```
+```text
 M(τ) ≅ 𝒢(τ)
 ```
 
@@ -490,13 +490,13 @@ M(τ) ≅ 𝒢(τ)
 
 **变量消除** (Variable Elimination):
 
-```
+```text
 P(Q|e) = Σ_{X\Q} P(X, e) / Σ_{X} P(X, e)
 ```
 
 **消元顺序**影响计算复杂度:
 
-```
+```text
 复杂度 = O(n · d^{tw+1})
 ```
 
@@ -506,7 +506,7 @@ P(Q|e) = Σ_{X\Q} P(X, e) / Σ_{X} P(X, e)
 
 **Metropolis-Hastings算法**:
 
-```
+```text
 1. 初始化 x₀
 2. 对 t = 1, 2, ...:
    a. 从 Q(·|x_{t-1}) 采样候选 y
@@ -516,7 +516,7 @@ P(Q|e) = Σ_{X\Q} P(X, e) / Σ_{X} P(X, e)
 
 **Gibbs采样**:
 
-```
+```text
 对每个变量 xᵢ:
   xᵢ ~ P(xᵢ | x_{-i})
 ```
@@ -589,7 +589,7 @@ def ELBO {X D : Type u} [MeasurableSpace X] [MeasurableSpace D]
 
 **重要采样** (Importance Sampling) 从提议分布 Q 采样，通过权重纠正偏差:
 
-```
+```text
 w(x) = P(x) / Q(x)
 
 𝔼_P[f(X)] = 𝔼_Q[f(X) · w(X)] ≈ (1/N) Σᵢ f(xᵢ) · w(xᵢ)
@@ -597,7 +597,7 @@ w(x) = P(x) / Q(x)
 
 **自归一化重要采样**:
 
-```
+```text
 𝔼_P[f(X)] ≈ Σᵢ f(xᵢ) · w̃(xᵢ) / Σᵢ w̃(xᵢ)
 ```
 
@@ -611,7 +611,7 @@ w(x) = P(x) / Q(x)
 
 **定义 6.1.1** (采样正确性). 采样算法 A 对目标分布 P 是正确的，如果:
 
-```
+```text
 lim_{n→∞} (1/n) Σᵢ δ_{xᵢ} = P    (弱收敛)
 ```
 
@@ -621,7 +621,7 @@ lim_{n→∞} (1/n) Σᵢ δ_{xᵢ} = P    (弱收敛)
 
 **定义 6.2.1** (推断一致性). 推断算法是一致的，如果:
 
-```
+```text
 lim_{n→∞} P̂ₙ(·|D) = P(·|D)    (后验收敛)
 ```
 
@@ -631,7 +631,7 @@ lim_{n→∞} P̂ₙ(·|D) = P(·|D)    (后验收敛)
 
 **总变差距离**:
 
-```
+```text
 ||μ - ν||_TV = sup_A |μ(A) - ν(A)|
 ```
 
@@ -661,7 +661,7 @@ lim_{n→∞} P̂ₙ(·|D) = P(·|D)    (后验收敛)
 
 对 Φ ∈ 𝒢(𝒢(𝒢(X))) 和 A ∈ ℱ_X:
 
-```
+```text
 (μ_X ∘ 𝒢(μ_X))(Φ)(A)
 = μ_X(𝒢(μ_X)(Φ))(A)
 = ∫_{𝒢(X)} ν(A) d(𝒢(μ_X)(Φ))(ν)
@@ -679,7 +679,7 @@ lim_{n→∞} P̂ₙ(·|D) = P(·|D)    (后验收敛)
 
 对 ν ∈ 𝒢(X):
 
-```
+```text
 (μ_X ∘ η_{𝒢(X)})(ν)(A)
 = ∫_{𝒢(X)} ξ(A) d(η_{𝒢(X)}(ν))(ξ)
 = ν(A)    (因为 η_{𝒢(X)}(ν) = δ_ν)
@@ -689,7 +689,7 @@ lim_{n→∞} P̂ₙ(·|D) = P(·|D)    (后验收敛)
 
 对 ν ∈ 𝒢(X):
 
-```
+```text
 (μ_X ∘ 𝒢(η_X))(ν)(A)
 = ∫_{𝒢(X)} ξ(A) d(𝒢(η_X)(ν))(ξ)
 = ∫_X η_X(x)(A) dν(x)
@@ -703,7 +703,7 @@ lim_{n→∞} P̂ₙ(·|D) = P(·|D)    (后验收敛)
 
 **陈述**: 对概率测度 μ ∈ 𝒢(X)，若 xᵢ ~ μ 独立同分布，则:
 
-```
+```text
 (1/n) Σᵢ₌₁ⁿ δ_{xᵢ} → μ    (几乎必然弱收敛)
 ```
 
@@ -711,7 +711,7 @@ lim_{n→∞} P̂ₙ(·|D) = P(·|D)    (后验收敛)
 
 由大数定律，对任意有界连续函数 f:
 
-```
+```text
 ∫ f d((1/n) Σᵢ δ_{xᵢ}) = (1/n) Σᵢ f(xᵢ) → 𝔼[f(X)] = ∫ f dμ    (a.s.)
 ```
 
@@ -723,7 +723,7 @@ lim_{n→∞} P̂ₙ(·|D) = P(·|D)    (后验收敛)
 
 **陈述**: 设 P 是遍历马尔可夫链的转移核，π 是平稳分布。则从任意初始分布 ν₀ 出发:
 
-```
+```text
 ν₀ Pⁿ → π    (总变差收敛)
 ```
 
@@ -733,13 +733,13 @@ lim_{n→∞} P̂ₙ(·|D) = P(·|D)    (后验收敛)
 
 由细致平衡条件:
 
-```
+```text
 π(x) P(x → y) = π(y) P(y → x)
 ```
 
 对 y 求和:
 
-```
+```text
 (πP)(y) = Σ_x π(x) P(x → y) = π(y) Σ_x P(y → x) = π(y)
 ```
 
@@ -757,7 +757,7 @@ lim_{n→∞} P̂ₙ(·|D) = P(·|D)    (后验收敛)
 
 **陈述**: observe(E, D) 的指称语义等于条件化操作:
 
-```
+```text
 〚observe(E, D)〛ρ = δ_{()} · P(X = ⟦E⟧ρ | D)
 ```
 
@@ -769,13 +769,13 @@ lim_{n→∞} P̂ₙ(·|D) = P(·|D)    (后验收敛)
 
 由 observe 的操作语义:
 
-```
+```text
 〚observe(E, D)〛ρ = δ_{()} · f_D(e)
 ```
 
 由贝叶斯定理:
 
-```
+```text
 P(X = e | D) = P(D | X = e) · P(X = e) / P(D) ∝ f_D(e)
 ```
 
@@ -787,7 +787,7 @@ P(X = e | D) = P(D | X = e) · P(X = e) / P(D) ∝ f_D(e)
 
 **陈述**: 对任意分布 Q，ELBO 是证据下界:
 
-```
+```text
 log P(D) ≥ ELBO(Q)
 ```
 
@@ -795,7 +795,7 @@ log P(D) ≥ ELBO(Q)
 
 **证明**:
 
-```
+```text
 log P(D) = log ∫ P(D|X) P(X) dX
          = log ∫ P(D|X) P(X) / Q(X) · Q(X) dX
          = log 𝔼_Q[P(D|X) P(X) / Q(X)]
