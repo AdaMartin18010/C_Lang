@@ -78,7 +78,7 @@
 #### 1.2.1 Windows 安装
 
 ```powershell
-# ========== 方法1: 使用 PowerShell (推荐) ==========
+### ========== 方法1: 使用 PowerShell (推荐) ==========
 
 ---
 
@@ -175,31 +175,31 @@
 | [系统技术](../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
 | [工业场景](../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
 | [思维表征](../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
-# 1. 打开 PowerShell (不是 CMD)
-# 2. 克隆仓库
+### 1. 打开 PowerShell (不是 CMD)
+### 2. 克隆仓库
 git clone https://github.com/emscripten-core/emsdk.git
 cd emsdk
 
-# 3. 安装最新版本
+### 3. 安装最新版本
 .\emsdk install latest
 
-# 4. 激活版本
+### 4. 激活版本
 .\emsdk activate latest
 
-# 5. 设置环境变量（当前会话）
+### 5. 设置环境变量（当前会话）
 .\emsdk_env.ps1
 
-# 6. 永久设置环境变量（可选，推荐）
-# 将以下内容添加到系统环境变量 Path:
-# %USERPROFILE%\emsdk
-# %USERPROFILE%\emsdk\upstream\emscripten
+### 6. 永久设置环境变量（可选，推荐）
+### 将以下内容添加到系统环境变量 Path:
+### %USERPROFILE%\emsdk
+### %USERPROFILE%\emsdk\upstream\emscripten
 
-# 7. 验证安装
+### 7. 验证安装
 emcc --version
 
-# ========== 方法2: 使用 Windows Subsystem for Linux (WSL) ==========
+### ========== 方法2: 使用 Windows Subsystem for Linux (WSL) ==========
 
-# 在 WSL 终端中执行 Linux 安装命令
+### 在 WSL 终端中执行 Linux 安装命令
 wsl
 git clone https://github.com/emscripten-core/emsdk.git
 cd emsdk
@@ -211,127 +211,127 @@ source ./emsdk_env.sh
 #### 1.2.2 macOS 安装
 
 ```bash
-# ========== 使用 Homebrew ==========
+### ========== 使用 Homebrew ==========
 
-# 1. 安装依赖
+### 1. 安装依赖
 brew install git cmake python node
 
-# 2. 克隆 emsdk
+### 2. 克隆 emsdk
 git clone https://github.com/emscripten-core/emsdk.git
 cd emsdk
 
-# 3. 安装并激活
+### 3. 安装并激活
 ./emsdk install latest
 ./emsdk activate latest
 
-# 4. 设置环境变量
+### 4. 设置环境变量
 source ./emsdk_env.sh
 
-# 5. 添加到 shell 配置文件（永久生效）
+### 5. 添加到 shell 配置文件（永久生效）
 echo 'source "$HOME/emsdk/emsdk_env.sh"' >> ~/.zshrc
-# 或如果使用 bash:
-# echo 'source "$HOME/emsdk/emsdk_env.sh"' >> ~/.bashrc
+### 或如果使用 bash:
+### echo 'source "$HOME/emsdk/emsdk_env.sh"' >> ~/.bashrc
 
-# 6. 验证
+### 6. 验证
 emcc --version
 
-# ========== 使用 MacPorts ==========
+### ========== 使用 MacPorts ==========
 sudo port install emscripten
 
-# ========== 使用 Homebrew 直接安装（可能不是最新版） ==========
+### ========== 使用 Homebrew 直接安装（可能不是最新版） ==========
 brew install emscripten
 ```
 
 #### 1.2.3 Linux 安装
 
 ```bash
-# ========== Ubuntu/Debian ==========
+### ========== Ubuntu/Debian ==========
 
-# 1. 安装依赖
+### 1. 安装依赖
 sudo apt-get update
 sudo apt-get install -y git cmake python3 python3-pip nodejs
 
-# 2. 克隆 emsdk
+### 2. 克隆 emsdk
 git clone https://github.com/emscripten-core/emsdk.git
 cd emsdk
 
-# 3. 安装
+### 3. 安装
 ./emsdk install latest
 ./emsdk activate latest
 
-# 4. 设置环境
+### 4. 设置环境
 source ./emsdk_env.sh
 
-# 5. 永久设置
+### 5. 永久设置
 echo 'source "$HOME/emsdk/emsdk_env.sh"' >> ~/.bashrc
 
-# ========== Fedora/RHEL/CentOS ==========
+### ========== Fedora/RHEL/CentOS ==========
 sudo dnf install git cmake python3 nodejs
-# 其余步骤相同
+### 其余步骤相同
 
-# ========== Arch Linux ==========
+### ========== Arch Linux ==========
 yay -S emscripten
-# 或
+### 或
 sudo pacman -S emscripten
 ```
 
 #### 1.2.4 Docker 安装
 
 ```dockerfile
-# Dockerfile
+### Dockerfile
 FROM emscripten/emsdk:latest
 
 WORKDIR /src
 
-# 复制项目文件
+### 复制项目文件
 COPY . .
 
-# 编译命令
+### 编译命令
 RUN emcc main.c -o output.js
 
-# 运行
+### 运行
 CMD ["node", "output.js"]
 ```
 
 ```bash
-# 使用 Docker 运行
+### 使用 Docker 运行
 docker run --rm -v $(pwd):/src emscripten/emsdk:latest \
     emcc /src/main.c -o /src/output.js
 
-# 交互式容器
+### 交互式容器
 docker run -it --rm -v $(pwd):/src emscripten/emsdk:latest /bin/bash
 ```
 
 ### 1.3 多版本管理
 
 ```bash
-# ========== 查看可用版本 ==========
+### ========== 查看可用版本 ==========
 ./emsdk list
 
-# ========== 安装特定版本 ==========
+### ========== 安装特定版本 ==========
 ./emsdk install 3.1.45
 ./emsdk activate 3.1.45
 
-# ========== 安装最新发布版 ==========
+### ========== 安装最新发布版 ==========
 ./emsdk install latest
 ./emsdk activate latest
 
-# ========== 安装最新开发版 ==========
+### ========== 安装最新开发版 ==========
 ./emsdk install tot  # tip-of-tree
 ./emsdk activate tot
 
-# ========== 安装 LTS 版本 ==========
+### ========== 安装 LTS 版本 ==========
 ./emsdk install 3.1.0
 ./emsdk activate 3.1.0 --permanent
 
-# ========== 切换版本 ==========
+### ========== 切换版本 ==========
 ./emsdk activate 3.1.45
 source ./emsdk_env.sh
 
-# ========== 卸载版本 ==========
+### ========== 卸载版本 ==========
 ./emsdk uninstall 3.1.45
 
-# ========== 更新 emsdk 本身 ==========
+### ========== 更新 emsdk 本身 ==========
 git pull
 ./emsdk install latest
 ./emsdk activate latest
@@ -340,7 +340,7 @@ git pull
 ### 1.4 配置环境变量
 
 ```bash
-# ========== emsdk_env.sh 设置的环境变量 ==========
+### ========== emsdk_env.sh 设置的环境变量 ==========
 
 echo $EMSDK                    # /path/to/emsdk
 echo $EMSDK_NODE               # /path/to/node
@@ -350,91 +350,91 @@ echo $EM_CACHE                 # /path/to/cache
 echo $EMCC_WASM_BACKEND        # 1
 echo $EMCC_SKIP_SANITY_CHECK   # (可选)
 
-# ========== 自定义配置文件 ~/.emscripten ==========
+### ========== 自定义配置文件 ~/.emscripten ==========
 
-# 创建配置文件
+### 创建配置文件
 cat > ~/.emscripten << 'EOF'
 import os
 
-# LLVM 路径
+### LLVM 路径
 LLVM_ROOT = os.path.expanduser('~/emsdk/upstream/bin')
 
-# Node.js 路径
+### Node.js 路径
 NODE_JS = os.path.expanduser('~/emsdk/node/bin/node')
 
-# Python 路径
+### Python 路径
 PYTHON = os.path.expanduser('~/emsdk/python/bin/python3')
 
-# Java 路径（用于 Closure Compiler）
+### Java 路径（用于 Closure Compiler）
 JAVA = 'java'
 
-# 编译器优化级别
+### 编译器优化级别
 EMCC_DEBUG = 0
 
-# 缓存目录
+### 缓存目录
 CACHE = os.path.expanduser('~/.emscripten_cache')
 
-# 临时目录
+### 临时目录
 TEMP_DIR = '/tmp'
 
-# 启用 WASM 后端
+### 启用 WASM 后端
 WASM_BACKEND = 1
 EOF
 
-# ========== 使用 .emscripten 配置 ==========
+### ========== 使用 .emscripten 配置 ==========
 export EM_CONFIG=~/.emscripten
 ```
 
 ### 1.5 验证安装和诊断
 
 ```bash
-# ========== 基础验证 ==========
+## ========== 基础验证 ==========
 
-# 检查 emcc 版本
+### 检查 emcc 版本
 emcc --version
-# 预期输出:
-# emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.45
-# clang version 17.0.0
-# Target: wasm32-unknown-emscripten
+### 预期输出:
+### emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.45
+### clang version 17.0.0
+### Target: wasm32-unknown-emscripten
 
-# 检查环境
+### 检查环境
 emcc --check
 
-# 显示详细配置
+### 显示详细配置
 emcc -v
 
-# 显示帮助
+### 显示帮助
 emcc --help
 
-# ========== 诊断工具 ==========
+### ========== 诊断工具 ==========
 
-# 运行完整诊断
+### 运行完整诊断
 emcc --version
 which emcc
 em-config EMSDK_NODE
 em-config LLVM_ROOT
 em-config BINARYEN_ROOT
 
-# 检查工具链
+### 检查工具链
 ls -la $EMSDK/upstream/bin/
 emcc -print-search-dirs
 
-# 测试编译
+### 测试编译
 echo 'int main() { return 0; }' > test.c
 emcc test.c -o test.js
 node test.js
 echo $?  # 应该输出 0
 
-# ========== 清理和重置 ==========
+### ========== 清理和重置 ==========
 
-# 清理缓存
+### 清理缓存
 emcc --clear-cache
 
-# 清理所有临时文件
+### 清理所有临时文件
 rm -rf ~/.emscripten_cache
 rm -rf ~/.emscripten_ports
 
-# 完全重置
+### 完全重置
 ./emsdk uninstall latest
 ./emsdk install latest
 ./emsdk activate latest
@@ -447,54 +447,54 @@ rm -rf ~/.emscripten_ports
 ### 2.1 优化级别详解
 
 ```bash
-# ========== 优化级别对比 ==========
+### ========== 优化级别对比 ==========
 
-# -O0: 无优化（调试模式）
-# - 编译速度最快
-# - 包含完整调试信息
-# - 代码体积最大
-# - 执行速度最慢
+### -O0: 无优化（调试模式）
+### - 编译速度最快
+### - 包含完整调试信息
+### - 代码体积最大
+### - 执行速度最慢
 emcc main.c -O0 -g3 -o debug.js
 
-# -O1: 基本优化
-# - 移除死代码
-# - 局部优化
-# - 保留部分调试信息
+### -O1: 基本优化
+### - 移除死代码
+### - 局部优化
+### - 保留部分调试信息
 emcc main.c -O1 -o basic_opt.js
 
-# -O2: 更多优化（推荐用于开发）
-# - 内联函数
-# - 循环优化
-# - 常量传播
-# - 可能影响调试
+### -O2: 更多优化（推荐用于开发）
+### - 内联函数
+### - 循环优化
+### - 常量传播
+### - 可能影响调试
 emcc main.c -O2 -o dev_opt.js
 
-# -O3: 激进优化（推荐用于生产）
-# - 最大优化级别
-# - 自动向量化
-# - 函数克隆
-# - 激进内联
+### -O3: 激进优化（推荐用于生产）
+### - 最大优化级别
+### - 自动向量化
+### - 函数克隆
+### - 激进内联
 emcc main.c -O3 -o production.js
 
-# -Os: 优化体积
-# - 专注于减少代码大小
-# - 牺牲部分性能换取体积
+### -Os: 优化体积
+### - 专注于减少代码大小
+### - 牺牲部分性能换取体积
 emcc main.c -Os -o size_opt.js
 
-# -Oz: 极致体积优化
-# - 最小化代码体积
-# - 可能显著影响性能
+### -Oz: 极致体积优化
+### - 最小化代码体积
+### - 可能显著影响性能
 emcc main.c -Oz -o minimal.js
 
-# ========== 链接时优化 (LTO) ==========
+### ========== 链接时优化 (LTO) ==========
 
-# LTO 模式
+### LTO 模式
 emcc main.c -flto -O3 -o lto_output.js
 
-# 薄 LTO（编译更快，优化稍弱）
+### 薄 LTO（编译更快，优化稍弱）
 emcc main.c -flto=thin -O3 -o thin_lto.js
 
-# ========== 编译对比表 ==========
+### ========== 编译对比表 ==========
 ```
 
 | 优化级别 | 编译时间 | 执行速度 | 代码体积 | 调试友好 | 适用场景 |
@@ -509,52 +509,52 @@ emcc main.c -flto=thin -O3 -o thin_lto.js
 ### 2.2 内存模型选项
 
 ```bash
-# ========== 内存配置 ==========
+### ========== 内存配置 ==========
 
-# 初始内存大小（64KB 的倍数）
+### 初始内存大小（64KB 的倍数）
 -sINITIAL_MEMORY=16777216        # 16MB
 -sINITIAL_MEMORY=33554432        # 32MB
 -sINITIAL_MEMORY=67108864        # 64MB (默认)
 -sINITIAL_MEMORY=134217728       # 128MB
 -sINITIAL_MEMORY=268435456       # 256MB
 
-# 简写形式
+### 简写形式
 -sINITIAL_MEMORY=64MB
 -sINITIAL_MEMORY=128MB
 
-# 最大内存大小
+### 最大内存大小
 -sMAXIMUM_MEMORY=536870912       # 512MB
 -sMAXIMUM_MEMORY=1073741824      # 1GB
 -sMAXIMUM_MEMORY=2147483648      # 2GB (WASM 最大)
 
-# 简写形式
+### 简写形式
 -sMAXIMUM_MEMORY=512MB
 -sMAXIMUM_MEMORY=1GB
 -sMAXIMUM_MEMORY=2GB
 
-# 允许内存增长
+### 允许内存增长
 -sALLOW_MEMORY_GROWTH=1
 -sALLOW_MEMORY_GROWTH=0          # 固定内存
 
-# 内存增长步长
+### 内存增长步长
 -sMEMORY_GROWTH_STEP=16777216    # 16MB 每次增长
 
-# 栈大小
+### 栈大小
 -sSTACK_SIZE=5242880             # 5MB (默认)
 -sSTACK_SIZE=8388608             # 8MB
 -sSTACK_SIZE=16777216            # 16MB
 
-# 简写形式
+### 简写形式
 -sSTACK_SIZE=5MB
 -sSTACK_SIZE=8MB
 
-# 内存对齐
+### 内存对齐
 -sABORTING_MALLOC=1              # malloc 失败时终止
 -sABORTING_MALLOC=0              # malloc 失败返回 NULL
 
-# ========== 内存配置示例 ==========
+### ========== 内存配置示例 ==========
 
-# 高性能计算场景
+### 高性能计算场景
 emcc compute.c -O3 \
     -sINITIAL_MEMORY=256MB \
     -sMAXIMUM_MEMORY=2GB \
@@ -562,14 +562,14 @@ emcc compute.c -O3 \
     -sSTACK_SIZE=16MB \
     -o compute.js
 
-# 固定内存场景（性能更好）
+### 固定内存场景（性能更好）
 emcc game.c -O3 \
     -sINITIAL_MEMORY=128MB \
     -sALLOW_MEMORY_GROWTH=0 \
     -sSTACK_SIZE=8MB \
     -o game.js
 
-# 内存受限设备
+### 内存受限设备
 emcc app.c -Os \
     -sINITIAL_MEMORY=16MB \
     -sMAXIMUM_MEMORY=64MB \
@@ -581,46 +581,46 @@ emcc app.c -Os \
 ### 2.3 导出配置选项
 
 ```bash
-# ========== 导出函数 ==========
+### ========== 导出函数 ==========
 
-# 导出特定函数（C 函数名前加下划线）
+### 导出特定函数（C 函数名前加下划线）
 -sEXPORTED_FUNCTIONS="['_main', '_add', '_multiply']"
 
-# 导出所有函数（不推荐，体积大）
+### 导出所有函数（不推荐，体积大）
 -sEXPORT_ALL=1
 -sEXPORT_ALL=0
 
-# 保留函数（防止被优化掉）
+### 保留函数（防止被优化掉）
 -sRETAIN_COMPILER_SETTINGS=1
 
-# ========== 导出运行时方法 ==========
+### ========== 导出运行时方法 ==========
 
-# 常用运行时方法
+### 常用运行时方法
 -sEXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'getValue', 'setValue', 'UTF8ToString', 'stringToUTF8', 'lengthBytesUTF8', 'addFunction', 'removeFunction']"
 
-# 完整运行时方法列表
+### 完整运行时方法列表
 -sEXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'getValue', 'setValue', 'allocate', 'ALLOC_NORMAL', 'ALLOC_STACK', 'ALLOC_STATIC', 'UTF8ToString', 'stringToUTF8', 'lengthBytesUTF8', 'UTF16ToString', 'stringToUTF16', 'lengthBytesUTF16', 'UTF32ToString', 'stringToUTF32', 'lengthBytesUTF32', 'intArrayFromString', 'intArrayToString', 'writeStringToMemory', 'writeArrayToMemory', 'writeAsciiToMemory', 'addRunDependency', 'removeRunDependency', 'addFunction', 'removeFunction', 'dynCall', 'getMemory', 'Pointer_stringify', 'warnOnce']"
 
-# ========== 模块化选项 ==========
+### ========== 模块化选项 ==========
 
-# 生成模块化代码
+### 生成模块化代码
 -sMODULARIZE=1
 
-# 指定模块名称
+### 指定模块名称
 -sEXPORT_NAME="MyModule"
 
-# ES6 模块
+### ES6 模块
 -sEXPORT_ES6=1
 
-# UMD 模块
+### UMD 模块
 -sEXPORT_ES6=0
 
-# 生成工厂函数（可多次实例化）
+### 生成工厂函数（可多次实例化）
 -sMODULARIZE=1 -sEXPORT_NAME="createModule"
 
-# ========== 导出配置示例 ==========
+### ========== 导出配置示例 ==========
 
-# 数学库
+### 数学库
 emcc math.c -O3 \
     -sEXPORTED_FUNCTIONS="['_add', '_subtract', '_multiply', '_divide', '_sqrt']" \
     -sEXPORTED_RUNTIME_METHODS="['ccall', 'cwrap']" \
@@ -628,7 +628,7 @@ emcc math.c -O3 \
     -sEXPORT_NAME="MathLib" \
     -o math.js
 
-# 字符串处理库
+### 字符串处理库
 emcc strings.c -O3 \
     -sEXPORTED_FUNCTIONS="['_reverse', '_to_upper', '_to_lower']" \
     -sEXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'UTF8ToString', 'stringToUTF8', 'lengthBytesUTF8']" \
@@ -636,7 +636,7 @@ emcc strings.c -O3 \
     -sEXPORT_NAME="StringLib" \
     -o strings.js
 
-# 图像处理库
+### 图像处理库
 emcc image.c -O3 \
     -sEXPORTED_FUNCTIONS="['_process_image', '_get_width', '_get_height']" \
     -sEXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'getValue', 'setValue']" \
@@ -649,107 +649,107 @@ emcc image.c -O3 \
 ### 2.4 环境相关选项
 
 ```bash
-# ========== 目标环境 ==========
+### ========== 目标环境 ==========
 
-# 仅浏览器
+### 仅浏览器
 -sENVIRONMENT=web
 
-# 仅 Node.js
+### 仅 Node.js
 -sENVIRONMENT=node
 
-# 浏览器和 Node.js
+### 浏览器和 Node.js
 -sENVIRONMENT=web,node
 
-# Web Worker
+### Web Worker
 -sENVIRONMENT=worker
 
-# Shell 环境
+### Shell 环境
 -sENVIRONMENT=shell
 
-# 所有环境
+### 所有环境
 -sENVIRONMENT=web,node,worker,shell
 
-# ========== WASM 相关 ==========
+### ========== WASM 相关 ==========
 
-# 输出格式
+### 输出格式
 -sWASM=1              # 输出 WASM（默认）
 -sWASM=0              # 输出 asm.js（已废弃）
 -sWASM=2              # 输出 WASM + 备用 asm.js
 
-# WASM 异步编译
+### WASM 异步编译
 -sWASM_ASYNC_COMPILATION=1    # 异步编译（默认）
 -sWASM_ASYNC_COMPILATION=0    # 同步编译
 
-# WASM 大内存（>2GB）
+### WASM 大内存（>2GB）
 -sMAXIMUM_MEMORY=4GB
 -sALLOW_MEMORY_GROWTH=1
 
-# ========== JavaScript 输出选项 ==========
+### ========== JavaScript 输出选项 ==========
 
-# 单文件输出（嵌入 WASM）
+### 单文件输出（嵌入 WASM）
 -sSINGLE_FILE=1
 
-# 最小化输出
+### 最小化输出
 -sMINIMAL_RUNTIME=1
 -sMINIMAL_RUNTIME=2
 
-# 使用 Closure Compiler 优化 JS
+### 使用 Closure Compiler 优化 JS
 --closure 1
 --closure 0
 
-# 生成 Source Map
+### 生成 Source Map
 -g4
 -sSOURCE_MAP_BASE='http://localhost:8000/'
 
-# ========== 网络和异步 ==========
+### ========== 网络和异步 ==========
 
-# 允许同步 XHR
+### 允许同步 XHR
 -sALLOW_SYNC_XHR_IN_MAIN_THREAD=1
 
-# 使用 Fetch API
+### 使用 Fetch API
 -sFETCH=1
 
-# 使用 WebSocket
+### 使用 WebSocket
 -lwebsocket.js
 
-# 使用 WebRTC
+### 使用 WebRTC
 -lwebrtc.js
 
-# ========== 多线程 ==========
+### ========== 多线程 ==========
 
-# 启用 pthreads
+### 启用 pthreads
 -sUSE_PTHREADS=1
 -sPTHREAD_POOL_SIZE=4
 -sPTHREAD_POOL_SIZE_STRICT=1
 
-# 启用 SharedArrayBuffer
+### 启用 SharedArrayBuffer
 -sSHARED_MEMORY=1
 
-# 需要正确的 HTTP 头
-# Cross-Origin-Opener-Policy: same-origin
-# Cross-Origin-Embedder-Policy: require-corp
+### 需要正确的 HTTP 头
+### Cross-Origin-Opener-Policy: same-origin
+### Cross-Origin-Embedder-Policy: require-corp
 
-# ========== 环境配置示例 ==========
+### ========== 环境配置示例 ==========
 
-# 纯浏览器应用
+### 纯浏览器应用
 emcc app.c -O3 \
     -sENVIRONMENT=web \
     -sWASM_ASYNC_COMPILATION=1 \
     -o app.js
 
-# Node.js CLI 工具
+### Node.js CLI 工具
 emcc cli.c -O3 \
     -sENVIRONMENT=node \
     -sWASM_ASYNC_COMPILATION=0 \
     -o cli.js
 
-# Web Worker
+### Web Worker
 emcc worker.c -O3 \
     -sENVIRONMENT=worker \
     -sEXPORTED_FUNCTIONS="['_process']" \
     -o worker.js
 
-# 多线程应用
+### 多线程应用
 emcc parallel.c -O3 \
     -sUSE_PTHREADS=1 \
     -sPTHREAD_POOL_SIZE=8 \
@@ -760,73 +760,73 @@ emcc parallel.c -O3 \
 ### 2.5 调试和分析选项
 
 ```bash
-# ========== 调试信息 ==========
+### ========== 调试信息 ==========
 
-# 无调试信息（发布）
-# （默认，无 -g 标志）
+### 无调试信息（发布）
+### （默认，无 -g 标志）
 
-# 基础调试信息
+## 基础调试信息
 -g
 
-# 详细调试信息
+### 详细调试信息
 -g2
 
-# DWARF 调试信息
+### DWARF 调试信息
 -g3
 
-# Source Map
+### Source Map
 -g4
 
-# 保留函数名
+### 保留函数名
 -sDEMANGLE_SUPPORT=1
 
-# 断言检查
+### 断言检查
 -sASSERTIONS=1
 -sASSERTIONS=2
 
-# 安全检查
+### 安全检查
 -sSAFE_HEAP=1
 -sSAFE_HEAP_LOG=1
 
-# 堆栈溢出检查
+### 堆栈溢出检查
 -sSTACK_OVERFLOW_CHECK=1
 -sSTACK_OVERFLOW_CHECK=2
 
-# ========== 分析工具 ==========
+### ========== 分析工具 ==========
 
-# 生成性能分析数据
+### 生成性能分析数据
 --profiling
 --profiling-funcs
 
-# 生成代码大小分析
+### 生成代码大小分析
 -sRELOCATABLE=1
 
-# 生成内存分析器
+### 生成内存分析器
 -sMEMORYPROFILER=1
 
-# 生成线程分析器（多线程时）
+### 生成线程分析器（多线程时）
 -sPTHREADS_PROFILING=1
 
-# ========== 日志和诊断 ==========
+### ========== 日志和诊断 ==========
 
-# 详细输出
+### 详细输出
 -v
 
-# 显示编译阶段
+### 显示编译阶段
 -###
 
-# 保存中间文件
+### 保存中间文件
 -save-temps
 
-# 显示内存使用
+### 显示内存使用
 -sVERBOSE=1
 
-# 运行时跟踪
+### 运行时跟踪
 -sRUNTIME_LOGGING=1
 
-# ========== 调试配置示例 ==========
+### ========== 调试配置示例 ==========
 
-# 开发调试配置
+### 开发调试配置
 emcc debug.c -O0 \
     -g3 \
     -sASSERTIONS=2 \
@@ -835,14 +835,14 @@ emcc debug.c -O0 \
     -sDEMANGLE_SUPPORT=1 \
     -o debug.js
 
-# 性能分析配置
+### 性能分析配置
 emcc profile.c -O3 \
     -g2 \
     --profiling \
     -sDEMANGLE_SUPPORT=1 \
     -o profile.js
 
-# Source Map 配置
+### Source Map 配置
 emcc app.c -O2 \
     -g4 \
     -sSOURCE_MAP_BASE='http://localhost:8000/' \
@@ -1084,9 +1084,9 @@ void* context_get_data(int handle) {
 ### 3.3 编译和调用
 
 ```bash
-# ========== 编译导出库 ==========
+### ========== 编译导出库 ==========
 
-# 基础编译
+## 基础编译
 emcc library.c -O3 \
     -sEXPORTED_FUNCTIONS="['_add', '_safe_divide', '_calculate_distance', '_sum_array', '_scale_array', '_get_version', '_count_vowels', '_vector_dot', '_vector_cross', '_increment_counter', '_context_create', '_context_destroy', '_context_get_data', '_malloc', '_free']" \
     -sEXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'getValue', 'setValue', 'UTF8ToString']" \
@@ -1094,7 +1094,7 @@ emcc library.c -O3 \
     -sEXPORT_NAME="MyLibrary" \
     -o mylib.js
 
-# 使用 Embind（更简单的接口）
+### 使用 Embind（更简单的接口）
 emcc library.cpp -O3 \
     --bind \
     -o mylib.js
@@ -2420,43 +2420,43 @@ int process_csv_file(const char* filename) {
 ### 6.3 预加载和嵌入文件
 
 ```bash
-# ========== 预加载文件 ==========
+### ========== 预加载文件 ==========
 
-# 预加载单个文件
+### 预加载单个文件
 emcc main.c -o app.js --preload-file data.txt
 
-# 预加载整个目录
+### 预加载整个目录
 emcc main.c -o app.js --preload-file assets/
 
-# 预加载并重命名
+### 预加载并重命名
 emcc main.c -o app.js --preload-file original.txt@renamed.txt
 
-# 预加载到虚拟路径
+### 预加载到虚拟路径
 emcc main.c -o app.js --preload-file local/data@/virtual/data
 
-# 多个预加载
+### 多个预加载
 emcc main.c -o app.js \
     --preload-file config.json \
     --preload-file textures/ \
     --preload-file sounds/
 
-# ========== 嵌入文件 ==========
+### ========== 嵌入文件 ==========
 
-# 嵌入单个文件（包含在 JS 中）
+### 嵌入单个文件（包含在 JS 中）
 emcc main.c -o app.js --embed-file data.txt
 
-# 嵌入目录
+### 嵌入目录
 emcc main.c -o app.js --embed-file assets/
 
-# ========== 从文件系统加载 (Node.js) ==========
+### ========== 从文件系统加载 (Node.js) ==========
 
-# 使用 NODEFS
+### 使用 NODEFS
 emcc main.c -o app.js -lnodefs.js \
     -sENVIRONMENT=node
 
-# ========== 完整示例 ==========
+### ========== 完整示例 ==========
 
-# 游戏资源打包
+### 游戏资源打包
 emcc game.c -O3 -o game.js \
     --preload-file assets/images@/images \
     --preload-file assets/audio@/audio \
@@ -2569,14 +2569,14 @@ class WasmFileSystem {
 ### 7.1 Pthreads 配置
 
 ```bash
-# ========== 启用多线程编译 ==========
+### ========== 启用多线程编译 ==========
 
-# 基础多线程编译
+## 基础多线程编译
 emcc main.c -o app.js \
     -sUSE_PTHREADS=1 \
     -sPTHREAD_POOL_SIZE=4
 
-# 完整多线程配置
+### 完整多线程配置
 emcc main.c -O3 -o app.js \
     -sUSE_PTHREADS=1 \
     -sPTHREAD_POOL_SIZE=8 \
@@ -2586,16 +2586,16 @@ emcc main.c -O3 -o app.js \
     -sALLOW_MEMORY_GROWTH=1 \
     -sSHARED_MEMORY=1
 
-# 编译 Worker 文件
+### 编译 Worker 文件
 emcc worker.c -O3 -o worker.js \
     -sUSE_PTHREADS=1 \
     -sPTHREAD_POOL_SIZE=4 \
     -sEXPORTED_FUNCTIONS="['_worker_main']" \
     -sEXPORTED_RUNTIME_METHODS="['ccall', 'cwrap']"
 
-# ========== 必需的 HTTP 响应头 ==========
+### ========== 必需的 HTTP 响应头 ==========
 
-# 对于多线程应用，服务器必须设置:
+### 对于多线程应用，服务器必须设置:
 Cross-Origin-Embedder-Policy: require-corp
 Cross-Origin-Opener-Policy: same-origin
 ```
@@ -3271,9 +3271,9 @@ void set_body_position(int body_id, float x, float y) {
 ### 9.1 调试配置
 
 ```bash
-# ========== 调试构建设置 ==========
+### ========== 调试构建设置 ==========
 
-# 开发调试版本
+### 开发调试版本
 emcc app.c -O0 -g3 \
     -sASSERTIONS=2 \
     -sSAFE_HEAP=1 \
@@ -3283,20 +3283,20 @@ emcc app.c -O0 -g3 \
     -sWARN_ON_UNDEFINED_SYMBOLS=1 \
     -o app_debug.js
 
-# 内存检查版本
+### 内存检查版本
 emcc app.c -O0 -g3 \
     -sSAFE_HEAP=1 \
     -sSAFE_HEAP_LOG=1 \
     -sASSERTIONS=2 \
     -o app_memcheck.js
 
-# 地址清理器 (ASan)
+### 地址清理器 (ASan)
 emcc app.c -O1 -g3 \
     -fsanitize=address \
     -sALLOW_MEMORY_GROWTH=1 \
     -o app_asan.js
 
-# 线程清理器 (TSan) - 仅多线程
+### 线程清理器 (TSan) - 仅多线程
 ecc app.c -O1 -g3 \
     -fsanitize=thread \
     -sUSE_PTHREADS=1 \

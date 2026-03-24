@@ -180,7 +180,7 @@ Xmake的解决方案：
 #### 1.2.1 快速安装脚本
 
 ```bash
-# 使用官方安装脚本（推荐）
+## 使用官方安装脚本（推荐）
 
 ---
 
@@ -257,10 +257,10 @@ Xmake的解决方案：
 
 curl -fsSL https://xmake.io/shget.text | bash
 
-# 国内镜像加速
+## 国内镜像加速
 curl -fsSL https://xmake.io/shget.text | bash -s -- --china
 
-# PowerShell (Windows)
+## PowerShell (Windows)
 Invoke-Expression (Invoke-Webrequest 'https://xmake.io/psget.text' -UseBasicParsing).Content
 ```
 
@@ -269,57 +269,57 @@ Invoke-Expression (Invoke-Webrequest 'https://xmake.io/psget.text' -UseBasicPars
 **macOS:**
 
 ```bash
-# Homebrew
+## Homebrew
 brew install xmake
 
-# MacPorts
+## MacPorts
 sudo port install xmake
 ```
 
 **Windows:**
 
 ```powershell
-# Scoop
+## Scoop
 scoop install xmake
 
-# Winget
+## Winget
 winget install xmake
 
-# Chocolatey
+## Chocolatey
 choco install xmake
 ```
 
 **Linux:**
 
 ```bash
-# Ubuntu/Debian
+## Ubuntu/Debian
 sudo add-apt-repository ppa:xmake-io/xmake
 sudo apt update
 sudo apt install xmake
 
-# Arch Linux
+## Arch Linux
 sudo pacman -S xmake
 
-# Fedora
+## Fedora
 sudo dnf install xmake
 
-# Alpine
+## Alpine
 apk add xmake
 ```
 
 #### 1.2.3 源码编译安装
 
 ```bash
-# 克隆仓库
+## 克隆仓库
 git clone https://github.com/xmake-io/xmake.git
 cd xmake
 
-# 编译安装
+## 编译安装
 ./configure
 make
 sudo make install
 
-# 或者使用xmake自举
+## 或者使用xmake自举
 cd core
 xmake
 ```
@@ -327,14 +327,14 @@ xmake
 #### 1.2.4 验证安装
 
 ```bash
-# 检查版本
+## 检查版本
 xmake --version
-# 输出类似：xmake v2.8.5+20231101
+## 输出类似：xmake v2.8.5+20231101
 
-# 查看帮助
+## 查看帮助
 xmake --help
 
-# 查看详细帮助
+## 查看详细帮助
 xmake man
 ```
 
@@ -399,19 +399,19 @@ target("hello")
 #### 1.3.4 构建和运行
 
 ```bash
-# 配置项目（检测编译器和平台）
+## 配置项目（检测编译器和平台）
 xmake f -c
 
-# 构建项目
+## 构建项目
 xmake
 
-# 运行程序
+## 运行程序
 xmake run
-# 输出：Hello, World!
+## 输出：Hello, World!
 
-# 带参数运行
+## 带参数运行
 xmake run hello Alice
-# 输出：Hello, Alice!
+## 输出：Hello, Alice!
 ```
 
 ---
@@ -879,15 +879,15 @@ end
 #### 3.2.2 切换构建模式
 
 ```bash
-# 切换到调试模式
+## 切换到调试模式
 xmake f -m debug
 xmake
 
-# 切换到发布模式
+## 切换到发布模式
 xmake f -m release
 xmake
 
-# 查看当前模式
+## 查看当前模式
 xmake f -v
 ```
 
@@ -920,10 +920,10 @@ end
 #### 3.3.1 查看支持的平台
 
 ```bash
-# 列出所有支持的平台
+## 列出所有支持的平台
 xmake show -l platforms
 
-# 常见平台列表
+## 常见平台列表
 - windows
 - linux
 - macosx
@@ -936,14 +936,14 @@ xmake show -l platforms
 #### 3.3.2 Android交叉编译
 
 ```bash
-# 使用Android NDK
+## 使用Android NDK
 xmake f -p android --ndk=~/Android/Sdk/ndk/25.1.8937393
 xmake
 
-# 指定ABI
+## 指定ABI
 xmake f -p android --ndk=~/ndk --arch=arm64-v8a
 
-# 指定API级别
+## 指定API级别
 xmake f -p android --ndk=~/ndk --android_sdk=21
 ```
 
@@ -964,37 +964,37 @@ target("android_app")
 #### 3.3.3 iOS交叉编译
 
 ```bash
-# iOS设备
+## iOS设备
 xmake f -p iphoneos
 xmake
 
-# iOS模拟器
+## iOS模拟器
 xmake f -p iphoneos --target=simulator
 xmake
 
-# 指定架构
+## 指定架构
 xmake f -p iphoneos --arch=arm64
 ```
 
 #### 3.3.4 MinGW交叉编译
 
 ```bash
-# Windows上编译Linux程序（或使用MinGW-w64）
+## Windows上编译Linux程序（或使用MinGW-w64）
 xmake f -p mingw
 xmake
 
-# 指定MinGW路径
+## 指定MinGW路径
 xmake f -p mingw --mingw=/usr/x86_64-w64-mingw32
 ```
 
 #### 3.3.5 通用交叉编译
 
 ```bash
-# 使用交叉编译工具链
+## 使用交叉编译工具链
 xmake f -p cross --sdk=/opt/cross-toolchain
 xmake
 
-# 指定交叉编译器
+## 指定交叉编译器
 xmake f -p cross --cross=i686-pc-linux-gnu- --bin=/opt/cross/bin
 ```
 
@@ -1022,20 +1022,20 @@ target("embedded_app")
 ### 3.4 构建目录管理
 
 ```bash
-# 指定构建输出目录
+## 指定构建输出目录
 xmake f -o build
 
-# 指定构建模式特定目录
+## 指定构建模式特定目录
 xmake f -m debug -o build/debug
 xmake f -m release -o build/release
 
-# 清理构建
+## 清理构建
 xmake clean
 
-# 完全清理（包括配置）
+## 完全清理（包括配置）
 xmake clean -a
 
-# 重新配置
+## 重新配置
 xmake f -c
 ```
 
@@ -1055,27 +1055,27 @@ Xrepo是Xmake内置的包管理器，支持：
 ### 4.2 基本包操作
 
 ```bash
-# 搜索包
+## 搜索包
 xrepo search zlib
 xrepo search "png*"
 
-# 查看包信息
+## 查看包信息
 xrepo info zlib
 
-# 安装包到全局仓库
+## 安装包到全局仓库
 xrepo install zlib
 xrepo install zlib 1.2.13
 
-# 安装并指定配置
+## 安装并指定配置
 xrepo install "zlib {configs={shared=true}}"
 
-# 卸载包
+## 卸载包
 xrepo remove zlib
 
-# 列出已安装包
+## 列出已安装包
 xrepo list
 
-# 更新包仓库
+## 更新包仓库
 xrepo update-repo
 ```
 
@@ -1462,20 +1462,20 @@ end
 #### 5.2.2 命令行配置选项
 
 ```bash
-# 查看所有选项
+## 查看所有选项
 xmake f --help
 
-# 启用选项
+## 启用选项
 xmake f --enable_tests=y
 xmake f --enable_tests=true
 
-# 禁用选项
+## 禁用选项
 xmake f --enable_tests=n
 
-# 设置路径选项
+## 设置路径选项
 xmake f --cuda_path=/opt/cuda-11.8
 
-# 查看当前配置
+## 查看当前配置
 xmake f -v
 ```
 
@@ -1484,20 +1484,20 @@ xmake f -v
 #### 5.3.1 内置任务
 
 ```bash
-# 运行项目
+## 运行项目
 xmake run [target] [args...]
 
-# 安装项目
+## 安装项目
 xmake install
 xmake install -o /usr/local
 
-# 打包项目
+## 打包项目
 xmake package
 
-# 卸载
+## 卸载
 xmake uninstall
 
-# 生成IDE项目文件
+## 生成IDE项目文件
 xmake project -k vs2022      # Visual Studio 2022
 xmake project -k cmake       # CMakeLists.txt
 xmake project -k make        # Makefile
@@ -2106,11 +2106,11 @@ project(myapp VERSION 1.0 LANGUAGES C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-# 查找包
+## 查找包
 find_package(ZLIB REQUIRED)
 find_package(PNG REQUIRED)
 
-# 添加可执行文件
+## 添加可执行文件
 add_executable(myapp src/main.c)
 
 target_include_directories(myapp PRIVATE include)
@@ -2121,7 +2121,7 @@ target_link_libraries(myapp
         PNG::PNG
 )
 
-# 安装
+## 安装
 install(TARGETS myapp DESTINATION bin)
 ```
 
@@ -2153,18 +2153,18 @@ target("myapp")
 #### 从Makefile迁移
 
 ```bash
-# 1. 保留原有Makefile作为参考
-# 2. 创建xmake.lua，分析Makefile中的：
-#    - 编译器选项 (CC, CFLAGS)
-#    - 源文件列表 (SRCS)
-#    - 链接库 (LDFLAGS, LIBS)
-#    - 包含路径 (CPPFLAGS)
+## 1. 保留原有Makefile作为参考
+## 2. 创建xmake.lua，分析Makefile中的：
+###    - 编译器选项 (CC, CFLAGS)
+###    - 源文件列表 (SRCS)
+###    - 链接库 (LDFLAGS, LIBS)
+###    - 包含路径 (CPPFLAGS)
 
-# 3. 编写xmake.lua
+## 3. 编写xmake.lua
 set_toolchain("gcc", "clang")
 set_languages("gnu11")
 
-# 4. 逐步测试
+## 4. 逐步测试
 xmake f -c
 xmake
 ```
@@ -2172,16 +2172,16 @@ xmake
 #### 从CMake迁移
 
 ```bash
-# 1. 使用xmake的cmake导入（临时方案）
+## 1. 使用xmake的cmake导入（临时方案）
 includes("cmake.lua")
 
-# 2. 或者手动转换
-# 分析CMakeLists.txt中的关键配置：
-# - project() -> set_project()
-# - add_executable() -> target() + set_kind("binary")
-# - add_library() -> target() + set_kind("static/shared")
-# - target_link_libraries() -> add_packages(), add_links()
-# - find_package() -> add_requires()
+## 2. 或者手动转换
+### 分析CMakeLists.txt中的关键配置：
+### - project() -> set_project()
+### - add_executable() -> target() + set_kind("binary")
+### - add_library() -> target() + set_kind("static/shared")
+### - target_link_libraries() -> add_packages(), add_links()
+### - find_package() -> add_requires()
 ```
 
 ---
@@ -2193,24 +2193,24 @@ includes("cmake.lua")
 #### Q: Windows上安装后无法找到xmake命令
 
 ```powershell
-# 解决方案1：添加环境变量
+### 解决方案1：添加环境变量
 [Environment]::SetEnvironmentVariable(
     "Path",
     $env:Path + ";C:\Program Files\xmake",
     "User"
 )
 
-# 解决方案2：使用 scoop 安装会自动配置PATH
+### 解决方案2：使用 scoop 安装会自动配置PATH
 scoop install xmake
 ```
 
 #### Q: Linux上编译安装失败
 
 ```bash
-# 检查依赖
+### 检查依赖
 sudo apt-get install build-essential libreadline-dev
 
-# 或者使用预编译版本
+### 或者使用预编译版本
 curl -fsSL https://xmake.io/shget.text | bash
 ```
 
@@ -2219,30 +2219,30 @@ curl -fsSL https://xmake.io/shget.text | bash
 #### Q: 找不到编译器
 
 ```bash
-# 指定编译器
+### 指定编译器
 xmake f --cc=gcc --cxx=g++
 
-# 或者使用工具链
+### 或者使用工具链
 xmake f --toolchain=clang
 
-# 查看可用工具链
+### 查看可用工具链
 xmake show -l toolchains
 ```
 
 #### Q: 包安装失败
 
 ```bash
-# 详细输出查看错误
+### 详细输出查看错误
 xmake f -vD
 
-# 更新包仓库
+### 更新包仓库
 xrepo update-repo
 
-# 清除包缓存重试
+### 清除包缓存重试
 xrepo remove --all
 xmake f -c
 
-# 使用系统库
+### 使用系统库
 add_requires("zlib", {system = true})
 ```
 
@@ -2289,16 +2289,16 @@ set_runtimes("MD")  -- 或 "MT", "MDd", "MTd"
 #### 加速构建
 
 ```bash
-# 使用并行构建
+### 使用并行构建
 xmake -j8
 
-# 启用ccache
+### 启用ccache
 xmake f --ccache=y
 
-# 启用distcc分布式编译
+### 启用distcc分布式编译
 xmake f --distcc=y
 
-# 使用预编译头
+### 使用预编译头
 set_pcxxheader("src/pch.h")
 ```
 
@@ -2316,19 +2316,19 @@ option("has_feature")
 ### 8.5 调试技巧
 
 ```bash
-# 详细输出
+### 详细输出
 xmake -v
 
-# 调试输出
+### 调试输出
 xmake -vD
 
-# 查看构建命令
+### 查看构建命令
 xmake -r --dry-run
 
-# 查看目标详情
+### 查看目标详情
 xmake show -t mytarget
 
-# 查看编译数据库
+### 查看编译数据库
 xmake project -k compile_commands
 ```
 
@@ -2380,16 +2380,16 @@ target("engine")
 **.gitignore:**
 
 ```gitignore
-# Xmake
+### Xmake
 .xmake/
 build/
 vsxmake*
 
-# 生成的文件
+### 生成的文件
 include/config.h
 src/version.cpp
 
-# IDE
+### IDE
 .vscode/
 .idea/
 *.sln
@@ -2399,20 +2399,20 @@ src/version.cpp
 ### 8.7 获取更多帮助
 
 ```bash
-# 查看帮助
+### 查看帮助
 xmake --help
 xmake <command> --help
 
-# 官方文档
-# https://xmake.io/#/zh-cn/
+### 官方文档
+### https://xmake.io/#/zh-cn/
 
-# 中文手册
-# https://xmake.io/#/zh-cn/manual/project_scope
+### 中文手册
+### https://xmake.io/#/zh-cn/manual/project_scope
 
-# 社区支持
-# GitHub Issues: https://github.com/xmake-io/xmake/issues
-# Telegram: https://t.me/tbooxorg
-# Discord: https://discord.gg/MwY8xFQ
+### 社区支持
+### GitHub Issues: https://github.com/xmake-io/xmake/issues
+### Telegram: https://t.me/tbooxorg
+### Discord: https://discord.gg/MwY8xFQ
 ```
 
 ---

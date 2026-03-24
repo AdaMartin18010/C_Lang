@@ -1,0 +1,37 @@
+---
+title: System Technology Domain Architecture
+---
+
+graph TB
+
+    subgraph Core_Systems
+        S1[OS Kernel]
+        S2[Concurrency]
+        S3[Memory Management]
+    end
+
+    subgraph Network_&_I/O
+        N1[Socket Programming]
+        N2[RDMA]
+        N3[DPDK]
+    end
+
+    subgraph Security
+        SEC1[Cryptography]
+        SEC2[Secure Boot]
+        SEC3[Exploit Mitigation]
+    end
+
+    subgraph Specialized
+        SP1[GPU/CUDA]
+        SP2[eBPF]
+        SP3[Virtualization]
+    end
+
+    S1 --> N1
+    S2 --> N2
+    S1 --> SEC1
+    S2 --> SEC3
+    N1 --> SEC1
+    S1 --> SP3
+    S3 --> SP1

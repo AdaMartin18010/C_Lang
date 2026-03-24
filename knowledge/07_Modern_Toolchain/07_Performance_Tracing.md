@@ -1,5 +1,12 @@
 # Linux性能追踪与观测技术
 
+
+> **版本**: v1.0.0
+> **最后更新**: 2026-03-25
+> **作者**: C_Lang Team
+> **难度**: L4 高级
+
+---
 > **层级定位**: 07 Modern Toolchain
 > **参考工具**: perf, ftrace, LTTng, eBPF/BCC
 > **难度级别**: L4-L5

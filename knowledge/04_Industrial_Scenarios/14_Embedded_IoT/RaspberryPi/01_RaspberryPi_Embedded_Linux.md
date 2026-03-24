@@ -1,5 +1,13 @@
 ﻿# Raspberry Pi 嵌入式Linux开发完全指南
 
+
+> **版本**: v1.0.0
+> **最后更新**: 2026-03-25
+> **作者**: C_Lang Team
+> **难度**: L2 基础
+
+---
+
 ## 目录
 
 - [Raspberry Pi 嵌入式Linux开发完全指南](#raspberry-pi-嵌入式linux开发完全指南)

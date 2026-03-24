@@ -1,5 +1,13 @@
 # 容器化嵌入式开发完整指南
 
+
+> **版本**: v1.0.0
+> **最后更新**: 2026-03-25
+> **作者**: C_Lang Team
+> **难度**: L3 进阶
+
+---
+
 ## 目录
 
 - [容器化嵌入式开发完整指南](#容器化嵌入式开发完整指南)
@@ -147,7 +155,7 @@
 
 ```bash
 #!/bin/bash
-# docker_install_ubuntu.sh
+### docker_install_ubuntu.sh
 
 ---
 
@@ -277,21 +285,21 @@
 - 参见本模块 [README.md](../../README.md)
 - 相关子目录文档
 
-# Docker 安装脚本 - Ubuntu/Debian 系统
+### Docker 安装脚本 - Ubuntu/Debian 系统
 
 set -e
 
 echo "=== Docker 安装脚本 ==="
 
-# 1. 卸载旧版本
+### 1. 卸载旧版本
 echo "[1/6] 卸载旧版本 Docker..."
 sudo apt-get remove -y docker docker-engine docker.io containerd runc 2>/dev/null || true
 
-# 2. 更新 apt 包索引
+### 2. 更新 apt 包索引
 echo "[2/6] 更新包索引..."
 sudo apt-get update
 
-# 3. 安装依赖包
+### 3. 安装依赖包
 echo "[3/6] 安装依赖包..."
 sudo apt-get install -y \
     ca-certificates \
@@ -300,14 +308,14 @@ sudo apt-get install -y \
     lsb-release \
     software-properties-common
 
-# 4. 添加 Docker 官方 GPG 密钥
+### 4. 添加 Docker 官方 GPG 密钥
 echo "[4/6] 添加 Docker GPG 密钥..."
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
     sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-# 5. 设置稳定版仓库
+### 5. 设置稳定版仓库
 echo "[5/6] 设置 Docker 仓库..."
 echo \
   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] \
@@ -315,17 +323,17 @@ echo \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# 6. 安装 Docker Engine
+### 6. 安装 Docker Engine
 echo "[6/6] 安装 Docker Engine..."
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io \
     docker-buildx-plugin docker-compose-plugin
 
-# 7. 将当前用户添加到 docker 组
+### 7. 将当前用户添加到 docker 组
 echo "[7/6] 配置用户权限..."
 sudo usermod -aG docker $USER
 
-# 8. 启动 Docker 服务
+### 8. 启动 Docker 服务
 sudo systemctl enable docker
 sudo systemctl start docker
 
@@ -337,10 +345,10 @@ echo "验证安装: docker run hello-world"
 #### Windows 安装 (PowerShell)
 
 ```powershell
-# docker_install_windows.ps1
-# Docker Desktop 安装脚本 - Windows
+### docker_install_windows.ps1
+### Docker Desktop 安装脚本 - Windows
 
-# 检查系统要求
+### 检查系统要求
 $osInfo = Get-CimInstance -ClassName Win32_OperatingSystem
 $totalMemory = [math]::Round($osInfo.TotalVisibleMemorySize / 1MB, 2)
 
@@ -348,7 +356,7 @@ Write-Host "=== Docker Desktop 安装检查 ===" -ForegroundColor Green
 Write-Host "操作系统: $($osInfo.Caption)"
 Write-Host "内存: $totalMemory GB"
 
-# 检查 WSL2
+### 检查 WSL2
 $wslInstalled = Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 if ($wslInstalled.State -ne "Enabled") {
     Write-Host "启用 WSL2..." -ForegroundColor Yellow
@@ -357,14 +365,14 @@ if ($wslInstalled.State -ne "Enabled") {
     exit
 }
 
-# 下载 Docker Desktop
+### 下载 Docker Desktop
 $dockerUrl = "https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe"
 $installerPath = "$env:TEMP\DockerDesktopInstaller.exe"
 
 Write-Host "下载 Docker Desktop..." -ForegroundColor Yellow
 Invoke-WebRequest -Uri $dockerUrl -OutFile $installerPath
 
-# 安装 Docker Desktop
+### 安装 Docker Desktop
 Write-Host "安装 Docker Desktop..." -ForegroundColor Yellow
 Start-Process -FilePath $installerPath -ArgumentList "install", "--quiet" -Wait
 
@@ -376,18 +384,18 @@ Write-Host "请重启计算机完成安装"
 
 ```bash
 #!/bin/bash
-# docker_install_macos.sh
-# Docker Desktop 安装 - macOS
+### docker_install_macos.sh
+### Docker Desktop 安装 - macOS
 
 echo "=== Docker Desktop macOS 安装 ==="
 
-# 检查 Homebrew
+### 检查 Homebrew
 if ! command -v brew &> /dev/null; then
     echo "安装 Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-# 使用 Homebrew 安装 Docker Desktop
+### 使用 Homebrew 安装 Docker Desktop
 echo "通过 Homebrew 安装 Docker Desktop..."
 brew install --cask docker
 
@@ -445,41 +453,41 @@ echo "验证安装: docker --version"
 #### Dockerfile 指令速查表
 
 ```dockerfile
-# ============================================================================
-# Dockerfile 指令详解 - 嵌入式开发专用
-# ============================================================================
+### ============================================================================
+### Dockerfile 指令详解 - 嵌入式开发专用
+### ============================================================================
 
-# ----------------------------------------------------------------------------
-# 基础指令
-# ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+## 基础指令
+### ----------------------------------------------------------------------------
 
-# FROM - 指定基础镜像，每个 Dockerfile 必须以 FROM 开始
-# 语法: FROM [--platform=<platform>] <image>[:<tag>][@<digest>]
+## FROM - 指定基础镜像，每个 Dockerfile 必须以 FROM 开始
+### 语法: FROM [--platform=<platform>] <image>[:<tag>][@<digest>]
 FROM ubuntu:22.04
 
-# ARG - 定义构建时变量，仅在构建阶段可用
-# 语法: ARG <name>[=<default value>]
+### ARG - 定义构建时变量，仅在构建阶段可用
+### 语法: ARG <name>[=<default value>]
 ARG TOOLCHAIN_VERSION=12.2.rel1
 ARG USERNAME=developer
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-# ENV - 设置环境变量，构建和运行阶段都可用
-# 语法: ENV <key>=<value> ...
+### ENV - 设置环境变量，构建和运行阶段都可用
+### 语法: ENV <key>=<value> ...
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Shanghai \
     PATH="/opt/gcc-arm-none-eabi/bin:${PATH}"
 
-# LABEL - 添加元数据到镜像
+### LABEL - 添加元数据到镜像
 LABEL maintainer="embedded-team@company.com" \
       version="1.0.0" \
       description="STM32 Development Environment"
 
-# ----------------------------------------------------------------------------
-# 用户和权限
-# ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+### 用户和权限
+### ----------------------------------------------------------------------------
 
-# 创建非 root 用户（安全最佳实践）
+### 创建非 root 用户（安全最佳实践）
 RUN groupadd --gid $USER_GID $USERNAME && \
     useradd --uid $USER_UID --gid $USER_GID -m $USERNAME && \
     apt-get update && \
@@ -487,44 +495,44 @@ RUN groupadd --gid $USER_GID $USERNAME && \
     echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME && \
     chmod 0440 /etc/sudoers.d/$USERNAME
 
-# USER - 切换当前用户
+### USER - 切换当前用户
 USER $USERNAME
 
-# WORKDIR - 设置工作目录，如果不存在会自动创建
+### WORKDIR - 设置工作目录，如果不存在会自动创建
 WORKDIR /workspace
 
-# ----------------------------------------------------------------------------
-# 文件操作
-# ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+### 文件操作
+### ----------------------------------------------------------------------------
 
-# COPY - 从构建上下文复制文件到镜像
-# 语法: COPY [options] <src>... <dest>
+### COPY - 从构建上下文复制文件到镜像
+### 语法: COPY [options] <src>... <dest>
 COPY --chown=$USERNAME:$USERNAME requirements.txt ./
 COPY --chown=$USERNAME:$USERNAME scripts/ ./scripts/
 
-# ADD - 类似 COPY，但支持自动解压和 URL
-# 建议优先使用 COPY，除非需要 ADD 的特殊功能
+### ADD - 类似 COPY，但支持自动解压和 URL
+### 建议优先使用 COPY，除非需要 ADD 的特殊功能
 ADD --chown=$USERNAME:$USERNAME https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz /opt/
 
-# ----------------------------------------------------------------------------
-# 运行命令
-# ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+### 运行命令
+### ----------------------------------------------------------------------------
 
-# RUN - 在镜像构建时执行命令
-# 语法: RUN [options] <command> ...
+### RUN - 在镜像构建时执行命令
+### 语法: RUN [options] <command> ...
 
-# Shell 形式（使用 /bin/sh -c）
+### Shell 形式（使用 /bin/sh -c）
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Exec 形式（推荐，更明确）
+### Exec 形式（推荐，更明确）
 RUN ["apt-get", "update"]
 RUN ["apt-get", "install", "-y", "cmake"]
 
-# 合并 RUN 指令减少镜像层数
+### 合并 RUN 指令减少镜像层数
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
@@ -539,56 +547,56 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# ----------------------------------------------------------------------------
-# 容器配置
-# ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+### 容器配置
+### ----------------------------------------------------------------------------
 
-# EXPOSE - 声明容器运行时监听的端口
-# 语法: EXPOSE <port>[/<protocol>]
+### EXPOSE - 声明容器运行时监听的端口
+### 语法: EXPOSE <port>[/<protocol>]
 EXPOSE 3333/tcp    # GDB 服务器端口
 EXPOSE 4444/tcp    # Telnet 端口
 EXPOSE 6666/tcp    # TCL 端口
 
-# VOLUME - 创建挂载点，用于持久化数据
-# 语法: VOLUME ["/data"]
+### VOLUME - 创建挂载点，用于持久化数据
+### 语法: VOLUME ["/data"]
 VOLUME ["/workspace", "/dev/bus/usb"]
 
-# ----------------------------------------------------------------------------
-# 容器启动
-# ----------------------------------------------------------------------------
+### ----------------------------------------------------------------------------
+### 容器启动
+### ----------------------------------------------------------------------------
 
-# CMD - 容器启动时的默认命令（可被覆盖）
-# 语法: CMD ["executable","param1","param2"] (exec 形式)
-#       CMD command param1 param2 (shell 形式)
+### CMD - 容器启动时的默认命令（可被覆盖）
+### 语法: CMD ["executable","param1","param2"] (exec 形式)
+###       CMD command param1 param2 (shell 形式)
 CMD ["/bin/bash"]
 
-# ENTRYPOINT - 容器启动时执行的命令（不易被覆盖）
-# 通常与 CMD 结合使用，CMD 作为默认参数
+### ENTRYPOINT - 容器启动时执行的命令（不易被覆盖）
+### 通常与 CMD 结合使用，CMD 作为默认参数
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["bash"]
 
-# HEALTHCHECK - 检查容器健康状态
+### HEALTHCHECK - 检查容器健康状态
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8080/health || exit 1
 
-# SHELL - 更改默认 shell
+### SHELL - 更改默认 shell
 SHELL ["/bin/bash", "-c"]
 
-# STOPSIGNAL - 设置停止容器的信号
+### STOPSIGNAL - 设置停止容器的信号
 STOPSIGNAL SIGTERM
 ```
 
 ### 2.3 Docker 网络配置
 
 ```dockerfile
-# docker_network_guide.md
-# Docker 网络配置指南 - 嵌入式开发场景
+### docker_network_guide.md
+### Docker 网络配置指南 - 嵌入式开发场景
 
 ```
 
 ```yaml
-# networks.yml
-# Docker Compose 网络配置示例
+### networks.yml
+### Docker Compose 网络配置示例
 
 version: '3.8'
 
@@ -663,58 +671,58 @@ services:
 #### 基础 ARM GCC 容器
 
 ```dockerfile
-# ============================================================================
-# Dockerfile.arm-gcc-basic
-# 基础 ARM GCC 交叉编译环境
-# ============================================================================
+### ============================================================================
+### Dockerfile.arm-gcc-basic
+## 基础 ARM GCC 交叉编译环境
+### ============================================================================
 
-# 使用多阶段构建减小最终镜像大小
-# 阶段 1: 下载和准备工具链
+### 使用多阶段构建减小最终镜像大小
+### 阶段 1: 下载和准备工具链
 FROM ubuntu:22.04 AS toolchain-downloader
 
-# 构建参数
+### 构建参数
 ARG ARM_TOOLCHAIN_VERSION=12.2.rel1
 ARG ARM_TOOLCHAIN_ARCH=x86_64
 
-# 安装下载工具
+### 安装下载工具
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     xz-utils \
     && rm -rf /var/lib/apt/lists/*
 
-# 设置下载目录
+### 设置下载目录
 WORKDIR /downloads
 
-# 下载 ARM GCC 工具链
-# 使用官方 ARM 编译器下载链接
+### 下载 ARM GCC 工具链
+### 使用官方 ARM 编译器下载链接
 RUN curl -fsSL -o gcc-arm.tar.xz \
     "https://developer.arm.com/-/media/Files/downloads/gnu/${ARM_TOOLCHAIN_VERSION}/binrel/arm-gnu-toolchain-${ARM_TOOLCHAIN_VERSION}-${ARM_TOOLCHAIN_ARCH}-arm-none-eabi.tar.xz" \
     && echo "下载完成: gcc-arm.tar.xz" \
     && ls -lh gcc-arm.tar.xz
 
-# 解压工具链
+### 解压工具链
 RUN tar -xf gcc-arm.tar.xz -C /opt/ \
     && rm gcc-arm.tar.xz \
     && mv /opt/arm-gnu-toolchain-* /opt/gcc-arm-none-eabi
 
-# ============================================================================
-# 阶段 2: 最终运行镜像
-# ============================================================================
+### ============================================================================
+### 阶段 2: 最终运行镜像
+### ============================================================================
 FROM ubuntu:22.04 AS embedded-builder
 
-# 镜像元数据
+### 镜像元数据
 LABEL maintainer="embedded-dev@company.com"
 LABEL description="ARM GCC Cross Compiler for STM32 Development"
 LABEL version="1.0.0"
 
-# 构建参数
+### 构建参数
 ARG USERNAME=developer
 ARG USER_UID=1000
 ARG USER_GID=1000
 ARG ARM_TOOLCHAIN_VERSION=12.2.rel1
 
-# 环境变量
+### 环境变量
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Shanghai \
     ARM_TOOLCHAIN_VERSION=${ARM_TOOLCHAIN_VERSION} \
@@ -728,8 +736,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
     SIZE=/opt/gcc-arm-none-eabi/bin/arm-none-eabi-size \
     GDB=/opt/gcc-arm-none-eabi/bin/arm-none-eabi-gdb
 
-# 安装系统依赖
-# 合并 RUN 指令以减少镜像层数
+### 安装系统依赖
+### 合并 RUN 指令以减少镜像层数
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # 基础构建工具
     build-essential \
@@ -771,21 +779,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# 从第一阶段复制工具链
+### 从第一阶段复制工具链
 COPY --from=toolchain-downloader /opt/gcc-arm-none-eabi /opt/gcc-arm-none-eabi
 
-# 验证工具链安装
+### 验证工具链安装
 RUN arm-none-eabi-gcc --version && \
     arm-none-eabi-g++ --version && \
     arm-none-eabi-gdb --version
 
-# 创建非 root 用户
+### 创建非 root 用户
 RUN groupadd --gid $USER_GID $USERNAME && \
     useradd --uid $USER_UID --gid $USER_GID -m $USERNAME && \
     usermod -aG dialout $USERNAME && \
     usermod -aG plugdev $USERNAME
 
-# 安装 Python 包（用于嵌入式开发工具）
+### 安装 Python 包（用于嵌入式开发工具）
 RUN pip3 install --no-cache-dir --upgrade pip && \
     pip3 install --no-cache-dir \
     pyserial \
@@ -797,35 +805,35 @@ RUN pip3 install --no-cache-dir --upgrade pip && \
     intelhex \
     srecord
 
-# 设置工作目录
+### 设置工作目录
 WORKDIR /workspace
 
-# 切换非 root 用户
+### 切换非 root 用户
 USER $USERNAME
 
-# 默认命令
+### 默认命令
 CMD ["/bin/bash"]
 ```
 
 #### 多架构支持容器
 
 ```dockerfile
-# ============================================================================
-# Dockerfile.multi-arch
-# 支持多架构的交叉编译容器
-# 支持: ARM Cortex-M, ARM Cortex-A, RISC-V
-# ============================================================================
+### ============================================================================
+### Dockerfile.multi-arch
+### 支持多架构的交叉编译容器
+### 支持: ARM Cortex-M, ARM Cortex-A, RISC-V
+### ============================================================================
 
 FROM ubuntu:22.04 AS multi-arch-toolchain
 
-# 构建参数 - 各架构工具链版本
+### 构建参数 - 各架构工具链版本
 ARG ARM_NONE_EABI_VER=12.2.rel1
 ARG ARM_LINUX_GNUEABI_VER=12.2.rel1
 ARG RISCV_GNU_VER=2023.07.05
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# 安装基础工具和依赖
+## 安装基础工具和依赖
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     ca-certificates \
@@ -841,10 +849,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /opt
 
-# -----------------------------------------------------------------------------
-# 安装 ARM Cortex-M 工具链 (arm-none-eabi)
-# 用于: STM32, NXP Kinetis, Nordic nRF52/53, etc.
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 安装 ARM Cortex-M 工具链 (arm-none-eabi)
+### 用于: STM32, NXP Kinetis, Nordic nRF52/53, etc.
+### -----------------------------------------------------------------------------
 RUN echo "=== Installing ARM Cortex-M toolchain ===" && \
     curl -fsSL -o arm-none-eabi.tar.xz \
     "https://developer.arm.com/-/media/Files/downloads/gnu/${ARM_NONE_EABI_VER}/binrel/arm-gnu-toolchain-${ARM_NONE_EABI_VER}-x86_64-arm-none-eabi.tar.xz" && \
@@ -853,10 +861,10 @@ RUN echo "=== Installing ARM Cortex-M toolchain ===" && \
     mv arm-gnu-toolchain-*-arm-none-eabi gcc-arm-none-eabi && \
     echo "ARM Cortex-M toolchain installed"
 
-# -----------------------------------------------------------------------------
-# 安装 ARM Linux 工具链 (arm-linux-gnueabihf)
-# 用于: ARM Linux 开发, Raspberry Pi, BeagleBone
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 安装 ARM Linux 工具链 (arm-linux-gnueabihf)
+### 用于: ARM Linux 开发, Raspberry Pi, BeagleBone
+### -----------------------------------------------------------------------------
 RUN echo "=== Installing ARM Linux toolchain ===" && \
     curl -fsSL -o arm-linux.tar.xz \
     "https://developer.arm.com/-/media/Files/downloads/gnu/${ARM_LINUX_GNUEABI_VER}/binrel/arm-gnu-toolchain-${ARM_LINUX_GNUEABI_VER}-x86_64-arm-none-linux-gnueabihf.tar.xz" && \
@@ -865,10 +873,10 @@ RUN echo "=== Installing ARM Linux toolchain ===" && \
     mv arm-gnu-toolchain-*-arm-none-linux-gnueabihf gcc-arm-linux-gnueabihf && \
     echo "ARM Linux toolchain installed"
 
-# -----------------------------------------------------------------------------
-# 安装 ARM64 Linux 工具链 (aarch64-linux-gnu)
-# 用于: 64-bit ARM Linux, Raspberry Pi 4/5, Jetson
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 安装 ARM64 Linux 工具链 (aarch64-linux-gnu)
+### 用于: 64-bit ARM Linux, Raspberry Pi 4/5, Jetson
+### -----------------------------------------------------------------------------
 RUN echo "=== Installing ARM64 Linux toolchain ===" && \
     curl -fsSL -o aarch64-linux.tar.xz \
     "https://developer.arm.com/-/media/Files/downloads/gnu/${ARM_LINUX_GNUEABI_VER}/binrel/arm-gnu-toolchain-${ARM_LINUX_GNUEABI_VER}-x86_64-aarch64-none-linux-gnu.tar.xz" && \
@@ -877,10 +885,10 @@ RUN echo "=== Installing ARM64 Linux toolchain ===" && \
     mv arm-gnu-toolchain-*-aarch64-none-linux-gnu gcc-aarch64-linux-gnu && \
     echo "ARM64 Linux toolchain installed"
 
-# -----------------------------------------------------------------------------
-# 安装 RISC-V 工具链
-# 用于: RISC-V MCU 和 Linux 开发
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 安装 RISC-V 工具链
+### 用于: RISC-V MCU 和 Linux 开发
+### -----------------------------------------------------------------------------
 RUN echo "=== Installing RISC-V toolchain ===" && \
     curl -fsSL -o riscv.tar.gz \
     "https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/${RISCV_GNU_VER}/riscv64-elf-ubuntu-22.04-nightly-${RISCV_GNU_VER}-nightly.tar.gz" && \
@@ -889,9 +897,9 @@ RUN echo "=== Installing RISC-V toolchain ===" && \
     mv riscv riscv64-unknown-elf && \
     echo "RISC-V toolchain installed"
 
-# -----------------------------------------------------------------------------
-# 最终镜像
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 最终镜像
+### -----------------------------------------------------------------------------
 FROM ubuntu:22.04 AS final
 
 LABEL maintainer="embedded-dev@company.com"
@@ -901,7 +909,7 @@ ARG USERNAME=developer
 ARG USER_UID=1000
 ARG USER_GID=1000
 
-# 设置环境变量 - 所有工具链路径
+### 设置环境变量 - 所有工具链路径
 ENV DEBIAN_FRONTEND=noninteractive \
     PATH="/opt/gcc-arm-none-eabi/bin:/opt/gcc-arm-linux-gnueabihf/bin:/opt/gcc-aarch64-linux-gnu/bin:/opt/riscv64-unknown-elf/bin:${PATH}" \
     # ARM Cortex-M
@@ -917,7 +925,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     RISCV_GCC=/opt/riscv64-unknown-elf/bin/riscv64-unknown-elf-gcc \
     RISCV_GDB=/opt/riscv64-unknown-elf/bin/riscv64-unknown-elf-gdb
 
-# 安装运行时依赖
+### 安装运行时依赖
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     make \
@@ -935,24 +943,24 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     binfmt-support \
     && rm -rf /var/lib/apt/lists/*
 
-# 复制所有工具链
+### 复制所有工具链
 COPY --from=multi-arch-toolchain /opt/gcc-arm-none-eabi /opt/gcc-arm-none-eabi
 COPY --from=multi-arch-toolchain /opt/gcc-arm-linux-gnueabihf /opt/gcc-arm-linux-gnueabihf
 COPY --from=multi-arch-toolchain /opt/gcc-aarch64-linux-gnu /opt/gcc-aarch64-linux-gnu
 COPY --from=multi-arch-toolchain /opt/riscv64-unknown-elf /opt/riscv64-unknown-elf
 
-# 验证所有工具链
+### 验证所有工具链
 RUN echo "=== Verifying toolchains ===" && \
     echo "ARM Cortex-M:" && arm-none-eabi-gcc --version && \
     echo "ARM Linux:" && arm-none-linux-gnueabihf-gcc --version && \
     echo "ARM64 Linux:" && aarch64-none-linux-gnu-gcc --version && \
     echo "RISC-V:" && riscv64-unknown-elf-gcc --version
 
-# 创建用户
+### 创建用户
 RUN groupadd --gid $USER_GID $USERNAME && \
     useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
 
-# 安装开发工具
+### 安装开发工具
 RUN pip3 install --no-cache-dir \
     pyserial \
     pyocd \
@@ -968,25 +976,25 @@ CMD ["/bin/bash"]
 
 ```bash
 #!/bin/bash
-# build_containers.sh
-# 容器构建脚本 - 支持多种配置
+### build_containers.sh
+### 容器构建脚本 - 支持多种配置
 
 set -e
 
-# 颜色定义
+### 颜色定义
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# 默认配置
+### 默认配置
 DOCKER_REGISTRY=""
 IMAGE_PREFIX="embedded"
 IMAGE_TAG="latest"
 PUSH_IMAGES=false
 PLATFORMS="linux/amd64"
 
-# 打印帮助信息
+### 打印帮助信息
 show_help() {
     cat << EOF
 Usage: $0 [OPTIONS] [TARGETS]
@@ -1015,7 +1023,7 @@ EXAMPLES:
 EOF
 }
 
-# 解析命令行参数
+### 解析命令行参数
 while [[ $# -gt 0 ]]; do
     case $1 in
         -r|--registry)
@@ -1054,7 +1062,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# 构建完整的镜像名称
+### 构建完整的镜像名称
 build_image_name() {
     local name=$1
     if [[ -n "$DOCKER_REGISTRY" ]]; then
@@ -1064,7 +1072,7 @@ build_image_name() {
     fi
 }
 
-# 检查 Docker 是否可用
+### 检查 Docker 是否可用
 check_docker() {
     if ! command -v docker &> /dev/null; then
         echo -e "${RED}Error: Docker is not installed${NC}"
@@ -1079,7 +1087,7 @@ check_docker() {
     echo -e "${GREEN}Docker is ready${NC}"
 }
 
-# 设置 buildx（用于多平台构建）
+### 设置 buildx（用于多平台构建）
 setup_buildx() {
     echo -e "${YELLOW}Setting up Docker Buildx...${NC}"
 
@@ -1090,7 +1098,7 @@ setup_buildx() {
     docker buildx inspect --bootstrap
 }
 
-# 构建 ARM GCC 容器
+### 构建 ARM GCC 容器
 build_arm_gcc() {
     local image_name=$(build_image_name "arm-gcc")
     echo -e "${YELLOW}Building ARM GCC container: ${image_name}${NC}"
@@ -1108,7 +1116,7 @@ build_arm_gcc() {
     echo -e "${GREEN}ARM GCC container built successfully${NC}"
 }
 
-# 构建多架构容器
+### 构建多架构容器
 build_multi_arch() {
     local image_name=$(build_image_name "multi-arch")
     echo -e "${YELLOW}Building Multi-Arch container: ${image_name}${NC}"
@@ -1126,7 +1134,7 @@ build_multi_arch() {
     echo -e "${GREEN}Multi-Arch container built successfully${NC}"
 }
 
-# 运行容器测试
+### 运行容器测试
 run_tests() {
     local image_name=$1
     echo -e "${YELLOW}Running tests for ${image_name}...${NC}"
@@ -1140,7 +1148,7 @@ run_tests() {
     echo -e "${GREEN}Tests passed${NC}"
 }
 
-# 主函数
+### 主函数
 main() {
     echo "=== Embedded Container Builder ==="
 
@@ -1182,33 +1190,33 @@ main
 ### 4.1 Buildroot 构建环境
 
 ```dockerfile
-# ============================================================================
-# Dockerfile.buildroot
-# Buildroot 编译环境容器
-# 用于构建完整的嵌入式 Linux 系统
-# ============================================================================
+### ============================================================================
+### Dockerfile.buildroot
+### Buildroot 编译环境容器
+### 用于构建完整的嵌入式 Linux 系统
+### ============================================================================
 
 FROM ubuntu:22.04 AS buildroot-base
 
 LABEL maintainer="embedded-linux@company.com"
 LABEL description="Buildroot Compilation Environment"
 
-# 构建参数
+### 构建参数
 ARG BUILDROOT_VERSION=2023.11.1
 ARG USERNAME=builder
 ARG USER_UID=1000
 ARG USER_GID=1000
 
-# 环境变量
+### 环境变量
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Shanghai \
     LC_ALL=C \
     BUILDROOT_VERSION=${BUILDROOT_VERSION}
 
-# -----------------------------------------------------------------------------
-# 安装 Buildroot 依赖
-# Buildroot 需要大量的构建工具和库
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 安装 Buildroot 依赖
+### Buildroot 需要大量的构建工具和库
+### -----------------------------------------------------------------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # 基础构建工具
     build-essential \
@@ -1278,19 +1286,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# 创建构建用户
+### 创建构建用户
 RUN groupadd --gid $USER_GID $USERNAME && \
     useradd --uid $USER_UID --gid $USER_GID -m $USERNAME && \
     usermod -aG sudo $USERNAME && \
     echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME
 
-# 切换到构建用户
+### 切换到构建用户
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
-# -----------------------------------------------------------------------------
-# 下载 Buildroot
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 下载 Buildroot
+### -----------------------------------------------------------------------------
 RUN echo "=== Downloading Buildroot ${BUILDROOT_VERSION} ===" && \
     wget -q "https://buildroot.org/downloads/buildroot-${BUILDROOT_VERSION}.tar.gz" && \
     tar -xzf "buildroot-${BUILDROOT_VERSION}.tar.gz" && \
@@ -1298,21 +1306,21 @@ RUN echo "=== Downloading Buildroot ${BUILDROOT_VERSION} ===" && \
     mv "buildroot-${BUILDROOT_VERSION}" buildroot && \
     echo "Buildroot downloaded successfully"
 
-# 设置工作目录
+### 设置工作目录
 WORKDIR /home/$USERNAME/buildroot
 
-# 预下载常用包（加速后续构建）
+### 预下载常用包（加速后续构建）
 RUN make source 2>/dev/null || true
 
-# 环境设置脚本
+### 环境设置脚本
 COPY --chown=$USERNAME:$USERNAME <<'EOF' /home/$USERNAME/.buildroot-env
 #!/bin/bash
-# Buildroot 环境设置
+### Buildroot 环境设置
 
 export BUILDROOT_DIR=/home/builder/buildroot
 export PATH="$BUILDROOT_DIR/output/host/usr/bin:$PATH"
 
-# 快速构建别名
+### 快速构建别名
 alias br-make='make -C $BUILDROOT_DIR'
 alias br-menuconfig='make -C $BUILDROOT_DIR menuconfig'
 alias br-linux-menuconfig='make -C $BUILDROOT_DIR linux-menuconfig'
@@ -1327,7 +1335,7 @@ EOF
 RUN chmod +x /home/$USERNAME/.buildroot-env && \
     echo "source /home/$USERNAME/.buildroot-env" >> /home/$USERNAME/.bashrc
 
-# 默认命令
+### 默认命令
 CMD ["/bin/bash"]
 ```
 
@@ -1335,10 +1343,10 @@ CMD ["/bin/bash"]
 
 ```bash
 #!/bin/bash
-# buildroot_workflow.sh
-# Buildroot 容器化工作流示例
+### buildroot_workflow.sh
+### Buildroot 容器化工作流示例
 
-# 1. 启动 Buildroot 容器
+### 1. 启动 Buildroot 容器
 start_buildroot_container() {
     docker run -it --rm \
         --name buildroot-builder \
@@ -1348,7 +1356,7 @@ start_buildroot_container() {
         embedded/buildroot:latest
 }
 
-# 2. 使用特定板级配置
+### 2. 使用特定板级配置
 build_for_board() {
     local board=$1  # 例如: raspberrypi4, stm32mp157a-dk1
 
@@ -1364,7 +1372,7 @@ build_for_board() {
         "
 }
 
-# 3. 自定义配置构建
+### 3. 自定义配置构建
 build_custom() {
     local config_file=$1
 
@@ -1381,7 +1389,7 @@ build_custom() {
         "
 }
 
-# 4. 增量构建（保留之前的构建结果）
+### 4. 增量构建（保留之前的构建结果）
 incremental_build() {
     docker run --rm \
         -v "buildroot-output":/home/builder/buildroot/output \
@@ -1394,24 +1402,24 @@ incremental_build() {
 ### 4.2 Yocto Project 构建环境
 
 ```dockerfile
-# ============================================================================
-# Dockerfile.yocto
-# Yocto Project 编译环境容器
-# 支持 Poky、OpenEmbedded、meta-layers
-# ============================================================================
+### ============================================================================
+### Dockerfile.yocto
+### Yocto Project 编译环境容器
+### 支持 Poky、OpenEmbedded、meta-layers
+### ============================================================================
 
 FROM ubuntu:22.04 AS yocto-builder
 
 LABEL maintainer="yocto-dev@company.com"
 LABEL description="Yocto Project Build Environment"
 
-# 构建参数
+### 构建参数
 ARG YOCTO_RELEASE=mickledore
 ARG USERNAME=yocto
 ARG USER_UID=1000
 ARG USER_GID=1000
 
-# 环境变量
+### 环境变量
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Shanghai \
     LC_ALL=en_US.UTF-8 \
@@ -1419,10 +1427,10 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LANGUAGE=en_US:en \
     YOCTO_RELEASE=${YOCTO_RELEASE}
 
-# -----------------------------------------------------------------------------
-# 安装 Yocto 依赖
-# Yocto 有严格的依赖要求
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 安装 Yocto 依赖
+### Yocto 有严格的依赖要求
+### -----------------------------------------------------------------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # 基础构建工具
     build-essential \
@@ -1463,65 +1471,65 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# 设置 locale
+### 设置 locale
 RUN apt-get update && apt-get install -y locales && \
     locale-gen en_US.UTF-8 && \
     update-locale LANG=en_US.UTF-8 && \
     rm -rf /var/lib/apt/lists/*
 
-# 创建 Yocto 用户
+### 创建 Yocto 用户
 RUN groupadd --gid $USER_GID $USERNAME && \
     useradd --uid $USER_UID --gid $USER_GID -m $USERNAME && \
     usermod -aG sudo $USERNAME && \
     echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME
 
-# 切换到 Yocto 用户
+### 切换到 Yocto 用户
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
-# -----------------------------------------------------------------------------
-# 下载 Poky
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 下载 Poky
+### -----------------------------------------------------------------------------
 RUN echo "=== Cloning Poky (${YOCTO_RELEASE}) ===" && \
     git clone -b ${YOCTO_RELEASE} \
         --single-branch --depth 1 \
         https://git.yoctoproject.org/git/poky && \
     echo "Poky cloned successfully"
 
-# 工作目录
+### 工作目录
 WORKDIR /home/$USERNAME/poky
 
-# 初始化脚本
+### 初始化脚本
 COPY --chown=$USERNAME:$USERNAME <<'EOF' /home/$USERNAME/init-yocto.sh
 #!/bin/bash
-# Yocto 初始化脚本
+### Yocto 初始化脚本
 
 YOCTO_DIR=/home/yocto/poky
 
 cd $YOCTO_DIR
 
-# 初始化构建环境
+### 初始化构建环境
 source oe-init-build-env
 
-# 设置并行编译选项
+### 设置并行编译选项
 cat >> conf/local.conf << 'LOCALCONF'
 
-# 并行编译设置
+### 并行编译设置
 BB_NUMBER_THREADS = "${@oe.utils.cpu_count()}"
 PARALLEL_MAKE = "-j${@oe.utils.cpu_count()}"
 
-# 使用本地镜像加速
-# SOURCE_MIRROR_URL = "file:///home/yocto/downloads"
-# INHERIT += "own-mirrors"
+### 使用本地镜像加速
+### SOURCE_MIRROR_URL = "file:///home/yocto/downloads"
+### INHERIT += "own-mirrors"
 
-# 启用 ccache
+### 启用 ccache
 INHERIT += "ccache"
 CCACHE_TOP_DIR = "/home/yocto/.ccache"
 
-# 共享状态缓存
+### 共享状态缓存
 SSTATE_DIR = "/home/yocto/sstate-cache"
 
-# 下载目录
+### 下载目录
 DL_DIR = "/home/yocto/downloads"
 LOCALCONF
 
@@ -1531,7 +1539,7 @@ EOF
 
 RUN chmod +x /home/$USERNAME/init-yocto.sh
 
-# 默认命令
+### 默认命令
 CMD ["/bin/bash"]
 ```
 
@@ -1717,28 +1725,28 @@ CMD ["/bin/bash"]
 ### 5.2 Dev Container Dockerfile
 
 ```dockerfile
-# ============================================================================
-# .devcontainer/Dockerfile
-# VS Code Dev Container 专用 Dockerfile
-# ============================================================================
+### ============================================================================
+### .devcontainer/Dockerfile
+### VS Code Dev Container 专用 Dockerfile
+### ============================================================================
 
 FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
 
-# 构建参数
+### 构建参数
 ARG ARM_TOOLCHAIN_VERSION=12.2.rel1
 ARG STM32CUBEMX_VERSION=6.9.0
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=1000
 
-# 环境变量
+### 环境变量
 ENV DEBIAN_FRONTEND=noninteractive \
     ARM_TOOLCHAIN_VERSION=${ARM_TOOLCHAIN_VERSION} \
     PATH="/opt/gcc-arm-none-eabi/bin:/opt/st/stm32cubemx:${PATH}"
 
-# -----------------------------------------------------------------------------
-# 安装基础工具
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+## 安装基础工具
+### -----------------------------------------------------------------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # 构建工具
     build-essential \
@@ -1781,9 +1789,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# -----------------------------------------------------------------------------
-# 安装 ARM GCC 工具链
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 安装 ARM GCC 工具链
+### -----------------------------------------------------------------------------
 RUN echo "Installing ARM GCC ${ARM_TOOLCHAIN_VERSION}..." && \
     mkdir -p /opt/gcc-arm-none-eabi && \
     curl -fsSL \
@@ -1791,9 +1799,9 @@ RUN echo "Installing ARM GCC ${ARM_TOOLCHAIN_VERSION}..." && \
     tar -xJC /opt/gcc-arm-none-eabi --strip-components=1 && \
     arm-none-eabi-gcc --version
 
-# -----------------------------------------------------------------------------
-# 安装 OpenOCD
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 安装 OpenOCD
+### -----------------------------------------------------------------------------
 RUN echo "Installing OpenOCD..." && \
     apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -1801,9 +1809,9 @@ RUN echo "Installing OpenOCD..." && \
         libhidapi-hidraw0 \
         && rm -rf /var/lib/apt/lists/*
 
-# -----------------------------------------------------------------------------
-# 安装调试工具
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 安装调试工具
+### -----------------------------------------------------------------------------
 RUN pip3 install --no-cache-dir --upgrade pip && \
     pip3 install --no-cache-dir \
     pyocd \
@@ -1811,39 +1819,39 @@ RUN pip3 install --no-cache-dir --upgrade pip && \
     mbed-cli \
     imgtool
 
-# -----------------------------------------------------------------------------
-# 安装 STM32CubeMX（可选）
-# -----------------------------------------------------------------------------
-# 注意：STM32CubeMX 需要图形界面，在 Dev Container 中可能需要额外配置
-# RUN mkdir -p /opt/st/stm32cubemx && \
-#     curl -fsSL -o /tmp/cubemx.zip \
-#         "https://www.st.com/content/st_com/en/products/development-tools/software-development-tools/stm32-software-development-tools/stm32-configurators-and-code-generators/stm32cubemx.html" && \
-#     unzip -q /tmp/cubemx.zip -d /opt/st/stm32cubemx && \
-#     rm /tmp/cubemx.zip
+### -----------------------------------------------------------------------------
+### 安装 STM32CubeMX（可选）
+### -----------------------------------------------------------------------------
+### 注意：STM32CubeMX 需要图形界面，在 Dev Container 中可能需要额外配置
+### RUN mkdir -p /opt/st/stm32cubemx && \
+###     curl -fsSL -o /tmp/cubemx.zip \
+###         "https://www.st.com/content/st_com/en/products/development-tools/software-development-tools/stm32-software-development-tools/stm32-configurators-and-code-generators/stm32cubemx.html" && \
+###     unzip -q /tmp/cubemx.zip -d /opt/st/stm32cubemx && \
+###     rm /tmp/cubemx.zip
 
-# -----------------------------------------------------------------------------
-# 配置用户
-# -----------------------------------------------------------------------------
-# 用户已在基础镜像中创建，这里只需添加权限
+### -----------------------------------------------------------------------------
+### 配置用户
+### -----------------------------------------------------------------------------
+## 用户已在基础镜像中创建，这里只需添加权限
 RUN usermod -aG dialout,plugdev ${USERNAME}
 
-# 创建常用目录
+### 创建常用目录
 RUN mkdir -p /home/${USERNAME}/.ccache && \
     chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}/.ccache
 
-# -----------------------------------------------------------------------------
-# 安装附加工具脚本
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 安装附加工具脚本
+### -----------------------------------------------------------------------------
 COPY --chown=${USERNAME}:${USERNAME} scripts/* /usr/local/bin/
 RUN chmod +x /usr/local/bin/*
 
-# -----------------------------------------------------------------------------
-# 设置工作目录
-# -----------------------------------------------------------------------------
+### -----------------------------------------------------------------------------
+### 设置工作目录
+### -----------------------------------------------------------------------------
 WORKDIR /workspace
 USER ${USERNAME}
 
-# 默认命令
+### 默认命令
 CMD ["/bin/bash"]
 ```
 
@@ -1851,14 +1859,14 @@ CMD ["/bin/bash"]
 
 ```bash
 #!/bin/bash
-# .devcontainer/post-create.sh
-# Dev Container 创建后执行脚本
+### .devcontainer/post-create.sh
+### Dev Container 创建后执行脚本
 
 set -e
 
 echo "=== Post-Create Setup ==="
 
-# 1. 配置 Git（如果尚未配置）
+### 1. 配置 Git（如果尚未配置）
 if ! git config --global user.name &> /dev/null; then
     echo "提示: 请配置 Git 用户名: git config --global user.name 'Your Name'"
 fi
@@ -1867,12 +1875,12 @@ if ! git config --global user.email &> /dev/null; then
     echo "提示: 请配置 Git 邮箱: git config --global user.email 'your@email.com'"
 fi
 
-# 2. 设置 ccache
+### 2. 设置 ccache
 export CCACHE_DIR=/home/vscode/.ccache
 ccache --max-size=5G
 echo "ccache configured with max size: 5GB"
 
-# 3. 验证工具链
+### 3. 验证工具链
 echo "Verifying toolchains..."
 echo "ARM GCC:"
 arm-none-eabi-gcc --version | head -n 1
@@ -1886,26 +1894,26 @@ openocd --version | head -n 1
 echo "Python3:"
 python3 --version
 
-# 4. 安装 Python 依赖（如果存在 requirements.txt）
+### 4. 安装 Python 依赖（如果存在 requirements.txt）
 if [ -f "requirements.txt" ]; then
     echo "Installing Python dependencies..."
     pip3 install --user -r requirements.txt
 fi
 
-# 5. 初始化 Git 子模块
+### 5. 初始化 Git 子模块
 if [ -f ".gitmodules" ]; then
     echo "Initializing git submodules..."
     git submodule update --init --recursive
 fi
 
-# 6. 设置 udev 规则（需要特权模式）
+### 6. 设置 udev 规则（需要特权模式）
 if [ -d ".devcontainer/udev" ]; then
     echo "Setting up udev rules..."
     sudo cp .devcontainer/udev/*.rules /etc/udev/rules.d/ 2>/dev/null || true
     sudo udevadm control --reload-rules 2>/dev/null || true
 fi
 
-# 7. 预下载常用文件
+### 7. 预下载常用文件
 if [ -f ".devcontainer/setup-scripts/download-tools.sh" ]; then
     bash .devcontainer/setup-scripts/download-tools.sh
 fi
@@ -1972,12 +1980,12 @@ echo "  run-tests        - 运行测试"
 
 ```bash
 #!/bin/bash
-# .devcontainer/codespaces-setup.sh
-# GitHub Codespaces 设置脚本
+### .devcontainer/codespaces-setup.sh
+### GitHub Codespaces 设置脚本
 
 echo "Setting up GitHub Codespaces for embedded development..."
 
-# 安装 ARM GCC
+### 安装 ARM GCC
 ARM_VERSION="12.2.rel1"
 INSTALL_DIR="$HOME/.local/opt/gcc-arm-none-eabi"
 
@@ -1985,11 +1993,11 @@ mkdir -p "$INSTALL_DIR"
 curl -fsSL "https://developer.arm.com/-/media/Files/downloads/gnu/${ARM_VERSION}/binrel/arm-gnu-toolchain-${VERSION}-x86_64-arm-none-eabi.tar.xz" | \
     tar -xJC "$INSTALL_DIR" --strip-components=1
 
-# 添加到 PATH
+### 添加到 PATH
 echo "export PATH=\"$INSTALL_DIR/bin:\$PATH\"" >> ~/.bashrc
 export PATH="$INSTALL_DIR/bin:$PATH"
 
-# 验证安装
+### 验证安装
 arm-none-eabi-gcc --version
 
 echo "Setup complete!"
@@ -1998,8 +2006,8 @@ echo "Setup complete!"
 ### 6.2 Codespaces 到本地设备调试
 
 ```yaml
-# .github/codespaces/tunnel.yml
-# 使用 GitHub CLI 创建本地设备调试隧道
+### .github/codespaces/tunnel.yml
+### 使用 GitHub CLI 创建本地设备调试隧道
 
 name: Device Debug Tunnel
 
@@ -2024,8 +2032,8 @@ jobs:
 ### 7.1 完整开发环境配置
 
 ```yaml
-# docker-compose.yml
-# 完整嵌入式开发环境
+### docker-compose.yml
+### 完整嵌入式开发环境
 
 version: '3.8'
 
@@ -2209,9 +2217,9 @@ services:
     profiles:
       - ci
 
-# ============================================================================
-# 网络配置
-# ============================================================================
+### ============================================================================
+### 网络配置
+### ============================================================================
 networks:
   embedded-net:
     driver: bridge
@@ -2219,9 +2227,9 @@ networks:
       config:
         - subnet: 172.28.0.0/16
 
-# ============================================================================
-# 数据卷
-# ============================================================================
+### ============================================================================
+### 数据卷
+### ============================================================================
 volumes:
   ccache:
     driver: local
@@ -2235,23 +2243,23 @@ volumes:
 
 ```bash
 #!/bin/bash
-# dev.sh
-# Docker Compose 开发环境管理脚本
+### dev.sh
+### Docker Compose 开发环境管理脚本
 
 set -e
 
-# 颜色定义
+### 颜色定义
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-# 获取当前用户 ID
+### 获取当前用户 ID
 export USER_UID=$(id -u)
 export USER_GID=$(id -g)
 
-# 显示帮助
+### 显示帮助
 show_help() {
     cat << EOF
 嵌入式开发环境管理脚本
@@ -2282,7 +2290,7 @@ Examples:
 EOF
 }
 
-# 启动环境
+### 启动环境
 cmd_start() {
     echo -e "${YELLOW}Starting embedded development environment...${NC}"
     docker-compose up -d dev
@@ -2290,25 +2298,25 @@ cmd_start() {
     echo "使用 '$0 shell' 进入开发容器"
 }
 
-# 停止环境
+### 停止环境
 cmd_stop() {
     echo -e "${YELLOW}Stopping environment...${NC}"
     docker-compose down
     echo -e "${GREEN}Environment stopped.${NC}"
 }
 
-# 重启环境
+### 重启环境
 cmd_restart() {
     cmd_stop
     cmd_start
 }
 
-# 进入 shell
+### 进入 shell
 cmd_shell() {
     docker-compose exec dev /bin/bash
 }
 
-# 构建项目
+### 构建项目
 cmd_build() {
     echo -e "${YELLOW}Building project...${NC}"
     docker-compose exec dev bash -c "
@@ -2320,7 +2328,7 @@ cmd_build() {
     echo -e "${GREEN}Build complete!${NC}"
 }
 
-# 烧录固件
+### 烧录固件
 cmd_flash() {
     local firmware=${1:-build/firmware.bin}
     echo -e "${YELLOW}Flashing firmware: $firmware${NC}"
@@ -2342,7 +2350,7 @@ cmd_flash() {
     echo -e "${GREEN}Flash complete!${NC}"
 }
 
-# 启动调试
+### 启动调试
 cmd_debug() {
     echo -e "${YELLOW}Starting debug session...${NC}"
 
@@ -2358,7 +2366,7 @@ cmd_debug() {
     "
 }
 
-# 运行测试
+### 运行测试
 cmd_test() {
     echo -e "${YELLOW}Running tests...${NC}"
     docker-compose exec dev bash -c "
@@ -2367,26 +2375,26 @@ cmd_test() {
     "
 }
 
-# CI 构建
+### CI 构建
 cmd_ci() {
     echo -e "${YELLOW}Running CI build...${NC}"
     docker-compose --profile ci run --rm ci-agent
     echo -e "${GREEN}CI build complete!${NC}"
 }
 
-# 清理
+### 清理
 cmd_clean() {
     echo -e "${YELLOW}Cleaning build artifacts...${NC}"
     docker-compose exec dev bash -c "rm -rf build/*"
     echo -e "${GREEN}Clean complete!${NC}"
 }
 
-# 查看日志
+### 查看日志
 cmd_logs() {
     docker-compose logs -f "$@"
 }
 
-# 查看状态
+### 查看状态
 cmd_status() {
     echo -e "${BLUE}Container Status:${NC}"
     docker-compose ps
@@ -2397,7 +2405,7 @@ cmd_status() {
         $(docker-compose ps -q) 2>/dev/null || echo "No containers running"
 }
 
-# 主函数
+### 主函数
 main() {
     case "${1:-}" in
         start)
@@ -2460,11 +2468,11 @@ main "$@"
 ### 8.1 QEMU 测试容器
 
 ```dockerfile
-# ============================================================================
-# Dockerfile.qemu
-# QEMU 测试环境容器
-# 用于在容器中运行嵌入式软件测试
-# ============================================================================
+### ============================================================================
+### Dockerfile.qemu
+### QEMU 测试环境容器
+### 用于在容器中运行嵌入式软件测试
+### ============================================================================
 
 FROM ubuntu:22.04 AS qemu-base
 
@@ -2474,7 +2482,7 @@ LABEL description="QEMU Testing Environment for Embedded Software"
 ENV DEBIAN_FRONTEND=noninteractive \
     QEMU_VERSION=8.1.0
 
-# 安装 QEMU 和测试工具
+### 安装 QEMU 和测试工具
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # QEMU 模拟器
     qemu-system-arm \
@@ -2494,7 +2502,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     expect \
     && rm -rf /var/lib/apt/lists/*
 
-# 安装 Python 测试库
+### 安装 Python 测试库
 RUN pip3 install --no-cache-dir \
     pytest \
     pytest-html \
@@ -2502,13 +2510,13 @@ RUN pip3 install --no-cache-dir \
     pyserial \
     pexpect
 
-# 创建工作目录
+### 创建工作目录
 WORKDIR /test
 
-# 测试入口脚本
+### 测试入口脚本
 COPY <<'EOF' /usr/local/bin/run-tests.sh
 #!/bin/bash
-# 容器内测试运行脚本
+### 容器内测试运行脚本
 
 set -e
 
@@ -2522,7 +2530,7 @@ echo "=== Running Embedded Tests ==="
 echo "Test directory: $TEST_DIR"
 echo "Results directory: $RESULTS_DIR"
 
-# 运行单元测试
+### 运行单元测试
 echo "Running unit tests..."
 cd "$TEST_DIR"
 pytest tests/ \
@@ -2534,7 +2542,7 @@ pytest tests/ \
     --cov-report=html:"$COVERAGE_DIR/html" \
     --junitxml="$RESULTS_DIR/junit.xml"
 
-# 运行 QEMU 集成测试
+### 运行 QEMU 集成测试
 echo "Running QEMU integration tests..."
 bash tests/qemu/run_qemu_tests.sh
 
@@ -2550,8 +2558,8 @@ CMD ["/usr/local/bin/run-tests.sh"]
 ### 8.2 QEMU 测试配置
 
 ```yaml
-# docker-compose.test.yml
-# 测试环境 Docker Compose 配置
+### docker-compose.test.yml
+### 测试环境 Docker Compose 配置
 
 version: '3.8'
 
@@ -2631,17 +2639,17 @@ volumes:
 
 ```bash
 #!/bin/bash
-# run_tests.sh
-# 自动化测试脚本
+### run_tests.sh
+### 自动化测试脚本
 
 set -e
 
-# 配置
+### 配置
 TEST_TYPES=${TEST_TYPES:-"unit integration"}
 RESULTS_DIR=${RESULTS_DIR:-"./test-results"}
 COVERAGE_THRESHOLD=${COVERAGE_THRESHOLD:-80}
 
-# 颜色
+### 颜色
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -2654,11 +2662,11 @@ echo "Running Embedded Tests"
 echo "Test types: $TEST_TYPES"
 echo "=========================================="
 
-# 构建测试容器
+### 构建测试容器
 echo -e "${YELLOW}Building test containers...${NC}"
 docker-compose -f docker-compose.test.yml build
 
-# 运行单元测试
+### 运行单元测试
 run_unit_tests() {
     echo -e "${YELLOW}Running unit tests...${NC}"
 
@@ -2672,7 +2680,7 @@ run_unit_tests() {
     fi
 }
 
-# 运行 QEMU 测试
+### 运行 QEMU 测试
 run_qemu_tests() {
     echo -e "${YELLOW}Running QEMU integration tests...${NC}"
 
@@ -2690,7 +2698,7 @@ run_qemu_tests() {
     fi
 }
 
-# 运行 HIL 测试（如果有硬件）
+### 运行 HIL 测试（如果有硬件）
 run_hitl_tests() {
     echo -e "${YELLOW}Running Hardware-in-the-Loop tests...${NC}"
 
@@ -2702,7 +2710,7 @@ run_hitl_tests() {
     fi
 }
 
-# 检查覆盖率
+### 检查覆盖率
 check_coverage() {
     echo -e "${YELLOW}Checking code coverage...${NC}"
 
@@ -2723,7 +2731,7 @@ check_coverage() {
     fi
 }
 
-# 生成报告
+### 生成报告
 generate_report() {
     echo -e "${YELLOW}Generating test report...${NC}"
 
@@ -2755,7 +2763,7 @@ generate_report() {
 EOF
 }
 
-# 主执行流程
+### 主执行流程
 main() {
     for test_type in $TEST_TYPES; do
         case $test_type in
@@ -2794,8 +2802,8 @@ main
 ### 9.1 GitHub Actions 完整配置
 
 ```yaml
-# .github/workflows/embedded-ci.yml
-# 完整的嵌入式 CI/CD 流水线
+### .github/workflows/embedded-ci.yml
+### 完整的嵌入式 CI/CD 流水线
 
 name: Embedded CI/CD Pipeline
 
@@ -2806,7 +2814,7 @@ on:
   pull_request:
     branches: [main, develop]
 
-# 环境变量
+### 环境变量
 env:
   ARM_TOOLCHAIN_VERSION: 12.2.rel1
   BUILD_TYPE: Release
@@ -3130,10 +3138,10 @@ jobs:
 ### 9.2 GitLab CI 配置
 
 ```yaml
-# .gitlab-ci.yml
-# GitLab CI/CD 配置 for 嵌入式开发
+### .gitlab-ci.yml
+### GitLab CI/CD 配置 for 嵌入式开发
 
-# 全局变量
+### 全局变量
 variables:
   ARM_TOOLCHAIN_VERSION: "12.2.rel1"
   DOCKER_DRIVER: overlay2
@@ -3141,13 +3149,13 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
   GIT_DEPTH: 0
 
-# 使用容器执行
+### 使用容器执行
 default:
   image: $CI_REGISTRY/embedded/dev:latest
   tags:
     - docker
 
-# 流水线阶段
+### 流水线阶段
 stages:
   - lint
   - build
@@ -3155,16 +3163,16 @@ stages:
   - analyze
   - deploy
 
-# 缓存配置
+### 缓存配置
 .ccache_template: &ccache
   cache:
     key: "ccache-${CI_JOB_NAME}"
     paths:
       - .ccache/
 
-# ============================================================================
-# 代码检查阶段
-# ============================================================================
+### ============================================================================
+### 代码检查阶段
+### ============================================================================
 
 clang-format:
   stage: lint
@@ -3180,9 +3188,9 @@ cppcheck:
     - cppcheck --enable=all --error-exitcode=1 --inline-suppr src/
   allow_failure: true
 
-# ============================================================================
-# 构建阶段
-# ============================================================================
+### ============================================================================
+### 构建阶段
+### ============================================================================
 
 build:stm32f4:
   stage: build
@@ -3217,9 +3225,9 @@ build:stm32f7:
       - build/*.bin
     expire_in: 1 week
 
-# ============================================================================
-# 测试阶段
-# ============================================================================
+### ============================================================================
+### 测试阶段
+### ============================================================================
 
 unit_tests:
   stage: test
@@ -3244,9 +3252,9 @@ integration_tests:
   script:
     - docker-compose -f docker-compose.test.yml up --abort-on-container-exit
 
-# ============================================================================
-# 分析阶段
-# ============================================================================
+### ============================================================================
+### 分析阶段
+### ============================================================================
 
 sonarqube:
   stage: analyze
@@ -3285,9 +3293,9 @@ code_quality:
     expire_in: 1 week
   allow_failure: true
 
-# ============================================================================
-# 部署阶段
-# ============================================================================
+### ============================================================================
+### 部署阶段
+### ============================================================================
 
 deploy:staging:
   stage: deploy
@@ -3312,9 +3320,9 @@ deploy:production:
     - main
   when: manual
 
-# ============================================================================
-# 容器镜像构建
-# ============================================================================
+### ============================================================================
+### 容器镜像构建
+### ============================================================================
 
 docker:build:
   stage: deploy
@@ -3340,10 +3348,10 @@ docker:build:
 ### 10.1 Trivy 安全配置
 
 ```yaml
-# trivy.yml
-# Trivy 安全扫描配置
+### trivy.yml
+### Trivy 安全扫描配置
 
-# 扫描配置
+### 扫描配置
 scan:
   # 扫描类型
   scanners:
@@ -3359,39 +3367,39 @@ scan:
   # 离线模式
   offline: false
 
-# 严重性级别
+### 严重性级别
 severity:
   - HIGH
   - CRITICAL
 
-# 忽略的文件
+### 忽略的文件
 skip-files:
   - "**/*.test"
   - "**/testdata/**"
   - "**/vendor/**"
 
-# 忽略的目录
+### 忽略的目录
 skip-dirs:
   - ".git"
   - "build"
   - "docs"
 
-# 报告格式
+### 报告格式
 format: sarif
 output: trivy-results.sarif
 
-# 退出代码
+### 退出代码
 exit-code: 1
 
-# 忽略未修复的漏洞
+### 忽略未修复的漏洞
 ignore-unfixed: false
 ```
 
 ### 10.2 GitHub Actions 安全扫描工作流
 
 ```yaml
-# .github/workflows/security-scan.yml
-# 安全扫描专用工作流
+### .github/workflows/security-scan.yml
+### 安全扫描专用工作流
 
 name: Security Scan
 
@@ -3522,8 +3530,8 @@ jobs:
 ### 10.3 安全扫描 Docker Compose
 
 ```yaml
-# docker-compose.security.yml
-# 安全扫描服务配置
+### docker-compose.security.yml
+### 安全扫描服务配置
 
 version: '3.8'
 
@@ -3625,21 +3633,21 @@ stm32-containerized-project/
 ### 11.2 完整 Dockerfile
 
 ```dockerfile
-# ============================================================================
-# docker/Dockerfile.stm32-complete
-# 完整的 STM32 容器化开发环境
-# ============================================================================
+### ============================================================================
+### docker/Dockerfile.stm32-complete
+### 完整的 STM32 容器化开发环境
+### ============================================================================
 
 FROM ubuntu:22.04 AS stm32-toolchain
 
-# 构建参数
+### 构建参数
 ARG ARM_VERSION=12.2.rel1
 ARG STM32CUBEMX_VERSION=6.9.0
 ARG USERNAME=developer
 ARG USER_UID=1000
 ARG USER_GID=1000
 
-# 环境变量
+### 环境变量
 ENV DEBIAN_FRONTEND=noninteractive \
     TZ=Asia/Shanghai \
     ARM_VERSION=${ARM_VERSION} \
@@ -3649,9 +3657,9 @@ LABEL maintainer="stm32-dev@company.com"
 LABEL description="Complete STM32 Development Environment"
 LABEL version="2.0.0"
 
-# =============================================================================
-# 阶段 1: 安装基础依赖
-# =============================================================================
+### =============================================================================
+## 阶段 1: 安装基础依赖
+### =============================================================================
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # 基础工具
     build-essential \
@@ -3712,9 +3720,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# =============================================================================
-# 阶段 2: 安装 ARM GCC 工具链
-# =============================================================================
+### =============================================================================
+### 阶段 2: 安装 ARM GCC 工具链
+### =============================================================================
 RUN echo "Installing ARM GCC ${ARM_VERSION}..." && \
     mkdir -p /opt/gcc-arm-none-eabi && \
     curl -fsSL \
@@ -3723,9 +3731,9 @@ RUN echo "Installing ARM GCC ${ARM_VERSION}..." && \
     arm-none-eabi-gcc --version && \
     echo "ARM GCC installed successfully"
 
-# =============================================================================
-# 阶段 3: 安装 OpenOCD
-# =============================================================================
+### =============================================================================
+### 阶段 3: 安装 OpenOCD
+### =============================================================================
 RUN echo "Building OpenOCD from source..." && \
     cd /tmp && \
     git clone --depth 1 --branch v0.12.0 \
@@ -3744,9 +3752,9 @@ RUN echo "Building OpenOCD from source..." && \
     rm -rf /tmp/openocd && \
     openocd --version
 
-# =============================================================================
-# 阶段 4: 安装 ST-Link 工具
-# =============================================================================
+### =============================================================================
+### 阶段 4: 安装 ST-Link 工具
+### =============================================================================
 RUN echo "Installing ST-Link tools..." && \
     cd /tmp && \
     git clone --depth 1 --branch v1.7.0 \
@@ -3760,9 +3768,9 @@ RUN echo "Installing ST-Link tools..." && \
     cd / && \
     rm -rf /tmp/stlink
 
-# =============================================================================
-# 阶段 5: 安装 Python 工具
-# =============================================================================
+### =============================================================================
+### 阶段 5: 安装 Python 工具
+### =============================================================================
 RUN pip3 install --no-cache-dir --upgrade pip && \
     pip3 install --no-cache-dir \
     pyserial \
@@ -3776,9 +3784,9 @@ RUN pip3 install --no-cache-dir --upgrade pip && \
     cbor2 \
     click
 
-# =============================================================================
-# 阶段 6: 配置用户和权限
-# =============================================================================
+### =============================================================================
+### 阶段 6: 配置用户和权限
+### =============================================================================
 RUN groupadd --gid $USER_GID $USERNAME && \
     useradd --uid $USER_UID --gid $USER_GID -m $USERNAME && \
     usermod -aG dialout $USERNAME && \
@@ -3786,16 +3794,16 @@ RUN groupadd --gid $USER_GID $USERNAME && \
     echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME && \
     chmod 0440 /etc/sudoers.d/$USERNAME
 
-# 创建工具目录
+### 创建工具目录
 RUN mkdir -p /workspace && \
     chown -R $USERNAME:$USERNAME /workspace
 
-# =============================================================================
-# 阶段 7: 添加实用脚本
-# =============================================================================
+### =============================================================================
+### 阶段 7: 添加实用脚本
+### =============================================================================
 COPY --chown=$USERNAME:$USERNAME <<'EOF' /usr/local/bin/build-firmware
 #!/bin/bash
-# 固件构建脚本
+### 固件构建脚本
 
 set -e
 
@@ -3822,7 +3830,7 @@ EOF
 
 COPY --chown=$USERNAME:$USERNAME <<'EOF' /usr/local/bin/flash-stm32
 #!/bin/bash
-# STM32 烧录脚本
+### STM32 烧录脚本
 
 FIRMWARE=${1:-build/firmware.bin}
 INTERFACE=${INTERFACE:-stlink}
@@ -3840,7 +3848,7 @@ EOF
 
 COPY --chown=$USERNAME:$USERNAME <<'EOF' /usr/local/bin/debug-stm32
 #!/bin/bash
-# STM32 调试脚本
+### STM32 调试脚本
 
 ELF_FILE=${1:-build/firmware.elf}
 INTERFACE=${INTERFACE:-stlink}
@@ -3848,17 +3856,17 @@ TARGET=${TARGET:-stm32f4x}
 
 echo "Starting debug session for $ELF_FILE..."
 
-# 启动 OpenOCD 后台进程
+### 启动 OpenOCD 后台进程
 openocd \
     -f interface/${INTERFACE}.cfg \
     -f target/${TARGET}.cfg &
 
 OCD_PID=$!
 
-# 等待 OpenOCD 启动
+### 等待 OpenOCD 启动
 sleep 2
 
-# 启动 GDB
+### 启动 GDB
 arm-none-eabi-gdb "$ELF_FILE" \
     -ex "target remote localhost:3333" \
     -ex "monitor reset halt" \
@@ -3866,7 +3874,7 @@ arm-none-eabi-gdb "$ELF_FILE" \
     -ex "break main" \
     -ex "continue"
 
-# 清理
+### 清理
 kill $OCD_PID 2>/dev/null
 EOF
 
@@ -3874,21 +3882,21 @@ RUN chmod +x /usr/local/bin/build-firmware \
     /usr/local/bin/flash-stm32 \
     /usr/local/bin/debug-stm32
 
-# =============================================================================
-# 阶段 8: 设置工作目录
-# =============================================================================
+### =============================================================================
+### 阶段 8: 设置工作目录
+### =============================================================================
 WORKDIR /workspace
 USER $USERNAME
 
-# 默认命令
+### 默认命令
 CMD ["/bin/bash"]
 ```
 
 ### 11.3 Docker Compose 完整配置
 
 ```yaml
-# docker/docker-compose.stm32.yml
-# STM32 完整开发环境
+### docker/docker-compose.stm32.yml
+### STM32 完整开发环境
 
 version: '3.8'
 
@@ -4041,24 +4049,24 @@ volumes:
 
 ```bash
 #!/bin/bash
-# stm32-manager.sh
-# STM32 项目管理脚本
+### stm32-manager.sh
+### STM32 项目管理脚本
 
 set -e
 
-# 配置
+### 配置
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_NAME="stm32-project"
 COMPOSE_FILE="$SCRIPT_DIR/docker/docker-compose.stm32.yml"
 
-# 颜色
+### 颜色
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-# 显示帮助
+### 显示帮助
 show_help() {
     cat << EOF
 STM32 项目管理脚本
@@ -4089,7 +4097,7 @@ Examples:
 EOF
 }
 
-# 初始化环境
+### 初始化环境
 cmd_setup() {
     echo -e "${YELLOW}Setting up STM32 development environment...${NC}"
 
@@ -4124,7 +4132,7 @@ cmd_setup() {
     echo "Run '$0 start' to start the development environment"
 }
 
-# 启动环境
+### 启动环境
 cmd_start() {
     echo -e "${YELLOW}Starting STM32 development environment...${NC}"
 
@@ -4137,19 +4145,19 @@ cmd_start() {
     echo "Run '$0 shell' to enter the container"
 }
 
-# 停止环境
+### 停止环境
 cmd_stop() {
     echo -e "${YELLOW}Stopping environment...${NC}"
     docker-compose -f "$COMPOSE_FILE" down
     echo -e "${GREEN}Environment stopped.${NC}"
 }
 
-# 进入 shell
+### 进入 shell
 cmd_shell() {
     docker-compose -f "$COMPOSE_FILE" exec stm32-dev /bin/bash
 }
 
-# 构建固件
+### 构建固件
 cmd_build() {
     local build_type="Debug"
     local target=""
@@ -4190,7 +4198,7 @@ cmd_build() {
     echo -e "${GREEN}Build complete!${NC}"
 }
 
-# 烧录固件
+### 烧录固件
 cmd_flash() {
     local firmware="build/firmware.bin"
     local interface="stlink"
@@ -4218,7 +4226,7 @@ cmd_flash() {
     echo -e "${GREEN}Flash complete!${NC}"
 }
 
-# 调试
+### 调试
 cmd_debug() {
     local elf_file="${1:-build/firmware.elf}"
 
@@ -4238,7 +4246,7 @@ cmd_debug() {
     "
 }
 
-# 运行测试
+### 运行测试
 cmd_test() {
     echo -e "${YELLOW}Running tests...${NC}"
 
@@ -4247,7 +4255,7 @@ cmd_test() {
     echo -e "${GREEN}Tests complete!${NC}"
 }
 
-# 清理
+### 清理
 cmd_clean() {
     echo -e "${YELLOW}Cleaning build artifacts...${NC}"
 
@@ -4258,7 +4266,7 @@ cmd_clean() {
     echo -e "${GREEN}Clean complete!${NC}"
 }
 
-# 生成文档
+### 生成文档
 cmd_docs() {
     echo -e "${YELLOW}Generating documentation...${NC}"
 
@@ -4274,7 +4282,7 @@ cmd_docs() {
     echo "View at: http://localhost:8080"
 }
 
-# 更新镜像
+### 更新镜像
 cmd_update() {
     echo -e "${YELLOW}Updating container images...${NC}"
 
@@ -4284,7 +4292,7 @@ cmd_update() {
     echo -e "${GREEN}Update complete!${NC}"
 }
 
-# 查看状态
+### 查看状态
 cmd_status() {
     echo -e "${BLUE}Container Status:${NC}"
     docker-compose -f "$COMPOSE_FILE" ps
@@ -4298,7 +4306,7 @@ cmd_status() {
     "
 }
 
-# 主函数
+### 主函数
 main() {
     case "${1:-}" in
         setup) cmd_setup ;;
@@ -4328,33 +4336,33 @@ main "$@"
 ### 11.5 使用示例
 
 ```bash
-# 1. 初始化环境
+### 1. 初始化环境
 ./stm32-manager.sh setup
 
-# 2. 启动开发环境
+### 2. 启动开发环境
 ./stm32-manager.sh start
 
-# 3. 进入开发容器
+### 3. 进入开发容器
 ./stm32-manager.sh shell
 
-# 4. 在容器内构建项目
+### 4. 在容器内构建项目
 build-firmware
-# 或使用 CMake 直接构建
+### 或使用 CMake 直接构建
 cmake -B build -G Ninja && cmake --build build
 
-# 5. 烧录固件
+### 5. 烧录固件
 ./stm32-manager.sh flash
 
-# 6. 启动调试
+### 6. 启动调试
 ./stm32-manager.sh debug
 
-# 7. 运行测试
+### 7. 运行测试
 ./stm32-manager.sh test
 
-# 8. 查看状态
+### 8. 查看状态
 ./stm32-manager.sh status
 
-# 9. 停止环境
+### 9. 停止环境
 ./stm32-manager.sh stop
 ```
 
@@ -4369,21 +4377,21 @@ cmake -B build -G Ninja && cmake --build build
 在 Linux 系统上，需要配置 udev 规则：
 
 ```bash
-# 创建 udev 规则文件
+### 创建 udev 规则文件
 sudo tee /etc/udev/rules.d/99-stm32.rules << 'EOF'
-# ST-Link V2
+### ST-Link V2
 SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3748", MODE="0666", GROUP="plugdev"
-# ST-Link V2-1
+### ST-Link V2-1
 SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="374b", MODE="0666", GROUP="plugdev"
-# ST-Link V3
+### ST-Link V3
 SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="374f", MODE="0666", GROUP="plugdev"
-# CMSIS-DAP
+### CMSIS-DAP
 SUBSYSTEM=="usb", ATTR{idVendor}=="0d28", ATTR{idProduct}=="0204", MODE="0666", GROUP="plugdev"
-# J-Link
+### J-Link
 SUBSYSTEM=="usb", ATTR{idVendor}=="1366", ATTR{idProduct}=="0101", MODE="0666", GROUP="plugdev"
 EOF
 
-# 重新加载规则
+### 重新加载规则
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
@@ -4399,15 +4407,15 @@ macOS 不支持直接传递 USB 设备到容器。解决方案：
 #### Q3: 如何减小镜像大小？
 
 ```dockerfile
-# 使用多阶段构建
+### 使用多阶段构建
 FROM ubuntu:22.04 AS builder
-# ... 构建步骤 ...
+### ... 构建步骤 ...
 
 FROM ubuntu:22.04 AS runtime
 COPY --from=builder /opt/toolchain /opt/toolchain
-# ... 运行时配置 ...
+### ... 运行时配置 ...
 
-# 清理不必要的文件
+### 清理不必要的文件
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ```

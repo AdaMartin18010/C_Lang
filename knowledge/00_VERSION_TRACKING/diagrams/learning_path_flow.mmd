@@ -1,0 +1,47 @@
+---
+title: Core Knowledge Learning Path
+---
+
+flowchart TD
+
+    subgraph Basic Layer
+        N0[Syntax Elements]
+        N1[Data Types]
+        N2[Operators]
+        N3[Control Flow]
+    end
+
+    subgraph Core Layer
+        N4[Pointers]
+        N5[Memory Management]
+        N6[Arrays]
+        N7[Functions]
+    end
+
+    subgraph Construction
+        N8[Structures]
+        N9[Preprocessor]
+        N10[Modularization]
+    end
+
+    subgraph Standard Library
+        N11[I/O]
+        N12[String]
+        N13[Math]
+        N14[Threads]
+    end
+
+    subgraph Advanced
+        N15[Undefined Behavior]
+        N16[Portability]
+        N17[Extensions]
+    end
+
+    N3 --> N4
+    N7 --> N8
+    N10 --> N11
+    N14 --> N15
+
+    classDef basic fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+    classDef core fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    classDef advanced fill:#fce4ec,stroke:#e91e63,stroke-width:2px

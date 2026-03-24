@@ -1,0 +1,127 @@
+{
+  "fix_date": "2026-03-25 05:55:49",
+  "fixed_files": [
+    {
+      "file": "01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/tools/02_Helix_QAC_Guide.md",
+      "original_h1": 113,
+      "new_h1": 113,
+      "metadata_added": true
+    },
+    {
+      "file": "01_Core_Knowledge_System/09_Safety_Standards/04_Secure_Coding_Guide.md",
+      "original_h1": 109,
+      "new_h1": 109,
+      "metadata_added": true
+    },
+    {
+      "file": "00_VERSION_TRACKING/GCC_15_C23_Default.md",
+      "original_h1": 103,
+      "new_h1": 103,
+      "metadata_added": true
+    },
+    {
+      "file": "07_Modern_Toolchain/07_Performance_Tracing.md",
+      "original_h1": 96,
+      "new_h1": 96,
+      "metadata_added": true
+    },
+    {
+      "file": "00_VERSION_TRACKING/LLVM_22_C23_Update.md",
+      "original_h1": 89,
+      "new_h1": 89,
+      "metadata_added": true
+    },
+    {
+      "file": "02_Formal_Semantics_and_Physics/11_CompCert_Verification/04_Frama_C_2024_Guide.md",
+      "original_h1": 73,
+      "new_h1": 73,
+      "metadata_added": true
+    },
+    {
+      "file": "02_Formal_Semantics_and_Physics/11_CompCert_Verification/05_Eva_Tutorial.md",
+      "original_h1": 73,
+      "new_h1": 73,
+      "metadata_added": true
+    },
+    {
+      "file": "07_Modern_Toolchain/05_Case_Studies/04_Linux_Kernel_Toolchain.md",
+      "original_h1": 72,
+      "new_h1": 72,
+      "metadata_added": true
+    },
+    {
+      "file": "04_Industrial_Scenarios/14_Embedded_IoT/ESP32/01_ESP32_Complete_Guide.md",
+      "original_h1": 69,
+      "new_h1": 69,
+      "metadata_added": false
+    },
+    {
+      "file": "10_WebAssembly_C/04_WASM_Performance_Optimization.md",
+      "original_h1": 68,
+      "new_h1": 68,
+      "metadata_added": true
+    },
+    {
+      "file": "07_Modern_Toolchain/03_CI_CD_DevOps/02_Docker_C_Development.md",
+      "original_h1": 65,
+      "new_h1": 65,
+      "metadata_added": true
+    },
+    {
+      "file": "07_Modern_Toolchain/02_Build_Systems_Modern/04_Bazel_C_Projects.md",
+      "original_h1": 63,
+      "new_h1": 63,
+      "metadata_added": true
+    },
+    {
+      "file": "02_Formal_Semantics_and_Physics/13_Hardware_Description/04_HLS_with_C/01_Vivado_HLS_Introduction.md",
+      "original_h1": 61,
+      "new_h1": 45,
+      "metadata_added": true
+    },
+    {
+      "file": "03_System_Technology_Domains/02_Cbindgen_Usage.md",
+      "original_h1": 59,
+      "new_h1": 59,
+      "metadata_added": true
+    },
+    {
+      "file": "07_Modern_Toolchain/06_Dynamic_Analysis_Tools.md",
+      "original_h1": 57,
+      "new_h1": 57,
+      "metadata_added": true
+    },
+    {
+      "file": "04_Industrial_Scenarios/14_Embedded_IoT/RaspberryPi/01_RaspberryPi_Embedded_Linux.md",
+      "original_h1": 57,
+      "new_h1": 57,
+      "metadata_added": true
+    },
+    {
+      "file": "07_Modern_Toolchain/02_Build_Systems_Modern/02_Meson_Build.md",
+      "original_h1": 56,
+      "new_h1": 56,
+      "metadata_added": true
+    },
+    {
+      "file": "07_Modern_Toolchain/02_Build_Systems_Modern/README.md",
+      "original_h1": 56,
+      "new_h1": 56,
+      "metadata_added": true
+    },
+    {
+      "file": "04_Industrial_Scenarios/14_Embedded_IoT/Baremetal/01_Baremetal_Programming.md",
+      "original_h1": 55,
+      "new_h1": 55,
+      "metadata_added": true
+    },
+    {
+      "file": "01_Core_Knowledge_System/05_Engineering/01_Build_System/README.md",
+      "original_h1": 52,
+      "new_h1": 52,
+      "metadata_added": true
+    }
+  ],
+  "total_fixed": 20,
+  "total_h1_reduced": 16
+}

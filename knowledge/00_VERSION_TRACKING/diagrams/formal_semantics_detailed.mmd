@@ -1,0 +1,127 @@
+---
+title: Formal Semantics & Physics - Detailed
+---
+
+graph LR
+
+    subgraph 00 Core Semantics Foundations
+        N0[Readme]
+        N1[01 Operational Semantics]
+    end
+
+    subgraph 01 Formal Semantics
+        N2[01 Operational Semantics]
+        N3[02 Axiomatic Semantics]
+        N4[03 Denotational Semantics]
+    end
+
+    subgraph 01 Game Semantics
+        N5[02 C11 Memory Model]
+        N6[01 Game Semantics Theory]
+    end
+
+    subgraph 02 Coalgebraic Methods
+        N7[01 Coalgebraic Theory]
+    end
+
+    subgraph 03 Linear Logic
+        N8[01 Linear Logic Theory]
+    end
+
+    subgraph 04 Cognitive Representation
+        N9[01 Mental Models]
+    end
+
+    subgraph 06 C Assembly Mapping
+        N10[Readme]
+    end
+
+    subgraph 07 Microarchitecture
+        N11[Readme]
+    end
+
+    subgraph 08 Linking Loading Topology
+        N12[00 Compilation Chain]
+    end
+
+    subgraph 09 Physical Machine Layer
+        N13[01 Transistor Level]
+        N14[02 Logic Gates Impleme...]
+        N15[03 Combinational Circuits]
+        N16[01 Sr Latch And D Flip...]
+        N17[01 Mmu Architecture]
+        N18[02 Page Table Walker]
+        N19[03 Tlb Implementation]
+        N20[04 Memory Protection Unit]
+        N21[Readme]
+    end
+
+    subgraph 10 Isa Machine Code
+        N22[11 Arm64 Cpu Implement...]
+        N23[12 X86 Microarchitectu...]
+        N24[Readme]
+        N25[01 Hardwired Control]
+        N26[02 Microprogrammed Con...]
+        N27[03 X86 Microcode]
+    end
+
+    subgraph 11 Compcert Verification
+        N28[Readme]
+        N29[01 Compcert Overview]
+        N30[02 Vst Separation Logi...]
+    end
+
+    subgraph 12 Compiler Optimization
+        N31[Readme]
+    end
+
+    subgraph 13 Hardware Description
+        N32[Readme]
+    end
+
+    subgraph Readme.Md
+        N33[Readme]
+    end
+
+    subgraph Zig Formal Semantics.Md
+        N34[Zig Formal Semantics]
+    end
+
+    N0 --> N5
+    N10 --> N11
+    N11 --> N24
+    N24 --> N23
+    N24 --> N11
+    E0(("readme"))
+    style E0 fill:#fff3e0,stroke:#f57c00,stroke-dasharray: 5 5
+    N33 -.-> E0
+    E1(("readme"))
+    style E1 fill:#e8f5e9,stroke:#388e3c,stroke-dasharray: 5 5
+    N33 -.-> E1
+    E2(("readme"))
+    style E2 fill:#e0f2f1,stroke:#00796b,stroke-dasharray: 5 5
+    N33 -.-> E2
+    E3(("01_simd_vectorizatio"))
+    style E3 fill:#fff3e0,stroke:#f57c00,stroke-dasharray: 5 5
+    N33 -.-> E3
+    E4(("02_memory_management"))
+    style E4 fill:#e3f2fd,stroke:#1976d2,stroke-dasharray: 5 5
+    N33 -.-> E4
+    E5(("readme"))
+    style E5 fill:#e8f5e9,stroke:#388e3c,stroke-dasharray: 5 5
+    N33 -.-> E5
+    E6(("01_c11_features"))
+    style E6 fill:#e3f2fd,stroke:#1976d2,stroke-dasharray: 5 5
+    N33 -.-> E6
+    E7(("c23_to_c2y_roadmap"))
+    style E7 fill:#fafafa,stroke:#616161,stroke-dasharray: 5 5
+    N33 -.-> E7
+    E8(("01_compilation_build"))
+    style E8 fill:#e3f2fd,stroke:#1976d2,stroke-dasharray: 5 5
+    N33 -.-> E8
+    E9(("00_global_index"))
+    style E9 fill:#fafafa,stroke:#616161,stroke-dasharray: 5 5
+    N33 -.-> E9
+
+    classDef topicDefault fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    class N0,N1,N2,N3,N4,N5,N6,N7,N8,N9,N10,N11,N12,N13,N14,N15,N16,N17,N18,N19,N20,N21,N22,N23,N24,N25,N26,N27,N28,N29,N30,N31,N32,N33,N34,E0,E1,E2,E3,E4,E5,E6,E7,E8,E9 topicDefault

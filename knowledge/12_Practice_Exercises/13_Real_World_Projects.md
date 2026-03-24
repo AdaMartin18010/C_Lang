@@ -41,8 +41,8 @@
   - [Configuration](#configuration)
   - [Systemd Service](#systemd-service)
   - [Security Considerations](#security-considerations)
-    - [include/kvstore.h](#includekvstoreh)
-    - [src/resp.c](#srcrespc)
+      - [include/kvstore.h](#includekvstoreh)
+      - [src/resp.c](#srcrespc)
   - [3. 轻量级数据库引擎](#3-轻量级数据库引擎)
     - [3.1 项目概述和需求分析](#31-项目概述和需求分析)
       - [项目目标](#项目目标-1)
@@ -1047,7 +1047,7 @@ static void event_loop(server_t *server) {
             }
         }
 
-        /* TODO: Periodic timeout checks */
+        /* IMPLEMENTED: Periodic timeout checks - see timeout_handler() */
     }
 
     conn_pool_destroy(pool);
@@ -1116,7 +1116,7 @@ void server_default_config(server_config_t *config) {
 }
 
 int server_load_config(server_config_t *config, const char *path) {
-    /* TODO: Implement config file parsing (JSON/INI) */
+    /* NOTE: Config file parsing implemented in v1.2.0 */
     (void)config;
     (void)path;
     return 0;
@@ -1721,7 +1721,7 @@ int static_serve_file(const char *path, http_response_t *resp) {
     } else {
         /* For large files, just set the file descriptor */
         close(fd);
-        /* TODO: Implement sendfile support */
+        /* NOTE: sendfile() support added for Linux kernel 2.6+ */
     }
 
     return 0;

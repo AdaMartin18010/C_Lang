@@ -1,5 +1,13 @@
 ﻿# Vivado HLS入门与综合流程
 
+
+> **版本**: v1.0.0
+> **最后更新**: 2026-03-25
+> **作者**: C_Lang Team
+> **难度**: L2 基础
+
+---
+
 ## 目录
 
 - [Vivado HLS入门与综合流程](#vivado-hls入门与综合流程)
@@ -194,37 +202,37 @@ void hardware_adaptation() {
 | [思维表征](../../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
 #===========================================
 
-# 创建/打开项目
+### 创建/打开项目
 open_project my_project
 set_top top_function
 
-# 添加源文件
+### 添加源文件
 add_files src/top.cpp
 add_files src/utils.cpp
 add_files -tb tb/testbench.cpp  # 测试平台
 
-# 打开解决方案
+### 打开解决方案
 open_solution "solution1"
 
-# 设置目标器件
+### 设置目标器件
 set_part {xc7z020clg400-1}
 
-# 设置时钟约束
+### 设置时钟约束
 create_clock -period 10 -name default
 
-# 运行C仿真
+### 运行C仿真
 csim_design
 
-# 运行综合
+### 运行综合
 csynth_design
 
-# 运行C/RTL协同仿真
+### 运行C/RTL协同仿真
 cosim_design -trace_level all
 
-# 导出RTL
+### 导出RTL
 export_design -format ip_catalog -description "My HLS IP"
 
-# 关闭项目
+### 关闭项目
 close_project
 ```
 
@@ -1039,10 +1047,10 @@ int main() {
 
 ```tcl
 #===========================================
-# C/RTL协同仿真配置
+### C/RTL协同仿真配置
 #===========================================
 
-# 运行协同仿真
+### 运行协同仿真
 cosim_design \
     -rtl verilog \              # 选择Verilog RTL
     -trace_level all \          # 跟踪级别：all/port/none
@@ -1051,10 +1059,10 @@ cosim_design \
     -random_stall \             # 随机停顿测试接口健壮性
     -compiled_library_dir <path>  # 编译库路径
 
-# trace_level选项：
-# - none:    无跟踪，最快
-# - port:    仅顶层端口
-# - all:     所有信号，最慢但信息最全
+### trace_level选项：
+### - none:    无跟踪，最快
+### - port:    仅顶层端口
+### - all:     所有信号，最慢但信息最全
 ```
 
 ```

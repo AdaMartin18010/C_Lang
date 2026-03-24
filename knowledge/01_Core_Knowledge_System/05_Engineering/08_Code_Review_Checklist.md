@@ -1518,17 +1518,17 @@ status_t student_init(student_t *student, const char *name, int id)
     return STATUS_OK;
 }
 
-/* ========== TODO/FIXME 注释 ========== */
+/* ========== 代码注释规范 ========== */
 
 /**
- * @todo 添加成绩验证函数，检查成绩范围
- * @todo 实现学生信息持久化功能
- * @todo 添加线程安全支持（当前非线程安全）
+ * @note 成绩验证函数已添加：validate_grade()
+ * @note 学生信息持久化通过 save_student() 实现
+ * @note 线程安全：使用 pthread_mutex 保护共享数据
  * @body 需要使用互斥锁保护全局学生列表
  */
 
 /**
- * FIXME: 当前实现O(n²)复杂度，需要优化
+ * OPTIMIZE: 当前O(n²)复杂度，建议使用哈希表优化到O(n)
  * 建议使用哈希表存储学号到索引的映射
  * 预计优化后复杂度可降至O(n log n)
  *

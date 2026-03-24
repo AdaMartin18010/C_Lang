@@ -1,0 +1,29 @@
+---
+title: Theorem Dependency Network
+---
+
+graph TD
+
+    %% Foundational Theorems
+    T1["Substitution Lemma"]:::foundational
+    T2["Weakening Lemma"]:::foundational
+    T3["Progress Theorem"]:::foundational
+
+    %% Type System Theorems
+    T4["Type Preservation"]:::typesystem
+    T5["Type Safety"]:::typesystem
+
+    %% Memory Safety Theorems
+    T6["Memory Safety"]:::memory
+    T7["No Use-After-Free"]:::memory
+
+    T1 --> T4
+    T2 --> T4
+    T3 --> T5
+    T4 --> T5
+    T5 --> T6
+    T6 --> T7
+
+    classDef foundational fill:#e3f2fd,stroke:#1976d2
+    classDef typesystem fill:#f3e5f5,stroke:#7b1fa2
+    classDef memory fill:#e8f5e9,stroke:#388e3c

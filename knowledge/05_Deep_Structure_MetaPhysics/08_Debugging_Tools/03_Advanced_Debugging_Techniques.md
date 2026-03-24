@@ -1,5 +1,12 @@
 ﻿# C语言高级调试技术完全指南
 
+
+> **版本**: v1.0.0
+> **最后更新**: 2026-03-25
+> **作者**: C_Lang Team
+> **难度**: L3 进阶
+
+---
 > **层级定位**: 05 Deep_Structure_MetaPhysics / 08 Debugging_Tools
 > **对应标准**: C11/C17/C23, GNU Debugger, eBPF, Linux Kernel Debugging
 > **难度级别**: L4-L5
@@ -47,7 +54,7 @@
   - [📖 6. 并发调试（死锁检测、竞态条件）](#-6-并发调试死锁检测竞态条件)
     - [6.1 死锁检测工具](#61-死锁检测工具)
     - [6.2 竞态条件检测](#62-竞态条件检测)
-- [C语言高级调试技术完全指南 - 续](#c语言高级调试技术完全指南---续)
+    - [C语言高级调试技术完全指南 - 续](#c语言高级调试技术完全指南---续)
   - [📖 7. 内核调试（kgdb/kdb/ftrace）](#-7-内核调试kgdbkdbftrace)
     - [7.1 KGDB配置与使用](#71-kgdb配置与使用)
     - [7.2 KDB常用命令](#72-kdb常用命令)
@@ -551,13 +558,13 @@ int xdp_drop_filter(struct xdp_md *ctx)
 | [系统技术](../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
 | [工业场景](../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
 | [思维表征](../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
-# 需要：clang, llvm, libbpf, bpftool
+### 需要：clang, llvm, libbpf, bpftool
 
 CLANG ?= clang
 CC ?= gcc
 ARCH := $(shell uname -m | sed 's/x86_64/x86/' | sed 's/aarch64/arm64/')
 
-# eBPF编译选项
+### eBPF编译选项
 BPF_CFLAGS = -target bpf \
     -D__TARGET_ARCH_$(ARCH) \
     -I/usr/include/$(shell uname -m)-linux-gnu \
@@ -565,11 +572,11 @@ BPF_CFLAGS = -target bpf \
     -O2 -g \
     -Wall -Werror
 
-# 用户空间编译选项
+### 用户空间编译选项
 USER_CFLAGS = -Wall -g -O2
 USER_LDFLAGS = -lbpf -lelf -lz
 
-# 目标
+### 目标
 EBPF_TARGETS = trace_open.o tc_prog.o xdp_prog.o
 USER_TARGETS = ebpf_loader
 
@@ -577,29 +584,29 @@ USER_TARGETS = ebpf_loader
 
 all: $(EBPF_TARGETS) $(USER_TARGETS) skeletons
 
-# 编译eBPF程序
+### 编译eBPF程序
 %.o: %.c
  $(CLANG) $(BPF_CFLAGS) -c $< -o $@
 
-# 生成骨架代码
+### 生成骨架代码
 skeletons: trace_open.skel.h
 
 trace_open.skel.h: trace_open.o
  bpftool gen skeleton $< > $@
 
-# 编译用户空间程序
+### 编译用户空间程序
 ebpf_loader: ebpf_loader.c trace_open.skel.h
  $(CC) $(USER_CFLAGS) $< -o $@ $(USER_LDFLAGS)
 
-# 加载eBPF程序（需要root权限）
+### 加载eBPF程序（需要root权限）
 load: all
  sudo ./ebpf_loader
 
-# 清理
+### 清理
 clean:
  rm -f *.o *.skel.h $(USER_TARGETS)
 
-# 调试帮助
+### 调试帮助
 dump: trace_open.o
  llvm-objdump -S $<
 
@@ -730,7 +737,7 @@ class BufferPrinter:
 
         return result
 
-# 注册pretty printers
+### 注册pretty printers
 class CustomPrinterCollection:
     def __init__(self):
         self.printers = {}
@@ -748,22 +755,22 @@ class CustomPrinterCollection:
                 return printer(val)
         return None
 
-# 创建并注册
+### 创建并注册
 printer_collection = CustomPrinterCollection()
 printer_collection.add('linked_list', LinkedListPrinter)
 printer_collection.add('hash_table', HashTablePrinter)
 printer_collection.add('buffer', BufferPrinter)
 
-# 注册到GDB
+### 注册到GDB
 gdb.printing.register_pretty_printer(
     gdb.current_objfile(),
     printer_collection.lookup,
     replace=True
 )
 
-# ============================================================================
-# GDB命令扩展
-# ============================================================================
+### ============================================================================
+### GDB命令扩展
+### ============================================================================
 
 class DumpMemoryCommand(gdb.Command):
     """
@@ -849,7 +856,7 @@ class DumpMemoryCommand(gdb.Command):
             val = struct.unpack('<f', bytes_data[i:i+4])[0]
             print(f"[{i//4:4d}] 0x{base_addr + i:08x}: {val}")
 
-# 注册命令
+### 注册命令
 DumpMemoryCommand()
 
 class BacktraceFilterCommand(gdb.Command):
@@ -952,9 +959,9 @@ class FindInStackCommand(gdb.Command):
 
 FindInStackCommand()
 
-# ============================================================================
-# 断点增强
-# ============================================================================
+### ============================================================================
+### 断点增强
+### ============================================================================
 
 class ConditionalBreakpoint:
     """
@@ -984,7 +991,7 @@ class ConditionalBreakpoint:
         gdb.execute(f"set ${key}={count}")
         return count == n
 
-# 注册便捷函数
+### 注册便捷函数
 class CallerMatchesFunc(gdb.Function):
     """GDB函数: $caller_matches(pattern)"""
     def __init__(self):
@@ -1014,17 +1021,17 @@ print("Available functions: $caller_matches()")
  * (gdb) source debug_script.gdb
  */
 
-# =============================================================================
-# 基本配置
-# =============================================================================
+### =============================================================================
+### 基本配置
+### =============================================================================
 
-# 禁用分页（适合自动化脚本）
+### 禁用分页（适合自动化脚本）
 set pagination off
 
-# 禁用确认提示
+### 禁用确认提示
 set confirm off
 
-# 设置输出格式
+### 设置输出格式
 set print pretty on
 set print array on
 set print object on
@@ -1032,20 +1039,20 @@ set print static-members on
 set print vtbl on
 set print demangle on
 
-# 设置历史记录
+### 设置历史记录
 set history filename ~/.gdb_history
 set history save on
 set history size 10000
 set history expansion on
 
-# =============================================================================
-# 颜色配置（支持彩色终端）
-# =============================================================================
+### =============================================================================
+### 颜色配置（支持彩色终端）
+### =============================================================================
 
-# 启用彩色输出
+### 启用彩色输出
 set prompt \033[31mgdb\033[0m>
 
-# 定义彩色打印函数
+### 定义彩色打印函数
 define p-red
     printf "\033[31m%s\033[0m\n", $arg0
 end
@@ -1062,9 +1069,9 @@ define p-blue
     printf "\033[34m%s\033[0m\n", $arg0
 end
 
-# =============================================================================
-# 自定义命令
-# =============================================================================
+### =============================================================================
+### 自定义命令
+### =============================================================================
 
 /**
  * 增强的堆栈回溯 - 显示局部变量
@@ -1307,9 +1314,9 @@ document scan-memory
 用法: scan-memory <start_addr> <end_addr> <pattern>
 end
 
-# =============================================================================
-# 自动断点命令
-# =============================================================================
+### =============================================================================
+### 自动断点命令
+### =============================================================================
 
 /**
  * 智能断点 - 记录命中次数并显示上下文
@@ -1354,9 +1361,9 @@ document log-break
 用法: log-break <location> <condition>
 end
 
-# =============================================================================
-# 核心转录分析辅助
-# =============================================================================
+### =============================================================================
+### 核心转录分析辅助
+### =============================================================================
 
 define core-analysis
     p-yellow "===== Core Dump Analysis ====="
@@ -1388,9 +1395,9 @@ document core-analysis
 用法: core-analysis (在加载core dump后运行)
 end
 
-# =============================================================================
-# 启动钩子
-# =============================================================================
+### =============================================================================
+### 启动钩子
+### =============================================================================
 
 define hook-stop
     # 每次停止时显示上下文
@@ -1406,9 +1413,9 @@ define hook-run
     p-green "Starting program..."
 end
 
-# =============================================================================
-# 便捷别名
-# =============================================================================
+### =============================================================================
+### 便捷别名
+### =============================================================================
 
 alias -a b = break
 alias -a c = continue
@@ -1427,9 +1434,9 @@ alias -a info-a = info args
 alias -a info-r = info registers
 alias -a info-th = info threads
 
-# =============================================================================
-# 欢迎信息
-# =============================================================================
+### =============================================================================
+### 欢迎信息
+### =============================================================================
 
 echo \n
 echo ================================================\n
@@ -1458,69 +1465,69 @@ echo \n
 
 ```bash
 #!/bin/bash
-# core_dump_setup.sh - Core Dump生成配置脚本
+### core_dump_setup.sh - Core Dump生成配置脚本
 
-# =============================================================================
-# 1. 系统级Core Dump配置
-# =============================================================================
+### =============================================================================
+### 1. 系统级Core Dump配置
+### =============================================================================
 
-# 启用core dump生成（大小无限制）
+### 启用core dump生成（大小无限制）
 echo "Setting core dump size to unlimited..."
 ulimit -c unlimited
 
-# 持久化到/etc/security/limits.conf
+### 持久化到/etc/security/limits.conf
 cat >> /etc/security/limits.conf << 'EOF'
-# Core dump settings
+### Core dump settings
 * soft core unlimited
 * hard core unlimited
 root soft core unlimited
 root hard core unlimited
 EOF
 
-# =============================================================================
-# 2. Core Dump文件命名和存储
-# =============================================================================
+### =============================================================================
+### 2. Core Dump文件命名和存储
+### =============================================================================
 
-# 创建core dump目录
+### 创建core dump目录
 mkdir -p /var/crash
 echo "Created /var/crash directory"
 
-# 配置systemd-coredump（现代Linux发行版）
+### 配置systemd-coredump（现代Linux发行版）
 cat > /etc/sysctl.d/99-core-dump.conf << 'EOF'
-# Core dump命名格式
-# %e: 可执行文件名
-# %p: PID
-# %t: 时间戳
-# %h: 主机名
-# %s: 信号编号
+### Core dump命名格式
+### %e: 可执行文件名
+### %p: PID
+### %t: 时间戳
+### %h: 主机名
+### %s: 信号编号
 kernel.core_pattern = /var/crash/core.%e.%p.%h.%t.%s
 
-# 包含PID
+### 包含PID
 kernel.core_uses_pid = 1
 
-# 设置管道处理（使用systemd-coredump）
-# kernel.core_pattern = |/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %e
+### 设置管道处理（使用systemd-coredump）
+### kernel.core_pattern = |/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %h %e
 EOF
 
-# 应用配置
+### 应用配置
 sysctl -p /etc/sysctl.d/99-core-dump.conf
 
-# =============================================================================
-# 3. 调试信息配置
-# =============================================================================
+### =============================================================================
+### 3. 调试信息配置
+### =============================================================================
 
-# 安装debuginfod（自动获取调试符号）
-# Ubuntu/Debian
+### 安装debuginfod（自动获取调试符号）
+### Ubuntu/Debian
 apt-get install -y debuginfod
-# RHEL/CentOS
-# yum install -y debuginfod
+### RHEL/CentOS
+### yum install -y debuginfod
 
-# 启用debuginfod
+### 启用debuginfod
 echo 'export DEBUGINFOD_URLS="https://debuginfod.ubuntu.com"' >> /etc/profile.d/debuginfod.sh
 
-# =============================================================================
-# 4. 验证配置
-# =============================================================================
+### =============================================================================
+### 4. 验证配置
+### =============================================================================
 
 echo "Current core dump settings:"
 echo "ulimit -c: $(ulimit -c)"
@@ -2814,127 +2821,127 @@ int main(int argc, char *argv[]) {
 
 ```bash
 #!/bin/bash
-# sanitizer_suppressions.sh - Sanitizer抑制规则配置
+### sanitizer_suppressions.sh - Sanitizer抑制规则配置
 
-# =============================================================================
-# AddressSanitizer 抑制规则
-# =============================================================================
+### =============================================================================
+### AddressSanitizer 抑制规则
+### =============================================================================
 
 cat > asan.supp << 'EOF'
-# AddressSanitizer抑制文件格式
-# 每行一个模式，匹配栈帧中的函数名或源文件
+### AddressSanitizer抑制文件格式
+### 每行一个模式，匹配栈帧中的函数名或源文件
 
-# 抑制特定函数的内存泄漏
+### 抑制特定函数的内存泄漏
 leak:my_known_leak_function
 leak:third_party_library_init
 
-# 抑制特定模块的所有错误
+### 抑制特定模块的所有错误
 interceptor_via_lib:lib problematic.so
 
-# 抑制特定源文件的错误
+### 抑制特定源文件的错误
 src:*/third_party/*
 src:*/generated_code/*
 
-# 抑制特定函数的特定错误类型
+### 抑制特定函数的特定错误类型
 [heap-buffer-overflow]
 fun:legacy_buffer_function
 
-# 抑制特定线程的泄漏（如静态初始化器线程）
+### 抑制特定线程的泄漏（如静态初始化器线程）
 leak:__static_initialization_and_destruction_0
 EOF
 
-# 使用方法: ASAN_OPTIONS=suppressions=asan.supp ./program
+### 使用方法: ASAN_OPTIONS=suppressions=asan.supp ./program
 
 echo "Created asan.supp"
 
-# =============================================================================
-# ThreadSanitizer 抑制规则
-# =============================================================================
+### =============================================================================
+### ThreadSanitizer 抑制规则
+### =============================================================================
 
 cat > tsan.supp << 'EOF'
-# ThreadSanitizer抑制文件
-# 用于抑制已知的、非问题的数据竞争
+### ThreadSanitizer抑制文件
+### 用于抑制已知的、非问题的数据竞争
 
-# 抑制特定函数的竞争
+### 抑制特定函数的竞争
 race:my_known_race_function
 
-# 抑制特定库的所有竞争
+### 抑制特定库的所有竞争
 race:libpthread.so*
 race:libz.so*
 
-# 抑制特定源文件
+### 抑制特定源文件
 src:*/third_party/old_code.c
 
-# 抑制特定全局变量的竞争
+### 抑制特定全局变量的竞争
 race:global_debug_counter
 
-# 抑制特定类型的竞争（如统计计数器）
+### 抑制特定类型的竞争（如统计计数器）
 race_top:statistics_update
 
-# 抑制初始化竞争（通常是良性的）
+### 抑制初始化竞争（通常是良性的）
 race:Singleton::getInstance
 EOF
 
 echo "Created tsan.supp"
 
-# =============================================================================
-# MemorySanitizer 抑制规则
-# =============================================================================
+### =============================================================================
+### MemorySanitizer 抑制规则
+### =============================================================================
 
 cat > msan.supp << 'EOF'
-# MemorySanitizer抑制文件
+### MemorySanitizer抑制文件
 
-# 抑制特定函数的未初始化值使用
+### 抑制特定函数的未初始化值使用
 uninit:legacy_function_using_uninit
 
-# 抑制特定模块
+### 抑制特定模块
 origin:*/third_party/*
 
-# 抑制特定全局变量
+### 抑制特定全局变量
 uninit:global_config_buffer
 EOF
 
 echo "Created msan.supp"
 
-# =============================================================================
-# UndefinedBehaviorSanitizer 抑制规则
-# =============================================================================
+### =============================================================================
+### UndefinedBehaviorSanitizer 抑制规则
+### =============================================================================
 
 cat > ubsan.supp << 'EOF'
-# UBSan抑制文件
+### UBSan抑制文件
 
-# 抑制特定函数的溢出检查
+### 抑制特定函数的溢出检查
 [signed-integer-overflow]
 fun:my_hash_function
 
-# 抑制特定对齐问题
+### 抑制特定对齐问题
 [alignment]
 src:*/legacy_misaligned_struct.c
 
-# 抑制特定除零检查
+### 抑制特定除零检查
 [integer-divide-by-zero]
 fun:safe_division_wrapper
 EOF
 
 echo "Created ubsan.supp"
 
-# =============================================================================
-# LeakSanitizer 抑制规则
-# =============================================================================
+### =============================================================================
+### LeakSanitizer 抑制规则
+### =============================================================================
 
 cat > lsan.supp << 'EOF'
-# LeakSanitizer抑制文件
+### LeakSanitizer抑制文件
 
-# 抑制特定类的所有对象泄漏
+### 抑制特定类的所有对象泄漏
 leak:MySingleton
 
-# 抑制特定函数的泄漏
+### 抑制特定函数的泄漏
 leak:initialize_static_data
 
-# 抑制特定大小范围的泄漏（不太可能真的是泄漏）
+### 抑制特定大小范围的泄漏（不太可能真的是泄漏）
 leak:* size: 0-16
 
-# 抑制匹配特定模式的泄漏
+### 抑制匹配特定模式的泄漏
 leak:std::string::_Rep::_S_create
 leak:std::basic_string::*::create
 EOF
@@ -2960,167 +2967,167 @@ echo "  LSAN_OPTIONS=suppressions=lsan.supp:max_leaks=10 ./program"
 
 ```bash
 #!/bin/bash
-# perf_analysis.sh - Linux perf性能分析脚本
+### perf_analysis.sh - Linux perf性能分析脚本
 
-# =============================================================================
-# 1. 基本性能计数器
-# =============================================================================
+### =============================================================================
+### 1. 基本性能计数器
+### =============================================================================
 
-# 统计CPU周期和指令数
+### 统计CPU周期和指令数
 perf stat ./program
 
-# 详细统计（包括缓存、分支等）
+### 详细统计（包括缓存、分支等）
 perf stat -e cycles,instructions,cache-references,cache-misses,branches,branch-misses ./program
 
-# 针对特定CPU
+### 针对特定CPU
 perf stat -a -C 0 ./program
 
-# 针对特定进程
+### 针对特定进程
 perf stat -p $(pgrep program_name)
 
-# =============================================================================
-# 2. 采样分析
-# =============================================================================
+### =============================================================================
+### 2. 采样分析
+### =============================================================================
 
-# 记录CPU周期样本
+### 记录CPU周期样本
 perf record ./program
 
-# 以更高频率采样（可能产生更多开销）
+### 以更高频率采样（可能产生更多开销）
 perf record -F 997 ./program
 
-# 记录特定事件
+### 记录特定事件
 perf record -e cache-misses ./program
 perf record -e branch-misses ./program
 
-# 多线程程序采样
+### 多线程程序采样
 perf record -g --threads ./program
 
-# 记录内核和用户空间
+### 记录内核和用户空间
 perf record -g --kernel-callchains ./program
 
-# =============================================================================
-# 3. 报告生成
-# =============================================================================
+### =============================================================================
+### 3. 报告生成
+### =============================================================================
 
-# 文本报告（热点函数）
+### 文本报告（热点函数）
 perf report
 
-# 排序显示
+### 排序显示
 perf report --sort=dso,symbol
 
-# 只显示用户空间
+### 只显示用户空间
 perf report --dso-only
 
-# 生成调用图
+### 生成调用图
 perf report -g graph
 
-# 生成堆叠报告
+### 生成堆叠报告
 perf report --stdio
 
-# =============================================================================
-# 4. 火焰图生成
-# =============================================================================
+### =============================================================================
+### 4. 火焰图生成
+### =============================================================================
 
-# 下载火焰图工具
+### 下载火焰图工具
 FLAMEGRAPH_DIR="$HOME/FlameGraph"
 if [ ! -d "$FLAMEGRAPH_DIR" ]; then
     git clone https://github.com/brendangregg/FlameGraph.git "$FLAMEGRAPH_DIR"
 fi
 
-# 记录数据并生成火焰图
+### 记录数据并生成火焰图
 perf record -F 99 -a -g -- sleep 30
 perf script | "$FLAMEGRAPH_DIR/stackcollapse-perf.pl" | "$FLAMEGRAPH_DIR/flamegraph.pl" > perf_flamegraph.svg
 
-# 差分火焰图（比较两个性能剖析）
-# 记录基准版本
+### 差分火焰图（比较两个性能剖析）
+### 记录基准版本
 perf record -F 99 -a -g -- ./program_baseline
 perf script | "$FLAMEGRAPH_DIR/stackcollapse-perf.pl" > out.baseline
 
-# 记录修改版本
+### 记录修改版本
 perf record -F 99 -a -g -- ./program_modified
 perf script | "$FLAMEGRAPH_DIR/stackcollapse-perf.pl" > out.modified
 
-# 生成差分火焰图
+### 生成差分火焰图
 "$FLAMEGRAPH_DIR/difffolded.pl" out.baseline out.modified | "$FLAMEGRAPH_DIR/flamegraph.pl" > diff_flamegraph.svg
 
-# 红蓝差分火焰图
+### 红蓝差分火焰图
 "$FLAMEGRAPH_DIR/difffolded.pl" -n out.baseline out.modified | "$FLAMEGRAPH_DIR/flamegraph.pl" --negation > diff_neg_flamegraph.svg
 
-# =============================================================================
-# 5. 跟踪点分析
-# =============================================================================
+### =============================================================================
+### 5. 跟踪点分析
+### =============================================================================
 
-# 列出可用跟踪点
+### 列出可用跟踪点
 perf list 'sched:*'
 perf list 'syscalls:*'
 
-# 记录调度事件
+### 记录调度事件
 perf record -e sched:sched_switch,sched:sched_wakeup -a -- sleep 10
 
-# 分析调度延迟
+### 分析调度延迟
 perf sched record -- sleep 10
 perf sched latency
 perf sched map
 
-# =============================================================================
-# 6. 内存分析
-# =============================================================================
+### =============================================================================
+### 6. 内存分析
+### =============================================================================
 
-# 分析内存带宽（需要Intel PCM或类似工具）
-# perf stat -e uncore_imc/clockticks/,uncore_imc/cas_count_read/ sleep 1
+### 分析内存带宽（需要Intel PCM或类似工具）
+### perf stat -e uncore_imc/clockticks/,uncore_imc/cas_count_read/ sleep 1
 
-# 分析TLB未命中
+### 分析TLB未命中
 perf stat -e dTLB-loads,dTLB-load-misses,iTLB-loads,iTLB-load-misses ./program
 
-# 分析页错误
+### 分析页错误
 perf stat -e page-faults,major-faults,minor-faults ./program
 
-# =============================================================================
-# 7. 缓存分析
-# =============================================================================
+### =============================================================================
+### 7. 缓存分析
+### =============================================================================
 
-# L1缓存
+### L1缓存
 perf stat -e L1-dcache-loads,L1-dcache-load-misses,L1-icache-load-misses ./program
 
-# LLC（Last Level Cache）
+### LLC（Last Level Cache）
 perf stat -e LLC-loads,LLC-load-misses,LLC-stores,LLC-store-misses ./program
 
-# 缓存行争用（false sharing检测）
+### 缓存行争用（false sharing检测）
 perf c2c record ./program
 perf c2c report
 
-# =============================================================================
-# 8. 分支预测分析
-# =============================================================================
+### =============================================================================
+### 8. 分支预测分析
+### =============================================================================
 
 perf stat -e branches,branch-misses,branch-loads,branch-load-misses ./program
 
-# 详细分支统计（Intel）
+### 详细分支统计（Intel）
 perf stat -e br_inst_retired.all_branches,br_misp_retired.all_branches ./program
 
-# =============================================================================
-# 9. 锁定分析
-# =============================================================================
+### =============================================================================
+### 9. 锁定分析
+### =============================================================================
 
-# 记录锁定事件
+### 记录锁定事件
 perf lock record ./program
 perf lock report
 perf lock stat
 perf lock contended
 
-# =============================================================================
-# 10. BPF集成（高级）
-# =============================================================================
+### =============================================================================
+### 10. BPF集成（高级）
+### =============================================================================
 
-# 使用perf with BPF
+### 使用perf with BPF
 perf record -e bpf-output ./program
 
-# 自定义BPF程序附加到perf事件
-# perf record -e $(perf probe -L function) ./program
+### 自定义BPF程序附加到perf事件
+### perf record -e $(perf probe -L function) ./program
 
-# =============================================================================
-# 实用函数
-# =============================================================================
+### =============================================================================
+### 实用函数
+### =============================================================================
 
 analyze_function() {
     local func=$1
@@ -4575,7 +4582,7 @@ int main() {
 }
 ```
 
-# C语言高级调试技术完全指南 - 续
+### C语言高级调试技术完全指南 - 续
 
 ## 📖 7. 内核调试（kgdb/kdb/ftrace）
 
@@ -4583,22 +4590,22 @@ int main() {
 
 ```bash
 #!/bin/bash
-# kgdb_setup.sh - KGDB双机调试配置脚本
+### kgdb_setup.sh - KGDB双机调试配置脚本
 
-# 1. 编译支持KGDB的内核配置选项
-# CONFIG_KGDB=y
-# CONFIG_KGDB_SERIAL_CONSOLE=y
-# CONFIG_DEBUG_KERNEL=y
-# CONFIG_DEBUG_INFO=y
-# CONFIG_MAGIC_SYSRQ=y
+### 1. 编译支持KGDB的内核配置选项
+### CONFIG_KGDB=y
+### CONFIG_KGDB_SERIAL_CONSOLE=y
+### CONFIG_DEBUG_KERNEL=y
+### CONFIG_DEBUG_INFO=y
+### CONFIG_MAGIC_SYSRQ=y
 
-# 2. 启动参数配置
-# GRUB_CMDLINE_LINUX_DEFAULT="console=ttyS0,115200 kgdboc=ttyS0,115200 nokaslr"
+### 2. 启动参数配置
+### GRUB_CMDLINE_LINUX_DEFAULT="console=ttyS0,115200 kgdboc=ttyS0,115200 nokaslr"
 
-# 3. 进入KGDB模式
+### 3. 进入KGDB模式
 echo g > /proc/sysrq-trigger
 
-# 4. 调试机连接
+### 4. 调试机连接
 gdb vmlinux
 (gdb) set remotebaud 115200
 (gdb) target remote /dev/ttyUSB0
@@ -4674,17 +4681,17 @@ int main() {
 ### 8.1 GDB Server使用
 
 ```bash
-# 目标机启动gdbserver
+### 目标机启动gdbserver
 gdbserver :1234 ./program
 gdbserver :1234 --attach <pid>
 
-# 调试机连接
+### 调试机连接
 gdb ./program
 (gdb) target remote target-ip:1234
 (gdb) break main
 (gdb) continue
 
-# 多进程调试
+### 多进程调试
 gdbserver --multi :1234
 (gdb) target extended-remote target-ip:1234
 (gdb) set remote exec-file /path/on/target
@@ -4694,14 +4701,14 @@ gdbserver --multi :1234
 ### 8.2 OpenOCD JTAG配置
 
 ```tcl
-# interface
+### interface
 interface ftdi
 ftdi_vid_pid 0x0403 0x6010
 
-# target
+### target
 source [find target/stm32f4x.cfg]
 
-# gdb server
+### gdb server
 gdb_port 3333
 telnet_port 4444
 
@@ -4712,13 +4719,13 @@ reset halt
 ### 8.3 交叉编译调试配置
 
 ```bash
-# 设置交叉编译工具链
+### 设置交叉编译工具链
 export CROSS_COMPILE=arm-linux-gnueabihf-
 
-# 编译带调试信息
+### 编译带调试信息
 ${CROSS_COMPILE}gcc -g -O0 -o program program.c
 
-# GDB配置
+### GDB配置
 set sysroot /path/to/target/rootfs
 set solib-search-path /path/to/target/libs
 target remote 192.168.1.100:1234
@@ -4777,9 +4784,9 @@ void init_crash_handler(void) {
 
 ```bash
 #!/bin/bash
-# auto_debug.sh
+### auto_debug.sh
 
-# 1. 运行程序并检测崩溃
+### 1. 运行程序并检测崩溃
 if ! ./program; then
     EXIT_CODE=$?
 
@@ -4842,17 +4849,17 @@ void debug_free(void *ptr, const char *file, int line) {
 ### 10.2 使用valgrind进行深度分析
 
 ```bash
-# 完整泄漏检测
+### 完整泄漏检测
 valgrind --leak-check=full \
          --show-leak-kinds=all \
          --track-origins=yes \
          --verbose \
          ./program
 
-# 生成抑制规则
+### 生成抑制规则
 valgrind --gen-suppressions=yes ./program
 
-# 堆分析
+### 堆分析
 valgrind --tool=massif --time-unit=B ./program
 ms_print massif.out.* > heap_report.txt
 ```

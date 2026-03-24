@@ -1,5 +1,12 @@
 # Eva 抽象解释插件深度教程
 
+
+> **版本**: v1.0.0
+> **最后更新**: 2026-03-25
+> **作者**: C_Lang Team
+> **难度**: L2 基础
+
+---
 > **文档版本**: 基于2024年《Guide to Software Verification with Frama-C》第3章
 > **Frama-C版本**: 30.0 Zinc / 31.0 Gallium
 > **更新日期**: 2026-03-19

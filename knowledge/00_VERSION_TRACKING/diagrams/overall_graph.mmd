@@ -1,0 +1,136 @@
+---
+title: Overall Knowledge Graph
+---
+
+graph TB
+    N0["00 global index"]:::topic_global
+    N1["02 formal semantics and phy..."]:::topic_formal_semantics
+    N2["03 system technology domains"]:::topic_system_tech
+    N3["07 modern toolchain"]:::topic_toolchain
+    N4["04 industrial scenarios"]:::topic_industrial
+    N5["14 concurrency parallelism"]:::topic_system_tech
+    N6["readme"]:::topic_other
+    N7["05 concept mappings"]:::topic_thinking
+    N8["00 core semantics foundations"]:::topic_formal_semantics
+    N9["06 learning paths"]:::topic_thinking
+    N10["02 core layer"]:::topic_core_knowledge
+    N11["04 standard library layer"]:::topic_core_knowledge
+    N12["misra c 2023"]:::topic_core_knowledge
+    N13["01 decision trees"]:::topic_thinking
+    N14["02 memory management"]:::topic_core_knowledge
+    N15["01 pointer depth"]:::topic_core_knowledge
+    N16["09 safety standards"]:::topic_core_knowledge
+    N17["01 syntax elements"]:::topic_core_knowledge
+    N18["01 core knowledge system"]:::topic_core_knowledge
+    N19["00 index"]:::topic_global
+    N20["06 thinking representation"]:::topic_thinking
+    N21["05 deep structure metaphysics"]:::topic_standards
+    N22["zig"]:::topic_other
+    N23["17 ada spark"]:::topic_other
+    N24["14 embedded iot"]:::topic_industrial
+    N25["03 performance optimization"]:::topic_core_knowledge
+    N26["16 embedded ai agents"]:::topic_other
+    N27["09 state machines"]:::topic_thinking
+    N28["04 secure coding guide"]:::topic_core_knowledge
+    N29["01 compilation build"]:::topic_core_knowledge
+    N30["12 practice exercises"]:::topic_other
+    N31["00 global architecture map"]:::topic_thinking
+    N32["02 data type system"]:::topic_core_knowledge
+    N33["06 c assembly mapping"]:::topic_formal_semantics
+    N34["01 technical comparison"]:::topic_other
+    N35["05 arrays pointers"]:::topic_core_knowledge
+    N36["09 data structures algorithms"]:::topic_other
+    N37["02 c11 memory model"]:::topic_formal_semantics
+    N38["07 microarchitecture"]:::topic_formal_semantics
+    N39["01 neural network basics"]:::topic_other
+    N40["11 compcert verification"]:::topic_formal_semantics
+    N41["14 video tutorials"]:::topic_other
+    N42["数据结构与算法"]:::topic_other
+    N43["02 embedded systems"]:::topic_core_knowledge
+    N44["zig security cryptography"]:::topic_other
+    N45["zig complete guide"]:::topic_other
+    N46["01 vs code setup"]:::topic_toolchain
+    N47["c2y feature previews"]:::topic_global
+    N48["04 zeroclaw edge deployment"]:::topic_other
+    N49["01 deterministic inference"]:::topic_other
+    N0 --> N4
+    N1 --> N29
+    N1 --> N25
+    N3 --> N4
+    N4 --> N4
+    N6 --> N4
+    N10 --> N11
+    N15 --> N35
+    N17 --> N32
+    N18 --> N29
+    N18 --> N25
+    N18 --> N4
+    N19 --> N29
+    N19 --> N25
+    N20 --> N25
+    N20 --> N4
+    N21 --> N4
+    N22 --> N4
+    N23 --> N4
+    N23 --> N11
+    N24 --> N5
+    N25 --> N35
+    N25 --> N29
+    N25 --> N5
+    N25 --> N38
+    N26 --> N4
+    N26 --> N11
+    N29 --> N25
+    N29 --> N38
+    N30 --> N5
+    N30 --> N6
+    N30 --> N4
+    N30 --> N12
+    N30 --> N10
+    N31 --> N4
+    N31 --> N11
+    N31 --> N19
+    N31 --> N10
+    N33 --> N29
+    N33 --> N38
+    N34 --> N4
+    N34 --> N11
+    N35 --> N14
+    N35 --> N27
+    N36 --> N4
+    N36 --> N11
+    N38 --> N35
+    N38 --> N5
+    N38 --> N25
+    N38 --> N33
+    N39 --> N4
+    N39 --> N11
+    N40 --> N33
+    N41 --> N25
+    N41 --> N4
+    N41 --> N11
+    N42 --> N4
+    N42 --> N11
+    N44 --> N4
+    N44 --> N11
+    N45 --> N4
+    N45 --> N11
+    N46 --> N4
+    N46 --> N11
+    N47 --> N4
+    N47 --> N11
+    N48 --> N4
+    N48 --> N11
+    N49 --> N4
+    N49 --> N11
+
+    classDef topic_core_knowledge fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef topic_formal_semantics fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef topic_system_tech fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    classDef topic_industrial fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef topic_standards fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef topic_thinking fill:#f1f8e9,stroke:#689f38,stroke-width:2px
+    classDef topic_toolchain fill:#e0f2f1,stroke:#00796b,stroke-width:2px
+    classDef topic_embedded fill:#fff8e1,stroke:#ffa000,stroke-width:2px
+    classDef topic_global fill:#f5f5f5,stroke:#616161,stroke-width:2px
+    classDef topic_other fill:#fafafa,stroke:#9e9e9e,stroke-width:1px

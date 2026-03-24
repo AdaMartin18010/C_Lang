@@ -1,0 +1,131 @@
+---
+title: Core Knowledge System - Detailed
+---
+
+graph LR
+
+    subgraph 01 Basic Layer
+        N0[01 Syntax Elements]
+        N1[02 Data Type System]
+        N2[Readme]
+        N3[03 Operators Expressions]
+        N4[04 Control Flow]
+    end
+
+    subgraph 02 Core Layer
+        N5[Readme]
+        N6[02 Memory Management]
+        N7[01 Pointer Depth]
+        N8[05 Arrays Pointers]
+        N9[04 Functions Scope]
+        N10[03 String Processing]
+    end
+
+    subgraph 03 Construction Layer
+        N11[Readme]
+        N12[01 Structures Unions]
+    end
+
+    subgraph 04 Standard Library Layer
+        N13[Readme]
+        N14[01 C89 Library]
+        N15[04 C17 C23 Library]
+        N16[Readme]
+        N17[02 C99 Library]
+        N18[03 C11 Library]
+        N19[10 Threads C11]
+    end
+
+    subgraph 05 Engineering
+        N20[Readme]
+    end
+
+    subgraph 05 Engineering Layer
+        N21[03 Performance Optimiz...]
+        N22[01 Compilation Build]
+        N23[Readme]
+        N24[02 Debug Techniques]
+    end
+
+    subgraph 07 Modern C
+        N25[05 Typeof Return]
+        N26[01 C11 Features]
+    end
+
+    subgraph 08 Application Domains
+        N27[02 Embedded Systems]
+        N28[Readme]
+    end
+
+    subgraph 09 Safety Standards
+        N29[Readme]
+        N30[Readme]
+        N31[04 Secure Coding Guide]
+        N32[Cisa 2026 Mandate Depth]
+        N33[00 Misra C 2023 Index]
+    end
+
+    subgraph Readme.Md
+        N34[Readme]
+    end
+
+    N5 --> N11
+    N6 --> N7
+    N34 --> N27
+    N34 --> N11
+    N0 --> N1
+    N0 --> N3
+    N21 --> N24
+    N22 --> N24
+    N11 --> N2
+    N8 --> N7
+    N2 --> N9
+    N2 --> N11
+    N23 --> N9
+    N14 --> N15
+    N14 --> N18
+    N14 --> N8
+    N15 --> N18
+    N28 --> N27
+    N28 --> N11
+    N25 --> N30
+    N16 --> N19
+    N10 --> N8
+    N10 --> N7
+    N10 --> N29
+    N17 --> N15
+    N17 --> N18
+    N18 --> N19
+    N20 --> N30
+    N24 --> N7
+    N24 --> N6
+    N32 --> N30
+    E0(("readme"))
+    style E0 fill:#e8f5e9,stroke:#388e3c,stroke-dasharray: 5 5
+    N13 -.-> E0
+    E1(("01_memory_leak_diagn"))
+    style E1 fill:#f1f8e9,stroke:#689f38,stroke-dasharray: 5 5
+    N13 -.-> E1
+    E2(("01_posix_threads"))
+    style E2 fill:#e8f5e9,stroke:#388e3c,stroke-dasharray: 5 5
+    N13 -.-> E2
+    E3(("readme"))
+    style E3 fill:#fce4ec,stroke:#c2185b,stroke-dasharray: 5 5
+    N13 -.-> E3
+    E4(("readme"))
+    style E4 fill:#f1f8e9,stroke:#689f38,stroke-dasharray: 5 5
+    N13 -.-> E4
+    E5(("readme"))
+    style E5 fill:#fafafa,stroke:#616161,stroke-dasharray: 5 5
+    N13 -.-> E5
+    N5 -.-> E0
+    N5 -.-> E1
+    E8(("09_level_bridging_ch"))
+    style E8 fill:#f1f8e9,stroke:#689f38,stroke-dasharray: 5 5
+    N5 -.-> E8
+    E9(("01_pointer_memory_ma"))
+    style E9 fill:#f1f8e9,stroke:#689f38,stroke-dasharray: 5 5
+    N5 -.-> E9
+
+    classDef topicDefault fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    class N0,N1,N2,N3,N4,N5,N6,N7,N8,N9,N10,N11,N12,N13,N14,N15,N16,N17,N18,N19,N20,N21,N22,N23,N24,N25,N26,N27,N28,N29,N30,N31,N32,N33,N34,E0,E1,E2,E3,E4,E5,E8,E9 topicDefault

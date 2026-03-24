@@ -1,0 +1,55 @@
+{
+  "fix_date": "2026-03-25 05:54:58",
+  "fixed_files": [
+    {
+      "file": "07_Modern_Toolchain/03_CI_CD_DevOps/05_Containerized_Embedded_Development.md",
+      "action": "restructure_h1",
+      "new_h1_count": 1
+    },
+    {
+      "file": "02_Formal_Semantics_and_Physics/16_Performance_Analysis_Hardware/02_Linux_Perf_Tutorial.md",
+      "action": "restructure_h1",
+      "new_h1_count": 1
+    },
+    {
+      "file": "05_Deep_Structure_MetaPhysics/08_Debugging_Tools/03_Advanced_Debugging_Techniques.md",
+      "action": "restructure_h1",
+      "new_h1_count": 1
+    },
+    {
+      "file": "10_WebAssembly_C/02_Emscripten_Advanced_Usage.md",
+      "action": "restructure_h1",
+      "new_h1_count": 1
+    },
+    {
+      "file": "02_Formal_Semantics_and_Physics/19_Hardware_Debugging/01_JTAG_Debug.md",
+      "action": "restructure_h1",
+      "new_h1_count": 1
+    },
+    {
+      "file": "01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/tools/01_MISRA_Toolchain_Guide.md",
+      "action": "restructure_h1",
+      "new_h1_count": 1
+    },
+    {
+      "file": "10_WebAssembly_C/01_WebAssembly_Introduction_C.md",
+      "action": "restructure_h1",
+      "new_h1_count": 1
+    },
+    {
+      "file": "07_Modern_Toolchain/05_Code_Quality_Toolchain/01_clang_format_Setup.md",
+      "action": "restructure_h1",
+      "new_h1_count": 1
+    },
+    {
+      "file": "07_Modern_Toolchain/02_Build_Systems_Modern/03_Xmake_Guide.md",
+      "action": "restructure_h1",
+      "new_h1_count": 1
+    },
+    {
+      "file": "07_Modern_Toolchain/05_Code_Quality_Toolchain/05_Code_Review_Automation.md",
+      "action": "fix_todo_markers"
+    }
+  ],
+  "total_fixed": 10
+}

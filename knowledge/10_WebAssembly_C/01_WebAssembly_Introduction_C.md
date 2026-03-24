@@ -1,5 +1,13 @@
 # WebAssembly 与 C 语言入门指南
 
+
+> **版本**: v1.0.0
+> **最后更新**: 2026-03-25
+> **作者**: C_Lang Team
+> **难度**: L3 进阶
+
+---
+
 ## 目录
 
 - [WebAssembly 与 C 语言入门指南](#webassembly-与-c-语言入门指南)
@@ -442,7 +450,7 @@ EMSCRIPTEN_BINDINGS(my_module) {
 #### 4.2.1 使用 Git 安装（推荐）
 
 ```bash
-# 1. 克隆 emsdk 仓库
+## 1. 克隆 emsdk 仓库
 
 ---
 
@@ -519,49 +527,49 @@ EMSCRIPTEN_BINDINGS(my_module) {
 
 git clone https://github.com/emscripten-core/emsdk.git
 
-# 2. 进入目录
+## 2. 进入目录
 cd emsdk
 
-# 3. 获取最新版本
+## 3. 获取最新版本
 ./emsdk install latest
 
-# Windows
-# emsdk install latest
+### Windows
+### emsdk install latest
 
-# 4. 激活版本
+## 4. 激活版本
 ./emsdk activate latest
 
-# Windows
-# emsdk activate latest
+### Windows
+### emsdk activate latest
 
-# 5. 设置环境变量
+## 5. 设置环境变量
 source ./emsdk_env.sh
 
-# Windows (PowerShell)
-# .\emsdk_env.ps1
-# Windows (CMD)
-# emsdk_env.bat
+### Windows (PowerShell)
+### .\emsdk_env.ps1
+### Windows (CMD)
+### emsdk_env.bat
 ```
 
 #### 4.2.2 验证安装
 
 ```bash
-# 检查版本
+### 检查版本
 emcc --version
 
-# 预期输出类似：
-# emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.45
-# clang version 17.0.0
-# Target: wasm32-unknown-emscripten
-# Thread model: posix
+### 预期输出类似：
+### emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.45
+### clang version 17.0.0
+### Target: wasm32-unknown-emscripten
+### Thread model: posix
 
-# 检查环境
+### 检查环境
 echo $EMSDK
 
-# Windows
-# echo %EMSDK%
+### Windows
+### echo %EMSDK%
 
-# 运行诊断工具
+### 运行诊断工具
 emcc --check
 ```
 
@@ -614,199 +622,199 @@ emsdk/
 ### 5.1 基础编译命令
 
 ```bash
-# ========== 基本编译 ==========
+### ========== 基本编译 ==========
 
-# 编译 C 文件为 WASM + HTML + JS
+### 编译 C 文件为 WASM + HTML + JS
 emcc hello.c -o hello.html
 
-# 编译 C++ 文件
+### 编译 C++ 文件
 em++ hello.cpp -o hello.html
 
-# 只生成 WASM + JS（无 HTML）
+### 只生成 WASM + JS（无 HTML）
 emcc hello.c -o hello.js
 
-# 生成独立 WASM 模块（最小输出）
+### 生成独立 WASM 模块（最小输出）
 emcc hello.c -o hello.wasm
 
-# ========== 优化级别 ==========
+### ========== 优化级别 ==========
 
-# 无优化（调试）
+### 无优化（调试）
 emcc hello.c -O0 -o hello.html
 
-# 基本优化
+### 基本优化
 emcc hello.c -O1 -o hello.html
 
-# 更多优化
+### 更多优化
 emcc hello.c -O2 -o hello.html
 
-# 激进优化（推荐用于发布）
+### 激进优化（推荐用于发布）
 emcc hello.c -O3 -o hello.html
 
-# 优化体积
+### 优化体积
 emcc hello.c -Os -o hello.html
 
-# 优化性能和体积平衡
+### 优化性能和体积平衡
 emcc hello.c -Oz -o hello.html
 
-# ========== 调试信息 ==========
+### ========== 调试信息 ==========
 
-# 包含调试信息
+### 包含调试信息
 emcc hello.c -g -o hello.html
 
-# 使用 DWARF 调试格式
+### 使用 DWARF 调试格式
 emcc hello.c -g3 -o hello.html
 
-# 生成 Source Map
+### 生成 Source Map
 emcc hello.c -g4 -o hello.html
 
-# ========== 编译和链接分离 ==========
+### ========== 编译和链接分离 ==========
 
-# 编译为目标文件
+### 编译为目标文件
 emcc -c hello.c -o hello.o
 emcc -c world.c -o world.o
 
-# 链接生成最终输出
+### 链接生成最终输出
 emcc hello.o world.o -o app.html
 
-# 创建静态库
+### 创建静态库
 emar rcs libmylib.a hello.o world.o
 
-# 链接静态库
+### 链接静态库
 emcc main.c libmylib.a -o app.html
-# 或
+### 或
 emcc main.c -L. -lmylib -o app.html
 ```
 
 ### 5.2 编译选项详解
 
 ```bash
-# ========== 输出格式选项 ==========
+### ========== 输出格式选项 ==========
 
-# 生成 HTML 文件（包含嵌入式 WASM）
+### 生成 HTML 文件（包含嵌入式 WASM）
 -sSINGLE_FILE=1
 
-# 生成 ES6 模块
+### 生成 ES6 模块
 -sEXPORT_ES6=1
 
-# 指定环境
+### 指定环境
 -sENVIRONMENT=web        # 仅浏览器
 -sENVIRONMENT=node       # 仅 Node.js
 -sENVIRONMENT=web,node   # 两者都支持
 -sENVIRONMENT=worker     # Web Worker
 
-# ========== 运行时选项 ==========
+### ========== 运行时选项 ==========
 
-# 初始内存大小（64KB 的倍数，单位：页）
+### 初始内存大小（64KB 的倍数，单位：页）
 -sINITIAL_MEMORY=16MB
 -sINITIAL_MEMORY=67108864  # 64MB = 64 * 1024 * 1024
 
-# 最大内存大小
+### 最大内存大小
 -sMAXIMUM_MEMORY=256MB
 -sALLOW_MEMORY_GROWTH=1   # 允许内存增长
 
-# 栈大小
+### 栈大小
 -sSTACK_SIZE=5MB
 
-# 导出函数
+### 导出函数
 -sEXPORTED_FUNCTIONS="['_main', '_myfunc']"
 
-# 导出运行时方法
+### 导出运行时方法
 -sEXPORTED_RUNTIME_METHODS="['ccall', 'cwrap', 'UTF8ToString']"
 
-# ========== 高级优化 ==========
+### ========== 高级优化 ==========
 
-# 启用 Closure Compiler 优化 JS
+### 启用 Closure Compiler 优化 JS
 --closure 1
 
-# 链接时优化 (LTO)
+### 链接时优化 (LTO)
 -flto
 -sLTO=1
 
-# 死代码消除
+### 死代码消除
 -sDEAD_CODE_STRIPPING=1
 
-# 最小化导出
+### 最小化导出
 -sEXPORT_ALL=0
 
-# WASM 异步编译
+### WASM 异步编译
 -sWASM_ASYNC_COMPILATION=1
 
-# ========== 模块化选项 ==========
+### ========== 模块化选项 ==========
 
-# 生成 ES6 模块
+### 生成 ES6 模块
 -sEXPORT_ES6=1
 -sMODULARIZE=1
 -sEXPORT_NAME="MyModule"
 
-# 使用模块化实例化
+### 使用模块化实例化
 -sMODULARIZE=1 -sEXPORT_NAME="createModule"
 
-# ========== 多线程支持 ==========
+### ========== 多线程支持 ==========
 
-# 启用 pthreads
+### 启用 pthreads
 -sUSE_PTHREADS=1
 -sPTHREAD_POOL_SIZE=4
 
-# SharedArrayBuffer
+### SharedArrayBuffer
 -sINITIAL_MEMORY=64MB
 -sMAXIMUM_MEMORY=256MB
 -sALLOW_MEMORY_GROWTH=1
 
-# ========== 文件系统 ==========
+### ========== 文件系统 ==========
 
-# 完全禁用文件系统（减少体积）
+### 完全禁用文件系统（减少体积）
 -sFILESYSTEM=0
 
-# 预加载文件到 MEMFS
+### 预加载文件到 MEMFS
 --preload-file assets/
 
-# 嵌入单个文件
+### 嵌入单个文件
 --embed-file config.txt
 
-# 使用 IndexedDB 文件系统
+### 使用 IndexedDB 文件系统
 -lidbfs.js
 
-# ========== 网络/Web API ==========
+### ========== 网络/Web API ==========
 
-# 允许同步 XHR（用于文件系统）
+### 允许同步 XHR（用于文件系统）
 -sALLOW_SYNC_XHR_IN_MAIN_THREAD=1
 
-# 使用 WebGL
+### 使用 WebGL
 -sUSE_WEBGL2=1
 -sFULL_ES3=1
 -sMIN_WEBGL_VERSION=2
 -sMAX_WEBGL_VERSION=2
 
-# WebSocket 支持
+### WebSocket 支持
 -lwebsocket.js
 
-# ========== 库链接 ==========
+### ========== 库链接 ==========
 
-# 链接 SDL2
+### 链接 SDL2
 -sUSE_SDL=2
 
-# 链接 GLFW
+### 链接 GLFW
 -sUSE_GLFW=3
 
-# 链接 OpenAL
+### 链接 OpenAL
 -sUSE_OPENAL=1
 
-# 链接 zlib
+### 链接 zlib
 -sUSE_ZLIB=1
 
-# 链接 libpng
+### 链接 libpng
 -sUSE_LIBPNG=1
 
-# 链接 libjpeg
+### 链接 libjpeg
 -sUSE_LIBJPEG=1
 
-# 链接 freetype
+### 链接 freetype
 -sUSE_FREETYPE=1
 
-# 链接 harfbuzz
+### 链接 harfbuzz
 -sUSE_HARFBUZZ=1
 
-# 链接 ICU
+### 链接 ICU
 -sUSE_ICU=1
 ```
 
@@ -917,39 +925,39 @@ int main() {
 编译命令：
 
 ```bash
-# 基础编译 - 生成 HTML 文件
+### 基础编译 - 生成 HTML 文件
 emcc hello.c -o hello.html
 
-# 编译输出：
-# - hello.wasm    (32KB - WASM 模块)
-# - hello.js      (280KB - JavaScript 胶水代码)
-# - hello.html    (8KB - HTML 入口文件)
+### 编译输出：
+### - hello.wasm    (32KB - WASM 模块)
+### - hello.js      (280KB - JavaScript 胶水代码)
+### - hello.html    (8KB - HTML 入口文件)
 
-# 使用优化编译
+### 使用优化编译
 emcc hello.c -O3 -o hello.html
 
-# 优化后输出：
-# - hello.wasm    (8KB)
-# - hello.js      (180KB)
-# - hello.html    (8KB)
+### 优化后输出：
+### - hello.wasm    (8KB)
+### - hello.js      (180KB)
+### - hello.html    (8KB)
 ```
 
 ### 6.2 运行程序
 
 ```bash
-# 方法1: 使用 emrun（推荐）
+### 方法1: 使用 emrun（推荐）
 emrun hello.html
 
-# 方法2: 使用 Python 简单 HTTP 服务器
+### 方法2: 使用 Python 简单 HTTP 服务器
 python3 -m http.server 8000
-# 浏览器访问: http://localhost:8000/hello.html
+### 浏览器访问: http://localhost:8000/hello.html
 
-# 方法3: 使用 Node.js
+### 方法3: 使用 Node.js
 node hello.js
-# 注意: 需要添加编译选项 -sENVIRONMENT=node
+### 注意: 需要添加编译选项 -sENVIRONMENT=node
 
-# 方法4: 使用 VS Code Live Server 扩展
-# 右键点击 hello.html → "Open with Live Server"
+### 方法4: 使用 VS Code Live Server 扩展
+### 右键点击 hello.html → "Open with Live Server"
 ```
 
 ### 6.3 程序结构解析
@@ -1073,13 +1081,13 @@ double average_array(int* arr, int length) {
 编译命令：
 
 ```bash
-# 编译为库（没有 main 函数）
+### 编译为库（没有 main 函数）
 emcc math_lib.c -O3 \
     -sEXPORTED_FUNCTIONS="['_add', '_subtract', '_multiply', '_divide', '_factorial', '_fibonacci', '_calculate_pi', '_sum_array', '_average_array']" \
     -sEXPORTED_RUNTIME_METHODS="['ccall', 'cwrap']" \
     -o math_lib.js
 
-# 精简版本（无文件系统）
+### 精简版本（无文件系统）
 emcc math_lib.c -O3 \
     -sEXPORTED_FUNCTIONS="['_add', '_subtract', '_multiply', '_divide', '_factorial', '_fibonacci', '_calculate_pi', '_sum_array', '_average_array']" \
     -sEXPORTED_RUNTIME_METHODS="['ccall', 'cwrap']" \
@@ -2886,12 +2894,12 @@ function freeString(ptr) {
 ## 附录：完整的命令速查表
 
 ```bash
-# ========== 基础编译 ==========
+### ========== 基础编译 ==========
 emcc input.c -o output.html                    # 生成 HTML + JS + WASM
 emcc input.c -o output.js                      # 生成 JS + WASM
 emcc input.c -o output.wasm                    # 仅 WASM
 
-# ========== 优化选项 ==========
+### ========== 优化选项 ==========
 emcc input.c -O0 -o output.js                  # 无优化（调试）
 emcc input.c -O1 -o output.js                  # 基本优化
 emcc input.c -O2 -o output.js                  # 更多优化
@@ -2899,31 +2907,31 @@ emcc input.c -O3 -o output.js                  # 激进优化（推荐）
 emcc input.c -Os -o output.js                  # 优化体积
 emcc input.c -Oz -o output.js                  # 极致体积优化
 
-# ========== 调试选项 ==========
+### ========== 调试选项 ==========
 emcc input.c -g -o output.js                   # 包含调试信息
 emcc input.c -g3 -o output.js                  # DWARF 格式
 emcc input.c -g4 -o output.js                  # Source Map
 
-# ========== 内存选项 ==========
+### ========== 内存选项 ==========
 emcc input.c -sINITIAL_MEMORY=64MB -o output.js
 emcc input.c -sMAXIMUM_MEMORY=256MB -o output.js
 emcc input.c -sALLOW_MEMORY_GROWTH=1 -o output.js
 emcc input.c -sSTACK_SIZE=8MB -o output.js
 
-# ========== 导出选项 ==========
+### ========== 导出选项 ==========
 emcc input.c -sEXPORTED_FUNCTIONS="['_main', '_foo']" -o output.js
 emcc input.c -sEXPORTED_RUNTIME_METHODS="['ccall', 'cwrap']" -o output.js
 
-# ========== 模块化选项 ==========
+### ========== 模块化选项 ==========
 emcc input.c -sMODULARIZE=1 -sEXPORT_NAME="MyModule" -o output.js
 emcc input.c -sEXPORT_ES6=1 -o output.js
 
-# ========== 文件系统 ==========
+### ========== 文件系统 ==========
 emcc input.c --preload-file assets/ -o output.js
 emcc input.c --embed-file data.txt -o output.js
 emcc input.c -sFILESYSTEM=0 -o output.js       # 禁用文件系统
 
-# ========== 库链接 ==========
+### ========== 库链接 ==========
 emcc input.c -sUSE_SDL=2 -o output.js
 emcc input.c -sUSE_SDL=2 -sUSE_SDL_IMAGE=2 -o output.js
 emcc input.c -sUSE_SDL_MIXER=2 -o output.js
@@ -2932,11 +2940,11 @@ emcc input.c -sUSE_GLFW=3 -o output.js
 emcc input.c -sUSE_WEBGL2=1 -o output.js
 emcc input.c -sUSE_PTHREADS=1 -o output.js
 
-# ========== 网络选项 ==========
+### ========== 网络选项 ==========
 emcc input.c -sFETCH=1 -o output.js
 emcc input.c -sALLOW_SYNC_XHR_IN_MAIN_THREAD=1 -o output.js
 
-# ========== 高级优化 ==========
+### ========== 高级优化 ==========
 emcc input.c -flto -o output.js                # 链接时优化
 emcc input.c --closure 1 -o output.js          # JS 闭包优化
 emcc input.c -sWASM=1 -sSIDE_MODULE=1 -o output.wasm  # 动态链接

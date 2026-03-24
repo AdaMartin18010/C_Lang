@@ -1,0 +1,120 @@
+---
+title: Industrial Scenarios - Detailed
+---
+
+graph LR
+
+    subgraph 01 Automotive Abs
+        N0[01 Abs System]
+        N1[02 Hard Realtime]
+    end
+
+    subgraph 02 Automotive Ecu
+        N2[01 Can Bus Protocol]
+        N3[02 Autosar Architecture]
+        N4[03 Functional Safety]
+        N5[Readme]
+    end
+
+    subgraph 02 Avionics Systems
+        N6[02 Do 178C]
+        N7[01 Arinc 429]
+        N8[03 Flight Control]
+        N9[Readme]
+    end
+
+    subgraph 03 High Frequency Trading
+        N10[01 Dpdk Network Stack]
+        N11[02 Cache Line Optimiza...]
+        N12[02 Lock Free Queues]
+        N13[03 Kernel Bypass]
+    end
+
+    subgraph 04 5G Baseband
+        N14[01 Simd Vectorization]
+        N15[Readme]
+    end
+
+    subgraph 05 Game Engine
+        N16[02 Atomic Operations]
+    end
+
+    subgraph 12 Blockchain Crypto
+        N17[02 Blockchain Basics]
+    end
+
+    subgraph 13 Linux Kernel
+        N18[Readme]
+        N19[01 Page Table Operations]
+        N20[02 Cache Coherence]
+    end
+
+    subgraph 14 Embedded Iot
+        N21[Readme]
+        N22[01 Iot Protocols Imple...]
+        N23[01 Memory Constrained ...]
+        N24[01 Esp32 Complete Guide]
+        N25[01 Raspberrypi Embedde...]
+        N26[01 Pico Complete Guide]
+    end
+
+    subgraph 15 Industrial Communication
+        N27[Readme]
+    end
+
+    subgraph 16 Mit 6S081 Labs
+        N28[08 Lab8 Lock]
+        N29[10 Lab10 Mmap]
+    end
+
+    subgraph 17 Cmu 15 213 Labs
+        N30[04 Cache Lab]
+    end
+
+    subgraph Classic C Projects
+        N31[01 Redis Data Structures]
+        N32[02 Sqlite Architecture]
+        N33[03 Nginx Event Driven]
+    end
+
+    subgraph Readme.Md
+        N34[Readme]
+    end
+
+    N34 --> N3
+    N18 --> N21
+    N27 --> N5
+    N27 --> N18
+    E0(("readme"))
+    style E0 fill:#e8f5e9,stroke:#388e3c,stroke-dasharray: 5 5
+    N34 -.-> E0
+    E1(("readme"))
+    style E1 fill:#e0f2f1,stroke:#00796b,stroke-dasharray: 5 5
+    N34 -.-> E1
+    E2(("00_global_index"))
+    style E2 fill:#fafafa,stroke:#616161,stroke-dasharray: 5 5
+    N34 -.-> E2
+    E3(("readme"))
+    style E3 fill:#f1f8e9,stroke:#689f38,stroke-dasharray: 5 5
+    N34 -.-> E3
+    E4(("readme"))
+    style E4 fill:#f3e5f5,stroke:#7b1fa2,stroke-dasharray: 5 5
+    N34 -.-> E4
+    E5(("readme"))
+    style E5 fill:#f1f8e9,stroke:#689f38,stroke-dasharray: 5 5
+    N34 -.-> E5
+    E6(("readme"))
+    style E6 fill:#e3f2fd,stroke:#1976d2,stroke-dasharray: 5 5
+    N34 -.-> E6
+    E7(("readme"))
+    style E7 fill:#fce4ec,stroke:#c2185b,stroke-dasharray: 5 5
+    N34 -.-> E7
+    E8(("readme"))
+    style E8 fill:#f1f8e9,stroke:#689f38,stroke-dasharray: 5 5
+    N34 -.-> E8
+    E9(("readme"))
+    style E9 fill:#e8f5e9,stroke:#388e3c,stroke-dasharray: 5 5
+    N34 -.-> E9
+
+    classDef topicDefault fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    class N0,N1,N2,N3,N4,N5,N6,N7,N8,N9,N10,N11,N12,N13,N14,N15,N16,N17,N18,N19,N20,N21,N22,N23,N24,N25,N26,N27,N28,N29,N30,N31,N32,N33,N34,E0,E1,E2,E3,E4,E5,E6,E7,E8,E9 topicDefault

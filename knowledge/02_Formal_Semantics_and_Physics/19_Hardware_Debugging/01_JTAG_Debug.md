@@ -1,5 +1,13 @@
 ﻿# JTAG 调试技术详解
 
+
+> **版本**: v1.0.0
+> **最后更新**: 2026-03-25
+> **作者**: C_Lang Team
+> **难度**: L3 进阶
+
+---
+
 ## 目录
 
 - [JTAG 调试技术详解](#jtag-调试技术详解)
@@ -1385,28 +1393,28 @@ int interconnect_test(jtag_chain_t *chain,
 | [系统技术](../../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
 | [工业场景](../../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
 | [思维表征](../../../06_Thinking_Representation/README.md) | 核心关联 | 思维表征基础 |
-# 下载地址：https://github.com/openocd-org/openocd/releases
+## 下载地址：https://github.com/openocd-org/openocd/releases
 
-# 1. 下载 openocd-x.x.x-i686-w64-mingw32.zip
-# 2. 解压到 C:\openocd\
-# 3. 添加环境变量
+## 1. 下载 openocd-x.x.x-i686-w64-mingw32.zip
+## 2. 解压到 C:\openocd\
+## 3. 添加环境变量
 
-# 验证安装
+### 验证安装
 openocd --version
 
-# 输出示例：
-# Open On-Chip Debugger 0.12.0
-# Licensed under GNU GPL v2
+### 输出示例：
+### Open On-Chip Debugger 0.12.0
+### Licensed under GNU GPL v2
 ```
 
 #### 5.2.2 Linux 安装
 
 ```bash
-# Ubuntu/Debian
+### Ubuntu/Debian
 sudo apt-get update
 sudo apt-get install openocd
 
-# 或从源码编译（获取最新功能）
+### 或从源码编译（获取最新功能）
 git clone https://github.com/openocd-org/openocd.git
 cd openocd
 ./bootstrap
@@ -1414,7 +1422,7 @@ cd openocd
 make
 sudo make install
 
-# 验证
+### 验证
 which openocd
 openocd --version
 ```
@@ -1458,74 +1466,74 @@ openocd/
 #### 5.3.1 接口配置文件示例
 
 ```tcl
-# interface/ftdi/olimex-arm-usb-ocd-h.cfg
-# Olimex ARM-USB-OCD-H 调试器配置
+### interface/ftdi/olimex-arm-usb-ocd-h.cfg
+### Olimex ARM-USB-OCD-H 调试器配置
 
-# 使用 FTDI 驱动
+### 使用 FTDI 驱动
 interface ftdi
 
-# FTDI 设备描述
+### FTDI 设备描述
 ftdi_device_desc "Olimex OpenOCD JTAG ARM-USB-OCD-H"
 
-# FTDI VID/PID
+### FTDI VID/PID
 ftdi_vid_pid 0x15ba 0x002b
 
-# 引脚配置（低字节）
-# 位0: TCK, 位1: TDI, 位2: TDO, 位3: TMS
-# 位4: TRST, 位5: SRST
+### 引脚配置（低字节）
+### 位0: TCK, 位1: TDI, 位2: TDO, 位3: TMS
+### 位4: TRST, 位5: SRST
 ftdi_layout_init 0x0808 0x0a1b
 
-# 通道配置
+### 通道配置
 ftdi_channel 0
 
-# 传输速率
+### 传输速率
 adapter speed 1000    # 1 MHz，可根据需要调整
 
-# 复位配置
+### 复位配置
 reset_config trst_and_srst srst_push_pull
 
-# 输出信息
+### 输出信息
 echo "Olimex ARM-USB-OCD-H interface configured"
 ```
 
 #### 5.3.2 目标芯片配置文件
 
 ```tcl
-# target/stm32f4x.cfg
-# STM32F4 系列 Cortex-M4 处理器配置
+### target/stm32f4x.cfg
+### STM32F4 系列 Cortex-M4 处理器配置
 
-# 设置工作区域（用于下载固件）
+### 设置工作区域（用于下载固件）
 set WORKAREASIZE 0x20000
 
-# 包含通用 Cortex-M 配置
+### 包含通用 Cortex-M 配置
 source [find target/swj-dp.tcl]
 source [find mem_helper.tcl]
 
-# 芯片信息
+### 芯片信息
 set CHIPNAME stm32f4x
 set CPU_MAX_ADDRESS 0xFFFFFFFF
 
-# 复位配置
+### 复位配置
 reset_config srst_only srst_nogate
 
-# 初始化 JTAG/SWD 链
+### 初始化 JTAG/SWD 链
 if {![using_hla]} {
     # JTAG 特定配置
     set _CHIPNAME $_CHIPNAME.cpu
     jtag newtap $_CHIPNAME cpu -irlen 4 -expected-id 0x4ba00477
 }
 
-# 目标配置
+### 目标配置
 target create $_CHIPNAME.cpu cortex_m -endian little -chain-position $_CHIPNAME.cpu
 
-# 工作区域（RAM 用于下载）
+### 工作区域（RAM 用于下载）
 $_CHIPNAME.cpu configure -work-area-phys 0x20000000 -work-area-size $_WORKAREASIZE
 
-# 闪存配置
+### 闪存配置
 set _FLASHNAME $_CHIPNAME.flash
 flash bank $_FLASHNAME stm32f2x 0x08000000 0 0 0 $_CHIPNAME.cpu
 
-# 初始化事件
+### 初始化事件
 $_CHIPNAME.cpu configure -event reset-start {
     # 降低速度以支持复位
     adapter speed 100
@@ -1536,7 +1544,7 @@ $_CHIPNAME.cpu configure -event reset-init {
     adapter speed 4000
 }
 
-# 调试辅助过程
+### 调试辅助过程
 proc jtag_init {} {
     # 自定义初始化代码
     echo "STM32F4x JTAG initialized"
@@ -1607,46 +1615,46 @@ proc jtag_init {} {
 #### 5.4.2 常用命令示例
 
 ```tcl
-# ==================== OpenOCD 常用命令示例 ====================
+### ==================== OpenOCD 常用命令示例 ====================
 
-# 1. 启动 OpenOCD
+## 1. 启动 OpenOCD
 openocd -f interface/ftdi/olimex-arm-usb-ocd-h.cfg \
         -f target/stm32f4x.cfg
 
-# 2. 连接后通过 Telnet 发送命令
+## 2. 连接后通过 Telnet 发送命令
 telnet localhost 4444
 
-# 3. 基本状态检查
+## 3. 基本状态检查
 > scan_chain    # 查看 JTAG 链上的设备
    TapName             Enabled  IdCode     Expected   IrLen IrCap IrMask
 -- ------------------- -------- ---------- ---------- ----- ----- ------
  0 stm32f4x.cpu        Y        0x4ba00477 0x4ba00477 4     0x01  0x03
 
-# 4. 复位和运行控制
+## 4. 复位和运行控制
 > reset halt           # 复位并暂停
 > reset run            # 复位并运行
 > halt                 # 暂停 CPU
 > resume               # 恢复运行
 > step                 # 单步执行
 
-# 5. 寄存器操作
+## 5. 寄存器操作
 > reg                  # 显示所有寄存器
 > reg r0               # 读取 r0
 > reg r0 0x12345678    # 写入 r0
 
-# 6. 内存操作
+## 6. 内存操作
 > mdw 0x08000000 16    # 读取 Flash 起始地址 16 个字
 > mdw 0x20000000 32    # 读取 RAM 起始地址 32 个字
 > mww 0x20000000 0x55  # 向 RAM 写入 0x55
 
-# 7. 程序下载
+## 7. 程序下载
 > program firmware.elf verify reset exit
 
-# 8. 断点设置
+## 8. 断点设置
 > bp 0x08000100 2 hw   # 在地址设置硬件断点
 > rbp 0x08000100       # 移除断点
 
-# 9. 闪存操作
+## 9. 闪存操作
 > flash probe 0        # 探测闪存
 > flash info 0         # 显示闪存信息
 > flash erase_sector 0 0 11   # 擦除扇区 0-11
@@ -1659,21 +1667,21 @@ telnet localhost 4444
 #### 5.5.1 完整配置脚本示例
 
 ```tcl
-# stm32f4_debug.cfg
-# 完整的 STM32F4 调试配置文件
+### stm32f4_debug.cfg
+### 完整的 STM32F4 调试配置文件
 
-# ==================== 接口配置 ====================
+### ==================== 接口配置 ====================
 source [find interface/ftdi/olimex-arm-usb-ocd-h.cfg]
 
-# 设置调试速度
+### 设置调试速度
 adapter speed 2000
 
-# ==================== 目标配置 ====================
+### ==================== 目标配置 ====================
 source [find target/stm32f4x.cfg]
 
-# ==================== 自定义命令 ====================
+### ==================== 自定义命令 ====================
 
-# 定义一个初始化过程
+### 定义一个初始化过程
 proc my_init {} {
     echo "=== 自定义初始化开始 ==="
 
@@ -1693,7 +1701,7 @@ proc my_init {} {
     echo "=== 初始化完成 ==="
 }
 
-# 定义下载过程
+### 定义下载过程
 proc download {filename} {
     echo "正在下载: $filename"
 
@@ -1712,7 +1720,7 @@ proc download {filename} {
     echo "下载完成，程序开始运行"
 }
 
-# 定义内存测试过程
+### 定义内存测试过程
 proc memory_test {addr size} {
     echo "测试内存区域: 0x[format %08X $addr] - 0x[format %08X [expr $addr + $size]]"
 
@@ -1749,14 +1757,14 @@ proc memory_test {addr size} {
     echo "内存测试完成"
 }
 
-# 定义 Flash 转储过程
+### 定义 Flash 转储过程
 proc dump_flash {filename {size 0x100000}} {
     echo "转储 Flash 到 $filename"
     dump_image $filename 0x08000000 $size
     echo "转储完成，大小: $size 字节"
 }
 
-# 初始化事件钩子
+### 初始化事件钩子
 $_CHIPNAME.cpu configure -event gdb-attach {
     echo "GDB 已连接"
     reset halt
@@ -1767,7 +1775,7 @@ $_CHIPNAME.cpu configure -event gdb-detach {
     resume
 }
 
-# 启动时执行初始化
+### 启动时执行初始化
 init
 my_init
 ```
@@ -1781,18 +1789,18 @@ my_init
 #### 6.1.1 GDB 启动配置
 
 ```bash
-# ==================== GDB 启动配置 ====================
+### ==================== GDB 启动配置 ====================
 
-# 1. 启动 OpenOCD（在另一个终端）
+## 1. 启动 OpenOCD（在另一个终端）
 openocd -f interface/ftdi/olimex-arm-usb-ocd-h.cfg -f target/stm32f4x.cfg
 
-# 2. 启动 ARM GDB
+## 2. 启动 ARM GDB
 arm-none-eabi-gdb firmware.elf
 
-# 3. 在 GDB 中连接到 OpenOCD
+## 3. 在 GDB 中连接到 OpenOCD
 (gdb) target remote localhost:3333
 
-# 4. 常用 GDB 命令
+## 4. 常用 GDB 命令
 (gdb) monitor reset halt      # 通过 OpenOCD 复位
 (gdb) load                    # 下载程序
 (gdb) continue 或 c           # 继续运行
@@ -1808,39 +1816,39 @@ arm-none-eabi-gdb firmware.elf
 #### 6.1.2 .gdbinit 配置文件
 
 ```gdb
-# .gdbinit - GDB 自动配置
-# 放置在工作目录或 home 目录
+### .gdbinit - GDB 自动配置
+### 放置在工作目录或 home 目录
 
-# 设置架构
+### 设置架构
 set architecture arm
 
-# 设置远程超时
+### 设置远程超时
 set remotetimeout 10
 
-# 连接到 OpenOCD
+### 连接到 OpenOCD
 target remote localhost:3333
 
-# 设置打印选项
+### 设置打印选项
 set print pretty on
 set print array on
 
-# 加载程序
+### 加载程序
 file firmware.elf
 
-# 复位目标
+### 复位目标
 monitor reset halt
 
-# 加载程序到目标
+### 加载程序到目标
 load
 
-# 设置 main 断点
+### 设置 main 断点
 break main
 
-# 继续到 main
+### 继续到 main
 continue
 
-# 自定义命令
-# 显示所有任务（FreeRTOS）
+### 自定义命令
+### 显示所有任务（FreeRTOS）
 define freertos_tasks
     set $tasks = pxReadyTasksLists
     set $i = 0
@@ -1851,13 +1859,13 @@ define freertos_tasks
     end
 end
 
-# 显示当前任务
+### 显示当前任务
 define current_task
     p/x pxCurrentTCB
     p *((TCB_t *)pxCurrentTCB)
 end
 
-# 内存检查
+### 内存检查
 define check_stack
     set $task = (TCB_t *)pxCurrentTCB
     set $top = $task->pxStack
@@ -1866,7 +1874,7 @@ define check_stack
     x/16xw $top
 end
 
-# 程序状态检查
+### 程序状态检查
 define system_status
     echo "=== 系统状态 ===\n"
     info registers
@@ -1938,13 +1946,13 @@ end
 #### 6.3.1 多核调试
 
 ```tcl
-# OpenOCD 多核配置示例（如 STM32H7 双核）
+### OpenOCD 多核配置示例（如 STM32H7 双核）
 
-# 主核 (Cortex-M7)
+### 主核 (Cortex-M7)
 target create stm32h7x.cpu0 cortex_m -endian little -chain-position 0
 stm32h7x.cpu0 configure -work-area-phys 0x20000000 -work-area-size 0x10000
 
-# 从核 (Cortex-M4)
+### 从核 (Cortex-M4)
 target create stm32h7x.cpu1 cortex_m -endian little -chain-position 1
 stm32h7x.cpu1 configure -work-area-phys 0x10000000 -work-area-size 0x10000
 
@@ -1952,16 +1960,16 @@ targets stm32h7x.cpu0  # 默认选择主核
 ```
 
 ```gdb
-# GDB 多核调试命令
+### GDB 多核调试命令
 
-# 查看可用目标
+### 查看可用目标
 (gdb) info targets
 
-# 切换到特定核心
+### 切换到特定核心
 (gdb) target remote localhost:3333  # 连接到主核
 (gdb) target remote localhost:3334  # 连接到从核
 
-# 分别控制每个核心
+### 分别控制每个核心
 (gdb) thread 1  # 选择线程/核心
 (gdb) continue
 ```
@@ -1970,7 +1978,7 @@ targets stm32h7x.cpu0  # 默认选择主核
 
 ```python
 #!/usr/bin/env python3
-# debug_script.py - 自动化调试脚本
+### debug_script.py - 自动化调试脚本
 
 import gdb
 
@@ -2035,7 +2043,7 @@ class AutomatedDebug(gdb.Command):
             f.write("\n寄存器:\n")
             f.write(gdb.execute("info registers", to_string=True))
 
-# 注册命令
+### 注册命令
 AutomatedDebug()
 ```
 
@@ -2071,36 +2079,36 @@ AutomatedDebug()
 #### 7.1.2 诊断步骤
 
 ```tcl
-# OpenOCD 诊断脚本
+### OpenOCD 诊断脚本
 
-# 1. 检查 JTAG 连接
+## 1. 检查 JTAG 连接
 scan_chain
-# 预期输出：显示芯片 IDCODE
-# 如果失败：检查硬件连接、电源
+### 预期输出：显示芯片 IDCODE
+### 如果失败：检查硬件连接、电源
 
-# 2. 尝试复位
+## 2. 尝试复位
 reset halt
-# 检查 PC 值
+### 检查 PC 值
 reg pc
-# 预期：0x08000000 (Flash) 或 0x1FFF0000 (System Memory)
+### 预期：0x08000000 (Flash) 或 0x1FFF0000 (System Memory)
 
-# 3. 检查启动模式
-# 读取 BOOT0/BOOT1 引脚状态（需要通过边界扫描或其他方式）
+## 3. 检查启动模式
+### 读取 BOOT0/BOOT1 引脚状态（需要通过边界扫描或其他方式）
 
-# 4. 检查时钟
-# 读取 RCC 寄存器
+## 4. 检查时钟
+### 读取 RCC 寄存器
 mdw 0x40023800 16  ;# RCC_CR, RCC_PLLCFGR 等
 
-# 5. 检查 Flash 选项字节
+## 5. 检查 Flash 选项字节
 mdw 0x1FFF C000 4   ;# 读取选项字节
 
-# 6. 检查向量表
+## 6. 检查向量表
 mdw 0x08000000 8    ;# 检查初始 SP 和 Reset Handler
 
-# 7. 逐步跟踪启动过程
+## 7. 逐步跟踪启动过程
 step
 step
-# 观察执行流程
+### 观察执行流程
 ```
 
 ### 7.2 案例2：HardFault 调试
@@ -2210,41 +2218,41 @@ void HardFault_Handler_C(uint32_t *stack_frame) {
 ```
 
 ```gdb
-# GDB HardFault 分析命令
+### GDB HardFault 分析命令
 
-# 1. 连接到目标
+## 1. 连接到目标
 (gdb) target remote localhost:3333
 
-# 2. 检查是否停在 HardFault
+## 2. 检查是否停在 HardFault
 (gdb) info registers pc
-# 应该显示 HardFault_Handler 附近
+### 应该显示 HardFault_Handler 附近
 
-# 3. 读取全局故障信息结构
+## 3. 读取全局故障信息结构
 (gdb) p/x g_hardfault_info
 
-# 4. 分析 CFSR
+## 4. 分析 CFSR
 (gdb) p/x g_hardfault_info.cfsr
-# 位含义分析：
-# - 位0: IACCVIOL - 指令访问冲突
-# - 位1: DACCVIOL - 数据访问冲突
-# - 位3: MUNSTKERR - 异常出栈错误
-# - 位4: MSTKERR - 异常入栈错误
-# - 位18: IBUSERR - 指令总线错误
-# - 等等
+### 位含义分析：
+### - 位0: IACCVIOL - 指令访问冲突
+### - 位1: DACCVIOL - 数据访问冲突
+### - 位3: MUNSTKERR - 异常出栈错误
+### - 位4: MSTKERR - 异常入栈错误
+### - 位18: IBUSERR - 指令总线错误
+### - 等等
 
-# 5. 检查故障地址
+## 5. 检查故障地址
 (gdb) p/x g_hardfault_info.mmfar  # 内存管理故障地址
 (gdb) p/x g_hardfault_info.bfar   # 总线故障地址
 
-# 6. 检查发生故障的代码位置
+## 6. 检查发生故障的代码位置
 (gdb) p/x g_hardfault_info.stack_frame.pc
 (gdb) list *g_hardfault_info.stack_frame.pc
 
-# 7. 检查调用链
+## 7. 检查调用链
 (gdb) p/x g_hardfault_info.stack_frame.lr
 (gdb) info line *g_hardfault_info.stack_frame.lr
 
-# 8. 反汇编故障点附近代码
+## 8. 反汇编故障点附近代码
 (gdb) disas g_hardfault_info.stack_frame.pc-16, g_hardfault_info.stack_frame.pc+16
 ```
 

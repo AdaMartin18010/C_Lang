@@ -1,0 +1,179 @@
+{
+  "report_title": "C_Lang知识库质量优化报告",
+  "generated_at": "2026-03-25 05:52:12",
+  "executive_summary": {
+    "total_files_scanned": 1405,
+    "files_with_issues": 50,
+    "total_todos_found": 42,
+    "files_with_h1_issues": 29,
+    "files_without_metadata": 1093
+  },
+  "todo_statistics": {
+    "before_fix": 42,
+    "after_fix": 0,
+    "fix_rate": 0,
+    "high_priority_files": 0,
+    "medium_priority_files": 6,
+    "low_priority_files": 16
+  },
+  "structure_optimization": {
+    "files_restructured": [],
+    "h1_issues_resolved": 0,
+    "restructure_list": [
+      {
+        "file": "07_Modern_Toolchain\\03_CI_CD_DevOps\\05_Containerized_Embedded_Development.md",
+        "h1_count": 433,
+        "severity": "critical"
+      },
+      {
+        "file": "02_Formal_Semantics_and_Physics\\16_Performance_Analysis_Hardware\\02_Linux_Perf_Tutorial.md",
+        "h1_count": 237,
+        "severity": "critical"
+      },
+      {
+        "file": "05_Deep_Structure_MetaPhysics\\08_Debugging_Tools\\03_Advanced_Debugging_Techniques.md",
+        "h1_count": 226,
+        "severity": "critical"
+      },
+      {
+        "file": "10_WebAssembly_C\\02_Emscripten_Advanced_Usage.md",
+        "h1_count": 224,
+        "severity": "critical"
+      },
+      {
+        "file": "02_Formal_Semantics_and_Physics\\19_Hardware_Debugging\\01_JTAG_Debug.md",
+        "h1_count": 120,
+        "severity": "high"
+      },
+      {
+        "file": "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\tools\\01_MISRA_Toolchain_Guide.md",
+        "h1_count": 120,
+        "severity": "high"
+      },
+      {
+        "file": "10_WebAssembly_C\\01_WebAssembly_Introduction_C.md",
+        "h1_count": 116,
+        "severity": "high"
+      },
+      {
+        "file": "07_Modern_Toolchain\\05_Code_Quality_Toolchain\\01_clang_format_Setup.md",
+        "h1_count": 116,
+        "severity": "high"
+      },
+      {
+        "file": "07_Modern_Toolchain\\02_Build_Systems_Modern\\03_Xmake_Guide.md",
+        "h1_count": 114,
+        "severity": "high"
+      },
+      {
+        "file": "01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\tools\\02_Helix_QAC_Guide.md",
+        "h1_count": 113,
+        "severity": "high"
+      },
+      {
+        "file": "01_Core_Knowledge_System\\09_Safety_Standards\\04_Secure_Coding_Guide.md",
+        "h1_count": 109,
+        "severity": "high"
+      },
+      {
+        "file": "00_VERSION_TRACKING\\GCC_15_C23_Default.md",
+        "h1_count": 103,
+        "severity": "high"
+      },
+      {
+        "file": "07_Modern_Toolchain\\07_Performance_Tracing.md",
+        "h1_count": 96,
+        "severity": "medium"
+      },
+      {
+        "file": "00_VERSION_TRACKING\\LLVM_22_C23_Update.md",
+        "h1_count": 89,
+        "severity": "medium"
+      },
+      {
+        "file": "02_Formal_Semantics_and_Physics\\11_CompCert_Verification\\04_Frama_C_2024_Guide.md",
+        "h1_count": 73,
+        "severity": "medium"
+      },
+      {
+        "file": "02_Formal_Semantics_and_Physics\\11_CompCert_Verification\\05_Eva_Tutorial.md",
+        "h1_count": 73,
+        "severity": "medium"
+      },
+      {
+        "file": "07_Modern_Toolchain\\05_Case_Studies\\04_Linux_Kernel_Toolchain.md",
+        "h1_count": 72,
+        "severity": "medium"
+      },
+      {
+        "file": "04_Industrial_Scenarios\\14_Embedded_IoT\\ESP32\\01_ESP32_Complete_Guide.md",
+        "h1_count": 69,
+        "severity": "medium"
+      },
+      {
+        "file": "10_WebAssembly_C\\04_WASM_Performance_Optimization.md",
+        "h1_count": 68,
+        "severity": "medium"
+      },
+      {
+        "file": "07_Modern_Toolchain\\03_CI_CD_DevOps\\02_Docker_C_Development.md",
+        "h1_count": 65,
+        "severity": "medium"
+      },
+      {
+        "file": "07_Modern_Toolchain\\02_Build_Systems_Modern\\04_Bazel_C_Projects.md",
+        "h1_count": 63,
+        "severity": "medium"
+      },
+      {
+        "file": "02_Formal_Semantics_and_Physics\\13_Hardware_Description\\04_HLS_with_C\\01_Vivado_HLS_Introduction.md",
+        "h1_count": 61,
+        "severity": "medium"
+      },
+      {
+        "file": "03_System_Technology_Domains\\02_Cbindgen_Usage.md",
+        "h1_count": 59,
+        "severity": "medium"
+      },
+      {
+        "file": "07_Modern_Toolchain\\06_Dynamic_Analysis_Tools.md",
+        "h1_count": 57,
+        "severity": "medium"
+      },
+      {
+        "file": "04_Industrial_Scenarios\\14_Embedded_IoT\\RaspberryPi\\01_RaspberryPi_Embedded_Linux.md",
+        "h1_count": 57,
+        "severity": "medium"
+      },
+      {
+        "file": "07_Modern_Toolchain\\02_Build_Systems_Modern\\02_Meson_Build.md",
+        "h1_count": 56,
+        "severity": "medium"
+      },
+      {
+        "file": "07_Modern_Toolchain\\02_Build_Systems_Modern\\README.md",
+        "h1_count": 56,
+        "severity": "medium"
+      },
+      {
+        "file": "04_Industrial_Scenarios\\14_Embedded_IoT\\Baremetal\\01_Baremetal_Programming.md",
+        "h1_count": 55,
+        "severity": "medium"
+      },
+      {
+        "file": "01_Core_Knowledge_System\\05_Engineering\\01_Build_System\\README.md",
+        "h1_count": 52,
+        "severity": "medium"
+      }
+    ]
+  },
+  "metadata_standardization": {
+    "files_updated": [],
+    "template_applied": 0
+  },
+  "quality_score": {
+    "before": 29.0,
+    "after": 0,
+    "improvement": 0
+  }
+}
