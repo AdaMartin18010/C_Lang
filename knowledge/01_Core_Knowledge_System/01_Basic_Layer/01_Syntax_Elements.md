@@ -64,10 +64,40 @@
     - [陷阱 SYN05: 字符串字面量拼接顺序](#陷阱-syn05-字符串字面量拼接顺序)
     - [陷阱 SYN06: 浮点常量默认类型](#陷阱-syn06-浮点常量默认类型)
   - [✅ 质量验收清单](#-质量验收清单)
-  - [深入理解](#深入理解)
-    - [技术原理](#技术原理)
+  - [🔬 深入理解](#-深入理解)
+    - [技术原理深度剖析](#技术原理深度剖析)
+      - [1. 编译器词法分析实现机制](#1-编译器词法分析实现机制)
+        - [1.1 确定性有限自动机（DFA）模型](#11-确定性有限自动机dfa模型)
+        - [1.2 最长匹配原则（Maximal Munch）](#12-最长匹配原则maximal-munch)
+        - [1.3 贪心分隔符解析](#13-贪心分隔符解析)
+      - [2. 翻译阶段与语法要素](#2-翻译阶段与语法要素)
+      - [3. 标识符的符号表管理](#3-标识符的符号表管理)
+        - [3.1 符号表数据结构](#31-符号表数据结构)
+        - [3.2 作用域解析算法](#32-作用域解析算法)
+      - [4. 关键字的实现策略](#4-关键字的实现策略)
+        - [4.1 关键字识别方法](#41-关键字识别方法)
+        - [4.2 上下文关键字（C23演进）](#42-上下文关键字c23演进)
+      - [5. 常量的内部表示](#5-常量的内部表示)
+        - [5.1 整数常量类型推导算法](#51-整数常量类型推导算法)
+        - [5.2 浮点常量精度问题](#52-浮点常量精度问题)
+      - [6. 字符串字面量的存储布局](#6-字符串字面量的存储布局)
+        - [6.1 内存布局模型](#61-内存布局模型)
+        - [6.2 字符串池化（String Interning）](#62-字符串池化string-interning)
     - [实践指南](#实践指南)
+      - [阶段1：建立坚实基础](#阶段1建立坚实基础)
+      - [阶段2：掌握核心原理](#阶段2掌握核心原理)
+      - [阶段3：应用实践](#阶段3应用实践)
+    - [层次关联与映射分析](#层次关联与映射分析)
+      - [与上层（核心层）的映射关系](#与上层核心层的映射关系)
+      - [与下层（构造层）的组合关系](#与下层构造层的组合关系)
+      - [与形式语义层的理论关联](#与形式语义层的理论关联)
+      - [与物理层的实现映射](#与物理层的实现映射)
+    - [决策树：语法要素应用选择](#决策树语法要素应用选择)
     - [相关资源](#相关资源)
+      - [权威文档](#权威文档)
+      - [推荐书籍](#推荐书籍)
+      - [在线资源](#在线资源)
+      - [参考实现](#参考实现)
 
 
 ---
@@ -661,25 +691,680 @@ float f2 = 3.141592653589793;  // 先转double，再转float，可能截断
 
 ---
 
-## 深入理解
+## 🔬 深入理解
 
-### 技术原理
+### 技术原理深度剖析
 
-深入探讨相关技术原理和实现细节。
+#### 1. 编译器词法分析实现机制
 
-### 实践指南
+C语言语法要素的处理始于编译器的**词法分析器（Lexer/Tokenizer）**。理解其实现原理对诊断编译错误至关重要。
 
-- 步骤1：理解基础概念
-- 步骤2：掌握核心原理
-- 步骤3：应用实践
+##### 1.1 确定性有限自动机（DFA）模型
 
-### 相关资源
+词法分析器本质上是DFA的实现：
 
-- 文档链接
-- 代码示例
-- 参考文章
+```
+状态转换图（简化）：
+
+    [开始] ──字母/下划线──→ [标识符] ──字母/数字/下划线──┐
+                              ↑                        │
+                              └────────────────────────┘
+
+    [开始] ──数字──→ [数字] ──数字──┐
+                     │            │
+                     ├─.──→ [小数]─┤
+                     │            │
+                     └─e/E──→ [指数]
+
+    [开始] ──"──→ [字符串] ──非\"──┐
+                              ↑   │
+                              └───┤
+                              \──→ [转义] ──特定字符──┘
+```
+
+**形式化定义**：
+
+```text
+Lexer = (Q, Σ, δ, q₀, F)
+其中：
+  Q = {START, ID, NUM, STRING, COMMENT, ...}  // 状态集
+  Σ = 所有ASCII字符 ∪ Unicode字符(C11+)      // 输入字母表
+  δ: Q × Σ → Q                                 // 状态转移函数
+  q₀ = START                                   // 初始状态
+  F ⊆ Q                                        // 接受状态集
+```
+
+##### 1.2 最长匹配原则（Maximal Munch）
+
+C语言词法分析遵循**最长匹配原则**：
+
+```c
+// 示例：如何解析 "+++++i"?
+a = b+++c;   // 解析为: b++ + c (后缀++，然后+)
+a = b++++c;  // 解析为: b++ ++ c → 错误! 第二个++无操作数
+a = +++b;    // 解析为: ++ +b   → 前缀++，然后一元+
+```
+
+**决策过程**：
+
+```
+输入: +++++i
+步骤1: 读取 '+' → 可能匹配 '+' 或 '++'，继续
+步骤2: 读取 '+' → 匹配 '++'，继续
+步骤3: 读取 '+' → 无法匹配 '+++'，回退到 '++'
+步骤4: 输出 token: ++
+步骤5: 读取 '+' → 继续
+步骤6: 读取 '+' → 匹配 '++'
+步骤7: 输出 token: ++
+步骤8: 读取 'i' → 标识符
+```
+
+##### 1.3 贪心分隔符解析
+
+```c
+// 经典陷阱：a---b 的解析
+int a = 5, b = 3, c;
+c = a---b;   // 解析为: c = a-- - b;  结果: c = 2, a = 4
+
+// 对比
+c = a- --b;  // 解析为: c = a - (--b); 结果: c = 3, b = 2
+c = a-- -b;  // 解析为: c = (a--) - b; 结果: c = 2, a = 4
+```
+
+#### 2. 翻译阶段与语法要素
+
+C标准定义了**8个翻译阶段**，语法要素在不同阶段有不同的形态：
+
+```mermaid
+flowchart LR
+    A[阶段1-2: 物理源字符] -->|三字母词/多字节转换| B[阶段3: 预处理标记]
+    B -->|宏展开/包含| C[阶段4: 预处理指令执行]
+    C -->|字符串拼接| D[阶段5-6: 词法单元/语法单元]
+    D -->|编译| E[阶段7-8: 目标代码]
+```
+
+**关键洞察**：
+
+| 阶段 | 处理单位 | 示例 |
+|------|----------|------|
+| 1-2 | 源字符 | `\` 续行符处理 |
+| 3 | 预处理标记 | `##` 拼接操作符工作在此阶段 |
+| 4 | 预处理指令 | `#define`, `#include` 执行 |
+| 5 | 字符/字符串拼接 | `"a" "b"` → `"ab"` |
+| 6 | 词法单元(Token) | 相邻字符串已合并 |
+| 7-8 | 语法单元 | 编译器进行语义分析 |
+
+```c
+// 阶段差异示例
+#define CONCAT(a, b) a##b
+#define STRINGIFY(x) #x
+
+// 阶段3-4: 预处理标记处理
+CONCAT(in, t) x = 5;    // 展开为: int x = 5;
+char* s = STRINGIFY(abc); // 展开为: char* s = "abc";
+
+// 阶段5: 字符串拼接
+char* str = "Hello, " "World" "!";  // 等同于 "Hello, World!"
+```
+
+#### 3. 标识符的符号表管理
+
+##### 3.1 符号表数据结构
+
+编译器使用**符号表（Symbol Table）**管理标识符：
+
+```c
+// 简化的符号表条目
+struct SymbolEntry {
+    char* name;           // 标识符名称
+    int scope_level;      // 作用域层级
+    enum SymbolKind kind; // VAR, FUNC, TYPEDEF, ENUM_CONST, ...
+    Type* type;           // 类型信息
+    int offset;           // 栈帧偏移或地址
+    // ... 其他属性
+};
+
+// 作用域链（处理嵌套作用域）
+struct Scope {
+    HashTable* symbols;   // 当前作用域的符号
+    struct Scope* parent; // 外层作用域
+    int level;            // 作用域深度
+};
+```
+
+##### 3.2 作用域解析算法
+
+```c
+// 标识符查找伪代码
+SymbolEntry* lookup(const char* name, Scope* current) {
+    for (Scope* s = current; s != NULL; s = s->parent) {
+        SymbolEntry* entry = hash_table_find(s->symbols, name);
+        if (entry != NULL) return entry;  // 找到最近的定义
+    }
+    return NULL;  // 未定义标识符
+}
+```
+
+#### 4. 关键字的实现策略
+
+##### 4.1 关键字识别方法
+
+**方法A：预留标识符（C语言采用）**
+
+```c
+// 关键字作为特殊标识符处理
+enum TokenKind {
+    TOK_IDENT,     // 普通标识符
+    TOK_INT,       // int
+    TOK_IF,        // if
+    TOK_WHILE,     // while
+    // ... 所有关键字
+};
+
+// 在符号表初始化时预填入关键字
+void init_keywords() {
+    insert_keyword("int", TOK_INT);
+    insert_keyword("if", TOK_IF);
+    insert_keyword("while", TOK_WHILE);
+    // ...
+}
+```
+
+**方法B：硬编码DFA（高性能实现）**
+使用完美哈希或Trie树实现O(1)或O(k)的关键字识别。
+
+##### 4.2 上下文关键字（C23演进）
+
+```c
+// C23 引入的关键字特性
+// _Decimal32, _Decimal64, _Decimal128 是上下文关键字
+// 仅在特定上下文中作为关键字，其他位置可作为标识符
+
+_Decimal64 x;     // _Decimal64 作为类型关键字
+int _Decimal64 = 5;  // 在某些编译器中可作为标识符（不推荐！）
+
+// C23 标准关键字简化
+// _Bool → bool (关键字)
+// _Static_assert → static_assert
+// _Thread_local → thread_local
+```
+
+#### 5. 常量的内部表示
+
+##### 5.1 整数常量类型推导算法
+
+编译器按照C标准6.4.4.1规则推导整数常量类型：
+
+```
+算法：推导整数常量类型
+输入：整数值V，后缀S（无/U/u/L/l/LL/ll组合）
+输出：最小可表示类型
+
+1. 如果后缀包含U：
+   - 无前缀 → 依次尝试: unsigned int → unsigned long → unsigned long long
+   - 有L → 依次尝试: unsigned long → unsigned long long
+   - 有LL → 直接: unsigned long long
+
+2. 如果后缀无U：
+   - 无前缀 → 依次尝试: int → long → long long
+   - 有L → 依次尝试: long → long long
+   - 有LL → 直接: long long
+
+3. 返回第一个能容纳V的类型
+```
+
+```c
+// 示例演示
+2147483647        // int (假设32位int)
+2147483648        // long (超出int范围)
+0x7FFFFFFF        // int
+0xFFFFFFFF        // unsigned int (如果32位int)
+0xFFFFFFFFU       // unsigned int
+0xFFFFFFFFUL      // unsigned long
+
+// 常见陷阱
+long long x = 1 << 40;  // 危险！1默认为int，可能溢出
+long long x = 1LL << 40; // 正确: 使用long long字面量
+```
+
+##### 5.2 浮点常量精度问题
+
+```c
+// 内部表示差异
+float f = 0.1f;        // 单精度: 0.100000001490116119384765625
+double d = 0.1;        // 双精度: 0.1000000000000000055511151231257827021181583404541015625
+long double ld = 0.1L; // 扩展精度
+
+// 常量推导规则
+0.1     // 默认为 double
+0.1f    // 明确 float
+0.1F    // 明确 float
+0.1l    // 明确 long double
+0.1L    // 明确 long double
+
+// C23 十进制浮点数
+// 精确表示十进制小数，避免二进制浮点误差
+_Decimal32 d32 = 0.1df;   // 精确 0.1
+_Decimal64 d64 = 0.1dd;   // 精确 0.1
+_Decimal128 d128 = 0.1dl; // 精确 0.1
+```
+
+#### 6. 字符串字面量的存储布局
+
+##### 6.1 内存布局模型
+
+```
+字符串字面量 "Hello\0World" 的存储（平台依赖）：
+
+只读数据段 (.rodata):
+┌─────────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
+│ 地址    │ +0 │ +1 │ +2 │ +3 │ +4 │ +5 │ +6 │ +7 │ +8 │ +9 │ +10│
+├─────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│ 内容    │ H  │ e  │ l  │ l  │ o  │ \0 │ W  │ o  │ r  │ l  │ d  │
+│ (ASCII) │ 72 │101 │108 │108 │111 │ 0  │ 87 │111 │114 │108 │100 │
+└─────────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┘
+                                    ↑
+                              printf在此停止
+```
+
+##### 6.2 字符串池化（String Interning）
+
+```c
+// 编译器优化：相同字符串可能共享存储
+const char* s1 = "hello";
+const char* s2 = "hello";
+const char* s3 = "hell" "o";  // 拼接后相同
+
+// 可能结果：s1 == s2 == s3（地址相同）
+// 注意：C标准不保证这一点，但大多数编译器会优化
+
+// 修改尝试（未定义行为）
+char* s = "hello";
+s[0] = 'H';  // 段错误！试图修改只读内存
+```
 
 ---
 
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review
+### 实践指南
+
+#### 阶段1：建立坚实基础
+
+**任务1.1：理解词法单元分类**
+
+```c
+// 分析以下代码的词法单元
+int main(void) {
+    int x = 42;
+    float y = 3.14f;
+    char* msg = "Hello";
+    return x + (int)y;
+}
+
+// 词法单元序列（简化）:
+// [int] [main] [(] [void] [)] [{]
+// [int] [x] [=] [42] [;]
+// [float] [y] [=] [3.14f] [;]
+// [char] [*] [msg] [=] ["Hello"] [;]
+// [return] [x] [+] [(] [int] [)] [y] [;]
+// [}]
+```
+
+**任务1.2：标识符命名练习**
+
+```c
+// 判断以下标识符的合法性
+
+int 2nd_value;      // ❌ 非法：不能以数字开头
+int _value;         // ✅ 合法
+int value_2;        // ✅ 合法
+int __value;        // ⚠️ 合法但保留（双下划线）
+int _Value;         // ⚠️ 合法但保留（下划线+大写）
+int value$;         // ❌ 非法：$非标准C（GNU扩展允许）
+int значение;       // ✅ C11起合法（Unicode）
+int \u6570\u503c;   // ✅ C11通用字符名
+```
+
+#### 阶段2：掌握核心原理
+
+**任务2.1：类型推导实验**
+
+```c
+#include <stdio.h>
+#include <stdint.h>
+#include <typeinfo>  // C++方式，C需用其他方法
+
+// 使用_Generic获取类型名称（C11）
+#define type_name(x) _Generic((x), \
+    int: "int", \
+    long: "long", \
+    long long: "long long", \
+    unsigned int: "unsigned int", \
+    unsigned long: "unsigned long", \
+    unsigned long long: "unsigned long long", \
+    float: "float", \
+    double: "double", \
+    long double: "long double", \
+    default: "other")
+
+int main(void) {
+    // 观察整数常量的类型推导
+    printf("1        : %s\n", type_name(1));
+    printf("1U       : %s\n", type_name(1U));
+    printf("1L       : %s\n", type_name(1L));
+    printf("1UL      : %s\n", type_name(1UL));
+    printf("1LL      : %s\n", type_name(1LL));
+    printf("1ULL     : %s\n", type_name(1ULL));
+
+    // 观察边界值
+    printf("2147483647   : %s\n", type_name(2147483647));     // INT_MAX
+    printf("2147483648   : %s\n", type_name(2147483648));     // INT_MAX+1 → long?
+    printf("4294967295U  : %s\n", type_name(4294967295U));    // UINT_MAX
+    printf("4294967296   : %s\n", type_name(4294967296));     // UINT_MAX+1 → long?
+
+    return 0;
+}
+```
+
+**任务2.2：最长匹配原则验证**
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int a = 5, b = 3, c = 2;
+
+    // 实验不同的++组合
+    int temp = a;
+    printf("a = %d, b = %d\n", temp, b);
+
+    // a---b 的解析
+    int result1 = temp---b;  // (temp--) - b
+    printf("temp---b = %d, temp = %d\n", result1, temp);
+
+    temp = a;
+    int result2 = temp- --b; // temp - (--b)
+    printf("temp- --b = %d, b = %d\n", result2, b);
+
+    return 0;
+}
+```
+
+#### 阶段3：应用实践
+
+**任务3.1：编写简单词法分析器**
+
+```c
+// 简化的C词法分析器框架
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+typedef enum {
+    TOK_INT, TOK_IDENTIFIER, TOK_NUMBER,
+    TOK_PLUS, TOK_MINUS, TOK_ASSIGN,
+    TOK_SEMICOLON, TOK_LPAREN, TOK_RPAREN,
+    TOK_EOF, TOK_UNKNOWN
+} TokenType;
+
+typedef struct {
+    TokenType type;
+    char lexeme[64];
+    int line;
+} Token;
+
+// 简化的词法分析
+Token get_next_token(const char** input) {
+    Token tok = {TOK_UNKNOWN, "", 1};
+
+    // 跳过空白
+    while (isspace(**input)) (*input)++;
+
+    if (**input == '\0') {
+        tok.type = TOK_EOF;
+        return tok;
+    }
+
+    // 标识符或关键字
+    if (isalpha(**input) || **input == '_') {
+        int i = 0;
+        while (isalnum(**input) || **input == '_') {
+            tok.lexeme[i++] = *(*input)++;
+        }
+        tok.lexeme[i] = '\0';
+
+        // 检查关键字
+        if (strcmp(tok.lexeme, "int") == 0) tok.type = TOK_INT;
+        else tok.type = TOK_IDENTIFIER;
+        return tok;
+    }
+
+    // 数字
+    if (isdigit(**input)) {
+        int i = 0;
+        while (isdigit(**input)) {
+            tok.lexeme[i++] = *(*input)++;
+        }
+        tok.lexeme[i] = '\0';
+        tok.type = TOK_NUMBER;
+        return tok;
+    }
+
+    // 单字符标记
+    switch (**input) {
+        case '+': tok.type = TOK_PLUS; break;
+        case '-': tok.type = TOK_MINUS; break;
+        case '=': tok.type = TOK_ASSIGN; break;
+        case ';': tok.type = TOK_SEMICOLON; break;
+        case '(': tok.type = TOK_LPAREN; break;
+        case ')': tok.type = TOK_RPAREN; break;
+    }
+    tok.lexeme[0] = *(*input)++;
+    tok.lexeme[1] = '\0';
+
+    return tok;
+}
+
+int main(void) {
+    const char* code = "int x = 42;";
+    Token tok;
+
+    printf("Tokenizing: %s\n\n", code);
+
+    do {
+        tok = get_next_token(&code);
+        const char* type_name[] = {
+            "INT", "IDENTIFIER", "NUMBER",
+            "PLUS", "MINUS", "ASSIGN",
+            "SEMICOLON", "LPAREN", "RPAREN",
+            "EOF", "UNKNOWN"
+        };
+        printf("Type: %-12s Lexeme: '%s'\n", type_name[tok.type], tok.lexeme);
+    } while (tok.type != TOK_EOF);
+
+    return 0;
+}
+```
+
+**任务3.2：常量类型诊断工具**
+
+```c
+// 诊断常量类型和潜在问题
+#include <stdio.h>
+#include <limits.h>
+#include <float.h>
+
+void diagnose_int_constant(long long value, const char* suffix) {
+    printf("Constant: %lld%s\n", value, suffix);
+
+    if (value > LLONG_MAX) {
+        printf("  ⚠️  超出 long long 范围!\n");
+    } else if (value > LONG_MAX) {
+        printf("  ℹ️  需要 long long 存储\n");
+    } else if (value > INT_MAX) {
+        printf("  ℹ️  需要 long 存储 (在32位系统)\n");
+    } else {
+        printf("  ✅ 可用 int 存储\n");
+    }
+
+    // 检查无符号后缀
+    if (strchr(suffix, 'u') || strchr(suffix, 'U')) {
+        printf("  ℹ️  无符号类型\n");
+    }
+}
+
+int main(void) {
+    printf("=== 整数常量诊断 ===\n\n");
+
+    diagnose_int_constant(42, "");
+    diagnose_int_constant(2147483647, "");   // INT_MAX
+    diagnose_int_constant(2147483648LL, "LL");
+    diagnose_int_constant(4294967295U, "U");
+
+    printf("\n=== 浮点常量诊断 ===\n");
+    printf("FLT_MAX  = %e\n", FLT_MAX);
+    printf("DBL_MAX  = %e\n", DBL_MAX);
+    printf("LDBL_MAX = %Le\n", LDBL_MAX);
+
+    return 0;
+}
+```
+
+---
+
+### 层次关联与映射分析
+
+#### 与上层（核心层）的映射关系
+
+```mermaid
+flowchart TB
+    subgraph Basic["基础层: 语法要素"]
+        B1[标识符]
+        B2[常量]
+        B3[字符串]
+    end
+
+    subgraph Core["核心层"]
+        C1[指针与变量]
+        C2[内存分配]
+        C3[字符串处理]
+    end
+
+    B1 -->|"标识符 → 变量名/函数名"| C1
+    B1 -->|"标识符 → 内存标签"| C2
+    B2 -->|"常量 → 初始化值"| C1
+    B3 -->|"字符串 → 字符数组"| C3
+```
+
+| 基础层概念 | 核心层映射 | 映射关系说明 |
+|:-----------|:-----------|:-------------|
+| 标识符 | 变量声明 | 标识符成为符号表条目，关联类型和地址 |
+| 整数常量 | 整型变量初始化 | 常量类型推导影响变量赋值转换 |
+| 字符串字面量 | 字符数组/指针 | 字符串退化为指向首字符的指针 |
+| 作用域规则 | 生命周期管理 | 标识符作用域决定变量生命周期策略 |
+
+#### 与下层（构造层）的组合关系
+
+```
+语法要素 + 构造层概念 = 复杂结构
+
+标识符 + 结构体 = 成员名称
+  └── struct Point { int x; int y; };  // x, y 是标识符
+
+标识符 + 枚举 = 枚举常量
+  └── enum Color { RED, GREEN, BLUE }; // RED, GREEN, BLUE 是标识符
+
+标识符 + 预处理器 = 宏名称
+  └── #define MAX_SIZE 100  // MAX_SIZE 是标识符
+
+常量 + 枚举 = 枚举值
+  └── enum Status { OK = 0, ERROR = 1 }; // 0, 1 是常量
+```
+
+#### 与形式语义层的理论关联
+
+| 语法要素 | 形式语义概念 | 关联说明 |
+|:---------|:-------------|:---------|
+| 标识符 | 环境（Environment）| Γ ⊢ id : τ （标识符在环境中有类型τ） |
+| 常量 | 值（Value）| ⟦n⟧ = n ∈ ℤ （常量的指称是其数值） |
+| 词法单元 | 抽象语法树（AST）| Token序列 → 语法分析 → AST |
+| 作用域 | 变量绑定（Binding）| λx.e 中的 x 绑定对应标识符作用域 |
+
+#### 与物理层的实现映射
+
+```
+语法要素 → 机器表示
+
+标识符 → 符号表条目（编译时）→ 地址（运行时）
+        名称字符串 → 哈希值 → 符号表索引
+
+整数常量 → 立即数（指令中）或 .rodata 段
+          小常量: MOV eax, 42
+          大常量: 存储在只读数据段
+
+字符串字面量 → .rodata 段
+              "hello" → 地址 0x404000 (示例)
+              引用时加载地址到寄存器
+```
+
+---
+
+### 决策树：语法要素应用选择
+
+```
+需要表示数据？
+├── 是 → 是固定值？
+│   ├── 是 → 使用常量
+│   │   └── 整数？ → 检查范围 → 选择适当后缀
+│   │       ├── 小范围 → 默认int
+│   │       ├── 大范围 → L/LL后缀
+│   │       └── 无符号 → U后缀
+│   └── 否 → 使用变量
+│       └── 需要命名 → 选择标识符
+│           ├── 局部变量 → 描述性小写名称
+│           ├── 全局变量 → 模块前缀+描述性名称
+│           └── 常量 → 全大写+下划线
+└── 否 → 需要文本？
+    └── 是 → 使用字符串
+        ├── 只读文本 → 字符串字面量
+        └── 可修改文本 → 字符数组
+```
+
+---
+
+### 相关资源
+
+#### 权威文档
+
+- **ISO/IEC 9899:2024** (C23标准) - 第6.4节 词法元素
+- **ISO/IEC 9899:2018** (C17标准) - 第6.4节
+- **WG14 N3096** - C23标准最终草案
+
+#### 推荐书籍
+
+- K&R 《C程序设计语言》第2章 类型、运算符与表达式
+- Expert C Programming (Deep C Secrets) - 第1章
+- 《编译原理》（龙书）第3章 词法分析
+
+#### 在线资源
+
+- [cppreference - C lexical analysis](https://en.cppreference.com/w/c/language/translation_phases)
+- [GCC 文档 - C Extensions](https://gcc.gnu.org/onlinedocs/gcc/C-Extensions.html)
+- [Clang 词法分析器实现](https://clang.llvm.org/doxygen/Lexer_8cpp_source.html)
+
+#### 参考实现
+
+- [tcc (Tiny C Compiler)](https://github.com/TinyCC/tinycc) - 小巧完整的C编译器
+- [c4](https://github.com/rswier/c4) - 用4个函数实现的C编译器
+- [chibicc](https://github.com/rui314/chibicc) - 教育用小型C编译器
+
+---
+
+> **最后更新**: 2026-03-28
+> **版本**: 2.0 - 全面增强版
+> **增强内容**:
+>
+> - 新增技术原理深度剖析（DFA、翻译阶段、符号表、常量推导）
+> - 新增完整的实践指南（三阶段练习任务）
+> - 新增层次关联与映射分析（四向映射关系）
+> - 新增决策树和形式语义关联
+> - 新增权威资源和参考实现链接
