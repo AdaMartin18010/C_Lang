@@ -31,6 +31,7 @@
 | 了解Zig语言 | [Zig-C连接](knowledge/08_Zig_C_Connection/README.md) |
 | 形式化验证入门 | [核心语义基础](knowledge/02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/) |
 | 硬件-汇编-C全链 | [数字逻辑基础](knowledge/02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/01_Digital_Logic_Foundations/01_Transistor_Level.md) |
+| 图灵机到C语言 | [计算理论基础](knowledge/21_Computation_Theory/README.md) → [汇编器实现](knowledge/22_Assembler_Implementation/README.md) → [虚拟机实现](knowledge/23_VM_Implementation/README.md) → [完整链条](knowledge/24_Complete_Chain/README.md) |
 | 安全编码规范 | [MISRA C:2025](knowledge/01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2025/README.md) |
 | LLM部署实战 | [llama.cpp指南](knowledge/11_Machine_Learning_C/07_llama_cpp_Deployment.md) |
 | 嵌入式AI开发 | [TinyML基础](knowledge/16_Embedded_AI_Agents/01_TinyML_Fundamentals/01_Introduction_to_TinyML.md) |
@@ -145,6 +146,31 @@
     ├── [VS Code配置](knowledge/07_Modern_Toolchain/01_IDE_Editors/01_VS_Code_Setup.md)
     ├── [Neovim](knowledge/07_Modern_Toolchain/01_IDE_Editors/02_Neovim_Modern.md)
     └── [CLion](knowledge/07_Modern_Toolchain/01_IDE_Editors/03_CLion_Guide.md)
+```
+
+### 知识链条（图灵机→C语言）⭐NEW
+
+```
+21_Computation_Theory/           # 计算理论基础
+├── [图灵机](knowledge/21_Computation_Theory/01_Turing_Machines.md)
+├── [λ演算](knowledge/21_Computation_Theory/02_Lambda_Calculus.md)
+├── [计算复杂性](knowledge/21_Computation_Theory/03_Computational_Complexity.md)
+└── [理论到物理桥梁](knowledge/21_Computation_Theory/04_Theory_to_Physical_Bridge.md)
+
+22_Assembler_Implementation/     # 汇编器实现
+├── [Hack汇编器](knowledge/22_Assembler_Implementation/01_Hack_Assembler.md)
+├── [RISC-V汇编器](knowledge/22_Assembler_Implementation/02_RISCV_Assembler.md)
+├── [C数据→汇编](knowledge/22_Assembler_Implementation/03_C_to_Assembly_Data.md)
+└── [C控制流→汇编](knowledge/22_Assembler_Implementation/04_C_to_Assembly_Control.md)
+
+23_VM_Implementation/            # 虚拟机实现
+├── [栈式VM](knowledge/23_VM_Implementation/01_Stack_Based_VM.md)
+└── [C子集解释器](knowledge/23_VM_Implementation/02_C_Subset_Interpreter.md)
+
+24_Complete_Chain/               # 完整知识链条整合
+├── [从图灵机到C](knowledge/24_Complete_Chain/01_From_Turing_to_C.md)
+├── [层间精确映射](knowledge/24_Complete_Chain/02_Layer_Bridges.md)
+└── [术语表与学习路径](knowledge/24_Complete_Chain/03_Complete_Glossary.md)
 ```
 
 ### Zig语言连接
@@ -282,4 +308,4 @@
 
 ---
 
-*最后更新: 2026-03-19*
+*最后更新: 2026-03-29*

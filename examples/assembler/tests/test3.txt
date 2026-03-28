@@ -1,0 +1,26 @@
+0x00001000: 0x00A00293    # addi t0, zero, 10
+0x00001004: 0x01400313    # addi t1, zero, 20
+0x00001008: 0x00628463    # beq  t0, t1, not_equal
+0x0000100C: 0x00629463    # bne  t0, t1, test_blt
+0x00001010: 0x00100393    # addi t2, zero, 1
+0x00001014: 0x0062C463    # blt  t0, t1, test_bge
+0x00001018: 0x00200393    # addi t2, zero, 2
+0x0000101C: 0x00535463    # bge  t1, t0, test_beq
+0x00001020: 0x00300393    # addi t2, zero, 3
+0x00001024: 0x00528263    # beq  t0, t0, test_loop
+0x00001028: 0x00000E13    # addi t3, zero, 0
+0x0000102C: 0x00500E93    # addi t4, zero, 5
+0x00001030: 0x01DE0663    # beq  t3, t4, loop_end
+0x00001034: 0x001E0E13    # addi t3, t3, 1
+0x00001038: 0x0000006F    # j    loop_start
+0x0000103C: 0x008000EF    # jal  ra, sub_routine
+0x00001040: 0x00C0006F    # jal  x0, continue
+0x00001044: 0x02A00F13    # addi t5, zero, 42
+0x00001048: 0x00008067    # jalr x0, ra, 0
+0x0000104C: 0x00A00513    # addi a0, zero, 10
+0x00001050: 0x01400593    # addi a1, zero, 20
+0x00001054: 0x00B54663    # blt  a0, a1, a0_is_less
+0x00001058: 0x00000613    # addi a2, zero, 0
+0x0000105C: 0x0000006F    # j    done
+0x00001060: 0x00100613    # addi a2, zero, 1
+0x00001064: 0x0000006F    # j    done
