@@ -3,7 +3,7 @@
 > **层级定位**: 21 Computation Theory / 基础层
 > **前置知识**: [图灵机](./01_Turing_Machines.md), [λ演算](./02_Lambda_Calculus.md)
 > **后续延伸**: [理论到物理桥梁](./04_Theory_to_Physical_Bridge.md)
-> **横向关联**: [算法分析](../../09_Data_Structures_Algorithms/), [性能优化](../../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
+> **横向关联**: [算法分析](../09_Data_Structures_Algorithms), [性能优化](../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
 > **预计学习时间**: 5天
 > **核心问题**: 为什么有些问题"难以计算"？物理世界对计算有什么限制？
 
@@ -316,8 +316,8 @@ NP难问题可能不是"暂时困难"，
 - 在实际输入规模下的表现？
 
 相关阅读：
-→ [数据结构算法模块](../../09_Data_Structures_Algorithms/)
-→ [性能优化](../../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
+→ [数据结构算法模块](../09_Data_Structures_Algorithms)
+→ [性能优化](../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
 ```
 
 ### 5.2 与物理实现的连接
@@ -338,8 +338,8 @@ NP难问题可能不是"暂时困难"，
 - 虚拟内存、外部存储
 
 相关阅读：
-→ [物理机器层](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/README.md)
-→ [缓存优化](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/03_Cache_Coherency_Protocols.md)
+→ [物理机器层](../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/README.md)
+→ [缓存优化](../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/03_Cache_Coherency_Protocols.md)
 ```
 
 ### 5.3 与密码学的连接
@@ -356,7 +356,7 @@ NP难问题可能不是"暂时困难"，
 - 需要基于其他困难问题（如量子计算）
 
 相关阅读：
-→ [密码学实现](../../03_System_Technology_Domains/15_Security_Engineering/03_Cryptography_Implementation.md)
+→ [密码学实现](../03_System_Technology_Domains/15_Security_Engineering/03_Cryptography_Implementation.md)
 ```
 
 ---

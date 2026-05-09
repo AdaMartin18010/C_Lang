@@ -103,8 +103,8 @@ C语言数据/控制结构
 
 完成本模块后，继续学习：
 
-- [虚拟机实现](../23_VM_Implementation/) - 中间抽象层
-- [完整链条回顾](../24_Complete_Chain/) - 知识整合
+- [虚拟机实现](../23_VM_Implementation/README.md) - 中间抽象层
+- [完整链条回顾](../24_Complete_Chain/README.md) - 知识整合
 
 ---
 

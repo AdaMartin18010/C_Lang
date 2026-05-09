@@ -13,7 +13,7 @@
 |:-----|:-----|
 | **核心概念** | TinyML、神经网络推理、模型量化、内存优化、推理加速 |
 | **前置知识** | [C语言基础](../../01_Core_Knowledge_System)、[SIMD优化](../../16_High_Performance_Computing/03_SIMD_Optimization.md)、[内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) |
-| **后续延伸** | [ESP32开发](../../04_Industrial_Scenarios/14_Embedded_IoT/ESP32/)、[STM32编程](../..) |
+| **后续延伸** | [ESP32开发](../../04_Industrial_Scenarios/14_Embedded_IoT/ESP32/README.md)、[STM32编程](../..) |
 | **横向关联** | [嵌入式系统](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md)、[实时系统](../../03_Embedded_Systems/04_Real_Time_Systems.md) |
 | **权威来源** | TensorFlow Lite Micro, CMSIS-NN, ARM ML Inference Guide |
 

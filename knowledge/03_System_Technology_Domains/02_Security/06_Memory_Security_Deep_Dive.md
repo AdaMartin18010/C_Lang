@@ -1,7 +1,7 @@
 # 内存安全深度剖析
 
-> **层级**: L5 (原理层) + L4 (方法论层)  
-> **目标**: 系统性掌握内存安全漏洞原理、检测方法与防御体系  
+> **层级**: L5 (原理层) + L4 (方法论层)
+> **目标**: 系统性掌握内存安全漏洞原理、检测方法与防御体系
 > **关联**: [静态分析原理](../01_System_Programming/08_Static_Analysis_Principles.md) | [动态分析原理](../01_System_Programming/09_Dynamic_Analysis_Principles.md) | [调试原理](../01_System_Programming/10_Debugging_Principles_and_Framework.md)
 
 ---
@@ -146,10 +146,10 @@
 struct malloc_chunk {
     size_t      mchunk_prev_size;  // 物理相邻前一个块大小 (如果前一个块空闲)
     size_t      mchunk_size;       // 当前块大小 + 标志位
-    
+
     struct malloc_chunk* fd;       // 下一个空闲块 (仅当空闲时)
     struct malloc_chunk* bk;       // 上一个空闲块 (仅当空闲时)
-    
+
     // 仅large bins使用:
     struct malloc_chunk* fd_nextsize;
     struct malloc_chunk* bk_nextsize;
@@ -161,18 +161,18 @@ struct malloc_chunk {
 // - bit 2: NON_MAIN_ARENA (是否非主arena)
 
 /* 堆溢出攻击向量：
- * 
+ *
  * 1. 元数据覆盖:
  *    溢出覆盖下一个块的size字段，可能导致:
  *    - 向后合并时的非法unlink操作
  *    - 大小分类错误导致的错误chunk重用
- * 
+ *
  * 2. Fastbin Dup:
  *    利用double-free在fastbin链表中创建环
- *    
+ *
  * 3. House of Spirit:
  *    伪造chunk头，释放栈上的内存
- *    
+ *
  * 4. Unsorted Bin Attack:
  *    修改unsorted bin的bk指针，实现任意地址写入
  */
@@ -196,22 +196,22 @@ void safe(char* user_input) {
 }
 
 /* 攻击原理:
- * 
+ *
  * printf函数通过解析格式字符串，从栈上读取参数。
  * 如果攻击者控制格式字符串，可以:
- * 
+ *
  * 1. 内存读取: %x %p %s 读取栈/任意地址内容
  *    printf("AAAA%p%p%p%p");  // 泄露栈内容
  *    printf("\x10\x01\x48\x00%p%p%s");  // 读取指定地址
- * 
+ *
  * 2. 内存写入: %n 系列向地址写入值
  *    %n:  写入已输出字符数到int*
  *    %hn: 写入short
  *    %hhn: 写入char
- *    
+ *
  *    利用:
  *    printf("AAAA%10$n\x10\x01\x48\x00");  // 向0x4801110写入4
- *    
+ *
  *    任意地址写入需要构造:
  *    - 地址放置在栈上 (通过之前调用残留或可控数据)
  *    - 使用%<offset>$n直接访问第offset个参数
@@ -285,14 +285,14 @@ void heap_feng_shui() {
     for (int i = 0; i < 10; i += 2) {
         free(groom[i]);  // 创建洞
     }
-    
+
     // 步骤2: 放置目标对象
     // 目标对象会落入之前创建的洞中
     void* target = malloc(0x100);  // 使用groom[0]的位置
-    
+
     // 步骤3: 释放目标，创建UAF
     free(target);  // target现在是悬垂指针
-    
+
     // 步骤4: 喷射控制对象
     // 控制对象会重用target的内存
     void* spray[100];
@@ -301,7 +301,7 @@ void heap_feng_shui() {
         // 填充控制数据，模拟victim对象的结构
         memset(spray[i], 'A', 0x100);
     }
-    
+
     // 步骤5: 触发UAF
     // 通过悬垂指针访问，实际访问的是控制对象
     // *(target->function_ptr)() 将执行攻击者控制的地址
@@ -499,12 +499,12 @@ void safe_string(const char* src) {
 // ✅ 检查溢出，清零内存
 void* safe_malloc(size_t nmemb, size_t size) {
     if (nmemb == 0 || size == 0) return NULL;
-    
+
     // 检查乘法溢出
     if (nmemb > SIZE_MAX / size) {
         return NULL;  // 溢出
     }
-    
+
     void* p = calloc(nmemb, size);  // calloc检查溢出并清零
     return p;
 }
@@ -555,7 +555,7 @@ struct buffer {
     char data[] __attribute__((counted_by(len)));
 };
 
-void process(const struct buffer* buf 
+void process(const struct buffer* buf
              __attribute__((pass_dynamic_object_size(0))))
 {
     // 编译器知道buf->data的大小是buf->len

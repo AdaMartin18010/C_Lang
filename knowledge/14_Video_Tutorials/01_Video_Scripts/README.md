@@ -4,7 +4,7 @@
 > **难度级别**: L1-L5 (全系列覆盖)
 > **总视频数**: 10集
 > **总时长**: 约8小时
-> **配套资源**: [Compiler Explorer集成](../02_Compiler_Explorer_Integration/), [交互式练习](../03_Interactive_Exercises/)
+> **配套资源**: [Compiler Explorer集成](../02_Compiler_Explorer_Integration/README.md), [交互式练习](../03_Interactive_Exercises/README.md)
 
 ---
 
@@ -373,8 +373,8 @@ int main(void) {
 ## 延伸阅读
 
 - [Compiler Explorer使用指南](../02_Compiler_Explorer_Integration/Compiler_Explorer_Guide.md)
-- [交互式练习平台](../03_Interactive_Exercises/)
-- [核心知识体系: 基础层](../../01_Core_Knowledge_System/01_Basic_Layer/)
+- [交互式练习平台](../03_Interactive_Exercises/README.md)
+- [核心知识体系: 基础层](../../01_Core_Knowledge_System/01_Basic_Layer/README.md)
 
 ---
 

@@ -548,8 +548,8 @@ I/O分析：
 
 ### 前置知识
 
-- [eBPF深度](../../03_System_Technology_Domains/01_System_Programming/06_eBPF_Deep.md)
-- [性能工程](../../01_Core_Knowledge_System/05_Engineering_Layer/06_Performance_Engineering.md)
+- [eBPF深度](../03_System_Technology_Domains/01_System_Programming/06_eBPF_Deep.md)
+- [性能工程](../01_Core_Knowledge_System/05_Engineering_Layer/06_Performance_Engineering.md)
 
 ### 后续延伸
 

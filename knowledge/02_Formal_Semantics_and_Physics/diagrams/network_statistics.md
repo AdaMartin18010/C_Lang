@@ -1,6 +1,7 @@
 # Theorem Network Statistics
 
 ## Overview
+
 - Total Nodes: 248
 - Total Edges: 11
 - Max Depth: 1
@@ -9,6 +10,7 @@
 - Average Dependencies: 0.06
 
 ## By Category
+
 - 分布式系统: 71
 - 公理语义: 47
 - 类型系统: 44
@@ -19,6 +21,7 @@
 - 编译器理论: 2
 
 ## Most Central Theorems
+
 - BT-1 (centrality: 3)
 - BT-2 (centrality: 3)
 - BT-3 (centrality: 3)

@@ -35,7 +35,7 @@ coqide 01_Swap_Proof.v
 
 ## 相关资源
 
-- [CompCert验证目录](../) - 返回上级目录
+- [CompCert验证目录](../README.md) - 返回上级目录
 - [Isabelle/HOL案例](../05_Practical_Verification_Cases/README.md) - 其他证明工具
 
 ---

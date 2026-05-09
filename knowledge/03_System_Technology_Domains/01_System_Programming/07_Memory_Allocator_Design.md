@@ -86,14 +86,14 @@ void *arena_alloc(arena_t *a, size_t size, size_t align) {
     uintptr_t ptr = (uintptr_t)(a->buffer + a->offset);
     uintptr_t aligned = (ptr + align - 1) & ~(align - 1);
     size_t padding = aligned - ptr;
-    
+
     if (a->offset + padding + size > a->capacity) {
         return NULL;  // OOM
     }
-    
+
     a->prev_offset = a->offset;
     a->offset += padding + size;
-    
+
     return (void *)aligned;
 }
 
@@ -107,15 +107,15 @@ void example(void) {
     static uint8_t buffer[1024 * 1024];  // 1MB arena
     arena_t arena;
     arena_init(&arena, buffer, sizeof(buffer));
-    
+
     // 游戏帧分配
     for (int frame = 0; frame < 1000; frame++) {
         // 分配临时数据
         void *temp1 = arena_alloc(&arena, 1024, 8);
         void *temp2 = arena_alloc(&arena, 2048, 16);
-        
+
         // 使用...
-        
+
         // 帧结束，批量释放
         arena_free_all(&arena);
     }
@@ -168,12 +168,12 @@ void pool_init(pool_t *p, void *buffer, size_t block_size, size_t block_count) {
     if (block_size < sizeof(pool_block_t)) {
         block_size = sizeof(pool_block_t);
     }
-    
+
     p->buffer = buffer;
     p->block_size = block_size;
     p->block_count = block_count;
     p->used = 0;
-    
+
     // 初始化空闲列表
     p->free_list = NULL;
     for (size_t i = 0; i < block_count; i++) {
@@ -187,17 +187,17 @@ void *pool_alloc(pool_t *p) {
     if (p->free_list == NULL) {
         return NULL;  // 池耗尽
     }
-    
+
     pool_block_t *block = p->free_list;
     p->free_list = block->next;
     p->used++;
-    
+
     return block;
 }
 
 void pool_free(pool_t *p, void *ptr) {
     if (ptr == NULL) return;
-    
+
     // 验证ptr在池范围内（调试构建）
     #ifdef DEBUG
     uintptr_t buf_start = (uintptr_t)p->buffer;
@@ -206,7 +206,7 @@ void pool_free(pool_t *p, void *ptr) {
     assert(ptr_val >= buf_start && ptr_val < buf_end);
     assert((ptr_val - buf_start) % p->block_size == 0);
     #endif
-    
+
     pool_block_t *block = ptr;
     block->next = p->free_list;
     p->free_list = block;
@@ -297,7 +297,7 @@ void tls_init(void) {
 
 void *malloc_fast(size_t size) {
     tls_init();
-    
+
     if (size <= 64) {
         // 小对象使用池
         int pool_idx = size_to_pool_idx(size);
@@ -326,20 +326,20 @@ typedef struct lockfree_node {
 // Treiber栈 - 无锁LIFO
 void *lockfree_pop(lockfree_head_t *head) {
     lockfree_node_t *old_head, *new_head;
-    
+
     do {
         old_head = atomic_load(head);
         if (old_head == NULL) return NULL;
         new_head = old_head->next;
     } while (!atomic_compare_exchange_weak(head, &old_head, new_head));
-    
+
     return old_head;
 }
 
 void lockfree_push(lockfree_head_t *head, void *ptr) {
     lockfree_node_t *new_head = ptr;
     lockfree_node_t *old_head;
-    
+
     do {
         old_head = atomic_load(head);
         new_head->next = old_head;
@@ -356,7 +356,7 @@ void lockfree_push(lockfree_head_t *head, void *ptr) {
 ```c
 #ifdef DEBUG_ALLOCATOR
     #define ALLOC_TRACE(fmt, ...) fprintf(stderr, "[ALLOC] " fmt "\n", ##__VA_ARGS__)
-    
+
     typedef struct alloc_header {
         size_t size;
         const char *file;
@@ -364,9 +364,9 @@ void lockfree_push(lockfree_head_t *head, void *ptr) {
         struct alloc_header *next;
         uint32_t magic;
     } alloc_header_t;
-    
+
     #define MAGIC_NUMBER 0xDEADBEEF
-    
+
     void *debug_alloc(size_t size, const char *file, int line) {
         alloc_header_t *h = raw_alloc(sizeof(alloc_header_t) + size);
         h->size = size;
@@ -374,13 +374,13 @@ void lockfree_push(lockfree_head_t *head, void *ptr) {
         h->line = line;
         h->magic = MAGIC_NUMBER;
         // 添加到全局列表...
-        
+
         // 填充守卫区域
         memset((char *)h + sizeof(alloc_header_t) + size, 0xAA, 8);
-        
+
         return (char *)h + sizeof(alloc_header_t);
     }
-    
+
     #define ALLOC(size) debug_alloc(size, __FILE__, __LINE__)
 #else
     #define ALLOC(size) raw_alloc(size)
@@ -392,14 +392,17 @@ void lockfree_push(lockfree_head_t *head, void *ptr) {
 ## 关联导航
 
 ### 前置知识
+
 - [内存管理](../../../01_Core_Knowledge_System/02_Core_Layer/01_Memory_Model.md)
 - [内存对齐](../../../01_Core_Knowledge_System/02_Core_Layer/06_Memory_Alignment.md)
 - [jemalloc/tcmalloc实现](../08_Memory_Management/02_Advanced_Allocators.md)
 
 ### 后续延伸
+
 - [垃圾回收](./08_Garbage_Collection.md)
 - [内存池在嵌入式中的应用](../../../03_Embedded_Systems/04_Memory_Optimization.md)
 
 ### 参考
-- jemalloc: http://jemalloc.net/
-- mimalloc: https://microsoft.github.io/mimalloc/
+
+- jemalloc: <http://jemalloc.net/>
+- mimalloc: <https://microsoft.github.io/mimalloc/>

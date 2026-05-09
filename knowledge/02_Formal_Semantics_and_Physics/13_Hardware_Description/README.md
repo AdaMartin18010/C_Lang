@@ -2,9 +2,9 @@
 
 > **层级定位**: 02_Formal_Semantics_and_Physics > 13_Hardware_Description
 > **难度级别**: L4-L5 (高级到专家)
-> **前置知识**: [数字逻辑基础](../09_Physical_Machine_Layer/01_Digital_Logic_Foundations/), [C语言高级特性](../../01_Core_Knowledge_System/06_Advanced_Layer/)
+> **前置知识**: [数字逻辑基础](../09_Physical_Machine_Layer/01_Digital_Logic_Foundations/README.md), [C语言高级特性](../../01_Core_Knowledge_System/06_Advanced_Layer/README.md)
 > **预估学习时间**: 15-20 小时
-> **配套实验**: [FPGA Labs](../18_FPGA_Labs/)
+> **配套实验**: [FPGA Labs](../18_FPGA_Labs/README.md)
 
 ---
 

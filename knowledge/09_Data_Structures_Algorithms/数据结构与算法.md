@@ -77,7 +77,7 @@
 # 数据结构与算法
 
 > **层级定位**: 09_Data_Structures_Algorithms
-> **前置知识**: [指针](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md)、[内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md)、[结构体](../../01_Core_Knowledge_System/03_Construction_Layer/01_Structures_Unions.md)
+> **前置知识**: [指针](../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md)、[内存管理](../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md)、[结构体](../01_Core_Knowledge_System/03_Construction_Layer/01_Structures_Unions.md)
 
 ---
 
@@ -85,9 +85,9 @@
 
 ### 前置知识
 
-- [指针深度解析](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) - 链表、树的基础
-- [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) - 动态数据结构
-- [结构体](../../01_Core_Knowledge_System/03_Construction_Layer/01_Structures_Unions.md) - 数据组织
+- [指针深度解析](../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) - 链表、树的基础
+- [内存管理](../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) - 动态数据结构
+- [结构体](../01_Core_Knowledge_System/03_Construction_Layer/01_Structures_Unions.md) - 数据组织
 
 ### 后续延伸
 

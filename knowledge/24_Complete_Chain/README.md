@@ -83,11 +83,11 @@ Week 5-8: 综合实践
 
 在学习本模块前，建议完成：
 
-- [21_Computation_Theory/](../21_Computation_Theory/) - 计算理论基础
-- [22_Assembler_Implementation/](../22_Assembler_Implementation/) - 汇编器实现
-- [23_VM_Implementation/](../23_VM_Implementation/) - 虚拟机实现
-- 核心C语言知识 - [01_Core_Knowledge_System/](../01_Core_Knowledge_System/)
-- 物理层知识 - [02_Formal_Semantics_and_Physics/](../02_Formal_Semantics_and_Physics/)
+- [21_Computation_Theory/](../21_Computation_Theory/README.md) - 计算理论基础
+- [22_Assembler_Implementation/](../22_Assembler_Implementation/README.md) - 汇编器实现
+- [23_VM_Implementation/](../23_VM_Implementation/README.md) - 虚拟机实现
+- 核心C语言知识 - [01_Core_Knowledge_System/](../01_Core_Knowledge_System/README.md)
+- 物理层知识 - [02_Formal_Semantics_and_Physics/](../02_Formal_Semantics_and_Physics/README.md)
 
 ---
 

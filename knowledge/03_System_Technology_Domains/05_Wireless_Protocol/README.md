@@ -9,6 +9,7 @@
 ## 🔗 文档关联
 
 ### 前置知识
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [嵌入式系统](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | 应用场景 | 嵌入式无线开发 |
@@ -16,6 +17,7 @@
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 缓冲区管理 |
 
 ### 核心技术
+
 | 协议 | 频段 | 应用场景 |
 |:-----|:-----|:---------|
 | BLE | 2.4GHz | 低功耗设备 |
@@ -24,6 +26,7 @@
 | Zigbee | 2.4GHz | mesh网络 |
 
 ### 后续延伸
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [硬件安全](../07_Hardware_Security/README.md) | 安全通信 | 无线安全、加密 |

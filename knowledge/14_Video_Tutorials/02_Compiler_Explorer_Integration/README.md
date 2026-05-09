@@ -451,7 +451,7 @@ int ub_example(int x) {
 ### 教程视频
 
 - [Matt Godbolt的CPPCON演讲](https://www.youtube.com/watch?v=bSkpMdDe4g4)
-- [CE使用技巧合集](../03_Interactive_Exercises/)
+- [CE使用技巧合集](../03_Interactive_Exercises/README.md)
 
 ### 相关工具
 

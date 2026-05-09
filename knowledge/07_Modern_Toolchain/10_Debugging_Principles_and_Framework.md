@@ -605,7 +605,7 @@ Happens-Before图的调试应用：
 ### 实践工具
 
 - [Linux运行时调试](./04_Linux_Runtime_Debugging.md)
-- [系统化调试方法论](./06_Thinking_Representation/09_Systematic_Debugging_Methodology.md)
+- [系统化调试方法论](../06_Thinking_Representation/09_Systematic_Debugging_Methodology.md)
 
 ### 理论基础
 

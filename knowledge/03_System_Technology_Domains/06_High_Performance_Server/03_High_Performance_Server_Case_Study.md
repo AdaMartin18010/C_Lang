@@ -1,7 +1,7 @@
 # 高性能服务器设计案例研究
 
-> **层级**: L0 (案例层)  
-> **目标**: 完整实现百万QPS级别的高性能Web服务器  
+> **层级**: L0 (案例层)
+> **目标**: 完整实现百万QPS级别的高性能Web服务器
 > **关联**: [DPDK高性能网络](../05_Network_Programming/04_DPDK_High_Performance_Networking.md)
 
 ---

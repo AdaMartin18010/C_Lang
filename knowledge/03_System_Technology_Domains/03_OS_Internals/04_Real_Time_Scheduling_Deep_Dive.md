@@ -2,7 +2,7 @@
 
 > **层级**: L4 (方法论层) + L3 (系统层)
 > **目标**: 掌握实时系统调度理论，理解 Rate-Monotonic、EDF 等算法的可调度性分析
-> **关联**: [嵌入式RTOS](../20_Industrial_Case_Studies/02_Embedded_RTOS_Design_Case.md) | [进程调度](03_Process_Scheduling_Deep_Dive.md)
+> **关联**: [嵌入式RTOS](../../20_Industrial_Case_Studies/02_Embedded_RTOS_Design_Case.md) | [进程调度](03_Process_Scheduling_Deep_Dive.md)
 
 ---
 

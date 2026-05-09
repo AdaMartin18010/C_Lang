@@ -1,7 +1,7 @@
 # CUDA编程原理与实践
 
-> **层级**: L4 (方法论层)  
-> **目标**: 掌握GPU并行计算原理，理解CUDA编程模型与性能优化  
+> **层级**: L4 (方法论层)
+> **目标**: 掌握GPU并行计算原理，理解CUDA编程模型与性能优化
 > **关联**: [性能工程](../05_Performance_Engineering/readme.md) | [并行计算](../04_Concurrency_and_Parallelism/readme.md)
 
 ---
@@ -257,11 +257,11 @@ kernel_function<<<grid, block, shared_mem, stream>>>(args);
 // 5. 完整示例: 向量加法
 #include <cuda_runtime.h>
 
-__global__ void vector_add(const float* A, const float* B, 
+__global__ void vector_add(const float* A, const float* B,
                            float* C, int n) {
     // 计算全局线程ID
     int i = blockIdx.x * blockDim.x + threadIdx.x;
-    
+
     // 边界检查
     if (i < n) {
         C[i] = A[i] + B[i];
@@ -272,24 +272,24 @@ void launch_vector_add(const float* h_A, const float* h_B,
                        float* h_C, int n) {
     float *d_A, *d_B, *d_C;
     size_t size = n * sizeof(float);
-    
+
     // 分配设备内存
     cudaMalloc(&d_A, size);
     cudaMalloc(&d_B, size);
     cudaMalloc(&d_C, size);
-    
+
     // 拷贝数据到设备
     cudaMemcpy(d_A, h_A, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_B, h_B, size, cudaMemcpyHostToDevice);
-    
+
     // 启动内核
     int threadsPerBlock = 256;
     int blocksPerGrid = (n + threadsPerBlock - 1) / threadsPerBlock;
     vector_add<<<blocksPerGrid, threadsPerBlock>>>(d_A, d_B, d_C, n);
-    
+
     // 拷贝结果回主机
     cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
-    
+
     // 释放设备内存
     cudaFree(d_A);
     cudaFree(d_B);
@@ -308,7 +308,7 @@ void launch_vector_add(const float* h_A, const float* h_B,
 __global__ void kernel_1d(float* data, int n) {
     int idx = blockIdx.x * blockDim.x + threadIdx.x;
     int stride = blockDim.x * gridDim.x;
-    
+
     // Grid-stride loop (推荐模式)
     for (int i = idx; i < n; i += stride) {
         data[i] = process(data[i]);
@@ -319,7 +319,7 @@ __global__ void kernel_1d(float* data, int n) {
 __global__ void kernel_2d(float* img, int width, int height) {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
-    
+
     if (x < width && y < height) {
         int idx = y * width + x;
         img[idx] = process_pixel(img[idx]);
@@ -331,7 +331,7 @@ __global__ void kernel_3d(float* volume, int nx, int ny, int nz) {
     int x = blockIdx.x * blockDim.x + threadIdx.x;
     int y = blockIdx.y * blockDim.y + threadIdx.y;
     int z = blockIdx.z * blockDim.z + threadIdx.z;
-    
+
     if (x < nx && y < ny && z < nz) {
         int idx = z * ny * nx + y * nx + x;
         volume[idx] = process_voxel(volume[idx]);
@@ -356,10 +356,10 @@ void use_pinned_memory() {
     float* h_data;
     // 替代 malloc: cudaMallocHost
     cudaMallocHost(&h_data, size);  // 页锁定
-    
+
     // 使用...
     cudaMemcpy(d_data, h_data, size, cudaMemcpyHostToDevice);
-    
+
     // 释放
     cudaFreeHost(h_data);
 }
@@ -370,18 +370,18 @@ void use_unified_memory() {
     float* data;
     // 分配可由CPU和GPU访问的内存
     cudaMallocManaged(&data, size);
-    
+
     // CPU初始化
     for (int i = 0; i < n; i++) data[i] = i;
-    
+
     // 内核使用 (自动迁移到GPU)
     kernel<<<grid, block>>>(data, n);
     cudaDeviceSynchronize();
-    
+
     // CPU再次访问 (自动迁回)
     float sum = 0;
     for (int i = 0; i < n; i++) sum += data[i];
-    
+
     cudaFree(data);
 }
 
@@ -390,24 +390,24 @@ void overlap_transfer_compute() {
     cudaStream_t stream1, stream2;
     cudaStreamCreate(&stream1);
     cudaStreamCreate(&stream2);
-    
+
     // 将数据分成两部分，在stream1和stream2上并行处理
     size_t half_size = total_size / 2;
-    
+
     // Stream1: 传输第一部分并计算
-    cudaMemcpyAsync(d_data1, h_data1, half_size, 
+    cudaMemcpyAsync(d_data1, h_data1, half_size,
                     cudaMemcpyHostToDevice, stream1);
     kernel<<<grid, block, 0, stream1>>>(d_data1, n/2);
     cudaMemcpyAsync(h_result1, d_result1, half_size,
                     cudaMemcpyDeviceToHost, stream1);
-    
+
     // Stream2: 同时传输和计算第二部分
     cudaMemcpyAsync(d_data2, h_data2, half_size,
                     cudaMemcpyHostToDevice, stream2);
     kernel<<<grid, block, 0, stream2>>>(d_data2, n/2);
     cudaMemcpyAsync(h_result2, d_result2, half_size,
                     cudaMemcpyDeviceToHost, stream2);
-    
+
     cudaStreamSynchronize(stream1);
     cudaStreamSynchronize(stream2);
 }
@@ -427,16 +427,16 @@ __global__ void matrix_multiply_shared(const float* A, const float* B,
     // 声明共享内存
     __shared__ float As[TILE_WIDTH][TILE_WIDTH];
     __shared__ float Bs[TILE_WIDTH][TILE_WIDTH];
-    
+
     int bx = blockIdx.x, by = blockIdx.y;
     int tx = threadIdx.x, ty = threadIdx.y;
-    
+
     // 计算C的行和列
     int row = by * TILE_WIDTH + ty;
     int col = bx * TILE_WIDTH + tx;
-    
+
     float Cvalue = 0;
-    
+
     // 分块计算
     for (int m = 0; m < (N + TILE_WIDTH - 1) / TILE_WIDTH; ++m) {
         // 协作加载A和B的tile到共享内存
@@ -444,21 +444,21 @@ __global__ void matrix_multiply_shared(const float* A, const float* B,
             As[ty][tx] = A[row * N + m * TILE_WIDTH + tx];
         else
             As[ty][tx] = 0.0f;
-            
+
         if (col < N && m * TILE_WIDTH + ty < N)
             Bs[ty][tx] = B[(m * TILE_WIDTH + ty) * N + col];
         else
             Bs[ty][tx] = 0.0f;
-        
+
         __syncthreads();  // 等待tile加载完成
-        
+
         // 计算tile内的点积
         for (int k = 0; k < TILE_WIDTH; ++k)
             Cvalue += As[ty][k] * Bs[k][tx];
-        
+
         __syncthreads();  // 等待计算完成再加载下一tile
     }
-    
+
     if (row < N && col < N)
         C[row * N + col] = Cvalue;
 }
@@ -549,9 +549,9 @@ cudaEventElapsedTime(&milliseconds, start, stop);
 
 void profiled_function() {
     nvtxRangePushA("Computation Phase");
-    
+
     // ... 代码 ...
-    
+
     nvtxRangePop();
 }
 ```
@@ -570,33 +570,33 @@ void profiled_function() {
 void multi_gpu_compute() {
     int device_count;
     cudaGetDeviceCount(&device_count);
-    
+
     // 为每个GPU创建stream
     cudaStream_t* streams = new cudaStream_t[device_count];
     for (int i = 0; i < device_count; i++) {
         cudaSetDevice(i);
         cudaStreamCreate(&streams[i]);
     }
-    
+
     // 数据并行: 将工作分发给多个GPU
     size_t chunk_size = total_size / device_count;
-    
+
     #pragma omp parallel for num_threads(device_count)
     for (int i = 0; i < device_count; i++) {
         cudaSetDevice(i);
-        
+
         float *d_data;
         cudaMalloc(&d_data, chunk_size);
-        
+
         cudaMemcpyAsync(d_data, h_data + i * chunk_size / sizeof(float),
                        chunk_size, cudaMemcpyHostToDevice, streams[i]);
-        
+
         kernel<<<grid, block, 0, streams[i]>>>(d_data, ...);
-        
+
         cudaMemcpyAsync(h_result + i * chunk_size / sizeof(float),
                        d_data, chunk_size, cudaMemcpyDeviceToHost, streams[i]);
     }
-    
+
     // 同步所有设备
     for (int i = 0; i < device_count; i++) {
         cudaSetDevice(i);
@@ -608,7 +608,7 @@ void multi_gpu_compute() {
 void enable_p2p() {
     int can_access;
     cudaDeviceCanAccessPeer(&can_access, 0, 1);
-    
+
     if (can_access) {
         cudaSetDevice(0);
         cudaDeviceEnablePeerAccess(1, 0);

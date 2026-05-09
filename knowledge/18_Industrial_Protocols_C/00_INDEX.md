@@ -16,8 +16,8 @@
 
 | 协议 | 难度 | 应用场景 | 入口 |
 |------|------|----------|------|
-| **Modbus** | ⭐⭐ | 通用工业通信 | [01_Modbus_Protocol](./01_Modbus_Protocol/) |
-| **CAN Bus** | ⭐⭐⭐ | 汽车、工业控制 | [02_CAN_Bus_Protocol](./02_CAN_Bus_Protocol/) |
+| **Modbus** | ⭐⭐ | 通用工业通信 | [01_Modbus_Protocol](./01_Modbus_Protocol/README.md) |
+| **CAN Bus** | ⭐⭐⭐ | 汽车、工业控制 | [02_CAN_Bus_Protocol](./02_CAN_Bus_Protocol/README.md) |
 | **OPC UA** | ⭐⭐⭐⭐⭐ | 工业4.0、数字化 | [03_OPC_UA_Protocol](./03_OPC_UA_Protocol/) |
 | **EtherCAT** | ⭐⭐⭐⭐⭐ | 运动控制 | [04_EtherCAT_Protocol](./04_EtherCAT_Protocol/) |
 
@@ -96,6 +96,6 @@ Modbus → OPC UA → EtherCAT → TSN → 工业云网关
 
 ## 相关模块
 
-- [19_Embedded_Systems_C](../19_Embedded_Systems_C/) - 嵌入式系统实现
-- [20_Hardware_Interfaces_C](../20_Hardware_Interfaces_C/) - 底层硬件接口
-- [04_Industrial_Scenarios](../04_Industrial_Scenarios/) - 工业场景应用
+- [19_Embedded_Systems_C](../19_Embedded_Systems_C/README.md) - 嵌入式系统实现
+- [20_Hardware_Interfaces_C](../20_Hardware_Interfaces_C/README.md) - 底层硬件接口
+- [04_Industrial_Scenarios](../04_Industrial_Scenarios/README.md) - 工业场景应用

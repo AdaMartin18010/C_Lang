@@ -12,9 +12,9 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | CAP定理、Paxos、Raft、PBFT、共识机制 |
-| **前置知识** | [数据结构](../../)、[网络编程](../../15_Network_Programming/)、[并发编程](../../14_Concurrency_Parallelism/) |
+| **前置知识** | [数据结构](../../README.md)、[网络编程](../../15_Network_Programming/)、[并发编程](../../14_Concurrency_Parallelism/) |
 | **后续延伸** | [Raft实现](../../17_Distributed_Systems/01_Raft_Consensus.md)、[区块链](../../12_Blockchain_Crypto/) |
-| **横向关联** | [系统架构](../../)、[容错理论](../../) |
+| **横向关联** | [系统架构](../../README.md)、[容错理论](../../README.md) |
 | **权威来源** | Paxos Made Simple, Raft Paper, PBFT Paper |
 
 ---

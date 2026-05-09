@@ -2,7 +2,7 @@
 
 > **层级定位**: 04_Industrial_Scenarios > 12_Blockchain_Crypto
 > **难度级别**: L4-L5 (高级到专家)
-> **前置知识**: [位运算](../../01_Core_Knowledge_System/01_Basic_Layer/03_Operators_Expressions.md), [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md), [安全编码](../../01_Core_Knowledge_System/09_Safety_Standards/)
+> **前置知识**: [位运算](../../01_Core_Knowledge_System/01_Basic_Layer/03_Operators_Expressions.md), [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md), [安全编码](../../01_Core_Knowledge_System/09_Safety_Standards/README.md)
 > **预估学习时间**: 15-20小时
 
 ---

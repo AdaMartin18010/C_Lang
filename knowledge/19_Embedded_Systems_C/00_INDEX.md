@@ -14,7 +14,7 @@
 
 ### 硬件架构
 
-- [MCU架构分析](./01_MCU_Architectures/)
+- [MCU架构分析](./01_MCU_Architectures/README.md)
 
 ### 外设编程
 
@@ -22,7 +22,7 @@
 
 ### 嵌入式C核心
 
-- [嵌入式C编程](./03_Embedded_C_Programming/)
+- [嵌入式C编程](./03_Embedded_C_Programming/README.md)
 
 ### 实时操作系统
 
@@ -91,6 +91,6 @@ RTOS深入 → 内存管理 → 调试技术 → Bootloader → 低功耗设计
 
 ## 相关模块
 
-- [18_Industrial_Protocols_C](../18_Industrial_Protocols_C/) - 工业通信协议
-- [20_Hardware_Interfaces_C](../20_Hardware_Interfaces_C/) - 硬件接口驱动
-- [04_Industrial_Scenarios/14_Embedded_IoT](../04_Industrial_Scenarios/14_Embedded_IoT/) - 实际项目案例
+- [18_Industrial_Protocols_C](../18_Industrial_Protocols_C/README.md) - 工业通信协议
+- [20_Hardware_Interfaces_C](../20_Hardware_Interfaces_C/README.md) - 硬件接口驱动
+- [04_Industrial_Scenarios/14_Embedded_IoT](../04_Industrial_Scenarios/14_Embedded_IoT/README.md) - 实际项目案例

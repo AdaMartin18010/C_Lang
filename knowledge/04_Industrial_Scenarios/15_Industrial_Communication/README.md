@@ -251,7 +251,7 @@ graph TB
 
 物理层是工业通信的**基础**，负责比特流的电气/光学传输。
 
-**目录位置**: [Physical_Layer/](Physical_Layer/)
+**目录位置**: [Physical_Layer/](Physical_Layer/README.md)
 
 | 文件 | 描述 | 关键技术 |
 |:-----|:-----|:---------|
@@ -304,7 +304,7 @@ graph LR
 
 数据链路层负责**帧的封装/解封装**、**MAC寻址**、**差错检测**和**介质访问控制**。
 
-**目录位置**: [Data_Link_Layer/](Data_Link_Layer/)
+**目录位置**: [Data_Link_Layer/](Data_Link_Layer/README.md)
 
 | 文件 | 描述 | 关键技术 |
 |:-----|:-----|:---------|
@@ -597,7 +597,7 @@ graph LR
 
 | 阶段 | 主题 | 推荐资源 | 实践项目 |
 |:-----|:-----|:---------|:---------|
-| 第1周 | 串口通信 | [Physical_Layer](Physical_Layer/) | 串口调试工具开发 |
+| 第1周 | 串口通信 | [Physical_Layer](Physical_Layer/README.md) | 串口调试工具开发 |
 | 第2-3周 | Modbus RTU | [01_Industrial_Communication_Protocols.md](01_Industrial_Communication_Protocols.md) | Modbus主站/从机实现 |
 | 第4周 | Modbus TCP | [01_Industrial_Communication_Protocols.md](01_Industrial_Communication_Protocols.md) | 以太网转串口网关 |
 | 第5-6周 | 工业以太网基础 | Profinet/EtherNet/IP入门 | 简单HMI通信 |

@@ -103,14 +103,14 @@
 
 | 主题 | 目录 | 难度 | 时间 | 核心内容 |
 |:-----|:-----|:----:|:----:|:---------|
-| ROS2基础 | [01_ROS2_Fundamentals](./01_ROS2_Fundamentals/) | ⭐⭐⭐⭐ | 10h | 节点、话题、服务、TF2坐标变换 |
-| 运动学 | [02_Kinematics](./02_Kinematics/) | ⭐⭐⭐⭐⭐ | 15h | 齐次变换、DH参数、正逆运动学、雅可比 |
-| 动力学 | [03_Dynamics](./03_Dynamics/) | ⭐⭐⭐⭐⭐ | 15h | 拉格朗日、牛顿-欧拉、轨迹规划 |
-| 控制理论 | [04_Control](./04_Control/) | ⭐⭐⭐⭐⭐ | 15h | PID、计算力矩、MPC、自适应控制 |
-| 高级电机控制 | [05_Motor_Control_Advanced](./05_Motor_Control_Advanced/) | ⭐⭐⭐⭐⭐ | 12h | FOC、SVPWM、无感控制 |
-| 物理仿真 | [06_Physics_Simulation](./06_Physics_Simulation/) | ⭐⭐⭐⭐ | 10h | MuJoCo、Bullet、Sim-to-Real |
-| 计算机视觉 | [07_Computer_Vision_Robotics](./07_Computer_Vision_Robotics/) | ⭐⭐⭐⭐ | 10h | OpenCV、视觉伺服、SLAM |
-| 案例研究 | [08_Case_Studies](./08_Case_Studies/) | ⭐⭐⭐⭐⭐ | 15h | 完整机器人项目实现 |
+| ROS2基础 | [01_ROS2_Fundamentals](./01_ROS2_Fundamentals/README.md) | ⭐⭐⭐⭐ | 10h | 节点、话题、服务、TF2坐标变换 |
+| 运动学 | [02_Kinematics](./02_Kinematics/README.md) | ⭐⭐⭐⭐⭐ | 15h | 齐次变换、DH参数、正逆运动学、雅可比 |
+| 动力学 | [03_Dynamics](./03_Dynamics/README.md) | ⭐⭐⭐⭐⭐ | 15h | 拉格朗日、牛顿-欧拉、轨迹规划 |
+| 控制理论 | [04_Control](./04_Control/README.md) | ⭐⭐⭐⭐⭐ | 15h | PID、计算力矩、MPC、自适应控制 |
+| 高级电机控制 | [05_Motor_Control_Advanced](./05_Motor_Control_Advanced/README.md) | ⭐⭐⭐⭐⭐ | 12h | FOC、SVPWM、无感控制 |
+| 物理仿真 | [06_Physics_Simulation](./06_Physics_Simulation/README.md) | ⭐⭐⭐⭐ | 10h | MuJoCo、Bullet、Sim-to-Real |
+| 计算机视觉 | [07_Computer_Vision_Robotics](./07_Computer_Vision_Robotics/README.md) | ⭐⭐⭐⭐ | 10h | OpenCV、视觉伺服、SLAM |
+| 案例研究 | [08_Case_Studies](./08_Case_Studies/README.md) | ⭐⭐⭐⭐⭐ | 15h | 完整机器人项目实现 |
 
 ---
 
@@ -240,9 +240,9 @@ ROS2基础 → 运动学 → 控制理论 → 案例实践
 ## 相关模块
 
 - [嵌入式系统](../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md)
-- [实时系统](../03_System_Technology_Domains/14_Concurrency_Parallelism/)
-- [计算机视觉](../03_System_Technology_Domains/03_Computer_Vision/)
-- [物联网](../04_Industrial_Scenarios/14_Embedded_IoT/)
+- [实时系统](../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md)
+- [计算机视觉](../03_System_Technology_Domains/03_Computer_Vision/README.md)
+- [物联网](../04_Industrial_Scenarios/14_Embedded_IoT/README.md)
 
 ---
 

@@ -3,7 +3,7 @@
 > **层级定位**: 21 Computation Theory / 基础层
 > **前置知识**: [图灵机](./01_Turing_Machines.md)
 > **后续延伸**: [计算复杂性](./03_Computational_Complexity.md) → [理论到物理桥梁](./04_Theory_to_Physical_Bridge.md)
-> **横向关联**: [函数与作用域](../../01_Core_Knowledge_System/02_Core_Layer/04_Functions_Scope.md)（C语言实现）
+> **横向关联**: [函数与作用域](../01_Core_Knowledge_System/02_Core_Layer/04_Functions_Scope.md)（C语言实现）
 > **预计学习时间**: 1周
 > **实践验证**: [λ演算解释器](../../examples/lambda/lambda_eval.py)
 
@@ -330,7 +330,7 @@ M N                M(N) 函数调用
 高阶函数            函数指针作为参数/返回值
 ```
 
-**深入阅读**：[C语言函数与作用域](../../01_Core_Knowledge_System/02_Core_Layer/04_Functions_Scope.md)
+**深入阅读**：[C语言函数与作用域](../01_Core_Knowledge_System/02_Core_Layer/04_Functions_Scope.md)
 
 ### 6.2 与函数指针的关联
 
@@ -363,7 +363,7 @@ int result = apply(add_one, 5);  // → 6
 - C++的模板和泛型有λ演算的影子
 
 相关阅读：
-→ [C类型理论](../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/04_C_Type_Theory.md)
+→ [C类型理论](../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/04_C_Type_Theory.md)
 ```
 
 ---

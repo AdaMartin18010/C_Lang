@@ -244,7 +244,7 @@ jobs:
 ### 前置知识
 
 - [安全编码实践](./03_Secure_Coding_Practices.md)
-- [Conan包管理](../../../01_Core_Knowledge_System/05_Engineering_Layer/05_Conan_Package_Management.md)
+- [Conan包管理](../../01_Core_Knowledge_System/05_Engineering_Layer/05_Conan_Package_Management.md)
 
 ### 后续延伸
 

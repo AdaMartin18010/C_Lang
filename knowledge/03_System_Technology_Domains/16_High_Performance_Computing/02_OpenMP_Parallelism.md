@@ -12,7 +12,7 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | OpenMP指令、并行循环、任务并行、同步机制、性能优化 |
-| **前置知识** | [C语言基础](../../01_Core_Knowledge_System/)、[并发编程](../../14_Concurrency_Parallelism/) |
+| **前置知识** | [C语言基础](../../01_Core_Knowledge_System/README.md)、[并发编程](../../14_Concurrency_Parallelism/) |
 | **后续延伸** | [MPI编程](01_MPI_Programming.md)、[SIMD优化](03_SIMD_Optimization.md) |
 | **横向关联** | [多线程](../../14_Concurrency_Parallelism/)、[性能调优](../../18_Systems_Performance/) |
 | **权威来源** | OpenMP Specification, LLNL OpenMP Tutorial |

@@ -2,7 +2,7 @@
 
 > **层级定位**: 06_Thinking_Representation > 09_State_Machines
 > **难度级别**: L3-L4 (中级到高级)
-> **前置知识**: [C语言基础](../01_Core_Knowledge_System/01_Basic_Layer/01_Syntax_Elements.md), [函数指针](../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md)
+> **前置知识**: [C语言基础](../../01_Core_Knowledge_System/01_Basic_Layer/01_Syntax_Elements.md), [函数指针](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md)
 > **预估学习时间**: 4-6 小时
 
 ---
@@ -41,8 +41,8 @@
 
 ### 横向关联
 
-- [层次桥接链](../../05_Concept_Mappings/09_Level_Bridging_Chains.md) - 理解实现模式演进
-- [概念等价性](../../05_Concept_Mappings/08_Concept_Equivalence_Graph.md) - 不同实现本质相同
+- [层次桥接链](../05_Concept_Mappings/09_Level_Bridging_Chains.md) - 理解实现模式演进
+- [概念等价性](../05_Concept_Mappings/08_Concept_Equivalence_Graph.md) - 不同实现本质相同
 
 ### 核心内容
 
@@ -382,9 +382,9 @@ void traffic_fsm_handle_event(TrafficState* state, Event event, uint32_t elapsed
 
 ### 相关模块
 
-- [并发编程](../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) - 状态机与多线程结合
-- [嵌入式系统](../04_Industrial_Scenarios/14_Embedded_IoT/readme.md) - 嵌入式状态机应用
-- [设计模式](../07_Modern_Toolchain/08_Design_Patterns/readme.md) - State模式详解
+- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) - 状态机与多线程结合
+- [嵌入式系统](../../04_Industrial_Scenarios/14_Embedded_IoT/README.md) - 嵌入式状态机应用
+- [设计模式](../../07_Modern_Toolchain/08_Design_Patterns/README.md) - State模式详解
 
 ---
 

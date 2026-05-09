@@ -16,9 +16,9 @@
 
 | 接口 | 速度 | 距离 | 复杂度 | 入口 |
 |------|------|------|--------|------|
-| **UART** | < 1Mbps | 短 | ⭐⭐ | [01_UART_Interfaces](./01_UART_Interfaces/) |
-| **SPI** | < 50MHz | 短 | ⭐⭐ | [02_SPI_Interfaces](./02_SPI_Interfaces/) |
-| **I2C** | < 3.4Mbps | 中 | ⭐⭐⭐ | [03_I2C_Interfaces](./03_I2C_Interfaces/) |
+| **UART** | < 1Mbps | 短 | ⭐⭐ | [01_UART_Interfaces](./01_UART_Interfaces/README.md) |
+| **SPI** | < 50MHz | 短 | ⭐⭐ | [02_SPI_Interfaces](./02_SPI_Interfaces/README.md) |
+| **I2C** | < 3.4Mbps | 中 | ⭐⭐⭐ | [03_I2C_Interfaces](./03_I2C_Interfaces/README.md) |
 | **CAN** | < 8Mbps | 长 | ⭐⭐⭐⭐ | [04_CAN_Interfaces](./04_CAN_Interfaces/) |
 | **USB** | < 480Mbps | 中 | ⭐⭐⭐⭐⭐ | [05_USB_Interfaces](./05_USB_Interfaces/) |
 | **Ethernet** | < 1Gbps | 长 | ⭐⭐⭐⭐ | [06_Ethernet_Interfaces](./06_Ethernet_Interfaces/) |
@@ -73,6 +73,6 @@
 
 ## 相关模块
 
-- [18_Industrial_Protocols_C](../18_Industrial_Protocols_C/) - 基于硬件接口的协议实现
-- [19_Embedded_Systems_C](../19_Embedded_Systems_C/) - 嵌入式系统集成
-- [04_Industrial_Scenarios](../04_Industrial_Scenarios/) - 实际应用案例
+- [18_Industrial_Protocols_C](../18_Industrial_Protocols_C/README.md) - 基于硬件接口的协议实现
+- [19_Embedded_Systems_C](../19_Embedded_Systems_C/README.md) - 嵌入式系统集成
+- [04_Industrial_Scenarios](../04_Industrial_Scenarios/README.md) - 实际应用案例
