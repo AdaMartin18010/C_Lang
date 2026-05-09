@@ -52,6 +52,126 @@
       - [2.5.1 已接受提案（C2y）](#251-已接受提案c2y)
       - [2.5.2 讨论中提案](#252-讨论中提案)
       - [2.5.3 提案阶段](#253-提案阶段)
+  - [第3部分：GCC 15新特性](#第3部分gcc-15新特性)
+    - [3.1 GCC 15发布概览](#31-gcc-15发布概览)
+      - [3.1.1 重大变化摘要](#311-重大变化摘要)
+      - [3.1.2 编译器行为变化](#312-编译器行为变化)
+    - [3.2 已实现的C2y特性](#32-已实现的c2y特性)
+      - [3.2.1 defer 语句完整支持](#321-defer-语句完整支持)
+      - [3.2.2 \_Countof 操作符](#322-_countof-操作符)
+      - [3.2.3 if 声明语句](#323-if-声明语句)
+      - [3.2.4 typeof\_unqual 操作符](#324-typeof_unqual-操作符)
+      - [3.2.5 C2y特性支持矩阵](#325-c2y特性支持矩阵)
+    - [3.3 优化改进](#33-优化改进)
+      - [3.3.1 LTO (Link Time Optimization) 增强](#331-lto-link-time-optimization-增强)
+      - [3.3.2 向量化改进](#332-向量化改进)
+      - [3.3.3 AMD Zen 4 优化](#333-amd-zen-4-优化)
+    - [3.4 诊断增强](#34-诊断增强)
+      - [3.4.1 改进的错误信息](#341-改进的错误信息)
+      - [3.4.2 静态分析集成](#342-静态分析集成)
+    - [3.5 实验性特性](#35-实验性特性)
+      - [3.5.1 实验性开关](#351-实验性开关)
+      - [3.5.2 未来路线图](#352-未来路线图)
+  - [第4部分：Clang 20新特性](#第4部分clang-20新特性)
+    - [4.1 Clang 20/LLVM 22发布概览](#41-clang-20llvm-22发布概览)
+      - [4.1.1 主要新特性总览](#411-主要新特性总览)
+    - [4.2 已实现的C2y特性](#42-已实现的c2y特性)
+      - [4.2.1 Named Loops (命名循环)](#421-named-loops-命名循环)
+      - [4.2.2 **COUNTER** 预定义宏](#422-counter-预定义宏)
+      - [4.2.3 static\_assert 无未定义行为](#423-static_assert-无未定义行为)
+      - [4.2.4 extern inline 调用 static inline](#424-extern-inline-调用-static-inline)
+      - [4.2.5 C2y特性支持状态总结](#425-c2y特性支持状态总结)
+    - [4.3 静态分析增强](#43-静态分析增强)
+      - [4.3.1 Clang Static Analyzer 改进](#431-clang-static-analyzer-改进)
+      - [4.3.2 Clang-Tidy 增强](#432-clang-tidy-增强)
+    - [4.4 LLVM 22集成改进](#44-llvm-22集成改进)
+      - [4.4.1 Distributed ThinLTO (DTLTO)](#441-distributed-thinlto-dtlto)
+      - [4.4.2 新硬件支持](#442-新硬件支持)
+    - [4.5 GCC与Clang差异分析](#45-gcc与clang差异分析)
+      - [4.5.1 C23特性支持差异](#451-c23特性支持差异)
+      - [4.5.2 C2y特性支持差异](#452-c2y特性支持差异)
+      - [4.5.3 扩展特性差异](#453-扩展特性差异)
+      - [4.5.4 选择建议](#454-选择建议)
+  - [第5部分：迁移指南](#第5部分迁移指南)
+    - [5.1 迁移检查清单](#51-迁移检查清单)
+      - [5.1.1 C11 → C17 迁移](#511-c11--c17-迁移)
+      - [5.1.2 C17 → C23 迁移](#512-c17--c23-迁移)
+      - [5.1.3 C23 → C2y 迁移](#513-c23--c2y-迁移)
+    - [5.2 破坏性变更列表](#52-破坏性变更列表)
+      - [5.2.1 C23破坏性变更](#521-c23破坏性变更)
+      - [5.2.2 C2y潜在破坏性变更](#522-c2y潜在破坏性变更)
+    - [5.3 代码现代化工具](#53-代码现代化工具)
+      - [5.3.1 自动迁移工具](#531-自动迁移工具)
+      - [5.3.2 IDE/编辑器支持](#532-ide编辑器支持)
+      - [5.3.3 CI/CD集成](#533-cicd集成)
+    - [5.4 兼容性宏定义](#54-兼容性宏定义)
+      - [5.4.1 完整兼容性头文件](#541-完整兼容性头文件)
+      - [5.4.2 使用示例](#542-使用示例)
+  - [第6部分：未来展望](#第6部分未来展望)
+    - [6.1 C30可能方向](#61-c30可能方向)
+      - [6.1.1 潜在特性 (2028+)](#611-潜在特性-2028)
+      - [6.1.2  constexpr函数路线图](#612--constexpr函数路线图)
+    - [6.2 模块化提案状态](#62-模块化提案状态)
+      - [6.2.1 C模块系统提案](#621-c模块系统提案)
+      - [6.2.2 与C++模块的协调](#622-与c模块的协调)
+    - [6.3 概念（Concepts）讨论](#63-概念concepts讨论)
+      - [6.3.1 C中的概念提案](#631-c中的概念提案)
+      - [6.3.2 与C++概念的区别](#632-与c概念的区别)
+    - [6.4 与C++的协调](#64-与c的协调)
+      - [6.4.1 当前协调状态](#641-当前协调状态)
+      - [6.4.2 协调目标](#642-协调目标)
+      - [6.4.3 共享头文件最佳实践](#643-共享头文件最佳实践)
+  - [附录](#附录)
+    - [A. 参考链接](#a-参考链接)
+      - [A.1 标准文档](#a1-标准文档)
+      - [A.2 编译器资源](#a2-编译器资源)
+      - [A.3 社区资源](#a3-社区资源)
+    - [B. 术语表](#b-术语表)
+    - [C. 修订历史](#c-修订历史)
+    - [附录D：详细API参考](#附录d详细api参考)
+      - [D.1 C23新增标准库函数完整列表](#d1-c23新增标准库函数完整列表)
+      - [D.2 C23新增预定义宏](#d2-c23新增预定义宏)
+      - [D.3 C23特性测试宏完整表](#d3-c23特性测试宏完整表)
+      - [D.4 C2y (2024) 新特性预览](#d4-c2y-2024-新特性预览)
+      - [D.5 兼容性矩阵详细表](#d5-兼容性矩阵详细表)
+      - [D.6 性能基准参考](#d6-性能基准参考)
+    - [附录E：常见问题解答 (FAQ)](#附录e常见问题解答-faq)
+      - [E.1 C23迁移相关](#e1-c23迁移相关)
+      - [E.2 C2y特性相关](#e2-c2y特性相关)
+      - [E.3 编译器相关](#e3-编译器相关)
+      - [E.4 工具链相关](#e4-工具链相关)
+    - [附录F：版本历史](#附录f版本历史)
+    - [附录G：示例代码详细说明](#附录g示例代码详细说明)
+      - [G.1 示例索引](#g1-示例索引)
+      - [G.2 编译测试矩阵](#g2-编译测试矩阵)
+      - [G.3 快速开始](#g3-快速开始)
+      - [G.4 示例分类](#g4-示例分类)
+      - [G.5 学习路径建议](#g5-学习路径建议)
+    - [附录H：相关资源链接](#附录h相关资源链接)
+      - [H.1 标准文档](#h1-标准文档)
+      - [H.2 编译器资源](#h2-编译器资源)
+      - [H.3 学习资源](#h3-学习资源)
+      - [H.4 工具资源](#h4-工具资源)
+      - [H.5 书籍推荐](#h5-书籍推荐)
+    - [附录I：贡献指南](#附录i贡献指南)
+      - [I.1 如何更新本文档](#i1-如何更新本文档)
+      - [I.2 文档规范](#i2-文档规范)
+      - [I.3 更新检查清单](#i3-更新检查清单)
+    - [文档元信息](#文档元信息)
+    - [附录J：WG14提案索引详细表](#附录jwg14提案索引详细表)
+      - [J.1 C23标准提案（已发布）](#j1-c23标准提案已发布)
+      - [J.2 C2y提案（已接受/开发中）](#j2-c2y提案已接受开发中)
+      - [J.3 C2y提案（讨论中/提案阶段）](#j3-c2y提案讨论中提案阶段)
+      - [J.4 提案状态图](#j4-提案状态图)
+      - [J.5 参与标准制定](#j5-参与标准制定)
+    - [附录K：编译器实现细节](#附录k编译器实现细节)
+      - [K.1 GCC实现架构](#k1-gcc实现架构)
+      - [K.2 Clang实现架构](#k2-clang实现架构)
+      - [K.3 关键实现挑战](#k3-关键实现挑战)
+    - [附录L：性能优化指南](#附录l性能优化指南)
+      - [L.1 C23特性性能建议](#l1-c23特性性能建议)
+      - [L.2 C2y特性性能建议](#l2-c2y特性性能建议)
+      - [L.3 编译器优化选项](#l3-编译器优化选项)
 
 ---
 
@@ -991,11 +1111,11 @@ void process_file(const char *filename) {
     FILE *fp = fopen(filename, "r");
     if (!fp) return;
     defer fclose(fp);
-    
+
     char *buffer = malloc(1024);
     if (!buffer) return;
     defer free(buffer);
-    
+
     // 业务逻辑，无需手动清理
     while (fgets(buffer, 1024, fp)) {
         printf("%s", buffer);
@@ -1023,15 +1143,15 @@ void process_file(const char *filename) {
 int main(void) {
     int arr[] = {1, 2, 3, 4, 5};
     int matrix[3][4];
-    
+
     printf("arr count: %zu\n", _Countof(arr));        // 5
     printf("matrix rows: %zu\n", _Countof(matrix));   // 3
     printf("matrix cols: %zu\n", _Countof(matrix[0])); // 4
-    
+
     // 指针错误检测
     int *p = arr;
     // _Countof(p);  // 编译错误：表达式不是数组
-    
+
     return 0;
 }
 ```
@@ -1062,14 +1182,14 @@ int main(void) {
         printf("Non-positive: %d\n", x);
     }
     // x 在这里不可见
-    
+
     // switch with declaration
     switch (int c = getchar(); c) {
         case 'a': puts("Got a"); break;
         case 'b': puts("Got b"); break;
         default: puts("Other");
     }
-    
+
     return 0;
 }
 ```
@@ -1095,16 +1215,16 @@ int main(void) {
 int main(void) {
     const int x = 42;
     volatile int y = 100;
-    
+
     typeof(x) a = x;          // const int
     typeof_unqual(x) b = x;   // int (const移除)
-    
+
     typeof(y) c = y;          // volatile int
     typeof_unqual(y) d = y;   // int (volatile移除)
-    
+
     b = 50;   // OK
     d = 200;  // OK
-    
+
     return 0;
 }
 ```
@@ -1120,7 +1240,7 @@ int main(void) {
 | if declaration | ✅ | `-std=c2y` | `__STDC_VERSION__ >= 202400L` |
 | typeof_unqual | ✅ | `-std=c2y` | `__has_feature(typeof_unqual)` |
 | named loops | ✅ | `-std=c2y` | `__STDC_VERSION__ >= 202400L` |
-| __COUNTER__ | ✅ | 默认 | `defined(__COUNTER__)` |
+| **COUNTER** | ✅ | 默认 | `defined(__COUNTER__)` |
 | constexpr函数 | ⚠️ | 部分 | 有限支持 |
 
 ---
@@ -1359,7 +1479,7 @@ int main(void) {
         {12, 14, 16, 18, 20},
         {21, 22, 23, 24, 25}
     };
-    
+
     search_matrix(matrix, 17);
     return 0;
 }
@@ -1367,7 +1487,7 @@ int main(void) {
 
 ---
 
-#### 4.2.2 __COUNTER__ 预定义宏
+#### 4.2.2 **COUNTER** 预定义宏
 
 | 属性 | 详情 |
 |------|------|
@@ -1471,6 +1591,7 @@ extern inline int public_function(int x) {
 ```
 
 **解决的问题：**
+
 - 允许`extern inline`函数调用`static inline`函数
 - 避免链接器错误
 - 清晰的内联策略分离
@@ -1486,7 +1607,7 @@ extern inline int public_function(int x) {
 | if declaration | ✅ | ✅ | C2y |
 | typeof_unqual | ✅ | ✅ | C2y |
 | named loops | ✅ | ✅ | C2y |
-| __COUNTER__ | ✅ | ✅ | C2y |
+| **COUNTER** | ✅ | ✅ | C2y |
 | static_assert增强 | ✅ | ✅ | C2y |
 | extern inline | ✅ | ✅ | C2y |
 | constexpr函数 | ⚠️ | ⚠️ | 讨论中 |
@@ -1616,7 +1737,7 @@ clang -march=nova-lake -mavx10.2 file.c
 | _Countof | ✅ | ✅ | 实现相同 |
 | if declaration | ✅ | ✅ | 实现相同 |
 | named loops | ✅ | ✅ | Clang先实现 |
-| __COUNTER__ | ✅ | ✅ | 行为相同 |
+| **COUNTER** | ✅ | ✅ | 行为相同 |
 | constexpr函数 | ⚠️ | ⚠️ | 都有限支持 |
 
 #### 4.5.3 扩展特性差异
@@ -1726,7 +1847,7 @@ echo "=== Check Complete ==="
 | **if declaration** | 简化错误处理 | GCC 15+, Clang 20+ |
 | **typeof_unqual** | 类型操作增强 | GCC 15+, Clang 20+ |
 | **named loops** | 多层循环控制 | Clang 20+ |
-| **__COUNTER__** | 元编程增强 | GCC 15+, Clang 20+ |
+| ****COUNTER**** | 元编程增强 | GCC 15+, Clang 20+ |
 
 **渐进式迁移策略：**
 
@@ -1908,10 +2029,10 @@ jobs:
       matrix:
         compiler: [gcc-15, clang-20]
         standard: [c23, c2y]
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Setup Compiler
       run: |
         if [ "${{ matrix.compiler }}" = "gcc-15" ]; then
@@ -1921,12 +2042,12 @@ jobs:
           sudo apt-get install clang-20
           echo "CC=clang-20" >> $GITHUB_ENV
         fi
-    
+
     - name: Build with ${{ matrix.standard }}
       run: |
         $CC -std=${{ matrix.standard }} -Werror -Wall \
             -Wextra -pedantic -c src/*.c
-    
+
     - name: Run Tests
       run: |
         $CC -std=${{ matrix.standard }} -o test_runner \
@@ -2101,14 +2222,14 @@ int allocate_resource(void);
 
 void example(void) {
     C23_AUTO x = 42;  /* int，如果支持C23 */
-    
+
     int arr[10];
     size_t n = C23_COUNTOF(arr);  /* 10 */
-    
+
     int *p = C23_NULLPTR;  /* nullptr 或 NULL */
-    
+
     C23_STATIC_ASSERT(sizeof(int) >= 4, "int must be 32-bit");
-    
+
     /* 使用资源 */
     int *resource = allocate_resource();  /* 警告如果忽略返回值 */
 }
@@ -2266,7 +2387,7 @@ import Math;  // 导入C++的C接口
 // 可能在C30+中考虑
 
 // 定义类型约束
-concept Numeric = 
+concept Numeric =
     (sizeof(T) >= sizeof(int)) &&
     __is_arithmetic(T);
 
@@ -2386,24 +2507,24 @@ void destroy_point(Point *p);
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
-| WG14主页 | https://www.open-std.org/jtc1/sc22/wg14/ | C标准委员会 |
-| C23标准草案 | https://open-std.org/JTC1/SC22/WG14/www/docs/n3096.pdf | 免费草案 |
-| WG14文档 | https://www.open-std.org/jtc1/sc22/wg14/www/wg14_document_log.htm | 提案索引 |
+| WG14主页 | <https://www.open-std.org/jtc1/sc22/wg14/> | C标准委员会 |
+| C23标准草案 | <https://open-std.org/JTC1/SC22/WG14/www/docs/n3096.pdf> | 免费草案 |
+| WG14文档 | <https://www.open-std.org/jtc1/sc22/wg14/www/wg14_document_log.htm> | 提案索引 |
 
 #### A.2 编译器资源
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
-| GCC文档 | https://gcc.gnu.org/onlinedocs/gcc-15.1.0/gcc/ | GCC 15手册 |
-| Clang文档 | https://clang.llvm.org/docs/ | Clang文档 |
-| Compiler Explorer | https://godbolt.org/ | 在线编译测试 |
+| GCC文档 | <https://gcc.gnu.org/onlinedocs/gcc-15.1.0/gcc/> | GCC 15手册 |
+| Clang文档 | <https://clang.llvm.org/docs/> | Clang文档 |
+| Compiler Explorer | <https://godbolt.org/> | 在线编译测试 |
 
 #### A.3 社区资源
 
 | 资源 | 链接 | 说明 |
 |------|------|------|
-| r/C_Programming | https://www.reddit.com/r/C_Programming/ | Reddit社区 |
-| C语言标准讨论 | https://groups.google.com/g/comp.std.c | Usenet镜像 |
+| r/C_Programming | <https://www.reddit.com/r/C_Programming/> | Reddit社区 |
+| C语言标准讨论 | <https://groups.google.com/g/comp.std.c> | Usenet镜像 |
 
 ### B. 术语表
 
@@ -2434,7 +2555,7 @@ void destroy_point(Point *p);
 ---
 
 > **文档结束**
-> 
+>
 > 本文档是C_Lang知识库的一部分，遵循项目文档标准。
 > 如有问题或建议，请通过项目Issue系统反馈。
 
@@ -2609,6 +2730,7 @@ void destroy_point(Point *p);
 **Q: 从C11/C17迁移到C23需要多少工作量？**
 
 A: 对于大多数项目，迁移工作量较小：
+
 - **低风险**: 更新编译选项 `-std=c23`
 - **中风险**: 替换 `NULL` → `nullptr`，使用 `auto`
 - **高风险**: 移除 `gets()`，修复隐式声明
@@ -2618,6 +2740,7 @@ A: 对于大多数项目，迁移工作量较小：
 **Q: C23代码能否在旧编译器上编译？**
 
 A: 不能直接使用。需要使用条件编译：
+
 ```c
 #if __STDC_VERSION__ >= 202311L
     // C23代码
@@ -2629,6 +2752,7 @@ A: 不能直接使用。需要使用条件编译：
 **Q: `nullptr` 和 `NULL` 有什么区别？**
 
 A: 主要区别：
+
 - `nullptr` 是 `nullptr_t` 类型，类型安全
 - `NULL` 是 `((void*)0)` 或 `0`，可能引发类型问题
 - `nullptr` 只能转换为指针类型
@@ -2639,6 +2763,7 @@ A: 主要区别：
 **Q: 何时应该开始使用C2y特性？**
 
 A: 建议时间线：
+
 - **现在**: 如果可以使用GCC 15或Clang 20
 - **2026年中**: 生产环境可考虑 `defer`, `_Countof`
 - **2027年**: C2y正式发布后全面采用
@@ -2646,6 +2771,7 @@ A: 建议时间线：
 **Q: `defer` 和 C++ 析构函数有什么区别？**
 
 A: 主要区别：
+
 - `defer` 在作用域退出时执行，不限于对象
 - 不需要对象包装
 - 可以 `defer` 任意语句
@@ -2654,6 +2780,7 @@ A: 主要区别：
 **Q: `_Countof` 和 `sizeof/sizeof` 哪个更好？**
 
 A: 推荐 `_Countof`：
+
 - 意图更清晰
 - 编译器检查（指针错误）
 - 标准化
@@ -2664,6 +2791,7 @@ A: 推荐 `_Countof`：
 **Q: GCC 15和Clang 20哪个更适合C23/C2y？**
 
 A: 取决于场景：
+
 - **性能**: GCC 15通常优化更好
 - **诊断**: Clang 20错误信息更清晰
 - **C2y支持**: 两者都完整支持
@@ -2672,6 +2800,7 @@ A: 取决于场景：
 **Q: MSVC对C23的支持如何？**
 
 A: MSVC 2022 17.12+支持大部分C23，但：
+
 - 不支持 `_BitInt`
 - 部分特性实现较慢
 - 主要关注C++兼容性
@@ -2679,6 +2808,7 @@ A: MSVC 2022 17.12+支持大部分C23，但：
 **Q: 嵌入式开发可以使用C23吗？**
 
 A: 可以，但需要注意：
+
 - 确保目标编译器支持
 - 检查库支持（如newlib）
 - 测试代码大小影响
@@ -2689,6 +2819,7 @@ A: 可以，但需要注意：
 **Q: 有哪些IDE支持C23？**
 
 A: 推荐IDE：
+
 - VS Code + clangd (最佳)
 - CLion (等待更新)
 - Vim/Neovim + LSP
@@ -2697,6 +2828,7 @@ A: 推荐IDE：
 **Q: 如何检查代码的C23兼容性？**
 
 A: 多种方法：
+
 ```bash
 # 编译检查
 gcc -std=c23 -Werror -Wall -c file.c
@@ -2711,6 +2843,7 @@ clang-tidy -checks='modernize-*' file.c
 **Q: 有自动迁移工具吗？**
 
 A: 可用工具：
+
 - `clang-tidy` 的 modernize 检查
 - `coccinelle` 语义补丁
 - 自定义脚本（基于正则）
@@ -2736,10 +2869,10 @@ A: 可用工具：
 ---
 
 > **文档结束**
-> 
+>
 > 本文档是C_Lang知识库的一部分，遵循项目文档标准。
 > 如有问题或建议，请通过项目Issue系统反馈。
-> 
+>
 > *最后更新: 2026-03-25*
 > *文档版本: 1.0.0*
 
@@ -2816,6 +2949,7 @@ done
 #### G.4 示例分类
 
 **入门示例（适合C23初学者）**
+
 - 01_auto_type_inference.c - 理解auto
 - 02_typeof_operator.c - 理解typeof
 - 03_nullptr_usage.c - nullptr vs NULL
@@ -2826,6 +2960,7 @@ done
 - 19_digit_separators.c - 数字可读性
 
 **中级示例（适合有经验的开发者）**
+
 - 06_bitint_arbitrary_precision.c - 大整数
 - 08_embed_directive.c - 嵌入文件
 - 10_stdckdint_overflow_check.c - 安全检查
@@ -2839,22 +2974,26 @@ done
 - 20_compatibility_macros.c - 跨版本兼容
 
 **高级示例（适合深入理解）**
+
 - 12_defer_statement.c - 资源管理
 
 #### G.5 学习路径建议
 
 **路径1：快速上手（1-2天）**
+
 1. 阅读本文档第1部分（C23标准回顾）
 2. 编译运行入门示例（01-05, 07, 09, 19）
 3. 在现有项目中尝试使用 `auto`, `nullptr`, `[[nodiscard]]`
 
 **路径2：全面掌握（1周）**
+
 1. 完整阅读本文档
 2. 编译运行所有示例
 3. 尝试将现有代码迁移到C23
 4. 使用兼容性宏支持多版本
 
 **路径3：专家级别（持续）**
+
 1. 深入理解C2y提案
 2. 在实验性项目中使用 `defer`, `_Countof`
 3. 贡献代码到C23/C2y开源项目
@@ -2868,38 +3007,38 @@ done
 
 | 资源 | URL | 类型 |
 |------|-----|------|
-| WG14官方 | https://www.open-std.org/jtc1/sc22/wg14/ | 委员会 |
-| C23草案N3096 | https://open-std.org/JTC1/SC22/WG14/www/docs/n3096.pdf | PDF |
-| WG14文档日志 | https://www.open-std.org/jtc1/sc22/wg14/www/wg14_document_log.htm | 索引 |
-| C标准提案 | https://wiki.edg.com/bin/view/WG14WebHome | Wiki |
+| WG14官方 | <https://www.open-std.org/jtc1/sc22/wg14/> | 委员会 |
+| C23草案N3096 | <https://open-std.org/JTC1/SC22/WG14/www/docs/n3096.pdf> | PDF |
+| WG14文档日志 | <https://www.open-std.org/jtc1/sc22/wg14/www/wg14_document_log.htm> | 索引 |
+| C标准提案 | <https://wiki.edg.com/bin/view/WG14WebHome> | Wiki |
 
 #### H.2 编译器资源
 
 | 资源 | URL | 说明 |
 |------|-----|------|
-| GCC 15 | https://gcc.gnu.org/gcc-15/ | 发布说明 |
-| GCC C23支持 | https://gcc.gnu.org/wiki/C23Status | 状态页 |
-| Clang文档 | https://clang.llvm.org/docs/ | 完整文档 |
-| Clang C23状态 | https://clang.llvm.org/c_status.html | C支持状态 |
-| Compiler Explorer | https://godbolt.org/ | 在线编译 |
+| GCC 15 | <https://gcc.gnu.org/gcc-15/> | 发布说明 |
+| GCC C23支持 | <https://gcc.gnu.org/wiki/C23Status> | 状态页 |
+| Clang文档 | <https://clang.llvm.org/docs/> | 完整文档 |
+| Clang C23状态 | <https://clang.llvm.org/c_status.html> | C支持状态 |
+| Compiler Explorer | <https://godbolt.org/> | 在线编译 |
 
 #### H.3 学习资源
 
 | 资源 | URL | 类型 |
 |------|-----|------|
-| cppreference C | https://en.cppreference.com/w/c | 参考手册 |
-| Learn C | https://www.learn-c.org/ | 教程 |
-| C FAQ | http://c-faq.com/ | 常见问题 |
-| r/C_Programming | https://www.reddit.com/r/C_Programming/ | 社区 |
+| cppreference C | <https://en.cppreference.com/w/c> | 参考手册 |
+| Learn C | <https://www.learn-c.org/> | 教程 |
+| C FAQ | <http://c-faq.com/> | 常见问题 |
+| r/C_Programming | <https://www.reddit.com/r/C_Programming/> | 社区 |
 
 #### H.4 工具资源
 
 | 工具 | URL | 用途 |
 |------|-----|------|
-| clang-tidy | https://clang.llvm.org/extra/clang-tidy/ | 代码检查 |
-| cppcheck | http://cppcheck.net/ | 静态分析 |
-| Valgrind | https://valgrind.org/ | 内存检测 |
-| GDB | https://www.gnu.org/software/gdb/ | 调试器 |
+| clang-tidy | <https://clang.llvm.org/extra/clang-tidy/> | 代码检查 |
+| cppcheck | <http://cppcheck.net/> | 静态分析 |
+| Valgrind | <https://valgrind.org/> | 内存检测 |
+| GDB | <https://www.gnu.org/software/gdb/> | 调试器 |
 
 #### H.5 书籍推荐
 
@@ -2933,6 +3072,7 @@ done
 #### I.3 更新检查清单
 
 更新本文档时，请检查：
+
 - [ ] 编译器版本信息最新
 - [ ] 特性支持状态准确
 - [ ] 代码示例可运行
@@ -2959,11 +3099,11 @@ done
 ---
 
 > **文档完全结束**
-> 
+>
 > 感谢您阅读本文档！
-> 
+>
 > 如有问题或建议，欢迎反馈。
-> 
+>
 > *C_Lang 知识库团队*
 > *2026年3月*
 
@@ -2981,7 +3121,7 @@ done
 | N2730 | Digit Separators | 语言 | C23 | 数字分隔符 |
 | N2789 | Remove gets | 库 | C23 | 移除gets函数 |
 | N2841 | Remove Trigraphs | 语言 | C23 | 移除三字母词 |
-| N2851 | VA_OPT | 预处理器 | C23 | __VA_OPT__ |
+| N2851 | VA_OPT | 预处理器 | C23 | **VA_OPT** |
 | N2893 | typeof | 语言 | C23 | typeof操作符 |
 | N2894 | auto Type Inference | 语言 | C23 | auto类型推导 |
 | N2935 | Standard Attributes | 语言 | C23 | [[...]]语法 |
@@ -3007,11 +3147,11 @@ done
 | N3278 | _Countof Updates | 语言 | ✅ 已接受 | 计数增强 |
 | N3280 | Named Loops | 语言 | ✅ 已接受 | 命名循环 |
 | N3281 | Continue to Label | 语言 | ✅ 已接受 | continue标签 |
-| N3290 | __COUNTER__ Macro | 预处理器 | ✅ 已接受 | 计数器宏 |
+| N3290 | **COUNTER** Macro | 预处理器 | ✅ 已接受 | 计数器宏 |
 | N3298 | constexpr Functions | 语言 | 🔄 讨论中 | 编译期函数 |
 | N3309 | constexpr Constraints | 语言 | 🔄 讨论中 | constexpr限制 |
 | N3355 | Named Loops (更新) | 语言 | ✅ 已接受 | 命名循环最终 |
-| N3457 | __COUNTER__ Final | 预处理器 | ✅ 已接受 | 计数器最终版 |
+| N3457 | **COUNTER** Final | 预处理器 | ✅ 已接受 | 计数器最终版 |
 | N3525 | static_assert UB | 语言 | ✅ 已接受 | 无UB保证 |
 | N3622 | extern inline | 语言 | ✅ 已接受 | inline增强 |
 
@@ -3069,6 +3209,7 @@ done
 5. **实现实验**: 在编译器中实验性实现
 
 **提案格式要求**
+
 - 使用WG14模板
 - 明确描述问题
 - 提供解决方案
@@ -3142,6 +3283,7 @@ LLVM后端
 #### L.1 C23特性性能建议
 
 **auto类型推导**
+
 ```c
 // 推荐：清晰、高效
 auto x = compute_value();  // 推导为最合适的类型
@@ -3151,6 +3293,7 @@ auto y = 3.14f;  // float，如果需要double可能丢失精度
 ```
 
 **constexpr使用**
+
 ```c
 // 推荐：编译期计算
 constexpr int table_size = 100;
@@ -3161,6 +3304,7 @@ const int size = 100;  // 运行期常量（C17方式）
 ```
 
 **_BitInt优化**
+
 ```c
 // 推荐：使用合适的位宽
 _BitInt(128) precise = large_calculation();
@@ -3172,6 +3316,7 @@ _BitInt(1024) overkill = simple_add();  // 浪费资源
 #### L.2 C2y特性性能建议
 
 **defer开销**
+
 ```c
 // defer有微小开销，但在I/O等慢操作中可忽略
 defer fclose(file);  // 文件操作 >> defer开销
@@ -3181,6 +3326,7 @@ defer fclose(file);  // 文件操作 >> defer开销
 ```
 
 **_Countof优化**
+
 ```c
 // _Countof与sizeof效率相同（都是编译期）
 // 在循环中使用时缓存结果
@@ -3191,6 +3337,7 @@ for (size_t i = 0; i < n; i++) { ... }
 #### L.3 编译器优化选项
 
 **GCC优化选项**
+
 ```bash
 # 开发阶段
 gcc -std=c23 -O0 -g -Wall -Wextra  # 调试
@@ -3206,6 +3353,7 @@ gcc -std=c23 -O3 -flto             # LTO
 ```
 
 **Clang优化选项**
+
 ```bash
 # 开发阶段
 clang -std=c23 -O0 -g -Wall

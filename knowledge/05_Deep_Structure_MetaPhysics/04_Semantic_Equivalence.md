@@ -257,19 +257,23 @@ $$\llbracket S_1; S_2 \rrbracket = \llbracket S_2 \rrbracket \circ \llbracket S_
 
 **条件语句**:
 
-$$\llbracket \text{if } B \text{ then } S_1 \text{ else } S_2 \rrbracket =
+$$
+\llbracket \text{if } B \text{ then } S_1 \text{ else } S_2 \rrbracket =
 \lambda \sigma. \begin{cases}
 \llbracket S_1 \rrbracket \sigma & \text{if } \llbracket B \rrbracket \sigma = \text{true} \\
 \llbracket S_2 \rrbracket \sigma & \text{if } \llbracket B \rrbracket \sigma = \text{false}
-\end{cases}$$
+\end{cases}
+$$
 
 **While循环的不动点定义**:
 
-$$\llbracket \text{while } B \text{ do } S \rrbracket = \text{fix}(\lambda f. \lambda \sigma.
+$$
+\llbracket \text{while } B \text{ do } S \rrbracket = \text{fix}(\lambda f. \lambda \sigma.
 \begin{cases}
 f(\llbracket S \rrbracket \sigma) & \text{if } \llbracket B \rrbracket \sigma = \text{true} \\
 \sigma & \text{if } \llbracket B \rrbracket \sigma = \text{false}
-\end{cases})$$
+\end{cases})
+$$
 
 ### 3.4 域论基础
 
@@ -517,6 +521,7 @@ a = a ^ b;
 程序语义等价性理论为程序验证、编译器正确性证明和程序优化提供了坚实的数学基础。不同的语义视角（操作、指称、公理）相互补充，共同构成了对程序行为的完整理解。
 
 未来发展方向：
+
 - 并发程序的语义等价
 - 概率程序的近似等价
 - 量子程序的语义理论

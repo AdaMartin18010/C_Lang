@@ -64,6 +64,9 @@ timeline
   - [2.5 C23：现代C语言](#25-c23现代c语言)
     - [核心特性详解](#核心特性详解-2)
 - [第三部分：重要特性深度分析](#第三部分重要特性深度分析)
+  - [🔗 文档关联](#-文档关联)
+    - [核心关联](#核心关联)
+    - [扩展阅读](#扩展阅读)
   - [3.1 变长数组VLA的兴衰](#31-变长数组vla的兴衰)
     - [VLA的设计初衷](#vla的设计初衷)
     - [VLA的优势](#vla的优势)
@@ -920,6 +923,7 @@ static const unsigned char logo[] = {
 ## 🔗 文档关联
 
 ### 核心关联
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [内存管理](../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
@@ -929,6 +933,7 @@ static const unsigned char logo[] = {
 | [数组与指针](../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
 
 ### 扩展阅读
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [软件工程](../../../01_Core_Knowledge_System/05_Engineering_Layer/readme.md) | 核心关联 | 软件工程基础 |
@@ -936,6 +941,7 @@ static const unsigned char logo[] = {
 | [系统技术](../../../03_System_Technology_Domains/readme.md) | 核心关联 | 系统技术基础 |
 | [工业场景](../../../04_Industrial_Scenarios/readme.md) | 核心关联 | 工业场景基础 |
 | [思维表征](../../../06_Thinking_Representation/readme.md) | 核心关联 | 思维表征基础 |
+
 ## 3.1 变长数组VLA的兴衰
 
 变长数组（Variable Length Arrays，VLA）是C99引入的最具争议的特性之一。它允许数组的大小在运行时确定，而不是编译时。

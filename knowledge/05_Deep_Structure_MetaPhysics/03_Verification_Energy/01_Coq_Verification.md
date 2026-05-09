@@ -1,8 +1,16 @@
+# Coq形式化验证基础
+
+> **层级定位**: 05 Deep Structure MetaPhysics / 03 Verification Energy
+> **对应标准**: Coq 8.18+, Mathematical Components
+> **难度级别**: L6 创造
+> **预估学习时间**: 30+ 小时
+
 ---
 
 ## 🔗 文档关联
 
 ### 核心关联
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [内存管理](../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
@@ -12,6 +20,7 @@
 | [数组与指针](../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
 
 ### 扩展阅读
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [软件工程](../../../01_Core_Knowledge_System/05_Engineering_Layer/readme.md) | 核心关联 | 软件工程基础 |
@@ -19,12 +28,7 @@
 | [系统技术](../../../03_System_Technology_Domains/readme.md) | 核心关联 | 系统技术基础 |
 | [工业场景](../../../04_Industrial_Scenarios/readme.md) | 核心关联 | 工业场景基础 |
 | [思维表征](../../../06_Thinking_Representation/readme.md) | 核心关联 | 思维表征基础 |
-﻿# Coq形式化验证基础
 
-> **层级定位**: 05 Deep Structure MetaPhysics / 03 Verification Energy
-> **对应标准**: Coq 8.18+, Mathematical Components
-> **难度级别**: L6 创造
-> **预估学习时间**: 30+ 小时
 
 ---
 
@@ -45,6 +49,9 @@
 ## 📑 目录
 
 - [Coq形式化验证基础](#coq形式化验证基础)
+  - [� 文档关联](#-文档关联)
+    - [核心关联](#核心关联)
+    - [扩展阅读](#扩展阅读)
   - [📋 本节概要](#-本节概要)
   - [📑 目录](#-目录)
   - [🧠 知识结构思维导图](#-知识结构思维导图)
