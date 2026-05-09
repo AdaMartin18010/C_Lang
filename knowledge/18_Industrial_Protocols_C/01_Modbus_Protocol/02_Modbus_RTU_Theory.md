@@ -1,7 +1,7 @@
 # Modbus RTU 协议深度解析
 
-> **协议版本**: Modbus over Serial Line V1.02  
-> **物理层**: EIA-485 (RS-485) / EIA-232 (RS-232)  
+> **协议版本**: Modbus over Serial Line V1.02
+> **物理层**: EIA-485 (RS-485) / EIA-232 (RS-232)
 > **最后更新**: 2026-03-29
 
 ---
@@ -46,6 +46,7 @@
 ### 1.2 形式化定义
 
 **定义 1.1 (Modbus RTU 帧)**
+
 ```
 设 Σ = {0x00, 0x01, ..., 0xFF} 为字节字母表
 
@@ -61,11 +62,12 @@ ModbusRTUFrame ::= Address × FunctionCode × Data × CRC
 ```
 
 **定义 1.2 (主从状态机)**
+
 ```
 MasterState ::= IDLE → TRANSMITTING → WAITING → PROCESSING → IDLE
                         ↑_________________________________|
 
-SlaveState ::= LISTENING → RECEIVING → VALIDATING → EXECUTING → 
+SlaveState ::= LISTENING → RECEIVING → VALIDATING → EXECUTING →
                TRANSMITTING → LISTENING
                           ↖______________________________↙
                               (异常时跳过TRANSMITTING)
@@ -192,26 +194,26 @@ TimingState timing_transition(TimingState current, Event event) {
             if (event == CHAR_RECEIVED)
                 return TIMING_RECEIVING;
             break;
-            
+
         case TIMING_RECEIVING:
             if (event == CHAR_RECEIVED)
                 return TIMING_RECEIVING;  /* 保持 */
             else if (event == T1_5_TIMEOUT)
                 return TIMING_T1_5_WAIT;
             break;
-            
+
         case TIMING_T1_5_WAIT:
             if (event == CHAR_RECEIVED)
                 return TIMING_RECEIVING;  /* 继续接收 */
             else if (event == T3_5_TIMEOUT)
                 return TIMING_FRAME_READY;
             break;
-            
+
         case TIMING_FRAME_READY:
             if (event == FRAME_PROCESSED)
                 return TIMING_IDLE;
             break;
-            
+
         default:
             return TIMING_IDLE;
     }
@@ -226,6 +228,7 @@ TimingState timing_transition(TimingState current, Event event) {
 ### 4.1 CRC16数学定义
 
 **定义 4.1 (Modbus CRC16)**
+
 ```
 Modbus使用CRC-16-IBM (多项式: x¹⁶ + x¹⁵ + x² + 1)
 
@@ -238,6 +241,7 @@ Modbus使用CRC-16-IBM (多项式: x¹⁶ + x¹⁵ + x² + 1)
 ```
 
 **定理 4.1 (CRC检测能力)**
+
 ```
 CRC16可以检测:
 1. 所有奇数位错误
@@ -255,11 +259,11 @@ uint16_t crc16_recursive(const uint8_t *data, size_t len, uint16_t crc) {
     if (len == 0) {
         return crc;
     }
-    
+
     /* 递归步: 处理第一个字节 */
     uint8_t byte = *data;
     crc ^= (uint16_t)byte;  /* XOR输入字节 */
-    
+
     /* 对当前字节进行8次移位处理 */
     for (int i = 0; i < 8; i++) {
         if (crc & 0x0001) {
@@ -268,7 +272,7 @@ uint16_t crc16_recursive(const uint8_t *data, size_t len, uint16_t crc) {
             crc = crc >> 1;
         }
     }
-    
+
     /* 递归处理剩余数据 */
     return crc16_recursive(data + 1, len - 1, crc);
 }
@@ -276,15 +280,15 @@ uint16_t crc16_recursive(const uint8_t *data, size_t len, uint16_t crc) {
 /* 迭代优化版本 (实际使用) */
 uint16_t crc16_modbus(const uint8_t *data, size_t len) {
     uint16_t crc = 0xFFFF;
-    
+
     for (size_t i = 0; i < len; i++) {
         crc ^= (uint16_t)data[i];
-        
+
         for (int j = 0; j < 8; j++) {
             crc = (crc & 0x0001) ? ((crc >> 1) ^ 0xA001) : (crc >> 1);
         }
     }
-    
+
     return crc;  /* 注意: Modbus要求低字节先传 */
 }
 ```
@@ -303,12 +307,12 @@ static const uint16_t crc16_table[256] = {
 /* 优化后的CRC计算 */
 uint16_t crc16_table_lookup(const uint8_t *data, size_t len) {
     uint16_t crc = 0xFFFF;
-    
+
     while (len--) {
         uint8_t idx = (crc ^ *data++) & 0xFF;
         crc = (crc >> 8) ^ crc16_table[idx];
     }
-    
+
     return crc;
 }
 
@@ -370,6 +374,7 @@ uint16_t crc16_table_lookup(const uint8_t *data, size_t len) {
 ### 5.2 异常响应形式化定义
 
 **定义 5.1 (异常响应)**
+
 ```
 异常响应 ::= ExceptionFunctionCode × ExceptionCode
 
@@ -389,11 +394,12 @@ ExceptionCode ∈ {
 ```
 
 **异常响应决策树**
+
 ```
 异常响应判定树
 │
 ├── 功能码有效性检查
-│   ├── 功能码 > 0x7F? 
+│   ├── 功能码 > 0x7F?
 │   │   └── YES → ERROR: ILLEGAL_FUNCTION (0x01)
 │   │
 │   └── 功能码在支持列表?
@@ -481,6 +487,7 @@ ExceptionCode ∈ {
 | **字符串** | n×8位 | `char[]` | Big-Endian | 每个字符1字节 |
 
 **字节序转换定理**
+
 ```
 定理: Modbus使用大端序(Big-Endian)，与小端主机需要转换
 

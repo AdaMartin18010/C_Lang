@@ -1,6 +1,6 @@
 # Kubernetes Operator 开发
 
-> **层级**: L4 (方法论层)  
+> **层级**: L4 (方法论层)
 > **目标**: 掌握 K8s Operator C 开发
 
 ---

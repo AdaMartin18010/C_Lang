@@ -141,9 +141,9 @@ export fn PyInit_mymodule() ?*c.PyObject {
 | **概念映射** | [../06_Thinking_Representation/05_Concept_Mappings/readme.md](../06_Thinking_Representation/05_Concept_Mappings/README.md) | 核心概念等价关系图 |
 
 ### 【阶段层】学习定位
-**当前模块**: 知识库  
-**难度等级**: L1-L6  
-**前置依赖**: 核心知识体系  
+**当前模块**: 知识库
+**难度等级**: L1-L6
+**前置依赖**: 核心知识体系
 **后续延伸**: 持续学习
 
 ```

@@ -1,9 +1,9 @@
 # 红黑树 (Red-Black Tree) 深度解析与C语言实现
 
-> **层级**: L3 (核心层)  
-> **难度**: 高级  
-> **先修知识**: 二叉搜索树、树旋转、算法分析  
-> **参考标准**: 《算法导论》(CLRS) 第13章、C11/C17标准  
+> **层级**: L3 (核心层)
+> **难度**: 高级
+> **先修知识**: 二叉搜索树、树旋转、算法分析
+> **参考标准**: 《算法导论》(CLRS) 第13章、C11/C17标准
 
 ---
 
@@ -78,12 +78,12 @@
 - **归纳步骤**：节点 $x$ 有两个子节点，每个子节点的黑高至少为：
   - 若 $x$ 为红色：$bh(child) = bh(x)$
   - 若 $x$ 为黑色：$bh(child) = bh(x) - 1$
-  
+
   因此，每个子树至少包含 $2^{bh(x)-1} - 1$ 个内部节点。
-  
+
   整棵子树至少包含：
   $$n \geq 1 + 2(2^{bh(x)-1} - 1) = 2^{bh(x)} - 1$$
-  
+
   引理得证。 ∎
 
 ### 1.3 NIL节点的特殊含义
@@ -127,7 +127,7 @@
 
 ```
 2-节点 (键: B)              3-节点 (键: A<B)              4-节点 (键: A<B<C)
-                             
+
     [B]                          [A,B]                       [A,B,C]
    /   \                       /   |   \                   /   |   |   \
   T1   T2                    T1   T2   T3                T1   T2  T3   T4
@@ -516,14 +516,14 @@ struct rb_node {
 ```c
 /**
  * rb_tree_complete.c - 完整红黑树实现
- * 
+ *
  * 特性：
  * - 支持键值对存储
  * - 完整的插入、删除、查找
  * - 迭代器支持
  * - 区间查询
  * - 树结构验证
- * 
+ *
  * 编译: gcc -std=c11 -o rb_tree rb_tree_complete.c
  */
 
@@ -567,7 +567,7 @@ typedef struct {
 static RBNode* create_node(RBTree *tree, int key, void *value) {
     RBNode *node = (RBNode*)malloc(sizeof(RBNode));
     if (!node) return NULL;
-    
+
     node->key = key;
     node->value = value;
     node->color = RED;
@@ -581,18 +581,18 @@ static RBNode* create_node(RBTree *tree, int key, void *value) {
 RBTree* rb_tree_create(void) {
     RBTree *tree = (RBTree*)malloc(sizeof(RBTree));
     if (!tree) return NULL;
-    
+
     tree->nil = (RBNode*)malloc(sizeof(RBNode));
     if (!tree->nil) {
         free(tree);
         return NULL;
     }
-    
+
     tree->nil->color = BLACK;
     tree->nil->left = tree->nil->right = tree->nil->parent = NULL;
     tree->nil->key = 0;
     tree->nil->value = NULL;
-    
+
     tree->root = tree->nil;
     tree->size = 0;
     return tree;
@@ -645,13 +645,13 @@ static RBNode* rb_predecessor(RBTree *tree, RBNode *x) {
 /* 左旋 */
 static void left_rotate(RBTree *tree, RBNode *x) {
     RBNode *y = x->right;
-    
+
     /* 将y的左子树变为x的右子树 */
     x->right = y->left;
     if (y->left != tree->nil) {
         y->left->parent = x;
     }
-    
+
     /* 将y链接到x原来的位置 */
     y->parent = x->parent;
     if (x->parent == tree->nil) {
@@ -661,7 +661,7 @@ static void left_rotate(RBTree *tree, RBNode *x) {
     } else {
         x->parent->right = y;
     }
-    
+
     /* 将x作为y的左子节点 */
     y->left = x;
     x->parent = y;
@@ -670,13 +670,13 @@ static void left_rotate(RBTree *tree, RBNode *x) {
 /* 右旋 */
 static void right_rotate(RBTree *tree, RBNode *y) {
     RBNode *x = y->left;
-    
+
     /* 将x的右子树变为y的左子树 */
     y->left = x->right;
     if (x->right != tree->nil) {
         x->right->parent = y;
     }
-    
+
     /* 将x链接到y原来的位置 */
     x->parent = y->parent;
     if (y->parent == tree->nil) {
@@ -686,7 +686,7 @@ static void right_rotate(RBTree *tree, RBNode *y) {
     } else {
         y->parent->right = x;
     }
-    
+
     /* 将y作为x的右子节点 */
     x->right = y;
     y->parent = x;
@@ -699,7 +699,7 @@ static void rb_insert_fixup(RBTree *tree, RBNode *z) {
     while (z->parent->color == RED) {
         if (z->parent == z->parent->parent->left) {
             RBNode *y = z->parent->parent->right;  /* 叔节点 */
-            
+
             if (y->color == RED) {
                 /* 情况2: 父红叔红 - 变色 */
                 z->parent->color = BLACK;
@@ -720,7 +720,7 @@ static void rb_insert_fixup(RBTree *tree, RBNode *z) {
         } else {
             /* 对称情况 */
             RBNode *y = z->parent->parent->left;
-            
+
             if (y->color == RED) {
                 z->parent->color = BLACK;
                 y->color = BLACK;
@@ -744,10 +744,10 @@ static void rb_insert_fixup(RBTree *tree, RBNode *z) {
 bool rb_insert(RBTree *tree, int key, void *value) {
     RBNode *z = create_node(tree, key, value);
     if (!z) return false;
-    
+
     RBNode *y = tree->nil;
     RBNode *x = tree->root;
-    
+
     /* 标准BST插入 */
     while (x != tree->nil) {
         y = x;
@@ -762,7 +762,7 @@ bool rb_insert(RBTree *tree, int key, void *value) {
             return true;
         }
     }
-    
+
     z->parent = y;
     if (y == tree->nil) {
         tree->root = z;
@@ -771,7 +771,7 @@ bool rb_insert(RBTree *tree, int key, void *value) {
     } else {
         y->right = z;
     }
-    
+
     tree->size++;
     rb_insert_fixup(tree, z);
     return true;
@@ -796,7 +796,7 @@ static void rb_delete_fixup(RBTree *tree, RBNode *x) {
     while (x != tree->root && x->color == BLACK) {
         if (x == x->parent->left) {
             RBNode *w = x->parent->right;
-            
+
             if (w->color == RED) {
                 /* 情况3: 兄弟为红 */
                 w->color = BLACK;
@@ -804,7 +804,7 @@ static void rb_delete_fixup(RBTree *tree, RBNode *x) {
                 left_rotate(tree, x->parent);
                 w = x->parent->right;
             }
-            
+
             if (w->left->color == BLACK && w->right->color == BLACK) {
                 /* 情况4: 兄弟为黑，两侄子为黑 */
                 w->color = RED;
@@ -827,14 +827,14 @@ static void rb_delete_fixup(RBTree *tree, RBNode *x) {
         } else {
             /* 对称情况 */
             RBNode *w = x->parent->left;
-            
+
             if (w->color == RED) {
                 w->color = BLACK;
                 x->parent->color = RED;
                 right_rotate(tree, x->parent);
                 w = x->parent->left;
             }
-            
+
             if (w->right->color == BLACK && w->left->color == BLACK) {
                 w->color = RED;
                 x = x->parent;
@@ -859,7 +859,7 @@ static void rb_delete_fixup(RBTree *tree, RBNode *x) {
 /* 删除节点 */
 bool rb_delete(RBTree *tree, int key) {
     RBNode *z = tree->root;
-    
+
     /* 查找要删除的节点 */
     while (z != tree->nil && z->key != key) {
         if (key < z->key) {
@@ -868,13 +868,13 @@ bool rb_delete(RBTree *tree, int key) {
             z = z->right;
         }
     }
-    
+
     if (z == tree->nil) return false;
-    
+
     RBNode *y = z;
     RBNode *x;
     Color y_original_color = y->color;
-    
+
     if (z->left == tree->nil) {
         x = z->right;
         rb_transplant(tree, z, z->right);
@@ -885,7 +885,7 @@ bool rb_delete(RBTree *tree, int key) {
         y = tree_minimum(tree, z->right);
         y_original_color = y->color;
         x = y->right;
-        
+
         if (y->parent == z) {
             x->parent = y;
         } else {
@@ -893,18 +893,18 @@ bool rb_delete(RBTree *tree, int key) {
             y->right = z->right;
             y->right->parent = y;
         }
-        
+
         rb_transplant(tree, z, y);
         y->left = z->left;
         y->left->parent = y;
         y->color = z->color;
     }
-    
+
     tree->size--;
     if (y_original_color == BLACK) {
         rb_delete_fixup(tree, x);
     }
-    
+
     free(z);
     return true;
 }
@@ -941,32 +941,32 @@ int rb_max_key(RBTree *tree) {
 RBIterator* rb_iter_create(RBTree *tree) {
     RBIterator *iter = (RBIterator*)malloc(sizeof(RBIterator));
     if (!iter) return NULL;
-    
+
     iter->capacity = 64;
     iter->stack = (RBNode**)malloc(sizeof(RBNode*) * iter->capacity);
     if (!iter->stack) {
         free(iter);
         return NULL;
     }
-    
+
     iter->top = -1;
     iter->tree = tree;
     iter->current = tree->root;
-    
+
     /* 将最左路径入栈 */
     while (iter->current != tree->nil) {
         iter->stack[++iter->top] = iter->current;
         iter->current = iter->current->left;
     }
-    
+
     return iter;
 }
 
 RBNode* rb_iter_next(RBIterator *iter) {
     if (iter->top < 0) return NULL;
-    
+
     RBNode *node = iter->stack[iter->top--];
-    
+
     /* 右子树的最左路径入栈 */
     RBNode *current = node->right;
     while (current != iter->tree->nil) {
@@ -977,7 +977,7 @@ RBNode* rb_iter_next(RBIterator *iter) {
         iter->stack[++iter->top] = current;
         current = current->left;
     }
-    
+
     return node;
 }
 
@@ -1001,11 +1001,11 @@ typedef struct {
 
 static void range_query_helper(RBTree *tree, RBNode *node, int low, int high, RangeResult *result) {
     if (node == tree->nil) return;
-    
+
     if (node->key > low) {
         range_query_helper(tree, node->left, low, high, result);
     }
-    
+
     if (node->key >= low && node->key <= high) {
         if (result->count >= result->capacity) {
             result->capacity *= 2;
@@ -1016,7 +1016,7 @@ static void range_query_helper(RBTree *tree, RBNode *node, int low, int high, Ra
         result->values[result->count] = node->value;
         result->count++;
     }
-    
+
     if (node->key < high) {
         range_query_helper(tree, node->right, low, high, result);
     }
@@ -1028,7 +1028,7 @@ RangeResult* rb_range_query(RBTree *tree, int low, int high) {
     result->count = 0;
     result->keys = (int*)malloc(sizeof(int) * result->capacity);
     result->values = (void**)malloc(sizeof(void*) * result->capacity);
-    
+
     range_query_helper(tree, tree->root, low, high, result);
     return result;
 }
@@ -1044,7 +1044,7 @@ void rb_range_result_free(RangeResult *result) {
 /* 验证红黑树性质 */
 static int check_black_height(RBTree *tree, RBNode *node, bool *valid) {
     if (node == tree->nil) return 0;
-    
+
     /* 检查性质4: 红节点的子节点必须是黑 */
     if (node->color == RED) {
         if (node->left->color != BLACK || node->right->color != BLACK) {
@@ -1052,28 +1052,28 @@ static int check_black_height(RBTree *tree, RBNode *node, bool *valid) {
             return 0;
         }
     }
-    
+
     int left_bh = check_black_height(tree, node->left, valid);
     int right_bh = check_black_height(tree, node->right, valid);
-    
+
     /* 检查性质5: 黑高相同 */
     if (left_bh != right_bh) {
         *valid = false;
         return 0;
     }
-    
+
     return left_bh + (node->color == BLACK ? 1 : 0);
 }
 
 bool rb_verify(RBTree *tree) {
     if (tree->root == tree->nil) return true;
-    
+
     /* 检查性质2: 根必须是黑色 */
     if (tree->root->color != BLACK) {
         printf("Violation: Root is not black\n");
         return false;
     }
-    
+
     bool valid = true;
     check_black_height(tree, tree->root, &valid);
     return valid;
@@ -1094,10 +1094,10 @@ int rb_height(RBTree *tree) {
 /* 打印树结构 */
 static void print_tree_recursive(RBTree *tree, RBNode *node, int level, const char *prefix) {
     if (node == tree->nil) return;
-    
+
     for (int i = 0; i < level; i++) printf("    ");
     printf("%s%d [%s]\n", prefix, node->key, node->color == RED ? "R" : "B");
-    
+
     print_tree_recursive(tree, node->left, level + 1, "L: ");
     print_tree_recursive(tree, node->right, level + 1, "R: ");
 }
@@ -1137,11 +1137,11 @@ void rb_tree_clear(RBTree *tree) {
 
 static void test_insert_delete(void) {
     printf("\n=== 测试: 插入与删除 ===\n");
-    
+
     RBTree *tree = rb_tree_create();
     int test_keys[] = {10, 20, 30, 15, 25, 5, 1, 7, 35, 40, 50, 45};
     int n = sizeof(test_keys) / sizeof(test_keys[0]);
-    
+
     /* 插入测试 */
     printf("插入序列: ");
     for (int i = 0; i < n; i++) {
@@ -1155,7 +1155,7 @@ static void test_insert_delete(void) {
     printf("\n树结构:\n");
     rb_print_tree(tree);
     printf("树大小: %d, 高度: %d\n", tree->size, rb_height(tree));
-    
+
     /* 删除测试 */
     printf("\n删除测试:\n");
     int delete_order[] = {1, 20, 10, 30, 25, 5};
@@ -1167,26 +1167,26 @@ static void test_insert_delete(void) {
             return;
         }
     }
-    
+
     printf("\n删除后树结构:\n");
     rb_print_tree(tree);
     printf("树大小: %d\n", tree->size);
-    
+
     rb_tree_destroy(tree);
     printf("插入删除测试通过!\n");
 }
 
 static void test_iterator(void) {
     printf("\n=== 测试: 迭代器 ===\n");
-    
+
     RBTree *tree = rb_tree_create();
     int keys[] = {50, 30, 70, 20, 40, 60, 80, 10, 25, 35, 45};
     int n = sizeof(keys) / sizeof(keys[0]);
-    
+
     for (int i = 0; i < n; i++) {
         rb_insert(tree, keys[i], NULL);
     }
-    
+
     printf("中序遍历结果: ");
     RBIterator *iter = rb_iter_create(tree);
     RBNode *node;
@@ -1194,7 +1194,7 @@ static void test_iterator(void) {
         printf("%d ", node->key);
     }
     printf("\n");
-    
+
     rb_iter_free(iter);
     rb_tree_destroy(tree);
     printf("迭代器测试通过!\n");
@@ -1202,21 +1202,21 @@ static void test_iterator(void) {
 
 static void test_range_query(void) {
     printf("\n=== 测试: 区间查询 ===\n");
-    
+
     RBTree *tree = rb_tree_create();
     for (int i = 1; i <= 100; i++) {
         rb_insert(tree, i, NULL);
     }
-    
+
     int low = 30, high = 40;
     RangeResult *result = rb_range_query(tree, low, high);
-    
+
     printf("区间 [%d, %d] 查询结果: ", low, high);
     for (int i = 0; i < result->count; i++) {
         printf("%d ", result->keys[i]);
     }
     printf("\n共 %d 个元素\n", result->count);
-    
+
     rb_range_result_free(result);
     rb_tree_destroy(tree);
     printf("区间查询测试通过!\n");
@@ -1224,20 +1224,20 @@ static void test_range_query(void) {
 
 static void performance_test(void) {
     printf("\n=== 性能测试 ===\n");
-    
+
     const int N = 100000;
     RBTree *tree = rb_tree_create();
-    
+
     /* 插入性能 */
     clock_t start = clock();
     for (int i = 0; i < N; i++) {
         rb_insert(tree, i, NULL);
     }
     clock_t insert_time = clock() - start;
-    
+
     printf("插入 %d 个节点: %.3f 秒\n", N, (double)insert_time / CLOCKS_PER_SEC);
     printf("树高度: %d (理论最优: %.1f)\n", rb_height(tree), 1.44 * log2(N + 1));
-    
+
     /* 查找性能 */
     start = clock();
     for (int i = 0; i < N; i++) {
@@ -1245,7 +1245,7 @@ static void performance_test(void) {
     }
     clock_t search_time = clock() - start;
     printf("查找 %d 个节点: %.3f 秒\n", N, (double)search_time / CLOCKS_PER_SEC);
-    
+
     /* 删除性能 */
     start = clock();
     for (int i = 0; i < N; i++) {
@@ -1253,7 +1253,7 @@ static void performance_test(void) {
     }
     clock_t delete_time = clock() - start;
     printf("删除 %d 个节点: %.3f 秒\n", N, (double)delete_time / CLOCKS_PER_SEC);
-    
+
     rb_tree_destroy(tree);
     printf("性能测试完成!\n");
 }
@@ -1262,16 +1262,16 @@ int main(void) {
     printf("========================================\n");
     printf("      红黑树完整实现测试程序            \n");
     printf("========================================\n");
-    
+
     test_insert_delete();
     test_iterator();
     test_range_query();
     performance_test();
-    
+
     printf("\n========================================\n");
     printf("        所有测试通过!                  \n");
     printf("========================================\n");
-    
+
     return 0;
 }
 ```
@@ -1379,7 +1379,7 @@ int main(void) {
                    w=红色                  w=黑色
                    [情况3]                 [情况4/5/6]
                    兄黑父红                 看侄子颜色
-                   旋转父                   
+                   旋转父
                    转为w黑                  ┌─────────────┐
                    转4/5/6                  │ 两侄子都黑?  │
                                             └─────────────┘
@@ -1593,7 +1593,7 @@ void map_put(Map *map, const char *key, int value) {
     MapEntry *entry = (MapEntry*)malloc(sizeof(MapEntry));
     entry->key = strdup(key);
     entry->value = value;
-    
+
     /* 这里简化处理，实际应使用字符串比较 */
     rb_insert(map, (int)key, entry);
 }
@@ -1601,16 +1601,16 @@ void map_put(Map *map, const char *key, int value) {
 /* 使用示例 */
 void demo_ordered_map(void) {
     printf("\n=== 有序Map演示 ===\n");
-    
+
     RBTree *map = rb_tree_create();
-    
+
     /* 插入键值对 */
     rb_insert(map, 50, "Alice");
     rb_insert(map, 30, "Bob");
     rb_insert(map, 70, "Charlie");
     rb_insert(map, 20, "David");
     rb_insert(map, 40, "Eve");
-    
+
     /* 有序遍历 */
     printf("按key有序遍历:\n");
     RBIterator *iter = rb_iter_create(map);
@@ -1619,13 +1619,13 @@ void demo_ordered_map(void) {
         printf("  Key: %d, Value: %s\n", node->key, (char*)node->value);
     }
     rb_iter_free(iter);
-    
+
     /* 查找 */
     RBNode *found = rb_search(map, 30);
     if (found) {
         printf("\n查找 Key=30: %s\n", (char*)found->value);
     }
-    
+
     /* 范围查询 */
     RangeResult *range = rb_range_query(map, 25, 55);
     printf("\n范围查询 [25, 55]: ");
@@ -1633,7 +1633,7 @@ void demo_ordered_map(void) {
         printf("%d ", range->keys[i]);
     }
     printf("\n");
-    
+
     rb_range_result_free(range);
     rb_tree_destroy(map);
 }
@@ -1681,20 +1681,20 @@ bool intervals_overlap(Interval *a, Interval *b) {
 }
 
 /* 区间查询: 查找与i重叠的所有区间 */
-void interval_search_all(ITNode *root, Interval *i, 
+void interval_search_all(ITNode *root, Interval *i,
                          Interval **results, int *count, int max_count) {
     if (!root) return;
-    
+
     /* 剪枝: 若左子树max < i.low，则左子树无重叠 */
     if (root->left && root->left->max_high >= i->low) {
         interval_search_all(root->left, i, results, count, max_count);
     }
-    
+
     /* 检查当前节点 */
     if (intervals_overlap(root->interval, i) && *count < max_count) {
         results[(*count)++] = root->interval;
     }
-    
+
     /* 剪枝: 若当前节点low > i.high，则右子树无重叠 */
     if (root->interval->low <= i->high && root->right) {
         interval_search_all(root->right, i, results, count, max_count);
@@ -1704,7 +1704,7 @@ void interval_search_all(ITNode *root, Interval *i,
 /* 使用示例: 会议室预订系统 */
 void demo_interval_tree(void) {
     printf("\n=== 区间树演示: 会议室预订 ===\n");
-    
+
     /* 现有预订 */
     Interval bookings[] = {
         {10, 20, 0, NULL},   /* 10:00-20:00 */
@@ -1712,16 +1712,16 @@ void demo_interval_tree(void) {
         {5,  12, 0, NULL},   /* 5:00-12:00 */
         {30, 40, 0, NULL},   /* 30:00-40:00 */
     };
-    
+
     printf("现有预订区间:\n");
     for (int i = 0; i < 4; i++) {
         printf("  [%d, %d]\n", bookings[i].low, bookings[i].high);
     }
-    
+
     /* 查询与新预订 [18, 22] 冲突的预订 */
     Interval new_booking = {18, 22, 0, NULL};
     printf("\n新预订 [%d, %d] 与以下预订冲突:\n", new_booking.low, new_booking.high);
-    
+
     for (int i = 0; i < 4; i++) {
         if (intervals_overlap(&bookings[i], &new_booking)) {
             printf("  [%d, %d]\n", bookings[i].low, bookings[i].high);
@@ -1737,7 +1737,7 @@ void demo_interval_tree(void) {
       红黑树性能测试报告
 ========================================
 
-测试环境: 
+测试环境:
 - CPU: x86_64 @ 2.5GHz
 - 内存: 16GB DDR4
 - 编译器: GCC 11.0 with -O2
@@ -1928,6 +1928,6 @@ void demo_interval_tree(void) {
 
 ---
 
-**文档版本**: 2.0  
-**最后更新**: 2026-03-28  
+**文档版本**: 2.0
+**最后更新**: 2026-03-28
 **维护者**: C语言知识库项目组

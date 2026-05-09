@@ -1,6 +1,6 @@
 # Google Benchmark 使用
 
-> **层级**: L4 (方法论层)  
+> **层级**: L4 (方法论层)
 > **目标**: 掌握 Google Benchmark 性能测试框架
 
 ---

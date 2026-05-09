@@ -2,9 +2,9 @@
 
 ## Raft/Paxos共识协议形式化验证
 
-> **版本**: 1.0  
-> **创建日期**: 2026-03-25  
-> **对应Lean项目**: `lean_projects/DistributedConsensus/`  
+> **版本**: 1.0
+> **创建日期**: 2026-03-25
+> **对应Lean项目**: `lean_projects/DistributedConsensus/`
 > **关联文档**: DISTRIBUTED_SEMANTICS.md, CONCURRENT_SEMANTICS.md
 
 ---
@@ -166,7 +166,7 @@ structure VolatileState where
 Leader日志: [1:1] [1:2] [2:3] [2:4] [2:5]
              ↑     ↑     ↑     ↑     ↑
             已提交到索引3，应用到索引2
-            
+
 commitIndex = 3
 lastApplied = 2
 
@@ -520,7 +520,7 @@ BecomeLeader(i) ==
 
 \* 下一步
 Next ==
-  \E i \in Server : 
+  \E i \in Server :
     \/ Timeout(i)
     \/ BecomeLeader(i)
     \/ ...
@@ -545,9 +545,9 @@ structure NodeState where
 
 -- 选举安全性定理（见 Raft/Safety.lean）
 theorem electionSafety {n : Nat} {sys : SystemState n} {t : Term} :
-  ∀ i j, isLeader (sys.nodes i) → isLeader (sys.nodes j) → 
-    sys.nodes i |>.currentTerm = t → 
-    sys.nodes j |>.currentTerm = t → 
+  ∀ i j, isLeader (sys.nodes i) → isLeader (sys.nodes j) →
+    sys.nodes i |>.currentTerm = t →
+    sys.nodes j |>.currentTerm = t →
     i = j := by
   -- 证明：多数投票原理
   sorry
@@ -561,7 +561,7 @@ TLA+规范和Lean实现之间的细化关系：
 TLA+ State          Lean State
 ─────────────────────────────────
 currentTerm[s]  ↔   nodes i |>.currentTerm
-state[s]        ↔   nodes i |>.role  
+state[s]        ↔   nodes i |>.role
 votedFor[s]     ↔   nodes i |>.votedFor
 log[s]          ↔   nodes i |>.log
 commitIndex[s]  ↔   nodes i |>.commitIndex
@@ -611,7 +611,7 @@ Raft协议维持三个核心不变式，它们是安全性的基础：
 #### 4.2.1 形式化定义
 
 ```lean
-def LeaderLogCompletenessInvariant {n : Nat} 
+def LeaderLogCompletenessInvariant {n : Nat}
     (states : List (SystemState n × Nat)) : Prop :=
   ∀ term0 term i j entry,
     WasLeaderIn states i term0 →
@@ -655,34 +655,34 @@ theorem leaderLogCompleteness {n : Nat} {states : List (SystemState n × Nat)}
   isCommitted (states.get t0).1.nodes i entry.index →
   isLeader (states.get t).1.nodes j →
   (states.get t).1.nodes j |>.log |>.getEntry? entry.index = some entry := by
-  
+
   intro h_inv h_term h_commit h_leader
-  
+
   -- 步骤1: 已提交意味着复制到多数节点
-  have h_majority : ∃ M, Majority M ∧ ∀ n ∈ M, 
-    (states.get t0).1.nodes n |>.log |>.getEntry? entry.index = some entry := 
+  have h_majority : ∃ M, Majority M ∧ ∀ n ∈ M,
+    (states.get t0).1.nodes n |>.log |>.getEntry? entry.index = some entry :=
     by apply commitImpliesMajorityReplication
-  
+
   -- 步骤2: 新Leader必须获得多数投票
-  have h_votes : ∃ V, Majority V ∧ ∀ n ∈ V, 
-    VotedFor (states.get t).1.nodes n j := 
+  have h_votes : ∃ V, Majority V ∧ ∀ n ∈ V,
+    VotedFor (states.get t).1.nodes n j :=
     by apply leaderImpliesMajorityVotes
-  
+
   -- 步骤3: 两个多数集相交
   obtain ⟨M, hM_maj, hM_rep⟩ := h_majority
   obtain ⟨V, hV_maj, hV_vote⟩ := h_votes
-  have h_intersect : ∃ n, n ∈ M ∧ n ∈ V := by 
+  have h_intersect : ∃ n, n ∈ M ∧ n ∈ V := by
     apply majorityIntersection hM_maj hV_maj
-  
+
   -- 步骤4: 相交节点包含条目且投票
   obtain ⟨n, hnM, hnV⟩ := h_intersect
-  have h_n_has_entry : (states.get t0).1.nodes n |>.log |>.getEntry? entry.index = some entry := 
+  have h_n_has_entry : (states.get t0).1.nodes n |>.log |>.getEntry? entry.index = some entry :=
     hM_rep n hnM
-  
+
   -- 步骤5: 根据选举引理，Leader日志至少一样新
-  have h_leader_up_to_date : LogUpToDate (states.get t).1.nodes j (states.get t0).1.nodes n := 
+  have h_leader_up_to_date : LogUpToDate (states.get t).1.nodes j (states.get t0).1.nodes n :=
     by apply electionLemma hV_vote
-  
+
   -- 步骤6: 根据日志匹配性，Leader包含条目
   apply logMatching h_leader_up_to_date h_n_has_entry
 ```
@@ -692,7 +692,7 @@ theorem leaderLogCompleteness {n : Nat} {states : List (SystemState n × Nat)}
 #### 4.3.1 形式化定义
 
 ```lean
-def StateMachineSafetyInvariant {n : Nat} 
+def StateMachineSafetyInvariant {n : Nat}
     (states : List (SystemState n × Nat)) : Prop :=
   ∀ t i j idx cmd1 cmd2,
     let state_t := (states.get? t).get!
@@ -719,29 +719,29 @@ def StateMachineSafetyInvariant {n : Nat}
 theorem stateMachineSafetyProof {n : Nat} {states : List (SystemState n × Nat)} :
   LeaderLogCompletenessInvariant states →
   StateMachineSafetyInvariant states := by
-  
+
   intro h_leader_completeness
   intro t i j idx cmd1 cmd2 h_applied_i h_applied_j h_entry_i h_entry_j
-  
+
   -- 步骤1: 应用意味着提交
-  have h_commit_i : isCommitted (states.get t).1.nodes i idx := 
+  have h_commit_i : isCommitted (states.get t).1.nodes i idx :=
     by apply appliedImpliesCommitted h_applied_i
-  
-  have h_commit_j : isCommitted (states.get t).1.nodes j idx := 
+
+  have h_commit_j : isCommitted (states.get t).1.nodes j idx :=
     by apply appliedImpliesCommitted h_applied_j
-  
+
   -- 步骤2: 获取日志条目
   obtain ⟨entry1, h_entry1⟩ := h_entry_i
   obtain ⟨entry2, h_entry2⟩ := h_entry_j
-  
+
   -- 步骤3: 两个条目都被提交，必须有相同任期
-  have h_same_term : entry1.term = entry2.term := 
+  have h_same_term : entry1.term = entry2.term :=
     by apply committedEntriesSameTerm h_commit_i h_commit_j
-  
+
   -- 步骤4: 相同索引和任期意味着相同命令（日志匹配性）
-  have h_same_cmd : entry1.command = entry2.command := 
+  have h_same_cmd : entry1.command = entry2.command :=
     by apply logMatchingLemma (by simp) h_same_term
-  
+
   -- 完成证明
   exact h_same_cmd
 ```
@@ -751,7 +751,7 @@ theorem stateMachineSafetyProof {n : Nat} {states : List (SystemState n × Nat)}
 #### 4.4.1 形式化定义
 
 ```lean
-def TermMonotonicityInvariant {n : Nat} 
+def TermMonotonicityInvariant {n : Nat}
     (states : List (SystemState n × Nat)) : Prop :=
   -- 节点任期单调性
   (∀ i t1 t2,
@@ -793,31 +793,31 @@ def TermMonotonicityInvariant {n : Nat}
 
 归纳步骤：
   考虑每种可能的转换：
-  
+
   1. 选举超时 -> Candidate
      - 增加term，不影响日志
      - 不变式1,2维持（未提交新条目）
      - 不变式3维持（term增加）
-  
-  2. 赢得选举 -> Leader  
+
+  2. 赢得选举 -> Leader
      - 不改变日志或commitIndex
      - 所有不变式维持
-  
+
   3. 追加日志条目
      - 新条目在leader当前term创建
      - 未提交，不影响不变式1,2
      - 不变式3维持（新条目term ≥ 之前）
-  
+
   4. 提交日志条目
      - 根据规则只能提交当前term的条目
      - 需要复制到多数节点
      - 不变式1维持（新Leader会包含）
      - 不变式2维持（提交前已保证一致）
-  
+
   5. 应用日志条目
      - 应用前必须已提交
      - 不变式维持
-  
+
   6. 收到更高任期消息 -> Follower
      - 更新term
      - 不变式3维持（term增加）
@@ -1043,7 +1043,7 @@ func (r *raft) preVote() {
 
 ```
 用户A → 提议: 预订周一上午
-用户B → 提议: 预订周一上午  
+用户B → 提议: 预订周一上午
 用户C → 提议: 预订周一上午
 
 目标：只有一个预订成功，所有用户看到一致的结果
@@ -1117,7 +1117,7 @@ Proposer                    Acceptors
 
 Paxos基础实现:
 ├── Prepare/Promise逻辑: ~200行
-├── Accept/Accepted逻辑: ~200行  
+├── Accept/Accepted逻辑: ~200行
 ├── 冲突解决: ~100行
 └── 总计: ~500行
 
@@ -1178,10 +1178,10 @@ Instance 3: 决定值 v3
 structure ConsensusProperties where
   -- 一致性
   agreement : ∀ p1 p2, decided p1 → decided p2 → value p1 = value p2
-  
-  -- 有效性  
+
+  -- 有效性
   validity : ∀ p, decided p → proposed (value p)
-  
+
   -- 终止性（在合理假设下）
   termination : ◇(∃ p, decided p)
 ```

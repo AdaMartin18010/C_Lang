@@ -517,7 +517,7 @@ open Effect
 open Effect.Deep
 
 (* 定义效果 *)
-type _ Effect.t += 
+type _ Effect.t +=
   | Get : int Effect.t
   | Put : int -> unit Effect.t
   | Fork : (unit -> unit) -> unit Effect.t
@@ -767,19 +767,19 @@ let await p = perform (Await p)
 let run_async main =
   let pending = ref 0 in
   let run_q = Queue.create () in
-  
+
   let rec schedule () =
     match Queue.take_opt run_q with
     | Some f -> f ()
     | None -> if !pending > 0 then schedule ()
   in
-  
+
   let fulfill p v =
     p.result <- Some v;
     List.iter (fun w -> Queue.add w run_q) p.waiters;
     p.waiters <- []
   in
-  
+
   let rec spawn f =
     match_with f () {
       retc = (fun _ -> schedule ());
@@ -1148,6 +1148,6 @@ void* state_get(void* ctx) {
 
 ---
 
-*文档版本: 1.0*  
-*最后更新: 2026-03-25*  
+*文档版本: 1.0*
+*最后更新: 2026-03-25*
 *作者: C_Lang Knowledge Base*

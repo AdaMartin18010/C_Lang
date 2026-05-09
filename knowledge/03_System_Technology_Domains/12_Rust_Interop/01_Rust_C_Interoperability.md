@@ -1,6 +1,6 @@
 # Rust 与 C 互操作性深度指南
 
-> **层级**: L4 (方法论层)  
+> **层级**: L4 (方法论层)
 > **目标**: 掌握 Rust 与 C 代码互操作的技术
 
 ---
@@ -10,8 +10,9 @@
 ### 1.1 类型映射
 
 Rust 与 C 的类型对应关系：
+
 - int -> c_int
-- void* -> *mut c_void
+- void*->*mut c_void
 - struct -> #[repr(C)] struct
 
 ### 1.2 外部函数声明

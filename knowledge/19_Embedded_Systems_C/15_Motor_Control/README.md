@@ -1,8 +1,8 @@
 # 电机控制算法深度解析
 
-> **控制理论**: FOC、DTC、六步换向、矢量控制  
-> **数学模型**: Park/Clark变换、PI调节器、SVPWM  
-> **实现技术**: 电流采样、位置编码器、PWM调制  
+> **控制理论**: FOC、DTC、六步换向、矢量控制
+> **数学模型**: Park/Clark变换、PI调节器、SVPWM
+> **实现技术**: 电流采样、位置编码器、PWM调制
 > **最后更新**: 2026-03-29
 
 ---
@@ -56,6 +56,7 @@
 ### 2.1 FOC核心变换
 
 **定义 2.1 (Clark变换 - 3相到2相)**
+
 ```
 Clark变换 (ABC → αβ):
   [i_α]   [ 2/3   -1/3   -1/3 ] [i_A]
@@ -75,6 +76,7 @@ Clark变换 (ABC → αβ):
 ```
 
 **定义 2.2 (Park变换 - 静止到旋转)**
+
 ```
 Park变换 (αβ → dq):
   [i_d]   [ cos(θ)   sin(θ) ] [i_α]
@@ -87,7 +89,7 @@ q轴: 超前d轴90° (产生转矩)
 
 转矩方程:
   T_e = (3/2) * p * [ψ_f * i_q + (L_d - L_q) * i_d * i_q]
-  
+
   其中:
     p = 极对数
     ψ_f = 永磁磁链
@@ -165,6 +167,7 @@ q轴: 超前d轴90° (产生转矩)
 ### 3.1 SVPWM原理
 
 **定义 3.1 (电压空间矢量)**
+
 ```
 基本电压矢量:
   V0 = 000 (零矢量)
@@ -182,7 +185,7 @@ q轴: 超前d轴90° (产生转矩)
 
 调制比 (调制深度):
   m = |V_ref| / (2/3 * V_dc)
-  
+
   线性调制范围: 0 ≤ m ≤ 1
   过调制: m > 1 (引入低次谐波)
 
@@ -190,7 +193,7 @@ q轴: 超前d轴90° (产生转矩)
   T1 = m * T_s * sin(60° - θ)
   T2 = m * T_s * sin(θ)
   T0 = T_s - T1 - T2
-  
+
   其中 T_s = PWM周期
 
 相电压波形: 马鞍波 (比正弦调制提高15%电压利用率)
@@ -217,23 +220,23 @@ void svpwm_calculate(SVPWM_Input *in, SVPWM_Output *out) {
     /* 1. 反Park变换 (Vd, Vq) -> (Vα, Vβ) */
     float valpha = in->vd * cos(in->theta) - in->vq * sin(in->theta);
     float vbeta  = in->vd * sin(in->theta) + in->vq * cos(in->theta);
-    
+
     /* 2. 计算三相电压 */
     float va = valpha;
     float vb = -0.5f * valpha + 0.8660254f * vbeta;
     float vc = -0.5f * valpha - 0.8660254f * vbeta;
-    
+
     /* 3. 加入零序分量 (三次谐波注入) */
     float vmax = fmaxf(va, fmaxf(vb, vc));
     float vmin = fminf(va, fminf(vb, vc));
     float voffset = -0.5f * (vmax + vmin);
-    
+
     /* 4. 归一化到PWM周期 */
     float v_norm = 1.0f / (in->vdc * 0.5773503f);  /* 2/sqrt(3) */
     out->ta = 0.5f + (va + voffset) * v_norm;
     out->tb = 0.5f + (vb + voffset) * v_norm;
     out->tc = 0.5f + (vc + voffset) * v_norm;
-    
+
     /* 5. 限幅 */
     out->ta = fmaxf(0.0f, fminf(1.0f, out->ta));
     out->tb = fmaxf(0.0f, fminf(1.0f, out->tb));
@@ -241,7 +244,7 @@ void svpwm_calculate(SVPWM_Input *in, SVPWM_Output *out) {
 }
 
 /* SVPWM vs SPWM 优势:
- * 
+ *
  * 1. 电压利用率高15% (最大调制比1.15 vs 1.0)
  * 2. 谐波含量低
  * 3. 更适合数字实现
@@ -256,6 +259,7 @@ void svpwm_calculate(SVPWM_Input *in, SVPWM_Output *out) {
 ### 4.1 离散PI形式化
 
 **定义 4.1 (离散PI控制器)**
+
 ```
 连续域:
   u(t) = Kp * e(t) + Ki * ∫e(t)dt
@@ -275,7 +279,7 @@ void svpwm_calculate(SVPWM_Input *in, SVPWM_Output *out) {
 
 输出限幅:
   u[k] = sat(u[k], U_min, U_max)
-  
+
   条件积分 (抗积分饱和):
     if u[k] == U_max and e[k] > 0:
         不积分 (积分项保持不变)

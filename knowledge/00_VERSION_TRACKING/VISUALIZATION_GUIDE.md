@@ -1,7 +1,7 @@
 # C_Lang知识库可视化系统使用指南
 
-> **文档版本**: 1.0  
-> **最后更新**: 2026-03-25  
+> **文档版本**: 1.0
+> **最后更新**: 2026-03-25
 > **作者**: C_Lang知识库团队
 
 ---
@@ -293,15 +293,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Setup Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
-    
+
     - name: Export Data
       run: python scripts/export_for_viz.py
-    
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
