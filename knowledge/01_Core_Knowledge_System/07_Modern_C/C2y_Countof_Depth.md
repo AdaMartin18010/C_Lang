@@ -17,7 +17,7 @@
 
 ### 1.1 什么是_Countof
 
-`_Countof` 是 C2y (C23) 标准引入的一个新的单目操作符，用于在编译期获取数组的元素个数。这是C语言标准化历史上首次提供原生的数组元素计数机制，标志着C语言在数组处理方面的重要进步。
+`_Countof` 是 C2y (ISO/IEC 9899:202Y, 草案) 计划引入的一个新的单目操作符，用于在编译期获取数组的元素个数。这是C语言标准化历史上首次提供原生的数组元素计数机制，标志着C语言在数组处理方面的重要进步。
 
 在C23之前，程序员需要依赖 `sizeof` 操作符的巧妙用法来计算数组元素数量：
 
@@ -84,7 +84,7 @@ sizeof(my_array) / sizeof(my_array[0])
 
 #### 1.2.2 标准化需求
 
-C语言标准委员会在C23中引入 `_Countof` 的主要原因包括：
+C语言标准委员会在C2y中计划引入 `_Countof` 的主要原因包括：
 
 1. **提高代码可读性**：明确的操作符名称比宏技巧更易理解
 2. **减少错误**：编译器原生支持，避免宏展开的潜在问题
@@ -349,7 +349,7 @@ for (int i = 0; i < _Countof(scores); i++) {
 
 #### 3.1.2 与范围for循环结合（C23）
 
-虽然C23不直接支持C++的范围for，但 `_Countof` 可以与指针遍历结合：
+虽然C2y不直接支持C++的范围for，但 `_Countof` 可以与指针遍历结合：
 
 ```c
 int data[] = {1, 2, 3, 4, 5};
@@ -1611,7 +1611,7 @@ grep -r "ARRAY_SIZE\|ARRAY_COUNT\|COUNT_OF\|_countof" --include="*.h" --include=
 #pragma once
 
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 202311L)
-    // C23支持_Countof
+    // C2y支持_Countof
     #define ARRAY_SIZE(arr) _Countof(arr)
 #else
     // 回退到传统方式
@@ -1741,8 +1741,8 @@ void safe_write(char *buf, size_t buf_size, const char *str) {
 
 // _Countof 兼容层
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 202311L)
-    // C23或更新：使用原生_Countof
-    #define C23_COUNTOF(arr) _Countof(arr)
+    // C2y：使用原生_Countof
+    #define C2Y_COUNTOF(arr) _Countof(arr)
 #else
     // C17或更早：使用sizeof技巧
     // 注意：这不会提供指针检查
@@ -1963,12 +1963,12 @@ int main(void) {
 
 | GCC版本 | _Countof支持 | 备注 |
 |---------|--------------|------|
-| GCC 15+ | 计划中 | 预计完整支持C23 |
+| GCC 16+ | ✅ 已支持 | `-std=c2y` 或 `-std=gnu2y` |
 | GCC 14 | 不支持 | 部分C23特性 |
 | GCC 13 | 不支持 | |
 | GCC 12 | 不支持 | |
 
-**注意**：GCC仍在积极开发C23支持，`_Countof` 预计将在GCC 15或更高版本中可用。
+**注意**：GCC 16（2026年3-4月发布）已正式支持 `_Countof`（`-std=c2y`）。GCC 15提供实验性支持。
 
 #### 8.2.2 GCC使用方法
 
@@ -2041,7 +2041,7 @@ CC := clang
 CFLAGS := -Wall -Wextra -pedantic
 
 # 检测C23支持
-C23_TEST := $(shell echo 'int main(){int a[10];return _Countof(a);}' | $(CC) -std=c23 -x c - -o /dev/null 2>&1 && echo yes)
+C2Y_TEST := $(shell echo 'int main(){int a[10];return _Countof(a);}' | $(CC) -std=c2y -x c - -o /dev/null 2>&1 && echo yes)
 
 ifeq ($(C23_TEST),yes)
     CFLAGS += -std=c23 -DHAS_C23=1

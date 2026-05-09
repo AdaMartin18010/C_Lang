@@ -2,7 +2,7 @@
 
 > **文档版本**: 1.0
 > **最后更新**: 2026-03-19
-> **适用标准**: ISO/IEC 9899:2024 (C2y)
+> **适用标准**: C2y (ISO/IEC 9899:202Y，草案阶段，预计2028-2029发布)
 > **目标读者**: C语言高级开发者、系统程序员、编译器开发者
 
 ---
@@ -25,7 +25,7 @@
 
 ### 1.1 什么是defer
 
-`defer` 是C2y（ISO/IEC 9899:2024）标准中引入的关键字，用于声明延迟执行的语句或代码块。这些被延迟的代码将在当前作用域（通常是函数）退出时自动执行，无论函数是正常返回、通过`return`语句返回，还是通过`goto`、`longjmp`等方式跳出。
+`defer` 是C2y（ISO/IEC 9899:202Y，草案阶段）标准中计划引入的关键字，用于声明延迟执行的语句或代码块。这些被延迟的代码将在当前作用域（通常是函数）退出时自动执行，无论函数是正常返回、通过`return`语句返回，还是通过`goto`、`longjmp`等方式跳出。
 
 `defer`的核心价值在于**将资源释放逻辑与资源获取逻辑紧密绑定**，使代码更加清晰、可维护，并从根本上避免资源泄漏问题。
 
@@ -2979,7 +2979,7 @@ void cleanup_func(int *p) {
 void example(void) {
     int x __attribute__((cleanup(cleanup_func))) = 42;
     defer printf("defer executed\n");
-    
+
     // 退出时执行顺序:
     // 1. defer 语句 (LIFO)
     // 2. cleanup 属性 (LIFO)
@@ -3635,7 +3635,7 @@ void thread_safe_function(void) {
 
 #### 9.3.1 官方文档
 
-1. **ISO/IEC 9899:2024** - C语言国际标准（C2y）
+1. **ISO/IEC 9899:2024** - C23标准 | **C2y (9899:202Y)** - 下一代C标准草案
 2. [Clang C2y Status](https://clang.llvm.org/c_status.html) - Clang C2y支持状态
 3. [GCC C2y Status](https://gcc.gnu.org/c-status.html) - GCC C2y支持状态
 

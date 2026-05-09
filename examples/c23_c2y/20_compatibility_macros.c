@@ -74,20 +74,25 @@
     #define C23_MAYBE_UNUSED
 #endif
 
-/* _Countof 兼容性 */
+/* _Countof 兼容性 (C2y特性，非C23) */
 #if IS_C2Y
-    #define C23_COUNTOF(arr) _Countof(arr)
+    #define C2Y_COUNTOF(arr) _Countof(arr)
 #else
-    #define C23_COUNTOF(arr) (sizeof(arr) / sizeof((arr)[0]))
+    #define C2Y_COUNTOF(arr) (sizeof(arr) / sizeof((arr)[0]))
 #endif
+/* 保留旧名称以兼容，但标记为废弃 */
+#define C23_COUNTOF(arr) C2Y_COUNTOF(arr)
 
-/* defer 兼容性 (简化版) */
+/* defer 兼容性 (C2y特性，简化版) */
 #if IS_C2Y
-    #define C23_DEFER(stmt) defer stmt
+    #define C2Y_DEFER(stmt) defer stmt
 #else
     /* 不支持 defer 时提供警告 */
-    #define C23_DEFER(stmt) \
+    #define C2Y_DEFER(stmt) \
         _Pragma("message \"defer not supported, manual cleanup required\"")
+#endif
+/* 保留旧名称以兼容，但标记为废弃 */
+#define C23_DEFER(stmt) C2Y_DEFER(stmt)
 #endif
 
 #endif /* C23_COMPAT_H */

@@ -611,7 +611,7 @@ flowchart TD
 └── 特殊情况
     ├── 集中错误处理 → goto cleanup
     ├── 状态机实现 → switch + 函数指针
-    └── 资源清理 → defer模式（C23属性）
+    └── 资源清理 → defer模式（C2y提案，GCC 15+实验性支持）
 ```
 
 ---

@@ -21,9 +21,10 @@
 | [思维表征](../../../../06_Thinking_Representation/readme.md) | 核心关联 | 思维表征基础 |
 # C2y `defer` 关键字
 
-> **提案**: N3734 - defer Technical Specification
-> **状态**: 审议中 (Committee Draft r4)
+> **提案**: N3853 - defer Technical Specification
+> **状态**: 审议中 (Committee Draft r5)
 > **作者**: JeanHeyd Meneide
+> **r5发布日期**: 2026-03-22
 > **预计支持**: GCC 17 / Clang 25 (实验性)
 
 ---
@@ -339,7 +340,7 @@ void jump_example(void) {
 
 | 编译器 | 版本 | 支持状态 |
 |:-------|:-----|:---------|
-| GCC | 15 | 不支持 (计划中) |
+| GCC | 15 | 实验性支持 (`-std=c2y` / `-std=gnu2y`) |
 | GCC | 17 | 预计支持 (实验性) |
 | Clang | 24 | 不支持 |
 | Clang | 25 | 预计支持 (实验性) |
@@ -427,7 +428,7 @@ void process_connection(void) {
 
 ## 8. 参考
 
-- **提案文档**: N3734 - defer Technical Specification (Committee Draft r4)
+- **提案文档**: N3853 - defer Technical Specification (Committee Draft r5)
 - **作者**: JeanHeyd Meneide (<https://thephd.dev>)
 - **WG14日志**: <https://www.open-std.org/jtc1/sc22/wg14/www/wg14_document_log>
 - **相关提案**: N3688, N3733, N3687
@@ -435,5 +436,5 @@ void process_connection(void) {
 ---
 
 **状态**: 审议中
-**最后更新**: 2026-03-24
+**最后更新**: 2026-05-10
 **预计标准化**: C2y (2027-2028)

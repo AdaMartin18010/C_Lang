@@ -1,5 +1,7 @@
 /*
- * C23 constexpr 关键字示例
+ * C23 constexpr 关键字示例（对象级）
+ * 注意：C23 仅支持 constexpr 对象/变量/数组/结构体，
+ *       constexpr 函数是 C2y 提案特性，不在 C23 标准中。
  * 编译: gcc -std=c23 -o 04_constexpr_usage 04_constexpr_usage.c
  *       clang -std=c23 -o 04_constexpr_usage 04_constexpr_usage.c
  */
@@ -28,7 +30,13 @@ struct Point {
 constexpr struct Point origin = {0, 0};
 constexpr struct Point unit_x = {1, 0};
 
-// 在编译期计算
+/*
+ * 以下 constexpr 函数示例仅适用于 C2y 编译器（-std=c2y）：
+ * C23 标准不包含 constexpr 函数，仅包含 constexpr 对象。
+ * 若使用 GCC 15+ / Clang 20+ 且指定 -std=c2y，可取消注释测试。
+ */
+#if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 202400L)
+/* C2y 实验性: constexpr 函数 */
 constexpr int factorial(int n) {
     return n <= 1 ? 1 : n * factorial(n - 1);
 }
@@ -36,6 +44,11 @@ constexpr int factorial(int n) {
 constexpr int square(int x) {
     return x * x;
 }
+#else
+/* C23 兼容: 使用宏或静态常量替代 constexpr 函数 */
+#define factorial(n) ((n) <= 1 ? 1 : (n) * factorial((n) - 1))
+#define square(x) ((x) * (x))
+#endif
 
 int main(void) {
     // 使用 constexpr 变量
