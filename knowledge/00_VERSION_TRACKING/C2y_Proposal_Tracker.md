@@ -229,12 +229,12 @@ FDIS投票:        2026年9月 (预计)
 
 | 提案编号 | 标题 | 作者 | 接受日期 | 影响 | 编译器状态 |
 |:--------:|:-----|:-----|:--------:|:----:|:----------:|
-| **N3096** | defer机制 - 作用域退出执行 | Alex Gilding | 2024-06 (2026-03确认) | 🔴 高 | ✅ Clang 22+, GCC 16+ |
-| **N3369** | _Countof操作符 | Jens Gustedt | 2025-03 (2026-03确认) | 🟡 中 | ✅ Clang 21+, GCC 16+ |
-| **N3473** | if声明语句 (C++风格) | Jens Gustedt | 2025-06 (2026-03确认) | 🟡 中 | ✅ Clang 22+ |
-| **N3260** | _Generic类型操作数支持 | Jens Gustedt | 2024-11 | 🟡 中 | Clang 22+ |
+| **N3096** | defer机制 - 作用域退出执行 | Alex Gilding | 2024-06 (2026-03确认) | 🔴 高 | GCC 15+ 实验性, Clang 20+ 计划中 |
+| **N3369** | _Countof操作符 | Jens Gustedt | 2025-03 (2026-03确认) | 🟡 中 | GCC 16+ 预计, Clang 待定 |
+| **N3473** | if声明语句 (C++风格) | Jens Gustedt | 2025-06 (2026-03确认) | 🟡 中 | Clang 20+ 计划中 |
+| **N3260** | _Generic类型操作数支持 | Jens Gustedt | 2024-11 | 🟡 中 | Clang 待定 |
 | **N3353** | 八进制字面量增强 (0o前缀) | Aaron Ballman | 2024-06 | 🟢 低 | GCC 14+, Clang 18+ |
-| **N3744** | 无标签结构体兼容性 | Joseph Myers | 2025-09 | 🟢 低 | Clang 22+ |
+| **N3744** | 无标签结构体兼容性 | Joseph Myers | 2025-09 | 🟢 低 | Clang 待定 |
 | **N3457** | __COUNTER__宏 | Aaron Ballman | 2025-09 (2026-03确认) | 🟢 低 | ✅ Clang 扩展已支持，标准形式待定 |
 
 ### 2.2 标准库增强
@@ -284,7 +284,7 @@ outer: for (int i = 0; i < N; i++) {
 }
 
 // 编译器支持 (2026年3月)
-// Clang 22+: -fexperimental-named-loops
+// Clang 20+ 计划中
 // GCC: 预计16+支持
 
 // 争议点解决进展:
@@ -317,7 +317,7 @@ auto p = malloc(100); // void* (C) - C2y可能允许隐式转换
 // 3. 🔄 指针类型的推导 - 允许void*推导，可能需要显式转换
 
 // 编译器实验性支持:
-// Clang 22+: -fexperimental-auto
+// Clang 待定
 // GCC 16: 预计完整支持
 ```
 

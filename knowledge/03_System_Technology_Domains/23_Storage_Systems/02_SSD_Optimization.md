@@ -13,8 +13,8 @@
 |:-----|:-----|
 | **核心概念** | SSD架构、NAND闪存、FTL、 wear leveling、TRIM、I/O优化 |
 | **前置知识** | [文件系统](../..)、[I/O优化](../../18_Systems_Performance/01_Linux_Performance_Tuning.md) |
-| **后续延伸** | [分布式存储](01_Distributed_Storage.md)、[数据库内部](../../18_Database_Internals/) |
-| **横向关联** | [内核I/O栈](../../21_OS_Internals/)、[硬件接口](../../15_Industrial_Communication/) |
+| **后续延伸** | [分布式存储](01_Distributed_Storage.md)、[数据库内部](../../03_System_Technology_Domains/18_Database_Internals/) |
+| **横向关联** | [内核I/O栈](../../21_OS_Internals/)、[硬件接口](../../03_System_Technology_Domains/15_Industrial_Communication/) |
 | **权威来源** | NVM Express Spec, Linux NVMe driver, SNIA标准 |
 
 ---

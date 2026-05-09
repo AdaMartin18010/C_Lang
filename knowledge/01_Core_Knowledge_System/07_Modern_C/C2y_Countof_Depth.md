@@ -1905,12 +1905,11 @@ gcc -std=gnu2y -o program program.c
 gcc --version
 ```
 
-### 8.2 Clang 21+支持
+### 8.2 Clang 支持
 
 #### 8.1.1 支持版本
 
-- **Clang 21**：完整支持 `_Countof` 操作符
-- **Clang 20**：部分支持（可能作为扩展）
+- **Clang**：`_Countof` 支持待定，目前无公开实现
 - **Clang 19及更早**：不支持，需要使用兼容层
 
 #### 8.1.2 使用方法
@@ -1963,12 +1962,12 @@ int main(void) {
 
 | GCC版本 | _Countof支持 | 备注 |
 |---------|--------------|------|
-| GCC 16+ | ✅ 已支持 | `-std=c2y` 或 `-std=gnu2y` |
+| GCC 16+ | 预计 | `-std=c2y` 或 `-std=gnu2y` |
 | GCC 14 | 不支持 | 部分C23特性 |
 | GCC 13 | 不支持 | |
 | GCC 12 | 不支持 | |
 
-**注意**：GCC 16（2026年3-4月发布）已正式支持 `_Countof`（`-std=c2y`）。GCC 15提供实验性支持。
+**注意**：GCC 16（预计2026年下半年发布）计划支持 `_Countof`（`-std=c2y`）。GCC 15提供实验性支持。
 
 #### 8.2.2 GCC使用方法
 
@@ -1999,7 +1998,7 @@ gcc -std=c23 -dM -E - < /dev/null | grep -i countof
 #### 8.3.1 编译器命令行
 
 ```bash
-# Clang 21+
+# Clang（待定）
 clang -std=c23 file.c -o output
 
 # GCC（等待支持）

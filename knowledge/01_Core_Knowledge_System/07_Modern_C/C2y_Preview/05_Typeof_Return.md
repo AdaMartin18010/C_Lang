@@ -65,7 +65,7 @@
 > **提案**: N3454 - typeof(return)
 > **状态**: 审议中
 > **作者**: Alejandro Colomar
-> **预计支持**: GCC 16+ / Clang 22+ (预计, 尚无实验性实现)
+> **预计支持**: GCC 16+ 预计 / Clang 待定
 
 ---
 

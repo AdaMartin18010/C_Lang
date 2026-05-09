@@ -534,7 +534,7 @@ char* trim_or_default(char* str, char* def) {
 | **标题** | Defer Mechanism for C |
 | **作者** | Alex Gilding |
 | **状态** | ✅ 已接受进入C2y |
-| **实现状态** | Clang 22+, GCC 16+ (预计) |
+| **实现状态** | GCC 15+ 实验性, Clang 20+ 计划中 |
 
 ### 3.2 核心概念
 
@@ -772,7 +772,7 @@ void signal_interaction(void) {
 | **标题** | The _Countof Operator |
 | **作者** | Jens Gustedt |
 | **状态** | ✅ 已接受进入C2y |
-| **实现状态** | Clang 22+, GCC 16+ (预计) |
+| **实现状态** | GCC 16+ 预计, Clang 待定 |
 
 ### 4.2 语法语义
 

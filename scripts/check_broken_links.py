@@ -12,6 +12,7 @@ math_patterns = [
     re.compile(r'^[A-Z]$'),  # single uppercase letter like S, Q, P
     re.compile(r'^[a-z]+$'),  # single lowercase word like 'skip', 'idx', 'opc'
     re.compile(r'^[0-9]+$'),  # just numbers
+    re.compile(r'^[a-zA-Z0-9_]+$'),  # alphanumeric identifiers: S1, Q2, x0
     re.compile(r'^[a-zA-Z0-9_]+\s*[:=]'),  # assignment-like: x := e, y':C
     re.compile(r'^[Δλ∀∃∧∨¬→↦⊢⊨∈∉∪∩⊆⊇⊂⊃∅∞]$'),  # math symbols
     re.compile(r'^[\w\s]+→[\w\s]+$'),  # arrow notation: C → D
@@ -20,6 +21,13 @@ math_patterns = [
     re.compile(r'^\$\{'),  # template variable: ${...}
     re.compile(r'^\{\{'),  # template: {{...}}
     re.compile(r'^[a-zA-Z0-9_]+[;+\-*/<>!&|]+[a-zA-Z0-9_]+$'),  # expressions with operators: S1; S2
+    re.compile(r'^[a-zA-Z0-9_]+[;+\-*/<>!&|]+\s+[a-zA-Z0-9_]+$'),  # expressions with space: S1; S2
+    re.compile(r'^[Δλ∀∃∧∨¬→↦⊢⊨∈∉∪∩⊆⊇⊂⊃∅∞].*'),  # math symbols at start
+    re.compile(r'^M[₀₁₂₃₄₅₆₇₈₉].*'),  # subscripted M: M₁ M₂
+    re.compile(r'^λ.*'),  # lambda expressions
+    re.compile(r'^[a-zA-Z0-9_]+\s*\(.*\)$'),  # function-like with args
+    re.compile(r'^["\'].*'),  # regex patterns starting with quotes
+    re.compile(r'^WP\['),  # WP[...] notation
     re.compile(r"^'[^']+'$"),  # quoted strings: 'mov_rax_imm32'
     re.compile(r'^if\s+'),  # conditional: if B then S1 else S2
     re.compile(r'^[a-zA-Z_][a-zA-Z0-9_]*->[a-zA-Z_]'),  # pointer access: sm->current
@@ -75,6 +83,12 @@ for root, dirs, files in os.walk('knowledge'):
                 
                 # Remove anchor
                 target = target.split('#')[0]
+                
+                # For directory links (trailing /), check if README.md exists
+                if target.endswith(('/', '\\')):
+                    target_readme = target + 'README.md'
+                    if os.path.exists(target_readme):
+                        continue
                 
                 if not os.path.exists(target):
                     broken.append((path, link, text))

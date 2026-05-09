@@ -233,7 +233,7 @@ N3096: defer关键字 ⭐ 热门特性
 
 N3369/N3469: _Countof操作符 ⭐
   size_t n = _Countof(arr);  // 替代sizeof(arr)/sizeof(arr[0])
-  // Clang 22+已支持
+  // Clang 待定
 
 N3457: __COUNTER__宏
   预处理器每次求值产生新数字，用于宏生成唯一变量名
