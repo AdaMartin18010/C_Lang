@@ -411,17 +411,17 @@ C11（ISO/IEC 9899:2011）是对C语言的重大更新，主要应对**多核处
 void memory_order_explained(void) {
     _Atomic int flag = 0;
     _Atomic int data = 0;
-    
+
     // 1. memory_order_relaxed - 最弱，无同步保证
     // 只保证原子性，无顺序约束
     // 使用场景：计数器（不用于同步）
     atomic_fetch_add_explicit(&counter, 1, memory_order_relaxed);
-    
+
     // 2. memory_order_consume - 数据依赖顺序（少用）
     // C11引入，但编译器通常实现为acquire
     int *ptr = atomic_load_explicit(&shared_ptr, memory_order_consume);
     // 后续对*ptr的访问保证在看到ptr之后
-    
+
     // 3. memory_order_acquire - 获取语义
     // 保证：后续读操作不会被重排到该操作之前
     // 使用场景：读锁、检查标志
@@ -429,18 +429,18 @@ void memory_order_explained(void) {
         // 等待
     }
     // 保证：看到flag!=0后，能看到flag设置前的所有写操作
-    
+
     // 4. memory_order_release - 释放语义
     // 保证：前面的写操作不会被重排到该操作之后
     // 使用场景：解锁、设置标志通知其他线程
     data = 42;  // 这行不会被重排到下面之后
     atomic_store_explicit(&flag, 1, memory_order_release);
-    
+
     // 5. memory_order_acq_rel - 获取+释放
     // 读改写操作（如fetch_add）同时使用
     // 保证：之前的写对其他线程可见，之后的读看到其他线程的写
     atomic_fetch_add_explicit(&ref_count, -1, memory_order_acq_rel);
-    
+
     // 6. memory_order_seq_cst - 顺序一致性（默认，最强）
     // 所有线程看到的操作顺序一致
     // 性能开销最大，但最易理解
@@ -707,7 +707,7 @@ int producer_thread(void *arg) {
     (void)arg;
     for (int i = 0; i < 100; i++) {
         mtx_lock(&mutex);
-        
+
         // 等待缓冲区非满
         while (count == BUFFER_SIZE) {
             // 原子操作：
@@ -716,14 +716,14 @@ int producer_thread(void *arg) {
             // 3. 被唤醒后重新获取mutex
             cnd_wait(&not_full, &mutex);
         }
-        
+
         // 生产数据
         buffer[write_idx] = i;
         write_idx = (write_idx + 1) % BUFFER_SIZE;
         count++;
-        
+
         printf("Produced: %d\n", i);
-        
+
         // 通知消费者
         cnd_signal(&not_empty);
         mtx_unlock(&mutex);
@@ -735,19 +735,19 @@ int consumer_thread(void *arg) {
     (void)arg;
     for (int i = 0; i < 100; i++) {
         mtx_lock(&mutex);
-        
+
         // 等待缓冲区非空
         while (count == 0) {
             cnd_wait(&not_empty, &mutex);
         }
-        
+
         // 消费数据
         int value = buffer[read_idx];
         read_idx = (read_idx + 1) % BUFFER_SIZE;
         count--;
-        
+
         printf("Consumed: %d\n", value);
-        
+
         // 通知生产者
         cnd_signal(&not_full);
         mtx_unlock(&mutex);
@@ -774,8 +774,8 @@ int consumer_thread(void *arg) {
 #include <stdio.h>
 
 // 运行时约束处理函数原型
-typedef void (*constraint_handler_t)(const char *restrict msg, 
-                                      void *restrict ptr, 
+typedef void (*constraint_handler_t)(const char *restrict msg,
+                                      void *restrict ptr,
                                       errno_t error);
 
 // 设置处理函数
@@ -789,17 +789,17 @@ constraint_handler_t set_constraint_handler_s(constraint_handler_t handler);
 void safe_string_ops(void) {
     char dest[10];
     errno_t err;
-    
+
     // 安全复制
     err = strcpy_s(dest, sizeof(dest), "Hello");
     if (err != 0) {
         // 处理错误（约束处理函数也可能已终止程序）
         printf("Copy failed: %d\n", err);
     }
-    
+
     // 安全连接
     err = strcat_s(dest, sizeof(dest), " World");
-    
+
     // 安全格式化
     err = sprintf_s(dest, sizeof(dest), "%d", 12345);
 }
@@ -917,16 +917,16 @@ void queue_init(ThreadSafeQueue *q) {
 
 bool queue_push(ThreadSafeQueue *q, void *item) {
     mtx_lock(&q->mutex);
-    
+
     size_t next_tail = (q->tail + 1) % QUEUE_SIZE;
     while (next_tail == q->head) {  // 队列满
         cnd_wait(&q->not_full, &q->mutex);
         next_tail = (q->tail + 1) % QUEUE_SIZE;
     }
-    
+
     q->items[q->tail] = item;
     q->tail = next_tail;
-    
+
     cnd_signal(&q->not_empty);
     mtx_unlock(&q->mutex);
     return true;
@@ -934,14 +934,14 @@ bool queue_push(ThreadSafeQueue *q, void *item) {
 
 void *queue_pop(ThreadSafeQueue *q) {
     mtx_lock(&q->mutex);
-    
+
     while (q->head == q->tail) {  // 队列空
         cnd_wait(&q->not_empty, &q->mutex);
     }
-    
+
     void *item = q->items[q->head];
     q->head = (q->head + 1) % QUEUE_SIZE;
-    
+
     cnd_signal(&q->not_full);
     mtx_unlock(&q->mutex);
     return item;
@@ -958,25 +958,25 @@ typedef struct {
 void spsc_push(SPSCQueue *q, void *item) {
     size_t idx = atomic_load_explicit(&q->write_idx, memory_order_relaxed);
     size_t next_idx = (idx + 1) % QUEUE_SIZE;
-    
+
     // 等待消费者
     while (next_idx == atomic_load_explicit(&q->read_idx, memory_order_acquire)) {
         // 自旋或yield
         thrd_yield();
     }
-    
+
     q->buffer[idx] = item;
     atomic_store_explicit(&q->write_idx, next_idx, memory_order_release);
 }
 
 void *spsc_pop(SPSCQueue *q) {
     size_t idx = atomic_load_explicit(&q->read_idx, memory_order_relaxed);
-    
+
     // 等待生产者
     while (idx == atomic_load_explicit(&q->write_idx, memory_order_acquire)) {
         thrd_yield();
     }
-    
+
     void *item = q->buffer[idx];
     atomic_store_explicit(&q->read_idx, (idx + 1) % QUEUE_SIZE, memory_order_release);
     return item;
@@ -1049,7 +1049,7 @@ bool lock_with_timeout(mtx_t *mutex, int timeout_ms) {
         ts.tv_sec += ts.tv_nsec / 1000000000;
         ts.tv_nsec %= 1000000000;
     }
-    
+
     // C11不直接支持timed mutex，需要条件变量模拟或平台扩展
     // 这里使用简单轮询
     struct timespec now;
@@ -1058,7 +1058,7 @@ bool lock_with_timeout(mtx_t *mutex, int timeout_ms) {
             return true;
         }
         timespec_get(&now, TIME_UTC);
-        if (now.tv_sec > ts.tv_sec || 
+        if (now.tv_sec > ts.tv_sec ||
             (now.tv_sec == ts.tv_sec && now.tv_nsec >= ts.tv_nsec)) {
             return false;  // 超时
         }

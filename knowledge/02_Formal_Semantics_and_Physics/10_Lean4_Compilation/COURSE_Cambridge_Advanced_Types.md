@@ -1,6 +1,6 @@
 ﻿# Cambridge: Advanced Topics in Type Theory
 
-> **层级**: L6++ (极致深度)  
+> **层级**: L6++ (极致深度)
 > **关联**: 剑桥类型论传统与Lean 4
 
 ---
@@ -8,6 +8,7 @@
 ## 课程概述
 
 剑桥大学的类型论课程涵盖：
+
 - 依赖类型理论
 - 归纳定义
 - 同构与等价
@@ -21,6 +22,7 @@
 ### 1.1 历史背景
 
 剑桥在类型论领域有深厚传统：
+
 - **Robin Milner**: ML类型推断
 - **Alan Turing**: 可计算性基础
 - **Martin Hyland**: 范畴论语义
@@ -37,6 +39,7 @@ Lean 4设计者**Leonardo de Moura**曾在 MSR Cambridge工作
 ### 2.1 归纳类型
 
 **定义2.1 (归纳类型)**:
+
 ```
 inductive T : Type
 | c₁ : A₁ → T
@@ -44,6 +47,7 @@ inductive T : Type
 ```
 
 **定理2.1 (归纳原理)**:
+
 ```
 ∀P: T → Prop.
 (∀a. P(c₁ a)) → (∀a t. P t → P(c₂ a t)) → ∀t. P t
@@ -52,6 +56,7 @@ inductive T : Type
 ### 2.2 归纳-递归定义
 
 **定理2.2 (Dybjer集合)**:
+
 ```
 归纳-递归定义在Martin-Löf类型论中一致
 ```
@@ -63,6 +68,7 @@ inductive T : Type
 ### 3.1 结构恒等原理
 
 **定理3.1 (同构即相等)**:
+
 ```
 在Univalent Foundations中，
 (A ≅ B) ≃ (A = B)
@@ -71,6 +77,7 @@ inductive T : Type
 ### 3.2 传输原理
 
 **定理3.2 (运输)**:
+
 ```
 transport : (P : A → Type) → (x = y) → P x → P y
 ```
@@ -82,6 +89,7 @@ transport : (P : A → Type) → (x = y) → P x → P y
 ### 4.1 局部笛卡尔闭范畴
 
 **定理4.1 (类型论=LCCC)**:
+
 ```
 扩展Martin-Löf类型论对应局部笛卡尔闭范畴
 ```
@@ -89,6 +97,7 @@ transport : (P : A → Type) → (x = y) → P x → P y
 ### 4.2 纤维范畴
 
 **定理4.2 (纤维语义)**:
+
 ```
 依赖类型 = 纤维范畴的截面
 ```
@@ -100,6 +109,7 @@ transport : (P : A → Type) → (x = y) → P x → P y
 ### 5.1 内核设计原则
 
 **定理5.1 (小内核可靠性)**:
+
 ```
 内核代码量与错误概率负相关
 ```
@@ -109,6 +119,7 @@ transport : (P : A → Type) → (x = y) → P x → P y
 ### 5.2 反射策略
 
 **定理5.2 (反射正确性)**:
+
 ```
 元程序生成的证明可被内核验证
 ```

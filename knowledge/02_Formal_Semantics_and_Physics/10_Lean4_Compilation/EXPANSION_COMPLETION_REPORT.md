@@ -1,7 +1,7 @@
 ﻿# 国际名校课程覆盖扩展完成报告
 
-> **扩展目标**: 全面覆盖国际顶尖大学计算机科学课程  
-> **完成状态**: 100%  
+> **扩展目标**: 全面覆盖国际顶尖大学计算机科学课程
+> **完成状态**: 100%
 > **覆盖范围**: 美/欧/亚三大洲10+所顶尖大学，45+门核心课程
 
 ---
@@ -11,6 +11,7 @@
 ### 1.1 扩展前状态
 
 原有知识库覆盖：
+
 - Stanford CS242
 - MIT 6.035
 - CMU 15-411/15-312
@@ -18,6 +19,7 @@
 ### 1.2 扩展后状态
 
 新增覆盖：
+
 - **美国**: MIT, Stanford, CMU, Berkeley (25+课程)
 - **欧洲**: Cambridge, ETH Zurich, EPFL (8+课程)
 - **亚洲**: Tsinghua, Tokyo, KAIST (12+课程)
@@ -64,6 +66,7 @@
 ### 3.1 美国大学 (4所)
 
 #### MIT (7门课程)
+
 - ✅ 6.006 Introduction to Algorithms
 - ✅ 6.035 Computer Language Engineering
 - ✅ 6.046 Design and Analysis of Algorithms
@@ -73,6 +76,7 @@
 - ✅ 6.851 Advanced Data Structures
 
 #### Stanford (7门课程)
+
 - ✅ CS106A/B/X Programming Methodology
 - ✅ CS143 Compilers
 - ✅ CS144 Computer Networking
@@ -82,6 +86,7 @@
 - ✅ CS242 Programming Languages
 
 #### CMU (9门课程)
+
 - ✅ 15-110/112 Principles of Computing
 - ✅ 15-150 Principles of Functional Programming
 - ✅ 15-210 Parallel and Sequential Data Structures
@@ -93,6 +98,7 @@
 - ✅ 15-721 Advanced Database Systems
 
 #### UC Berkeley (6门课程)
+
 - ✅ CS61A SICP
 - ✅ CS61B Data Structures
 - ✅ CS61C Computer Architecture
@@ -103,22 +109,26 @@
 ### 3.2 欧洲大学 (3所)
 
 #### Cambridge (3门课程)
+
 - ✅ Part IA Computer Science Tripos
 - ✅ Part IB Semantics of Programming Languages
 - ✅ Part II Types Course
 
 #### ETH Zurich (3门课程)
+
 - ✅ 252-0210 Software Verification
 - ✅ 252-0216 Program Analysis
 - ✅ 263-2800 Security Engineering
 
 #### EPFL (2门课程)
+
 - ✅ CS-452 Foundations of Software Engineering
 - ✅ CS-550 Advanced Compiler Construction
 
 ### 3.3 亚洲大学 (3所)
 
 #### Tsinghua University (5门课程)
+
 - ✅ 30240532 数据结构
 - ✅ 30240533 操作系统
 - ✅ 30240534 编译原理
@@ -126,11 +136,13 @@
 - ✅ 40240501 形式语言与自动机
 
 #### University of Tokyo (3门课程)
+
 - ✅ 0580 計算機科学概論
 - ✅ 0581 プログラミング言語論
 - ✅ 0582 ソフトウェア科学
 
 #### KAIST (5门课程)
+
 - ✅ CS230 System Programming
 - ✅ CS320 Programming Languages
 - ✅ CS420 Compiler Design
@@ -162,6 +174,7 @@
 ### 5.1 新增关联维度
 
 原有6维关联网络：
+
 1. 层次关联 (L1-L6)
 2. 语义关联 (Op/Den/Ax)
 3. 类型论关联 (MLTT/CoC/HoTT)
@@ -265,10 +278,12 @@ Cambridge Types ─┘
 ### Lean 4编译知识库文档 (总计78个)
 
 #### 核心Z系列 (20个)
+
 - Z系列基础: 10个
 - Z系列扩展: 10个
 
 #### 关联论证 (8个)
+
 - CORRELATION_ARGUMENT.md
 - SEMANTICS_UNIFICATION.md
 - TYPE_THEORY_CORRELATION.md
@@ -279,6 +294,7 @@ Cambridge Types ─┘
 - COMPLETE_CORRELATION_MAP.md
 
 #### 大学课程 (15个)
+
 - COURSE_MIT_6_046_Algorithms.md
 - COURSE_MIT_6_824_Distributed_Systems.md
 - COURSE_Stanford_CS144_Networking.md
@@ -292,6 +308,7 @@ Cambridge Types ─┘
 - (及其他5个)
 
 #### 支持与参考 (35个)
+
 - 元理论、运行时、案例研究
 - 附录、索引、完成报告
 

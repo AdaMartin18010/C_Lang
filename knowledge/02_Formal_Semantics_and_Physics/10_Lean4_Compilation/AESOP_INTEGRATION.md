@@ -52,13 +52,15 @@ declare_aesop_rule_sets [OperationalSemantics]
 | Norm | `subst_var_self`, `subst_const` | 替换归一化 |
 
 **策略宏**:
+
 - `aesop_semantics` - 通用语义证明
 - `aesop_simp` - 快速简化
 - `aesop_deep` - 深度搜索
 
 **示例**:
+
 ```lean
-theorem subst_var_same_aesop {x t} : 
+theorem subst_var_same_aesop {x t} :
   (Tm.var x).subst x t = t := by
   aesop_simp  -- 自动完成证明
 ```
@@ -80,14 +82,16 @@ declare_aesop_rule_sets [DenotationalSemantics]
 | Norm | `iterate_zero`, `iterate_succ` | 不动点迭代归一化 |
 
 **策略宏**:
+
 - `aesop_domain` - 域论通用证明
 - `aesop_mono` - 单调性证明
 - `aesop_continuous` - 连续性证明
 - `aesop_fix` - 不动点证明
 
 **示例**:
+
 ```lean
-theorem id_continuous_aesop {D} [CPO D] : 
+theorem id_continuous_aesop {D} [CPO D] :
   Continuous (λ (x : D) => x) := by
   constructor
   · prove_monotone
@@ -111,12 +115,14 @@ declare_aesop_rule_sets [HoareLogic]
 | Norm | `wp_skip_norm`, `wp_assign_norm` | WP计算归一化 |
 
 **策略宏**:
+
 - `aesop_hoare` - 霍尔逻辑通用证明
 - `aesop_wp` - WP计算
 - `aesop_vc` - 验证条件生成
 - `aesop_inv` - 循环不变式
 
 **示例**:
+
 ```lean
 theorem verify_incr_aesop {n : Int} :
   {λ s => s "x" = n} ("x" := $ "x" + # 1) {λ s => s "x" = n + 1} := by
@@ -140,12 +146,14 @@ declare_aesop_rule_sets [DistributedConsensus]
 | Norm | `isLeader_def`, `isCommitted_def` | 谓词定义归一化 |
 
 **策略宏**:
+
 - `aesop_raft` - Raft通用证明
 - `aesop_inv` - 不变式证明
 - `aesop_safety` - 安全性证明
 - `aesop_transition` - 状态转换验证
 
 **示例**:
+
 ```lean
 theorem termMonotonicity_aesop {s s' : NodeState} :
   s' = s.incrementTerm → s.currentTerm < s'.currentTerm := by
@@ -222,16 +230,19 @@ theorem termMonotonicity_aesop {s s' : NodeState} :
 ### 1. 规则设计原则
 
 **Safe规则**:
+
 - 只添加不会产生分支的规则
 - 用于归一化和基本简化
 - 确保终止性
 
 **Unsafe规则**:
+
 - 使用优先级控制搜索顺序
 - 高优先级(30%)用于常用规则
 - 低优先级(10-20%)用于备用规则
 
 **Norm规则**:
+
 - 用于表达式归一化
 - 在主要搜索前应用
 - 包含`simp`扩展
@@ -303,7 +314,7 @@ theorem your_rule : ... := by
 ```lean
 macro "aesop_custom" : tactic =>
   `(tactic|
-    aesop (config := 
+    aesop (config :=
       { terminal := false
         maxRuleApplicationDepth := 50
         maxRuleApplications := 500
@@ -328,6 +339,7 @@ Aesop集成为4个Lean项目带来了显著的证明自动化提升：
 - **领域特定规则集优化**
 
 未来工作方向：
+
 1. 进一步完善复杂定理的自动化
 2. 集成SMT求解器处理算术约束
 3. 开发可视化证明搜索工具

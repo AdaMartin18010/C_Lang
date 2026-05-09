@@ -1,7 +1,7 @@
 # Lean 4 编译到 C：性能优化案例手册
 
-> **层级**: L4 (方法论层)  
-> **目标**: 提供生产级性能优化的完整案例、反例对比与基准测试数据  
+> **层级**: L4 (方法论层)
+> **目标**: 提供生产级性能优化的完整案例、反例对比与基准测试数据
 > **方法**: 每个案例包含问题描述、原始代码、优化方案、性能数据、原理分析
 
 ---
@@ -11,24 +11,28 @@
 ### 问题：高阶函数在数值循环中的开销
 
 **原始代码（慢）**：
+
 ```lean
 def sumOfSquares (n : Nat) : Nat :=
   (List.range n).map (λ x => x * x) |>.foldl (· + ·) 0
 ```
 
 **问题分析**：
+
 1. `List.range n` 创建完整列表（O(n) 内存分配）
 2. `.map` 创建新列表（第二次 O(n) 分配）
 3. 高阶函数调用有闭包分配开销
 4. Nat 是装箱类型，每次加法需要堆分配
 
 **基准测试结果**：
+
 ```
 n = 10,000:  45ms,  分配 160MB
 n = 100,000: 超时（>5秒）
 ```
 
 **优化版本 1（数组替代列表）**：
+
 ```lean
 def sumOfSquaresFast1 (n : Nat) : Nat :=
   let arr := Array.range n
@@ -36,6 +40,7 @@ def sumOfSquaresFast1 (n : Nat) : Nat :=
 ```
 
 **改进点**：
+
 - 连续内存布局，缓存友好
 - 仍有问题：中间数组分配
 
@@ -44,6 +49,7 @@ def sumOfSquaresFast1 (n : Nat) : Nat :=
 ---
 
 **优化版本 2（避免中间分配）**：
+
 ```lean
 def sumOfSquaresFast2 (n : Nat) : Nat :=
   let rec loop (i : Nat) (acc : Nat) : Nat :=
@@ -53,6 +59,7 @@ def sumOfSquaresFast2 (n : Nat) : Nat :=
 ```
 
 **改进点**：
+
 - 尾递归，常数栈空间
 - 无中间数据结构
 - 仍有问题：Nat 装箱
@@ -62,6 +69,7 @@ def sumOfSquaresFast2 (n : Nat) : Nat :=
 ---
 
 **优化版本 3（使用原始类型）**：
+
 ```lean
 def sumOfSquaresFast3 (n : UInt32) : UInt32 :=
   let rec loop (i : UInt32) (acc : UInt32) : UInt32 :=
@@ -71,10 +79,12 @@ def sumOfSquaresFast3 (n : UInt32) : UInt32 :=
 ```
 
 **改进点**：
+
 - UInt32 未装箱，直接机器加法
 - 尾递归优化为循环
 
 **性能**：
+
 ```
 n = 10,000:   0.05ms  (900x 加速)
 n = 100,000:  0.5ms
@@ -82,6 +92,7 @@ n = 1,000,000: 5ms
 ```
 
 **生成的 C 代码**：
+
 ```c
 LEAN_EXPORT uint32_t l_sumOfSquaresFast3(uint32_t n) {
 _start:
@@ -106,6 +117,7 @@ _start:
 ### 问题：不可变列表的累积更新
 
 **原始代码（慢）**：
+
 ```lean
 def buildList (n : Nat) : List Nat :=
   let rec loop (i : Nat) (acc : List Nat) : List Nat :=
@@ -115,20 +127,23 @@ def buildList (n : Nat) : List Nat :=
 ```
 
 **问题分析**：
+
 - 每次 `::` 创建新 cons 单元（堆分配）
 - List 是链表，非连续内存
 
 **基准测试**：
+
 ```
 n = 100,000: 45ms, 分配 3.2MB
 ```
 
 **优化版本（使用 Array 和破坏性更新）**：
+
 ```lean
 def buildArray (n : Nat) : Array Nat :=
   let rec loop (i : Nat) (acc : Array Nat) : Array Nat :=
     if i = 0 then acc
-    else 
+    else
       let acc' := acc.push i
       loop (i - 1) acc'
   loop n (Array.mkEmpty n)
@@ -139,6 +154,7 @@ def buildArray (n : Nat) : Array Nat :=
 如果编译器能证明 `acc` 的引用计数为 1（独占），`push` 可以原地修改数组（破坏性更新）。这是基于 Henry Baker 的「Fast Functional Arrays」中的线性类型思想。
 
 **性能**：
+
 ```
 n = 100,000:  3ms  (15x 加速)
 n = 1,000,000: 35ms
@@ -159,23 +175,27 @@ def testRC := buildArray 100
 ### 问题：字符串拼接的 O(n²) 复杂度
 
 **原始代码（慢）**：
+
 ```lean
 def concatStrings (strs : List String) : String :=
   strs.foldl (λ acc s => acc ++ s) ""
 ```
 
 **问题分析**：
+
 - String 在 Lean 中是不可变的 UTF-8 字节数组
 - `++` 需要分配新数组并复制两个操作数
 - 累积拼接导致重复复制：总复制量 = n×平均长度×n/2 = O(n²)
 
 **基准测试（字符串平均长度 100）**：
+
 ```
 n = 1,000:  45ms
 n = 10,000: 超时
 ```
 
 **优化版本（使用 String.Builder）**：
+
 ```lean
 def concatStringsFast (strs : List String) : String :=
   let builder := strs.foldl (λ b s => b.append s) String.Builder.mk
@@ -187,6 +207,7 @@ def concatStringsFast (strs : List String) : String :=
 String.Builder 是可变缓冲区，使用可扩展数组（类似 Java StringBuilder）。追加操作平均 O(1) 摊销，总复杂度 O(n)。
 
 **性能**：
+
 ```
 n = 1,000:   0.5ms  (90x 加速)
 n = 10,000:  5ms
@@ -200,22 +221,26 @@ n = 100,000: 65ms
 ### 问题：循环中的闭包捕获
 
 **原始代码（慢）**：
+
 ```lean
 def processItems (items : Array Int) (factor : Int) : Array Int :=
   items.map (λ x => x * factor)
 ```
 
 **问题分析**：
+
 - 每次调用 `map` 创建闭包捕获 `factor`
 - 闭包需要堆分配（16-32 字节）
 - 如果调用频繁，GC 压力大
 
 **基准测试（调用 10000 次）**：
+
 ```
 原始版本: 120ms, 分配 320KB 闭包
 ```
 
 **优化版本 1（内联展开）**：
+
 ```lean
 def processItemsFast1 (items : Array Int) (factor : Int) : Array Int :=
   let mut result := Array.mkEmpty items.size
@@ -225,6 +250,7 @@ def processItemsFast1 (items : Array Int) (factor : Int) : Array Int :=
 ```
 
 **优化版本 2（宏内联）**：
+
 ```lean
 @[inline]
 def mulBy (factor : Int) (x : Int) := x * factor
@@ -234,6 +260,7 @@ def processItemsFast2 (items : Array Int) (factor : Int) : Array Int :=
 ```
 
 **性能**：
+
 ```
 优化版本 1: 15ms  (8x 加速)
 优化版本 2: 12ms  (10x 加速)
@@ -246,6 +273,7 @@ def processItemsFast2 (items : Array Int) (factor : Int) : Array Int :=
 ### 问题：复杂类型类层次导致的编译时开销
 
 **原始代码（编译慢）**：
+
 ```lean
 class Monoid (M : Type) extends Semigroup M, One M where
   one_mul : ∀ x, 1 * x = x
@@ -259,17 +287,19 @@ def bigComputation {M} [CommMonoid M] (xs : List M) : M :=
 ```
 
 **问题分析**：
+
 - 类型类实例解析在复杂层次中可能指数级增长
 - 每次调用 `bigComputation` 都需解析实例
 
 **优化版本（单态化）**：
+
 ```lean
 @[specialize]
 def bigComputation' {M} [CommMonoid M] (xs : List M) : M :=
   xs.foldl (· * ·) 1
 
 -- 使用点指定类型
-def computeNat (xs : List Nat) : Nat := 
+def computeNat (xs : List Nat) : Nat :=
   bigComputation' xs  -- 生成特化版本
 ```
 
@@ -300,6 +330,7 @@ LEAN_EXPORT lean_obj_res l_bigComputation_Nat(lean_obj_arg xs) {
 ### 问题：结构体字段排序与填充
 
 **原始定义（内存浪费）**：
+
 ```lean
 structure BadLayout where
   flag : Bool    -- 1 字节
@@ -309,6 +340,7 @@ structure BadLayout where
 ```
 
 **优化定义（紧凑布局）**：
+
 ```lean
 structure GoodLayout where
   size : UInt64  -- 8 字节
@@ -321,6 +353,7 @@ structure GoodLayout where
 **原理**：
 
 根据 System V AMD64 ABI：
+
 - 按字段大小降序排列
 - 对齐要求：8 字节类型在 8 字节边界
 - 填充最小化
@@ -384,6 +417,7 @@ cg_annotate cachegrind.out.*
 ## 结论
 
 性能优化是一个迭代过程：
+
 1. **测量**：确定真正的热点（不要猜测）
 2. **分析**：理解为什么慢（内存、计算、分支）
 3. **优化**：应用适当的变换

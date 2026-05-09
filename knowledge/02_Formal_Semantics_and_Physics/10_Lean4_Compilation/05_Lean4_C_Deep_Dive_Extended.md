@@ -1,7 +1,7 @@
 # Lean 4 编译到 C：深度扩展分析
 
-> **层级**: L5 (原理层) - 深度扩展版  
-> **目标**: 深入剖析编译过程每个环节，提供完整可运行代码示例与理论证明  
+> **层级**: L5 (原理层) - 深度扩展版
+> **目标**: 深入剖析编译过程每个环节，提供完整可运行代码示例与理论证明
 > **深度**: 每节包含数学推导、完整代码、性能分析、反例警示
 
 ---
@@ -13,12 +13,14 @@
 **理论基础**：
 
 Lean 4 的解析器基于广义 LR (GLR) 解析算法，处理歧义文法。文法 G = (V, Σ, R, S) 其中：
+
 - V 是非终结符集合（如 `term`, `command`）
 - Σ 是终结符集合（关键字、标识符、操作符）
 - R 是产生式规则
 - S 是开始符号
 
 **关键产生式规则（简化）**：
+
 ```
 term ::= identifier
        | literal
@@ -82,6 +84,7 @@ Syntax.node `Lean.Parser.Term.let
 **理论基础**：
 
 Bidirectional Type Checking（双向类型检查）由 Pierce 和 Turner 在 2000 年系统阐述。核心思想是：
+
 - **检查模式** (Checking Mode)：在已知类型 Γ ⊢ t ⇐ T 下检查项
 - **综合模式** (Synthesis Mode)：从项综合出类型 Γ ⊢ t ⇒ T
 
@@ -123,7 +126,7 @@ Annotation (Ann):
 
 ```lean
 -- Elaborator 伪代码（概念性）
-partial def elaborate (ctx : Context) (stx : Syntax) (expectedType? : Option Expr) 
+partial def elaborate (ctx : Context) (stx : Syntax) (expectedType? : Option Expr)
     : TermElabM Expr :=
   match stx with
   | `($f $a) =>  -- 应用
@@ -133,7 +136,7 @@ partial def elaborate (ctx : Context) (stx : Syntax) (expectedType? : Option Exp
         | _ => throwError "not a function"
       let aExpr ← elaborate ctx a argType  -- 检查参数
       return mkApp fExpr aExpr
-  
+
   | `(fun $x => $body) =>  -- Lambda
       match expectedType? with
       | some (Expr.forallE _ domain range _) =>
@@ -148,17 +151,17 @@ partial def elaborate (ctx : Context) (stx : Syntax) (expectedType? : Option Exp
             let bodyExpr ← elaborate (ctx.extend x xExpr domain) body none
             let range ← inferType bodyExpr
             return mkLambda x domain bodyExpr
-  
+
   | `($n:num) =>  -- 数字字面量
       match expectedType? with
       | some (Expr.const `Nat _) => return mkNatLit n
       | some (Expr.const `Int _) => return mkIntLit n
-      | some ty => 
+      | some ty =>
           -- 尝试从类型确定
           if (← isDefEq ty (mkConst `Nat)) then mkNatLit n
           else mkNumLit n ty
       | none => return mkNatLit n  -- 默认 Nat
-  
+
   | _ => throwError "unsupported syntax"
 ```
 
@@ -179,7 +182,7 @@ def good1 : Nat → Nat := fun x => x + x
 def bad2 {α} [Add α] (x : α) := x + x + x + ...  -- 无限展开
 
 -- 反例 3：元变量实例化冲突
-def bad3 := 
+def bad3 :=
   let f := fun x => x + 1  -- 推断 x : Nat
   f true  -- 错误：期望 Nat，得到 Bool
 ```
@@ -228,6 +231,7 @@ Lambda 抽象 (Lam):
 **归约策略**：
 
 Kernel 支持多种归约规则：
+
 - β-归约：(fun x => t) a → t[a/x]
 - δ-归约：展开定义
 - ι-归约：归纳类型的消去
@@ -275,7 +279,7 @@ Lean 4 Kernel 约 10,000 行 C++ 代码，远小于 Coq Kernel（约 30,000 行 
 ‖Prop‖ = Unit             (命题变单位类型)
 ‖P‖ = Unit                (如果 P : Prop，擦除为 Unit)
 ‖p‖ = ()                  (如果 p : P 且 P : Prop)
-‖(x:A) → B‖ = 
+‖(x:A) → B‖ =
   if B : Prop then Unit
   else if A : Prop then ‖B‖
   else (x:‖A‖) → ‖B‖
@@ -328,7 +332,7 @@ extract (Sort 0) = Unit
 extract (Sort (u+1)) = Type
 extract (Expr.const `Nat _) = Nat
 extract (Expr.const `Int _) = Int
-extract (Expr.app f a) = 
+extract (Expr.app f a) =
   match extract f with
   | Pi Prop B => extract B  -- 擦除 Prop 参数
   | Pi A B => Pi (extract A) (extract B)
@@ -536,6 +540,7 @@ def factorialCPS (n : Nat) (k : Nat → Nat) : Nat :=
 **理论基础**：
 
 Jean-Yves Girard 的线性逻辑 (1987) 引入资源敏感推理：
+
 - A ⊸ B：消耗 A 产生 B
 - !A：A 的无限副本（指数模态）
 
@@ -552,11 +557,11 @@ Lean 4 的引用计数（RC）对应于 !A 的实现。
 
 规则：
   Γ; Δ ⊢ x : A    (x : A ∈ Γ 或 x :& A ∈ Δ)
-  
+
   Γ; Δ ⊢ t : A    Γ; Δ' ⊢ u : B
   --------------------------------
   Γ; Δ, Δ' ⊢ (t, u) : A × B
-  
+
   Γ; Δ, x :& A ⊢ t : B
   ------------------------------
   Γ; Δ ⊢ λx. t : A ⊸ B
@@ -567,13 +572,13 @@ Lean 4 的引用计数（RC）对应于 !A 的实现。
 ```
 优化 1：延迟递增 (Delayed RC)
   如果变量只使用一次且不在分支中，可以延迟递增
-  
+
 优化 2：融合递增/递减
   inc(x); ... ; dec(x)  →  如果 x 不被其他引用，可以消除
-  
+
 优化 3：借用传播
   f(&x) 如果 f 不保留引用，x 不需要递增
-  
+
 优化 4：独占性检测
   如果 RC=1，可以原地修改（破坏性更新）
 ```
@@ -602,10 +607,10 @@ LEAN_EXPORT lean_obj_res l_listMap(lean_obj_arg f, lean_obj_arg xs) {
         lean_obj_arg xs' = lean_ctor_get(xs, 1);
         lean_inc(x); lean_inc(xs');  // 为子调用保留
         lean_dec(xs);  // 释放 xs（已被解构）
-        
+
         lean_obj_arg y = l_apply_1(f, x);  // f x
         lean_obj_arg ys = l_listMap(f, xs');  // 递归（尾调用？）
-        
+
         // 构造新列表节点
         lean_obj_res result = lean_alloc_ctor(1, 2, 0);
         lean_ctor_set(result, 0, y);
@@ -666,7 +671,7 @@ LEAN_EXPORT lean_obj_res l_publicFunction(lean_obj_arg x) {
 -- Module A
 def helper := ...
 
--- Module B  
+-- Module B
 def helper := ...
 
 -- 链接时冲突：两个 l_helper 定义
@@ -793,7 +798,7 @@ opaque fastSqrt (x : Float) : Float
 opaque vectorDot (v1 v2 : @& Array Float) : Float
 
 -- 纯 Lean 实现（回退）
-def sqrtPure (x : Float) : Float := 
+def sqrtPure (x : Float) : Float :=
   if x < 0 then 0 else x ^ 0.5
 
 -- 使用外部实现的包装
@@ -828,15 +833,15 @@ LEAN_EXPORT lean_obj_res lean_fastSqrt(lean_obj_arg x) {
 LEAN_EXPORT lean_obj_res lean_vectorDot(b_lean_obj_arg v1, b_lean_obj_arg v2) {
     size_t n1 = lean_array_size(v1);
     size_t n2 = lean_array_size(v2);
-    
+
     if (n1 != n2) {
         // 返回 NaN 表示错误
         return lean_box_float(NAN);
     }
-    
+
     double* a1 = (double*)lean_array_cptr(v1);
     double* a2 = (double*)lean_array_cptr(v2);
-    
+
     double sum = 0.0;
     // 手动循环展开 x4
     size_t i = 0;
@@ -850,7 +855,7 @@ LEAN_EXPORT lean_obj_res lean_vectorDot(b_lean_obj_arg v1, b_lean_obj_arg v2) {
     for (; i < n1; i++) {
         sum += a1[i] * a2[i];
     }
-    
+
     return lean_box_float(sum);
 }
 
@@ -868,17 +873,17 @@ import MathUtils
 
 def main : IO Unit := do
   IO.println "=== Lean 4 FFI 演示 ==="
-  
+
   -- 测试快速平方根
   let x := 2.0
   IO.println s!"sqrt({x}) = {MathUtils.sqrtSafe x}"
-  
+
   -- 测试向量点积
   let v1 := #[1.0, 2.0, 3.0, 4.0]
   let v2 := #[5.0, 6.0, 7.0, 8.0]
   let dot := MathUtils.vectorDot v1 v2
   IO.println s!"点积: {dot}"
-  
+
   -- 性能测试
   IO.println "\n性能测试:"
   let start ← IO.monoMsNow
@@ -900,7 +905,7 @@ lake build
 # === Lean 4 FFI 演示 ===
 # sqrt(2.0) = 1.4142135623730951
 # 点积: 70.0
-# 
+#
 # 性能测试:
 # 结果: 666666666.666...
 # 耗时: 45ms
@@ -942,6 +947,7 @@ def myFunction := ...
 本文档深入剖析了 Lean 4 编译到 C 的每个环节，从 Parser 的上下文无关文法到 C 代码生成的工程细节。通过完整的数学形式化、可运行的代码示例和性能分析，提供了生产级 FFI 开发所需的全部知识。
 
 **关键要点**：
+
 1. **理解擦除**：证明在编译时完全消失，只有计算内容保留
 2. **控制装箱**：原始类型直接映射，复杂类型需要堆分配
 3. **利用借用**：@& 标记减少 50% 的 RC 操作
@@ -949,6 +955,7 @@ def myFunction := ...
 5. **特化关键路径**：@specialize 消除多态开销
 
 **引用文献**：
+
 - de Moura & Ullrich (2021), "The Lean 4 Theorem Prover"
 - Pierce & Turner (2000), "Bidirectional Type Checking"
 - Girard (1987), "Linear Logic"

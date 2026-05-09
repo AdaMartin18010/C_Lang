@@ -1,9 +1,11 @@
 # 心智模型与代码同构
+
 ---
 
 ## 🔗 知识关联网络
 
 ### 1. 全局导航
+
 | 层级 | 文档 | 作用 |
 |:-----|:-----|:-----|
 | 总索引 | [../../00_GLOBAL_INDEX.md](../../00_GLOBAL_INDEX.md) | 完整知识图谱入口 |
@@ -11,6 +13,7 @@
 | 学习路径 | [../../06_Thinking_Representation/06_Learning_Paths/readme.md](../../06_Thinking_Representation/06_Learning_Paths/readme.md) | 推荐学习路线 |
 
 ### 2. 前置知识依赖
+
 | 文档 | 关系 | 掌握要求 |
 |:-----|:-----|:---------|
 | [../../01_Core_Knowledge_System/01_Basic_Layer/01_Syntax_Elements.md](../../01_Core_Knowledge_System/01_Basic_Layer/01_Syntax_Elements.md) | 语言基础 | 必须掌握 |
@@ -18,6 +21,7 @@
 | [../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 内存基础 | 必须掌握 |
 
 ### 3. 同层横向关联
+
 | 文档 | 关系 | 互补内容 |
 |:-----|:-----|:---------|
 | [../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 技术扩展 | 并发编程技术 |
@@ -25,12 +29,14 @@
 | [../../04_Industrial_Scenarios/readme.md](../../04_Industrial_Scenarios/readme.md) | 实践应用 | 工业实践案例 |
 
 ### 4. 深层理论关联
+
 | 文档 | 关系 | 理论深度 |
 |:-----|:-----|:---------|
 | [../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md](../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md) | 语义基础 | 操作语义、类型理论 |
 | [../../06_Thinking_Representation/05_Concept_Mappings/readme.md](../../06_Thinking_Representation/05_Concept_Mappings/readme.md) | 概念映射 | 知识关联网络 |
 
 ### 5. 后续进阶延伸
+
 | 文档 | 关系 | 进阶方向 |
 |:-----|:-----|:---------|
 | [../../03_System_Technology_Domains/readme.md](../../03_System_Technology_Domains/readme.md) | 系统技术 | 系统级开发 |
@@ -38,6 +44,7 @@
 | [../../07_Modern_Toolchain/readme.md](../../07_Modern_Toolchain/readme.md) | 工具链 | 现代开发工具 |
 
 ### 6. 阶段学习定位
+
 ```
 当前位置: 根据文档主题确定学习阶段
 ├─ 入门阶段: 基础语法、数据类型
@@ -48,7 +55,9 @@
 ```
 
 ### 7. 局部索引
+
 本文件所属模块的详细内容：
+
 - 参见本模块 [readme.md](../../readme.md)
 - 相关子目录文档
 
@@ -77,6 +86,14 @@
 ## 📑 目录
 
 - [心智模型与代码同构](#心智模型与代码同构)
+  - [� 知识关联网络](#-知识关联网络)
+    - [1. 全局导航](#1-全局导航)
+    - [2. 前置知识依赖](#2-前置知识依赖)
+    - [3. 同层横向关联](#3-同层横向关联)
+    - [4. 深层理论关联](#4-深层理论关联)
+    - [5. 后续进阶延伸](#5-后续进阶延伸)
+    - [6. 阶段学习定位](#6-阶段学习定位)
+    - [7. 局部索引](#7-局部索引)
   - [📋 本节概要](#-本节概要)
   - [📑 目录](#-目录)
   - [🧠 知识结构思维导图](#-知识结构思维导图)

@@ -152,7 +152,7 @@ void process_with_prefetch(float *data, int n) {
         if (i + 16 < n) {
             _mm_prefetch((const char*)&data[i + 16], _MM_HINT_T0);
         }
-        
+
         // 处理当前数据
         data[i] = heavy_computation(data[i]);
     }
@@ -280,7 +280,7 @@ typedef struct {
 // 线性探测 - 缓存友好
 void *lookup(LinearHashTable *ht, uint64_t key) {
     size_t idx = hash(key) & (ht->capacity - 1);
-    
+
     while (ht->entries[idx].occupied) {
         if (ht->entries[idx].key == key) {
             return ht->entries[idx].value;
@@ -321,14 +321,14 @@ perf report
 void measure_cache() {
     int Events[2] = {PAPI_L1_DCM, PAPI_L2_DCM};  // L1/L2数据缓存未命中
     long long values[2];
-    
+
     PAPI_start_counters(Events, 2);
-    
+
     // 被测代码
     workload();
-    
+
     PAPI_stop_counters(values, 2);
-    
+
     printf("L1 misses: %lld\n", values[0]);
     printf("L2 misses: %lld\n", values[1]);
 }
@@ -339,10 +339,12 @@ void measure_cache() {
 ## 关联导航
 
 ### 前置知识
+
 - [微架构](../readme.md)
 - [性能优化 [链接失效]](../../../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
 - [数组与指针 [链接失效]](../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md)
 
 ### 后续延伸
+
 - [SIMD优化 [链接失效]](./04_SIMD_Optimization.md)
 - [并发编程 [链接失效]](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md)

@@ -1,8 +1,8 @@
 # Lean 4 生态系统全面指南
 
-> **文档层级**: L6 (专家级)  
-> **目标读者**: 形式化数学研究者、证明工程师、编程语言研究者  
-> **最后更新**: 2026年3月  
+> **文档层级**: L6 (专家级)
+> **目标读者**: 形式化数学研究者、证明工程师、编程语言研究者
+> **最后更新**: 2026年3月
 > **统计**: 覆盖15+核心组件，30+数学领域，400万+行代码库(Mathlib4)
 
 ---
@@ -257,14 +257,14 @@ partial def elabPredicate : Syntax → TermElabM Expr
 def customElaborator (stx : Syntax) : TermElabM Expr := do
   -- 创建新的元变量
   let mvar ← mkFreshExprMVar (some (.sort .zero))
-  
+
   -- 访问当前局部上下文
   let lctx ← getLCtx
   logInfo s!"局部变量数量: {lctx.decls.size}"
-  
+
   -- 精化输入语法
   let e ← elabTerm stx (some mvar)
-  
+
   -- 确保类型一致
   synthesizeSyntheticMVars
   return e
@@ -313,15 +313,15 @@ open Lean Lean.Meta
 def createExpr : MetaM Expr := do
   -- 常量
   let c := mkConst ``Nat.add
-  
+
   -- 应用
   let app := mkApp c (mkNatLit 1)
-  
+
   -- Lambda抽象
   let lam ← withLocalDecl `x .default (.const ``Nat []) fun x => do
     let body ← mkAdd x (mkNatLit 1)
     mkLambdaFVars #[x] body
-  
+
   return lam
 
 /- ========== 元变量与合一 ========== -/
@@ -329,11 +329,11 @@ def createExpr : MetaM Expr := do
 def unificationExample : MetaM Unit := do
   -- 创建元变量
   let mvar ← mkFreshExprMVar (some (.const ``Nat []))
-  
+
   -- 创建约束
   let t1 := mkAppN (.const ``Nat.add []) #[mkNatLit 1, mvar]
   let t2 := mkNatLit 5
-  
+
   -- 尝试合一
   if ← isDefEq t1 t2 then
     -- 成功后mvar被赋值为4
@@ -355,10 +355,10 @@ def reductionExample (e : Expr) : MetaM Expr := do
   let whnf ← whnf e        -- 弱头范式
   let nf ← reduce e        -- 完全归约
   let tr ← transparency (← getConfig).transparency
-  
+
   -- 带透明度的归约
   let semi ← withTransparency .semitransparent (whnf e)
-  
+
   return nf
 
 /- ========== 遍历与转换 ========== -/
@@ -382,14 +382,14 @@ def mySimp : TacticM Unit := do
   let goal ← getMainGoal
   withContext goal do
     let target ← getType'
-    
+
     -- 应用简化
     let (result, proof) ← simp target
       { config := Simp.neutralConfig
         simprocs := {}
         congrTheorems := ← getSimpCongrTheorems }
       (← getSimpTheorems)
-    
+
     -- 替换目标
     replaceMainGoal [← applySimpResultToTarget goal target result]
 
@@ -444,15 +444,15 @@ def optimizeDecl (decl : Decl) : CoreM Decl := do
 def shouldInline (decl : Decl) (callSite : Expr) : CoreM Bool := do
   let size := estimateSize decl
   let hotness := estimateHotness callSite
-  
+
   -- 小函数且热路径上则内联
   if size < 20 && hotness > 0.8 then
     return true
-  
+
   -- 带有inline属性的总是内联
   if hasInlineAttribute decl then
     return true
-  
+
   return false
 
 /- ========== 代码生成扩展 ========== -/
@@ -528,11 +528,11 @@ structure ConstraintState where
 def solveConstraints (cs : Array Constraint) : MetaM Substitution := do
   let mut subst := {}
   let mut worklist := cs
-  
+
   while !worklist.isEmpty do
     let c := worklist.back
     worklist := worklist.pop
-    
+
     match ← trySolve c subst with
     | .solved newSubst =>
         subst := compose newSubst subst
@@ -541,7 +541,7 @@ def solveConstraints (cs : Array Constraint) : MetaM Substitution := do
         worklist := worklist.push c  -- 稍后重试
     | .failed err =>
         throwError err
-  
+
   return subst
 
 /- ========== 元变量与延迟求解 ========== -/
@@ -549,7 +549,7 @@ def solveConstraints (cs : Array Constraint) : MetaM Substitution := do
 -- 元变量创建
 def createMetaVar (type : Expr) (kind : MetavarKind) : MetaM Expr := do
   let mvar ← mkFreshExprMVar type kind
-  
+
   -- 记录约束来源
   registerMVarInfo mvar {
     userName := .anonymous,
@@ -557,7 +557,7 @@ def createMetaVar (type : Expr) (kind : MetavarKind) : MetaM Expr := do
     type := type,
     kind := kind
   }
-  
+
   return mvar
 
 -- 深度优先 vs 广度优先实例化
@@ -580,7 +580,7 @@ def resolveImplicits (e : Expr) (mode : ImplicitMode) : MetaM Expr :=
             let val ← synthesizeImplicit arg
             result := mkApp result val
         return result
-  
+
   | .loose =>
       -- 允许留下元变量
       return e
@@ -592,26 +592,26 @@ def synthInstance (type : Expr) : MetaM Expr := do
   -- 1. 检查缓存
   if let some inst ← getInstanceFromCache type then
     return inst
-  
+
   -- 2. 尝试本地实例
   if let some inst ← findLocalInstance type then
     cacheInstance type inst
     return inst
-  
+
   -- 3. 全局搜索
   let candidates ← getInstanceCandidates type
-  
+
   -- 4. 尝试每个候选
   let mut successes := #[]
   for cand in candidates do
     if ← tryCandidate cand type then
       successes := successes.push cand
-  
+
   -- 5. 消歧
   match successes.size with
   | 0 => throwError "找不到实例: {type}"
   | 1 => return successes[0]!
-  | _ => 
+  | _ =>
       -- 优先级消歧
       if let some best ← disambiguate successes then
         return best
@@ -623,9 +623,9 @@ def synthInstance (type : Expr) : MetaM Expr := do
 def unify (t1 t2 : Expr) : MetaM Unit := do
   let t1 ← instantiateMVars t1
   let t2 ← instantiateMVars t2
-  
+
   if ← isDefEq t1 t2 then return ()
-  
+
   match t1, t2 with
   | .mvar mvarId, _ => assignExprMVar mvarId t2
   | _, .mvar mvarId => assignExprMVar mvarId t1
@@ -725,22 +725,22 @@ struct lean_object {
 
 LEAN_EXPORT lean_object* lean_fac(lean_object* x) {
     lean_object* result;
-    
+
     if (LEAN_IS_SCALAR(x) && LEAN_UNBOX_SCALAR(x) == 0) {
         /* 基本情况: 0! = 1 */
         result = LEAN_BOX_SCALAR(1);
     } else {
         /* 递归情况: n! = n * (n-1)! */
         lean_dec(x);  /* 释放参数引用 */
-        
+
         lean_object* n_minus_1 = lean_nat_sub(x, LEAN_BOX_SCALAR(1));
         lean_object* sub_result = lean_fac(n_minus_1);
         lean_dec(n_minus_1);
-        
+
         result = lean_nat_mul(x, sub_result);
         lean_dec(sub_result);
     }
-    
+
     return result;
 }
 
@@ -758,27 +758,27 @@ typedef struct {
 /* 应用闭包 */
 LEAN_EXPORT lean_object* lean_apply_1(lean_object* f, lean_object* a1) {
     lean_closure* cl = (lean_closure*)f;
-    
+
     if (cl->m_arity == 1) {
         /* 参数足够，直接调用 */
         return cl->m_fun(a1);
     } else {
         /* 部分应用，创建新闭包 */
         lean_closure* new_cl = lean_alloc_closure(
-            cl->m_fun, 
+            cl->m_fun,
             cl->m_arity - 1,
             cl->m_header.m_rc >> 1  /* 捕获数量 */ + 1
         );
-        
+
         /* 复制现有捕获 */
         for (size_t i = 0; i < (cl->m_header.m_rc >> 1); i++) {
             new_cl->m_captured[i] = cl->m_captured[i];
             lean_inc(cl->m_captured[i]);
         }
-        
+
         /* 添加新参数 */
         new_cl->m_captured[cl->m_header.m_rc >> 1] = a1;
-        
+
         lean_dec(f);
         return (lean_object*)new_cl;
     }
@@ -797,7 +797,7 @@ LEAN_EXPORT lean_object* sum_naive(lean_object* n) {
         lean_object* pred = lean_nat_sub(n, LEAN_BOX_SCALAR(1));
         lean_object* rest = sum_naive(pred);
         lean_dec(pred);
-        
+
         lean_object* result = lean_nat_add(n, rest);
         lean_dec(rest);
         lean_dec(n);
@@ -809,7 +809,7 @@ LEAN_EXPORT lean_object* sum_naive(lean_object* n) {
 LEAN_EXPORT lean_object* sum_tail(lean_object* n, lean_object* acc) {
     lean_object* current_n = n;
     lean_object* current_acc = acc;
-    
+
 TAIL_CALL:
     if (LEAN_IS_SCALAR(current_n) && LEAN_UNBOX_SCALAR(current_n) == 0) {
         lean_dec(current_n);
@@ -817,10 +817,10 @@ TAIL_CALL:
     } else {
         lean_object* new_acc = lean_nat_add(current_acc, current_n);
         lean_dec(current_acc);
-        
+
         lean_object* new_n = lean_nat_sub(current_n, LEAN_BOX_SCALAR(1));
         lean_dec(current_n);
-        
+
         /* 尾递归优化: 跳转而非调用 */
         current_n = new_n;
         current_acc = new_acc;
@@ -1883,9 +1883,9 @@ theorem primes_infinite : ∀ n : ℕ, ∃ p > n, p.Prime := by
   -- 考虑 n! + 1
   let m := Nat.factorial n + 1
   have hm : 0 < m := by positivity
-  
+
   obtain ⟨p, hp_prime, hp_dvd⟩ := Nat.exists_prime_and_dvd (by linarith : m ≠ 0)
-  
+
   use p
   constructor
   · -- 证明 p > n
@@ -2238,17 +2238,17 @@ namespace Std4Examples
 
 def efficientArrayOps : IO Unit := do
   let a := #[1, 2, 3, 4, 5]
-  
+
   -- O(1)访问
   let x := a[2]!  -- 3
-  
+
   -- 写时复制
   let b := a.push 6  -- a保持不变
-  
+
   -- 原地修改 (如果是唯一引用)
   let mut c := a
   c := c.set! 0 10
-  
+
   IO.println s!"a = {a}, b = {b}, c = {c}"
 
 /- ========== HashMap与HashSet ========== -/
@@ -2256,16 +2256,16 @@ def efficientArrayOps : IO Unit := do
 -- 高性能哈希表
 def hashMapExample : IO Unit := do
   let mut m : Std.HashMap String Nat := {}
-  
+
   -- 插入
   m := m.insert "one" 1
   m := m.insert "two" 2
-  
+
   -- 查找
   match m.find? "one" with
   | some n => IO.println s!"Found: {n}"
   | none => IO.println "Not found"
-  
+
   -- 遍历
   for (k, v) in m do
     IO.println s!"{k} -> {v}"
@@ -2278,7 +2278,7 @@ import Std.Data.RBMap
 def rbMapExample : IO Unit := do
   let m : Std.RBMap String Nat Ord.compare :=
     Std.RBMap.empty.insert "b" 2 |>.insert "a" 1
-  
+
   -- 按键顺序遍历
   for (k, v) in m do
     IO.println s!"{k} -> {v}"  -- 输出按a, b顺序
@@ -2308,14 +2308,14 @@ namespace Std4IOExamples
 def fileOperations : IO Unit := do
   -- 读取整个文件
   let content ← IO.FS.readFile "test.txt"
-  
+
   -- 逐行读取
   let h ← IO.FS.Handle.mk "test.txt" IO.FS.Mode.read
   let mut line ← h.getLine
   while !line.isEmpty do
     IO.println line
     line ← h.getLine
-  
+
   -- 写入文件
   IO.FS.writeFile "output.txt" "Hello, Lean!"
 
@@ -2326,7 +2326,7 @@ def processExample : IO Unit := do
     cmd := "echo"
     args := #["Hello from subprocess"]
   }
-  
+
   let exitCode ← child.wait
   IO.println s!"Process exited with code {exitCode}"
 
@@ -2339,7 +2339,7 @@ def socketExample : IO Unit := do
   -- socket.connect (Socket.SockAddr4.mk addr port)
   -- socket.send data
   -- socket.recv bufSize
-  
+
   IO.println "Socket operations require additional libraries"
 
 /- ========== 任务并行 ========== -/
@@ -2350,32 +2350,32 @@ def parallelExample : IO Unit := do
     IO.sleep 100
     return "Result 1"
   )
-  
+
   let task2 ← IO.asTask (do
     IO.sleep 200
     return "Result 2"
   )
-  
+
   -- 等待结果
   let r1 ← IO.wait task1
   let r2 ← IO.wait task2
-  
+
   IO.println s!"{r1}, {r2}"
 
 /- ========== 原子操作 ========== -/
 
 def atomicExample : IO Unit := do
   let counter ← IO.mkRef 0
-  
+
   -- 原子读取
   let val ← counter.get
-  
+
   -- 原子修改
   counter.modify (· + 1)
-  
+
   -- CAS操作
   let success ← counter.compareAndSet val (val + 1)
-  
+
   IO.println s!"Counter: {← counter.get}, CAS success: {success}"
 
 end Std4IOExamples
@@ -2446,7 +2446,7 @@ theorem partial_example (p q : Prop) : (p → q) → p → q := by
 theorem structured_example (n : Nat) : n + 0 = n := by
   induction n with
   | zero => simp
-  | succ n ih => 
+  | succ n ih =>
       aesop (add unsafe simp [ih])  -- 在归纳步骤中使用Aesop
 
 end AesopExamples
@@ -2488,10 +2488,10 @@ def counterWidget : Component CounterState where
   javascript := "
     import * as React from 'react';
     import { useState } from 'react';
-    
+
     export default function(props) {
       const [count, setCount] = useState(props.count);
-      
+
       return React.createElement('div', {},
         React.createElement('p', {}, `Count: ${count}`),
         React.createElement('button', {
@@ -2508,14 +2508,14 @@ def insertCodeWidget : Component String where
   javascript := "
     import * as React from 'react';
     import { EditorContext } from '@leanprover/infoview';
-    
+
     export default function(props) {
       const editor = React.useContext(EditorContext);
-      
+
       const insertCode = async () => {
         await editor.insertText(props);
       };
-      
+
       return React.createElement('button', {
         onClick: insertCode
       }, `Insert: ${props}`);
@@ -2537,17 +2537,17 @@ structure PlotData where
 def plotWidget : Component PlotData where
   javascript := "
     import * as React from 'react';
-    
+
     export default function(props) {
       // 使用Canvas绘制函数图像
       const canvasRef = React.useRef(null);
-      
+
       React.useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
         // 绘制坐标轴和函数...
       }, [props]);
-      
+
       return React.createElement('canvas', {
         ref: canvasRef,
         width: 400,
@@ -2582,15 +2582,15 @@ leanInk input.lean --output output.html --format html
 
 ### 文档注释
 ```lean
-/-! 
+/-!
   # 文档头部
-  
+
   使用`/-!`和`!-/`包裹的块注释会被提取为文档。
 -/
 
-/-- 
+/--
   函数文档：说明函数的用途、参数和返回值。
-  
+
   * `x`: 输入值
   * 返回: x的平方
 -/
@@ -2605,7 +2605,7 @@ def square (x : Nat) : Nat := x * x
 
 section HiddenDetails
 --#[hide]
-def complexImplementation : Nat := 
+def complexImplementation : Nat :=
   let rec loop (n acc : Nat) : Nat :=
     if n = 0 then acc else loop (n - 1) (acc + n)
   loop 100 0
@@ -2631,7 +2631,7 @@ namespace DocGen4Examples
 
 /- ========== 文档注释规范 ========== -/
 
-/-- 
+/--
 # DocGen4文档生成系统
 
 DocGen4从源代码提取文档并生成API文档网站。
@@ -2715,10 +2715,10 @@ open Lake DSL
 package «my-project» where
   -- 版本
   version := v!"1.0.0"
-  
+
   -- 默认构建设置
   defaultTargets := #[«my-project»]
-  
+
   -- Lean版本要求
   leanOptions := #[
     ⟨`pp.unicode.fun, true⟩, -- 使用Unicode函数箭头
@@ -2731,7 +2731,7 @@ package «my-project» where
 lean_lib «MyProject» where
   -- 源代码根目录
   srcDir := "src"
-  
+
   -- 额外的构建选项
   moreLeanArgs := #["-DautoImplicit=false"]
 
@@ -2891,12 +2891,12 @@ example (p q : Prop) (hp : p) (hq : q) : p ∧ q := by
   -- hp : p
   -- hq : q
   -- ⊢ p ∧ q
-  
+
   constructor
   -- 分裂后:
   -- Case left: ⊢ p
   -- Case right: ⊢ q
-  
+
   · exact hp  -- 证明左分支
   · exact hq  -- 证明右分支
 
@@ -2947,27 +2947,27 @@ from lean_dojo import Pos, ProofState
 
 def prove_theorem(theorem: Theorem, model) -> ProofState:
     """使用神经网络尝试证明定理"""
-    
+
     # 初始状态
     state = theorem.get_initial_state()
-    
+
     while not state.is_solved:
         # 获取可能的策略
         tactics = state.get_applicable_tactics()
-        
+
         # 使用模型评分
         scores = model.score(state, tactics)
-        
+
         # 选择最佳策略
         best_tactic = tactics[scores.argmax()]
-        
+
         # 应用策略
         state = state.apply_tactic(best_tactic)
-        
+
         if state.is_error:
             # 回溯
             state = state.parent
-    
+
     return state
 
 # ========== 数据提取 ==========
@@ -2975,7 +2975,7 @@ def prove_theorem(theorem: Theorem, model) -> ProofState:
 # 提取证明数据用于训练训练
 def extract_proof_data(repo):
     data = []
-    
+
     for thm in trace(repo):
         if thm.proof is not None:
             data.append({
@@ -2984,7 +2984,7 @@ def extract_proof_data(repo):
                 'proof_steps': thm.proof.steps,
                 'dependencies': thm.dependencies
             })
-    
+
     return data
 
 # ========== 与LLM结合 ==========
@@ -2993,7 +2993,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 def llm_prove(theorem_statement: str, model, tokenizer) -> str:
     """使用LLM生成证明"""
-    
+
     prompt = f"""
 Theorem: {theorem_statement}
 
@@ -3002,23 +3002,23 @@ Please prove this theorem in Lean 4:
 ```lean
 theorem my_theorem : {theorem_statement} := by
 """
-    
+
     inputs = tokenizer(prompt, return_tensors="pt")
     outputs = model.generate(**inputs, max_length=512)
-    
+
     return tokenizer.decode(outputs[0])
 
 # 验证生成的证明
 def verify_proof(lean_code: str) -> bool:
     import subprocess
-    
+
     result = subprocess.run(
         ["lean", "--stdin"],
         input=lean_code,
         capture_output=True,
         text=True
     )
-    
+
     return result.returncode == 0
 ```
 
@@ -3407,14 +3407,14 @@ import openai
 
 class LLMStep:
     """LLMStep策略调用器"""
-    
+
     def __init__(self, model: str = "gpt-4", api_key: Optional[str] = None):
         self.model = model
         self.client = openai.OpenAI(api_key=api_key)
-    
+
     def generate_tactics(self, goal: str, context: str, n_suggestions: int = 5) -> List[str]:
         """基于当前目标生成策略建议"""
-        
+
         prompt = f"""
 You are a Lean 4 proof assistant. Given the current proof state, suggest the next tactic.
 
@@ -3426,7 +3426,7 @@ Context:
 
 Suggest {n_suggestions} different tactics:
 """
-        
+
         response = self.client.chat.completions.create(
             model=self.model,
             messages=[
@@ -3436,12 +3436,12 @@ Suggest {n_suggestions} different tactics:
             n=n_suggestions,
             temperature=0.7
         )
-        
+
         return [choice.message.content for choice in response.choices]
-    
+
     def complete_proof(self, theorem_statement: str, partial_proof: str = "") -> str:
         """尝试完成证明"""
-        
+
         prompt = f"""
 Complete the following Lean 4 proof:
 
@@ -3457,7 +3457,7 @@ Partial Proof:
 
 Provide the complete proof:
 """
-        
+
         response = self.client.chat.completions.create(
             model=self.model,
             messages=[
@@ -3466,23 +3466,23 @@ Provide the complete proof:
             ],
             temperature=0.5
         )
-        
+
         return response.choices[0].message.content
 
 # 使用示例
 if __name__ == "__main__":
     llm = LLMStep()
-    
+
     # 生成策略建议
     suggestions = llm.generate_tactics(
         goal="n + 0 = n",
         context="n : ℕ",
         n_suggestions=3
     )
-    
+
     for i, tactic in enumerate(suggestions, 1):
         print(f"Suggestion {i}: {tactic}")
-    
+
     # 尝试完整证明
     proof = llm.complete_proof(
         theorem_statement="theorem add_zero (n : ℕ) : n + 0 = n",
@@ -3615,7 +3615,7 @@ namespace BlockchainVerification
 /- ========== 智能合约验证 ========== -/
 
 -- 简单代币合约
-def TokenState := 
+def TokenState :=
   { balances : Address → Nat
     totalSupply : Nat
     balances_sum_eq_total : ∑ a, balances a = totalSupply }
@@ -3654,7 +3654,7 @@ def PBFTView :=
 
 -- 安全性质: 安全性 (Safety)
 theorem pbft_safety (view : PBFTView) :
-    ∀ committed_blocks, 
+    ∀ committed_blocks,
     all_correct_replicas_agree view committed_blocks := by
   -- PBFT安全性质证明
   sorry
@@ -3770,13 +3770,13 @@ def additionWorld : GameWorld where
       statement := "theorem zero_add (n : Nat) : 0 + n = n"
       hints := ["使用归纳法", "基本情况: 0 + 0 = 0", "归纳步骤: 假设对n成立，证明对succ n"]
       solution := "induction n with d hd; rfl; rw [Nat.add_succ, hd]" },
-    
+
     { number := 2
       description := "加法结合律"
       statement := "theorem add_assoc (a b c : Nat) : (a + b) + c = a + (b + c)"
       hints := ["对a使用归纳法", "使用zero_add和succ_add引理"]
       solution := "induction a; rfl; simp [Nat.add_succ, Nat.succ_add, *]" },
-    
+
     { number := 3
       description := "加法交换律"
       statement := "theorem add_comm (a b : Nat) : a + b = b + a"
@@ -3850,7 +3850,7 @@ theorem fermat_last_theorem (n : Nat) (h : n ≥ 3) (a b c : Nat) (ha : a > 0) (
 
 -- 相关: 椭圆曲线的模性
 theorem modularity_theorem {E : EllipticCurve ℚ} :
-    ∃ (N : Nat) (f : ModularForm 2 N), 
+    ∃ (N : Nat) (f : ModularForm 2 N),
     L(E, s) = L(f, s) := by
   -- Wiles-Taylor定理
   sorry
@@ -3989,8 +3989,8 @@ def PartialRecursive : Nat →. Nat :=
 
 -- Church-Turing论题的形式化
 def ChurchTuringThesis : Prop :=
-  ∀ (f : Nat → Nat), 
-  Computable f ↔ 
+  ∀ (f : Nat → Nat),
+  Computable f ↔
   (∃ (t : TuringMachine), t.compute = f)
 
 -- 停机问题不可判定
@@ -4001,7 +4001,7 @@ theorem halting_problem_undecidable :
 
 -- Gödel不完备定理
 theorem goedel_incompleteness (T : Theory) [Consistent T] [Decidable T] :
-    ∃ (G : Sentence), 
+    ∃ (G : Sentence),
     T ⊬ G ∧ T ⊬ ¬G ∧ T ⊢ (G ↔ ¬Provable ⌜G⌝) := by
   -- Gödel第一不完备定理
   sorry
@@ -4323,31 +4323,31 @@ def MillenniumProblems : List OpenProblem := [
     statement := P_vs_NP
     status := .statementComplete
     relatedMathlibModules := [`Computability, `Complexity] },
-  
+
   { name := "Hodge Conjecture"
     description := "Hodge猜想"
     statement := HodgeConjecture  -- 需要定义
     status := .notStarted
     relatedMathlibModules := [`AlgebraicGeometry] },
-  
+
   { name := "Riemann Hypothesis"
     description := "黎曼假设"
     statement := RiemannHypothesis
     status := .partialProgress 30
     relatedMathlibModules := [`NumberTheory, `ComplexAnalysis] },
-  
+
   { name := "Yang-Mills Existence"
     description := "Yang-Mills理论的存在性与质量缺口"
     statement := YangMillsExistence  -- 需要定义
     status := .notStarted
     relatedMathlibModules := [`MathematicalPhysics] },
-  
+
   { name := "Navier-Stokes Existence"
     description := "Navier-Stokes方程解的存在性与光滑性"
     statement := NavierStokesExistence
     status := .specialCases
     relatedMathlibModules := [`PDE, `FluidDynamics] },
-  
+
   { name := "Birch and Swinnerton-Dyer"
     description := "BSD猜想"
     statement := BSDConjecture
@@ -4470,12 +4470,12 @@ set_option trace.aesop true
 ---
 
 > **文档完成声明**
-> 
+>
 > 本文档全面覆盖了Lean 4生态系统的主要组件，包括：
 > - 语言核心机制
 > - Mathlib4数学图书馆的各主要分支
 > - 核心工具和框架
 > - 工业和教育应用案例
 > - 与数学基础的深层联系
-> 
+>
 > 为C_Lang知识库提供了完整的Lean 4参考资源。

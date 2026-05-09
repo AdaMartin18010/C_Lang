@@ -4,6 +4,7 @@
 ## 🔗 全面知识关联体系
 
 ### 【全局层】知识库导航
+
 | 维度 | 目标文档 | 导航作用 |
 |:-----|:---------|:---------|
 | **总索引** | [../../00_GLOBAL_INDEX.md](../../00_GLOBAL_INDEX.md) | 完整知识图谱入口，全局视角 |
@@ -12,9 +13,10 @@
 | **概念映射** | [../../06_Thinking_Representation/05_Concept_Mappings/readme.md](../../06_Thinking_Representation/05_Concept_Mappings/readme.md) | 核心概念等价关系图 |
 
 ### 【阶段层】学习定位
-**当前模块**: 知识库  
-**难度等级**: L1-L6  
-**前置依赖**: 核心知识体系  
+
+**当前模块**: 知识库
+**难度等级**: L1-L6
+**前置依赖**: 核心知识体系
 **后续延伸**: 持续学习
 
 ```
@@ -28,6 +30,7 @@
 ```
 
 ### 【层次层】纵向知识链
+
 | 层级 | 关联文档 | 层次关系 |
 |:-----|:---------|:---------|
 | **理论基础** | [../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md](../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/readme.md) | 语义学理论基础 |
@@ -36,6 +39,7 @@
 | **系统实现** | [../../03_System_Technology_Domains/readme.md](../../03_System_Technology_Domains/readme.md) | 系统级实现 |
 
 ### 【局部层】横向关联网
+
 | 关联类型 | 目标文档 | 关联说明 |
 |:---------|:---------|:---------|
 | **技术扩展** | [../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 并发编程技术 |
@@ -44,6 +48,7 @@
 | **实践案例** | [../../04_Industrial_Scenarios/readme.md](../../04_Industrial_Scenarios/readme.md) | 工业实践场景 |
 
 ### 【总体层】知识体系架构
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                     总体知识体系架构                          │
@@ -59,6 +64,7 @@
 ```
 
 ### 【决策层】学习路径选择
+
 | 目标 | 推荐路径 | 关键文档 |
 |:-----|:---------|:---------|
 | **系统学习** | 01 → 02 → 03 → 04 | 按顺序阅读各模块 |
