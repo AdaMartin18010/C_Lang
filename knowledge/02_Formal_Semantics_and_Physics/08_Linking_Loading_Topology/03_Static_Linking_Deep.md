@@ -496,7 +496,7 @@ readelf -r main_static              # 可执行文件（应无重定位）
 ### 前置知识
 
 - [编译与构建](../../01_Core_Knowledge_System/05_Engineering_Layer/01_Compilation_Build.md)
-- [ELF文件格式 [链接失效]](./readme.md#目标文件格式)
+- [ELF文件格式 [链接失效]](./README.md#目标文件格式)
 - [C与汇编映射](../06_C_Assembly_Mapping/README.md)
 
 ### 后续延伸

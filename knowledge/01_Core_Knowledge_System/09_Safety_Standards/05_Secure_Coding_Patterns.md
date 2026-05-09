@@ -572,13 +572,13 @@ void internal_function(int *arr, size_t n) {
 ### 前置知识
 
 - [安全编码指南](./04_Secure_Coding_Guide.md)
-- [MISRA C:2023 [链接失效]](../MISRA_C_2023/readme.md)
-- [CERT C [链接失效]](../CERT_C_2024/readme.md)
+- [MISRA C:2023 [链接失效]](../MISRA_C_2023/README.md)
+- [CERT C [链接失效]](../CERT_C_2024/README.md)
 
 ### 后续延伸
 
 - [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md)
-- [形式化验证 [链接失效]](../../../02_Formal_Semantics_and_Physics/11_CompCert_Verification/readme.md)
+- [形式化验证 [链接失效]](../../../02_Formal_Semantics_and_Physics/11_CompCert_Verification/README.md)
 
 ### 参考
 

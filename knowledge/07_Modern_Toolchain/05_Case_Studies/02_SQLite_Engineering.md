@@ -1558,7 +1558,7 @@ SQLite 的工程实践提供了以下可借鉴的关键点：
 
 ## 参考资源
 
-- [SQLite 官方源码](https://sqlite.org/src/doc/trunk/readme.md)
+- [SQLite 官方源码](https://sqlite.org/src/doc/trunk/README.md)
 - [SQLite 架构文档](https://sqlite.org/arch.html)
 - [SQLite 查询规划器](https://sqlite.org/queryplanner.html)
 - [SQLite WAL 模式](https://sqlite.org/wal.html)

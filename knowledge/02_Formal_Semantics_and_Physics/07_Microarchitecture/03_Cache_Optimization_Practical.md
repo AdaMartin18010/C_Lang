@@ -347,4 +347,4 @@ void measure_cache() {
 ### 后续延伸
 
 - [SIMD优化 [链接失效]](./04_SIMD_Optimization.md)
-- [并发编程 [链接失效]](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md)
+- [并发编程 [链接失效]](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md)

@@ -978,7 +978,7 @@ class LlamaContext {
 ### 优化参考
 
 - [llama.cpp Performance](https://github.com/ggerganov/llama.cpp/blob/master/docs/performance.md) - 性能优化指南
-- [Quantization Guide](https://github.com/ggerganov/llama.cpp/blob/master/examples/quantize/readme.md) - 量化指南
+- [Quantization Guide](https://github.com/ggerganov/llama.cpp/blob/master/examples/quantize/README.md) - 量化指南
 
 ---
 
