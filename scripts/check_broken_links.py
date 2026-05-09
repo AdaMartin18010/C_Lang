@@ -50,8 +50,12 @@ for root, dirs, files in os.walk('knowledge'):
                 text = match.group(1)
                 link = match.group(2)
                 
-                # Skip external links
+                # Skip external links and non-markdown internal links
                 if link.startswith('http://') or link.startswith('https://') or link.startswith('mailto:') or link.startswith('#'):
+                    continue
+                # Skip non-markdown file links (html, pdf, images, etc.)
+                link_lower = link.split('#')[0].lower()
+                if any(link_lower.endswith(ext) for ext in ['.html', '.htm', '.pdf', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.mp4', '.webm']):
                     continue
                 
                 # Skip anchor-only links
@@ -75,18 +79,21 @@ for root, dirs, files in os.walk('knowledge'):
                 
                 total += 1
                 
+                # Remove anchor
+                link_no_anchor = link.split('#')[0]
+                
+                # Check if it's a directory link (trailing / before normpath strips it)
+                is_dir_link = link_no_anchor.endswith('/')
+                
                 # Resolve relative path
                 if link.startswith('/'):
-                    target = os.path.normpath(os.path.join('knowledge', link.lstrip('/')))
+                    target = os.path.normpath(os.path.join('knowledge', link_no_anchor.lstrip('/')))
                 else:
-                    target = os.path.normpath(os.path.join(root, link))
+                    target = os.path.normpath(os.path.join(root, link_no_anchor))
                 
-                # Remove anchor
-                target = target.split('#')[0]
-                
-                # For directory links (trailing /), check if README.md exists
-                if target.endswith(('/', '\\')):
-                    target_readme = target + 'README.md'
+                # For directory links, check if README.md exists
+                if is_dir_link:
+                    target_readme = os.path.join(target, 'README.md')
                     if os.path.exists(target_readme):
                         continue
                 
