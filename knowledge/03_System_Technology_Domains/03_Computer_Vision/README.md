@@ -14,7 +14,7 @@
 |:-----|:---------|:-----|
 | [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心基础 | 图像矩阵操作 |
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 图像缓冲区管理 |
-| [系统编程](../01_System_Programming/readme.md) | 系统基础 | V4L2设备操作 |
+| [系统编程](../01_System_Programming/README.md) | 系统基础 | V4L2设备操作 |
 
 ### 核心技术
 

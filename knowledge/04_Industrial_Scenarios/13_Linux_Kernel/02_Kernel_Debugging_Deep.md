@@ -419,8 +419,8 @@ cat /sys/kernel/slab/kmalloc-256/alloc_calls
 
 ### 后续延伸
 
-- [性能优化](../01_High_Performance/readme.md)
-- [内核安全](../06_Security/readme.md)
+- [性能优化](../01_High_Performance/README.md)
+- [内核安全](../06_Security/README.md)
 
 ### 参考
 

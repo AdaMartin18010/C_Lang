@@ -13,7 +13,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [并发编程](../14_Concurrency_Parallelism/README.md) | 核心基础 | 多线程服务器模型 |
-| [系统编程](../01_System_Programming/readme.md) | 系统基础 | 文件描述符、I/O |
+| [系统编程](../01_System_Programming/README.md) | 系统基础 | 文件描述符、I/O |
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 缓冲区管理 |
 
 ### 服务器设计模式

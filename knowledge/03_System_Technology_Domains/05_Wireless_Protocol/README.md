@@ -13,7 +13,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [嵌入式系统](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | 应用场景 | 嵌入式无线开发 |
-| [系统编程](../01_System_Programming/readme.md) | 系统基础 | 设备驱动、中断 |
+| [系统编程](../01_System_Programming/README.md) | 系统基础 | 设备驱动、中断 |
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 缓冲区管理 |
 
 ### 核心技术

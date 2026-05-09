@@ -93,12 +93,12 @@
 
 - [算法复杂度分析](./02_Algorithm_Analysis.md)
 - [并发数据结构](../03_System_Technology_Domains/14_Concurrency_Parallelism/07_Concurrent_Data_Structures.md)
-- [高性能计算](../04_Industrial_Scenarios/01_High_Performance/readme.md)
+- [高性能计算](../04_Industrial_Scenarios/01_High_Performance/README.md)
 
 ### 实践案例
 
 - [Redis源码分析](../04_Industrial_Scenarios/08_Real_World_Cases/01_Redis_Case_Study.md)
-- [Linux内核数据结构](../03_System_Technology_Domains/01_System_Programming/readme.md)
+- [Linux内核数据结构](../03_System_Technology_Domains/01_System_Programming/README.md)
 
 ---
 

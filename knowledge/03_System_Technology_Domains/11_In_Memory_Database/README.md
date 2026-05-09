@@ -12,7 +12,7 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [数据结构](../../06_Thinking_Representation/04_Data_Structures/readme.md) | 算法基础 | B+树、哈希表 |
+| [数据结构](../../06_Thinking_Representation/04_Data_Structures/README.md) | 算法基础 | B+树、哈希表 |
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心基础 | 内存池、分配器 |
 | [并发编程](../14_Concurrency_Parallelism/README.md) | 并行基础 | 锁、无锁结构 |
 

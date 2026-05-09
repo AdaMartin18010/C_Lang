@@ -30,7 +30,7 @@
 |:-----|:---------|:-----|
 | [C11内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md) | 一致性模型 | 持久内存序 |
 | [并发编程](../14_Concurrency_Parallelism/README.md) | 事务实现 | 乐观并发控制 |
-| [存储系统](../../04_Industrial_Scenarios/01_High_Performance/readme.md) | 系统架构 | 存储引擎设计 |
+| [存储系统](../../04_Industrial_Scenarios/01_High_Performance/README.md) | 系统架构 | 存储引擎设计 |
 
 ## 目录
 
