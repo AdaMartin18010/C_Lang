@@ -1,338 +1,262 @@
-# SIMD向量化编程深度指南
+# SIMD 与向量化编程实战 (SIMD Intrinsics Programming)
 
-> **层级定位**: 02 Formal Semantics and Physics / 09 Physical Machine Layer
-> **难度级别**: L4-L5
-> **预估学习时间**: 10-12 小时
+> **层级定位**: 02 Formal Semantics and Physics / 09 Physical_Machine_Layer
+> **主题**: x86-64 SSE/AVX 与 RISC-V V-ext intrinsics 编程
+> **难度级别**: L4 分析 → L5 专家
+> **预估学习时间**: 12-18 小时
+> **对标资料**: Intel Intrinsics Guide / RISC-V V Spec / Agner Fog
 
----
+## 概述
 
-## 目录
-
-- [SIMD向量化编程深度指南](#simd向量化编程深度指南)
-  - [目录](#目录)
-  - [1. SIMD概述](#1-simd概述)
-    - [1.1 什么SIMD](#11-什么simd)
-    - [1.2 向量指令集演进](#12-向量指令集演进)
-  - [2. x86 SIMD编程](#2-x86-simd编程)
-    - [2.1 SSE/AVX内建函数](#21-sseavx内建函数)
-    - [2.2 向量化循环](#22-向量化循环)
-    - [2.3 水平操作与归约](#23-水平操作与归约)
-  - [3. ARM NEON编程](#3-arm-neon编程)
-    - [3.1 NEON基础](#31-neon基础)
-    - [3.2 NEON矩阵乘法](#32-neon矩阵乘法)
-  - [4. 自动向量化](#4-自动向量化)
-    - [4.1 GCC/Clang自动向量化](#41-gccclang自动向量化)
-    - [4.2 帮助编译器向量化](#42-帮助编译器向量化)
-  - [5. 性能考量](#5-性能考量)
-    - [5.1 向量化最佳实践](#51-向量化最佳实践)
-    - [5.2 性能测量](#52-性能测量)
-  - [关联导航](#关联导航)
-    - [前置知识](#前置知识)
-    - [后续延伸](#后续延伸)
-    - [参考](#参考)
-
-## 1. SIMD概述
-
-### 1.1 什么SIMD
-
-```
-SISD (传统):                    SIMD (向量化):
-┌─────────┐                     ┌─────────┐
-│  数据1   │                     │ 数据1-8 │
-└────┬────┘                     │ 数据2-8 │
-     │                         │ 数据3-8 │
-     ▼                         │ 数据4-8 │
-┌─────────┐                     │ 数据5-8 │
-│  运算    │                     │ 数据6-8 │
-└────┬────┘                     │ 数据7-8 │
-     │                         │ 数据8-8 │
-     ▼                         └────┬────┘
-┌─────────┐                          │
-│  结果    │                          ▼
-└─────────┘                     ┌─────────┐
-                                │  8x运算  │
-                                └────┬────┘
-                                     │
-                                     ▼
-                                ┌─────────┐
-                                │  8x结果  │
-                                └─────────┘
-```
-
-### 1.2 向量指令集演进
-
-| 指令集 | 位宽 | 寄存器 | 数据类型 | 架构 |
-|:-------|:-----|:-------|:---------|:-----|
-| MMX | 64-bit | 8 | int | x86 |
-| SSE | 128-bit | 8/16 | float/int | x86 |
-| AVX | 256-bit | 16 | float/int | x86 |
-| AVX-512 | 512-bit | 32 | float/int | x86 |
-| NEON | 128-bit | 32 | float/int | ARM |
-| SVE | 可变 | 可变 | float/int | ARM |
+SIMD（Single Instruction Multiple Data，单指令多数据）是现代 CPU 最核心的并行计算机制。一条 SIMD 指令可以同时处理 4-64 个数据元素，理论加速比与数据宽度成正比。本模块从程序员视角出发，系统阐述 x86-64 SSE/AVX/AVX-512 和 RISC-V Vector 扩展的 intrinsics 编程技术，包含完整的代码示例和性能对比，对齐 Intel 官方 Intrinsics Guide 和 RISC-V V 规范。
 
 ---
 
-## 2. x86 SIMD编程
+## 1. SIMD 架构概览
 
-### 2.1 SSE/AVX内建函数
+| 扩展 | 寄存器宽度 | 典型数据类型 | 同时处理元素数 (float) |
+|:-----|:-----------|:-------------|:----------------------|
+| **SSE** | 128-bit | `__m128` | 4 × float32 |
+| **SSE2** | 128-bit | `__m128i/d` | 2 × float64 / 16 × int8 |
+| **AVX** | 256-bit | `__m256` | 8 × float32 |
+| **AVX-512** | 512-bit | `__m512` | 16 × float32 |
+| **RISC-V V** | 可变 (VLEN) | `vfloat32m1_t` | 取决于 VLEN (通常 4-16) |
+| **ARM NEON** | 128-bit | `float32x4_t` | 4 × float32 |
+
+### SIMD 寄存器文件 (x86-64)
+
+```
+XMM0-XMM15:  128-bit (SSE)    — 16 个寄存器
+YMM0-YMM15:  256-bit (AVX)    — 低 128-bit 与 XMM 重叠
+ZMM0-ZMM31:  512-bit (AVX-512) — 扩展至 32 个寄存器 (x86-64)
+```
+
+---
+
+## 2. x86-64 AVX2 Intrinsics 编程
+
+### 头文件与编译
+
+```c
+#include <immintrin.h>    // AVX2 + AVX-512
+
+// 编译选项
+gcc -O3 -mavx2 -mfma program.c -o program    # AVX2
+ gcc -O3 -mavx512f -mavx512vl program.c      # AVX-512
+```
+
+### 基础数据类型
+
+```c
+__m256   a;   // 8 × float32
+__m256d  b;   // 4 × float64
+__m256i  c;   // 整数向量: 32 × int8, 16 × int16, 8 × int32, 4 × int64
+```
+
+### 核心操作示例：向量加法
 
 ```c
 #include <immintrin.h>
+#include <stdio.h>
 
-// SSE: 128-bit (4个float或2个double)
-__m128 vec_a = _mm_set_ps(4.0, 3.0, 2.0, 1.0);  // 倒序！
-__m128 vec_b = _mm_set_ps(8.0, 7.0, 6.0, 5.0);
-__m128 result = _mm_add_ps(vec_a, vec_b);       // [12,10,8,6]
-
-// AVX: 256-bit (8个float或4个double)
-__m256 avx_a = _mm256_set_ps(8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0);
-__m256 avx_b = _mm256_set1_ps(2.0);             // 广播
-__m256 avx_res = _mm256_mul_ps(avx_a, avx_b);   // [16,14,12,10,8,6,4,2]
-
-// 加载/存储
-float data[8] __attribute__((aligned(32)));
-__m256 loaded = _mm256_load_ps(data);           // 对齐加载
-_mm256_store_ps(data, avx_res);                 // 对齐存储
-
-// 未对齐加载
-__m256 unaligned = _mm256_loadu_ps(data);
-```
-
-### 2.2 向量化循环
-
-```c
-// 普通循环
-void saxpy_normal(float *y, const float *x, float a, int n) {
-    for (int i = 0; i < n; i++) {
-        y[i] = a * x[i] + y[i];
-    }
-}
-
-// AVX向量化 (一次处理8个float)
-void saxpy_avx(float *y, const float *x, float a, int n) {
-    __m256 va = _mm256_set1_ps(a);  // 广播a到所有元素
-
+void vec_add_avx2(const float *a, const float *b, float *out, int n) {
+    // 每次处理 8 个 float (256-bit / 32-bit)
     int i = 0;
-    // 主循环：每次8个
-    for (; i <= n - 8; i += 8) {
-        __m256 vx = _mm256_loadu_ps(&x[i]);
-        __m256 vy = _mm256_loadu_ps(&y[i]);
-        vy = _mm256_add_ps(_mm256_mul_ps(va, vx), vy);
-        _mm256_storeu_ps(&y[i], vy);
+    for (; i + 8 <= n; i += 8) {
+        __m256 va = _mm256_loadu_ps(&a[i]);   // 非对齐加载
+        __m256 vb = _mm256_loadu_ps(&b[i]);
+        __m256 vc = _mm256_add_ps(va, vb);    // 8 个并行加法
+        _mm256_storeu_ps(&out[i], vc);
     }
+    // 处理尾部不足 8 个的元素
+    for (; i < n; i++)
+        out[i] = a[i] + b[i];
+}
+```
 
-    // 处理尾部
-    for (; i < n; i++) {
-        y[i] = a * x[i] + y[i];
+### 点积计算 (FMA 优化)
+
+```c
+float dot_product_avx2(const float *a, const float *b, int n) {
+    __m256 sum = _mm256_setzero_ps();
+    int i = 0;
+    for (; i + 8 <= n; i += 8) {
+        __m256 va = _mm256_loadu_ps(&a[i]);
+        __m256 vb = _mm256_loadu_ps(&b[i]);
+        sum = _mm256_fmadd_ps(va, vb, sum);   // 乘加融合: a*b + sum
     }
+    // 水平求和
+    float result[8];
+    _mm256_storeu_ps(result, sum);
+    float total = 0;
+    for (int j = 0; j < 8; j++) total += result[j];
+    for (; i < n; i++) total += a[i] * b[i];
+    return total;
 }
 ```
 
-### 2.3 水平操作与归约
+### 矩阵乘法 (分块 + AVX2)
 
 ```c
-// 水平求和（将8个float相加为1个）
-float hsum_avx(__m256 v) {
-    // v = [a,b,c,d,e,f,g,h]
-    __m128 lo = _mm256_extractf128_ps(v, 0);  // [a,b,c,d]
-    __m128 hi = _mm256_extractf128_ps(v, 1);  // [e,f,g,h]
-    lo = _mm_add_ps(lo, hi);                   // [a+e,b+f,c+g,d+h]
-
-    // 继续折叠
-    __m128 shuf = _mm_movehdup_ps(lo);         // [b+f,d+h,b+f,d+h]
-    lo = _mm_add_ps(lo, shuf);                 // [a+e+b+f, ..., ...]
-    shuf = _mm_movehl_ps(shuf, lo);            // [c+g+d+h, ...]
-    lo = _mm_add_ss(lo, shuf);                 // 最终和
-
-    return _mm_cvtss_f32(lo);
-}
-
-// AVX-512简化版本
-float hsum_avx512(__m512 v) {
-    return _mm512_reduce_add_ps(v);
-}
-```
-
----
-
-## 3. ARM NEON编程
-
-### 3.1 NEON基础
-
-```c
-#include <arm_neon.h>
-
-// 128-bit向量类型
-float32x4_t vec4;    // 4个float
-int32x4_t ivec4;     // 4个int32
-float64x2_t dvec2;   // 2个double
-
-// 加载和存储
-float data[4];
-float32x4_t v = vld1q_f32(data);  // 加载4个float
-vst1q_f32(data, v);               // 存储
-
-// 算术运算
-float32x4_t a, b, c;
-c = vaddq_f32(a, b);  // c[i] = a[i] + b[i]
-c = vmulq_f32(a, b);  // c[i] = a[i] * b[i]
-c = vfmaq_f32(c, a, b);  // c = c + a * b (乘累加)
-
-// 广播
-float32x4_t ones = vdupq_n_f32(1.0f);
-```
-
-### 3.2 NEON矩阵乘法
-
-```c
-// 4x4矩阵乘法向量化
-void matmul_4x4_neon(float *C, const float *A, const float *B) {
-    // 加载B的列
-    float32x4_t b0 = vld1q_f32(B);
-    float32x4_t b1 = vld1q_f32(B + 4);
-    float32x4_t b2 = vld1q_f32(B + 8);
-    float32x4_t b3 = vld1q_f32(B + 12);
-
-    for (int i = 0; i < 4; i++) {
-        // 加载A的行并广播每个元素
-        float32x4_t a0 = vdupq_n_f32(A[i * 4 + 0]);
-        float32x4_t a1 = vdupq_n_f32(A[i * 4 + 1]);
-        float32x4_t a2 = vdupq_n_f32(A[i * 4 + 2]);
-        float32x4_t a3 = vdupq_n_f32(A[i * 4 + 3]);
-
-        // 计算点积
-        float32x4_t c = vmulq_f32(a0, b0);
-        c = vfmaq_f32(c, a1, b1);
-        c = vfmaq_f32(c, a2, b2);
-        c = vfmaq_f32(c, a3, b3);
-
-        vst1q_f32(C + i * 4, c);
+void matmul_avx2(const float *A, const float *B, float *C,
+                 int M, int N, int K) {
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j += 8) {
+            __m256 cvec = _mm256_setzero_ps();
+            for (int k = 0; k < K; k++) {
+                __m256 a_broadcast = _mm256_set1_ps(A[i*K + k]);
+                __m256 bvec = _mm256_loadu_ps(&B[k*N + j]);
+                cvec = _mm256_fmadd_ps(a_broadcast, bvec, cvec);
+            }
+            _mm256_storeu_ps(&C[i*N + j], cvec);
+        }
     }
 }
 ```
 
 ---
 
-## 4. 自动向量化
+## 3. RISC-V Vector (RVV) Intrinsics
 
-### 4.1 GCC/Clang自动向量化
+### RISC-V V 的核心特性
+
+- **可变向量长度 (VLEN)**: 硬件定义，软件不可见
+- **向量长度寄存器 (vl)**: 运行时设置实际处理元素数
+- **无固定向量宽度**: 同一代码可在 128-bit 到 4096-bit 向量处理器上运行
+
+### 头文件与编译
+
+```c
+#include <riscv_vector.h>
+
+// 编译
+gcc -O3 -march=rv64gcv -o program program.c
+```
+
+### 向量加法 (RISC-V V)
+
+```c
+void vec_add_rvv(const float *a, const float *b, float *out, size_t n) {
+    size_t i = 0;
+    while (i < n) {
+        // 设置向量长度: 处理 min(n-i, 硬件最大) 个元素
+        size_t vl = __riscv_vsetvl_e32m8(n - i);
+
+        vfloat32m8_t va = __riscv_vle32_v_f32m8(&a[i], vl);
+        vfloat32m8_t vb = __riscv_vle32_v_f32m8(&b[i], vl);
+        vfloat32m8_t vc = __riscv_vfadd_vv_f32m8(va, vb, vl);
+
+        __riscv_vse32_v_f32m8(&out[i], vc, vl);
+        i += vl;
+    }
+}
+```
+
+### 点积 (RISC-V V with widening)
+
+```c
+float dot_product_rvv(const float *a, const float *b, size_t n) {
+    size_t vlmax = __riscv_vsetvlmax_e32m1();
+    vfloat32m1_t vsum = __riscv_vfmv_v_f_f32m1(0.0f, vlmax);
+
+    size_t i = 0;
+    while (i < n) {
+        size_t vl = __riscv_vsetvl_e32m8(n - i);
+        vfloat32m8_t va = __riscv_vle32_v_f32m8(&a[i], vl);
+        vfloat32m8_t vb = __riscv_vle32_v_f32m8(&b[i], vl);
+
+        // 部分点积
+        vfloat32m1_t vred = __riscv_vfredusum_vs_f32m8_f32m1(
+            __riscv_vfmul_vv_f32m8(va, vb, vl), vsum, vl);
+        vsum = vred;
+        i += vl;
+    }
+
+    float result;
+    __riscv_vse32_v_f32m1(&result, vsum, 1);
+    return result;
+}
+```
+
+---
+
+## 4. 性能对比
+
+### 环境设置
 
 ```bash
-# 编译选项
--O3                    # 最高优化级别
--ftree-vectorize       # 启用向量化（-O3默认开启）
--mavx2                 # 目标AVX2
--march=native          # 针对本地CPU
--fopt-info-vec         # 输出向量化信息
--fopt-info-vec-missed  # 输出未向量化的原因
-
-# 示例
-gcc -O3 -mavx2 -fopt-info-vec program.c
+# 检查 CPU SIMD 支持
+gcc -dM -E - < /dev/null | grep -E "(SSE|AVX|RISCV)"
+cat /proc/cpuinfo | grep flags | head -1
 ```
 
-### 4.2 帮助编译器向量化
+### 典型加速比 (理论 vs 实际)
+
+| 操作 | Scalar | SSE (4-wide) | AVX2 (8-wide) | AVX-512 (16-wide) | 实际加速比 |
+|:-----|:-------|:-------------|:--------------|:------------------|:-----------|
+| float 加法 | 1× | 4× | 8× | 16× | 3-7× (AVX2) |
+| float 乘加 (FMA) | 1× | 4× | 8× | 16× | 4-12× (AVX2) |
+| int8 点积 | 1× | 16× | 32× | 64× | 8-20× (AVX2) |
+| 矩阵乘法 | 1× | ~3× | ~6× | ~10× | 4-8× (AVX2) |
+
+> **注意**: 实际加速比受内存带宽、缓存效率、数据依赖和指令发射限制影响，通常远低于理论峰值。
+
+---
+
+## 5. 关键优化技巧
+
+### 5.1 内存对齐
 
 ```c
-// 1. 对齐
-float data[1024] __attribute__((aligned(32)));
+// ❌ 非对齐加载可能慢 2-10 倍
+__m256 a = _mm256_loadu_ps(ptr);   // unaligned
 
-// 2. 使用 restrict 消除别名
-void foo(float * restrict a, const float * restrict b, int n);
+// ✅ 对齐加载（需要 32-byte 对齐）
+float *ptr alignas(32) = ...;
+__m256 a = _mm256_load_ps(ptr);    // aligned
+```
 
-// 3. 循环展开提示
-#pragma GCC unroll 4
-for (int i = 0; i < n; i++) {
-    // ...
+### 5.2 避免 SIMD ↔ Scalar 混用
+
+```c
+// ❌ 频繁在 SIMD 和标量间切换
+for (...) {
+    __m256 v = _mm256_loadu_ps(p);
+    v = _mm256_add_ps(v, ...);
+    if (v[0] > threshold) ...   // 提取标量 → 性能杀手
 }
+```
 
-// 4. 向量化断言
-#pragma GCC ivdep  // 忽略数据依赖（需谨慎）
-for (int i = 0; i < n; i++) {
-    a[i] = a[i-1] + b[i];  // 编译器可能不敢向量化
-}
+### 5.3 循环展开 + 多累加器
 
-// 5. OpenMP SIMD
-#pragma omp simd
-for (int i = 0; i < n; i++) {
-    y[i] = a * x[i] + y[i];
+```c
+// ✅ 多累加器隐藏延迟
+__m256 sum0 = _mm256_setzero_ps();
+__m256 sum1 = _mm256_setzero_ps();
+for (int i = 0; i < n; i += 16) {
+    sum0 = _mm256_fmadd_ps(_mm256_loadu_ps(&a[i]), _mm256_loadu_ps(&b[i]), sum0);
+    sum1 = _mm256_fmadd_ps(_mm256_loadu_ps(&a[i+8]), _mm256_loadu_ps(&b[i+8]), sum1);
 }
+sum0 = _mm256_add_ps(sum0, sum1);
 ```
 
 ---
 
-## 5. 性能考量
+## 6. 权威参考
 
-### 5.1 向量化最佳实践
+- **Intel Intrinsics Guide**: <https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html>
+- **RISC-V Vector Spec**: <https://github.com/riscv/riscv-v-spec>
+- **RISC-V C Intrinsics**: <https://github.com/riscv/riscv-c-api-doc>
+- **Agner Fog's Manual 1**: Instruction tables — 每条指令的延迟和吞吐
+- **"Modern Parallel Programming"** (Intel): SIMD 优化最佳实践
 
-```
-1. 内存对齐
-   - 32字节对齐用于AVX
-   - 64字节对齐用于AVX-512
+## 待补充内容
 
-2. 数据布局
-   - SOA (Structure of Arrays) 优于 AOS
-   - AOS: {x,y,z,x,y,z} - 难以向量化
-   - SOA: {x,x,x,y,y,y,z,z,z} - 容易向量化
-
-3. 避免水平操作
-   - 水平求和代价高
-   - 尽量保持垂直操作
-
-4. 注意加载/存储模式
-   - 连续访问最优
-   - 步长访问次之
-   - 随机访问最差
-```
-
-### 5.2 性能测量
-
-```c
-#include <time.h>
-
-double measure_simd(void (*func)(float*, const float*, float, int),
-                    float *y, const float *x, float a, int n,
-                    int iterations) {
-    struct timespec start, end;
-
-    // 预热
-    func(y, x, a, n);
-
-    clock_gettime(CLOCK_MONOTONIC, &start);
-    for (int i = 0; i < iterations; i++) {
-        func(y, x, a, n);
-    }
-    clock_gettime(CLOCK_MONOTONIC, &end);
-
-    double secs = (end.tv_sec - start.tv_sec) +
-                  (end.tv_nsec - start.tv_nsec) * 1e-9;
-    return secs / iterations;
-}
-
-// 计算带宽和FLOPS
-void report_performance(double time_sec, int n, int flops_per_element) {
-    double bytes_accessed = n * sizeof(float) * 2;  // 读+写
-    double flops = n * flops_per_element;
-
-    printf("带宽: %.2f GB/s\n", bytes_accessed / time_sec / 1e9);
-    printf("FLOPS: %.2f GFLOPS\n", flops / time_sec / 1e9);
-}
-```
+- [ ] AVX-512 掩码寄存器编程与向量化循环
+- [ ] ARM NEON/SVE intrinsics 对比
+- [ ] 自动向量化：如何编写编译器友好代码
+- [ ] 性能剖析：使用 Intel VTune 分析 SIMD 效率
 
 ---
 
-## 关联导航
-
-### 前置知识
-
-- [计算机体系结构](../README.md)
-- [性能优化 [链接失效]](../../07_Microarchitecture/03_Cache_Optimization_Practical.md)
-
-### 后续延伸
-
-- [GPU计算 [链接失效]](../../../03_System_Technology_Domains/06_High_Performance_Computing/02_GPU_Computing.md)
-- [矩阵运算优化 [链接失效]](../../../07_Microarchitecture/07_Matrix_Operation_Optimization.md)
-
-### 参考
-
-- Intel Intrinsics Guide: <https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html>
-- ARM NEON Reference: <https://developer.arm.com/architectures/instruction-sets/simd-isas/neon>
+*最后更新: 2026-05-10*

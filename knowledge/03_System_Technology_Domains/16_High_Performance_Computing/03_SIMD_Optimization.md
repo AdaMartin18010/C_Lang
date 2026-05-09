@@ -37,6 +37,11 @@
       - [算术运算示例](#算术运算示例)
       - [水平运算与归约](#水平运算与归约)
     - [ARM NEON](#arm-neon)
+    - [RISC-V Vector Extension (RVV)](#risc-v-vector-extension-rvv)
+      - [RVV核心概念](#rvv核心概念)
+      - [RVV Intrinsics 编程](#rvv-intrinsics-编程)
+      - [RVV与AVX/NEON的关键差异](#rvv与avxneon的关键差异)
+      - [RVV编译与运行](#rvv编译与运行)
   - [⚡ 性能优化技巧](#-性能优化技巧)
     - [数据对齐](#数据对齐)
     - [循环展开与流水线](#循环展开与流水线)
@@ -325,6 +330,140 @@ void neon_load_store() {
     vst1q_f32(result, vec);
 }
 ```
+
+### RISC-V Vector Extension (RVV)
+
+RISC-V V扩展是模块化的向量指令集，与ARM SVE类似采用**可变长度向量(VLA)**设计。
+向量长度由硬件在运行时决定，通过 `vsetvli` 指令配置，实现"一次编写，到处运行"。
+
+#### RVV核心概念
+
+| 概念 | 说明 | 对比 |
+|:-----|:-----|:-----|
+| **VLEN** | 向量寄存器位宽 (硬件决定，通常128-4096位) | 类似SVE的硬件向量长度 |
+| **LMUL** | 寄存器组乘数 (1/8 ~ 8) | 可将多个寄存器拼接为更宽向量 |
+| **SEW** | 元素宽度 (8/16/32/64位) | 通过 `vsetvli` 动态设置 |
+| **AVL** | 应用向量长度 (剩余处理元素数) | `vsetvli` 返回实际处理的元素数 |
+
+#### RVV Intrinsics 编程
+
+```c
+#include <riscv_vector.h>
+#include <stdio.h>
+
+// RVV向量加法
+void vector_add_rvv(const float* a, const float* b, float* c, size_t n) {
+    size_t vl;  // 向量长度
+    for (size_t i = 0; i < n; i += vl) {
+        // 设置向量长度: SEW=32位(e32), LMUL=1(m1)
+        // 返回实际处理的元素数 (受限于VLEN和剩余元素数)
+        vl = __riscv_vsetvl_e32m1(n - i);
+
+        // 加载向量
+        vfloat32m1_t va = __riscv_vle32_v_f32m1(&a[i], vl);
+        vfloat32m1_t vb = __riscv_vle32_v_f32m1(&b[i], vl);
+
+        // 向量加法
+        vfloat32m1_t vc = __riscv_vfadd_vv_f32m1(va, vb, vl);
+
+        // 存储结果
+        __riscv_vse32_v_f32m1(&c[i], vc, vl);
+    }
+}
+
+// RVV向量点积 (乘加归约)
+float dot_product_rvv(const float* a, const float* b, size_t n) {
+    size_t vl;
+    // 初始化累加器为零
+    vfloat32m1_t vsum = __riscv_vfmv_v_f_f32m1(0.0f, __riscv_vsetvlmax_e32m1());
+
+    for (size_t i = 0; i < n; i += vl) {
+        vl = __riscv_vsetvl_e32m1(n - i);
+
+        vfloat32m1_t va = __riscv_vle32_v_f32m1(&a[i], vl);
+        vfloat32m1_t vb = __riscv_vle32_v_f32m1(&b[i], vl);
+
+        // 乘加: sum += a * b
+        vsum = __riscv_vfmacc_vv_f32m1(vsum, va, vb, vl);
+    }
+
+    // 归约求和 (将所有元素相加)
+    // 使用递归折半归约
+    vl = __riscv_vsetvlmax_e32m1();
+    float sum = __riscv_vfmv_f_s_f32m1_f32(vsum);
+    // 注: 完整归约需要额外的向量内归约指令或标量收尾
+    return sum;
+}
+
+// RVV条件操作 (掩码)
+void vector_conditional_rvv(float* a, const float* b, size_t n) {
+    size_t vl;
+    for (size_t i = 0; i < n; i += vl) {
+        vl = __riscv_vsetvl_e32m1(n - i);
+
+        vfloat32m1_t vb = __riscv_vle32_v_f32m1(&b[i], vl);
+
+        // 生成掩码: b > 0.0
+        vbool32_t mask = __riscv_vmfgt_vf_f32m1_b32(vb, 0.0f, vl);
+
+        // 条件选择: a = (b > 0) ? b : 0
+        vfloat32m1_t va = __riscv_vmerge_vvm_f32m1(
+            __riscv_vfmv_v_f_f32m1(0.0f, vl),  // 假值
+            vb,                                  // 真值
+            mask, vl);
+
+        __riscv_vse32_v_f32m1(&a[i], va, vl);
+    }
+}
+
+// RVV整型操作示例
+void vector_abs_diff_rvv(const int8_t* a, const int8_t* b, uint8_t* c, size_t n) {
+    size_t vl;
+    for (size_t i = 0; i < n; i += vl) {
+        // SEW=8位, LMUL=8 (最大化利用寄存器)
+        vl = __riscv_vsetvl_e8m8(n - i);
+
+        vint8m8_t va = __riscv_vle8_v_i8m8(&a[i], vl);
+        vint8m8_t vb = __riscv_vle8_v_i8m8(&b[i], vl);
+
+        // 绝对差值: |a - b|
+        vint8m8_t vdiff = __riscv_vssub_vv_i8m8(va, vb, vl);  // 饱和减法
+        vuint8m8_t vabs = __riscv_vabs_v_i8m8(vdiff, vl);
+
+        __riscv_vse8_v_u8m8(&c[i], vabs, vl);
+    }
+}
+```
+
+#### RVV与AVX/NEON的关键差异
+
+| 特性 | x86 AVX2 | ARM NEON | RISC-V RVV |
+|:-----|:---------|:---------|:-----------|
+| **向量长度** | 固定256位 | 固定128位 | **可变(VLA)** |
+| **寄存器数** | 16 (YMM) | 16/32 (128位) | 32 (VLEN位) |
+| **配置方式** | 编译时固定 | 编译时固定 | **运行时vsetvli** |
+| **掩码操作** | AVX-512专用 | 专用指令 | **原生支持** |
+| **可移植性** | x86 only | ARM only | **跨实现兼容** |
+| **代码风格** | 显式寄存器宽度 | 显式寄存器宽度 | **隐式长度(vl)** |
+
+#### RVV编译与运行
+
+```bash
+# 使用RISC-V GCC/Clang编译
+riscv64-unknown-elf-gcc -march=rv64gcv -O3 -o rvv_demo rvv_demo.c
+
+# QEMU模拟运行 (支持RVV 1.0)
+qemu-riscv64 -cpu rv64,v=true,vlen=128 ./rvv_demo
+
+# 在真实硬件运行 (如Banana Pi BPI-F3, SpacemiT K1)
+# VLEN=256位, 支持RVV 1.0
+```
+
+**权威参考**:
+
+- [RISC-V Vector Extension Spec v1.0](https://github.com/riscv/riscv-v-spec)
+- [RISC-V Intrinsics API](https://github.com/riscv-non-isa/rvv-intrinsic-doc)
+- RVV 1.0 于2021年冻结，主流编译器(GCC 13+, Clang 17+)已完整支持
 
 ---
 

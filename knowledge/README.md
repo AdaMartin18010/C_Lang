@@ -397,7 +397,7 @@ flowchart TB
 - [指针深度](./01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) - C语言最核心的概念
 - [内存管理](./01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) - malloc/free到内存池管理
 
-### 2.3 L2: 形式语义与物理 (35,000+ 行 | 50+ 文件)
+### 2.3 L2: 形式语义与物理 (250,000+ 行 | 370+ 文件)
 
 **定位**: 连接C语言与物理实现的桥梁，包含编译映射、硬件架构和形式化方法。
 
@@ -433,6 +433,29 @@ C表达式 → 汇编 → 机器码 → 微操作 → ALU → 门电路
 - [ISA架构](./02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/01_Instruction_Set_Architecture.md) (16,796行)
   - ISA形式化定义→指令编码→语义函数→ABI→系统调用
   - 涵盖x86/x64/ARM/RISC-V架构
+
+- [编译器内部原理](./02_Formal_Semantics_and_Physics/11_Compiler_Internals/README.md) (238行)
+  - 编译器后端完整管道：IR→SelectionDAG→指令选择→调度→寄存器分配→代码发射
+  - 对齐 LLVM 官方文档与 CompCert 验证编译器体系
+
+- [LLVM IR 入门教程](./02_Formal_Semantics_and_Physics/12_Compiler_Optimization/05_LLVM_IR_Tutorial.md) (364行)
+  - LLVM IR 语法、指令集与编程实践
+  - 对标 LLVM Kaleidoscope Tutorial 与 Language Reference Manual
+
+- [缓存友好编程](./02_Formal_Semantics_and_Physics/07_Microarchitecture/04_Cache_Friendly_Programming.md) (234行)
+  - 缓存层次结构、局部性原理、缓存友好代码模式
+  - 对标 CMU 15-213 (CSAPP) 第6章缓存存储器层次
+
+- [链接器脚本指南](./02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/05_Linker_Scripts_Guide.md) (277行)
+  - 链接器脚本语法、内存布局、段定义、裸机/嵌入式实战
+
+- [从 NAND 门到 C 编译器](./02_Formal_Semantics_and_Physics/20_Industrial_Case_Studies/06_NAND2C_Computer_Build.md) (352行)
+  - 12个渐进式项目：布尔逻辑→ALU→时序电路→汇编器→VM→编译器→OS
+  - 对标 Hebrew University NAND2Tetris 与 Stanford CS107E
+
+- [裸机嵌入式开发](./02_Formal_Semantics_and_Physics/20_Industrial_Case_Studies/03_Baremetal_Embedded.md) (1,579行)
+  - RISC-V 启动代码、链接器脚本、中断向量表、PLIC、PMP、newlib 移植
+  - 对标 Stanford CS107E 嵌入式系统课程
 
 ### 2.4 L3: 系统技术领域 (16,400+ 行 | 33 文件)
 
@@ -597,6 +620,10 @@ flowchart LR
 | 时序逻辑 | 5h | 理解FSM和存储元件 |
 | 图灵完备 | 4h | 证明物理层到计算理论的映射 |
 
+**推荐阅读**:
+- [数字逻辑门](./02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/01_Digital_Logic_Gates.md) — 完整论证物理层到计算理论的映射
+- [从 NAND 门到 C 编译器](./02_Formal_Semantics_and_Physics/20_Industrial_Case_Studies/06_NAND2C_Computer_Build.md) — 12个渐进式项目，从门电路到完整计算机
+
 #### 阶段2: ISA与机器码 (25小时)
 
 | 主题 | 时长 | 目标 |
@@ -607,6 +634,10 @@ flowchart LR
 | ABI规范 | 5h | 掌握调用约定和内存布局 |
 | 系统调用 | 5h | 理解用户态/内核态切换 |
 
+**推荐阅读**:
+- [ISA架构](./02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/01_Instruction_Set_Architecture.md) — 涵盖x86/x64/ARM/RISC-V架构
+- [链接器脚本指南](./02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/05_Linker_Scripts_Guide.md) — 内存布局与段定义
+
 #### 阶段3: 汇编语言 (15小时)
 
 | 主题 | 时长 | 目标 |
@@ -615,6 +646,11 @@ flowchart LR
 | C-汇编映射 | 6h | 理解编译器代码生成 |
 | 内联汇编 | 3h | 在C中嵌入汇编 |
 | 优化技巧 | 2h | 手写汇编优化 |
+
+**推荐阅读**:
+- [C-汇编映射](./02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/01_Compilation_Functor.md) — 编译函子与代码生成
+- [编译器内部原理](./02_Formal_Semantics_and_Physics/11_Compiler_Internals/README.md) — 后端管道：IR到机器码的完整旅程
+- [LLVM IR 入门教程](./02_Formal_Semantics_and_Physics/12_Compiler_Optimization/05_LLVM_IR_Tutorial.md) — LLVM IR语法与编程实践
 
 #### 阶段4: C语言核心 (40小时)
 
@@ -626,6 +662,10 @@ flowchart LR
 | 标准库 | 8h | 熟练使用stdio/stdlib等 |
 | 工程实践 | 6h | Makefile、调试、优化 |
 | 高级特性 | 6h | 内联汇编、UB、可移植性 |
+
+**推荐阅读**:
+- [编译器基础](./01_Core_Knowledge_System/15_Compiler_Basics/README.md) — 编译器前端完整链：词法→语法→语义→AST→IR
+- [缓存友好编程](./02_Formal_Semantics_and_Physics/07_Microarchitecture/04_Cache_Friendly_Programming.md) — 缓存层次与性能优化
 
 #### 阶段5: 形式语义 (30小时)
 
@@ -665,6 +705,11 @@ flowchart LR
 
 **目标岗位**: 编译器工程师、语言设计师、工具链开发
 
+**推荐阅读**:
+- [编译器基础](./01_Core_Knowledge_System/15_Compiler_Basics/README.md) — 前端完整链
+- [编译器内部原理](./02_Formal_Semantics_and_Physics/11_Compiler_Internals/README.md) — 后端管道
+- [LLVM IR 入门教程](./02_Formal_Semantics_and_Physics/12_Compiler_Optimization/05_LLVM_IR_Tutorial.md) — LLVM IR实践
+
 #### 路径C: 嵌入式专家 (90小时)
 
 ```
@@ -673,6 +718,10 @@ flowchart LR
 ```
 
 **目标岗位**: 嵌入式工程师、固件开发、物联网开发
+
+**推荐阅读**:
+- [裸机嵌入式开发](./02_Formal_Semantics_and_Physics/20_Industrial_Case_Studies/03_Baremetal_Embedded.md) — RISC-V启动代码、链接器脚本、中断、PMP
+- [链接器脚本指南](./02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/05_Linker_Scripts_Guide.md) — 内存布局与段定义
 
 #### 路径D: 形式化验证专家 (130小时)
 

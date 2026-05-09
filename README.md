@@ -151,6 +151,33 @@ knowledge/
 - 🛠️ **现代工具链**: [knowledge/07_Modern_Toolchain/README.md](./knowledge/07_Modern_Toolchain/README.md)
 - 🧮 **知识链条**: [knowledge/24_Complete_Chain/README.md](./knowledge/24_Complete_Chain/README.md) - 从图灵机到C语言 ⭐NEW
 
+### 🔗 硬件到C完整知识链
+
+从晶体管到高级语言的完整学习路径，对齐 MIT 6.004/6.175、CMU 15-213、NAND2Tetris、Stanford CS107E 等国际权威课程：
+
+```text
+晶体管 → 逻辑门 → ALU → CPU数据通路 → 流水线 → 缓存 → ISA → 汇编器 → 链接器
+   │         │       │         │           │        │       │        │         │
+   ▼         ▼       ▼         ▼           ▼        ▼       ▼        ▼         ▼
+ 3h        5h      4h        6h          5h       4h      6h       4h        3h
+```
+
+| 层级 | 主题 | 核心文档 | 对标课程 |
+|:-----|:-----|:---------|:---------|
+| **物理层** | 数字逻辑与门电路 | [数字逻辑门](knowledge/02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/01_Digital_Logic_Gates.md) | MIT 6.004 |
+| **架构层** | RISC-V CPU 完整设计 | [RISC-V CPU设计](knowledge/02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/09_RISCV_CPU_Complete_Design.md) | MIT 6.175 / Berkeley CS61C |
+| **缓存层** | 缓存友好编程 | [缓存编程指南](knowledge/02_Formal_Semantics_and_Physics/07_Microarchitecture/04_Cache_Friendly_Programming.md) | CMU 15-213 Ch.6 |
+| **预测层** | 分支预测与优化 | [分支预测指南](knowledge/02_Formal_Semantics_and_Physics/07_Microarchitecture/05_Branch_Prediction_Programmer_Guide.md) | Intel Opt. Manual |
+| **ISA层** | 指令集与机器码 | [ISA架构](knowledge/02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/01_Instruction_Set_Architecture.md) | Stanford CS107 |
+| **SIMD层** | 向量化编程 | [SIMD优化](knowledge/03_System_Technology_Domains/16_High_Performance_Computing/03_SIMD_Optimization.md) | Intel/ARM/RISC-V |
+| **汇编层** | C-汇编映射 | [编译函子](knowledge/02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/01_Compilation_Functor.md) | CMU 15-213 |
+| **链接层** | 链接器脚本 | [链接器脚本指南](knowledge/02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/05_Linker_Scripts_Guide.md) | Stanford CS107E |
+| **编译层** | 编译器前端 | [编译器基础](knowledge/01_Core_Knowledge_System/15_Compiler_Basics/README.md) | Stanford CS143 |
+| **优化层** | 编译器后端 | [编译器内部](knowledge/02_Formal_Semantics_and_Physics/11_Compiler_Internals/README.md) | LLVM Docs |
+| **LLVM层** | LLVM IR 实践 | [LLVM IR教程](knowledge/02_Formal_Semantics_and_Physics/12_Compiler_Optimization/05_LLVM_IR_Tutorial.md) | LLVM Kaleidoscope |
+| **项目层** | 从NAND到C | [完整构建指南](knowledge/02_Formal_Semantics_and_Physics/20_Industrial_Case_Studies/06_NAND2C_Computer_Build.md) | NAND2Tetris |
+| **嵌入层** | 裸机开发 | [裸机嵌入式](knowledge/02_Formal_Semantics_and_Physics/20_Industrial_Case_Studies/03_Baremetal_Embedded.md) | Stanford CS107E |
+
 ---
 
 ## 📊 统计概览
