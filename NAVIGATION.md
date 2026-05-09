@@ -27,7 +27,7 @@
 | 需求 | 直接跳转 |
 |:-----|:---------|
 | 学习C23新特性 | [C23核心特性](knowledge/01_Core_Knowledge_System/07_Modern_C/03_C23_Core_Features.md) |
-| 追踪C2y演进 | [C23到C2y路线图](knowledge/00_VERSION_TRACKING/C23_to_C2y_Roadmap.md) |
+| 追踪C2y演进 | [C23到C2y路线图](knowledge/00_VERSION_TRACKING/C23_to_C2y_Roadmap.md) → [2026春季更新](knowledge/00_VERSION_TRACKING/C2y_Spring_2026_Update.md) |
 | 了解Zig语言 | [Zig-C连接](knowledge/08_Zig_C_Connection/README.md) |
 | 形式化验证入门 | [核心语义基础](knowledge/02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/) |
 | 硬件-汇编-C全链 | [数字逻辑基础](knowledge/02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/01_Digital_Logic_Foundations/01_Transistor_Level.md) |
