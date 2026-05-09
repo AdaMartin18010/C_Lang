@@ -119,10 +119,10 @@
 
 | 提案号 | 标题 | 作者 | 状态 | 预计支持 |
 |:-------|:-----|:-----|:----:|:---------|
-| N3753 | Elvis操作符 `?:` | Colomar | 审议中 | GCC 17? / Clang 24? |
-| N3658 | Named Loops (命名循环) | Celeste | 讨论中 | Clang 22+ 实验性 |
+| N3753 | Elvis操作符 `?:` | Colomar | 审议中 | GCC 扩展已支持 / Clang 扩展已支持，标准形式待定 |
+| N3658 | Named Loops (命名循环) | Celeste | 讨论中 | GCC 15+ 实验性 / Clang 20+ 计划中 |
 | N3657 | 闭包/函数字面量 | Meneide | 讨论中 | 待定 |
-| N3636 | `__COUNTER__` 宏 | Johnson | 讨论中 | GCC 17? |
+| N3636 | `__COUNTER__` 宏 | Johnson | 讨论中 | GCC 扩展已支持 / Clang 扩展已支持，标准形式待定 |
 | N3745 | Dependent Structure Types | Uecker | 审议中 | 待定 |
 | N3747 | 整数集合 | Seacord | 审议中 | 待定 |
 | N3645 | Literal Functions (函数字面量) | Celeste | 讨论中 | 待定 |

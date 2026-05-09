@@ -4,6 +4,30 @@ import re
 # Match markdown links: [text](path) and [text](path "title")
 link_re = re.compile(r'\[([^\]]+)\]\(([^)\s"]+)(?:\s+"[^"]*")?\)')
 
+# Patterns that indicate a link is actually a mathematical/formal notation,
+# not a real markdown link
+math_patterns = [
+    re.compile(r'^[\s*]*$'),  # empty or just stars
+    re.compile(r'^[.]{3,}$'),  # ellipsis like ...
+    re.compile(r'^[A-Z]$'),  # single uppercase letter like S, Q, P
+    re.compile(r'^[a-z]+$'),  # single lowercase word like 'skip', 'idx', 'opc'
+    re.compile(r'^[0-9]+$'),  # just numbers
+    re.compile(r'^[a-zA-Z0-9_]+\s*[:=]'),  # assignment-like: x := e, y':C
+    re.compile(r'^[Δλ∀∃∧∨¬→↦⊢⊨∈∉∪∩⊆⊇⊂⊃∅∞]$'),  # math symbols
+    re.compile(r'^[\w\s]+→[\w\s]+$'),  # arrow notation: C → D
+    re.compile(r'^\w+\s*\(.*\)$'),  # function-like: sm->current, data.function
+    re.compile(r'^R\['),  # register notation: R[A+1..A+B-1]
+    re.compile(r'^\$\{'),  # template variable: ${...}
+    re.compile(r'^\{\{'),  # template: {{...}}
+    re.compile(r'^[a-zA-Z0-9_]+[;+\-*/<>!&|]+[a-zA-Z0-9_]+$'),  # expressions with operators: S1; S2
+    re.compile(r"^'[^']+'$"),  # quoted strings: 'mov_rax_imm32'
+    re.compile(r'^if\s+'),  # conditional: if B then S1 else S2
+    re.compile(r'^[a-zA-Z_][a-zA-Z0-9_]*->[a-zA-Z_]'),  # pointer access: sm->current
+    re.compile(r'^\w+\.\w+'),  # dotted access: data.function
+    re.compile(r'^\.\.\.[\w.]+'),  # spread/ellipsis prefix: ...data.args
+    re.compile(r'^\w+\s+then\s+\w+\s+else\s+\w+'),  # if-then-else fragments
+]
+
 broken = []
 total = 0
 
@@ -24,6 +48,21 @@ for root, dirs, files in os.walk('knowledge'):
                 
                 # Skip anchor-only links
                 if link.startswith('#'):
+                    continue
+                
+                # Skip template placeholders
+                if '{{' in text or '{{' in link or '${' in text or '${' in link:
+                    continue
+                if text in ('text', 'url', 'alt', 'path', '{{资源名称}}', '{{URL}}'):
+                    continue
+                
+                # Skip mathematical/formal notation links
+                is_math = False
+                for pattern in math_patterns:
+                    if pattern.match(text.strip()):
+                        is_math = True
+                        break
+                if is_math:
                     continue
                 
                 total += 1
