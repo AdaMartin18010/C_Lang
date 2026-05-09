@@ -625,7 +625,7 @@ WARNING: ThreadSanitizer: data race
 - CI检查:
 - 安全培训:
 
-```
+
 
 ---
 
@@ -690,7 +690,7 @@ WARNING: ThreadSanitizer: data race
 
 ---
 
-> **最后更新**: 2026-03-21
+> **最后更新**: 2026-05-10
 > **维护者**: AI Code Review
 
 
@@ -699,11 +699,13 @@ WARNING: ThreadSanitizer: data race
 ### 认知科学基础
 
 #### 1. 认知负荷理论
+
 - **内在负荷**: 概念本身的复杂度
 - **外在负荷**: 信息呈现方式
 - **相关负荷**: 构建图式的认知投入
 
 #### 2. 知识结构化
+
 ```
 
 表层结构 → 深层结构 → 抽象原理
@@ -716,6 +718,7 @@ WARNING: ThreadSanitizer: data race
 ```
 
 #### 3. 元认知策略
+
 | 策略 | 应用 | 效果 |
 |:-----|:-----|:-----|
 | 自我解释 | 解释代码行为 | 深度理解 |
@@ -723,6 +726,7 @@ WARNING: ThreadSanitizer: data race
 | 类比推理 | 联系已知 | 知识迁移 |
 
 ### 实践关联
+
 - [概念映射](05_Concept_Mappings/readme.md)
 - [学习路径](06_Learning_Paths/readme.md)
 - [决策树](01_Decision_Trees/readme.md)

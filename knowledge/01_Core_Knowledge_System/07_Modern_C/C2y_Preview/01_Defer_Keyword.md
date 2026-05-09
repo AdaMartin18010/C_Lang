@@ -1,8 +1,12 @@
+
+# C2y `defer` 关键字
+
 ---
 
 ## 🔗 文档关联
 
 ### 核心关联
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [内存管理 [链接失效]](../../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
@@ -12,6 +16,7 @@
 | [数组与指针 [链接失效]](../../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
 
 ### 扩展阅读
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [软件工程 [链接失效]](../../../../01_Core_Knowledge_System/05_Engineering_Layer/readme.md) | 核心关联 | 软件工程基础 |
@@ -19,13 +24,12 @@
 | [系统技术 [链接失效]](../../../../03_System_Technology_Domains/readme.md) | 核心关联 | 系统技术基础 |
 | [工业场景 [链接失效]](../../../../04_Industrial_Scenarios/readme.md) | 核心关联 | 工业场景基础 |
 | [思维表征 [链接失效]](../../../../06_Thinking_Representation/readme.md) | 核心关联 | 思维表征基础 |
-# C2y `defer` 关键字
 
 > **提案**: N3853 - defer Technical Specification
 > **状态**: 审议中 (Committee Draft r5)
 > **作者**: JeanHeyd Meneide
 > **r5发布日期**: 2026-03-22
-> **预计支持**: GCC 17 / Clang 25 (实验性)
+> **预计支持**: GCC 15+ (实验性, `-std=c2y`) / Clang 20+ (计划中)
 
 ---
 

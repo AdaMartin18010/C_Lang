@@ -19,6 +19,23 @@
 | [C23](../01_Core_Knowledge_System/04_Standard_Library_Layer/C23_Standard_Library/readme.md) | C23 | 现代特性 |
 | [C2y路线图](C23_to_C2y_Roadmap.md) | C2y | 未来演进 |
 
+### 新文档（2026-05-10更新创建）
+
+| 文档 | 类别 | 说明 |
+|:-----|:-----|:-----|
+| [C2y 2026春季更新](C2y_Spring_2026_Update.md) | C2y | WG14 2026春夏季会议更新 |
+| [GCC 16 C2y支持](GCC_16_C2y_Support.md) | 工具链 | GCC 16编译器C2y特性状态 |
+| [Clang 20发布说明](Clang_20_C23_Release_Notes.md) | 工具链 | Clang 20编译器C23特性状态 |
+| [glibc 2.43预览](glibc_2.43_C2y_Preview.md) | 运行时库 | glibc C23/C2y支持状态 |
+| [musl 2.0 C23](musl_2.0_C23.md) | 运行时库 | musl C23完整支持计划 |
+| [C23默认标准迁移](C23_Default_Standard_Migration_Guide.md) | 迁移指南 | GCC 15破坏性变更应对方案 |
+| [OpenSSL 3.0 EOL](OpenSSL_3.0_EOL_Migration.md) | 运行时库 | OpenSSL生命周期管理 |
+| [C内存安全政治化](C_Memory_Safety_Politics_2026.md) | 产业分析 | Rust替代压力与C的韧性 |
+| [单一真相源重构](Single_Source_of_Truth_Refactor.md) | 项目治理 | 消除内容冗余方案 |
+| [事件驱动更新机制](External_Event_Driven_Update_Mechanism.md) | 项目治理 | 自动化跟踪设计 |
+| [本次更新日志](2026-05-10_Major_Update_Log.md) | 项目治理 | 2026-05-10修改记录 |
+| [目录结构修复计划](2026-05-10_Directory_Structure_Fix_Plan.md) | 项目治理 | 格式与结构修复方案 |
+
 ### 核心知识关联
 
 | 文档 | 关系类型 | 说明 |
@@ -42,6 +59,7 @@
 - [版本跟踪与知识库导航](#版本跟踪与知识库导航)
   - [🔗 文档关联](#-文档关联)
     - [版本演进路径](#版本演进路径)
+    - [新文档（2026-05-10更新创建）](#新文档2026-05-10更新创建)
     - [核心知识关联](#核心知识关联)
     - [全局索引](#全局索引)
   - [📑 目录](#-目录)
@@ -580,7 +598,7 @@ v3.0.0 (计划 2026-Q4)
 ## 维护信息
 
 - **当前版本**: v2.1.5
-- **最后更新**: 2026-03-15
+- **最后更新**: 2026-05-10
 - **本次更新**: 练习题库大扩展 (75+练习)，README覆盖率100%
 - **维护团队**: C 语言知识库维护组
 - **问题反馈**: 通过 GitHub Issues

@@ -5,15 +5,13 @@ with open('knowledge/01_Core_Knowledge_System/07_Modern_C/C2y_If_Declaration_Dep
 
 fence_re = re.compile(r'^' + '`' * 3)
 matches = [(i+1, line.strip()) for i, line in enumerate(lines) if fence_re.match(line)]
-print(f'Total matches: {len(matches)}')
-print('First 5:', matches[:5])
-print('Last 5:', matches[-5:])
 
 in_fence = False
-for line_num, line in matches:
+for idx, (line_num, line) in enumerate(matches):
     old = in_fence
     in_fence = not in_fence
-    if old == in_fence:
-        print(f'Line {line_num}: {old}->{in_fence}  {line}')
+    if 77 <= idx <= 89:
+        print(f'{idx+1:3d}: line {line_num:5d}: {old}->{in_fence}  {line}')
 
-print(f'Final in_fence: {in_fence}')
+print(f'Final: {in_fence}')
+print(f'Total: {len(matches)}')

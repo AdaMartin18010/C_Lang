@@ -24,7 +24,7 @@
 > **提案**: N3753 - The Elvis operator `?:`
 > **状态**: 审议中
 > **作者**: Alejandro Colomar
-> **预计支持**: GCC 17 / Clang 24 (实验性)
+> **预计支持**: GCC扩展已支持 / Clang扩展已支持（标准形式待定）
 
 ---
 
@@ -322,4 +322,4 @@ int x = user_config ?: system_config ?: default_config;
 ---
 
 **状态**: 审议中
-**最后更新**: 2026-03-24
+**最后更新**: 2026-05-10
