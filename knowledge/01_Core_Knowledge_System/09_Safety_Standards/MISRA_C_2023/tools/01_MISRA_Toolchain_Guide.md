@@ -1793,3 +1793,5 @@ echo "  3. Run 'make misra-check' to verify compliance"
 echo "  4. See README.md for more information"
 echo ""
 echo "=========================================="
+
+```

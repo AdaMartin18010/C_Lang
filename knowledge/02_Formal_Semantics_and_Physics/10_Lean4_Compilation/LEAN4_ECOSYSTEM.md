@@ -2581,6 +2581,7 @@ leanInk input.lean --output output.html --format html
 ## 注释类型
 
 ### 文档注释
+
 ```lean
 /-!
   # 文档头部
@@ -2600,6 +2601,7 @@ def square (x : Nat) : Nat := x * x
 ```
 
 ### 代码折叠
+
 ```lean
 -- 使用标记创建可折叠区域
 
@@ -2614,6 +2616,7 @@ end HiddenDetails
 ```
 
 ### 交互式片段
+
 ```lean
 -- 嵌入可执行的代码片段
 
@@ -2622,6 +2625,7 @@ example : 2 + 2 = 4 := by
   simp
   -- #endsnippet
 ```
+
 ```
 
 ## 3.5 DocGen4 - 文档生成
@@ -2663,10 +2667,12 @@ require «doc-gen4» from git
 ```
 
 生成文档：
+
 ```bash
 lake -Kenv=dev update
 lake build Mathlib:docs
 ```
+
 -/
 
 /- ========== 文档注释最佳实践 ========== -/
@@ -2700,6 +2706,7 @@ def factorial (n : Nat) : Nat :=
   loop n 1
 
 end DocGen4Examples
+
 ```
 
 ## 3.6 Lake - 包管理器
@@ -3451,6 +3458,7 @@ Theorem:
 ```
 
 Partial Proof:
+
 ```lean
 {partial_proof}
 ```
@@ -3470,7 +3478,8 @@ Provide the complete proof:
         return response.choices[0].message.content
 
 # 使用示例
-if __name__ == "__main__":
+
+if **name** == "**main**":
     llm = LLMStep()
 
     # 生成策略建议
@@ -3489,6 +3498,7 @@ if __name__ == "__main__":
         partial_proof="theorem add_zero (n : ℕ) : n + 0 = n := by"
     )
     print(f"\nGenerated proof:\n{proof}")
+
 ```
 
 ---
@@ -4410,22 +4420,26 @@ Lean 4 学习路径图:
 ## A.2 关键资源
 
 ### 官方文档
+
 - [Lean 4 Manual](https://lean-lang.org/lean4/doc/)
 - [Mathlib4 Documentation](https://leanprover-community.github.io/mathlib4_docs/)
 - [API文档](https://leanprover-community.github.io/mathlib4_docs/Mathlib.html)
 
 ### 教程与书籍
+
 - **Theorem Proving in Lean 4** - 基础定理证明
 - **Functional Programming in Lean** - 函数式编程
 - **Mathematics in Lean** - 数学形式化
 - **Metaprogramming in Lean 4** - 元编程
 
 ### 在线工具
+
 - [Lean 4 Web Editor](https://lean.math.hhu.de/)
 - [Mathlib Search](https://leanprover-community.github.io/mathlib_docs/)
 - [Zulip Chat](https://leanprover.zulipchat.com/)
 
 ### 社区
+
 - GitHub: leanprover/lean4, leanprover-community/mathlib4
 - Zulip: 活跃的讨论社区
 - YouTube: Leanprover频道
@@ -4472,6 +4486,7 @@ set_option trace.aesop true
 > **文档完成声明**
 >
 > 本文档全面覆盖了Lean 4生态系统的主要组件，包括：
+>
 > - 语言核心机制
 > - Mathlib4数学图书馆的各主要分支
 > - 核心工具和框架
@@ -4479,3 +4494,5 @@ set_option trace.aesop true
 > - 与数学基础的深层联系
 >
 > 为C_Lang知识库提供了完整的Lean 4参考资源。
+
+```

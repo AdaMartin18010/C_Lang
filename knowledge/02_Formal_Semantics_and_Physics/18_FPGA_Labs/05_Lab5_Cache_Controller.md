@@ -1878,3 +1878,5 @@ CPU → L1 Cache (4KB) → L2 Cache (64KB) → Main Memory
 
 > **最后更新**: 2026-03-21
 > **维护者**: AI Code Review
+
+```
