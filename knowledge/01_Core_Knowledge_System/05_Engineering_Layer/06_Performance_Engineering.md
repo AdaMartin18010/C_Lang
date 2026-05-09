@@ -475,7 +475,7 @@ P_max ├───────────────────────�
 
 ### 后续延伸
 
-- [并行算法优化](../../03_System_Technology_Domains/06_High_Performance_Computing/readme.md)
+- [并行算法优化 [链接失效]](../../03_System_Technology_Domains/06_High_Performance_Computing/readme.md)
 - [性能分析硬件](../../02_Formal_Semantics_and_Physics/16_Performance_Analysis_Hardware/readme.md)
 
 ### 参考

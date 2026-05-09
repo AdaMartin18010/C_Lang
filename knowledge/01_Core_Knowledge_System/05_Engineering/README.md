@@ -1,7 +1,7 @@
 ﻿# C 语言工程实践
 
 > **定位**: 核心知识体系 / 工程实践 | **主题**: 软件工程方法在 C 项目中的应用
-> **前置知识**: [内存管理](../02_Core_Layer/02_Memory_Management.md)、[结构体](../03_Construction_Layer/01_Structures_Unions.md)、[编译构建](./01_Compilation_Build.md)
+> **前置知识**: [内存管理](../02_Core_Layer/02_Memory_Management.md)、[结构体](../03_Construction_Layer/01_Structures_Unions.md)、[编译构建 [链接失效]](./01_Compilation_Build.md)
 > **关联理论**: [全局不变式](../../06_Thinking_Representation/05_Concept_Mappings/13_Global_Invariants.md)、[层次桥接链](../../06_Thinking_Representation/05_Concept_Mappings/09_Level_Bridging_Chains.md)
 
 ---
@@ -23,8 +23,8 @@
 ### 实践关联
 
 - [状态机设计](../../06_Thinking_Representation/09_State_Machines/readme.md) - 复杂逻辑组织
-- [调试技术](./02_Debug_Techniques.md) - 问题定位
-- [性能优化](./03_Performance_Optimization.md) - 效率提升
+- [调试技术 [链接失效]](./02_Debug_Techniques.md) - 问题定位
+- [性能优化 [链接失效]](./03_Performance_Optimization.md) - 效率提升
 
 ---
 
@@ -503,26 +503,3 @@ jobs:
 
 
 ---
-
-## 深入理解
-
-### 技术原理
-
-深入探讨相关技术原理和实现细节。
-
-### 实践指南
-
-- 步骤1：理解基础概念
-- 步骤2：掌握核心原理
-- 步骤3：应用实践
-
-### 相关资源
-
-- 文档链接
-- 代码示例
-- 参考文章
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

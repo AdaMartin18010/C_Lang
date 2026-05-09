@@ -119,14 +119,14 @@
       - [7.3.2 编译器版本要求](#732-编译器版本要求)
       - [7.3.3 CMake 配置示例](#733-cmake-配置示例)
       - [7.3.4 代码兼容性宏](#734-代码兼容性宏)
+  - [🔗 C2y 特性交叉链接](#-c2y-特性交叉链接)
+    - [C2y 语言特性文档](#c2y-语言特性文档)
+    - [C2y 编译选项](#c2y-编译选项)
+    - [C23/C2y 路线图](#c23c2y-路线图)
   - [附录](#附录)
     - [A. 参考链接](#a-参考链接)
     - [B. 术语表](#b-术语表)
     - [C. 修订历史](#c-修订历史)
-  - [深入理解](#深入理解)
-    - [技术原理](#技术原理)
-    - [实践指南](#实践指南)
-    - [相关资源](#相关资源)
 
 ---
 
@@ -293,20 +293,20 @@ GCC 15.1:   基准分数 103.5 (+3.5%)
 ### 核心关联
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
-| [指针深度](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
-| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 核心关联 | 并发编程基础 |
-| [数据类型](../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
-| [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+| [内存管理 [链接失效]](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度 [链接失效]](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程 [链接失效]](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 核心关联 | 并发编程基础 |
+| [数据类型 [链接失效]](../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针 [链接失效]](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
 
 ### 扩展阅读
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [软件工程](../../01_Core_Knowledge_System/05_Engineering_Layer/readme.md) | 核心关联 | 软件工程基础 |
-| [形式语义](../../02_Formal_Semantics_and_Physics/readme.md) | 核心关联 | 形式语义基础 |
-| [系统技术](../../03_System_Technology_Domains/readme.md) | 核心关联 | 系统技术基础 |
-| [工业场景](../../04_Industrial_Scenarios/readme.md) | 核心关联 | 工业场景基础 |
-| [思维表征](../../06_Thinking_Representation/readme.md) | 核心关联 | 思维表征基础 |
+| [软件工程 [链接失效]](../../01_Core_Knowledge_System/05_Engineering_Layer/readme.md) | 核心关联 | 软件工程基础 |
+| [形式语义 [链接失效]](../../02_Formal_Semantics_and_Physics/readme.md) | 核心关联 | 形式语义基础 |
+| [系统技术 [链接失效]](../../03_System_Technology_Domains/readme.md) | 核心关联 | 系统技术基础 |
+| [工业场景 [链接失效]](../../04_Industrial_Scenarios/readme.md) | 核心关联 | 工业场景基础 |
+| [思维表征 [链接失效]](../../06_Thinking_Representation/readme.md) | 核心关联 | 思维表征基础 |
 wget https://ftp.gnu.org/gnu/gcc/gcc-15.1.0/gcc-15.1.0.tar.xz
 tar -xf gcc-15.1.0.tar.xz
 cd gcc-15.1.0
@@ -3390,6 +3390,7 @@ gcc -std=c2y -Wc23-c2y-compat source.c
 ### C23/C2y 路线图
 
 完整的C23到C2y演进路线图请参考：
+
 - [C23_C2Y_ROADMAP.md](../05_C_Language_Standards/C23_C2Y_ROADMAP.md)
 - [C23_C2Y_SUPPORT_MATRIX.md](../05_C_Language_Standards/C23_C2Y_SUPPORT_MATRIX.md)
 
@@ -3429,26 +3430,3 @@ gcc -std=c2y -Wc23-c2y-compat source.c
 
 
 ---
-
-## 深入理解
-
-### 技术原理
-
-深入探讨相关技术原理和实现细节。
-
-### 实践指南
-
-- 步骤1：理解基础概念
-- 步骤2：掌握核心原理
-- 步骤3：应用实践
-
-### 相关资源
-
-- 文档链接
-- 代码示例
-- 参考文章
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

@@ -124,10 +124,6 @@
     - [硬件文档](#硬件文档)
     - [社区资源](#社区资源)
   - [更新记录](#更新记录)
-  - [深入理解](#深入理解)
-    - [技术原理](#技术原理)
-    - [实践指南](#实践指南)
-    - [相关资源](#相关资源)
 
 ---
 
@@ -941,12 +937,12 @@ void parallel_vector_add(const float *a, const float *b,
     sycl::buffer<float, 1> buf_c(c, sycl::range<1>(n));
 
     // 提交并行内核
-    `q.submit([&](sycl::handler& h) {`
+    `q.submit([& [链接失效]](sycl::handler& h) {`
         auto acc_a = buf_a.get_access<sycl::access::mode::read>(h);
         auto acc_b = buf_b.get_access<sycl::access::mode::read>(h);
         auto acc_c = buf_c.get_access<sycl::access::mode::write>(h);
 
-        h.parallel_for(sycl::range<1>(n), [=](sycl::id<1> i) {
+        h.parallel_for(sycl::range<1>(n), [= [链接失效]](sycl::id<1> i) {
             acc_c[i] = acc_a[i] + acc_b[i];
         });
     });
@@ -1967,26 +1963,3 @@ chmod +x build_with_dtltO.sh
 
 
 ---
-
-## 深入理解
-
-### 技术原理
-
-深入探讨相关技术原理和实现细节。
-
-### 实践指南
-
-- 步骤1：理解基础概念
-- 步骤2：掌握核心原理
-- 步骤3：应用实践
-
-### 相关资源
-
-- 文档链接
-- 代码示例
-- 参考文章
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

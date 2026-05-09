@@ -325,12 +325,12 @@ void report_performance(double time_sec, int n, int flops_per_element) {
 ### 前置知识
 
 - [计算机体系结构](../readme.md)
-- [性能优化](../../07_Microarchitecture/03_Cache_Optimization_Practical.md)
+- [性能优化 [链接失效]](../../07_Microarchitecture/03_Cache_Optimization_Practical.md)
 
 ### 后续延伸
 
-- [GPU计算](../../../03_System_Technology_Domains/06_High_Performance_Computing/02_GPU_Computing.md)
-- [矩阵运算优化](../../../07_Microarchitecture/07_Matrix_Operation_Optimization.md)
+- [GPU计算 [链接失效]](../../../03_System_Technology_Domains/06_High_Performance_Computing/02_GPU_Computing.md)
+- [矩阵运算优化 [链接失效]](../../../07_Microarchitecture/07_Matrix_Operation_Optimization.md)
 
 ### 参考
 

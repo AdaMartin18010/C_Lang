@@ -112,10 +112,6 @@
   - [更新建议](#更新建议)
     - [知识库更新清单](#知识库更新清单)
     - [代码示例准备](#代码示例准备)
-  - [深入理解](#深入理解)
-    - [技术原理](#技术原理)
-    - [实践指南](#实践指南)
-    - [相关资源](#相关资源)
 
 ## 新增提案概览
 
@@ -275,12 +271,12 @@ outer: while (condition1) {
 
 // 基本闭包
 int multiplier = 10;
-auto fn = [](int x) { return x * multiplier; };  // 捕获multiplier
+auto fn = [ [链接失效]](int x) { return x * multiplier; };  // 捕获multiplier
 int result = fn(5);  // 50
 
 // 显式捕获
 int a = 1, b = 2;
-auto sum = `[a, b](void) { return a + b; };`
+auto sum = `[a, b [链接失效]](void) { return a + b; };`
 ```
 
 ### 语法规范
@@ -300,13 +296,13 @@ capture_list:
 ```c
 // 问题：闭包生命周期管理
 int* create_multiplier(int factor) {
-    auto fn = `[factor](int x) { return x * factor; };`
+    auto fn = `[factor [链接失效]](int x) { return x * factor; };`
     return fn;  // 错误：factor在栈上，函数返回后失效
 }
 
 // 可能的解决方案：堆分配闭包
 int* create_multiplier_heap(int factor) {
-    auto fn = heap_closure `[factor](int x) { return x * factor; };`
+    auto fn = heap_closure `[factor [链接失效]](int x) { return x * factor; };`
     return fn;  // 需要手动释放
 }
 ```
@@ -441,26 +437,3 @@ struct Node<double> double_list;
 
 
 ---
-
-## 深入理解
-
-### 技术原理
-
-深入探讨相关技术原理和实现细节。
-
-### 实践指南
-
-- 步骤1：理解基础概念
-- 步骤2：掌握核心原理
-- 步骤3：应用实践
-
-### 相关资源
-
-- 文档链接
-- 代码示例
-- 参考文章
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

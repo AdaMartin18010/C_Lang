@@ -22,15 +22,15 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [Linux内核开发](../08_Application_Domains/01_OS_Kernel.md) | 实际应用 | 内核中的多级指针模式 |
-| [链表实现](../../06_Thinking_Representation/04_Data_Structures/01_Linked_List.md) | 数据结构 | 二级指针修改链表 |
-| [函数指针](03_Function_Pointers.md) | 进阶主题 | 复杂指针类型组合 |
+| [链表实现 [链接失效]](../../06_Thinking_Representation/04_Data_Structures/01_Linked_List.md) | 数据结构 | 二级指针修改链表 |
+| [函数指针 [链接失效]](03_Function_Pointers.md) | 进阶主题 | 复杂指针类型组合 |
 
 ### 横向关联
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [C11内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md) | 理论深化 | 并发环境下的指针安全 |
-| [Linux系统编程](../../03_System_Technology_Domains/01_System_Programming/readme.md) | 系统应用 | 系统调用中的指针使用 |
+| [Linux系统编程 [链接失效]](../../03_System_Technology_Domains/01_System_Programming/readme.md) | 系统应用 | 系统调用中的指针使用 |
 
 ---
 
@@ -1062,26 +1062,3 @@ int main(void) {
 
 
 ---
-
-## 深入理解
-
-### 技术原理
-
-深入探讨相关技术原理和实现细节。
-
-### 实践指南
-
-- 步骤1：理解基础概念
-- 步骤2：掌握核心原理
-- 步骤3：应用实践
-
-### 相关资源
-
-- 文档链接
-- 代码示例
-- 参考文章
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

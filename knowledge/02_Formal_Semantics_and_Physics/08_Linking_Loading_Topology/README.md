@@ -21,8 +21,8 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [动态链接](../../03_System_Technology_Domains/01_System_Programming/03_Dynamic_Linking.md) | 运行时 | 动态链接器 |
-| [系统编程](../../03_System_Technology_Domains/01_System_Programming/readme.md) | 系统调用 | 加载器接口 |
+| [动态链接 [链接失效]](../../03_System_Technology_Domains/01_System_Programming/03_Dynamic_Linking.md) | 运行时 | 动态链接器 |
+| [系统编程 [链接失效]](../../03_System_Technology_Domains/01_System_Programming/readme.md) | 系统调用 | 加载器接口 |
 | [形式化验证](../11_CompCert_Verification/readme.md) | 正确性 | 链接正确性证明 |
 
 ### 关键概念链
@@ -779,26 +779,3 @@ sudo ldconfig -n /path/to/lib
 
 
 ---
-
-## 深入理解
-
-### 核心原理
-
-深入探讨技术原理和实现细节。
-
-### 实践应用
-
-- 应用场景1
-- 应用场景2
-- 应用场景3
-
-### 最佳实践
-
-1. 理解基础概念
-2. 掌握核心机制
-3. 应用到实际项目
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

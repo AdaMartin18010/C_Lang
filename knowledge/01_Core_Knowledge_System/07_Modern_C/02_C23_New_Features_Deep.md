@@ -326,8 +326,8 @@ strlcpy(limited, original, sizeof(limited));  // 总是以\0结尾
 
 ### 后续延伸
 
-- [C23标准库](../../04_Standard_Library_Layer/C23_Standard_Library/readme.md)
-- [位运算](../../01_Basic_Layer/06_Bit_Operations.md)
+- [C23标准库 [链接失效]](../../04_Standard_Library_Layer/C23_Standard_Library/readme.md)
+- [位运算 [链接失效]](../../01_Basic_Layer/06_Bit_Operations.md)
 
 ### 参考
 

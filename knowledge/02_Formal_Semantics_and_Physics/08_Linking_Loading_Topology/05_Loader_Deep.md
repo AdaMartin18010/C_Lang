@@ -574,8 +574,8 @@ int main(int argc, char **argv) {
 ### 前置知识
 
 - [动态链接深度解析](./04_Dynamic_Linking_Deep.md)
-- [系统调用](../../03_System_Technology_Domains/01_System_Programming/04_System_Call_Interface.md)
-- [虚拟内存](../../03_System_Technology_Domains/01_System_Programming/05_Memory_Mapped_Files.md)
+- [系统调用 [链接失效]](../../03_System_Technology_Domains/01_System_Programming/04_System_Call_Interface.md)
+- [虚拟内存 [链接失效]](../../03_System_Technology_Domains/01_System_Programming/05_Memory_Mapped_Files.md)
 
 ### 后续延伸
 
@@ -585,5 +585,5 @@ int main(int argc, char **argv) {
 
 ### 实践关联
 
-- [逆向工程](../../03_System_Technology_Domains/01_System_Programming/08_Binary_Reverse_Engineering.md)
+- [逆向工程 [链接失效]](../../03_System_Technology_Domains/01_System_Programming/08_Binary_Reverse_Engineering.md)
 - [漏洞利用](../../01_Core_Knowledge_System/09_Safety_Standards/Vulnerability_Cases/readme.md)

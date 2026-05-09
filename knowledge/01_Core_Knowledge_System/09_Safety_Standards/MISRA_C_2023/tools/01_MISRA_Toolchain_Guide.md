@@ -1678,7 +1678,7 @@ set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 
 ## 证明文档
 
-- [静态分析报告](reports/static_analysis_2026_Q1.pdf)
+- [静态分析报告 [链接失效]](reports/static_analysis_2026_Q1.pdf)
 - [偏离记录](docs/DEVIATIONS.md)
 - [审计记录](docs/AUDIT_LOG.md)
 
@@ -1796,66 +1796,3 @@ echo "  3. Run 'make misra-check' to verify compliance"
 echo "  4. See README.md for more information"
 echo ""
 echo "=========================================="
-
-```
-
----
-
-## 附录
-
-### A. 参考资源
-
-1. **MISRA官方网站**: https://www.misra.org.uk/
-2. **MISRA C:2023标准文档**（需购买）
-3. **PC-lint Plus文档**: https://www.gimpel.com/
-4. **Cppcheck文档**: http://cppcheck.net/manual.html
-5. **Clang-Tidy文档**: https://clang.llvm.org/extra/clang-tidy/
-6. **Coverity文档**: https://community.synopsys.com/s/article/Coverity
-
-### B. 术语表
-
-| 术语 | 定义 |
-|------|------|
-| MISRA | Motor Industry Software Reliability Association |
-| 强制性规则(Mandatory) | 必须遵守，不允许偏离的规则 |
-| 必需规则(Required) | 必须遵守，可经正式流程偏离的规则 |
-| 建议性规则(Advisory) | 建议遵守，可自行决定偏离的规则 |
-| 偏离(Deviation) | 在特定条件下不遵守规则的正式许可 |
-| 静态分析 | 不执行代码而检查代码错误或违规的技术 |
-| 抑制(Suppression) | 在特定位置忽略特定警告的方法 |
-
-### C. 版本历史
-
-| 版本 | 日期 | 变更说明 |
-|------|------|----------|
-| 1.0 | 2026-03-17 | 初始版本，涵盖主要工具配置 |
-
----
-
-*本文档是MISRA C:2023工具链配置的完整指南，旨在帮助C语言开发者建立符合MISRA标准的开发流程。*
-
-
----
-
-## 深入理解
-
-### 技术原理
-
-深入探讨相关技术原理和实现细节。
-
-### 实践指南
-
-- 步骤1：理解基础概念
-- 步骤2：掌握核心原理
-- 步骤3：应用实践
-
-### 相关资源
-
-- 文档链接
-- 代码示例
-- 参考文章
-
----
-
-> **最后更新**: 2026-03-21  
-> **维护者**: AI Code Review

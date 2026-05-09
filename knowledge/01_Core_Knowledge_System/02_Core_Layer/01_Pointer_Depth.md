@@ -12,10 +12,10 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | 指针语义、指针-数组区别、指针算术、函数指针、复杂声明、const限定、形式化模型 |
-| **前置知识** | [数据类型系统](../../01_Basic_Layer/02_Data_Type_System.md)、内存地址概念、[数组基础](../../01_Basic_Layer/05_Arrays_Pointers.md)、二进制表示 |
-| **后续延伸** | [动态内存管理](../02_Memory_Management.md)、[数据结构实现](../../../09_Data_Structures_Algorithms/readme.md)、[函数式编程模式](../../../08_Zig_C_Connection/05_Migration_Methodology/readme.md)、[并发内存模型](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) |
-| **横向关联** | [数组与指针对比](./05_Arrays_Pointers.md#数组与指针的关系)、[函数指针](./03_Function_Pointers.md)、[复杂声明解析](../06_Advanced_Layer/04_Complex_Declarations.md) |
-| **深层理论** | [指针的形式化语义](../../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/01_Operational_Semantics.md)、[概念等价性](../../../06_Thinking_Representation/05_Concept_Mappings/08_Concept_Equivalence_Graph.md) |
+| **前置知识** | [数据类型系统 [链接失效]](../../01_Basic_Layer/02_Data_Type_System.md)、内存地址概念、[数组基础 [链接失效]](../../01_Basic_Layer/05_Arrays_Pointers.md)、二进制表示 |
+| **后续延伸** | [动态内存管理 [链接失效]](../02_Memory_Management.md)、[数据结构实现 [链接失效]](../../../09_Data_Structures_Algorithms/readme.md)、[函数式编程模式 [链接失效]](../../../08_Zig_C_Connection/05_Migration_Methodology/readme.md)、[并发内存模型 [链接失效]](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) |
+| **横向关联** | [数组与指针对比 [链接失效]](./05_Arrays_Pointers.md#数组与指针的关系)、[函数指针 [链接失效]](./03_Function_Pointers.md)、[复杂声明解析 [链接失效]](../06_Advanced_Layer/04_Complex_Declarations.md) |
+| **深层理论** | [指针的形式化语义 [链接失效]](../../../02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/01_Operational_Semantics.md)、[概念等价性 [链接失效]](../../../06_Thinking_Representation/05_Concept_Mappings/08_Concept_Equivalence_Graph.md) |
 | **权威来源** | K&R Ch5, Expert C Programming Ch3/4, CSAPP Ch3.8, Modern C Level 2, ISO C11 §6.5 |
 
 ---
@@ -897,7 +897,7 @@ int main(void) {
     printf("\nFunction pointer array:\n");
     int a = 20, b = 5;
     for (int i = 0; i < 4; i++) {
-        `printf("%d %s %d = %d\n", a, op_names[i], b, ops[i](a, b));`
+        `printf("%d %s %d = %d\n", a, op_names[i], b, ops[i [链接失效]](a, b));`
     }
 
     /* 动态选择函数 */
@@ -2685,7 +2685,7 @@ int dispatch(int opcode, int a, int b) {
     };
 
     if (opcode >= 0 && opcode < 4 && handlers[opcode]) {
-        return handlers[opcode](a, b);
+        return handlers[opcode [链接失效]](a, b);
     }
     return 0;
 }

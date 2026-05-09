@@ -106,7 +106,7 @@
 | 文档 | 关系 | 说明 |
 |:-----|:-----|:-----|
 | [并发编程](../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 应用延伸 | 内存模型应用 |
-| [系统编程](../03_System_Technology_Domains/01_System_Programming/readme.md) | 系统实现 | 底层系统调用 |
+| [系统编程 [链接失效]](../03_System_Technology_Domains/01_System_Programming/readme.md) | 系统实现 | 底层系统调用 |
 | [性能优化](../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md) | 优化应用 | 微架构优化 |
 >
 > **新增内容 (2026-03-14)**:
@@ -347,26 +347,3 @@ graph TB
 
 
 ---
-
-## 深入理解
-
-### 核心原理
-
-深入探讨技术原理和实现细节。
-
-### 实践应用
-
-- 应用场景1
-- 应用场景2
-- 应用场景3
-
-### 最佳实践
-
-1. 理解基础概念
-2. 掌握核心机制
-3. 应用到实际项目
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

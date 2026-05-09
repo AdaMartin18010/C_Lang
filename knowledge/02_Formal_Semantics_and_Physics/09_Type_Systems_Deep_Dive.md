@@ -2,7 +2,7 @@
 
 > **层级**: L5 (原理层)
 > **目标**: 深入理解类型理论、类型系统设计与高级类型特性
-> **关联**: [形式化语义基础](./01_Formal_Semantics_Foundations.md) | [程序验证](./05_Program_Verification/readme.md)
+> **关联**: [形式化语义基础 [链接失效]](./01_Formal_Semantics_Foundations.md) | [程序验证 [链接失效]](./05_Program_Verification/readme.md)
 
 ---
 

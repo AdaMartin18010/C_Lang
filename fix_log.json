@@ -3,7 +3,7 @@
     {
       "file": "﻿E:\\_src\\C_Lang\\knowledge\\00_GLOBAL_INDEX.md",
       "error": "[Errno 22] Invalid argument: '\\ufeffE:\\\\_src\\\\C_Lang\\\\knowledge\\\\00_GLOBAL_INDEX.md'",
-      "traceback": "Traceback (most recent call last):\n  File \"E:\\_src\\C_Lang\\fix_md_v2.py\", line 243, in <module>\n    changes = fix_file(fp)\n  File \"E:\\_src\\C_Lang\\fix_md_v2.py\", line 27, in fix_file\n    with open(fp, 'r', encoding='utf-8') as f:\n         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 22] Invalid argument: '\\ufeffE:\\\\_src\\\\C_Lang\\\\knowledge\\\\00_GLOBAL_INDEX.md'\n"
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\_src\\C_Lang\\fix_md_v3.py\", line 225, in <module>\n    changes = fix_file(fp)\n  File \"E:\\_src\\C_Lang\\fix_md_v3.py\", line 41, in fix_file\n    with open(fp, 'r', encoding='utf-8') as f:\n         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\nOSError: [Errno 22] Invalid argument: '\\ufeffE:\\\\_src\\\\C_Lang\\\\knowledge\\\\00_GLOBAL_INDEX.md'\n"
     },
     {
       "file": "knowledge\\00_INDEX.md",
@@ -21,7 +21,7 @@
       "file": "knowledge\\README.md",
       "changes": [
         "remove_trailing_template_and_close_fence",
-        "fix_unclosed_fence",
+        "remove_template_fence",
         "fix_broken_links_x3"
       ]
     },
@@ -45,62 +45,78 @@
       ]
     },
     {
+      "file": "knowledge\\00_VERSION_TRACKING\\C23_to_C2y_Roadmap.md",
+      "changes": [
+        "remove_trailing_template"
+      ]
+    },
+    {
       "file": "knowledge\\00_VERSION_TRACKING\\C2y_Feature_Previews.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\00_VERSION_TRACKING\\C2y_New_Proposals_2026.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x4"
       ]
     },
     {
       "file": "knowledge\\00_VERSION_TRACKING\\C2y_Proposal_Tracker.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\00_VERSION_TRACKING\\C2y_to_C34_Roadmap.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\00_VERSION_TRACKING\\CISA_CRA_Compliance_2026.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\00_VERSION_TRACKING\\C_Standards_Roadmap.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\00_VERSION_TRACKING\\Expansion_Summary_2026-03-14.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\00_VERSION_TRACKING\\GCC_15_C23_Default.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\00_VERSION_TRACKING\\LLVM_21_C23_Update.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\00_VERSION_TRACKING\\LLVM_22_C23_Update.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x2"
       ]
     },
@@ -120,12 +136,14 @@
     {
       "file": "knowledge\\00_VERSION_TRACKING\\Zig_Roadmap_Tracking.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\00_VERSION_TRACKING\\reports\\c2y_report_20260319.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
@@ -156,12 +174,14 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\01_Basic_Layer\\03_Operators_Expressions.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x5"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\01_Basic_Layer\\04_Control_Flow.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x5"
       ]
     },
@@ -175,18 +195,19 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\01_Basic_Layer\\IEEE_754_Floating_Point\\01_IEEE_754_Basics.md",
       "changes": [
-        "fix_broken_links_x2"
+        "remove_trailing_template"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\01_Basic_Layer\\IEEE_754_Floating_Point\\02_IEEE_754_Operations.md",
       "changes": [
-        "fix_broken_links_x2"
+        "remove_trailing_template"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\01_Basic_Layer\\IEEE_754_Floating_Point\\03_Decimal_Floating_Point.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
@@ -205,6 +226,7 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\02_Core_Layer\\01_Pointer_Multilevel_Linux.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x3"
       ]
     },
@@ -215,14 +237,22 @@
       ]
     },
     {
+      "file": "knowledge\\01_Core_Knowledge_System\\02_Core_Layer\\03_String_Processing.md",
+      "changes": [
+        "remove_trailing_template"
+      ]
+    },
+    {
       "file": "knowledge\\01_Core_Knowledge_System\\02_Core_Layer\\04_Functions_Scope.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x2"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\02_Core_Layer\\05_Arrays_Pointers.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x1"
       ]
     },
@@ -230,6 +260,12 @@
       "file": "knowledge\\01_Core_Knowledge_System\\02_Core_Layer\\10_Advanced_Data_Structures.md",
       "changes": [
         "fix_broken_links_x4"
+      ]
+    },
+    {
+      "file": "knowledge\\01_Core_Knowledge_System\\02_Core_Layer\\README.md",
+      "changes": [
+        "remove_trailing_template"
       ]
     },
     {
@@ -251,6 +287,12 @@
       ]
     },
     {
+      "file": "knowledge\\01_Core_Knowledge_System\\03_Construction_Layer\\README.md",
+      "changes": [
+        "remove_trailing_template"
+      ]
+    },
+    {
       "file": "knowledge\\01_Core_Knowledge_System\\04_Standard_Library_Layer\\03_C11_Library.md",
       "changes": [
         "fix_broken_links_x2"
@@ -265,42 +307,55 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\04_Standard_Library_Layer\\05_C23_Standard_Library_Extensions.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\04_Standard_Library_Layer\\10_Threads_C11.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x2"
+      ]
+    },
+    {
+      "file": "knowledge\\01_Core_Knowledge_System\\04_Standard_Library_Layer\\README.md",
+      "changes": [
+        "remove_trailing_template"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\04_Standard_Library_Layer\\01_Standard_IO\\01_stdio_File_IO.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\04_Standard_Library_Layer\\01_Standard_IO\\README.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x2"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\04_Standard_Library_Layer\\C23_Standard_Library\\01_stdbit_h_Complete_Reference.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\04_Standard_Library_Layer\\C23_Standard_Library\\02_stdckdint_h_Complete_Reference.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\04_Standard_Library_Layer\\C23_Standard_Library\\README.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x1"
       ]
     },
@@ -323,8 +378,15 @@
       ]
     },
     {
+      "file": "knowledge\\01_Core_Knowledge_System\\05_Engineering\\08_Code_Review_Checklist.md",
+      "changes": [
+        "remove_trailing_template"
+      ]
+    },
+    {
       "file": "knowledge\\01_Core_Knowledge_System\\05_Engineering\\README.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x3"
       ]
     },
@@ -351,7 +413,14 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\05_Engineering_Layer\\02_Code_Quality.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
+      ]
+    },
+    {
+      "file": "knowledge\\01_Core_Knowledge_System\\05_Engineering_Layer\\02_Debug_Techniques.md",
+      "changes": [
+        "remove_trailing_template"
       ]
     },
     {
@@ -364,6 +433,7 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\05_Engineering_Layer\\04_Performance_Optimization_Advanced.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x1"
       ]
     },
@@ -382,6 +452,7 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\05_Engineering_Layer\\README.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x3"
       ]
     },
@@ -400,36 +471,42 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\06_Advanced_Layer\\01_Language_Extensions.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\06_Advanced_Layer\\02_Undefined_Behavior.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\06_Advanced_Layer\\03_Portability.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\06_Advanced_Layer\\README.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x1"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\07_Modern_C\\01_C11_Features.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\07_Modern_C\\02_C17_C23_Features.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
@@ -442,12 +519,14 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\07_Modern_C\\03_C23_Core_Features.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\07_Modern_C\\04_C23_Memory_Security.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
@@ -460,12 +539,14 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\07_Modern_C\\C2y_Countof_Depth.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\07_Modern_C\\C2y_Defer_Depth.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
@@ -474,6 +555,12 @@
       "changes": [
         "remove_trailing_template",
         "fix_broken_links_x10"
+      ]
+    },
+    {
+      "file": "knowledge\\01_Core_Knowledge_System\\07_Modern_C\\README.md",
+      "changes": [
+        "remove_trailing_template"
       ]
     },
     {
@@ -503,43 +590,56 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\08_Application_Domains\\01_OS_Kernel.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x1"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\08_Application_Domains\\02_Embedded_Industrial_Advanced.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\08_Application_Domains\\02_Embedded_Multiplatform_Protocols.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\08_Application_Domains\\02_Embedded_Physical_Control.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\08_Application_Domains\\02_Embedded_Systems.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\08_Application_Domains\\03_Infrastructure_Software.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\08_Application_Domains\\04_High_Performance_Computing.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
+      ]
+    },
+    {
+      "file": "knowledge\\01_Core_Knowledge_System\\08_Application_Domains\\README.md",
+      "changes": [
+        "remove_trailing_template"
       ]
     },
     {
@@ -584,12 +684,14 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\09_Safety_Standards\\CERT_C_2024\\README.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\09_Safety_Standards\\DO_178C\\01_Software_Levels_and_Objectives.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
@@ -602,18 +704,21 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\09_Safety_Standards\\Formal_Verification\\Case_Studies.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\09_Safety_Standards\\Formal_Verification\\README.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\09_Safety_Standards\\IEC_61508\\01_SIL_Implementation.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
@@ -626,6 +731,7 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\09_Safety_Standards\\ISO_26262\\01_ASIL_Decomposition.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
@@ -638,6 +744,7 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\09_Safety_Standards\\ISO_IEC_TS_17961\\README.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
@@ -657,13 +764,13 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\03_MISRA_C_2023_Rules_3.md",
       "changes": [
-        "fix_broken_links_x2"
+        "remove_trailing_template"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\04_MISRA_C_2023_Rules_4.md",
       "changes": [
-        "fix_broken_links_x2"
+        "remove_trailing_template"
       ]
     },
     {
@@ -793,13 +900,15 @@
     {
       "file": "knowledge\\01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\tools\\01_MISRA_Toolchain_Guide.md",
       "changes": [
-        "fix_unclosed_fence",
+        "remove_trailing_template_and_close_fence",
+        "remove_template_fence",
         "fix_broken_links_x1"
       ]
     },
     {
       "file": "knowledge\\01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2023\\tools\\02_Helix_QAC_Guide.md",
       "changes": [
+        "remove_trailing_template",
         "fix_broken_links_x10"
       ]
     },
@@ -907,7 +1016,7 @@
       "file": "knowledge\\01_Core_Knowledge_System\\09_Safety_Standards\\MISRA_C_2025\\tools\\docs\\DEVIATIONS.md",
       "changes": [
         "remove_trailing_template_and_close_fence",
-        "fix_unclosed_fence",
+        "remove_template_fence",
         "fix_broken_links_x10"
       ]
     },
@@ -1293,7 +1402,7 @@
       "file": "knowledge\\02_Formal_Semantics_and_Physics\\09_Physical_Machine_Layer\\01_Digital_Logic_Foundations\\02_Logic_Gates_Implementation.md",
       "changes": [
         "remove_trailing_template_and_close_fence",
-        "fix_unclosed_fence"
+        "remove_template_fence"
       ]
     },
     {

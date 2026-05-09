@@ -618,7 +618,7 @@ if (!f) return -1;
 
 ```c
 // 提案：函数字面量
-auto callback = [](int x) { return x * 2; };
+auto callback = [ [链接失效]](int x) { return x * 2; };
 int result = callback(5);  // 10
 ```
 

@@ -13,8 +13,8 @@
 |:-----|:-----|
 | **核心概念** | 控制结构、函数调用约定、递归、作用域、存储期 |
 | **前置知识** | [语法要素](./01_Syntax_Elements.md)、[数据类型系统](./02_Data_Type_System.md)、[运算符与表达式](./03_Operators_Expressions.md) |
-| **后续延伸** | [函数指针](../../02_Core_Layer/01_Pointer_Depth.md)、[状态机](../../../06_Thinking_Representation/09_State_Machines/readme.md)、[并发编程](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) |
-| **横向关联** | [层次桥接链](../../../06_Thinking_Representation/05_Concept_Mappings/09_Level_Bridging_Chains.md#控制流→状态机→并发模型链)、[控制流等价变换](../../../06_Thinking_Representation/05_Concept_Mappings/08_Concept_Equivalence_Graph.md#控制流等价变换) |
+| **后续延伸** | [函数指针 [链接失效]](../../02_Core_Layer/01_Pointer_Depth.md)、[状态机 [链接失效]](../../../06_Thinking_Representation/09_State_Machines/readme.md)、[并发编程 [链接失效]](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) |
+| **横向关联** | [层次桥接链 [链接失效]](../../../06_Thinking_Representation/05_Concept_Mappings/09_Level_Bridging_Chains.md#控制流→状态机→并发模型链)、[控制流等价变换 [链接失效]](../../../06_Thinking_Representation/05_Concept_Mappings/08_Concept_Equivalence_Graph.md#控制流等价变换) |
 | **权威来源** | K&R Ch1,3,4, CSAPP Ch3.7, Modern C Level 1 |
 
 ---
@@ -797,26 +797,3 @@ if (condition1) {
 
 
 ---
-
-## 深入理解
-
-### 技术原理
-
-深入探讨相关技术原理和实现细节。
-
-### 实践指南
-
-- 步骤1：理解基础概念
-- 步骤2：掌握核心原理
-- 步骤3：应用实践
-
-### 相关资源
-
-- 文档链接
-- 代码示例
-- 参考文章
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

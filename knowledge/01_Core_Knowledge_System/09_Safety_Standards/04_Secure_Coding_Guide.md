@@ -76,10 +76,6 @@
     - [标准与规范](#标准与规范)
     - [工具资源](#工具资源)
     - [安全库](#安全库)
-  - [深入理解](#深入理解)
-    - [核心概念](#核心概念)
-    - [实践应用](#实践应用)
-    - [学习建议](#学习建议)
 
 ---
 
@@ -239,20 +235,20 @@ bool safe_copy_v3(const char *input, char *output, size_t out_len) {
 ### 核心关联
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [内存管理](../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
-| [指针深度](../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
-| [并发编程](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 核心关联 | 并发编程基础 |
-| [数据类型](../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
-| [数组与指针](../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
+| [内存管理 [链接失效]](../../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
+| [指针深度 [链接失效]](../../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 核心关联 | 指针深度基础 |
+| [并发编程 [链接失效]](../../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 核心关联 | 并发编程基础 |
+| [数据类型 [链接失效]](../../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 核心关联 | 数据类型基础 |
+| [数组与指针 [链接失效]](../../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
 
 ### 扩展阅读
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [软件工程](../../../01_Core_Knowledge_System/05_Engineering_Layer/readme.md) | 核心关联 | 软件工程基础 |
-| [形式语义](../../../02_Formal_Semantics_and_Physics/readme.md) | 核心关联 | 形式语义基础 |
-| [系统技术](../../../03_System_Technology_Domains/readme.md) | 核心关联 | 系统技术基础 |
-| [工业场景](../../../04_Industrial_Scenarios/readme.md) | 核心关联 | 工业场景基础 |
-| [思维表征](../../../06_Thinking_Representation/readme.md) | 核心关联 | 思维表征基础 |
+| [软件工程 [链接失效]](../../../01_Core_Knowledge_System/05_Engineering_Layer/readme.md) | 核心关联 | 软件工程基础 |
+| [形式语义 [链接失效]](../../../02_Formal_Semantics_and_Physics/readme.md) | 核心关联 | 形式语义基础 |
+| [系统技术 [链接失效]](../../../03_System_Technology_Domains/readme.md) | 核心关联 | 系统技术基础 |
+| [工业场景 [链接失效]](../../../04_Industrial_Scenarios/readme.md) | 核心关联 | 工业场景基础 |
+| [思维表征 [链接失效]](../../../06_Thinking_Representation/readme.md) | 核心关联 | 思维表征基础 |
 gcc -fstack-protector-strong -Wstack-protector -fstack-check
 
 # 运行时检测
@@ -2981,26 +2977,3 @@ gcc \
 
 
 ---
-
-## 深入理解
-
-### 核心概念
-
-本主题的核心概念包括：基础理论、实现机制、实际应用。
-
-### 实践应用
-
-- 应用场景1
-- 应用场景2
-- 应用场景3
-
-### 学习建议
-
-1. 先理解基础概念
-2. 再进行实践练习
-3. 最后深入源码
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

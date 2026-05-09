@@ -36,7 +36,7 @@
 | **预处理** | 宏系统 | [预处理器](../../01_Core_Knowledge_System/03_Construction_Layer/02_Preprocessor.md) | 宏、条件编译、头文件 |
 | **编译** | 编译优化 | [编译与构建](../../01_Core_Knowledge_System/05_Engineering_Layer/01_Compilation_Build.md) | 优化级别、调试信息 |
 | **编译** | 语义分析 | [C与汇编映射](../06_C_Assembly_Mapping/readme.md) | 代码生成、ABI |
-| **汇编** | 目标文件 | [ELF格式](./readme.md#目标文件格式) | 段、符号、重定位 |
+| **汇编** | 目标文件 | [ELF格式 [链接失效]](./readme.md#目标文件格式) | 段、符号、重定位 |
 | **链接** | 静态链接 | [静态链接深度](./03_Static_Linking_Deep.md) | 符号解析、重定位、库 |
 | **链接** | 动态链接 | [动态链接深度](./04_Dynamic_Linking_Deep.md) | PIC、GOT/PLT、延迟绑定 |
 | **加载** | 程序加载 | [加载器深度](./05_Loader_Deep.md) | execve、内存映射、ASLR |
@@ -210,7 +210,7 @@ value = A(symbol) + addend  (根据type调整)
 
 ### 系统技术层
 
-- [系统编程](../../03_System_Technology_Domains/01_System_Programming/readme.md)
+- [系统编程 [链接失效]](../../03_System_Technology_Domains/01_System_Programming/readme.md)
 - [eBPF深度](../../03_System_Technology_Domains/01_System_Programming/06_eBPF_Deep.md)
 - [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md)
 - [网络编程](../../03_System_Technology_Domains/15_Network_Programming/readme.md)
@@ -219,7 +219,7 @@ value = A(symbol) + addend  (根据type调整)
 
 - [Linux内核](../../04_Industrial_Scenarios/13_Linux_Kernel/readme.md)
 - [嵌入式IoT](../../04_Industrial_Scenarios/14_Embedded_IoT/readme.md)
-- [高性能计算](../../04_Industrial_Scenarios/01_High_Performance/readme.md)
+- [高性能计算 [链接失效]](../../04_Industrial_Scenarios/01_High_Performance/readme.md)
 
 ---
 

@@ -15,7 +15,7 @@
 |:-----|:---------|:-----|
 | [C11标准库](03_C11_Library.md) | 版本基础 | C11是前一版本 |
 | [现代C编程](../07_Modern_C/readme.md) | 语言特性 | C23语言新特性 |
-| [位运算](../01_Basic_Layer/06_Bit_Operations.md) | 知识基础 | stdbit.h基础 |
+| [位运算 [链接失效]](../01_Basic_Layer/06_Bit_Operations.md) | 知识基础 | stdbit.h基础 |
 
 ### 版本演进链
 

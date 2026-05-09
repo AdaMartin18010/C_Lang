@@ -13,9 +13,9 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [C类型系统](../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 基础依赖 | C类型理论形式化基础 |
-| [未定义行为](../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 实践关联 | UB的形式化定义 |
-| [逻辑基础](../../05_Deep_Structure_MetaPhysics/01_Mathematical_Foundations/01_Logic_Systems.md) | 数学基础 | 数理逻辑、集合论 |
+| [C类型系统 [链接失效]](../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) | 基础依赖 | C类型理论形式化基础 |
+| [未定义行为 [链接失效]](../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 实践关联 | UB的形式化定义 |
+| [逻辑基础 [链接失效]](../../05_Deep_Structure_MetaPhysics/01_Mathematical_Foundations/01_Logic_Systems.md) | 数学基础 | 数理逻辑、集合论 |
 
 ### 后续延伸
 
@@ -249,26 +249,3 @@ C#minor → Cminor → ... → 汇编
 
 
 ---
-
-## 深入理解
-
-### 核心概念
-
-本主题的核心概念包括：基础理论、实现机制、实际应用。
-
-### 实践应用
-
-- 应用场景1
-- 应用场景2
-- 应用场景3
-
-### 学习建议
-
-1. 先理解基础概念
-2. 再进行实践练习
-3. 最后深入源码
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

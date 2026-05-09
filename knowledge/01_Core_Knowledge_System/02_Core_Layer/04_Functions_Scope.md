@@ -21,7 +21,7 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [函数指针](03_Function_Pointers.md) | 直接延伸 | 函数作为一等公民 |
+| [函数指针 [链接失效]](03_Function_Pointers.md) | 直接延伸 | 函数作为一等公民 |
 | [内存管理](02_Memory_Management.md) | 间接关联 | 生命周期与作用域 |
 | [工程实践](../05_Engineering/readme.md) | 应用场景 | 模块化设计、代码组织 |
 
@@ -30,7 +30,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [预处理器](../03_Construction_Layer/02_Preprocessor.md) | 功能关联 | 宏与函数的区别 |
-| [递归实现](../../06_Thinking_Representation/05_Algorithm_Implementation.md) | 应用场景 | 递归函数设计模式 |
+| [递归实现 [链接失效]](../../06_Thinking_Representation/05_Algorithm_Implementation.md) | 应用场景 | 递归函数设计模式 |
 
 ---
 
@@ -411,26 +411,3 @@ unsigned long long fib(int n) {
 
 
 ---
-
-## 深入理解
-
-### 技术原理
-
-深入探讨相关技术原理和实现细节。
-
-### 实践指南
-
-- 步骤1：理解基础概念
-- 步骤2：掌握核心原理
-- 步骤3：应用实践
-
-### 相关资源
-
-- 文档链接
-- 代码示例
-- 参考文章
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

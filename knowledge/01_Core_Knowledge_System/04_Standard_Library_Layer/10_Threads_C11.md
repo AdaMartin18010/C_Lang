@@ -23,14 +23,14 @@
 |:-----|:---------|:-----|
 | [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 高级主题 | 更全面的并发技术 |
 | [C11内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md) | 理论深化 | 内存序、happens-before |
-| [无锁编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/05_Lock_Free.md) | 专家进阶 | 原子操作高级应用 |
+| [无锁编程 [链接失效]](../../03_System_Technology_Domains/14_Concurrency_Parallelism/05_Lock_Free.md) | 专家进阶 | 原子操作高级应用 |
 
 ### 横向关联
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [POSIX线程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/01_POSIX_Threads.md) | 平台对比 | pthread与C11线程对比 |
-| [安全编码](../../09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全实践 | 并发安全最佳实践 |
+| [安全编码 [链接失效]](../../09_Safety_Standards/04_Secure_Coding_Guide.md) | 安全实践 | 并发安全最佳实践 |
 
 ---
 
@@ -2446,26 +2446,3 @@ int main(void) {
 
 
 ---
-
-## 深入理解
-
-### 技术原理
-
-深入探讨相关技术原理和实现细节。
-
-### 实践指南
-
-- 步骤1：理解基础概念
-- 步骤2：掌握核心原理
-- 步骤3：应用实践
-
-### 相关资源
-
-- 文档链接
-- 代码示例
-- 参考文章
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

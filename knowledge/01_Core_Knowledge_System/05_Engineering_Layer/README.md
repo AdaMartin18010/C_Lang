@@ -22,15 +22,15 @@
 | 文档 | 关系 | 说明 |
 |:-----|:-----|:-----|
 | [代码审查检查清单](../05_Engineering/08_Code_Review_Checklist.md) | 质量保障 | 人工审查流程 |
-| [性能优化](../05_Engineering/03_Performance_Optimization.md) | 工程实践 | 优化工程化 |
-| [调试技术](../05_Engineering/02_Debug_Techniques.md) | 开发支持 | 调试工程化 |
+| [性能优化 [链接失效]](../05_Engineering/03_Performance_Optimization.md) | 工程实践 | 优化工程化 |
+| [调试技术 [链接失效]](../05_Engineering/02_Debug_Techniques.md) | 开发支持 | 调试工程化 |
 
 ### 后续延伸
 
 | 文档 | 关系 | 说明 |
 |:-----|:-----|:-----|
 | [现代工具链](../../07_Modern_Toolchain/readme.md) | 工具支持 | IDE、构建系统、CI/CD |
-| [持续集成](../../03_System_Technology_Domains/13_DevOps_Toolchain/readme.md) | 自动化 | 自动化构建部署 |
+| [持续集成 [链接失效]](../../03_System_Technology_Domains/13_DevOps_Toolchain/readme.md) | 自动化 | 自动化构建部署 |
 | [MISRA C工具](../09_Safety_Standards/MISRA_C_2023/tools/01_MISRA_Toolchain_Guide.md) | 合规检查 | 静态分析工具链 |
 
 ### 工程实践体系
@@ -76,11 +76,6 @@
   - [文档生成](#文档生成)
     - [Doxygen 配置](#doxygen-配置)
     - [文档注释规范](#文档注释规范)
-  - [深入理解](#深入理解)
-    - [技术原理](#技术原理)
-    - [实践指南](#实践指南)
-    - [相关资源](#相关资源)
-      - [编译器优化深度解析](#编译器优化深度解析)
 
 
 ---
@@ -709,31 +704,3 @@ typedef enum {
 
 
 ---
-
-## 深入理解
-
-### 技术原理
-
-深入探讨相关技术原理和实现细节。
-
-### 实践指南
-
-- 步骤1：理解基础概念
-- 步骤2：掌握核心原理
-- 步骤3：应用实践
-
-### 相关资源
-
-#### 编译器优化深度解析
-
-- [循环优化](Compiler_Optimization_Deep/01_Loop_Optimization.md) - 循环展开、LICM、强度削减
-- [自动向量化](Compiler_Optimization_Deep/02_Auto_Vectorization.md) - SIMD、AVX/NEON编程
-
-- 文档链接
-- 代码示例
-- 参考文章
-
----
-
-> **最后更新**: 2026-03-24
-> **维护者**: AI Code Review

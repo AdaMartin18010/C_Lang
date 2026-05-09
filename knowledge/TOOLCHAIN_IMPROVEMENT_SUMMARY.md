@@ -291,7 +291,7 @@
 
 - 评估报告
 - [工具链模块主页](./07_Modern_Toolchain/readme.md)
-- [可持续推进路线图](../../SUSTAINABLE_ROADMAP_2026.md)
+- [可持续推进路线图 [链接失效]](../../SUSTAINABLE_ROADMAP_2026.md)
 - [IDE对比矩阵](./07_Modern_Toolchain/01_IDE_Editors/06_IDE_Comparison_Matrix.md)
 - [GitHub Actions指南](./07_Modern_Toolchain/03_CI_CD_DevOps/01_GitHub_Actions_C.md)
 
@@ -322,26 +322,3 @@
 
 
 ---
-
-## 深入理解
-
-### 核心原理
-
-深入探讨技术原理和实现细节。
-
-### 实践应用
-
-- 应用场景1
-- 应用场景2
-- 应用场景3
-
-### 最佳实践
-
-1. 理解基础概念
-2. 掌握核心机制
-3. 应用到实际项目
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review

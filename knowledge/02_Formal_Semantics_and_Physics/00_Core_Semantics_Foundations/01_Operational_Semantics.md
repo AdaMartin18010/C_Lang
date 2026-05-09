@@ -186,7 +186,7 @@ $$\forall a \in A. \exists! b \in B. (a, b) \in f$$
 - **双射 (Bijective)**: 既是单射又是满射
 
 **定义 1.6 (函数更新)**: 给定函数 $f: A \to B$，点更新定义为：
-$$f[a \mapsto b](x) \triangleq \begin{cases} b & \text{if } x = a \\ f(x) & \text{otherwise} \end{cases}$$
+$$f[a \mapsto b [链接失效]](x) \triangleq \begin{cases} b & \text{if } x = a \\ f(x) & \text{otherwise} \end{cases}$$
 
 #### 1.1.3 有限序列
 
@@ -457,7 +457,7 @@ $$
   \frac{\overline{\langle 1, \sigma \rangle \Downarrow 1}}{\langle x := 1, \sigma \rangle \Downarrow \sigma[x \mapsto 1]}
   \quad
   \frac{
-    \frac{\sigma[x \mapsto 1](x) = 1}{\langle x, \sigma[x \mapsto 1] \rangle \Downarrow 1}
+    \frac{\sigma[x \mapsto 1 [链接失效]](x) = 1}{\langle x, \sigma[x \mapsto 1] \rangle \Downarrow 1}
     \quad
     \frac{}{\langle 2, \sigma[x \mapsto 1] \rangle \Downarrow 2}
   }{\langle x + 2, \sigma[x \mapsto 1] \rangle \Downarrow 3}
@@ -1462,26 +1462,3 @@ Qed.
 
 
 ---
-
-## 深入理解
-
-### 核心概念
-
-本主题的核心概念包括：基础理论、实现机制、实际应用。
-
-### 实践应用
-
-- 应用场景1
-- 应用场景2
-- 应用场景3
-
-### 学习建议
-
-1. 先理解基础概念
-2. 再进行实践练习
-3. 最后深入源码
-
----
-
-> **最后更新**: 2026-03-21
-> **维护者**: AI Code Review
