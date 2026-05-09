@@ -14,7 +14,7 @@
 | **核心概念** | SIMD指令集、向量化编程、内联汇编、内建函数、自动向量化 |
 | **前置知识** | [数据类型系统](../../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md)、[内存对齐](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) |
 | **后续延伸** | [5G基带向量化](../../04_Industrial_Scenarios/04_5G_Baseband/01_SIMD_Vectorization.md)、[图像处理优化](../../03_Computer_Vision/02_Optical_Flow.md) |
-| **横向关联** | [编译器优化](../../01_Core_Knowledge_System/05_Engineering_Layer/01_Compilation_Build.md)、[微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/readme.md) |
+| **横向关联** | [编译器优化](../../01_Core_Knowledge_System/05_Engineering_Layer/01_Compilation_Build.md)、[微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) |
 | **权威来源** | Intel Intrinsics Guide, ARM NEON Programmer's Guide, Agner Fog's manuals |
 
 ---

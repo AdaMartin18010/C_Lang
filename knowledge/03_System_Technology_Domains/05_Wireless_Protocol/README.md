@@ -26,9 +26,9 @@
 ### 后续延伸
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [硬件安全](../07_Hardware_Security/readme.md) | 安全通信 | 无线安全、加密 |
-| [安全启动](../06_Security_Boot/readme.md) | 安全基础 | 固件安全 |
-| [计算机视觉](../03_Computer_Vision/readme.md) | 边缘AI | 无线视频传输 |
+| [硬件安全](../07_Hardware_Security/README.md) | 安全通信 | 无线安全、加密 |
+| [安全启动](../06_Security_Boot/README.md) | 安全基础 | 固件安全 |
+| [计算机视觉](../03_Computer_Vision/README.md) | 边缘AI | 无线视频传输 |
 
 ## 概述
 

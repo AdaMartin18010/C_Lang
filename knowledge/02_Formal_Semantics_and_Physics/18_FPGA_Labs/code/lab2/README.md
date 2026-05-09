@@ -60,7 +60,7 @@
 
 ---
 
-[← 返回Lab2](../readme.md) | [← 返回代码目录](../readme.md)
+[← 返回Lab2](../README.md) | [← 返回代码目录](../README.md)
 
 
 ---

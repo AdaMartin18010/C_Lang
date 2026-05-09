@@ -68,7 +68,7 @@ Cache是弥合CPU与主存速度差距的关键技术，对系统性能有着决
 
 ---
 
-[← 返回Lab5](../readme.md) | [← 返回代码目录](../readme.md)
+[← 返回Lab5](../README.md) | [← 返回代码目录](../README.md)
 
 
 ---

@@ -610,7 +610,7 @@ readelf -V ./program
 
 - [加载器工作原理](#动态链接器工作原理)
 - [系统编程 [链接失效]](../../03_System_Technology_Domains/01_System_Programming/readme.md)
-- [内核模块](../../04_Industrial_Scenarios/13_Linux_Kernel/readme.md)
+- [内核模块](../../04_Industrial_Scenarios/13_Linux_Kernel/README.md)
 
 ### 实践关联
 

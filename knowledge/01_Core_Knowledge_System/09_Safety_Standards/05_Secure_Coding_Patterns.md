@@ -577,7 +577,7 @@ void internal_function(int *arr, size_t n) {
 
 ### 后续延伸
 
-- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md)
+- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md)
 - [形式化验证 [链接失效]](../../../02_Formal_Semantics_and_Physics/11_CompCert_Verification/readme.md)
 
 ### 参考

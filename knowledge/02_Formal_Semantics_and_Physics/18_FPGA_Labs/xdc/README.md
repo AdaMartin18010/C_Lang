@@ -21,7 +21,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports clk]
 
 ---
 
-[← 返回上级目录](../readme.md)
+[← 返回上级目录](../README.md)
 
 
 ---

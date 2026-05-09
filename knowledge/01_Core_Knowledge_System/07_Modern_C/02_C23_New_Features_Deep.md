@@ -322,7 +322,7 @@ strlcpy(limited, original, sizeof(limited));  // 总是以\0结尾
 ### 前置知识
 
 - [C11特性](./01_C11_Features.md)
-- [现代C编程](./readme.md)
+- [现代C编程](./README.md)
 
 ### 后续延伸
 

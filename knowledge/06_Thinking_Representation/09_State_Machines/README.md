@@ -35,9 +35,9 @@
 
 ### 后续延伸
 
-- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) - 多线程状态机
-- [嵌入式系统设计](../../04_Industrial_Scenarios/14_Embedded_IoT/readme.md) - 实际应用场景
-- [编译器实现](../../02_Formal_Semantics_and_Physics/11_CompCert_Verification/readme.md) - 词法分析状态机
+- [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) - 多线程状态机
+- [嵌入式系统设计](../../04_Industrial_Scenarios/14_Embedded_IoT/README.md) - 实际应用场景
+- [编译器实现](../../02_Formal_Semantics_and_Physics/11_CompCert_Verification/README.md) - 词法分析状态机
 
 ### 横向关联
 

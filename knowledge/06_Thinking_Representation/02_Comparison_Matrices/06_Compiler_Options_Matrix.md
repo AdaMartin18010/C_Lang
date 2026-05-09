@@ -107,7 +107,7 @@ CFLAGS="-O0 -g -fsanitize=address,undefined,leak -fno-omit-frame-pointer"
 
 ---
 
-**返回**: [对比矩阵总览](./readme.md) | [思维表征总览](../readme.md)
+**返回**: [对比矩阵总览](./README.md) | [思维表征总览](../README.md)
 
 
 ---

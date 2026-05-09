@@ -28,8 +28,8 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [视频编解码](../04_Video_Codec/readme.md) | 视频处理 | 视频流处理 |
-| [SIMD优化](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/readme.md) | 性能优化 | 向量化图像处理 |
+| [视频编解码](../04_Video_Codec/README.md) | 视频处理 | 视频流处理 |
+| [SIMD优化](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 性能优化 | 向量化图像处理 |
 | [硬件加速](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | 嵌入式 | GPU/DSP加速 |
 
 ---

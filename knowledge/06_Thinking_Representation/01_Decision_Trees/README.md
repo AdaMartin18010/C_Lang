@@ -23,7 +23,7 @@
 |:-----|:---------|:-----|
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 泄漏诊断 | 内存泄漏决策树 |
 | [指针深度](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) | 非法访问 | 段错误决策树 |
-| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/readme.md) | 死锁竞争 | 并发决策树 |
+| [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 死锁竞争 | 并发决策树 |
 
 ### 后续延伸
 
@@ -1049,8 +1049,8 @@ flowchart LR
 
 ---
 
-**← [返回上级目录](../readme.md)**
-**← [返回知识库根目录](../../readme.md)**
+**← [返回上级目录](../README.md)**
+**← [返回知识库根目录](../../README.md)**
 
 
 ---
