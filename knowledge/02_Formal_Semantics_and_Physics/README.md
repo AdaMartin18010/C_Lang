@@ -198,8 +198,8 @@
 
 | 文件 | 主题 | 难度 | 参考来源 | 代码行数 |
 |:-----|:-----|:----:|:---------|:--------:|
-| [01_Mental_Models.md](./04_Cognitive_Representation/01_Mental_Models.md) | 心智模型 | L5 | Johnson-Laird | 362 |
-| [02_Embodied_Cognition.md](./04_Cognitive_Representation/02_Embodied_Cognition.md) | 具身认知 | L5 | Lakoff, Nunez | 442 |
+| 01_Mental_Models.md | 心智模型 | L5 | Johnson-Laird | 362 |
+| 02_Embodied_Cognition.md | 具身认知 | L5 | Lakoff, Nunez | 442 |
 
 **前置知识**: 认知心理学
 **关联**: [06_Thinking_Representation/01_Decision_Trees](../06_Thinking_Representation/01_Decision_Trees/README.md)

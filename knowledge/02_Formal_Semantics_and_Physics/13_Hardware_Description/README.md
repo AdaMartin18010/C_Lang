@@ -4,7 +4,7 @@
 > **难度级别**: L4-L5 (高级到专家)
 > **前置知识**: [数字逻辑基础](../09_Physical_Machine_Layer/01_Digital_Logic_Foundations/README.md), [C语言高级特性](../../01_Core_Knowledge_System/06_Advanced_Layer/README.md)
 > **预估学习时间**: 15-20 小时
-> **配套实验**: [FPGA Labs](../18_FPGA_Labs/README.md)
+> **配套实验**: FPGA Labs
 
 ---
 
@@ -47,9 +47,9 @@
 
 ### 实践资源
 
-- [Lab1: 组合电路设计](../18_FPGA_Labs/01_Lab1_Basic_Gates.md)
-- [Lab2: ALU实现](../18_FPGA_Labs/02_Lab2_ALU_Implementation.md)
-- [Lab3: 单周期CPU](../18_FPGA_Labs/03_Lab3_Single_Cycle_CPU.md)
+- Lab1: 组合电路设计
+- Lab2: ALU实现
+- Lab3: 单周期CPU
 - 代码仓库 - Verilog和C示例
 
 ---
@@ -499,7 +499,7 @@ Performance Estimates
 ### 相关模块
 
 - [数字逻辑基础](../09_Physical_Machine_Layer/01_Digital_Logic_Foundations/README.md)
-- [FPGA实验](../18_FPGA_Labs/README.md)
+- FPGA实验
 - [C到硬件映射](../14_C_to_Hardware_Mapping/README.md)
 
 ---

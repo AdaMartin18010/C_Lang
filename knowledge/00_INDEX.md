@@ -321,7 +321,7 @@
 | 性能瓶颈分析 | [性能瓶颈分析决策树](./06_Thinking_Representation/01_Decision_Trees/03_Performance_Bottleneck.md) | 1小时 |
 | 并发调试 | [并发调试决策树](./06_Thinking_Representation/01_Decision_Trees/05_Concurrency_Debug.md) | 2小时 |
 | 编译链接错误 | [编译链接决策树](./06_Thinking_Representation/01_Decision_Trees/04_Compilation_Error.md) | 15分钟 |
-| 技术选型对比 | [对比矩阵集合](./06_Thinking_Representation/02_Multidimensional_Matrix/README.md) | 即时 |
+| 技术选型对比 | [对比矩阵集合](./06_Thinking_Representation/02_Comparison_Matrices/README.md) | 即时 |
 | 概念理解映射 | [概念映射集合](./06_Thinking_Representation/05_Concept_Mappings/README.md) | 即时 |
 
 ---
@@ -1454,7 +1454,7 @@ graph TD
 
 | 资源类型 | 文件数 | 核心文件 | 用途 |
 |:---------|:------:|:---------|:-----|
-| **多维矩阵** | 15+ | [标准对比矩阵](./06_Thinking_Representation/02_Multidimensional_Matrix/01_Standards_Comparison_Matrix.md) | 快速对比决策 |
+| **对比矩阵** | 16+ | [标准对比矩阵](./06_Thinking_Representation/02_Comparison_Matrices/01_Standards_Comparison_Matrix.md) | 快速对比决策 |
 | **知识图谱** | 8+ | [C语言知识图谱](./06_Thinking_Representation/05_Concept_Mappings/05_C_Language_Knowledge_Graph.md) | 概念关系可视化 |
 | **决策树** | 11+ | [内存泄漏诊断](./06_Thinking_Representation/01_Decision_Trees/01_Memory_Leak_Diagnosis.md) | 问题诊断流程 |
 | **学习路径** | 6+ | [入门到进阶路径](./06_Thinking_Representation/06_Learning_Paths/01_Beginner_to_Advanced.md) | 系统化学习指导 |
@@ -1463,7 +1463,7 @@ graph TD
 
 ```text
 06_Thinking_Representation/
-├── 01_Decision_Trees/                       # 决策树 (11文件)
+├── 01_Decision_Trees/                       # 决策树 (13文件)
 │   ├── 01_Memory_Leak_Diagnosis.md          # 内存泄漏诊断
 │   ├── 02_Segfault_Troubleshooting.md       # 段错误排查
 │   ├── 03_Performance_Bottleneck.md         # 性能瓶颈分析
@@ -1474,16 +1474,20 @@ graph TD
 │   ├── 08_Type_Conversion_Decision_Tree.md  # 类型转换决策
 │   ├── 09_Concurrency_Model_Decision_Tree.md # 并发模型决策
 │   ├── 10_Compilation_Error_Diagnosis_Tree.md # 编译错误诊断
+│   ├── 14_Learning_Path_Decision_Tree.md    # 学习路径决策 ⭐NEW
+│   ├── 15_Learning_Path_Master_Tree.md      # 学习路径主决策树 ⭐NEW
 │   └── README.md
-├── 01_Mind_Maps/                            # 思维导图
+├── 01_Mind_Maps/                            # 思维导图 (5文件)
 │   ├── 01_Knowledge_System_MindMap.md       # 知识体系思维导图
+│   ├── 02_Memory_Model_Map.md               # 内存模型导图
+│   ├── 03_Pointer_Concepts_Map.md           # 指针概念导图
+│   ├── 04_Concurrent_Programming_Map.md     # 并发编程导图
 │   └── README.md
-├── 02_Multidimensional_Matrix/              # 多维矩阵
-│   ├── 01_Standards_Comparison_Matrix.md    # 标准对比矩阵 ⭐NEW
-│   └── README.md
-├── 02_Comparison_Matrices/                  # 对比矩阵 (13文件)
+├── 02_Comparison_Matrices/                  # 对比矩阵 (16文件)
 │   ├── 01_Pointer_Types_Matrix.md           # 指针类型对比
+│   ├── 01_Standards_Comparison_Matrix.md    # 标准对比矩阵 ⭐NEW
 │   ├── 01_Type_Storage_Matrix.md            # 类型存储对比
+│   ├── 02_Core_Concepts_Comprehensive_Matrix.md # 核心概念综合矩阵
 │   ├── 02_Memory_Models_Matrix.md           # 内存模型对比
 │   ├── 02_Synchronization_Matrix.md         # 同步机制对比
 │   ├── 03_IO_Methods_Matrix.md              # IO方法对比
@@ -1492,14 +1496,8 @@ graph TD
 │   ├── 04_Type_Qualifiers_Matrix.md         # 类型限定符对比
 │   ├── 05_Compiler_Optimization_Matrix.md   # 编译器优化对比
 │   ├── 05_Optimization_Levels_Matrix.md     # 优化级别对比
-│   └── README.md
-├── 03_Decision_Trees/                       # 学习路径决策树
-│   ├── 01_Learning_Path_Decision_Tree.md    # 学习路径决策 ⭐NEW
-│   └── README.md
-├── 03_Mind_Maps/                            # 专题思维导图 (4文件)
-│   ├── 02_Memory_Model_Map.md               # 内存模型导图
-│   ├── 03_Pointer_Concepts_Map.md           # 指针概念导图
-│   ├── 04_Concurrent_Programming_Map.md     # 并发编程导图
+│   ├── 06_Compiler_Options_Matrix.md        # 编译器选项对比
+│   ├── 07_Skill_Matrix.md                   # 技能与学习矩阵 ⭐NEW
 │   └── README.md
 ├── 04_Application_Scenario_Trees/           # 应用场景树
 │   ├── 01_Industry_Application_Scenario_Tree.md # 工业应用
@@ -1525,10 +1523,12 @@ graph TD
 │   ├── 06_Standards_Mapping.md              # 标准映射
 │   ├── 07_Topic_Dependency_Graph.md         # 主题依赖图
 │   └── README.md
-├── 06_Index/                                # 核心索引 (4文件)
+├── 06_Index/                                # 核心索引 (6文件)
 │   ├── 01_Core_Concepts_Index.md            # 核心概念索引
+│   ├── 01_Global_Index.md                   # 全局索引
 │   ├── 02_Keywords_Index.md                 # 关键字索引
 │   ├── 03_Design_Patterns_Index.md          # 设计模式索引
+│   ├── 04_Modern_C_Quick_Reference.md       # 现代C特性速查 ⭐NEW
 │   └── README.md
 ├── 06_Learning_Paths/                       # 学习路径 (6文件) ⭐NEW
 │   ├── 01_Beginner_to_Advanced.md           # 入门到进阶
@@ -1545,9 +1545,6 @@ graph TD
 │   ├── 03_Prerequisite_Chains.md            # 前置依赖链
 │   ├── 04_Type_System_Knowledge_Graph.md    # 类型系统图谱
 │   ├── 05_Concurrency_Knowledge_Graph.md    # 并发知识图谱
-│   └── README.md
-├── 08_Index/                                # 全局索引
-│   ├── 01_Global_Index.md                   # 全局索引
 │   └── README.md
 └── README.md                                # 模块说明
 ```

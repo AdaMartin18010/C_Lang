@@ -111,16 +111,16 @@
 
 ---
 
-### 03_Mind_Maps - 思维导图
+### 01_Mind_Maps - 思维导图
 
 知识结构可视化。
 
 | 文件 | 主题 | 覆盖范围 |
 |:-----|:-----|:---------|
 | [01_Knowledge_System_MindMap.md](./01_Mind_Maps/01_Knowledge_System_MindMap.md) | C语言知识系统 | 完整知识图谱 |
-| [02_Memory_Model_Map.md](./03_Mind_Maps/02_Memory_Model_Map.md) | 内存模型 | 堆栈全局常量 |
-| [03_Pointer_Concepts_Map.md](03_Mind_Maps/03_Pointer_Concepts_Map.md) | 指针概念 | ✅ |
-| [04_Concurrent_Programming_Map.md](03_Mind_Maps/04_Concurrent_Programming_Map.md) | 并发编程 | ✅ |
+| [02_Memory_Model_Map.md](./01_Mind_Maps/02_Memory_Model_Map.md) | 内存模型 | 堆栈全局常量 |
+| [03_Pointer_Concepts_Map.md](01_Mind_Maps/03_Pointer_Concepts_Map.md) | 指针概念 | ✅ |
+| [04_Concurrent_Programming_Map.md](01_Mind_Maps/04_Concurrent_Programming_Map.md) | 并发编程 | ✅ |
 
 ---
 
@@ -177,7 +177,7 @@
 
 ---
 
-### 08_Index - 索引与导航
+### 06_Index - 索引与导航
 
 > 注：学习路径已移至 [06_Learning_Paths](./06_Learning_Paths/README.md)
 
@@ -185,7 +185,7 @@
 
 | 文件 | 主题 | 用途 |
 |:-----|:-----|:-----|
-| [01_Global_Index.md](./08_Index/01_Global_Index.md) | 全局索引 | 按主题查找 |
+| [01_Global_Index.md](./06_Index/01_Global_Index.md) | 全局索引 | 按主题查找 |
 | [02_Standard_Reference.md](06_Index/01_Core_Concepts_Index.md) | 标准参考 | ✅ |
 | [03_API_Quick_Reference.md](06_Index/02_Keywords_Index.md) | API速查 | ✅ |
 
@@ -242,13 +242,13 @@ graph TB
 
 ### 学习新知识时
 
-1. 查看 [03_Mind_Maps](./03_Mind_Maps/README.md) 了解知识结构
+1. 查看 [01_Mind_Maps](./01_Mind_Maps/README.md) 了解知识结构
 2. 跟随 [07_Knowledge_Graph/02_Learning_Paths.md](./07_Knowledge_Graph/02_Learning_Paths.md) 学习
 3. 理解 [05_Concept_Mappings](./05_Concept_Mappings/README.md) 中的概念关联
 
 ### 快速查找时
 
-1. 使用 [08_Index/01_Global_Index.md](./08_Index/01_Global_Index.md) 按主题查找
+1. 使用 [06_Index/01_Global_Index.md](./06_Index/01_Global_Index.md) 按主题查找
 2. 查阅 [00_INDEX.md](../00_INDEX.md) 全局索引
 
 ---
@@ -271,12 +271,12 @@ graph TB
 |:---------|:---------|:-----|
 | "出错了怎么办？" | 决策树 | [01_Decision_Trees](./01_Decision_Trees/README.md) |
 | "选A还是选B？" | 对比矩阵 | [02_Comparison_Matrices](./02_Comparison_Matrices/README.md) |
-| "整体结构是什么？" | 思维导图 | [03_Mind_Maps](./03_Mind_Maps/README.md) |
+| "整体结构是什么？" | 思维导图 | [01_Mind_Maps](./01_Mind_Maps/README.md) |
 | "实际怎么用？" | 案例研究 | [04_Case_Studies](./04_Case_Studies/README.md) |
 | "这些概念什么关系？" | 概念映射 | [05_Concept_Mappings](./05_Concept_Mappings/README.md) |
 | "适合什么场景？" | 应用场景 | [04_Application_Scenario_Trees](./04_Application_Scenario_Trees/README.md) |
 | "从哪里开始学？" | 知识图谱 | [07_Knowledge_Graph](./07_Knowledge_Graph/README.md) |
-| "怎么快速找到？" | 索引 | [08_Index](./08_Index/README.md) |
+| "怎么快速找到？" | 索引 | [06_Index](./06_Index/README.md) |
 
 ---
 
@@ -292,9 +292,9 @@ graph TB
 | 新增文件 | 类型 | 用途 |
 |:---------|:-----|:-----|
 | [全局架构图](./00_GLOBAL_ARCHITECTURE_MAP.md) | 层级架构 | 知识库总览导航入口 |
-| [核心概念综合矩阵](./02_Multidimensional_Matrix/02_Core_Concepts_Comprehensive_Matrix.md) | 多维矩阵 | 六维概念对比 |
+| [核心概念综合矩阵](./02_Comparison_Matrices/02_Core_Concepts_Comprehensive_Matrix.md) | 多维矩阵 | 六维概念对比 |
 | [概念关联网络](./07_Knowledge_Graph/06_Concept_Relationship_Network.md) | 知识图谱 | 跨层次概念关联 |
-| [学习路径主决策树](./03_Decision_Trees/02_Learning_Path_Master_Tree.md) | 决策树 | 个性化学习导航 |
+| [学习路径主决策树](./01_Decision_Trees/15_Learning_Path_Master_Tree.md) | 决策树 | 个性化学习导航 |
 | 可持续演进计划 | 规划文档 | 长期发展路线图 |
 
 ### 第二轮新增（持续推进）
@@ -306,7 +306,7 @@ graph TB
 | [性能优化决策树](./01_Decision_Trees/12_Performance_Optimization_Tree.md) | 决策树 | 性能诊断与优化策略 |
 | [调试技术主决策树](./01_Decision_Trees/13_Debugging_Master_Tree.md) | 决策树 | 问题诊断与调试方法 |
 | [编译器选项矩阵](./02_Comparison_Matrices/06_Compiler_Options_Matrix.md) | 对比矩阵 | GCC/Clang选项对比 |
-| [现代C特性速查](./08_Index/04_Modern_C_Quick_Reference.md) | 速查表 | C99/C11/C17/C23特性 |
+| [现代C特性速查](./06_Index/04_Modern_C_Quick_Reference.md) | 速查表 | C99/C11/C17/C23特性 |
 
 ---
 

@@ -281,7 +281,7 @@ Week 1-4                      Month 3-6                    Month 12+
 |:-----|:---------|:-----|
 | 了解知识体系全貌 | 全局架构图 | 本文档 |
 | 系统学习 | 学习路径 | [06_Learning_Paths/readme.md](./06_Learning_Paths/README.md) |
-| 查找具体概念 | 全局索引 | [08_Index/01_Global_Index.md](./08_Index/01_Global_Index.md) |
+| 查找具体概念 | 全局索引 | [06_Index/01_Global_Index.md](./06_Index/01_Global_Index.md) |
 | 解决具体问题 | 决策树 | [01_Decision_Trees/readme.md](./01_Decision_Trees/README.md) |
 | 技术选型对比 | 对比矩阵 | [02_Comparison_Matrices/readme.md](./02_Comparison_Matrices/README.md) |
 | 理解概念关系 | 知识图谱 | [07_Knowledge_Graph/readme.md](./07_Knowledge_Graph/README.md) |

@@ -24,7 +24,7 @@
     - [2.2 L1: 核心知识体系 (11,200+ 行 | 35 文件)](#22-l1-核心知识体系-11200-行--35-文件)
       - [内容模块](#内容模块)
       - [关键文档](#关键文档)
-    - [2.3 L2: 形式语义与物理 (35,000+ 行 | 50+ 文件)](#23-l2-形式语义与物理-35000-行--50-文件)
+    - [2.3 L2: 形式语义与物理 (250,000+ 行 | 370+ 文件)](#23-l2-形式语义与物理-250000-行--370-文件)
       - [内容模块](#内容模块-1)
       - [核心论证链条](#核心论证链条)
       - [关键文档](#关键文档-1)
@@ -181,7 +181,7 @@
     - [2.2 L1: 核心知识体系 (11,200+ 行 | 35 文件)](#22-l1-核心知识体系-11200-行--35-文件)
       - [内容模块](#内容模块)
       - [关键文档](#关键文档)
-    - [2.3 L2: 形式语义与物理 (35,000+ 行 | 50+ 文件)](#23-l2-形式语义与物理-35000-行--50-文件)
+    - [2.3 L2: 形式语义与物理 (250,000+ 行 | 370+ 文件)](#23-l2-形式语义与物理-250000-行--370-文件)
       - [内容模块](#内容模块-1)
       - [核心论证链条](#核心论证链条)
       - [关键文档](#关键文档-1)
@@ -621,6 +621,7 @@ flowchart LR
 | 图灵完备 | 4h | 证明物理层到计算理论的映射 |
 
 **推荐阅读**:
+
 - [数字逻辑门](./02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/01_Digital_Logic_Gates.md) — 完整论证物理层到计算理论的映射
 - [从 NAND 门到 C 编译器](./02_Formal_Semantics_and_Physics/20_Industrial_Case_Studies/06_NAND2C_Computer_Build.md) — 12个渐进式项目，从门电路到完整计算机
 
@@ -635,6 +636,7 @@ flowchart LR
 | 系统调用 | 5h | 理解用户态/内核态切换 |
 
 **推荐阅读**:
+
 - [ISA架构](./02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/01_Instruction_Set_Architecture.md) — 涵盖x86/x64/ARM/RISC-V架构
 - [链接器脚本指南](./02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/05_Linker_Scripts_Guide.md) — 内存布局与段定义
 
@@ -648,6 +650,7 @@ flowchart LR
 | 优化技巧 | 2h | 手写汇编优化 |
 
 **推荐阅读**:
+
 - [C-汇编映射](./02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/01_Compilation_Functor.md) — 编译函子与代码生成
 - [编译器内部原理](./02_Formal_Semantics_and_Physics/11_Compiler_Internals/README.md) — 后端管道：IR到机器码的完整旅程
 - [LLVM IR 入门教程](./02_Formal_Semantics_and_Physics/12_Compiler_Optimization/05_LLVM_IR_Tutorial.md) — LLVM IR语法与编程实践
@@ -664,6 +667,7 @@ flowchart LR
 | 高级特性 | 6h | 内联汇编、UB、可移植性 |
 
 **推荐阅读**:
+
 - [编译器基础](./01_Core_Knowledge_System/15_Compiler_Basics/README.md) — 编译器前端完整链：词法→语法→语义→AST→IR
 - [缓存友好编程](./02_Formal_Semantics_and_Physics/07_Microarchitecture/04_Cache_Friendly_Programming.md) — 缓存层次与性能优化
 
@@ -706,6 +710,7 @@ flowchart LR
 **目标岗位**: 编译器工程师、语言设计师、工具链开发
 
 **推荐阅读**:
+
 - [编译器基础](./01_Core_Knowledge_System/15_Compiler_Basics/README.md) — 前端完整链
 - [编译器内部原理](./02_Formal_Semantics_and_Physics/11_Compiler_Internals/README.md) — 后端管道
 - [LLVM IR 入门教程](./02_Formal_Semantics_and_Physics/12_Compiler_Optimization/05_LLVM_IR_Tutorial.md) — LLVM IR实践
@@ -720,6 +725,7 @@ flowchart LR
 **目标岗位**: 嵌入式工程师、固件开发、物联网开发
 
 **推荐阅读**:
+
 - [裸机嵌入式开发](./02_Formal_Semantics_and_Physics/20_Industrial_Case_Studies/03_Baremetal_Embedded.md) — RISC-V启动代码、链接器脚本、中断、PMP
 - [链接器脚本指南](./02_Formal_Semantics_and_Physics/08_Linking_Loading_Topology/05_Linker_Scripts_Guide.md) — 内存布局与段定义
 
@@ -1123,14 +1129,19 @@ knowledge/
 │
 ├── 06_Thinking_Representation/          # 思维表达 (8,000+行)
 │   ├── README.md
+│   ├── 01_Decision_Trees/               # 决策树
 │   ├── 01_Mind_Maps/                    # 思维导图
-│   ├── 02_Multidimensional_Matrix/      # 多维矩阵
-│   ├── 03_Decision_Trees/               # 决策树
+│   ├── 02_Comparison_Matrices/          # 对比矩阵
 │   ├── 04_Application_Scenario_Trees/   # 应用场景树
 │   ├── 04_Case_Studies/                 # 案例研究
+│   ├── 04_Cognitive_Representation/     # 认知表征
 │   ├── 05_Concept_Mappings/             # 概念映射
+│   ├── 06_Index/                        # 索引与导航
 │   ├── 06_Learning_Paths/               # 学习路径
-│   └── 08_Index/                        # 全局索引
+│   ├── 07_Knowledge_Graph/              # 知识图谱
+│   ├── 09_Bloom_Taxonomy/               # 布鲁姆分类
+│   ├── 09_State_Machines/               # 状态机
+│   └── 10_Concept_Maps/                 # 概念地图
 │
 ├── 07_Modern_Toolchain/                 # 现代工具链 (✅ 已完成)
 │   ├── README.md                        # 模块主页

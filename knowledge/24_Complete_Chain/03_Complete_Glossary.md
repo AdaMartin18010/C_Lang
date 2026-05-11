@@ -2,7 +2,7 @@
 
 > **层级定位**: 24 Complete Chain / 参考层
 > **前置知识**: [从图灵机到C](./01_From_Turing_to_C.md), [层间桥梁](./02_Layer_Bridges.md)
-> **横向关联**: [全局索引](../06_Thinking_Representation/08_Index/01_Global_Index.md), [核心概念索引](../06_Thinking_Representation/06_Index/01_Core_Concepts_Index.md)
+> **横向关联**: [全局索引](../06_Thinking_Representation/06_Index/01_Global_Index.md), [核心概念索引](../06_Thinking_Representation/06_Index/01_Core_Concepts_Index.md)
 > **预计学习时间**: 持续参考
 
 ---

@@ -79,7 +79,7 @@
 | 6 | `00_VERSION_TRACKING/GCC_15_C23_Default.md` | 31 |
 | 7 | `00_VERSION_TRACKING/LLVM_21_C23_Update.md` | 31 |
 | 8 | `00_VERSION_TRACKING/MISRA_C_2025_Update_Plan.md` | 31 |
-| 9 | `06_Thinking_Representation/08_Index/01_Global_Index.md` | 19 |
+| 9 | `06_Thinking_Representation/06_Index/01_Global_Index.md` | 19 |
 | 10 | `09_Data_Structures_Algorithms/README.md` | 27 |
 | 11 | `README.md` | 42 |
 | 12 | `TOOLCHAIN_IMPROVEMENT_SUMMARY.md` | 27 |

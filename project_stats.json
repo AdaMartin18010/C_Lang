@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-05-11T19:10:33.732039",
+  "generated_at": "2026-05-11T20:26:30.175484",
   "markdown": {
-    "files": 1322,
-    "lines": 1044291
+    "files": 1199,
+    "lines": 979272
   },
   "c_code": {
     "files": 4914,
@@ -18,19 +18,21 @@
   },
   "top_directories": {
     "00_VERSION_TRACKING": 35,
-    "01_Core_Knowledge_System": 168,
-    "02_Formal_Semantics_and_Physics": 333,
-    "03_System_Technology_Domains": 120,
+    "01_Core_Knowledge_System": 181,
+    "02_Formal_Semantics_and_Physics": 200,
+    "03_System_Technology_Domains": 116,
     "04_Industrial_Scenarios": 107,
     "05_Deep_Structure_MetaPhysics": 72,
     "06_Thinking_Representation": 121,
-    "07_Modern_Toolchain": 78,
+    "07_Modern_Toolchain": 80,
     "08_Zig_C_Connection": 29,
     "09_Data_Structures_Algorithms": 18,
     "10_WebAssembly_C": 5,
     "11_Machine_Learning_C": 9,
     "12_Practice_Exercises": 14,
+    "13_C_Language_Standards": 2,
     "14_Video_Tutorials": 21,
+    "15_Hardware_Interfaces": 9,
     "16_Embedded_AI_Agents": 20,
     "17_Ada_SPARK": 29,
     "18_Industrial_Protocols_C": 15,
@@ -40,9 +42,6 @@
     "22_Assembler_Implementation": 5,
     "23_VM_Implementation": 3,
     "24_Complete_Chain": 4,
-    "c_language_standards": 2,
-    "embedded_bare_metal": 1,
-    "hardware_interfaces_c": 9,
     "memory_safe_languages": 17,
     "robotics_physical_control": 9,
     "templates": 3,

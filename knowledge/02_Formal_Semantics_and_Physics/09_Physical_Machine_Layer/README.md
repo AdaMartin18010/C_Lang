@@ -21,7 +21,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [硬件描述](../13_Hardware_Description/README.md) | 设计实现 | HDL硬件设计 |
-| [FPGA实验](../18_FPGA_Labs/README.md) | 实践验证 | 硬件实现实验 |
+| FPGA实验 | 实践验证 | 硬件实现实验 |
 | [工业案例](../20_Industrial_Case_Studies/README.md) | 实际应用 | 真实处理器实现 |
 
 ### 硬件层次
