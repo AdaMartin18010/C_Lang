@@ -1,0 +1,1776 @@
+========================================
+KNOWLEDGE DIRECTORY AUDIT REPORT
+========================================
+
+Total Markdown files: 1653
+
+=== 1. SHORT FILES (<100 lines) ===
+Count: 377
+
+  10 lines: knowledge\02_Formal_Semantics_and_Physics\13_Hardware_Description\code\README.md
+  10 lines: knowledge\03_System_Technology_Domains\15_Industrial_Communication\README.md
+  10 lines: knowledge\03_System_Technology_Domains\18_Database_Internals\README.md
+  10 lines: knowledge\06_Thinking_Representation\09_State_Machines\code\README.md
+  14 lines: knowledge\01_Core_Knowledge_System\00_Introduction\02_C_Language_Grammar.md
+  14 lines: knowledge\01_Core_Knowledge_System\01_System_Programming\05_Memory_Mapped_Files.md
+  14 lines: knowledge\01_Core_Knowledge_System\01_System_Programming\06_eBPF_Deep.md
+  14 lines: knowledge\01_Core_Knowledge_System\01_System_Programming\README.md
+  14 lines: knowledge\01_Core_Knowledge_System\02_Core_Layer\01_Memory_Model.md
+  14 lines: knowledge\01_Core_Knowledge_System\03_Construction_Layer\04_Memory_Optimization.md
+  14 lines: knowledge\01_Core_Knowledge_System\07_Modern_Toolchain\03_Static_Analysis_Tools.md
+  14 lines: knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023_Guide.md
+  14 lines: knowledge\01_Core_Knowledge_System\15_Network_Programming\03_High_Performance_Server.md
+  14 lines: knowledge\02_Formal_Semantics_and_Physics\01_Formal_Semantics_Foundations.md
+  14 lines: knowledge\02_Formal_Semantics_and_Physics\11_Compiler_Internals\04_CompCert_Verified_Compiler.md
+  14 lines: knowledge\02_Formal_Semantics_and_Physics\13_Formal_Methods\03_TLA_Plus_Specification.md
+  14 lines: knowledge\02_Formal_Semantics_and_Physics\14_Concurrency_Parallelism\06_Formal_Verification.md
+  14 lines: knowledge\02_Formal_Semantics_and_Physics\14_Concurrency_Parallelism\07_Iris_Concurrent_Logic.md
+  14 lines: knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\docs\verilog_reference.md
+  14 lines: knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\docs\vivado_flow.md
+  14 lines: knowledge\03_System_Technology_Domains\01_C11_Memory_Model.md
+  14 lines: knowledge\03_System_Technology_Domains\13_System_Call_Implementation.md
+  14 lines: knowledge\03_System_Technology_Domains\01_Core_Knowledge_System\05_Data_Structures_Algorithms\README.md
+  14 lines: knowledge\03_System_Technology_Domains\01_System_Programming\02_File_System_Operations.md
+  14 lines: knowledge\03_System_Technology_Domains\01_System_Programming\05_eBPF_Deep_Exploration.md
+  14 lines: knowledge\03_System_Technology_Domains\01_System_Programming\07_High_Performance_Networking.md
+  14 lines: knowledge\03_System_Technology_Domains\01_System_Programming\08_Garbage_Collection.md
+  14 lines: knowledge\03_System_Technology_Domains\01_System_Programming\08_Static_Analysis_Principles.md
+  14 lines: knowledge\03_System_Technology_Domains\01_System_Programming\09_Dynamic_Analysis_Principles.md
+  14 lines: knowledge\03_System_Technology_Domains\01_System_Programming\10_Debugging_Principles_and_Framework.md
+  14 lines: knowledge\03_System_Technology_Domains\01_System_Programming\11_Testing_Methodology.md
+  14 lines: knowledge\03_System_Technology_Domains\03_Computer_Vision\02_Optical_Flow.md
+  14 lines: knowledge\03_System_Technology_Domains\03_OS_Internals\03_Process_Scheduling_Deep_Dive.md
+  14 lines: knowledge\03_System_Technology_Domains\03_OS_Internals\05_Linux_Kernel_Module_Programming.md
+  14 lines: knowledge\03_System_Technology_Domains\03_OS_Internals\README.md
+  14 lines: knowledge\03_System_Technology_Domains\04_Concurrency_and_Parallelism\README.md
+  14 lines: knowledge\03_System_Technology_Domains\05_Automotive\AUTOSAR_Architecture.md
+  14 lines: knowledge\03_System_Technology_Domains\05_Network_Programming\README.md
+  14 lines: knowledge\03_System_Technology_Domains\05_Performance_Engineering\README.md
+  14 lines: knowledge\03_System_Technology_Domains\05_Program_Verification\README.md
+  14 lines: knowledge\03_System_Technology_Domains\06_High_Performance_Server\README.md
+  14 lines: knowledge\03_System_Technology_Domains\08_Distributed_Systems\README.md
+  14 lines: knowledge\03_System_Technology_Domains\08_Memory_Management\02_Advanced_Allocators.md
+  14 lines: knowledge\03_System_Technology_Domains\10_Security_Engineering\03_Secure_Coding_Practices.md
+  14 lines: knowledge\03_System_Technology_Domains\10_Security_Engineering\09_Exploit_Development.md
+  14 lines: knowledge\03_System_Technology_Domains\10_Security_Engineering\09_Fuzzing_Techniques.md
+  14 lines: knowledge\03_System_Technology_Domains\10_Security_Engineering\10_Blockchain_Cryptography.md
+  14 lines: knowledge\03_System_Technology_Domains\10_Security_Engineering\10_Malware_Analysis.md
+  14 lines: knowledge\03_System_Technology_Domains\10_Security_Engineering\11_Safety_Critical_Verification.md
+  14 lines: knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\01_C11_Threads.md
+  14 lines: knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\02_Synchronization_Primitives.md
+  14 lines: knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\03_Atomic_Operations.md
+  14 lines: knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\03_Real_Time_Systems.md
+  14 lines: knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\04_Thread_Pool_Implementation.md
+  14 lines: knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\05_Lock_Free.md
+  14 lines: knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\06_Debugging.md
+  14 lines: knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\07_Concurrent_Data_Structures.md
+  14 lines: knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\08_RCU_Mechanism.md
+  14 lines: knowledge\03_System_Technology_Domains\15_Network_Programming\05_TLS_Implementation.md
+  14 lines: knowledge\03_System_Technology_Domains\16_High_Performance_Computing\03_SIMD_Optimization.md
+  14 lines: knowledge\03_System_Technology_Domains\16_OS_Kernel\04_Interrupt_Handling.md
+  14 lines: knowledge\03_System_Technology_Domains\16_OS_Kernel\04_NUMA_Architecture.md
+  14 lines: knowledge\03_System_Technology_Domains\16_OS_Kernel\06_Kernel_Performance_Tuning.md
+  14 lines: knowledge\03_System_Technology_Domains\17_Distributed_Systems\01_Raft_Consensus.md
+  14 lines: knowledge\03_System_Technology_Domains\17_Distributed_Systems\03_Distributed_Consistency.md
+  14 lines: knowledge\03_System_Technology_Domains\18_Web_Development\01_RESTful_API_Design.md
+  14 lines: knowledge\04_Industrial_Scenarios\01_High_Performance\README.md
+  14 lines: knowledge\04_Industrial_Scenarios\01_System_Programming\06_Device_Driver_Basics.md
+  14 lines: knowledge\04_Industrial_Scenarios\06_Security\README.md
+  14 lines: knowledge\04_Industrial_Scenarios\08_Real_World_Cases\01_Redis_Case_Study.md
+  14 lines: knowledge\04_Industrial_Scenarios\12_Blockchain_Crypto\projects\project1_full_node.md
+  14 lines: knowledge\04_Industrial_Scenarios\12_Blockchain_Crypto\projects\project2_wallet.md
+  14 lines: knowledge\04_Industrial_Scenarios\12_Blockchain_Crypto\projects\project3_contract_deployment.md
+  14 lines: knowledge\04_Industrial_Scenarios\13_Linux_Kernel\02_Kernel_Debugging_Deep.md
+  14 lines: knowledge\04_Industrial_Scenarios\21_OS_Internals\01_Kernel_Synchronization.md
+  14 lines: knowledge\04_Industrial_Scenarios\21_OS_Internals\README.md
+  14 lines: knowledge\06_Thinking_Representation\00_SUSTAINABLE_EVOLUTION_PLAN.md
+  14 lines: knowledge\06_Thinking_Representation\04_Data_Structures\README.md
+  14 lines: knowledge\06_Thinking_Representation\09_State_Machines\cases\case1_industrial_control.md
+  14 lines: knowledge\06_Thinking_Representation\09_State_Machines\cases\case2_network_protocol.md
+  14 lines: knowledge\06_Thinking_Representation\09_State_Machines\cases\case3_game_ai.md
+  14 lines: knowledge\06_Thinking_Representation\10_Concept_Maps\learning_paths\beginner_path.md
+  14 lines: knowledge\06_Thinking_Representation\10_Concept_Maps\learning_paths\embedded_path.md
+  14 lines: knowledge\06_Thinking_Representation\10_Concept_Maps\learning_paths\expert_path.md
+  14 lines: knowledge\06_Thinking_Representation\10_Concept_Maps\learning_paths\intermediate_path.md
+  14 lines: knowledge\07_Modern_Toolchain\05_Dynamic_Analysis_Tools.md
+  14 lines: knowledge\07_Modern_Toolchain\06_Performance_Tracing.md
+  14 lines: knowledge\07_Modern_Toolchain\07_Performance_Profiling.md
+  14 lines: knowledge\09_Data_Structures_Algorithms\01_Dynamic_Array.md
+  14 lines: knowledge\09_Data_Structures_Algorithms\02_Algorithm_Analysis.md
+  14 lines: knowledge\09_Data_Structures_Algorithms\02_Linked_List.md
+  14 lines: knowledge\09_Data_Structures_Algorithms\03_Stack_Queue.md
+  14 lines: knowledge\09_Data_Structures_Algorithms\04_Trees.md
+  14 lines: knowledge\09_Data_Structures_Algorithms\05_Hash_Table.md
+  14 lines: knowledge\09_Data_Structures_Algorithms\06_Graphs.md
+  14 lines: knowledge\09_Data_Structures_Algorithms\07_Sorting.md
+  14 lines: knowledge\09_Data_Structures_Algorithms\08_Searching.md
+  14 lines: knowledge\09_Data_Structures_Algorithms\09_Dynamic_Programming.md
+  14 lines: knowledge\15_Network_Programming\03_High_Performance_Server.md
+  14 lines: knowledge\15_Network_Programming\README.md
+  14 lines: knowledge\19_Embedded_Systems_C\04_Real_Time_Systems.md
+  14 lines: knowledge\os_kernel\01_Linux_Kernel_Module_Programming.md
+  14 lines: knowledge\os_kernel\02_Process_Scheduling_Deep.md
+  14 lines: knowledge\os_kernel\README.md
+  14 lines: knowledge\performance_engineering\01_Linux_Performance_Tuning.md
+  17 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\CONTRIBUTING.md
+  17 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\DECISIONS.md
+  17 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\EQUIPMENT.md
+  17 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\HISTORY.md
+  17 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\MILESTONES.md
+  17 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\SOFTWARE.md
+  17 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\TECHNICAL.md
+  17 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\TEMPLATES.md
+  17 lines: knowledge\robotics_physical_control\01_ROS2_Fundamentals\01_ROS2_Introduction.md
+  17 lines: knowledge\robotics_physical_control\01_ROS2_Fundamentals\02_Nodes_Topics.md
+  17 lines: knowledge\robotics_physical_control\01_ROS2_Fundamentals\03_Services_Actions.md
+  17 lines: knowledge\robotics_physical_control\01_ROS2_Fundamentals\04_TF2_Transforms.md
+  17 lines: knowledge\robotics_physical_control\01_ROS2_Fundamentals\05_RViz_Gazebo.md
+  17 lines: knowledge\robotics_physical_control\02_Kinematics\01_Homogeneous_Transforms.md
+  17 lines: knowledge\robotics_physical_control\02_Kinematics\02_DH_Parameters.md
+  17 lines: knowledge\robotics_physical_control\02_Kinematics\03_Forward_Kinematics.md
+  17 lines: knowledge\robotics_physical_control\02_Kinematics\04_Inverse_Kinematics.md
+  17 lines: knowledge\robotics_physical_control\02_Kinematics\05_Jacobian.md
+  17 lines: knowledge\robotics_physical_control\03_Dynamics\01_Lagrangian_Mechanics.md
+  17 lines: knowledge\robotics_physical_control\03_Dynamics\02_Newton_Euler.md
+  17 lines: knowledge\robotics_physical_control\03_Dynamics\03_Trajectory_Planning.md
+  17 lines: knowledge\robotics_physical_control\04_Control\01_PID_Advanced.md
+  17 lines: knowledge\robotics_physical_control\04_Control\02_Computed_Torque.md
+  17 lines: knowledge\robotics_physical_control\05_Motor_Control_Advanced\01_FOC_Theory.md
+  17 lines: knowledge\robotics_physical_control\05_Motor_Control_Advanced\02_SVPWM.md
+  17 lines: knowledge\robotics_physical_control\05_Motor_Control_Advanced\03_Sensorless_FOC.md
+  17 lines: knowledge\robotics_physical_control\05_Motor_Control_Advanced\04_Parameter_Identification.md
+  17 lines: knowledge\robotics_physical_control\06_Physics_Simulation\01_MuJoCo_Integration.md
+  17 lines: knowledge\robotics_physical_control\06_Physics_Simulation\02_Bullet_Physics.md
+  17 lines: knowledge\robotics_physical_control\06_Physics_Simulation\03_Simulation_to_Real.md
+  17 lines: knowledge\robotics_physical_control\07_Computer_Vision_Robotics\01_OpenCV_C_Interface.md
+  17 lines: knowledge\robotics_physical_control\07_Computer_Vision_Robotics\02_Camera_Calibration.md
+  17 lines: knowledge\robotics_physical_control\07_Computer_Vision_Robotics\03_Object_Detection_Tracking.md
+  17 lines: knowledge\robotics_physical_control\07_Computer_Vision_Robotics\04_Visual_Odometry_SLAM.md
+  17 lines: knowledge\robotics_physical_control\07_Computer_Vision_Robotics\05_Visual_Servoing.md
+  17 lines: knowledge\robotics_physical_control\08_Case_Studies\01_Industrial_Arm_Control.md
+  17 lines: knowledge\robotics_physical_control\08_Case_Studies\02_Mobile_Robot_Navigation.md
+  17 lines: knowledge\robotics_physical_control\08_Case_Studies\03_Drone_Flight_Control.md
+  17 lines: knowledge\robotics_physical_control\08_Case_Studies\04_Collaborative_Robot_Safety.md
+  21 lines: knowledge\03_System_Technology_Domains\01_System_Programming\02_Process_Management.md
+  21 lines: knowledge\03_System_Technology_Domains\01_System_Programming\03_Threading_and_Concurrency.md
+  21 lines: knowledge\03_System_Technology_Domains\01_System_Programming\05_Memory_Mapped_Files.md
+  30 lines: knowledge\02_Formal_Semantics_and_Physics\diagrams\network_statistics.md
+  33 lines: knowledge\embedded_bare_metal\09_Embedded_Linux\01_Buildroot_Guide.md
+  35 lines: knowledge\01_Core_Knowledge_System\07_Modern_C\10_Modern_C_Development\01_Memory_Safety\01_Announcing_Ownership.md
+  35 lines: knowledge\01_Core_Knowledge_System\07_Modern_C\10_Modern_C_Development\02_Modern_Tooling\01_LLVM_Toolchain.md
+  35 lines: knowledge\01_Core_Knowledge_System\07_Modern_C\10_Modern_C_Development\03_Metaprogramming\01_C_Preprocessor_Metaprogramming.md
+  35 lines: knowledge\01_Core_Knowledge_System\07_Modern_C\10_Modern_C_Development\03_Metaprogramming\02_C_Code_Generation.md
+  35 lines: knowledge\01_Core_Knowledge_System\12_Advanced_Topics\01_Volatile_And_Memory_Barriers.md
+  35 lines: knowledge\01_Core_Knowledge_System\12_Advanced_Topics\02_Atomic_Operations_Deep.md
+  35 lines: knowledge\01_Core_Knowledge_System\12_Advanced_Topics\03_Signal_Handling.md
+  35 lines: knowledge\01_Core_Knowledge_System\12_Advanced_Topics\04_Inter_Process_Communication.md
+  35 lines: knowledge\01_Core_Knowledge_System\13_Design_Patterns\01_C_OOP_Patterns.md
+  35 lines: knowledge\01_Core_Knowledge_System\13_Design_Patterns\02_C_Concurrency_Patterns.md
+  35 lines: knowledge\01_Core_Knowledge_System\13_Design_Patterns\03_C_Memory_Patterns.md
+  35 lines: knowledge\01_Core_Knowledge_System\14_Advanced_Memory\01_Custom_Memory_Allocators.md
+  35 lines: knowledge\01_Core_Knowledge_System\14_Advanced_Memory\02_Memory_Debugging_Techniques.md
+  35 lines: knowledge\01_Core_Knowledge_System\14_Advanced_Memory\03_Memory_Mapping_Techniques.md
+  35 lines: knowledge\01_Core_Knowledge_System\15_Compiler_Basics\02_Syntactic_Analysis.md
+  35 lines: knowledge\01_Core_Knowledge_System\16_Linked_Data_Structures\01_Linked_List_Variants.md
+  35 lines: knowledge\01_Core_Knowledge_System\16_Linked_Data_Structures\02_Tree_Variants.md
+  35 lines: knowledge\01_Core_Knowledge_System\17_Numerical_Computing\01_Floating_Point_Arithmetic.md
+  35 lines: knowledge\01_Core_Knowledge_System\17_Numerical_Computing\02_Numerical_Stability.md
+  35 lines: knowledge\01_Core_Knowledge_System\18_Bit_Manipulation\01_Bit_Hacks.md
+  35 lines: knowledge\01_Core_Knowledge_System\18_Bit_Manipulation\02_Endianness_Packing.md
+  35 lines: knowledge\01_Core_Knowledge_System\19_Advanced_Pointers\01_Function_Pointers.md
+  35 lines: knowledge\01_Core_Knowledge_System\19_Advanced_Pointers\02_Pointer_Aliasing.md
+  35 lines: knowledge\01_Core_Knowledge_System\20_Macros_Preprocessor\01_Advanced_Macros.md
+  35 lines: knowledge\01_Core_Knowledge_System\20_Macros_Preprocessor\02_Header_Guards.md
+  35 lines: knowledge\01_Core_Knowledge_System\21_Error_Handling\01_Error_Handling_Patterns.md
+  35 lines: knowledge\01_Core_Knowledge_System\21_Error_Handling\02_Resource_Management.md
+  35 lines: knowledge\01_Core_Knowledge_System\22_Testing_Techniques\02_Integration_Testing.md
+  35 lines: knowledge\01_Core_Knowledge_System\23_Documentation\01_Code_Comments.md
+  35 lines: knowledge\01_Core_Knowledge_System\23_Documentation\02_API_Design.md
+  35 lines: knowledge\01_Core_Knowledge_System\24_Code_Quality\01_Code_Metrics.md
+  35 lines: knowledge\01_Core_Knowledge_System\24_Code_Quality\02_Static_Analysis_Tools.md
+  35 lines: knowledge\01_Core_Knowledge_System\25_C_Interfacing\01_Calling_Conventions.md
+  35 lines: knowledge\01_Core_Knowledge_System\25_C_Interfacing\02_FFI_with_Other_Languages.md
+  35 lines: knowledge\01_Core_Knowledge_System\26_Portability\01_Portable_C_Code.md
+  35 lines: knowledge\01_Core_Knowledge_System\26_Portability\02_Cross_Compilation.md
+  35 lines: knowledge\01_Core_Knowledge_System\27_Internationalization\01_Unicode_in_C.md
+  35 lines: knowledge\01_Core_Knowledge_System\27_Internationalization\02_Text_Processing.md
+  35 lines: knowledge\01_Core_Knowledge_System\27_Internationalization\03_Date_Time_Locale.md
+  35 lines: knowledge\01_Core_Knowledge_System\28_Library_Design\01_Library_ABI_Stability.md
+  35 lines: knowledge\01_Core_Knowledge_System\28_Library_Design\02_Versioning_Strategies.md
+  35 lines: knowledge\01_Core_Knowledge_System\29_Build_Systems\01_Makefiles.md
+  35 lines: knowledge\01_Core_Knowledge_System\29_Build_Systems\02_CMake_Basics.md
+  35 lines: knowledge\01_Core_Knowledge_System\29_Build_Systems\03_Compilation_Model.md
+  35 lines: knowledge\02_Formal_Semantics_and_Physics\09_Type_Theory\01_Hindley_Milner_Type_Inference.md
+  35 lines: knowledge\02_Formal_Semantics_and_Physics\09_Type_Theory\02_Dependent_Types_Basics.md
+  35 lines: knowledge\02_Formal_Semantics_and_Physics\10_Complexity_Theory\01_Computational_Complexity.md
+  35 lines: knowledge\02_Formal_Semantics_and_Physics\10_Complexity_Theory\02_Algorithmic_Lower_Bounds.md
+  35 lines: knowledge\02_Formal_Semantics_and_Physics\11_Logic_and_Proof\01_Hoare_Logic.md
+  35 lines: knowledge\02_Formal_Semantics_and_Physics\11_Logic_and_Proof\02_Separation_Logic.md
+  35 lines: knowledge\02_Formal_Semantics_and_Physics\11_Logic_and_Proof\03_Model_Checking.md
+  35 lines: knowledge\02_Formal_Semantics_and_Physics\12_Category_Theory\01_Category_Theory_Basics.md
+  35 lines: knowledge\02_Formal_Semantics_and_Physics\12_Category_Theory\02_Monads_and_Computation.md
+  35 lines: knowledge\02_Formal_Semantics_and_Physics\13_Lambda_Calculus\01_Lambda_Calculus_Basics.md
+  35 lines: knowledge\02_Formal_Semantics_and_Physics\14_Information_Theory\01_Information_Theory_Basics.md
+  35 lines: knowledge\02_Formal_Semantics_and_Physics\14_Information_Theory\02_Error_Correcting_Codes.md
+  35 lines: knowledge\03_System_Technology_Domains\12_Computer_Graphics\01_OpenGL_C_Integration.md
+  35 lines: knowledge\03_System_Technology_Domains\14_Natural_Language_Processing\01_Tokenizer_Implementation.md
+  35 lines: knowledge\03_System_Technology_Domains\15_Security_Engineering\01_Exploit_Mitigations.md
+  35 lines: knowledge\03_System_Technology_Domains\15_Security_Engineering\02_Secure_Coding_Standards.md
+  35 lines: knowledge\03_System_Technology_Domains\16_High_Performance_Computing\01_MPI_Programming.md
+  35 lines: knowledge\03_System_Technology_Domains\17_Distributed_Systems\02_Distributed_Transactions.md
+  35 lines: knowledge\03_System_Technology_Domains\18_Systems_Performance\04_Memory_Optimization.md
+  35 lines: knowledge\03_System_Technology_Domains\19_Systems_Security\03_Malware_Analysis.md
+  35 lines: knowledge\03_System_Technology_Domains\20_Network_Programming\01_Nonblocking_IO.md
+  35 lines: knowledge\03_System_Technology_Domains\20_Network_Programming\02_Zero_Copy_Networking.md
+  35 lines: knowledge\03_System_Technology_Domains\20_Network_Programming\03_TLS_Implementation.md
+  35 lines: knowledge\03_System_Technology_Domains\21_OS_Internals\02_Kernel_Memory_Management.md
+  35 lines: knowledge\03_System_Technology_Domains\22_Virtualization\02_Hypervisor_Design.md
+  35 lines: knowledge\03_System_Technology_Domains\23_Storage_Systems\01_Distributed_Storage.md
+  35 lines: knowledge\03_System_Technology_Domains\24_Edge_Computing\01_Edge_Device_Programming.md
+  35 lines: knowledge\03_System_Technology_Domains\24_Edge_Computing\02_IoT_Gateway_Development.md
+  35 lines: knowledge\03_System_Technology_Domains\25_Cloud_Native\01_Microservices_in_C.md
+  35 lines: knowledge\03_System_Technology_Domains\25_Cloud_Native\02_Kubernetes_Operators.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\05_Performance_Optimization\01_Profiling_Methodology.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\06_Security_Development\01_Secure_Coding_Practices.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\07_Code_Review\01_C_Code_Review_Guide.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\08_Documentation\01_Technical_Writing_for_C.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\09_Legacy_Code\01_Refactoring_C_Code.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\09_Legacy_Code\02_Working_with_Legacy_Systems.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\10_Continuous_Integration\01_CMake_CI_CD.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\10_Continuous_Integration\02_Docker_for_C.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\10_Continuous_Integration\03_Quality_Gates.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\11_Documentation_Standards\01_C_API_Documentation.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\11_Documentation_Standards\02_Architecture_Documentation.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\12_Team_Collaboration\01_Git_Workflows.md
+  35 lines: knowledge\07_Modern_Toolchain\07_Development_Methodology\12_Team_Collaboration\02_Open_Source_Governance.md
+  35 lines: knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\05_Static_Analyzers\01_Clang_Static_Analyzer.md
+  35 lines: knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\06_Debuggers\01_GDB_Advanced_Techniques.md
+  35 lines: knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\07_Build_Systems\01_Meson_Build_System.md
+  35 lines: knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\07_Build_Systems\02_Bazel_for_C.md
+  35 lines: knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\08_Testing_Tools\01_GTest_Integration.md
+  35 lines: knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\08_Testing_Tools\02_Fuzzing_with_LibFuzzer.md
+  35 lines: knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\09_Package_Managers\01_vcpkg_Usage.md
+  35 lines: knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\09_Package_Managers\02_Conan_Package_Manager.md
+  35 lines: knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\10_IDE_Integration\01_VSCode_C_Development.md
+  35 lines: knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\10_IDE_Integration\02_CLion_C_Projects.md
+  35 lines: knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\11_Code_Generation\01_Annoying_Tools.md
+  35 lines: knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\11_Code_Generation\02_AST_Transformation.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\04_Advanced_Algorithms\02_String_Algorithms.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\04_Advanced_Algorithms\03_Numerical_Algorithms.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\05_Algorithm_Implementations\02_AVL_Tree.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\05_Algorithm_Implementations\03_LSM_Tree.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\05_Algorithm_Implementations\04_B_Tree_Plus.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\06_Mathematical_Computing\01_Arbitrary_Precision.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\06_Mathematical_Computing\02_Linear_Algebra_Library.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\06_Mathematical_Computing\03_Fourier_Transforms.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\07_Geometric_Algorithms\01_Computational_Geometry.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\07_Geometric_Algorithms\02_Collision_Detection.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\08_Probabilistic_Data_Structures\01_Bloom_Filter.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\08_Probabilistic_Data_Structures\02_HyperLogLog.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\08_Probabilistic_Data_Structures\03_Count_Min_Sketch.md
+  35 lines: knowledge\09_Data_Structures_Algorithms\09_Distributed_Algorithms\02_Consistent_Hashing.md
+  35 lines: knowledge\12_Practice_Exercises\01_Beginner_Projects\01_Text_Editor.md
+  35 lines: knowledge\12_Practice_Exercises\01_Beginner_Projects\02_Shell_Implementation.md
+  35 lines: knowledge\12_Practice_Exercises\02_Intermediate_Projects\01_HTTP_Server.md
+  35 lines: knowledge\12_Practice_Exercises\02_Intermediate_Projects\02_Redis_Client.md
+  35 lines: knowledge\12_Practice_Exercises\03_Advanced_Projects\01_Database_Engine.md
+  35 lines: knowledge\12_Practice_Exercises\03_Advanced_Projects\02_TCPIP_Stack.md
+  35 lines: knowledge\12_Practice_Exercises\04_Expert_Challenges\01_Operating_System_Kernel.md
+  35 lines: knowledge\12_Practice_Exercises\04_Expert_Challenges\02_Database_System.md
+  35 lines: knowledge\12_Practice_Exercises\04_Expert_Challenges\03_Programming_Language.md
+  35 lines: knowledge\20_Industrial_Case_Studies\03_Compiler_Frontend_Case.md
+  35 lines: knowledge\20_Industrial_Case_Studies\04_Database_Engine_Case.md
+  35 lines: knowledge\20_Industrial_Case_Studies\05_Network_Protocol_Stack_Case.md
+  35 lines: knowledge\20_Industrial_Case_Studies\06_Virtual_Machine_Case.md
+  35 lines: knowledge\20_Industrial_Case_Studies\07_Distributed_KV_Store_Case.md
+  35 lines: knowledge\20_Industrial_Case_Studies\08_Embedded_Bootloader_Case.md
+  35 lines: knowledge\20_Industrial_Case_Studies\11_Container_Runtime.md
+  35 lines: knowledge\20_Industrial_Case_Studies\12_Real_Time_Audio.md
+  35 lines: knowledge\20_Industrial_Case_Studies\15_JIT_Compiler.md
+  35 lines: knowledge\20_Industrial_Case_Studies\16_Garbage_Collector.md
+  35 lines: knowledge\20_Industrial_Case_Studies\17_Debugger_Implementation.md
+  35 lines: knowledge\20_Industrial_Case_Studies\20_Proxy_Server.md
+  35 lines: knowledge\20_Industrial_Case_Studies\24_RPC_Framework.md
+  35 lines: knowledge\20_Industrial_Case_Studies\27_Metrics_System.md
+  35 lines: knowledge\20_Industrial_Case_Studies\28_Tracing_System.md
+  35 lines: knowledge\20_Industrial_Case_Studies\37_Quantum_Computing_Simulator.md
+  35 lines: knowledge\20_Industrial_Case_Studies\09_Language_Server\01_Clangd_Implementation.md
+  35 lines: knowledge\20_Industrial_Case_Studies\10_File_System\01_FUSE_File_System.md
+  35 lines: knowledge\20_Industrial_Case_Studies\13_Emulator\01_CPU_Emulator.md
+  35 lines: knowledge\20_Industrial_Case_Studies\14_Compiler_Backend\01_LLVMC_Backend.md
+  35 lines: knowledge\20_Industrial_Case_Studies\18_Blockchain\01_Blockchain_Core.md
+  35 lines: knowledge\20_Industrial_Case_Studies\19_Search_Engine\01_Search_Engine_Core.md
+  35 lines: knowledge\20_Industrial_Case_Studies\21_Message_Queue\01_Message_Queue_Implementation.md
+  35 lines: knowledge\20_Industrial_Case_Studies\22_Time_Series_DB\01_Time_Series_Engine.md
+  35 lines: knowledge\20_Industrial_Case_Studies\25_Load_Balancer\01_Load_Balancer_Implementation.md
+  35 lines: knowledge\20_Industrial_Case_Studies\26_Service_Mesh\01_Service_Mesh_Data_Plane.md
+  35 lines: knowledge\20_Industrial_Case_Studies\29_DDOS_Protection\01_DDOS_Mitigation_System.md
+  35 lines: knowledge\20_Industrial_Case_Studies\30_WAF\01_Web_Application_Firewall.md
+  35 lines: knowledge\20_Industrial_Case_Studies\31_Identity_Management\01_Authentication_System.md
+  35 lines: knowledge\20_Industrial_Case_Studies\32_Video_Streaming\01_Video_Streaming_Server.md
+  35 lines: knowledge\20_Industrial_Case_Studies\33_CDN\01_CDN_Edge_Server.md
+  35 lines: knowledge\20_Industrial_Case_Studies\34_Game_Engine\01_Game_Engine_Architecture.md
+  35 lines: knowledge\20_Industrial_Case_Studies\35_Browser_Engine\01_Browser_Rendering_Engine.md
+  35 lines: knowledge\20_Industrial_Case_Studies\36_Mobile_OS\01_Mobile_OS_Kernel.md
+  35 lines: knowledge\20_Industrial_Case_Studies\38_Autonomous_Driving\01_Autonomous_Driving_Platform.md
+  35 lines: knowledge\20_Industrial_Case_Studies\39_Drone_Flight_Control\01_Flight_Control_System.md
+  35 lines: knowledge\20_Industrial_Case_Studies\40_Robotic_Arm\01_Robot_Kinematics.md
+  35 lines: knowledge\20_Industrial_Case_Studies\41_Neural_Network_Inference\01_NN_Inference_Engine.md
+  35 lines: knowledge\20_Industrial_Case_Studies\42_Digital_Signal_Processor\01_DSP_Algorithms.md
+  35 lines: knowledge\20_Industrial_Case_Studies\43_Virtual_Reality\01_VR_Rendering_Engine.md
+  35 lines: knowledge\20_Industrial_Case_Studies\44_Augmented_Reality\01_AR_Tracking_System.md
+  35 lines: knowledge\20_Industrial_Case_Studies\45_5G_Core_Network\01_5G_Core_Implementation.md
+  35 lines: knowledge\20_Industrial_Case_Studies\46_Satellite_Communication\01_Satellite_Ground_System.md
+  35 lines: knowledge\cross_platform_development\04_Mobile_Platforms\01_Android_NDK.md
+  35 lines: knowledge\cross_platform_development\05_Web_Assembly\01_C_to_WASM.md
+  35 lines: knowledge\c_language_standards\05_C23_Standard\01_C23_New_Features.md
+  35 lines: knowledge\c_language_standards\05_C23_Standard\02_C23_Migration_Guide.md
+  35 lines: knowledge\c_language_standards\06_Standard_Evolution\01_C_Historical_Evolution.md
+  35 lines: knowledge\c_language_standards\06_Standard_Evolution\02_C_Standard_Committee.md
+  35 lines: knowledge\c_language_standards\06_Standard_Evolution\03_C_Implementations.md
+  35 lines: knowledge\embedded_bare_metal\09_Embedded_Linux\02_Yocto_Project.md
+  35 lines: knowledge\embedded_bare_metal\10_FPGA\01_Soft_Core_Programming.md
+  35 lines: knowledge\embedded_bare_metal\10_FPGA\02_HLS_C_Programming.md
+  35 lines: knowledge\embedded_bare_metal\11_Industrial_Protocols\01_Modbus_Protocol.md
+  35 lines: knowledge\embedded_bare_metal\11_Industrial_Protocols\02_CAN_Bus_Programming.md
+  35 lines: knowledge\embedded_bare_metal\11_Industrial_Protocols\03_Ethernet_IP.md
+  35 lines: knowledge\embedded_bare_metal\12_Safety_Critical\01_ISO_26262.md
+  35 lines: knowledge\embedded_bare_metal\12_Safety_Critical\02_IEC_61508.md
+  35 lines: knowledge\embedded_bare_metal\13_Medical_Devices\01_Medical_Device_Software.md
+  35 lines: knowledge\embedded_bare_metal\14_Aerospace\01_DO_178C.md
+  35 lines: knowledge\performance_engineering\03_GPU_Programming\01_CUDA_C_Basics.md
+  35 lines: knowledge\performance_engineering\04_Benchmarking\01_Google_Benchmark.md
+  35 lines: knowledge\performance_engineering\05_Profiling_Tools\01_Flame_Graphs.md
+  35 lines: knowledge\performance_engineering\05_Profiling_Tools\02_Memory_Profiling.md
+  35 lines: knowledge\performance_engineering\05_Profiling_Tools\03_System_Profiling.md
+  35 lines: knowledge\performance_engineering\06_Energy_Efficiency\01_Green_Computing.md
+  35 lines: knowledge\performance_engineering\06_Energy_Efficiency\02_Battery_Optimization.md
+  35 lines: knowledge\standard_library_frameworks\06_Test_Frameworks\01_CMocka_Testing.md
+  35 lines: knowledge\standard_library_frameworks\07_Networking\01_libcurl_Integration.md
+  35 lines: knowledge\standard_library_frameworks\08_Persistence\01_SQLite_Integration.md
+  35 lines: knowledge\standard_library_frameworks\09_Containers\01_Klib_Data_Structures.md
+  35 lines: knowledge\standard_library_frameworks\09_Containers\02_Glib_Data_Structures.md
+  35 lines: knowledge\standard_library_frameworks\10_Serialization\01_Protocol_Buffers_C.md
+  35 lines: knowledge\standard_library_frameworks\10_Serialization\02_MessagePack_C.md
+  44 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\A1_Martin_Lof_Type_Theory.md
+  45 lines: knowledge\03_System_Technology_Domains\12_Rust_Interop\01_Rust_C_Interoperability.md
+  46 lines: knowledge\01_Core_Knowledge_System\04_Standard_Library_Layer\Standard_Library_Internals\README.md
+  47 lines: knowledge\02_Formal_Semantics_and_Physics\11_Category_Theory_Computing\01_Category_Theory_for_Programmers.md
+  47 lines: knowledge\03_System_Technology_Domains\11_Embedded_Systems\01_Embedded_C_Programming_Principles.md
+  48 lines: knowledge\04_Industrial_Scenarios\Classic_C_Projects\README.md
+  49 lines: knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\README.md
+  51 lines: knowledge\02_Formal_Semantics_and_Physics\05_Program_Verification\README.md
+  51 lines: knowledge\02_Formal_Semantics_and_Physics\05_Type_Semantics\README.md
+  55 lines: knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\tools\README.md
+  63 lines: knowledge\03_System_Technology_Domains\01_System_Programming\04_System_Call_Interface.md
+  63 lines: knowledge\03_System_Technology_Domains\01_System_Programming\README.md
+  67 lines: knowledge\02_Formal_Semantics_and_Physics\11_Compiler_Internals\03_Optimization_Techniques.md
+  70 lines: knowledge\templates\README_FOOTER.md
+  71 lines: knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\tools\docs\README.md
+  72 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_examples\README.md
+  78 lines: knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2025\tools\docs\README.md
+  79 lines: knowledge\hardware_interfaces_c\00_INDEX.md
+  80 lines: knowledge\03_System_Technology_Domains\03_OS_Internals\04_Real_Time_Scheduling_Deep_Dive.md
+  81 lines: knowledge\00_VERSION_TRACKING\reports\README.md
+  81 lines: knowledge\03_System_Technology_Domains\06_High_Performance_Server\03_High_Performance_Server_Case_Study.md
+  85 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\A2_CoC_Proof_Erasure.md
+  85 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\G1_Mathlib4_Typeclass.md
+  88 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\G2_Extraction_Verified_Code.md
+  89 lines: knowledge\00_VERSION_TRACKING\Clang_20_C23_Release_Notes.md
+  90 lines: knowledge\00_VERSION_TRACKING\GCC_16_C2y_Support.md
+  90 lines: knowledge\23_VM_Implementation\README.md
+  91 lines: knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2025\tools\docs\DEVIATIONS.md
+  94 lines: knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\tools\docs\AUDIT_LOG.md
+  97 lines: knowledge\19_Embedded_Systems_C\00_INDEX.md
+  98 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\H3_Cubical_Type_Theory.md
+  99 lines: knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\H1_Quotient_Types.md
+
+=== 2. DIRECTORY STATS ===
+knowledge: 11 files, 6715 lines, 0 short
+knowledge\00_VERSION_TRACKING: 33 files, 17305 lines, 2 short
+knowledge\00_VERSION_TRACKING\reports: 2 files, 294 lines, 1 short
+knowledge\01_Core_Knowledge_System: 1 files, 347 lines, 0 short
+knowledge\01_Core_Knowledge_System\00_Introduction: 1 files, 14 lines, 1 short
+knowledge\01_Core_Knowledge_System\01_Basic_Layer: 6 files, 6137 lines, 0 short
+knowledge\01_Core_Knowledge_System\01_Basic_Layer\IEEE_754_Floating_Point: 4 files, 4538 lines, 0 short
+knowledge\01_Core_Knowledge_System\01_System_Programming: 3 files, 42 lines, 3 short
+knowledge\01_Core_Knowledge_System\02_Core_Layer: 11 files, 12118 lines, 1 short
+knowledge\01_Core_Knowledge_System\03_Construction_Layer: 5 files, 4110 lines, 1 short
+knowledge\01_Core_Knowledge_System\04_Standard_Library_Layer: 7 files, 9499 lines, 0 short
+knowledge\01_Core_Knowledge_System\04_Standard_Library_Layer\01_Standard_IO: 2 files, 1097 lines, 0 short
+knowledge\01_Core_Knowledge_System\04_Standard_Library_Layer\C23_Standard_Library: 3 files, 1033 lines, 0 short
+knowledge\01_Core_Knowledge_System\04_Standard_Library_Layer\Standard_Library_Internals: 4 files, 1438 lines, 1 short
+knowledge\01_Core_Knowledge_System\05_Engineering_Layer: 10 files, 11361 lines, 0 short
+knowledge\01_Core_Knowledge_System\05_Engineering_Layer\Compiler_Optimization_Deep: 2 files, 813 lines, 0 short
+knowledge\01_Core_Knowledge_System\06_Advanced_Layer: 6 files, 2599 lines, 0 short
+knowledge\01_Core_Knowledge_System\07_Modern_C: 10 files, 12263 lines, 0 short
+knowledge\01_Core_Knowledge_System\07_Modern_C\10_Modern_C_Development\01_Memory_Safety: 1 files, 35 lines, 1 short
+knowledge\01_Core_Knowledge_System\07_Modern_C\10_Modern_C_Development\02_Modern_Tooling: 1 files, 35 lines, 1 short
+knowledge\01_Core_Knowledge_System\07_Modern_C\10_Modern_C_Development\03_Metaprogramming: 2 files, 70 lines, 2 short
+knowledge\01_Core_Knowledge_System\07_Modern_C\C2y_Preview: 6 files, 2102 lines, 0 short
+knowledge\01_Core_Knowledge_System\07_Modern_Toolchain: 1 files, 14 lines, 1 short
+knowledge\01_Core_Knowledge_System\08_Application_Domains: 8 files, 8819 lines, 0 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards: 7 files, 7228 lines, 1 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\CERT_C_2024: 1 files, 468 lines, 0 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\DO_178C: 2 files, 654 lines, 0 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\Formal_Verification: 2 files, 926 lines, 0 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\IEC_61508: 2 files, 964 lines, 0 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\ISO_26262: 2 files, 799 lines, 0 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\ISO_IEC_TS_17961: 1 files, 449 lines, 0 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023: 24 files, 11204 lines, 0 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\tools: 3 files, 4206 lines, 1 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\tools\docs: 4 files, 379 lines, 2 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2025: 10 files, 5562 lines, 0 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2025\tools: 1 files, 119 lines, 0 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2025\tools\docs: 4 files, 395 lines, 2 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\POSIX_1_2024: 2 files, 5370 lines, 0 short
+knowledge\01_Core_Knowledge_System\09_Safety_Standards\Vulnerability_Cases: 6 files, 2433 lines, 0 short
+knowledge\01_Core_Knowledge_System\11_Internationalization: 1 files, 607 lines, 0 short
+knowledge\01_Core_Knowledge_System\12_Advanced_Topics: 4 files, 140 lines, 4 short
+knowledge\01_Core_Knowledge_System\13_Design_Patterns: 3 files, 105 lines, 3 short
+knowledge\01_Core_Knowledge_System\14_Advanced_Memory: 5 files, 1139 lines, 3 short
+knowledge\01_Core_Knowledge_System\15_Compiler_Basics: 3 files, 1684 lines, 1 short
+knowledge\01_Core_Knowledge_System\15_Network_Programming: 1 files, 14 lines, 1 short
+knowledge\01_Core_Knowledge_System\16_Linked_Data_Structures: 2 files, 70 lines, 2 short
+knowledge\01_Core_Knowledge_System\17_Numerical_Computing: 2 files, 70 lines, 2 short
+knowledge\01_Core_Knowledge_System\18_Bit_Manipulation: 2 files, 70 lines, 2 short
+knowledge\01_Core_Knowledge_System\19_Advanced_Pointers: 2 files, 70 lines, 2 short
+knowledge\01_Core_Knowledge_System\20_Macros_Preprocessor: 2 files, 70 lines, 2 short
+knowledge\01_Core_Knowledge_System\21_Error_Handling: 2 files, 70 lines, 2 short
+knowledge\01_Core_Knowledge_System\22_Testing_Techniques: 2 files, 1822 lines, 1 short
+knowledge\01_Core_Knowledge_System\23_Documentation: 2 files, 70 lines, 2 short
+knowledge\01_Core_Knowledge_System\24_Code_Quality: 2 files, 70 lines, 2 short
+knowledge\01_Core_Knowledge_System\25_C_Interfacing: 2 files, 70 lines, 2 short
+knowledge\01_Core_Knowledge_System\26_Portability: 2 files, 70 lines, 2 short
+knowledge\01_Core_Knowledge_System\27_Internationalization: 3 files, 105 lines, 3 short
+knowledge\01_Core_Knowledge_System\28_Library_Design: 2 files, 70 lines, 2 short
+knowledge\01_Core_Knowledge_System\29_Build_Systems: 3 files, 105 lines, 3 short
+knowledge\02_Formal_Semantics_and_Physics: 7 files, 5687 lines, 1 short
+knowledge\02_Formal_Semantics_and_Physics\00_Core_Semantics_Foundations: 6 files, 3669 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\01_Game_Semantics: 3 files, 2017 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\02_Coalgebraic_Methods: 3 files, 1745 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\03_Linear_Logic: 3 files, 2025 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\04_Cognitive_Representation: 3 files, 2156 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\05_Program_Verification: 1 files, 51 lines, 1 short
+knowledge\02_Formal_Semantics_and_Physics\05_Quantum_Random_Computing: 3 files, 2060 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\05_Type_Semantics: 2 files, 471 lines, 1 short
+knowledge\02_Formal_Semantics_and_Physics\06_C_Assembly_Mapping: 4 files, 2162 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\07_Microarchitecture: 6 files, 2625 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\08_Linking_Loading_Topology: 9 files, 4660 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\09_Physical_Machine_Layer: 6 files, 3146 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\09_Physical_Machine_Layer\01_Digital_Logic_Foundations: 4 files, 6687 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\09_Physical_Machine_Layer\02_Arithmetic_Logic_Unit: 5 files, 7306 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\09_Physical_Machine_Layer\03_Memory_Circuits: 5 files, 5952 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\09_Physical_Machine_Layer\05_Memory_Management_Hardware: 5 files, 8662 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\09_Type_Theory: 2 files, 70 lines, 2 short
+knowledge\02_Formal_Semantics_and_Physics\10_Complexity_Theory: 2 files, 70 lines, 2 short
+knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code: 5 files, 7158 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\06_Control_Unit_Design: 4 files, 4788 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\08_RISCV_CPU_Complete: 5 files, 6417 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\09_Interrupt_Hardware: 3 files, 4922 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\10_IO_System: 3 files, 5049 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation: 155 files, 79552 lines, 14 short
+knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\courses: 6 files, 3138 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\debates: 1 files, 592 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\figures: 7 files, 3228 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\history: 1 files, 536 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_examples: 1 files, 72 lines, 1 short
+knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\proofs: 2 files, 1294 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\11_Category_Theory_Computing: 1 files, 47 lines, 1 short
+knowledge\02_Formal_Semantics_and_Physics\11_CompCert_Verification: 10 files, 10192 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\11_CompCert_Verification\05_Practical_Verification_Cases: 2 files, 680 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\11_CompCert_Verification\06_Coq_Examples: 2 files, 5164 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\11_Compiler_Internals: 5 files, 1212 lines, 2 short
+knowledge\02_Formal_Semantics_and_Physics\11_Logic_and_Proof: 3 files, 105 lines, 3 short
+knowledge\02_Formal_Semantics_and_Physics\11_Rust_to_C: 1 files, 181 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\12_Category_Theory: 2 files, 70 lines, 2 short
+knowledge\02_Formal_Semantics_and_Physics\12_Compiler_Optimization: 3 files, 1062 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\12_Zig_to_C: 1 files, 190 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\13_Formal_Methods: 3 files, 801 lines, 1 short
+knowledge\02_Formal_Semantics_and_Physics\13_Garbage_Collection: 1 files, 214 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\13_Hardware_Description: 2 files, 1093 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\13_Hardware_Description\04_HLS_with_C: 4 files, 4663 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\13_Hardware_Description\code: 1 files, 10 lines, 1 short
+knowledge\02_Formal_Semantics_and_Physics\13_Lambda_Calculus: 1 files, 35 lines, 1 short
+knowledge\02_Formal_Semantics_and_Physics\14_C_to_Hardware_Mapping: 5 files, 5582 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\14_Concurrency_Parallelism: 2 files, 28 lines, 2 short
+knowledge\02_Formal_Semantics_and_Physics\14_Information_Theory: 2 files, 70 lines, 2 short
+knowledge\02_Formal_Semantics_and_Physics\16_Performance_Analysis_Hardware: 6 files, 9369 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs: 7 files, 11989 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code: 1 files, 327 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\lab1: 1 files, 257 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\lab2: 1 files, 261 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\lab3: 1 files, 237 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\lab4: 1 files, 238 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\lab5: 1 files, 240 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\lab6: 1 files, 245 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\docs: 2 files, 28 lines, 2 short
+knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\reports: 1 files, 268 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\xdc: 1 files, 221 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\19_Hardware_Debugging: 5 files, 8431 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\20_Industrial_Case_Studies: 7 files, 6642 lines, 0 short
+knowledge\02_Formal_Semantics_and_Physics\diagrams: 1 files, 30 lines, 1 short
+knowledge\03_System_Technology_Domains: 15 files, 10883 lines, 2 short
+knowledge\03_System_Technology_Domains\01_Core_Knowledge_System\05_Data_Structures_Algorithms: 1 files, 14 lines, 1 short
+knowledge\03_System_Technology_Domains\01_System_Programming: 18 files, 1857 lines, 13 short
+knowledge\03_System_Technology_Domains\01_Virtual_Machine_Interpreter: 4 files, 2047 lines, 0 short
+knowledge\03_System_Technology_Domains\02_Regex_Engine: 4 files, 1716 lines, 0 short
+knowledge\03_System_Technology_Domains\02_Security: 1 files, 655 lines, 0 short
+knowledge\03_System_Technology_Domains\03_Computer_Vision: 4 files, 1600 lines, 1 short
+knowledge\03_System_Technology_Domains\03_Embedded_Systems: 1 files, 528 lines, 0 short
+knowledge\03_System_Technology_Domains\03_OS_Internals: 4 files, 122 lines, 4 short
+knowledge\03_System_Technology_Domains\04_Concurrency_and_Parallelism: 1 files, 14 lines, 1 short
+knowledge\03_System_Technology_Domains\04_Video_Codec: 4 files, 2723 lines, 0 short
+knowledge\03_System_Technology_Domains\05_Automotive: 1 files, 14 lines, 1 short
+knowledge\03_System_Technology_Domains\05_Network_Programming: 2 files, 660 lines, 1 short
+knowledge\03_System_Technology_Domains\05_Performance_Engineering: 1 files, 14 lines, 1 short
+knowledge\03_System_Technology_Domains\05_Program_Verification: 1 files, 14 lines, 1 short
+knowledge\03_System_Technology_Domains\05_Wireless_Protocol: 4 files, 2645 lines, 0 short
+knowledge\03_System_Technology_Domains\06_High_Performance_Server: 2 files, 95 lines, 2 short
+knowledge\03_System_Technology_Domains\06_Security_Boot: 4 files, 2049 lines, 0 short
+knowledge\03_System_Technology_Domains\07_GPU_Programming: 1 files, 684 lines, 0 short
+knowledge\03_System_Technology_Domains\07_Hardware_Security: 11 files, 19119 lines, 0 short
+knowledge\03_System_Technology_Domains\08_Distributed_Consensus: 4 files, 3316 lines, 0 short
+knowledge\03_System_Technology_Domains\08_Distributed_Systems: 2 files, 686 lines, 1 short
+knowledge\03_System_Technology_Domains\08_Memory_Management: 1 files, 14 lines, 1 short
+knowledge\03_System_Technology_Domains\09_Database_Internals: 1 files, 869 lines, 0 short
+knowledge\03_System_Technology_Domains\09_High_Performance_Log: 4 files, 2738 lines, 0 short
+knowledge\03_System_Technology_Domains\10_Security_Engineering: 9 files, 1102 lines, 6 short
+knowledge\03_System_Technology_Domains\10_Virtualization: 1 files, 887 lines, 0 short
+knowledge\03_System_Technology_Domains\11_Embedded_Systems: 1 files, 47 lines, 1 short
+knowledge\03_System_Technology_Domains\11_In_Memory_Database: 6 files, 4892 lines, 0 short
+knowledge\03_System_Technology_Domains\12_Computer_Graphics: 1 files, 35 lines, 1 short
+knowledge\03_System_Technology_Domains\12_Persistent_Memory: 3 files, 2355 lines, 0 short
+knowledge\03_System_Technology_Domains\12_Rust_Interop: 1 files, 45 lines, 1 short
+knowledge\03_System_Technology_Domains\13_Machine_Learning: 1 files, 663 lines, 0 short
+knowledge\03_System_Technology_Domains\13_RDMA_Network: 4 files, 4518 lines, 0 short
+knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism: 13 files, 4775 lines, 10 short
+knowledge\03_System_Technology_Domains\14_Natural_Language_Processing: 1 files, 35 lines, 1 short
+knowledge\03_System_Technology_Domains\15_Industrial_Communication: 1 files, 10 lines, 1 short
+knowledge\03_System_Technology_Domains\15_Network_Programming: 5 files, 6698 lines, 1 short
+knowledge\03_System_Technology_Domains\15_Security_Engineering: 3 files, 1091 lines, 2 short
+knowledge\03_System_Technology_Domains\16_High_Performance_Computing: 3 files, 631 lines, 2 short
+knowledge\03_System_Technology_Domains\16_OS_Kernel: 6 files, 1689 lines, 3 short
+knowledge\03_System_Technology_Domains\16_Rust_Interoperability: 4 files, 2565 lines, 0 short
+knowledge\03_System_Technology_Domains\17_Distributed_Systems: 4 files, 635 lines, 3 short
+knowledge\03_System_Technology_Domains\17_Graphics_Rendering: 2 files, 471 lines, 0 short
+knowledge\03_System_Technology_Domains\18_Database_Internals: 2 files, 325 lines, 1 short
+knowledge\03_System_Technology_Domains\18_Systems_Performance: 4 files, 1633 lines, 1 short
+knowledge\03_System_Technology_Domains\18_Web_Development: 1 files, 14 lines, 1 short
+knowledge\03_System_Technology_Domains\19_Systems_Security: 3 files, 873 lines, 1 short
+knowledge\03_System_Technology_Domains\20_Network_Programming: 3 files, 105 lines, 3 short
+knowledge\03_System_Technology_Domains\21_OS_Internals: 3 files, 3702 lines, 1 short
+knowledge\03_System_Technology_Domains\22_Virtualization: 2 files, 1696 lines, 1 short
+knowledge\03_System_Technology_Domains\23_Storage_Systems: 2 files, 416 lines, 1 short
+knowledge\03_System_Technology_Domains\24_Edge_Computing: 2 files, 70 lines, 2 short
+knowledge\03_System_Technology_Domains\25_Cloud_Native: 2 files, 70 lines, 2 short
+knowledge\04_Industrial_Scenarios: 1 files, 317 lines, 0 short
+knowledge\04_Industrial_Scenarios\01_Automotive_ABS: 3 files, 6228 lines, 0 short
+knowledge\04_Industrial_Scenarios\01_High_Performance: 1 files, 14 lines, 1 short
+knowledge\04_Industrial_Scenarios\01_System_Programming: 1 files, 14 lines, 1 short
+knowledge\04_Industrial_Scenarios\02_Automotive_ECU: 5 files, 3946 lines, 0 short
+knowledge\04_Industrial_Scenarios\02_Avionics_Systems: 4 files, 3895 lines, 0 short
+knowledge\04_Industrial_Scenarios\03_High_Frequency_Trading: 5 files, 3407 lines, 0 short
+knowledge\04_Industrial_Scenarios\04_5G_Baseband: 4 files, 6247 lines, 0 short
+knowledge\04_Industrial_Scenarios\05_Game_Engine: 4 files, 4813 lines, 0 short
+knowledge\04_Industrial_Scenarios\06_Quantum_Computing: 5 files, 4531 lines, 0 short
+knowledge\04_Industrial_Scenarios\06_Security: 1 files, 14 lines, 1 short
+knowledge\04_Industrial_Scenarios\08_Neuromorphic: 4 files, 2072 lines, 0 short
+knowledge\04_Industrial_Scenarios\08_Real_World_Cases: 1 files, 14 lines, 1 short
+knowledge\04_Industrial_Scenarios\10_DNA_Storage: 3 files, 2344 lines, 0 short
+knowledge\04_Industrial_Scenarios\10_Deep_Sea: 3 files, 1649 lines, 0 short
+knowledge\04_Industrial_Scenarios\11_Cryogenic_Superconducting: 3 files, 1534 lines, 0 short
+knowledge\04_Industrial_Scenarios\11_Space_Computing: 5 files, 3181 lines, 0 short
+knowledge\04_Industrial_Scenarios\12_Blockchain_Crypto: 3 files, 1917 lines, 0 short
+knowledge\04_Industrial_Scenarios\12_Blockchain_Crypto\projects: 3 files, 42 lines, 3 short
+knowledge\04_Industrial_Scenarios\13_Linux_Kernel: 5 files, 12676 lines, 1 short
+knowledge\04_Industrial_Scenarios\14_Embedded_IoT: 2 files, 6277 lines, 0 short
+knowledge\04_Industrial_Scenarios\14_Embedded_IoT\Baremetal: 2 files, 5329 lines, 0 short
+knowledge\04_Industrial_Scenarios\14_Embedded_IoT\ESP32: 2 files, 4559 lines, 0 short
+knowledge\04_Industrial_Scenarios\14_Embedded_IoT\Industrial_Linux: 2 files, 7785 lines, 0 short
+knowledge\04_Industrial_Scenarios\14_Embedded_IoT\IoT_Protocols: 2 files, 7683 lines, 0 short
+knowledge\04_Industrial_Scenarios\14_Embedded_IoT\Memory_Constrained: 2 files, 4265 lines, 0 short
+knowledge\04_Industrial_Scenarios\14_Embedded_IoT\RPi_Pico: 2 files, 4759 lines, 0 short
+knowledge\04_Industrial_Scenarios\14_Embedded_IoT\RaspberryPi: 2 files, 3298 lines, 0 short
+knowledge\04_Industrial_Scenarios\15_Industrial_Communication: 2 files, 6265 lines, 0 short
+knowledge\04_Industrial_Scenarios\15_Industrial_Communication\Data_Link_Layer: 2 files, 6428 lines, 0 short
+knowledge\04_Industrial_Scenarios\15_Industrial_Communication\Physical_Layer: 3 files, 1478 lines, 0 short
+knowledge\04_Industrial_Scenarios\16_MIT_6S081_Labs: 13 files, 7905 lines, 0 short
+knowledge\04_Industrial_Scenarios\17_CMU_15_213_Labs: 9 files, 6191 lines, 0 short
+knowledge\04_Industrial_Scenarios\21_OS_Internals: 2 files, 28 lines, 2 short
+knowledge\04_Industrial_Scenarios\Classic_C_Projects: 5 files, 2031 lines, 1 short
+knowledge\05_Deep_Structure_MetaPhysics: 12 files, 7858 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\01_Formal_Semantics: 9 files, 5468 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\02_Algebraic_Topology: 4 files, 2188 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\03_Verification_Energy: 3 files, 2861 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\04_Formal_Verification_Energy: 3 files, 2543 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\05_Computational_Complexity: 2 files, 757 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\05_Lean_4: 8 files, 5118 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\06_Standard_Library_Physics: 4 files, 3607 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\06_TLA_Plus: 6 files, 4688 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\07_Computability_Theory: 2 files, 1386 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\08_Debugging_Tools: 4 files, 6380 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\09_Linking_Algebraic_Topology: 3 files, 1914 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\10_Debug_Info_Encoding: 3 files, 2968 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\11_Heterogeneous_Memory: 3 files, 2471 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\12_Self_Modifying_Code: 3 files, 2393 lines, 0 short
+knowledge\05_Deep_Structure_MetaPhysics\13_Self_Modifying_Code: 3 files, 2774 lines, 0 short
+knowledge\06_Thinking_Representation: 5 files, 1541 lines, 1 short
+knowledge\06_Thinking_Representation\01_Decision_Trees: 15 files, 6944 lines, 0 short
+knowledge\06_Thinking_Representation\01_Mind_Maps: 2 files, 921 lines, 0 short
+knowledge\06_Thinking_Representation\02_Comparison_Matrices: 12 files, 5070 lines, 0 short
+knowledge\06_Thinking_Representation\02_Multidimensional_Matrix: 3 files, 4414 lines, 0 short
+knowledge\06_Thinking_Representation\03_Decision_Trees: 3 files, 2112 lines, 0 short
+knowledge\06_Thinking_Representation\03_Mind_Maps: 4 files, 1819 lines, 0 short
+knowledge\06_Thinking_Representation\04_Application_Scenario_Trees: 2 files, 819 lines, 0 short
+knowledge\06_Thinking_Representation\04_Case_Studies: 8 files, 6398 lines, 0 short
+knowledge\06_Thinking_Representation\04_Data_Structures: 1 files, 14 lines, 1 short
+knowledge\06_Thinking_Representation\05_Concept_Mappings: 19 files, 8706 lines, 0 short
+knowledge\06_Thinking_Representation\06_Index: 4 files, 1918 lines, 0 short
+knowledge\06_Thinking_Representation\06_Learning_Paths: 6 files, 5383 lines, 0 short
+knowledge\06_Thinking_Representation\07_Knowledge_Graph: 10 files, 4845 lines, 0 short
+knowledge\06_Thinking_Representation\08_Index: 3 files, 1875 lines, 0 short
+knowledge\06_Thinking_Representation\09_Bloom_Taxonomy: 8 files, 5409 lines, 0 short
+knowledge\06_Thinking_Representation\09_State_Machines: 7 files, 4585 lines, 0 short
+knowledge\06_Thinking_Representation\09_State_Machines\cases: 3 files, 42 lines, 3 short
+knowledge\06_Thinking_Representation\09_State_Machines\code: 1 files, 10 lines, 1 short
+knowledge\06_Thinking_Representation\10_Concept_Maps: 11 files, 5329 lines, 0 short
+knowledge\06_Thinking_Representation\10_Concept_Maps\learning_paths: 4 files, 56 lines, 4 short
+knowledge\07_Modern_Toolchain: 12 files, 4827 lines, 3 short
+knowledge\07_Modern_Toolchain\01_IDE_Editors: 7 files, 3895 lines, 0 short
+knowledge\07_Modern_Toolchain\02_Build_Systems_Modern: 7 files, 7022 lines, 0 short
+knowledge\07_Modern_Toolchain\03_CI_CD_DevOps: 6 files, 8632 lines, 0 short
+knowledge\07_Modern_Toolchain\03_CI_CD_DevOps\05_CI_CD_Templates: 1 files, 639 lines, 0 short
+knowledge\07_Modern_Toolchain\04_Package_Management: 5 files, 2892 lines, 0 short
+knowledge\07_Modern_Toolchain\05_Case_Studies: 5 files, 5117 lines, 0 short
+knowledge\07_Modern_Toolchain\05_Code_Quality_Toolchain: 9 files, 6431 lines, 0 short
+knowledge\07_Modern_Toolchain\06_Project_Templates: 2 files, 1591 lines, 0 short
+knowledge\07_Modern_Toolchain\07_Concurrency_Parallelism: 7 files, 6010 lines, 0 short
+knowledge\07_Modern_Toolchain\07_Development_Methodology\05_Performance_Optimization: 1 files, 35 lines, 1 short
+knowledge\07_Modern_Toolchain\07_Development_Methodology\06_Security_Development: 1 files, 35 lines, 1 short
+knowledge\07_Modern_Toolchain\07_Development_Methodology\07_Code_Review: 1 files, 35 lines, 1 short
+knowledge\07_Modern_Toolchain\07_Development_Methodology\08_Documentation: 1 files, 35 lines, 1 short
+knowledge\07_Modern_Toolchain\07_Development_Methodology\09_Legacy_Code: 2 files, 70 lines, 2 short
+knowledge\07_Modern_Toolchain\07_Development_Methodology\10_Continuous_Integration: 3 files, 105 lines, 3 short
+knowledge\07_Modern_Toolchain\07_Development_Methodology\11_Documentation_Standards: 2 files, 70 lines, 2 short
+knowledge\07_Modern_Toolchain\07_Development_Methodology\12_Team_Collaboration: 2 files, 70 lines, 2 short
+knowledge\07_Modern_Toolchain\08_Design_Patterns: 4 files, 2858 lines, 0 short
+knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\05_Static_Analyzers: 1 files, 35 lines, 1 short
+knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\06_Debuggers: 1 files, 35 lines, 1 short
+knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\07_Build_Systems: 2 files, 70 lines, 2 short
+knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\08_Testing_Tools: 2 files, 70 lines, 2 short
+knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\09_Package_Managers: 2 files, 70 lines, 2 short
+knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\10_IDE_Integration: 2 files, 70 lines, 2 short
+knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem\11_Code_Generation: 2 files, 70 lines, 2 short
+knowledge\07_Modern_Toolchain\09_System_Architecture: 3 files, 2494 lines, 0 short
+knowledge\07_Modern_Toolchain\10_Distributed_Systems: 3 files, 1961 lines, 0 short
+knowledge\07_Modern_Toolchain\11_Workflow_StateMachines: 3 files, 2014 lines, 0 short
+knowledge\07_Modern_Toolchain\12_Modern_C_Standards: 2 files, 1600 lines, 0 short
+knowledge\07_Modern_Toolchain\13_Comprehensive_Examples: 2 files, 1580 lines, 0 short
+knowledge\07_Modern_Toolchain\13_Zig_C_Interop: 2 files, 1548 lines, 0 short
+knowledge\08_Zig_C_Connection: 2 files, 5520 lines, 0 short
+knowledge\08_Zig_C_Connection\01_Type_System_Mapping: 4 files, 5974 lines, 0 short
+knowledge\08_Zig_C_Connection\02_Memory_Model_Bridge: 4 files, 6109 lines, 0 short
+knowledge\08_Zig_C_Connection\03_ABI_Formalization: 4 files, 4293 lines, 0 short
+knowledge\08_Zig_C_Connection\04_Translation_Validation: 4 files, 3748 lines, 0 short
+knowledge\08_Zig_C_Connection\05_Migration_Methodology: 4 files, 4242 lines, 0 short
+knowledge\08_Zig_C_Connection\06_C23_Zig_Parallel: 4 files, 8728 lines, 0 short
+knowledge\08_Zig_C_Connection\07_Real_World_Migration_Cases: 3 files, 2073 lines, 0 short
+knowledge\09_Data_Structures_Algorithms: 13 files, 696 lines, 10 short
+knowledge\09_Data_Structures_Algorithms\01_Fundamental_Data_Structures: 6 files, 9354 lines, 0 short
+knowledge\09_Data_Structures_Algorithms\02_Fundamental_Algorithms: 6 files, 9921 lines, 0 short
+knowledge\09_Data_Structures_Algorithms\04_Advanced_Algorithms: 3 files, 1676 lines, 2 short
+knowledge\09_Data_Structures_Algorithms\05_Algorithm_Implementations: 4 files, 2039 lines, 3 short
+knowledge\09_Data_Structures_Algorithms\06_Mathematical_Computing: 3 files, 105 lines, 3 short
+knowledge\09_Data_Structures_Algorithms\07_Geometric_Algorithms: 2 files, 70 lines, 2 short
+knowledge\09_Data_Structures_Algorithms\08_Probabilistic_Data_Structures: 3 files, 105 lines, 3 short
+knowledge\09_Data_Structures_Algorithms\09_Distributed_Algorithms: 2 files, 519 lines, 1 short
+knowledge\10_WebAssembly_C: 5 files, 11859 lines, 0 short
+knowledge\11_Machine_Learning_C: 9 files, 13217 lines, 0 short
+knowledge\12_Practice_Exercises: 14 files, 17455 lines, 0 short
+knowledge\12_Practice_Exercises\01_Beginner_Projects: 2 files, 70 lines, 2 short
+knowledge\12_Practice_Exercises\02_Intermediate_Projects: 2 files, 70 lines, 2 short
+knowledge\12_Practice_Exercises\03_Advanced_Projects: 2 files, 70 lines, 2 short
+knowledge\12_Practice_Exercises\04_Expert_Challenges: 3 files, 105 lines, 3 short
+knowledge\14_Video_Tutorials: 2 files, 1320 lines, 0 short
+knowledge\14_Video_Tutorials\01_Video_Scripts: 11 files, 11478 lines, 0 short
+knowledge\14_Video_Tutorials\02_Compiler_Explorer_Integration: 2 files, 1104 lines, 0 short
+knowledge\14_Video_Tutorials\03_Interactive_Exercises: 3 files, 2251 lines, 0 short
+knowledge\14_Video_Tutorials\04_Video_Production_Guide: 3 files, 1703 lines, 0 short
+knowledge\15_Network_Programming: 2 files, 28 lines, 2 short
+knowledge\16_Embedded_AI_Agents: 1 files, 289 lines, 0 short
+knowledge\16_Embedded_AI_Agents\01_TinyML_Fundamentals: 3 files, 1531 lines, 0 short
+knowledge\16_Embedded_AI_Agents\02_LLMs_on_Edge: 3 files, 1877 lines, 0 short
+knowledge\16_Embedded_AI_Agents\03_AI_Agent_Runtime: 2 files, 751 lines, 0 short
+knowledge\16_Embedded_AI_Agents\04_C_Implementation_Guide: 1 files, 237 lines, 0 short
+knowledge\16_Embedded_AI_Agents\05_Case_Studies: 2 files, 1020 lines, 0 short
+knowledge\16_Embedded_AI_Agents\06_C_Frameworks: 2 files, 991 lines, 0 short
+knowledge\16_Embedded_AI_Agents\07_Hardware_Acceleration: 2 files, 930 lines, 0 short
+knowledge\16_Embedded_AI_Agents\08_Real_Time_AI: 2 files, 1042 lines, 0 short
+knowledge\16_Embedded_AI_Agents\09_Security_Reliability: 2 files, 968 lines, 0 short
+knowledge\17_Ada_SPARK: 2 files, 597 lines, 0 short
+knowledge\17_Ada_SPARK\01_Ada_Basics: 5 files, 2859 lines, 0 short
+knowledge\17_Ada_SPARK\02_SPARK_Verification: 3 files, 1218 lines, 0 short
+knowledge\17_Ada_SPARK\03_Ada_C_Interoperability: 3 files, 1481 lines, 0 short
+knowledge\17_Ada_SPARK\04_Safety_Standards: 4 files, 1909 lines, 0 short
+knowledge\17_Ada_SPARK\05_Case_Studies: 5 files, 2414 lines, 0 short
+knowledge\17_Ada_SPARK\06_Migration_from_C: 3 files, 2182 lines, 0 short
+knowledge\17_Ada_SPARK\07_Decision_Trees: 2 files, 879 lines, 0 short
+knowledge\17_Ada_SPARK\08_Comparison_Matrices: 2 files, 795 lines, 0 short
+knowledge\18_Industrial_Protocols_C: 2 files, 231 lines, 0 short
+knowledge\18_Industrial_Protocols_C\01_Modbus_Protocol: 5 files, 1807 lines, 0 short
+knowledge\18_Industrial_Protocols_C\02_CAN_Bus_Protocol: 3 files, 1152 lines, 0 short
+knowledge\18_Industrial_Protocols_C\02_CAN_Bus_Protocol\04_CANopen_Protocol: 1 files, 417 lines, 0 short
+knowledge\18_Industrial_Protocols_C\02_CAN_Bus_Protocol\05_J1939_Protocol: 1 files, 415 lines, 0 short
+knowledge\18_Industrial_Protocols_C\04_OPC_UA_Foundation: 1 files, 439 lines, 0 short
+knowledge\18_Industrial_Protocols_C\07_Protocol_Comparison: 1 files, 258 lines, 0 short
+knowledge\18_Industrial_Protocols_C\08_Industrial_Ethernet: 1 files, 370 lines, 0 short
+knowledge\19_Embedded_Systems_C: 3 files, 259 lines, 2 short
+knowledge\19_Embedded_Systems_C\01_MCU_Architectures: 1 files, 100 lines, 0 short
+knowledge\19_Embedded_Systems_C\03_Embedded_C_Programming: 3 files, 1114 lines, 0 short
+knowledge\19_Embedded_Systems_C\05_FreeRTOS_Detail: 1 files, 432 lines, 0 short
+knowledge\19_Embedded_Systems_C\05_FreeRTOS_Detail\04_Synchronization_Primitives: 1 files, 699 lines, 0 short
+knowledge\19_Embedded_Systems_C\05_FreeRTOS_Detail\05_Interrupt_Management: 1 files, 483 lines, 0 short
+knowledge\19_Embedded_Systems_C\05_FreeRTOS_Detail\06_Memory_Management: 1 files, 606 lines, 0 short
+knowledge\19_Embedded_Systems_C\06_Low_Power_Design: 1 files, 568 lines, 0 short
+knowledge\19_Embedded_Systems_C\07_EMC_Design: 1 files, 483 lines, 0 short
+knowledge\19_Embedded_Systems_C\08_Watchdog_Timers: 1 files, 540 lines, 0 short
+knowledge\19_Embedded_Systems_C\09_Testing_Debugging: 1 files, 424 lines, 0 short
+knowledge\19_Embedded_Systems_C\10_Hardware_Power_Design: 1 files, 188 lines, 0 short
+knowledge\19_Embedded_Systems_C\11_Functional_Safety: 1 files, 294 lines, 0 short
+knowledge\19_Embedded_Systems_C\12_Embedded_Security: 1 files, 257 lines, 0 short
+knowledge\19_Embedded_Systems_C\13_Real_Time_Analysis: 1 files, 253 lines, 0 short
+knowledge\19_Embedded_Systems_C\14_Storage_Technologies: 1 files, 211 lines, 0 short
+knowledge\19_Embedded_Systems_C\15_Motor_Control: 1 files, 307 lines, 0 short
+knowledge\20_Industrial_Case_Studies: 19 files, 1685 lines, 16 short
+knowledge\20_Industrial_Case_Studies\09_Language_Server: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\10_File_System: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\13_Emulator: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\14_Compiler_Backend: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\18_Blockchain: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\19_Search_Engine: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\21_Message_Queue: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\22_Time_Series_DB: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\25_Load_Balancer: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\26_Service_Mesh: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\29_DDOS_Protection: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\30_WAF: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\31_Identity_Management: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\32_Video_Streaming: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\33_CDN: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\34_Game_Engine: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\35_Browser_Engine: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\36_Mobile_OS: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\38_Autonomous_Driving: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\39_Drone_Flight_Control: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\40_Robotic_Arm: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\41_Neural_Network_Inference: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\42_Digital_Signal_Processor: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\43_Virtual_Reality: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\44_Augmented_Reality: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\45_5G_Core_Network: 1 files, 35 lines, 1 short
+knowledge\20_Industrial_Case_Studies\46_Satellite_Communication: 1 files, 35 lines, 1 short
+knowledge\21_Computation_Theory: 5 files, 2297 lines, 0 short
+knowledge\22_Assembler_Implementation: 5 files, 3344 lines, 0 short
+knowledge\23_VM_Implementation: 3 files, 1706 lines, 1 short
+knowledge\24_Complete_Chain: 4 files, 1718 lines, 0 short
+knowledge\Zig: 26 files, 27312 lines, 0 short
+knowledge\Zig\2026_latest: 2 files, 1375 lines, 0 short
+knowledge\Zig\decision_trees: 2 files, 923 lines, 0 short
+knowledge\Zig\formal_models: 2 files, 1106 lines, 0 short
+knowledge\Zig\matrices: 2 files, 1030 lines, 0 short
+knowledge\Zig\visualizations: 2 files, 1201 lines, 0 short
+knowledge\c_language_standards: 2 files, 3655 lines, 0 short
+knowledge\c_language_standards\05_C23_Standard: 2 files, 70 lines, 2 short
+knowledge\c_language_standards\06_Standard_Evolution: 3 files, 105 lines, 3 short
+knowledge\cross_platform_development\04_Mobile_Platforms: 1 files, 35 lines, 1 short
+knowledge\cross_platform_development\05_Web_Assembly: 1 files, 35 lines, 1 short
+knowledge\embedded_bare_metal\09_Embedded_Linux: 2 files, 68 lines, 2 short
+knowledge\embedded_bare_metal\10_FPGA: 2 files, 70 lines, 2 short
+knowledge\embedded_bare_metal\11_Industrial_Protocols: 3 files, 105 lines, 3 short
+knowledge\embedded_bare_metal\12_Safety_Critical: 2 files, 70 lines, 2 short
+knowledge\embedded_bare_metal\13_Medical_Devices: 1 files, 35 lines, 1 short
+knowledge\embedded_bare_metal\14_Aerospace: 1 files, 35 lines, 1 short
+knowledge\hardware_interfaces_c: 2 files, 262 lines, 1 short
+knowledge\hardware_interfaces_c\01_UART_Interfaces: 1 files, 183 lines, 0 short
+knowledge\hardware_interfaces_c\02_ADC: 1 files, 500 lines, 0 short
+knowledge\hardware_interfaces_c\02_SPI_Interfaces: 1 files, 473 lines, 0 short
+knowledge\hardware_interfaces_c\03_I2C_Interfaces: 1 files, 459 lines, 0 short
+knowledge\hardware_interfaces_c\04_DMA: 1 files, 552 lines, 0 short
+knowledge\hardware_interfaces_c\05_Timer_PWM: 1 files, 523 lines, 0 short
+knowledge\hardware_interfaces_c\06_Signal_Integrity: 1 files, 257 lines, 0 short
+knowledge\memory_safe_languages: 1 files, 239 lines, 0 short
+knowledge\memory_safe_languages\01_Rust_vs_C: 10 files, 11487 lines, 0 short
+knowledge\memory_safe_languages\02_Migration_Strategies: 2 files, 1312 lines, 0 short
+knowledge\memory_safe_languages\03_Industry_Cases: 2 files, 1171 lines, 0 short
+knowledge\memory_safe_languages\04_Decision_Frameworks: 2 files, 1293 lines, 0 short
+knowledge\os_kernel: 3 files, 42 lines, 3 short
+knowledge\performance_engineering: 1 files, 14 lines, 1 short
+knowledge\performance_engineering\03_GPU_Programming: 1 files, 35 lines, 1 short
+knowledge\performance_engineering\04_Benchmarking: 1 files, 35 lines, 1 short
+knowledge\performance_engineering\05_Profiling_Tools: 3 files, 105 lines, 3 short
+knowledge\performance_engineering\06_Energy_Efficiency: 2 files, 70 lines, 2 short
+knowledge\robotics_physical_control: 1 files, 269 lines, 0 short
+knowledge\robotics_physical_control\01_ROS2_Fundamentals: 6 files, 627 lines, 5 short
+knowledge\robotics_physical_control\02_Kinematics: 6 files, 541 lines, 5 short
+knowledge\robotics_physical_control\03_Dynamics: 4 files, 575 lines, 3 short
+knowledge\robotics_physical_control\04_Control: 3 files, 596 lines, 2 short
+knowledge\robotics_physical_control\05_Motor_Control_Advanced: 5 files, 587 lines, 4 short
+knowledge\robotics_physical_control\06_Physics_Simulation: 4 files, 536 lines, 3 short
+knowledge\robotics_physical_control\07_Computer_Vision_Robotics: 6 files, 595 lines, 5 short
+knowledge\robotics_physical_control\08_Case_Studies: 5 files, 526 lines, 4 short
+knowledge\standard_library_frameworks\06_Test_Frameworks: 1 files, 35 lines, 1 short
+knowledge\standard_library_frameworks\07_Networking: 1 files, 35 lines, 1 short
+knowledge\standard_library_frameworks\08_Persistence: 1 files, 35 lines, 1 short
+knowledge\standard_library_frameworks\09_Containers: 2 files, 70 lines, 2 short
+knowledge\standard_library_frameworks\10_Serialization: 2 files, 70 lines, 2 short
+knowledge\templates: 3 files, 1340 lines, 1 short
+
+=== 3. EMPTY-ISH DIRS (only README.md <30 lines) ===
+knowledge\02_Formal_Semantics_and_Physics\13_Hardware_Description\code: README.md only, 10 lines
+knowledge\03_System_Technology_Domains\01_Core_Knowledge_System\05_Data_Structures_Algorithms: README.md only, 14 lines
+knowledge\03_System_Technology_Domains\04_Concurrency_and_Parallelism: README.md only, 14 lines
+knowledge\03_System_Technology_Domains\05_Performance_Engineering: README.md only, 14 lines
+knowledge\03_System_Technology_Domains\05_Program_Verification: README.md only, 14 lines
+knowledge\03_System_Technology_Domains\15_Industrial_Communication: README.md only, 10 lines
+knowledge\04_Industrial_Scenarios\01_High_Performance: README.md only, 14 lines
+knowledge\04_Industrial_Scenarios\06_Security: README.md only, 14 lines
+knowledge\06_Thinking_Representation\04_Data_Structures: README.md only, 14 lines
+knowledge\06_Thinking_Representation\09_State_Machines\code: README.md only, 10 lines
+Total empty-ish dirs: 10
+
+=== 4. EMPTY DIRS (no files at all) ===
+knowledge\01_Core_Knowledge_System\07_Modern_C\10_Modern_C_Development
+knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_projects
+knowledge\03_System_Technology_Domains\01_Core_Knowledge_System
+knowledge\03_System_Technology_Domains\04_Compiler_Technology
+knowledge\07_Modern_Toolchain\07_Development_Methodology
+knowledge\07_Modern_Toolchain\08_Toolchain_Ecosystem
+knowledge\18_Industrial_Protocols_C\00_Protocol_Fundamentals
+knowledge\18_Industrial_Protocols_C\03_OPC_UA_Protocol
+knowledge\18_Industrial_Protocols_C\04_EtherCAT_Protocol
+knowledge\18_Industrial_Protocols_C\05_Industrial_Ethernet
+knowledge\18_Industrial_Protocols_C\06_Wireless_Industrial
+knowledge\18_Industrial_Protocols_C\08_Case_Studies
+knowledge\19_Embedded_Systems_C\00_Embedded_Fundamentals
+knowledge\19_Embedded_Systems_C\02_Peripheral_Programming
+knowledge\19_Embedded_Systems_C\04_RTOS_Concepts
+knowledge\19_Embedded_Systems_C\06_Zephyr_RTOS
+knowledge\19_Embedded_Systems_C\07_Bootloaders
+knowledge\19_Embedded_Systems_C\08_Debugging_Techniques
+knowledge\19_Embedded_Systems_C\09_Embedded_Toolchains
+knowledge\19_Embedded_Systems_C\16_Sensor_Fusion
+knowledge\19_Embedded_Systems_C\17_Bootloader_Design
+knowledge\19_Embedded_Systems_C\18_Protocol_Stack_Implementation
+knowledge\19_Embedded_Systems_C\19_File_Systems
+knowledge\19_Embedded_Systems_C\20_Clock_Reset_Systems
+knowledge\19_Embedded_Systems_C\21_HAL_Design
+knowledge\22_Assembler_Implementation\code
+knowledge\23_VM_Implementation\code
+knowledge\c_language_standards\C23_C2y_Tracking
+knowledge\cross_platform_development
+knowledge\embedded_bare_metal
+knowledge\hardware_interfaces_c\00_Interface_Fundamentals
+knowledge\hardware_interfaces_c\04_CAN_Interfaces
+knowledge\hardware_interfaces_c\05_USB_Interfaces
+knowledge\hardware_interfaces_c\06_Ethernet_Interfaces
+knowledge\hardware_interfaces_c\07_Wireless_Interfaces
+knowledge\hardware_interfaces_c\08_Memory_Interfaces
+knowledge\hardware_interfaces_c\09_Analog_Interfaces
+knowledge\hardware_interfaces_c\10_Advanced_Interfaces
+knowledge\standard_library_frameworks
+Total empty dirs: 39
+
+=== 5. DUPLICATE TITLES (H1) ===
+Title: 'Readme'
+  - knowledge\01_Core_Knowledge_System\01_System_Programming\README.md
+  - knowledge\03_System_Technology_Domains\01_Core_Knowledge_System\05_Data_Structures_Algorithms\README.md
+  - knowledge\03_System_Technology_Domains\03_OS_Internals\README.md
+  - knowledge\03_System_Technology_Domains\04_Concurrency_and_Parallelism\README.md
+  - knowledge\03_System_Technology_Domains\05_Network_Programming\README.md
+  - knowledge\03_System_Technology_Domains\05_Performance_Engineering\README.md
+  - knowledge\03_System_Technology_Domains\05_Program_Verification\README.md
+  - knowledge\03_System_Technology_Domains\06_High_Performance_Server\README.md
+  - knowledge\03_System_Technology_Domains\08_Distributed_Systems\README.md
+  - knowledge\04_Industrial_Scenarios\01_High_Performance\README.md
+  - knowledge\04_Industrial_Scenarios\06_Security\README.md
+  - knowledge\04_Industrial_Scenarios\21_OS_Internals\README.md
+  - knowledge\06_Thinking_Representation\04_Data_Structures\README.md
+  - knowledge\15_Network_Programming\README.md
+  - knowledge\os_kernel\README.md
+
+Title: '编译'
+  - knowledge\03_System_Technology_Domains\02_Regex_Engine\01_NFA_Implementation.md
+  - knowledge\04_Industrial_Scenarios\17_CMU_15_213_Labs\05_Shell_Lab.md
+  - knowledge\04_Industrial_Scenarios\17_CMU_15_213_Labs\07_Proxy_Lab.md
+  - knowledge\06_Thinking_Representation\04_Case_Studies\02_Database_Engine.md
+  - knowledge\06_Thinking_Representation\07_Knowledge_Graph\03_Prerequisite_Chains.md
+  - knowledge\07_Modern_Toolchain\13_Comprehensive_Examples\01_High_Performance_Server.md
+
+Title: 'Ubuntu/Debian'
+  - knowledge\03_System_Technology_Domains\04_Video_Codec\README.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\Baremetal\README.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\Industrial_Linux\01_Industrial_Linux_System.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\Memory_Constrained\README.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\RaspberryPi\01_RaspberryPi_Embedded_Linux.md
+
+Title: 'GCC'
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\01_MISRA_C_2023_Rules_1-5.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\README.md
+
+Title: '03 High Performance Server'
+  - knowledge\01_Core_Knowledge_System\15_Network_Programming\03_High_Performance_Server.md
+  - knowledge\15_Network_Programming\03_High_Performance_Server.md
+
+Title: '基本性能统计'
+  - knowledge\02_Formal_Semantics_and_Physics\07_Microarchitecture\README.md
+  - knowledge\04_Industrial_Scenarios\04_5G_Baseband\01_SIMD_Vectorization.md
+
+Title: 'Thierry Coquand: 构造演算与证明助手的先驱'
+  - knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\figures\FIGURE_Coquand.md
+  - knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\figures\FIGURE_Thierry_Coquand.md
+
+Title: 'Per Martin-Löf: 直觉主义类型论之父'
+  - knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\figures\FIGURE_Martin_Lof.md
+  - knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\figures\FIGURE_Per_Martin-Lof.md
+
+Title: 'Code'
+  - knowledge\02_Formal_Semantics_and_Physics\13_Hardware_Description\code\README.md
+  - knowledge\06_Thinking_Representation\09_State_Machines\code\README.md
+
+Title: 'Cargo.toml'
+  - knowledge\03_System_Technology_Domains\16_Rust_Interoperability\01_Rust_Call_C.md
+  - knowledge\03_System_Technology_Domains\16_Rust_Interoperability\02_C_Call_Rust.md
+
+Title: '编译测试'
+  - knowledge\04_Industrial_Scenarios\02_Automotive_ECU\02_Autosar_Architecture.md
+  - knowledge\04_Industrial_Scenarios\17_CMU_15_213_Labs\01_Data_Lab.md
+
+Title: '1. 下载 ESP-IDF 工具安装器'
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\ESP32\01_ESP32_Complete_Guide.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\ESP32\README.md
+
+Title: '分离逻辑与程序验证'
+  - knowledge\05_Deep_Structure_MetaPhysics\03_Verification_Energy\04_Separation_Logic.md
+  - knowledge\05_Deep_Structure_MetaPhysics\04_Formal_Verification_Energy\02_Separation_Logic_Entropy.md
+
+Title: '编译时添加调试信息'
+  - knowledge\06_Thinking_Representation\01_Decision_Trees\01_Memory_Leak_Diagnosis.md
+  - knowledge\06_Thinking_Representation\01_Decision_Trees\02_Segfault_Troubleshooting.md
+
+Title: 'C语言静态分析深度指南'
+  - knowledge\07_Modern_Toolchain\05_Code_Quality_Toolchain\01_Static_Analysis_Deep_Dive.md
+  - knowledge\07_Modern_Toolchain\05_Code_Quality_Toolchain\02_Static_Analysis_Deep_Dive.md
+
+Title: '数据结构与算法'
+  - knowledge\09_Data_Structures_Algorithms\README.md
+  - knowledge\09_Data_Structures_Algorithms\数据结构与算法.md
+
+Total duplicate title groups: 16
+
+=== 6. SIMILAR CONTENT GROUPS (first 500 chars match) ===
+Group (125 files):
+  - knowledge\02_Formal_Semantics_and_Physics\12_Compiler_Optimization\04_Auto_Vectorization.md
+  - knowledge\02_Formal_Semantics_and_Physics\13_Hardware_Description\01_Verilog_Basics.md
+  - knowledge\02_Formal_Semantics_and_Physics\14_C_to_Hardware_Mapping\01_C_for_Synthesis.md
+  - knowledge\02_Formal_Semantics_and_Physics\14_C_to_Hardware_Mapping\02_Pointer_to_Memory_Interface.md
+  - knowledge\02_Formal_Semantics_and_Physics\14_C_to_Hardware_Mapping\03_Loops_to_Pipelines.md
+  - knowledge\02_Formal_Semantics_and_Physics\14_C_to_Hardware_Mapping\04_Functions_to_Modules.md
+  - knowledge\04_Industrial_Scenarios\01_Automotive_ABS\01_ABS_System.md
+  - knowledge\04_Industrial_Scenarios\01_Automotive_ABS\02_Hard_RealTime.md
+  - knowledge\04_Industrial_Scenarios\02_Automotive_ECU\03_Functional_Safety.md
+  - knowledge\04_Industrial_Scenarios\02_Automotive_ECU\README.md
+  - knowledge\04_Industrial_Scenarios\02_Avionics_Systems\01_ARINC_429.md
+  - knowledge\04_Industrial_Scenarios\02_Avionics_Systems\03_Flight_Control.md
+  - knowledge\04_Industrial_Scenarios\02_Avionics_Systems\README.md
+  - knowledge\04_Industrial_Scenarios\03_High_Frequency_Trading\01_DPDK_Network_Stack.md
+  - knowledge\04_Industrial_Scenarios\03_High_Frequency_Trading\02_Cache_Line_Optimization.md
+  - knowledge\04_Industrial_Scenarios\03_High_Frequency_Trading\02_Lock_Free_Queues.md
+  - knowledge\04_Industrial_Scenarios\03_High_Frequency_Trading\03_Kernel_Bypass.md
+  - knowledge\04_Industrial_Scenarios\04_5G_Baseband\02_DMA_Offload.md
+  - knowledge\04_Industrial_Scenarios\04_5G_Baseband\03_MIMO_Detection.md
+  - knowledge\04_Industrial_Scenarios\04_5G_Baseband\README.md
+  - knowledge\04_Industrial_Scenarios\05_Game_Engine\01_ECS_Architecture.md
+  - knowledge\04_Industrial_Scenarios\05_Game_Engine\01_GPU_Memory_Management.md
+  - knowledge\04_Industrial_Scenarios\05_Game_Engine\02_Atomic_Operations.md
+  - knowledge\04_Industrial_Scenarios\06_Quantum_Computing\01_Quantum_Classical_Interface.md
+  - knowledge\04_Industrial_Scenarios\06_Quantum_Computing\01_Quantum_Simulation_C.md
+  - knowledge\04_Industrial_Scenarios\06_Quantum_Computing\02_Surface_Code_Decoder.md
+  - knowledge\04_Industrial_Scenarios\06_Quantum_Computing\03_Shor_Algorithm.md
+  - knowledge\04_Industrial_Scenarios\06_Quantum_Computing\README.md
+  - knowledge\04_Industrial_Scenarios\08_Neuromorphic\01_SNN_Control.md
+  - knowledge\04_Industrial_Scenarios\08_Neuromorphic\01_SNN_Simulation.md
+  - knowledge\04_Industrial_Scenarios\08_Neuromorphic\02_STDP_Learning.md
+  - knowledge\04_Industrial_Scenarios\08_Neuromorphic\README.md
+  - knowledge\04_Industrial_Scenarios\10_Deep_Sea\01_Acoustic_Modem.md
+  - knowledge\04_Industrial_Scenarios\10_Deep_Sea\02_Energy_Aware_Scheduling.md
+  - knowledge\04_Industrial_Scenarios\10_Deep_Sea\README.md
+  - knowledge\04_Industrial_Scenarios\10_DNA_Storage\01_DNA_Synthesis.md
+  - knowledge\04_Industrial_Scenarios\10_DNA_Storage\02_Error_Correction_Coding.md
+  - knowledge\04_Industrial_Scenarios\10_DNA_Storage\README.md
+  - knowledge\04_Industrial_Scenarios\11_Cryogenic_Superconducting\01_Cryo_Serial_Interface.md
+  - knowledge\04_Industrial_Scenarios\11_Cryogenic_Superconducting\02_Subthreshold_Optimization.md
+  - knowledge\04_Industrial_Scenarios\11_Cryogenic_Superconducting\README.md
+  - knowledge\04_Industrial_Scenarios\11_Space_Computing\01_EDAC_Memory.md
+  - knowledge\04_Industrial_Scenarios\11_Space_Computing\01_Radiation_Hardening.md
+  - knowledge\04_Industrial_Scenarios\11_Space_Computing\02_TMR_Voting.md
+  - knowledge\04_Industrial_Scenarios\11_Space_Computing\README.md
+  - knowledge\04_Industrial_Scenarios\12_Blockchain_Crypto\02_Blockchain_Basics.md
+  - knowledge\04_Industrial_Scenarios\13_Linux_Kernel\02_Cache_Coherence.md
+  - knowledge\04_Industrial_Scenarios\16_MIT_6S081_Labs\05_Lab5_Cow.md
+  - knowledge\04_Industrial_Scenarios\16_MIT_6S081_Labs\07_Lab7_Network_Driver.md
+  - knowledge\04_Industrial_Scenarios\16_MIT_6S081_Labs\09_Lab9_File_System.md
+  - knowledge\04_Industrial_Scenarios\17_CMU_15_213_Labs\00_CMU_Labs_Overview.md
+  - knowledge\04_Industrial_Scenarios\Classic_C_Projects\01_Redis_Data_Structures.md
+  - knowledge\04_Industrial_Scenarios\Classic_C_Projects\02_SQLite_Architecture.md
+  - knowledge\04_Industrial_Scenarios\Classic_C_Projects\03_Nginx_Event_Driven.md
+  - knowledge\04_Industrial_Scenarios\Classic_C_Projects\04_Git_Internals.md
+  - knowledge\05_Deep_Structure_MetaPhysics\01_Formal_Semantics\02_Axiomatic_Semantics.md
+  - knowledge\05_Deep_Structure_MetaPhysics\05_Lean_4\03_Tactics_Proofs.md
+  - knowledge\05_Deep_Structure_MetaPhysics\05_Lean_4\04_C_Verification_Lean.md
+  - knowledge\05_Deep_Structure_MetaPhysics\06_Standard_Library_Physics\01_Malloc_Physics.md
+  - knowledge\05_Deep_Structure_MetaPhysics\06_Standard_Library_Physics\02_Memcpy_SIMD.md
+  - knowledge\05_Deep_Structure_MetaPhysics\06_Standard_Library_Physics\03_Qsort_Branch_Prediction.md
+  - knowledge\05_Deep_Structure_MetaPhysics\06_TLA_Plus\01_TLA_Introduction.md
+  - knowledge\05_Deep_Structure_MetaPhysics\07_Computability_Theory\01_Turing_Machines.md
+  - knowledge\05_Deep_Structure_MetaPhysics\09_Linking_Algebraic_Topology\01_Relocation_Group_Action.md
+  - knowledge\05_Deep_Structure_MetaPhysics\09_Linking_Algebraic_Topology\02_Homology_Groups.md
+  - knowledge\05_Deep_Structure_MetaPhysics\10_Debug_Info_Encoding\01_DWARF_Deserialization.md
+  - knowledge\05_Deep_Structure_MetaPhysics\11_Heterogeneous_Memory\01_CUDA_Unified_Memory.md
+  - knowledge\05_Deep_Structure_MetaPhysics\11_Heterogeneous_Memory\02_OpenMP_Offload.md
+  - knowledge\05_Deep_Structure_MetaPhysics\11_Heterogeneous_Memory\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\12_Self_Modifying_Code\01_JIT_Basics.md
+  - knowledge\05_Deep_Structure_MetaPhysics\12_Self_Modifying_Code\02_Tracing_JIT.md
+  - knowledge\05_Deep_Structure_MetaPhysics\13_Self_Modifying_Code\01_Von_Neumann_Reflectivity.md
+  - knowledge\05_Deep_Structure_MetaPhysics\13_Self_Modifying_Code\02_JIT_Physical_Constraints.md
+  - knowledge\06_Thinking_Representation\01_Decision_Trees\04_Formal_Proof_Decision_Tree.md
+  - knowledge\06_Thinking_Representation\01_Decision_Trees\06_Pointer_Usage_Decision_Tree.md
+  - knowledge\06_Thinking_Representation\01_Decision_Trees\07_Memory_Allocation_Decision_Tree.md
+  - knowledge\06_Thinking_Representation\01_Decision_Trees\08_Type_Conversion_Decision_Tree.md
+  - knowledge\06_Thinking_Representation\01_Decision_Trees\09_Concurrency_Model_Decision_Tree.md
+  - knowledge\06_Thinking_Representation\01_Mind_Maps\01_Knowledge_System_MindMap.md
+  - knowledge\06_Thinking_Representation\02_Comparison_Matrices\01_Pointer_Types_Matrix.md
+  - knowledge\06_Thinking_Representation\02_Comparison_Matrices\02_Memory_Models_Matrix.md
+  - knowledge\06_Thinking_Representation\02_Comparison_Matrices\03_IO_Methods_Matrix.md
+  - knowledge\06_Thinking_Representation\02_Comparison_Matrices\03_Storage_Duration_Matrix.md
+  - knowledge\06_Thinking_Representation\02_Comparison_Matrices\04_Memory_Allocation_Matrix.md
+  - knowledge\06_Thinking_Representation\02_Comparison_Matrices\04_Type_Qualifiers_Matrix.md
+  - knowledge\06_Thinking_Representation\02_Comparison_Matrices\README.md
+  - knowledge\06_Thinking_Representation\02_Multidimensional_Matrix\README.md
+  - knowledge\06_Thinking_Representation\03_Decision_Trees\01_Learning_Path_Decision_Tree.md
+  - knowledge\06_Thinking_Representation\03_Mind_Maps\02_Memory_Model_Map.md
+  - knowledge\06_Thinking_Representation\03_Mind_Maps\03_Pointer_Concepts_Map.md
+  - knowledge\06_Thinking_Representation\03_Mind_Maps\04_Concurrent_Programming_Map.md
+  - knowledge\06_Thinking_Representation\04_Application_Scenario_Trees\01_Industry_Application_Scenario_Tree.md
+  - knowledge\06_Thinking_Representation\04_Case_Studies\04_Compiler_Frontend.md
+  - knowledge\06_Thinking_Representation\04_Case_Studies\05_Embedded_Firmware.md
+  - knowledge\06_Thinking_Representation\04_Case_Studies\README.md
+  - knowledge\06_Thinking_Representation\05_Concept_Mappings\02_Type_System_Matrix.md
+  - knowledge\06_Thinking_Representation\05_Concept_Mappings\03_Concurrency_Safety_Layers.md
+  - knowledge\06_Thinking_Representation\05_Concept_Mappings\04_Concurrent_Programming_Map.md
+  - knowledge\06_Thinking_Representation\05_Concept_Mappings\04_Storage_Duration_Lifetime.md
+  - knowledge\06_Thinking_Representation\05_Concept_Mappings\05_C_Language_Knowledge_Graph.md
+  - knowledge\06_Thinking_Representation\05_Concept_Mappings\08_Concept_Equivalence_Graph.md
+  - knowledge\06_Thinking_Representation\05_Concept_Mappings\10_Theory_Unification_Mapping.md
+  - knowledge\06_Thinking_Representation\05_Concept_Mappings\12_Theorem_Dependency_Network.md
+  - knowledge\06_Thinking_Representation\05_Concept_Mappings\13_Global_Invariants.md
+  - knowledge\06_Thinking_Representation\06_Index\01_Core_Concepts_Index.md
+  - knowledge\06_Thinking_Representation\06_Index\02_Keywords_Index.md
+  - knowledge\06_Thinking_Representation\06_Learning_Paths\01_Beginner_to_Advanced.md
+  - knowledge\06_Thinking_Representation\08_Index\01_Global_Index.md
+  - knowledge\06_Thinking_Representation\09_Bloom_Taxonomy\README.md
+  - knowledge\07_Modern_Toolchain\07_Concurrency_Parallelism\03_Actor_Model_C.md
+  - knowledge\07_Modern_Toolchain\07_Concurrency_Parallelism\05_Thread_Pool_Patterns.md
+  - knowledge\07_Modern_Toolchain\07_Concurrency_Parallelism\06_Coroutine_Fiber.md
+  - knowledge\07_Modern_Toolchain\08_Design_Patterns\01_Creational_Patterns.md
+  - knowledge\07_Modern_Toolchain\08_Design_Patterns\02_Structural_Patterns.md
+  - knowledge\07_Modern_Toolchain\08_Design_Patterns\03_Behavioral_Patterns.md
+  - knowledge\07_Modern_Toolchain\08_Design_Patterns\README.md
+  - knowledge\07_Modern_Toolchain\09_System_Architecture\02_Event_Driven_Architecture.md
+  - knowledge\07_Modern_Toolchain\09_System_Architecture\README.md
+  - knowledge\07_Modern_Toolchain\10_Distributed_Systems\01_Consensus_Algorithms.md
+  - knowledge\07_Modern_Toolchain\10_Distributed_Systems\02_Circuit_Breaker.md
+  - knowledge\07_Modern_Toolchain\10_Distributed_Systems\README.md
+  - knowledge\07_Modern_Toolchain\11_Workflow_StateMachines\02_Rule_Engine.md
+  - knowledge\07_Modern_Toolchain\11_Workflow_StateMachines\README.md
+  - knowledge\08_Zig_C_Connection\03_ABI_Formalization\README.md
+  - knowledge\17_Ada_SPARK\07_Decision_Trees\01_Ada_Task_Scheduling_Debug.md
+
+Group (100 files):
+  - knowledge\07_Modern_Toolchain\01_IDE_Editors\06_IDE_Comparison_Matrix.md
+  - knowledge\07_Modern_Toolchain\03_CI_CD_DevOps\01_GitHub_Actions_C.md
+  - knowledge\07_Modern_Toolchain\03_CI_CD_DevOps\03_GitLab_CI_C.md
+  - knowledge\07_Modern_Toolchain\07_Concurrency_Parallelism\01_C11_Memory_Model.md
+  - knowledge\08_Zig_C_Connection\01_Type_System_Mapping\01_C_to_Zig_Type_Correspondence.md
+  - knowledge\08_Zig_C_Connection\01_Type_System_Mapping\02_Extern_Struct_Equivalence.md
+  - knowledge\08_Zig_C_Connection\01_Type_System_Mapping\03_Function_Pointer_Compatibility.md
+  - knowledge\08_Zig_C_Connection\01_Type_System_Mapping\README.md
+  - knowledge\08_Zig_C_Connection\02_Memory_Model_Bridge\01_C11_vs_Zig_Memory_Model.md
+  - knowledge\08_Zig_C_Connection\02_Memory_Model_Bridge\02_Atomic_Operations_Mapping.md
+  - knowledge\08_Zig_C_Connection\02_Memory_Model_Bridge\03_Pointer_Provenance_Analysis.md
+  - knowledge\08_Zig_C_Connection\02_Memory_Model_Bridge\README.md
+  - knowledge\08_Zig_C_Connection\03_ABI_Formalization\01_System_V_ABI_Zig_C.md
+  - knowledge\08_Zig_C_Connection\03_ABI_Formalization\02_Windows_ABI_Compatibility.md
+  - knowledge\08_Zig_C_Connection\03_ABI_Formalization\03_Calling_Convention_Proofs.md
+  - knowledge\08_Zig_C_Connection\04_Translation_Validation\02_CImport_Correctness.md
+  - knowledge\08_Zig_C_Connection\04_Translation_Validation\03_Semantic_Preservation_Proofs.md
+  - knowledge\08_Zig_C_Connection\05_Migration_Methodology\01_Incremental_Migration_Patterns.md
+  - knowledge\08_Zig_C_Connection\05_Migration_Methodology\02_Safety_Improvement_Metrics.md
+  - knowledge\08_Zig_C_Connection\05_Migration_Methodology\03_Performance_Comparison_Framework.md
+  - knowledge\08_Zig_C_Connection\05_Migration_Methodology\README.md
+  - knowledge\08_Zig_C_Connection\06_C23_Zig_Parallel\01_Nullptr_vs_Optional_Pointer.md
+  - knowledge\08_Zig_C_Connection\06_C23_Zig_Parallel\02_Constexpr_vs_Comptime.md
+  - knowledge\08_Zig_C_Connection\06_C23_Zig_Parallel\03_Typeof_vs_TypeOf.md
+  - knowledge\08_Zig_C_Connection\07_Real_World_Migration_Cases\01_Redis_Data_Structure_Migration.md
+  - knowledge\08_Zig_C_Connection\07_Real_World_Migration_Cases\02_SQLite_BTree_Migration.md
+  - knowledge\08_Zig_C_Connection\07_Real_World_Migration_Cases\README.md
+  - knowledge\09_Data_Structures_Algorithms\01_Fundamental_Data_Structures\README.md
+  - knowledge\09_Data_Structures_Algorithms\02_Fundamental_Algorithms\01_Sorting_Algorithms_Complete.md
+  - knowledge\09_Data_Structures_Algorithms\02_Fundamental_Algorithms\02_Searching_Algorithms.md
+  - knowledge\09_Data_Structures_Algorithms\02_Fundamental_Algorithms\03_Graph_Algorithms_Fundamentals.md
+  - knowledge\09_Data_Structures_Algorithms\02_Fundamental_Algorithms\04_Dynamic_Programming_Basics.md
+  - knowledge\09_Data_Structures_Algorithms\02_Fundamental_Algorithms\05_Greedy_Algorithms_Backtracking.md
+  - knowledge\09_Data_Structures_Algorithms\02_Fundamental_Algorithms\README.md
+  - knowledge\14_Video_Tutorials\01_Video_Scripts\01_Introduction_to_C.md
+  - knowledge\14_Video_Tutorials\01_Video_Scripts\02_Pointer_Deep_Dive.md
+  - knowledge\14_Video_Tutorials\02_Compiler_Explorer_Integration\README.md
+  - knowledge\14_Video_Tutorials\03_Interactive_Exercises\README.md
+  - knowledge\14_Video_Tutorials\04_Video_Production_Guide\README.md
+  - knowledge\14_Video_Tutorials\04_Video_Production_Guide\Visual_Design_Guidelines.md
+  - knowledge\16_Embedded_AI_Agents\01_TinyML_Fundamentals\README.md
+  - knowledge\16_Embedded_AI_Agents\02_LLMs_on_Edge\README.md
+  - knowledge\16_Embedded_AI_Agents\03_AI_Agent_Runtime\README.md
+  - knowledge\16_Embedded_AI_Agents\04_C_Implementation_Guide\README.md
+  - knowledge\16_Embedded_AI_Agents\05_Case_Studies\README.md
+  - knowledge\16_Embedded_AI_Agents\06_C_Frameworks\README.md
+  - knowledge\16_Embedded_AI_Agents\07_Hardware_Acceleration\README.md
+  - knowledge\16_Embedded_AI_Agents\08_Real_Time_AI\README.md
+  - knowledge\16_Embedded_AI_Agents\09_Security_Reliability\01_AI_Safety_Standards.md
+  - knowledge\16_Embedded_AI_Agents\09_Security_Reliability\README.md
+  - knowledge\17_Ada_SPARK\01_Ada_Basics\01_Syntax_Types.md
+  - knowledge\17_Ada_SPARK\01_Ada_Basics\02_Packages_Modules.md
+  - knowledge\17_Ada_SPARK\01_Ada_Basics\03_Task_Concurrency.md
+  - knowledge\17_Ada_SPARK\01_Ada_Basics\04_Exceptions_Contracts.md
+  - knowledge\17_Ada_SPARK\01_Ada_Basics\README.md
+  - knowledge\17_Ada_SPARK\02_SPARK_Verification\README.md
+  - knowledge\17_Ada_SPARK\03_Ada_C_Interoperability\01_Calling_C_from_Ada.md
+  - knowledge\17_Ada_SPARK\03_Ada_C_Interoperability\README.md
+  - knowledge\17_Ada_SPARK\04_Safety_Standards\01_DO_178C_with_Ada.md
+  - knowledge\17_Ada_SPARK\04_Safety_Standards\02_EN_50128.md
+  - knowledge\17_Ada_SPARK\04_Safety_Standards\README.md
+  - knowledge\17_Ada_SPARK\05_Case_Studies\01_SPARK_Safe_Stack.md
+  - knowledge\17_Ada_SPARK\05_Case_Studies\02_SPARK_Bounded_Buffer.md
+  - knowledge\17_Ada_SPARK\05_Case_Studies\03_Boeing_787_DAL_A.md
+  - knowledge\17_Ada_SPARK\05_Case_Studies\04_F_35_Lightning_II.md
+  - knowledge\17_Ada_SPARK\05_Case_Studies\README.md
+  - knowledge\17_Ada_SPARK\06_Migration_from_C\01_C_to_Ada_Guide.md
+  - knowledge\17_Ada_SPARK\06_Migration_from_C\README.md
+  - knowledge\17_Ada_SPARK\07_Decision_Trees\README.md
+  - knowledge\17_Ada_SPARK\08_Comparison_Matrices\01_Ada_C_Rust_Safety_Matrix.md
+  - knowledge\17_Ada_SPARK\08_Comparison_Matrices\README.md
+  - knowledge\memory_safe_languages\01_Rust_vs_C\01_Technical_Comparison.md
+  - knowledge\memory_safe_languages\01_Rust_vs_C\02_Ownership_vs_Pointers.md
+  - knowledge\memory_safe_languages\01_Rust_vs_C\03_Linux_Kernel_Rust_Integration.md
+  - knowledge\memory_safe_languages\01_Rust_vs_C\05_Memory_Safety_Statistics.md
+  - knowledge\memory_safe_languages\01_Rust_vs_C\06_DRM_Subsystem_Rust_Case.md
+  - knowledge\memory_safe_languages\01_Rust_vs_C\06_Migration_Case_Studies.md
+  - knowledge\memory_safe_languages\01_Rust_vs_C\README.md
+  - knowledge\memory_safe_languages\02_Migration_Strategies\README.md
+  - knowledge\memory_safe_languages\03_Industry_Cases\01_Google_Android.md
+  - knowledge\memory_safe_languages\03_Industry_Cases\README.md
+  - knowledge\memory_safe_languages\04_Decision_Frameworks\README.md
+  - knowledge\robotics_physical_control\01_ROS2_Fundamentals\README.md
+  - knowledge\robotics_physical_control\02_Kinematics\README.md
+  - knowledge\robotics_physical_control\03_Dynamics\README.md
+  - knowledge\robotics_physical_control\04_Control\README.md
+  - knowledge\robotics_physical_control\05_Motor_Control_Advanced\README.md
+  - knowledge\robotics_physical_control\06_Physics_Simulation\README.md
+  - knowledge\robotics_physical_control\07_Computer_Vision_Robotics\README.md
+  - knowledge\robotics_physical_control\08_Case_Studies\README.md
+  - knowledge\Zig\2026_latest\README.md
+  - knowledge\Zig\2026_latest\Zig_2026_Roadmap.md
+  - knowledge\Zig\decision_trees\Learning_Path_Decision_Tree.md
+  - knowledge\Zig\decision_trees\README.md
+  - knowledge\Zig\formal_models\Core_Concepts_Definitions.md
+  - knowledge\Zig\formal_models\README.md
+  - knowledge\Zig\matrices\Language_Comparison_Matrix.md
+  - knowledge\Zig\matrices\README.md
+  - knowledge\Zig\visualizations\README.md
+  - knowledge\Zig\visualizations\Zig_Knowledge_MindMap.md
+
+Group (65 files):
+  - knowledge\00_VERSION_TRACKING\C2y_Feature_Previews.md
+  - knowledge\00_VERSION_TRACKING\C2y_New_Proposals_2026.md
+  - knowledge\00_VERSION_TRACKING\C2y_Proposal_Tracker.md
+  - knowledge\00_VERSION_TRACKING\C2y_to_C34_Roadmap.md
+  - knowledge\00_VERSION_TRACKING\CISA_CRA_Compliance_2026.md
+  - knowledge\00_VERSION_TRACKING\C_Standards_Roadmap.md
+  - knowledge\00_VERSION_TRACKING\Expansion_Summary_2026-03-14.md
+  - knowledge\00_VERSION_TRACKING\MISRA_C_2025_Update_Plan.md
+  - knowledge\00_VERSION_TRACKING\Zig_Roadmap_Tracking.md
+  - knowledge\01_Core_Knowledge_System\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\README.md
+  - knowledge\03_System_Technology_Domains\03_Edge_Detection.md
+  - knowledge\03_System_Technology_Domains\03_Hardware_Acceleration.md
+  - knowledge\03_System_Technology_Domains\03_JIT_Regex.md
+  - knowledge\03_System_Technology_Domains\03_Multi_Raft.md
+  - knowledge\03_System_Technology_Domains\03_Unsafe_Rust_Patterns.md
+  - knowledge\03_System_Technology_Domains\03_Zigbee_Stack.md
+  - knowledge\03_System_Technology_Domains\04_Garbage_Collection.md
+  - knowledge\03_System_Technology_Domains\07_Atomic_Operations.md
+  - knowledge\03_System_Technology_Domains\README.md
+  - knowledge\04_Industrial_Scenarios\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\01_Complexity_Classes.md
+  - knowledge\05_Deep_Structure_MetaPhysics\02_P_vs_NP.md
+  - knowledge\05_Deep_Structure_MetaPhysics\03_Algorithm_Lower_Bounds.md
+  - knowledge\05_Deep_Structure_MetaPhysics\03_Binary_Translation.md
+  - knowledge\05_Deep_Structure_MetaPhysics\03_Homotopy_Type_Theory.md
+  - knowledge\05_Deep_Structure_MetaPhysics\04_Dependent_Types.md
+  - knowledge\05_Deep_Structure_MetaPhysics\04_Sandboxing.md
+  - knowledge\05_Deep_Structure_MetaPhysics\04_Semantic_Equivalence.md
+  - knowledge\05_Deep_Structure_MetaPhysics\05_Type_Semantics.md
+  - knowledge\05_Deep_Structure_MetaPhysics\README.md
+  - knowledge\06_Thinking_Representation\00_GLOBAL_ARCHITECTURE_MAP.md
+  - knowledge\06_Thinking_Representation\00_MULTI_DIMENSIONAL_FRAMEWORK.md
+  - knowledge\06_Thinking_Representation\README.md
+  - knowledge\07_Modern_Toolchain\README.md
+  - knowledge\08_Zig_C_Connection\README.md
+  - knowledge\09_Data_Structures_Algorithms\README.md
+  - knowledge\09_Data_Structures_Algorithms\数据结构与算法.md
+  - knowledge\11_Machine_Learning_C\01_Neural_Network_Basics.md
+  - knowledge\11_Machine_Learning_C\03_Gradient_Descent_Optimizers.md
+  - knowledge\11_Machine_Learning_C\04_CNN_Fundamentals.md
+  - knowledge\11_Machine_Learning_C\05_RNN_LSTM_Basics.md
+  - knowledge\12_Practice_Exercises\01_Basic_Exercises.md
+  - knowledge\12_Practice_Exercises\02_Pointer_Exercises.md
+  - knowledge\12_Practice_Exercises\03_Data_Structure_Projects.md
+  - knowledge\12_Practice_Exercises\04_System_Programming_Labs.md
+  - knowledge\12_Practice_Exercises\05_Embedded_Challenges.md
+  - knowledge\12_Practice_Exercises\07_Algorithm_Challenges.md
+  - knowledge\12_Practice_Exercises\12_Mini_Projects.md
+  - knowledge\14_Video_Tutorials\00_Video_Course_Outline.md
+  - knowledge\14_Video_Tutorials\README.md
+  - knowledge\16_Embedded_AI_Agents\README.md
+  - knowledge\17_Ada_SPARK\00_Ada_SPARK_Introduction.md
+  - knowledge\17_Ada_SPARK\README.md
+  - knowledge\memory_safe_languages\README.md
+  - knowledge\robotics_physical_control\README.md
+  - knowledge\templates\kb-article-template.md
+  - knowledge\Zig\Zig_Build_System.md
+  - knowledge\Zig\Zig_Compiler_Internals.md
+  - knowledge\Zig\Zig_Concurrency_Async.md
+  - knowledge\Zig\Zig_Database_Advanced.md
+  - knowledge\Zig\Zig_Design_Patterns.md
+  - knowledge\Zig\Zig_Distributed_Systems.md
+  - knowledge\Zig\Zig_Embedded_Systems.md
+  - knowledge\Zig\Zig_Formal_Semantics.md
+
+Group (19 files):
+  - knowledge\03_System_Technology_Domains\07_Hardware_Security\03_HSM_Integration.md
+  - knowledge\03_System_Technology_Domains\07_Hardware_Security\06_Post_Quantum_Cryptography.md
+  - knowledge\03_System_Technology_Domains\08_Distributed_Consensus\01_Raft_Core.md
+  - knowledge\03_System_Technology_Domains\08_Distributed_Consensus\02_Leader_Election.md
+  - knowledge\03_System_Technology_Domains\08_Distributed_Consensus\02_Paxos_Implementation.md
+  - knowledge\03_System_Technology_Domains\09_High_Performance_Log\01_LockFree_Ring_Log.md
+  - knowledge\03_System_Technology_Domains\09_High_Performance_Log\02_Structured_Binary_Log.md
+  - knowledge\03_System_Technology_Domains\09_High_Performance_Log\03_Lockless_Ring_Buffer_SPSC_MPMC.md
+  - knowledge\03_System_Technology_Domains\11_In_Memory_Database\01_B_Tree_Index.md
+  - knowledge\03_System_Technology_Domains\11_In_Memory_Database\01_RESP_Protocol.md
+  - knowledge\03_System_Technology_Domains\11_In_Memory_Database\02_LRU_Cache.md
+  - knowledge\03_System_Technology_Domains\11_In_Memory_Database\02_LSM_Tree.md
+  - knowledge\03_System_Technology_Domains\11_In_Memory_Database\03_Hash_Index.md
+  - knowledge\03_System_Technology_Domains\12_Persistent_Memory\01_PMDK_Basics.md
+  - knowledge\03_System_Technology_Domains\12_Persistent_Memory\02_PM_Optimized_DataStructures.md
+  - knowledge\03_System_Technology_Domains\13_RDMA_Network\01_Verbs_API.md
+  - knowledge\03_System_Technology_Domains\13_RDMA_Network\02_One_Sided_RDMA.md
+  - knowledge\03_System_Technology_Domains\16_Rust_Interoperability\01_C_ABI_Basics.md
+  - knowledge\03_System_Technology_Domains\17_Graphics_Rendering\01_GPU_Memory_Management.md
+
+Group (15 files):
+  - knowledge\01_Core_Knowledge_System\01_System_Programming\README.md
+  - knowledge\03_System_Technology_Domains\01_Core_Knowledge_System\05_Data_Structures_Algorithms\README.md
+  - knowledge\03_System_Technology_Domains\03_OS_Internals\README.md
+  - knowledge\03_System_Technology_Domains\04_Concurrency_and_Parallelism\README.md
+  - knowledge\03_System_Technology_Domains\05_Network_Programming\README.md
+  - knowledge\03_System_Technology_Domains\05_Performance_Engineering\README.md
+  - knowledge\03_System_Technology_Domains\05_Program_Verification\README.md
+  - knowledge\03_System_Technology_Domains\06_High_Performance_Server\README.md
+  - knowledge\03_System_Technology_Domains\08_Distributed_Systems\README.md
+  - knowledge\04_Industrial_Scenarios\01_High_Performance\README.md
+  - knowledge\04_Industrial_Scenarios\06_Security\README.md
+  - knowledge\04_Industrial_Scenarios\21_OS_Internals\README.md
+  - knowledge\06_Thinking_Representation\04_Data_Structures\README.md
+  - knowledge\15_Network_Programming\README.md
+  - knowledge\os_kernel\README.md
+
+Group (12 files):
+  - knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\08_RISCV_CPU_Complete\02_RV32I_Pipelined.md
+  - knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\08_RISCV_CPU_Complete\03_RV32IM_with_Cache.md
+  - knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\09_Interrupt_Hardware\01_Interrupt_Controller.md
+  - knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\10_IO_System\01_DMA_Controller.md
+  - knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\10_IO_System\02_PCIe_Basics.md
+  - knowledge\02_Formal_Semantics_and_Physics\11_CompCert_Verification\05_Practical_Verification_Cases\01_Memory_Safety_Proof.md
+  - knowledge\02_Formal_Semantics_and_Physics\13_Hardware_Description\04_HLS_with_C\02_C_to_Hardware_Pragma.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\Industrial_Linux\README.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\IoT_Protocols\01_IoT_Protocols_Implementation.md
+  - knowledge\04_Industrial_Scenarios\15_Industrial_Communication\Data_Link_Layer\01_Data_Link_Protocols.md
+  - knowledge\04_Industrial_Scenarios\15_Industrial_Communication\Physical_Layer\01_GPIO_Driver.md
+  - knowledge\04_Industrial_Scenarios\15_Industrial_Communication\Physical_Layer\02_I2C_Driver.md
+
+Group (7 files):
+  - knowledge\Zig\Zig_Game_Development.md
+  - knowledge\Zig\Zig_GUI_Development.md
+  - knowledge\Zig\Zig_Industrial_Cases.md
+  - knowledge\Zig\Zig_Learning_Paths.md
+  - knowledge\Zig\Zig_Machine_Learning.md
+  - knowledge\Zig\Zig_Security_Cryptography.md
+  - knowledge\Zig\Zig_Standard_Library_Deep_Dive.md
+
+Group (2 files):
+  - knowledge\KNOWLEDGE_GRAPH.md
+  - knowledge\TOOLCHAIN_IMPROVEMENT_SUMMARY.md
+
+Group (2 files):
+  - knowledge\01_Core_Knowledge_System\15_Network_Programming\03_High_Performance_Server.md
+  - knowledge\15_Network_Programming\03_High_Performance_Server.md
+
+Group (2 files):
+  - knowledge\02_Formal_Semantics_and_Physics\13_Hardware_Description\code\README.md
+  - knowledge\06_Thinking_Representation\09_State_Machines\code\README.md
+
+Group (2 files):
+  - knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\01_POSIX_Threads.md
+  - knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\C 语言并发与并行编程.md
+
+Group (2 files):
+  - knowledge\05_Deep_Structure_MetaPhysics\02_Isabelle_HOL.md
+  - knowledge\Zig\Zig_Network_Programming.md
+
+Total similar groups: 12
+
+=== 7. DUPLICATE FILENAMES ACROSS DIRECTORIES ===
+Filename: README.md
+  - knowledge\README.md
+  - knowledge\00_VERSION_TRACKING\README.md
+  - knowledge\00_VERSION_TRACKING\reports\README.md
+  - knowledge\01_Core_Knowledge_System\README.md
+  - knowledge\01_Core_Knowledge_System\01_Basic_Layer\README.md
+  - knowledge\01_Core_Knowledge_System\01_Basic_Layer\IEEE_754_Floating_Point\README.md
+  - knowledge\01_Core_Knowledge_System\01_System_Programming\README.md
+  - knowledge\01_Core_Knowledge_System\02_Core_Layer\README.md
+  - knowledge\01_Core_Knowledge_System\03_Construction_Layer\README.md
+  - knowledge\01_Core_Knowledge_System\04_Standard_Library_Layer\README.md
+  - knowledge\01_Core_Knowledge_System\04_Standard_Library_Layer\01_Standard_IO\README.md
+  - knowledge\01_Core_Knowledge_System\04_Standard_Library_Layer\C23_Standard_Library\README.md
+  - knowledge\01_Core_Knowledge_System\04_Standard_Library_Layer\Standard_Library_Internals\README.md
+  - knowledge\01_Core_Knowledge_System\05_Engineering_Layer\README.md
+  - knowledge\01_Core_Knowledge_System\06_Advanced_Layer\README.md
+  - knowledge\01_Core_Knowledge_System\07_Modern_C\README.md
+  - knowledge\01_Core_Knowledge_System\07_Modern_C\C2y_Preview\README.md
+  - knowledge\01_Core_Knowledge_System\08_Application_Domains\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\CERT_C_2024\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\DO_178C\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\Formal_Verification\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\IEC_61508\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\ISO_26262\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\ISO_IEC_TS_17961\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\tools\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\tools\docs\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2025\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2025\tools\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2025\tools\docs\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\POSIX_1_2024\README.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\Vulnerability_Cases\README.md
+  - knowledge\01_Core_Knowledge_System\11_Internationalization\README.md
+  - knowledge\01_Core_Knowledge_System\15_Compiler_Basics\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\00_Core_Semantics_Foundations\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\01_Game_Semantics\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\02_Coalgebraic_Methods\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\03_Linear_Logic\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\04_Cognitive_Representation\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\05_Program_Verification\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\05_Quantum_Random_Computing\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\05_Type_Semantics\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\06_C_Assembly_Mapping\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\07_Microarchitecture\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\08_Linking_Loading_Topology\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\09_Physical_Machine_Layer\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\09_Physical_Machine_Layer\01_Digital_Logic_Foundations\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\09_Physical_Machine_Layer\02_Arithmetic_Logic_Unit\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\09_Physical_Machine_Layer\03_Memory_Circuits\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\09_Physical_Machine_Layer\05_Memory_Management_Hardware\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\06_Control_Unit_Design\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\08_RISCV_CPU_Complete\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\09_Interrupt_Hardware\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\10_ISA_Machine_Code\10_IO_System\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\10_Lean4_Compilation\lean_examples\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\11_CompCert_Verification\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\11_CompCert_Verification\05_Practical_Verification_Cases\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\11_CompCert_Verification\06_Coq_Examples\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\11_Compiler_Internals\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\12_Compiler_Optimization\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\13_Hardware_Description\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\13_Hardware_Description\04_HLS_with_C\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\13_Hardware_Description\code\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\14_C_to_Hardware_Mapping\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\16_Performance_Analysis_Hardware\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\lab1\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\lab2\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\lab3\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\lab4\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\lab5\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\code\lab6\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\reports\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\18_FPGA_Labs\xdc\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\19_Hardware_Debugging\README.md
+  - knowledge\02_Formal_Semantics_and_Physics\20_Industrial_Case_Studies\README.md
+  - knowledge\03_System_Technology_Domains\README.md
+  - knowledge\03_System_Technology_Domains\01_Core_Knowledge_System\05_Data_Structures_Algorithms\README.md
+  - knowledge\03_System_Technology_Domains\01_System_Programming\README.md
+  - knowledge\03_System_Technology_Domains\01_Virtual_Machine_Interpreter\README.md
+  - knowledge\03_System_Technology_Domains\02_Regex_Engine\README.md
+  - knowledge\03_System_Technology_Domains\03_Computer_Vision\README.md
+  - knowledge\03_System_Technology_Domains\03_OS_Internals\README.md
+  - knowledge\03_System_Technology_Domains\04_Concurrency_and_Parallelism\README.md
+  - knowledge\03_System_Technology_Domains\04_Video_Codec\README.md
+  - knowledge\03_System_Technology_Domains\05_Network_Programming\README.md
+  - knowledge\03_System_Technology_Domains\05_Performance_Engineering\README.md
+  - knowledge\03_System_Technology_Domains\05_Program_Verification\README.md
+  - knowledge\03_System_Technology_Domains\05_Wireless_Protocol\README.md
+  - knowledge\03_System_Technology_Domains\06_High_Performance_Server\README.md
+  - knowledge\03_System_Technology_Domains\06_Security_Boot\README.md
+  - knowledge\03_System_Technology_Domains\07_Hardware_Security\README.md
+  - knowledge\03_System_Technology_Domains\08_Distributed_Consensus\README.md
+  - knowledge\03_System_Technology_Domains\08_Distributed_Systems\README.md
+  - knowledge\03_System_Technology_Domains\09_High_Performance_Log\README.md
+  - knowledge\03_System_Technology_Domains\11_In_Memory_Database\README.md
+  - knowledge\03_System_Technology_Domains\12_Persistent_Memory\README.md
+  - knowledge\03_System_Technology_Domains\13_RDMA_Network\README.md
+  - knowledge\03_System_Technology_Domains\14_Concurrency_Parallelism\README.md
+  - knowledge\03_System_Technology_Domains\15_Industrial_Communication\README.md
+  - knowledge\03_System_Technology_Domains\15_Network_Programming\README.md
+  - knowledge\03_System_Technology_Domains\16_Rust_Interoperability\README.md
+  - knowledge\03_System_Technology_Domains\17_Graphics_Rendering\README.md
+  - knowledge\03_System_Technology_Domains\18_Database_Internals\README.md
+  - knowledge\04_Industrial_Scenarios\README.md
+  - knowledge\04_Industrial_Scenarios\01_Automotive_ABS\README.md
+  - knowledge\04_Industrial_Scenarios\01_High_Performance\README.md
+  - knowledge\04_Industrial_Scenarios\02_Automotive_ECU\README.md
+  - knowledge\04_Industrial_Scenarios\02_Avionics_Systems\README.md
+  - knowledge\04_Industrial_Scenarios\03_High_Frequency_Trading\README.md
+  - knowledge\04_Industrial_Scenarios\04_5G_Baseband\README.md
+  - knowledge\04_Industrial_Scenarios\05_Game_Engine\README.md
+  - knowledge\04_Industrial_Scenarios\06_Quantum_Computing\README.md
+  - knowledge\04_Industrial_Scenarios\06_Security\README.md
+  - knowledge\04_Industrial_Scenarios\08_Neuromorphic\README.md
+  - knowledge\04_Industrial_Scenarios\10_Deep_Sea\README.md
+  - knowledge\04_Industrial_Scenarios\10_DNA_Storage\README.md
+  - knowledge\04_Industrial_Scenarios\11_Cryogenic_Superconducting\README.md
+  - knowledge\04_Industrial_Scenarios\11_Space_Computing\README.md
+  - knowledge\04_Industrial_Scenarios\12_Blockchain_Crypto\README.md
+  - knowledge\04_Industrial_Scenarios\13_Linux_Kernel\README.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\README.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\Baremetal\README.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\ESP32\README.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\Industrial_Linux\README.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\IoT_Protocols\README.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\Memory_Constrained\README.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\RaspberryPi\README.md
+  - knowledge\04_Industrial_Scenarios\14_Embedded_IoT\RPi_Pico\README.md
+  - knowledge\04_Industrial_Scenarios\15_Industrial_Communication\README.md
+  - knowledge\04_Industrial_Scenarios\15_Industrial_Communication\Data_Link_Layer\README.md
+  - knowledge\04_Industrial_Scenarios\15_Industrial_Communication\Physical_Layer\README.md
+  - knowledge\04_Industrial_Scenarios\16_MIT_6S081_Labs\README.md
+  - knowledge\04_Industrial_Scenarios\17_CMU_15_213_Labs\README.md
+  - knowledge\04_Industrial_Scenarios\21_OS_Internals\README.md
+  - knowledge\04_Industrial_Scenarios\Classic_C_Projects\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\01_Formal_Semantics\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\02_Algebraic_Topology\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\03_Verification_Energy\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\04_Formal_Verification_Energy\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\05_Computational_Complexity\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\05_Lean_4\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\06_Standard_Library_Physics\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\06_TLA_Plus\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\07_Computability_Theory\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\08_Debugging_Tools\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\09_Linking_Algebraic_Topology\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\10_Debug_Info_Encoding\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\11_Heterogeneous_Memory\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\12_Self_Modifying_Code\README.md
+  - knowledge\05_Deep_Structure_MetaPhysics\13_Self_Modifying_Code\README.md
+  - knowledge\06_Thinking_Representation\README.md
+  - knowledge\06_Thinking_Representation\01_Decision_Trees\README.md
+  - knowledge\06_Thinking_Representation\01_Mind_Maps\README.md
+  - knowledge\06_Thinking_Representation\02_Comparison_Matrices\README.md
+  - knowledge\06_Thinking_Representation\02_Multidimensional_Matrix\README.md
+  - knowledge\06_Thinking_Representation\03_Decision_Trees\README.md
+  - knowledge\06_Thinking_Representation\03_Mind_Maps\README.md
+  - knowledge\06_Thinking_Representation\04_Application_Scenario_Trees\README.md
+  - knowledge\06_Thinking_Representation\04_Case_Studies\README.md
+  - knowledge\06_Thinking_Representation\04_Data_Structures\README.md
+  - knowledge\06_Thinking_Representation\05_Concept_Mappings\README.md
+  - knowledge\06_Thinking_Representation\06_Index\README.md
+  - knowledge\06_Thinking_Representation\06_Learning_Paths\README.md
+  - knowledge\06_Thinking_Representation\07_Knowledge_Graph\README.md
+  - knowledge\06_Thinking_Representation\08_Index\README.md
+  - knowledge\06_Thinking_Representation\09_Bloom_Taxonomy\README.md
+  - knowledge\06_Thinking_Representation\09_State_Machines\README.md
+  - knowledge\06_Thinking_Representation\09_State_Machines\code\README.md
+  - knowledge\06_Thinking_Representation\10_Concept_Maps\README.md
+  - knowledge\07_Modern_Toolchain\README.md
+  - knowledge\07_Modern_Toolchain\01_IDE_Editors\README.md
+  - knowledge\07_Modern_Toolchain\02_Build_Systems_Modern\README.md
+  - knowledge\07_Modern_Toolchain\03_CI_CD_DevOps\README.md
+  - knowledge\07_Modern_Toolchain\03_CI_CD_DevOps\05_CI_CD_Templates\README.md
+  - knowledge\07_Modern_Toolchain\04_Package_Management\README.md
+  - knowledge\07_Modern_Toolchain\05_Case_Studies\README.md
+  - knowledge\07_Modern_Toolchain\05_Code_Quality_Toolchain\README.md
+  - knowledge\07_Modern_Toolchain\06_Project_Templates\README.md
+  - knowledge\07_Modern_Toolchain\07_Concurrency_Parallelism\README.md
+  - knowledge\07_Modern_Toolchain\08_Design_Patterns\README.md
+  - knowledge\07_Modern_Toolchain\09_System_Architecture\README.md
+  - knowledge\07_Modern_Toolchain\10_Distributed_Systems\README.md
+  - knowledge\07_Modern_Toolchain\11_Workflow_StateMachines\README.md
+  - knowledge\07_Modern_Toolchain\12_Modern_C_Standards\README.md
+  - knowledge\07_Modern_Toolchain\13_Comprehensive_Examples\README.md
+  - knowledge\07_Modern_Toolchain\13_Zig_C_Interop\README.md
+  - knowledge\08_Zig_C_Connection\README.md
+  - knowledge\08_Zig_C_Connection\01_Type_System_Mapping\README.md
+  - knowledge\08_Zig_C_Connection\02_Memory_Model_Bridge\README.md
+  - knowledge\08_Zig_C_Connection\03_ABI_Formalization\README.md
+  - knowledge\08_Zig_C_Connection\04_Translation_Validation\README.md
+  - knowledge\08_Zig_C_Connection\05_Migration_Methodology\README.md
+  - knowledge\08_Zig_C_Connection\06_C23_Zig_Parallel\README.md
+  - knowledge\08_Zig_C_Connection\07_Real_World_Migration_Cases\README.md
+  - knowledge\09_Data_Structures_Algorithms\README.md
+  - knowledge\09_Data_Structures_Algorithms\01_Fundamental_Data_Structures\README.md
+  - knowledge\09_Data_Structures_Algorithms\02_Fundamental_Algorithms\README.md
+  - knowledge\10_WebAssembly_C\README.md
+  - knowledge\11_Machine_Learning_C\README.md
+  - knowledge\12_Practice_Exercises\README.md
+  - knowledge\14_Video_Tutorials\README.md
+  - knowledge\14_Video_Tutorials\01_Video_Scripts\README.md
+  - knowledge\14_Video_Tutorials\02_Compiler_Explorer_Integration\README.md
+  - knowledge\14_Video_Tutorials\03_Interactive_Exercises\README.md
+  - knowledge\14_Video_Tutorials\04_Video_Production_Guide\README.md
+  - knowledge\15_Network_Programming\README.md
+  - knowledge\16_Embedded_AI_Agents\README.md
+  - knowledge\16_Embedded_AI_Agents\01_TinyML_Fundamentals\README.md
+  - knowledge\16_Embedded_AI_Agents\02_LLMs_on_Edge\README.md
+  - knowledge\16_Embedded_AI_Agents\03_AI_Agent_Runtime\README.md
+  - knowledge\16_Embedded_AI_Agents\04_C_Implementation_Guide\README.md
+  - knowledge\16_Embedded_AI_Agents\05_Case_Studies\README.md
+  - knowledge\16_Embedded_AI_Agents\06_C_Frameworks\README.md
+  - knowledge\16_Embedded_AI_Agents\07_Hardware_Acceleration\README.md
+  - knowledge\16_Embedded_AI_Agents\08_Real_Time_AI\README.md
+  - knowledge\16_Embedded_AI_Agents\09_Security_Reliability\README.md
+  - knowledge\17_Ada_SPARK\README.md
+  - knowledge\17_Ada_SPARK\01_Ada_Basics\README.md
+  - knowledge\17_Ada_SPARK\02_SPARK_Verification\README.md
+  - knowledge\17_Ada_SPARK\03_Ada_C_Interoperability\README.md
+  - knowledge\17_Ada_SPARK\04_Safety_Standards\README.md
+  - knowledge\17_Ada_SPARK\05_Case_Studies\README.md
+  - knowledge\17_Ada_SPARK\06_Migration_from_C\README.md
+  - knowledge\17_Ada_SPARK\07_Decision_Trees\README.md
+  - knowledge\17_Ada_SPARK\08_Comparison_Matrices\README.md
+  - knowledge\18_Industrial_Protocols_C\README.md
+  - knowledge\18_Industrial_Protocols_C\01_Modbus_Protocol\README.md
+  - knowledge\18_Industrial_Protocols_C\02_CAN_Bus_Protocol\README.md
+  - knowledge\19_Embedded_Systems_C\README.md
+  - knowledge\19_Embedded_Systems_C\01_MCU_Architectures\README.md
+  - knowledge\19_Embedded_Systems_C\03_Embedded_C_Programming\README.md
+  - knowledge\19_Embedded_Systems_C\05_FreeRTOS_Detail\04_Synchronization_Primitives\README.md
+  - knowledge\19_Embedded_Systems_C\05_FreeRTOS_Detail\05_Interrupt_Management\README.md
+  - knowledge\19_Embedded_Systems_C\05_FreeRTOS_Detail\06_Memory_Management\README.md
+  - knowledge\19_Embedded_Systems_C\06_Low_Power_Design\README.md
+  - knowledge\19_Embedded_Systems_C\07_EMC_Design\README.md
+  - knowledge\19_Embedded_Systems_C\08_Watchdog_Timers\README.md
+  - knowledge\19_Embedded_Systems_C\09_Testing_Debugging\README.md
+  - knowledge\19_Embedded_Systems_C\10_Hardware_Power_Design\README.md
+  - knowledge\19_Embedded_Systems_C\11_Functional_Safety\README.md
+  - knowledge\19_Embedded_Systems_C\12_Embedded_Security\README.md
+  - knowledge\19_Embedded_Systems_C\13_Real_Time_Analysis\README.md
+  - knowledge\19_Embedded_Systems_C\14_Storage_Technologies\README.md
+  - knowledge\19_Embedded_Systems_C\15_Motor_Control\README.md
+  - knowledge\21_Computation_Theory\README.md
+  - knowledge\22_Assembler_Implementation\README.md
+  - knowledge\23_VM_Implementation\README.md
+  - knowledge\24_Complete_Chain\README.md
+  - knowledge\hardware_interfaces_c\README.md
+  - knowledge\hardware_interfaces_c\01_UART_Interfaces\README.md
+  - knowledge\hardware_interfaces_c\02_ADC\README.md
+  - knowledge\hardware_interfaces_c\02_SPI_Interfaces\README.md
+  - knowledge\hardware_interfaces_c\03_I2C_Interfaces\README.md
+  - knowledge\hardware_interfaces_c\04_DMA\README.md
+  - knowledge\hardware_interfaces_c\05_Timer_PWM\README.md
+  - knowledge\hardware_interfaces_c\06_Signal_Integrity\README.md
+  - knowledge\memory_safe_languages\README.md
+  - knowledge\memory_safe_languages\01_Rust_vs_C\README.md
+  - knowledge\memory_safe_languages\02_Migration_Strategies\README.md
+  - knowledge\memory_safe_languages\03_Industry_Cases\README.md
+  - knowledge\memory_safe_languages\04_Decision_Frameworks\README.md
+  - knowledge\os_kernel\README.md
+  - knowledge\robotics_physical_control\README.md
+  - knowledge\robotics_physical_control\01_ROS2_Fundamentals\README.md
+  - knowledge\robotics_physical_control\02_Kinematics\README.md
+  - knowledge\robotics_physical_control\03_Dynamics\README.md
+  - knowledge\robotics_physical_control\04_Control\README.md
+  - knowledge\robotics_physical_control\05_Motor_Control_Advanced\README.md
+  - knowledge\robotics_physical_control\06_Physics_Simulation\README.md
+  - knowledge\robotics_physical_control\07_Computer_Vision_Robotics\README.md
+  - knowledge\robotics_physical_control\08_Case_Studies\README.md
+  - knowledge\templates\README.md
+  - knowledge\Zig\README.md
+  - knowledge\Zig\2026_latest\README.md
+  - knowledge\Zig\decision_trees\README.md
+  - knowledge\Zig\formal_models\README.md
+  - knowledge\Zig\matrices\README.md
+  - knowledge\Zig\visualizations\README.md
+
+Filename: 00_INDEX.md
+  - knowledge\00_INDEX.md
+  - knowledge\18_Industrial_Protocols_C\00_INDEX.md
+  - knowledge\19_Embedded_Systems_C\00_INDEX.md
+  - knowledge\hardware_interfaces_c\00_INDEX.md
+
+Filename: 03_High_Performance_Server.md
+  - knowledge\01_Core_Knowledge_System\15_Network_Programming\03_High_Performance_Server.md
+  - knowledge\03_System_Technology_Domains\15_Network_Programming\03_High_Performance_Server.md
+  - knowledge\15_Network_Programming\03_High_Performance_Server.md
+
+Filename: KNOWLEDGE_GRAPH.md
+  - knowledge\KNOWLEDGE_GRAPH.md
+  - knowledge\00_VERSION_TRACKING\KNOWLEDGE_GRAPH.md
+
+Filename: 05_Memory_Mapped_Files.md
+  - knowledge\01_Core_Knowledge_System\01_System_Programming\05_Memory_Mapped_Files.md
+  - knowledge\03_System_Technology_Domains\01_System_Programming\05_Memory_Mapped_Files.md
+
+Filename: 06_eBPF_Deep.md
+  - knowledge\01_Core_Knowledge_System\01_System_Programming\06_eBPF_Deep.md
+  - knowledge\03_System_Technology_Domains\01_System_Programming\06_eBPF_Deep.md
+
+Filename: 04_Memory_Optimization.md
+  - knowledge\01_Core_Knowledge_System\03_Construction_Layer\04_Memory_Optimization.md
+  - knowledge\03_System_Technology_Domains\18_Systems_Performance\04_Memory_Optimization.md
+
+Filename: AUDIT_LOG.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\tools\docs\AUDIT_LOG.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2025\tools\docs\AUDIT_LOG.md
+
+Filename: DEVIATIONS.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\tools\docs\DEVIATIONS.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2025\tools\docs\DEVIATIONS.md
+
+Filename: MISRA_COMPLIANCE.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2023\tools\docs\MISRA_COMPLIANCE.md
+  - knowledge\01_Core_Knowledge_System\09_Safety_Standards\MISRA_C_2025\tools\docs\MISRA_COMPLIANCE.md
+
+Filename: 01_Operational_Semantics.md
+  - knowledge\02_Formal_Semantics_and_Physics\00_Core_Semantics_Foundations\01_Operational_Semantics.md
+  - knowledge\05_Deep_Structure_MetaPhysics\01_Formal_Semantics\01_Operational_Semantics.md
+
+Filename: 03_Model_Checking.md
+  - knowledge\02_Formal_Semantics_and_Physics\11_Logic_and_Proof\03_Model_Checking.md
+  - knowledge\05_Deep_Structure_MetaPhysics\06_TLA_Plus\03_Model_Checking.md
+
+Filename: 01_C11_Memory_Model.md
+  - knowledge\03_System_Technology_Domains\01_C11_Memory_Model.md
+  - knowledge\07_Modern_Toolchain\07_Concurrency_Parallelism\01_C11_Memory_Model.md
+
+Filename: 03_Edge_Detection.md
+  - knowledge\03_System_Technology_Domains\03_Edge_Detection.md
+  - knowledge\03_System_Technology_Domains\03_Computer_Vision\03_Edge_Detection.md
+
+Filename: 03_Hardware_Acceleration.md
+  - knowledge\03_System_Technology_Domains\03_Hardware_Acceleration.md
+  - knowledge\03_System_Technology_Domains\04_Video_Codec\03_Hardware_Acceleration.md
+
+Filename: 03_HSM_Integration.md
+  - knowledge\03_System_Technology_Domains\03_HSM_Integration.md
+  - knowledge\03_System_Technology_Domains\07_Hardware_Security\03_HSM_Integration.md
+
+Filename: 03_Measured_Boot.md
+  - knowledge\03_System_Technology_Domains\03_Measured_Boot.md
+  - knowledge\03_System_Technology_Domains\06_Security_Boot\03_Measured_Boot.md
+
+Filename: 03_Zigbee_Stack.md
+  - knowledge\03_System_Technology_Domains\03_Zigbee_Stack.md
+  - knowledge\03_System_Technology_Domains\05_Wireless_Protocol\03_Zigbee_Stack.md
+
+Filename: 08_Static_Analysis_Principles.md
+  - knowledge\03_System_Technology_Domains\01_System_Programming\08_Static_Analysis_Principles.md
+  - knowledge\07_Modern_Toolchain\08_Static_Analysis_Principles.md
+
+Filename: 09_Dynamic_Analysis_Principles.md
+  - knowledge\03_System_Technology_Domains\01_System_Programming\09_Dynamic_Analysis_Principles.md
+  - knowledge\07_Modern_Toolchain\09_Dynamic_Analysis_Principles.md
+
+Filename: 10_Debugging_Principles_and_Framework.md
+  - knowledge\03_System_Technology_Domains\01_System_Programming\10_Debugging_Principles_and_Framework.md
+  - knowledge\07_Modern_Toolchain\10_Debugging_Principles_and_Framework.md
+
+Filename: 11_Testing_Methodology.md
+  - knowledge\03_System_Technology_Domains\01_System_Programming\11_Testing_Methodology.md
+  - knowledge\07_Modern_Toolchain\11_Testing_Methodology.md
+
+Filename: 04_Real_Time_Systems.md
+  - knowledge\03_System_Technology_Domains\03_Embedded_Systems\04_Real_Time_Systems.md
+  - knowledge\19_Embedded_Systems_C\04_Real_Time_Systems.md
+
+Filename: 01_Linux_Kernel_Module_Programming.md
+  - knowledge\03_System_Technology_Domains\16_OS_Kernel\01_Linux_Kernel_Module_Programming.md
+  - knowledge\os_kernel\01_Linux_Kernel_Module_Programming.md
+
+Filename: 02_Process_Scheduling_Deep.md
+  - knowledge\03_System_Technology_Domains\16_OS_Kernel\02_Process_Scheduling_Deep.md
+  - knowledge\os_kernel\02_Process_Scheduling_Deep.md
+
+Filename: 01_Consensus_Algorithms.md
+  - knowledge\03_System_Technology_Domains\17_Distributed_Systems\01_Consensus_Algorithms.md
+  - knowledge\07_Modern_Toolchain\10_Distributed_Systems\01_Consensus_Algorithms.md
+
+Filename: 01_GPU_Memory_Management.md
+  - knowledge\03_System_Technology_Domains\17_Graphics_Rendering\01_GPU_Memory_Management.md
+  - knowledge\04_Industrial_Scenarios\05_Game_Engine\01_GPU_Memory_Management.md
+
+Filename: 01_Linux_Performance_Tuning.md
+  - knowledge\03_System_Technology_Domains\18_Systems_Performance\01_Linux_Performance_Tuning.md
+  - knowledge\performance_engineering\01_Linux_Performance_Tuning.md
+
+Filename: 01_Kernel_Synchronization.md
+  - knowledge\03_System_Technology_Domains\21_OS_Internals\01_Kernel_Synchronization.md
+  - knowledge\04_Industrial_Scenarios\21_OS_Internals\01_Kernel_Synchronization.md
+
+Filename: 01_SNN_Simulation.md
+  - knowledge\04_Industrial_Scenarios\08_Neuromorphic\01_SNN_Simulation.md
+  - knowledge\04_Industrial_Scenarios\11_Space_Computing\01_SNN_Simulation.md
+
+Filename: 01_Complexity_Classes.md
+  - knowledge\05_Deep_Structure_MetaPhysics\01_Complexity_Classes.md
+  - knowledge\05_Deep_Structure_MetaPhysics\05_Computational_Complexity\01_Complexity_Classes.md
+
+Filename: 03_Homotopy_Type_Theory.md
+  - knowledge\05_Deep_Structure_MetaPhysics\03_Homotopy_Type_Theory.md
+  - knowledge\05_Deep_Structure_MetaPhysics\02_Algebraic_Topology\03_Homotopy_Type_Theory.md
+
+Filename: 01_Turing_Machines.md
+  - knowledge\05_Deep_Structure_MetaPhysics\07_Computability_Theory\01_Turing_Machines.md
+  - knowledge\21_Computation_Theory\01_Turing_Machines.md
+
+Filename: 03_Pointer_Concepts_Map.md
+  - knowledge\06_Thinking_Representation\03_Mind_Maps\03_Pointer_Concepts_Map.md
+  - knowledge\06_Thinking_Representation\05_Concept_Mappings\03_Pointer_Concepts_Map.md
+
+Filename: 04_Concurrent_Programming_Map.md
+  - knowledge\06_Thinking_Representation\03_Mind_Maps\04_Concurrent_Programming_Map.md
+  - knowledge\06_Thinking_Representation\05_Concept_Mappings\04_Concurrent_Programming_Map.md
