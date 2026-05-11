@@ -217,7 +217,7 @@ Clight → Csharpminor → Cminor → CminorSel → RTL → LTL → Linear → M
 | [01_AST_and_IR.md](01_AST_and_IR.md) | AST 设计与 IR 表示 | 中 |
 | [02_Backend_Code_Generation.md](02_Backend_Code_Generation.md) | 后端代码生成 | 中 |
 | [03_Optimization_Techniques.md](03_Optimization_Techniques.md) | 编译器优化技术 | 深 |
-| [04_CompCert_Verified_Compiler.md](04_CompCert_Verified_Compiler.md) | 验证编译器 | 深 |
+| 04_CompCert_Verified_Compiler.md | 验证编译器 | 深 |
 
 ## 权威参考
 

@@ -5,7 +5,7 @@
 > **后续延伸**: [RISC-V汇编器](./02_RISCV_Assembler.md)
 > **横向关联**: [Hack计算机架构](../02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/08_RISCV_CPU_Complete/README.md)（参考对比）
 > **预计学习时间**: 1周
-> **实践验证**: [hack_assembler.c](../../examples/assembler/hack_assembler.c)
+> **实践验证**: hack_assembler.c
 
 ---
 
@@ -731,5 +731,5 @@ D;JGT
 ---
 
 *文档创建: 2026-03-29*
-*配套代码: [hack_assembler.c](../../examples/assembler/hack_assembler.c)*
+*配套代码: hack_assembler.c*
 *状态: Month 2 文档1/4*

@@ -1094,7 +1094,7 @@ v1.0 LTS ──► v1.1 ──► v1.2 ──► v2.0 LTS
 ### 附录D: 相关文档
 
 - [SEMANTIC_SPECIFICATION.md](./SEMANTIC_SPECIFICATION.md) - 语义规范定义
-- [OPEN_SOURCE_GOVERNANCE.md](./OPEN_SOURCE_GOVERNANCE.md) - 开源治理结构
+- OPEN_SOURCE_GOVERNANCE.md - 开源治理结构
 - [ROADMAP_2030.md](./ROADMAP_2030.md) - 2030技术路线图
 
 ---

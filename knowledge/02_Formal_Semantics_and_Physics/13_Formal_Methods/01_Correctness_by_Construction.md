@@ -212,12 +212,12 @@ int array_sum(int *a, int n) {
 ### 前置知识
 
 - [霍尔逻辑与类型理论](../05_Type_Semantics/README.md)
-- [并发程序验证](../14_Concurrency_Parallelism/06_Formal_Verification.md)
+- 并发程序验证
 
 ### 后续延伸
 
 - [Coq证明助手实战](./02_Coq_Proof_Assistant.md)
-- [TLA+系统规格](./03_TLA_Plus_Specification.md)
+- TLA+系统规格
 
 ### 参考
 

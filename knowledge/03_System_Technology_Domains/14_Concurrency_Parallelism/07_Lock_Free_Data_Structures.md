@@ -286,12 +286,12 @@ void* lookup(LockFreeHashTable *ht, uint64_t key) {
 ### 前置知识
 
 - [C11内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md)
-- [原子操作](./03_Atomic_Operations.md)
+- 原子操作
 - [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md)
 
 ### 后续延伸
 
-- [RCU机制](./08_RCU_Mechanism.md)
+- RCU机制
 - [并发数据结构](https://github.com/concurrencykit/ck)
 
 ### 参考实现

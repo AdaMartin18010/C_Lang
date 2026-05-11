@@ -405,7 +405,7 @@ void process_misaligned(void *ptr) {
 ### 前置知识
 
 - [类型系统](./README.md)
-- [内存布局](../../../01_Core_Knowledge_System/02_Core_Layer/01_Memory_Model.md)
+- 内存布局
 - 严格别名规则
 
 ### 后续延伸

@@ -198,7 +198,7 @@ typedef enum {
     OP_JMP,       /* PC += sBx */
 
     /* 函数调用 */
-    OP_CALL,      /* R[A..A+C-2] = R[A](R[A+1..A+B-1]) */
+    OP_CALL,      /* R[A..A+C-2] = RA */
     OP_RETURN,    /* return R[A..A+B-2] */
     OP_CLOSURE,   /* R[A] = closure(KPROTO[Bx]) */
 

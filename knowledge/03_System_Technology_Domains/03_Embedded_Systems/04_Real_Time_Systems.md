@@ -511,13 +511,13 @@ ASIL等级 (Automotive Safety Integrity Level):
 
 ### 前置知识
 
-- [进程调度算法深度](../../os_kernel/02_Process_Scheduling_Deep.md)
-- [Linux内核模块编程](../../os_kernel/01_Linux_Kernel_Module_Programming.md)
+- 进程调度算法深度
+- Linux内核模块编程
 
 ### 后续延伸
 
-- [安全关键系统验证](../10_Security_Engineering/11_Safety_Critical_Verification.md)
-- [AUTOSAR架构](../05_Automotive/AUTOSAR_Architecture.md)
+- 安全关键系统验证
+- AUTOSAR架构
 
 ### 参考
 

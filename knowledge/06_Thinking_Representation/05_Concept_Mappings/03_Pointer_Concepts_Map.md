@@ -50,7 +50,7 @@
 | `arr[i]` | int | 第i个元素 |
 | `*(arr+i)` | int | 同上 |
 | `&arr[i]` | int* | 第i个元素地址 |
-| `&arr` | int[*](5) | 整个数组地址 |
+| `&arr` | int | 整个数组地址 |
 
 **关键区别**: `sizeof(arr)` = 总字节数, `sizeof(ptr)` = 指针大小(4/8)
 
@@ -97,7 +97,7 @@ int (*fp)(int, int)
 // typedef简化
 typedef int (*BinaryOp)(int, int);
 BinaryOp ops[] = {add, sub, mul, div};
-result = ops[0](a, b);  // 调用add
+result = ops0;  // 调用add
 ```
 
 ---

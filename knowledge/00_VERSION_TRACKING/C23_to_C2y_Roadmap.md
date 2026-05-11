@@ -2,7 +2,7 @@
 
 > **文档状态**: 活跃更新 | **最后更新**: 2026-03-19 | **标准状态**: ISO/IEC 9899:2024已发布
 >
-> 📚 **相关文档**: [C2y提案追踪](./C2y_Proposal_Tracker.md) | [C2y特性预览](./C2y_Feature_Previews.md) | [C2y→C34路线图](./C2y_to_C34_Roadmap.md) | [监控脚本](../../scripts/c2y_monitor.py)
+> 📚 **相关文档**: [C2y提案追踪](./C2y_Proposal_Tracker.md) | [C2y特性预览](./C2y_Feature_Previews.md) | [C2y→C34路线图](./C2y_to_C34_Roadmap.md) | 监控脚本
 
 ---
 
@@ -743,7 +743,7 @@ C_Lang知识库已建立完整的C2y标准提案追踪系统，包括:
 | **C2y提案追踪器** | 47+提案的状态总览、分类、时间线 | [C2y_Proposal_Tracker.md](./C2y_Proposal_Tracker.md) |
 | **C2y特性预览** | 15+主要特性的深度技术分析 | [C2y_Feature_Previews.md](./C2y_Feature_Previews.md) |
 | **C2y→C34路线图** | 2027-2030演进预测 | [C2y_to_C34_Roadmap.md](./C2y_to_C34_Roadmap.md) |
-| **监控脚本** | WG14文档监控框架 | [c2y_monitor.py](../../scripts/c2y_monitor.py) |
+| **监控脚本** | WG14文档监控框架 | c2y_monitor.py |
 
 ### 快速导航
 

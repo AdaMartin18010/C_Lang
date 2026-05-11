@@ -12,8 +12,8 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | BPF/eBPF架构、BPF程序类型、性能分析、跟踪工具 |
-| **前置知识** | [Linux内核](../../os_kernel/)、[系统编程](../../01_System_Programming/README.md) |
-| **后续延伸** | [内核调试](../../13_Linux_Kernel/02_Kernel_Debugging_Deep.md)、[网络编程](../../15_Network_Programming/) |
+| **前置知识** | Linux内核、系统编程 |
+| **后续延伸** | 内核调试、网络编程 |
 | **横向关联** | [eBPF深度](../../03_System_Technology_Domains/01_System_Programming/06_eBPF_Deep.md)、[性能调优](01_Linux_Performance_Tuning.md) |
 | **权威来源** | Linux Kernel BPF文档, Brendan Gregg's BPF book |
 

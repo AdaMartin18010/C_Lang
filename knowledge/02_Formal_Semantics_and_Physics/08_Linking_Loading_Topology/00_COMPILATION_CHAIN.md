@@ -219,7 +219,7 @@ value = A(symbol) + addend  (根据type调整)
 
 - [Linux内核](../../04_Industrial_Scenarios/13_Linux_Kernel/README.md)
 - [嵌入式IoT](../../04_Industrial_Scenarios/14_Embedded_IoT/README.md)
-- [高性能计算](../../04_Industrial_Scenarios/01_High_Performance/README.md)
+- 高性能计算
 
 ---
 

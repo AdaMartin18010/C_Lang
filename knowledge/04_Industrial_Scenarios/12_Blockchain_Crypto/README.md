@@ -40,14 +40,14 @@
 |:-----|:-----|:----:|:----:|
 | 密码学原语 | [01_Cryptographic_Primitives.md](./01_Cryptographic_Primitives.md) | ⭐⭐⭐⭐ | 4h |
 | 区块链基础 | [02_Blockchain_Basics.md](./02_Blockchain_Basics.md) | ⭐⭐⭐⭐ | 5h |
-| 高级加密技术 | [03_Advanced_Cryptography.md](./03_Advanced_Cryptography.md) | ⭐⭐⭐⭐⭐ | 4h |
-| 智能合约VM | [04_Smart_Contract_VM.md](./04_Smart_Contract_VM.md) | ⭐⭐⭐⭐⭐ | 5h |
+| 高级加密技术 | 03_Advanced_Cryptography.md | ⭐⭐⭐⭐⭐ | 4h |
+| 智能合约VM | 04_Smart_Contract_VM.md | ⭐⭐⭐⭐⭐ | 5h |
 
 ### 实践项目
 
-- [项目1: 完整区块链节点](./projects/project1_full_node.md)
-- [项目2: 加密货币钱包](./projects/project2_wallet.md)
-- [项目3: 智能合约部署](./projects/project3_contract_deployment.md)
+- 项目1: 完整区块链节点
+- 项目2: 加密货币钱包
+- 项目3: 智能合约部署
 
 ---
 

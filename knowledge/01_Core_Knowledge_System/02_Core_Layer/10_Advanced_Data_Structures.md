@@ -655,7 +655,7 @@ void example(void) {
 ### 前置知识
 
 - 基础数据结构
-- [内存管理](./01_Memory_Model.md)
+- 内存管理
 
 ### 后续延伸
 

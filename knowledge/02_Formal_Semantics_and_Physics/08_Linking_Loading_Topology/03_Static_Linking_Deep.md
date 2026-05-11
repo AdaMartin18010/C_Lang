@@ -503,7 +503,7 @@ readelf -r main_static              # 可执行文件（应无重定位）
 
 - [动态链接](./02_Dynamic_Linking_Category.md)
 - [加载器工作原理](#动态链接器工作原理)
-- [内存布局](../../03_System_Technology_Domains/01_System_Programming/05_Memory_Mapped_Files.md)
+- 内存布局
 
 ### 实践关联
 

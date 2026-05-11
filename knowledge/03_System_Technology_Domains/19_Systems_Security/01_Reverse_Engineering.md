@@ -12,9 +12,9 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | 逆向工程、反汇编、调试、静态/动态分析 |
-| **前置知识** | [C语言基础](../../01_Core_Knowledge_System/README.md)、[编译原理](../../05_Engineering_Layer/01_Compilation_Build.md) |
-| **后续延伸** | [二进制利用](02_Binary_Exploitation.md)、[恶意软件分析](03_Malware_Analysis.md) |
-| **横向关联** | [系统编程](../../03_System_Technology_Domains/01_System_Programming/README.md)、[内核调试](../../os_kernel/) |
+| **前置知识** | [C语言基础](../../01_Core_Knowledge_System/README.md)、编译原理 |
+| **后续延伸** | [二进制利用](02_Binary_Exploitation.md)、恶意软件分析 |
+| **横向关联** | [系统编程](../../03_System_Technology_Domains/01_System_Programming/README.md)、内核调试 |
 | **权威来源** | IDA Pro文档, Ghidra文档, x86-64 ABI |
 
 ---

@@ -1,10 +1,10 @@
 # Arena/Region分配器与Scoped Allocation
 
-> **标准**: ISO/IEC 9899:2024 (C23) Section 7.22.3  
-> **前置知识**: [内存管理](../02_Core_Layer/02_Memory_Management.md), [抽象状态机](../01_Basic_Layer/00_Abstract_State_Machine.md)  
-> **后续延伸**: [自定义内存分配器](01_Custom_Memory_Allocators.md), [所有权语义](00_Ownership_Semantics.md)  
-> **对标资源**: Modern C实践, Handmade Hero内存管理, Ginger Bill的Arena文章  
-> **难度**: 3/5 | **预计学习时间**: 2-3 小时  
+> **标准**: ISO/IEC 9899:2024 (C23) Section 7.22.3
+> **前置知识**: [内存管理](../02_Core_Layer/02_Memory_Management.md), [抽象状态机](../01_Basic_Layer/00_Abstract_State_Machine.md)
+> **后续延伸**: 自定义内存分配器, [所有权语义](00_Ownership_Semantics.md)
+> **对标资源**: Modern C实践, Handmade Hero内存管理, Ginger Bill的Arena文章
+> **难度**: 3/5 | **预计学习时间**: 2-3 小时
 
 ---
 
@@ -125,12 +125,12 @@ Arena arena_create(size_t capacity) {
 void* arena_alloc(Arena* a, size_t size, size_t align) {
     // 对齐当前指针
     char* p = (char*)(((uintptr_t)a->ptr + align - 1) & ~(align - 1));
-    
+
     // 检查容量
     if (p + size > a->end) {
         return NULL;  // Arena溢出
     }
-    
+
     a->ptr = p + size;
     return p;
 }
@@ -169,33 +169,33 @@ typedef struct {
 
 int main(void) {
     Arena arena = arena_create(1024);  // 1KB Arena
-    
+
     // 分配对象
     Point* p1 = arena_alloc(&arena, sizeof(Point), alignof(Point));
     p1->x = 10; p1->y = 20;
-    
+
     Point* p2 = arena_alloc(&arena, sizeof(Point), alignof(Point));
     p2->x = 30; p2->y = 40;
-    
+
     // 分配字符串
     const char* msg = "Hello, Arena!";
     size_t len = strlen(msg) + 1;
     char* copy = arena_alloc(&arena, len, alignof(char));
     memcpy(copy, msg, len);
-    
+
     printf("p1: (%d, %d)\n", p1->x, p1->y);
     printf("p2: (%d, %d)\n", p2->x, p2->y);
     printf("msg: %s\n", copy);
     printf("used: %zu bytes\n", arena_used(&arena));
-    
+
     // 重置Arena（释放所有对象）
     arena_reset(&arena);
     // p1, p2, copy 现在不可访问！
-    
+
     // 可以重新分配
     Point* p3 = arena_alloc(&arena, sizeof(Point), alignof(Point));
     p3->x = 100;
-    
+
     arena_destroy(&arena);
     return 0;
 }
@@ -231,24 +231,24 @@ void* multi_arena_alloc(MultiArena* ma, size_t size, size_t align) {
             return p;
         }
     }
-    
+
     // 分配新块
     size_t alloc_size = ma->block_size;
     if (size > alloc_size) alloc_size = size;
-    
+
     ArenaBlock* block = malloc(sizeof(ArenaBlock) + alloc_size);
     block->base = (char*)(block + 1);
     block->ptr = block->base + size;
     block->end = block->base + alloc_size;
     block->next = NULL;
-    
+
     if (ma->current) {
         ma->current->next = block;
     } else {
         ma->first = block;
     }
     ma->current = block;
-    
+
     return block->base;
 }
 
@@ -296,11 +296,11 @@ void temp_arena_end(TempArena* t) {
 // 使用示例
 void process_data(Arena* arena, const Data* input) {
     TempArena temp = temp_arena_begin(arena);
-    
+
     // 分配临时缓冲区
     char* buffer = arena_alloc(temp.parent, input->size, 1);
     // ... 使用buffer处理数据 ...
-    
+
     temp_arena_end(&temp);  // 自动释放所有临时分配
 }
 ```
@@ -322,13 +322,13 @@ void arena_rollback(Arena* a, ArenaMarker mark) {
 // 使用示例
 void parser(Arena* arena) {
     ArenaMarker checkpoint = arena_mark(arena);
-    
+
     ASTNode* node = parse_expression(arena);
     if (node == NULL) {
         arena_rollback(arena, checkpoint);  // 回滚到解析前状态
         return;
     }
-    
+
     // ... 继续处理 ...
 }
 ```
@@ -388,13 +388,13 @@ static inline void region_cleanup(Arena** a) {
 void process_request(Request* req) {
     Arena region_arena = arena_create(64 * 1024);  // 64KB
     REGION(ra, &region_arena);
-    
+
     // 所有在此函数中分配的对象都会自动释放
     Response* resp = arena_alloc(ra, sizeof(Response), alignof(Response));
     char* body = arena_alloc(ra, req->body_size, 1);
-    
+
     // ... 处理请求 ...
-    
+
     // 函数返回时，region_arena自动重置（cleanup属性）
 }
 ```
@@ -429,9 +429,9 @@ void scratch_end(void) {
 void example(void) {
     Arena* s = scratch_begin();
     char* buf1 = arena_alloc(s, 1000, 1);
-    
+
     // ... 使用buf1 ...
-    
+
     scratch_end();  // 释放buf1
 }
 ```
@@ -528,14 +528,14 @@ typedef struct {
 
 void game_update(GameState* gs) {
     arena_reset(&gs->frame_arena);  // 每帧开始时重置
-    
+
     // 分配帧临时数据
-    Particle* particles = arena_alloc(&gs->frame_arena, 
+    Particle* particles = arena_alloc(&gs->frame_arena,
                                       MAX_PARTICLES * sizeof(Particle),
                                       alignof(Particle));
-    
+
     // 更新粒子、渲染等
-    
+
     // 帧结束：所有临时数据自动释放
     gs->frame_count++;
 }

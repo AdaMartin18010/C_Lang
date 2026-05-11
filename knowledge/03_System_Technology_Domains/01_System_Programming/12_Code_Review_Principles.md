@@ -2,7 +2,7 @@
 
 > **层级**: L4 (方法论层)
 > **目标**: 掌握系统化代码审查方法论，提升代码质量，促进知识传承
-> **关联**: [静态分析原理](08_Static_Analysis_Principles.md) | [调试原理](10_Debugging_Principles_and_Framework.md) | [测试方法论](11_Testing_Methodology.md)
+> **关联**: 静态分析原理 | 调试原理 | 测试方法论
 
 ---
 

@@ -754,7 +754,7 @@ useDefault = true
 [[rules]]
 id = "api-key-custom"
 description = "Custom API Key"
-regex = '''(?i)(api[_-]?key\s*=\s*)['"]([a-zA-Z0-9]{32,})['"]'''
+regex = '''(?i)(api[_-]?key\s*=\s*)'"['"]'''
 tags = ["apikey", "custom"]
 
 [[rules]]

@@ -345,7 +345,7 @@
 
 ### C. 伦理框架
 
-[AI_ETHICS.md](./AI_ETHICS.md) - AI时代的伦理准则
+AI_ETHICS.md - AI时代的伦理准则
 
 ---
 

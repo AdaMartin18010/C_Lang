@@ -575,7 +575,7 @@ int main(int argc, char **argv) {
 
 - [动态链接深度解析](./04_Dynamic_Linking_Deep.md)
 - [系统调用](../../03_System_Technology_Domains/01_System_Programming/04_System_Call_Interface.md)
-- [虚拟内存](../../03_System_Technology_Domains/01_System_Programming/05_Memory_Mapped_Files.md)
+- 虚拟内存
 
 ### 后续延伸
 

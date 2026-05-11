@@ -5,7 +5,7 @@
 > **后续延伸**: [C到汇编：数据表示](./03_C_to_Assembly_Data.md) → [C到汇编：控制流](./04_C_to_Assembly_Control.md)
 > **横向关联**: [RISC-V CPU实现](../02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/08_RISCV_CPU_Complete/README.md)
 > **预计学习时间**: 2周
-> **实践验证**: [riscv_assembler.c](../../examples/assembler/riscv_assembler.c)
+> **实践验证**: riscv_assembler.c
 
 ---
 

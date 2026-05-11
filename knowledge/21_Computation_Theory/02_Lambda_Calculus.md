@@ -5,7 +5,7 @@
 > **后续延伸**: [计算复杂性](./03_Computational_Complexity.md) → [理论到物理桥梁](./04_Theory_to_Physical_Bridge.md)
 > **横向关联**: [函数与作用域](../01_Core_Knowledge_System/02_Core_Layer/04_Functions_Scope.md)（C语言实现）
 > **预计学习时间**: 1周
-> **实践验证**: [λ演算解释器](../../examples/lambda/lambda_eval.py)
+> **实践验证**: λ演算解释器
 
 ---
 
@@ -561,5 +561,5 @@ if __name__ == "__main__":
 ---
 
 *文档创建: 2026-03-29*
-*配套代码: [lambda_eval.py](../../examples/lambda/lambda_eval.py)*
+*配套代码: lambda_eval.py*
 *与图灵机的连接: 两种等价的计算模型*

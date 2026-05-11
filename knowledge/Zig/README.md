@@ -341,9 +341,9 @@ Zig 在保持 C 优点的同时，解决了许多问题：
 
 | 文档 | 说明 |
 |------|------|
-| [ZIG_100_PERCENT_REPORT.md](ZIG_100_PERCENT_REPORT.md) | 100% 完成报告 |
-| [ZIG_KNOWLEDGE_BASE_STATUS.md](ZIG_KNOWLEDGE_BASE_STATUS.md) | 状态报告 |
-| [ZIG_KNOWLEDGE_BASE_ANALYSIS_REPORT.md](ZIG_KNOWLEDGE_BASE_ANALYSIS_REPORT.md) | 分析报告 |
+| ZIG_100_PERCENT_REPORT.md | 100% 完成报告 |
+| ZIG_KNOWLEDGE_BASE_STATUS.md | 状态报告 |
+| ZIG_KNOWLEDGE_BASE_ANALYSIS_REPORT.md | 分析报告 |
 
 ### 2.2 学习路径推荐
 

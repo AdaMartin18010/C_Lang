@@ -549,8 +549,8 @@ Qed.
 
 ### 后续延伸
 
-- [CompCert验证编译器](../11_Compiler_Internals/04_CompCert_Verified_Compiler.md)
-- [Iris并发逻辑](../14_Concurrency_Parallelism/07_Iris_Concurrent_Logic.md)
+- CompCert验证编译器
+- Iris并发逻辑
 
 ### 参考
 

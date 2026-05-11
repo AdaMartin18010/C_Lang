@@ -851,7 +851,7 @@ uint64_t test_indirect_jump(int *pattern, int pattern_len) {
     uint64_t start = rdtscp(&aux);
     for (int i = 0; i < ITERATIONS; i++) {
         int idx = pattern[i % pattern_len];
-        sum = funcs[idx](sum);
+        sum = funcsidx;
     }
     uint64_t end = rdtscp(&aux);
 

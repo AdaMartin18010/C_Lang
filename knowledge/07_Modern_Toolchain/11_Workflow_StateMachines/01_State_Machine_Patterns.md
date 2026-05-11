@@ -72,7 +72,7 @@ void sm_init(state_machine_t* sm) {
 }
 
 void sm_run(state_machine_t* sm) {
-    sm->handlers[sm->current](sm->context);
+    sm->handlerssm->current;
 }
 
 /* 状态转换 */

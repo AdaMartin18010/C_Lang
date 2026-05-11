@@ -400,7 +400,7 @@ void execute_program(uint8_t *code, size_t code_size, uint64_t entry_point) {
         // 执行
         uint8_t opcode = inst.opcode[0];
         if (dispatch_table[opcode]) {
-            dispatch_table[opcode](&state, &inst);
+            dispatch_tableopcode;
         } else {
             printf("Unknown opcode: 0x%02X\n", opcode);
             break;

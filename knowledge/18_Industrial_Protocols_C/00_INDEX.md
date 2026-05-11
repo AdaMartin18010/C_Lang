@@ -10,7 +10,7 @@
 
 ### 协议基础
 
-- [协议基础理论](./00_Protocol_Fundamentals/)
+- 协议基础理论
 
 ### 核心协议
 
@@ -18,15 +18,15 @@
 |------|------|----------|------|
 | **Modbus** | ⭐⭐ | 通用工业通信 | [01_Modbus_Protocol](./01_Modbus_Protocol/README.md) |
 | **CAN Bus** | ⭐⭐⭐ | 汽车、工业控制 | [02_CAN_Bus_Protocol](./02_CAN_Bus_Protocol/README.md) |
-| **OPC UA** | ⭐⭐⭐⭐⭐ | 工业4.0、数字化 | [03_OPC_UA_Protocol](./03_OPC_UA_Protocol/) |
-| **EtherCAT** | ⭐⭐⭐⭐⭐ | 运动控制 | [04_EtherCAT_Protocol](./04_EtherCAT_Protocol/) |
+| **OPC UA** | ⭐⭐⭐⭐⭐ | 工业4.0、数字化 | 03_OPC_UA_Protocol |
+| **EtherCAT** | ⭐⭐⭐⭐⭐ | 运动控制 | 04_EtherCAT_Protocol |
 
 ### 扩展内容
 
-- [工业以太网](./05_Industrial_Ethernet/)
-- [无线工业协议](./06_Wireless_Industrial/)
-- [协议对比分析](./07_Protocol_Comparison/)
-- [实际案例](./08_Case_Studies/)
+- 工业以太网
+- 无线工业协议
+- 协议对比分析
+- 实际案例
 
 ---
 

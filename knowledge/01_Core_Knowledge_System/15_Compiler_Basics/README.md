@@ -256,7 +256,7 @@ entry:
 | 文件 | 主题 | 难度 |
 |:-----|:-----|:-----|
 | [01_Lexical_Analysis.md](01_Lexical_Analysis.md) | 词法分析：正则表达式、DFA、flex | L3 |
-| [02_Syntactic_Analysis.md](02_Syntactic_Analysis.md) | 语法分析：递归下降、LR、bison | L4 |
+| 02_Syntactic_Analysis.md | 语法分析：递归下降、LR、bison | L4 |
 
 ## 权威参考
 

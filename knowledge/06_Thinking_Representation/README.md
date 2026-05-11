@@ -295,7 +295,7 @@ graph TB
 | [核心概念综合矩阵](./02_Multidimensional_Matrix/02_Core_Concepts_Comprehensive_Matrix.md) | 多维矩阵 | 六维概念对比 |
 | [概念关联网络](./07_Knowledge_Graph/06_Concept_Relationship_Network.md) | 知识图谱 | 跨层次概念关联 |
 | [学习路径主决策树](./03_Decision_Trees/02_Learning_Path_Master_Tree.md) | 决策树 | 个性化学习导航 |
-| [可持续演进计划](./00_SUSTAINABLE_EVOLUTION_PLAN.md) | 规划文档 | 长期发展路线图 |
+| 可持续演进计划 | 规划文档 | 长期发展路线图 |
 
 ### 第二轮新增（持续推进）
 
@@ -310,7 +310,7 @@ graph TB
 
 ---
 
-> **返回导航**: [知识库总览](../README.md) | [上层目录](..)
+> **返回导航**: [知识库总览](../README.md) | 上层目录
 
 
 ---

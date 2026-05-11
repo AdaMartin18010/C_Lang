@@ -243,13 +243,13 @@ jobs:
 
 ### 前置知识
 
-- [安全编码实践](./03_Secure_Coding_Practices.md)
+- 安全编码实践
 - [Conan包管理](../../01_Core_Knowledge_System/05_Engineering_Layer/05_Conan_Package_Management.md)
 
 ### 后续延伸
 
-- [静态分析工具](../../../07_Modern_Toolchain/03_Static_Analysis_Tools.md)
-- [模糊测试实践](./09_Fuzzing_Techniques.md)
+- 静态分析工具
+- 模糊测试实践
 
 ### 参考
 

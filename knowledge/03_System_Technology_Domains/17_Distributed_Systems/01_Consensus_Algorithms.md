@@ -561,8 +561,8 @@ Reply:
 
 ### 后续延伸
 
-- [分布式事务](../17_Distributed_Systems/02_Distributed_Transactions.md)
-- [分布式一致性](../17_Distributed_Systems/03_Distributed_Consistency.md)
+- 分布式事务
+- 分布式一致性
 
 ### 参考
 

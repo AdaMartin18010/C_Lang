@@ -57,16 +57,16 @@
 
 ### 实践资源
 
-- [Lab1: 简单LED状态机](./labs/lab1_simple_led.md) - 入门实验
-- [Lab2: 通信协议状态机](./labs/lab2_protocol_state_machine.md) - 中级实验
-- [Lab3: 层次菜单系统](./labs/lab3_menu_system.md) - 高级实验
-- [代码仓库](./code/) - 完整可编译示例
+- Lab1: 简单LED状态机 - 入门实验
+- Lab2: 通信协议状态机 - 中级实验
+- Lab3: 层次菜单系统 - 高级实验
+- 代码仓库 - 完整可编译示例
 
 ### 案例研究
 
-- [案例1: 工业设备控制](./cases/case1_industrial_control.md) - 注塑机控制状态机
-- [案例2: 网络协议实现](./cases/case2_network_protocol.md) - TCP状态机简化版
-- [案例3: 游戏AI状态](./cases/case3_game_ai.md) - NPC行为状态机
+- 案例1: 工业设备控制 - 注塑机控制状态机
+- 案例2: 网络协议实现 - TCP状态机简化版
+- 案例3: 游戏AI状态 - NPC行为状态机
 
 ---
 

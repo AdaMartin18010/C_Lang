@@ -24,7 +24,7 @@
 | [C11线程库](10_Threads_C11.md) | 核心扩展 | threads.h详解 |
 | [并发编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/README.md) | 高级应用 | 并发技术全景 |
 | [C11内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md) | 理论深化 | 内存序与原子性 |
-| [无锁编程](../../03_System_Technology_Domains/14_Concurrency_Parallelism/05_Lock_Free.md) | 专家进阶 | 原子操作高级应用 |
+| 无锁编程 | 专家进阶 | 原子操作高级应用 |
 
 ### 关键新增
 

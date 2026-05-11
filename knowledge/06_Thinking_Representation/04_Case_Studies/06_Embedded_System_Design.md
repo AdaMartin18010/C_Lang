@@ -128,7 +128,7 @@ void engine_fsm_run(EngineControl *ec) {
 
     EngineEvent evt;
     if (poll_event(&evt)) {
-        handlers[ec->state](ec, &evt);
+        handlersec->state;
     }
 }
 ```

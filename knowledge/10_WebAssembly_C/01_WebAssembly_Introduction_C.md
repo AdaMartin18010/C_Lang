@@ -1976,7 +1976,7 @@ self.onmessage = async function(e) {
 
             try {
                 const startTime = performance.now();
-                const result = wasmExports[data.function](...data.args);
+                const result = wasmExportsdata.function;
                 const endTime = performance.now();
 
                 self.postMessage({
@@ -2017,7 +2017,7 @@ self.onmessage = async function(e) {
 
                 // 调用 WASM 函数
                 const startTime = performance.now();
-                const result = wasmExports[funcName](ptr, array.length);
+                const result = wasmExportsfuncName;
                 const endTime = performance.now();
 
                 // 释放内存

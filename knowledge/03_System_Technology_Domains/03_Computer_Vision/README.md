@@ -21,7 +21,7 @@
 | 技术 | 文档 | 算法基础 |
 |:-----|:-----|:---------|
 | V4L2 | [V4L2捕获](01_V4L2_Capture.md) | 视频采集框架 |
-| 光流 | [光流算法](02_Optical_Flow.md) | Lucas-Kanade |
+| 光流 | 光流算法 | Lucas-Kanade |
 | 边缘检测 | [边缘检测](03_Edge_Detection.md) | Canny算法 |
 
 ### 后续延伸
@@ -37,7 +37,7 @@
 ## 内容
 
 - [V4L2视频捕获](./01_V4L2_Capture.md)
-- [光流算法](./02_Optical_Flow.md)
+- 光流算法
 - [边缘检测](./03_Edge_Detection.md)
 
 ---

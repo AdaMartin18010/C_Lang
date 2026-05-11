@@ -2,7 +2,7 @@
 
 > **标准**: ISO/IEC 9899:2024 (C23) Section 6.3.2.1, 6.5.2.1, 6.5.3.2, 6.5.6
 > **前置知识**: [抽象状态机](../01_Basic_Layer/00_Abstract_State_Machine.md), [数据类型系统](../01_Basic_Layer/02_Data_Type_System.md)
-> **后续延伸**: [指针深度](01_Pointer_Depth.md), [高级指针](19_Advanced_Pointers/README.md)
+> **后续延伸**: [指针深度](01_Pointer_Depth.md), 高级指针
 > **对标资源**: Expert C Programming (Ch.4, Ch.9), comp.lang.c FAQ (Sec.6), Modern C Level 2
 > **难度**: 4/5 | **预计学习时间**: 3-4 小时
 
@@ -52,7 +52,7 @@
 | **sizeof结果** | 元素大小 x 元素个数 | 指针本身的大小（4或8字节） |
 | **内存分配** | 分配 N x sizeof(T) 字节 | 分配 sizeof(void*) 字节 |
 | **地址运算** | 数组名是常量地址（不可赋值） | 指针变量可修改 |
-| **取地址 &** | &arr 得到数组指针（类型 T[*](N)）| &ptr 得到指针的指针（T**）|
+| **取地址 &** | &arr 得到数组指针（类型 T）| &ptr 得到指针的指针（T**）|
 | **解引用 *** | arr[i] 等价于 *(arr + i) | *ptr 访问ptr指向的对象 |
 
 ```c

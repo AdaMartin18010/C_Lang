@@ -11,25 +11,25 @@
 ## 核心领域
 
 ### 1. 进程与线程
-- [进程管理](02_Process_Management.md)
-- [线程与并发](03_Threading_and_Concurrency.md)
-- [进程间通信 (IPC)](04_Inter_Process_Communication.md)
+- 进程管理
+- 线程与并发
+- 进程间通信 (IPC)
 
 ### 2. 系统调用与内核接口
 - [系统调用接口](04_System_Call_Interface.md)
-- [内存映射文件](05_Memory_Mapped_Files.md)
+- 内存映射文件
 - [eBPF 深度探索](06_eBPF_Deep.md)
 
 ### 3. 内存管理
 - [内存分配器设计](07_Memory_Allocator_Design.md)
-- [垃圾回收](08_Garbage_Collection.md)
-- [jemalloc/tcmalloc 实现](../08_Memory_Management/02_Advanced_Allocators.md)
+- 垃圾回收
+- jemalloc/tcmalloc 实现
 
 ### 4. 调试与分析
-- [静态分析原理](08_Static_Analysis_Principles.md)
-- [动态分析原理](09_Dynamic_Analysis_Principles.md)
-- [调试原理与框架](10_Debugging_Principles_and_Framework.md)
-- [测试方法论](11_Testing_Methodology.md)
+- 静态分析原理
+- 动态分析原理
+- 调试原理与框架
+- 测试方法论
 
 ### 5. 性能工程
 - [性能剖析原理](13_Performance_Profiling_Principles.md)

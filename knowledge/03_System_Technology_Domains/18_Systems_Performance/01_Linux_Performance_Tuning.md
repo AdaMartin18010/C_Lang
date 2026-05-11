@@ -12,9 +12,9 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | CPU调度、内存管理、I/O优化、网络调优、性能分析 |
-| **前置知识** | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md)、[进程调度](../../os_kernel/02_Process_Scheduling_Deep.md) |
-| **后续延伸** | [BPF性能工具](02_BPF_Performance_Tools.md)、[eBPF深度](../../01_System_Programming/06_eBPF_Deep.md) |
-| **横向关联** | [内核同步](../../21_OS_Internals/01_Kernel_Synchronization.md)、[高性能服务器](../../15_Network_Programming/03_High_Performance_Server.md) |
+| **前置知识** | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md)、进程调度 |
+| **后续延伸** | [BPF性能工具](02_BPF_Performance_Tools.md)、eBPF深度 |
+| **横向关联** | 内核同步、高性能服务器 |
 | **权威来源** | Linux Kernel Documentation, Brendan Gregg's Systems Performance |
 
 ---

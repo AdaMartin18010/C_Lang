@@ -436,8 +436,8 @@ void trace_process(pid_t pid) {
 
 ### 后续延伸
 
-- [漏洞分析与利用](./09_Exploit_Development.md)
-- [恶意软件分析](./10_Malware_Analysis.md)
+- 漏洞分析与利用
+- 恶意软件分析
 
 ### 参考
 

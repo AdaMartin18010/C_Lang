@@ -12,14 +12,14 @@
 
 - [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) - 共享内存基础
 - [指针与别名](../../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md) - 数据竞争的理解基础
-- [C11内存模型](../01_C11_Memory_Model.md) - 原子操作和内存序
+- C11内存模型 - 原子操作和内存序
 
 ### 后续延伸
 
-- [无锁编程](./05_Lock_Free.md) - 高级并发技术
-- [线程池实现](./04_Thread_Pool_Implementation.md) - 实际应用
-- [并发调试](./06_Debugging.md) - 问题诊断
-- [性能优化](../../01_Core_Knowledge_System/05_Engineering/03_Performance_Optimization.md) - 多核优化
+- 无锁编程 - 高级并发技术
+- 线程池实现 - 实际应用
+- 并发调试 - 问题诊断
+- 性能优化 - 多核优化
 
 ### 理论支撑
 
@@ -35,12 +35,12 @@
 
 ## 目录
 
-- [C11线程基础](./01_C11_Threads.md)
-- [同步原语](./02_Synchronization_Primitives.md)
-- [原子操作与内存序](./03_Atomic_Operations.md)
-- [线程池实现](./04_Thread_Pool_Implementation.md)
-- [无锁编程](./05_Lock_Free.md)
-- [并发调试](./06_Debugging.md)
+- C11线程基础
+- 同步原语
+- 原子操作与内存序
+- 线程池实现
+- 无锁编程
+- 并发调试
 
 ---
 

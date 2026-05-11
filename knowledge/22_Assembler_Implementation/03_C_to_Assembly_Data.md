@@ -5,7 +5,7 @@
 > **后续延伸**: [C到汇编：控制流](./04_C_to_Assembly_Control.md)
 > **横向关联**: [指针深度](../01_Core_Knowledge_System/02_Core_Layer/01_Pointer_Depth.md), [数据类型系统](../01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md)
 > **预计学习时间**: 2周
-> **实践验证**: [c_to_asm_data.c](../../examples/assembler/c_to_asm_data.c)
+> **实践验证**: c_to_asm_data.c
 
 ---
 

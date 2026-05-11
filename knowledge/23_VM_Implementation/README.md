@@ -73,7 +73,7 @@
 | 字节码 | → [汇编指令](../22_Assembler_Implementation/02_RISCV_Assembler.md) |
 | 栈操作 | → [C控制流](../22_Assembler_Implementation/04_C_to_Assembly_Control.md) |
 | 词法分析 | → [编译器词法分析](../01_Core_Knowledge_System/15_Compiler_Basics/01_Lexical_Analysis.md) |
-| 语法分析 | → [编译器语法分析](../01_Core_Knowledge_System/15_Compiler_Basics/02_Syntactic_Analysis.md) |
+| 语法分析 | → 编译器语法分析 |
 | C4解释器 | → [Nand2Tetris VM](../03_System_Technology_Domains/01_Virtual_Machine_Interpreter/README.md) |
 
 ---

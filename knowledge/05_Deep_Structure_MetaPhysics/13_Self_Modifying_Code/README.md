@@ -934,7 +934,7 @@ class TinyJIT:
         # 生成代码
         # 第一个数加载到 rax
         first_num = int(tokens[0])
-        code.extend(self.OPCODES['mov_rax_imm32'](first_num))
+        code.extend(self.OPCODES'mov_rax_imm32')
 
         # 处理加法
         i = 1
@@ -944,7 +944,7 @@ class TinyJIT:
                 # push rax
                 code.extend(self.OPCODES['push_rax'])
                 # mov rax, next_num
-                code.extend(self.OPCODES['mov_rax_imm32'](next_num))
+                code.extend(self.OPCODES'mov_rax_imm32')
                 # pop rbx (rbx = 之前的值)
                 code.extend(bytes([0x5b]))  # pop rbx
                 # add rax, rbx

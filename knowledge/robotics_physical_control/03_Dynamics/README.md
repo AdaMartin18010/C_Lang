@@ -85,9 +85,9 @@
 
 ## 内容
 
-- [拉格朗日力学](./01_Lagrangian_Mechanics.md)
-- [牛顿-欧拉递推](./02_Newton_Euler.md)
-- [轨迹规划](./03_Trajectory_Planning.md)
+- 拉格朗日力学
+- 牛顿-欧拉递推
+- 轨迹规划
 
 ---
 

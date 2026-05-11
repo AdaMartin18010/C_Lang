@@ -9,8 +9,8 @@
 
 | 主题 | 说明 | 文档 |
 |:-----|:-----|:-----|
-| **调用约定与 ABI** | cdecl、stdcall、fastcall、System V AMD64 ABI、Windows x64 | [调用约定](01_Calling_Conventions.md) |
-| **FFI 概览** | Python/ctypes、Java/JNI、Go/CGO、Rust FFI 简介 | [FFI 概览](02_FFI_with_Other_Languages.md) |
+| **调用约定与 ABI** | cdecl、stdcall、fastcall、System V AMD64 ABI、Windows x64 | 调用约定 |
+| **FFI 概览** | Python/ctypes、Java/JNI、Go/CGO、Rust FFI 简介 | FFI 概览 |
 | **C ↔ Rust FFI** | 完整指南：所有权、生命周期、panic安全、bindgen/cbindgen | [C↔Rust FFI 完全指南](C_Rust_FFI_Guide.md) ⭐ |
 
 ---

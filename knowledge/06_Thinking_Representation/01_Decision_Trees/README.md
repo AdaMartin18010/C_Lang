@@ -15,7 +15,7 @@
 | 内存泄漏 | [内存泄漏诊断](01_Memory_Leak_Diagnosis.md) | 内存管理、Valgrind |
 | 段错误 | [段错误排查](02_Segfault_Troubleshooting.md) | 指针、内存保护 |
 | 性能瓶颈 | [性能优化](12_Performance_Optimization_Tree.md) | Profiling、优化 |
-| 并发问题 | [并发调试](../../03_System_Technology_Domains/14_Concurrency_Parallelism/06_Debugging.md) | 线程、锁、原子性 |
+| 并发问题 | 并发调试 | 线程、锁、原子性 |
 
 ### 与核心知识关联
 

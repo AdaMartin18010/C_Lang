@@ -360,7 +360,7 @@
 
 - [2030路线图](./ROADMAP_2030.md) - 5年规划
 - [2050路线图](./ROADMAP_2050.md) - 25年愿景
-- [AI_ETHICS.md](./AI_ETHICS.md) - 长期伦理框架
+- AI_ETHICS.md - 长期伦理框架
 
 ### C. 继承者
 

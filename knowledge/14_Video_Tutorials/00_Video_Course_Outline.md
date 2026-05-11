@@ -955,7 +955,7 @@
 ### Compiler Explorer 集成
 
 - [Compiler Explorer 使用指南](./02_Compiler_Explorer_Integration/Compiler_Explorer_Guide.md)
-- [10个可嵌入的代码示例](../02_Compiler_Explorer_Integration/embedded_examples.html)
+- 10个可嵌入的代码示例
 
 ### 交互式练习平台
 

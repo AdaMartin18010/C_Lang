@@ -274,11 +274,11 @@ type Number interface {
     ~int | ~int32 | ~int64 | ~uint | ~uint32 | ~uint64
 }
 
-func parseNumber[T Number](s string) (T, error) {
+func parseNumberT Number (T, error) {
     // ...
 }
 
-n, err := parseNumber[uint32]("42")
+n, err := parseNumberuint32
 if err != nil { /* 错误处理 */ }
 ```
 

@@ -10,7 +10,7 @@
 
 ### 基础理论
 
-- [嵌入式基础概念](./00_Embedded_Fundamentals/)
+- 嵌入式基础概念
 
 ### 硬件架构
 
@@ -18,7 +18,7 @@
 
 ### 外设编程
 
-- [外设编程指南](./02_Peripheral_Programming/)
+- 外设编程指南
 
 ### 嵌入式C核心
 
@@ -26,15 +26,15 @@
 
 ### 实时操作系统
 
-- [RTOS概念](./04_RTOS_Concepts/)
-- [FreeRTOS详解](./05_FreeRTOS_Detail/)
-- [Zephyr RTOS](./06_Zephyr_RTOS/)
+- RTOS概念
+- FreeRTOS详解
+- Zephyr RTOS
 
 ### 系统级内容
 
-- [Bootloader](./07_Bootloaders/)
-- [调试技术](./08_Debugging_Techniques/)
-- [工具链](./09_Embedded_Toolchains/)
+- Bootloader
+- 调试技术
+- 工具链
 
 ---
 

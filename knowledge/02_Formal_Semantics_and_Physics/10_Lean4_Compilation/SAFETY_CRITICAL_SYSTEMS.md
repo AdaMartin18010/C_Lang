@@ -1375,7 +1375,7 @@ def verify_system {System : Type}
 
 ### 安全相关
 
-- [SECURITY_SEMANTICS.md](SECURITY_SEMANTICS.md) - 安全语义学
+- SECURITY_SEMANTICS.md - 安全语义学
   - 信息流控制
   - 内存安全
   - 漏洞模型

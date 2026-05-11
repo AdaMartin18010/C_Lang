@@ -424,8 +424,8 @@ HTTP/2改进：
 
 ### 后续延伸
 
-- [TLS/SSL协议实现](./05_TLS_Implementation.md)
-- [RESTful API设计](../18_Web_Development/01_RESTful_API_Design.md)
+- TLS/SSL协议实现
+- RESTful API设计
 
 ### 参考
 

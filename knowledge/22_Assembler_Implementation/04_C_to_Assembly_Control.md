@@ -5,7 +5,7 @@
 > **后续延伸**: [栈式虚拟机](../23_VM_Implementation/01_Stack_Based_VM.md)
 > **横向关联**: [函数与作用域](../01_Core_Knowledge_System/02_Core_Layer/04_Functions_Scope.md), [控制流](../01_Core_Knowledge_System/01_Basic_Layer/04_Control_Flow.md)
 > **预计学习时间**: 2周
-> **实践验证**: [c_to_asm_control.c](../../examples/assembler/c_to_asm_control.c)
+> **实践验证**: c_to_asm_control.c
 
 ---
 
@@ -795,7 +795,7 @@ gcd_done:
 | 相关文档 | 连接点 |
 |:---------|:-------|
 | [栈式虚拟机](../23_VM_Implementation/01_Stack_Based_VM.md) | 函数调用的栈模型对比 |
-| [调用约定](../01_Core_Knowledge_System/25_C_Interfacing/01_Calling_Conventions.md) | 不同架构的调用约定比较 |
+| 调用约定 | 不同架构的调用约定比较 |
 | [编译器优化](../01_Core_Knowledge_System/05_Engineering_Layer/Compiler_Optimization_Deep/01_Loop_Optimization.md) | 循环优化的汇编级实现 |
 
 ---

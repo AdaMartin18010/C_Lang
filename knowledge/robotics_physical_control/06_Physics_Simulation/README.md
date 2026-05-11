@@ -85,9 +85,9 @@
 
 ## 内容
 
-- [MuJoCo集成](./01_MuJoCo_Integration.md)
-- [Bullet Physics](./02_Bullet_Physics.md)
-- [仿真到现实](./03_Simulation_to_Real.md)
+- MuJoCo集成
+- Bullet Physics
+- 仿真到现实
 
 ---
 

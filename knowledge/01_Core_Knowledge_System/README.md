@@ -158,13 +158,13 @@ ISO C标准库各版本详解。
 | [02_Code_Quality.md](./05_Engineering_Layer/02_Code_Quality.md) | 代码质量 | L3 | MISRA C:2012 | 200+ |
 | [02_Debug_Techniques.md](./05_Engineering_Layer/02_Debug_Techniques.md) | 调试技术 | L3 | GDB, LLDB | 200+ |
 | [03_Performance_Optimization.md](./05_Engineering_Layer/03_Performance_Optimization.md) | 性能优化 | L4 | Intel Optimization | 200+ |
-| [08_Code_Review_Checklist.md](./05_Engineering/08_Code_Review_Checklist.md) | 代码审查 | L3 | CERT C | 200+ |
+| 08_Code_Review_Checklist.md | 代码审查 | L3 | CERT C | 200+ |
 
 ### 05_Engineering/01_Build_System - 构建系统
 
 | 文件 | 主题 | 难度 | 国际标准 | 代码行数 |
 |:-----|:-----|:----:|:---------|:--------:|
-| [01_Makefile.md](./05_Engineering/01_Build_System/01_Makefile.md) | Makefile构建 | L2-L4 | POSIX Make | 444 |
+| 01_Makefile.md | Makefile构建 | L2-L4 | POSIX Make | 444 |
 
 **前置知识**: [04_Standard_Library_Layer](./04_Standard_Library_Layer/README.md)
 **后续延伸**: [06_Advanced_Layer](./06_Advanced_Layer/README.md)
@@ -340,7 +340,7 @@ graph TD
 
 ---
 
-> **返回导航**: [知识库总览](../README.md) | [上层目录](..)
+> **返回导航**: [知识库总览](../README.md) | 上层目录
 
 
 ---

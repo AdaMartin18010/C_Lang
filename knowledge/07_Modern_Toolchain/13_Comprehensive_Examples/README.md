@@ -174,7 +174,7 @@ static void *worker_thread(void *arg) {
                 /* 执行中间件链 */
                 bool passed = true;
                 for (uint32_t i = 0; i < server->middleware_count && passed; i++) {
-                    passed = server->middlewares[i](req, resp);
+                    passed = server->middlewaresi;
                 }
 
                 /* 路由处理 */

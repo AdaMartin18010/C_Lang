@@ -118,7 +118,7 @@
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
 | [01_V4L2_Capture.md](./03_Computer_Vision/01_V4L2_Capture.md) | V4L2采集 | L4 | Linux V4L2 API |
-| [02_Optical_Flow.md](./03_Computer_Vision/02_Optical_Flow.md) | 光流算法 | L5 | OpenCV Implementation |
+| 02_Optical_Flow.md | 光流算法 | L5 | OpenCV Implementation |
 | [03_Edge_Detection.md](03_Edge_Detection.md) | 边缘检测 | L4 | Canny, Sobel ✅ |
 
 ---
@@ -331,7 +331,7 @@ graph TB
 
 ---
 
-> **返回导航**: [知识库总览](../README.md) | [上层目录](..)
+> **返回导航**: [知识库总览](../README.md) | 上层目录
 
 
 ---

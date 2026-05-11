@@ -85,7 +85,7 @@
 | 重定位 | Relocation | 链接时调整地址引用的过程 | [02_RISCV_Assembler.md](../22_Assembler_Implementation/02_RISCV_Assembler.md) |
 | 调用约定 | Calling Convention | 函数调用的参数传递和寄存器使用规则 | [04_C_to_Assembly_Control.md](../22_Assembler_Implementation/04_C_to_Assembly_Control.md) |
 | 栈帧 | Stack Frame | 函数调用时在栈上分配的内存区域 | [04_C_to_Assembly_Control.md](../22_Assembler_Implementation/04_C_to_Assembly_Control.md) |
-| ABI | Application Binary Interface | 应用程序二进制接口规范 | [调用约定](../01_Core_Knowledge_System/25_C_Interfacing/01_Calling_Conventions.md) |
+| ABI | Application Binary Interface | 应用程序二进制接口规范 | 调用约定 |
 
 ### 1.5 Layer 5: 虚拟机层
 
@@ -180,7 +180,7 @@
 
 • 想了解函数调用的底层机制？
   → [04_C_to_Assembly_Control.md](../22_Assembler_Implementation/04_C_to_Assembly_Control.md)
-  → [调用约定](../01_Core_Knowledge_System/25_C_Interfacing/01_Calling_Conventions.md)
+  → 调用约定
 
 • 想了解虚拟机的实现？
   → [01_Stack_Based_VM.md](../23_VM_Implementation/01_Stack_Based_VM.md)
@@ -292,7 +292,7 @@ Week 5-6: 实践项目
 主题：函数调用深度理解
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 1. [04_C_to_Assembly_Control.md] - 函数调用汇编实现
-2. [调用约定](../01_Core_Knowledge_System/25_C_Interfacing/01_Calling_Conventions.md) - ABI规范
+2. 调用约定 - ABI规范
 3. [02_Layer_Bridges.md] - 形式化映射
 4. 实践：用gdb跟踪函数调用
 

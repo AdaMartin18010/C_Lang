@@ -418,7 +418,7 @@ CPU/ISA ↔ 汇编
 | ISA | 汇编指令 | 硬件信号 | [ISA机器码](../02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/README.md) |
 | 汇编器 | 助记符 | 机器码 | [RISC-V汇编器](../22_Assembler_Implementation/02_RISCV_Assembler.md) |
 | 编译器 | C代码 | 汇编 | [编译器基础](../README.md) |
-| ABI | C函数调用 | 寄存器+栈 | [调用约定](../01_Core_Knowledge_System/25_C_Interfacing/01_Calling_Conventions.md) |
+| ABI | C函数调用 | 寄存器+栈 | 调用约定 |
 
 ---
 

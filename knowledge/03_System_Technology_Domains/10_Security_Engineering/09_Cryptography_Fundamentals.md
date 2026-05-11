@@ -296,13 +296,13 @@ dh_key_t dh_compute_shared(dh_key_t private_key, dh_key_t public_key) {
 
 ### 前置知识
 
-- [安全编码实践](./03_Secure_Coding_Practices.md)
-- [内存安全](../../01_Core_Knowledge_System/02_Core_Layer/01_Memory_Model.md)
+- 安全编码实践
+- 内存安全
 
 ### 后续延伸
 
-- [TLS/SSL协议实现](../15_Network_Programming/05_TLS_Implementation.md)
-- [区块链密码学](./10_Blockchain_Cryptography.md)
+- TLS/SSL协议实现
+- 区块链密码学
 
 ### 参考
 

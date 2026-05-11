@@ -190,7 +190,7 @@ gcc -o nn nn.c -lopenblas -lpthread -lm -O3 -mavx2
 
 ---
 
-> **返回导航**: [知识库总览](../README.md) | [上层目录](..)
+> **返回导航**: [知识库总览](../README.md) | 上层目录
 
 
 ---

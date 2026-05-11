@@ -91,13 +91,13 @@
 
 ### 后续延伸
 
-- [算法复杂度分析](./02_Algorithm_Analysis.md)
-- [并发数据结构](../03_System_Technology_Domains/14_Concurrency_Parallelism/07_Concurrent_Data_Structures.md)
-- [高性能计算](../04_Industrial_Scenarios/01_High_Performance/README.md)
+- 算法复杂度分析
+- 并发数据结构
+- 高性能计算
 
 ### 实践案例
 
-- [Redis源码分析](../04_Industrial_Scenarios/08_Real_World_Cases/01_Redis_Case_Study.md)
+- Redis源码分析
 - [Linux内核数据结构](../03_System_Technology_Domains/01_System_Programming/README.md)
 
 ---
@@ -106,21 +106,21 @@
 
 ### 基础数据结构
 
-- [动态数组](./01_Dynamic_Array.md)
-- [链表](./02_Linked_List.md)
-- [栈与队列](./03_Stack_Queue.md)
+- 动态数组
+- 链表
+- 栈与队列
 
 ### 高级数据结构
 
-- [树与二叉树](./04_Trees.md)
-- [哈希表](./05_Hash_Table.md)
-- [图](./06_Graphs.md)
+- 树与二叉树
+- 哈希表
+- 图
 
 ### 算法
 
-- [排序算法](./07_Sorting.md)
-- [搜索算法](./08_Searching.md)
-- [动态规划](./09_Dynamic_Programming.md)
+- 排序算法
+- 搜索算法
+- 动态规划
 
 ---
 

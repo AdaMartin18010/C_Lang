@@ -632,7 +632,7 @@ hrtimer_cancel(&timer);  // 取消并等待完成
 
 ### 前置知识
 
-- [系统调用机制](../13_System_Call_Implementation.md)
+- 系统调用机制
 - [并发编程](../14_Concurrency_Parallelism/README.md)
 - [内存管理](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/05_Memory_Management_Hardware/README.md)
 
@@ -640,7 +640,7 @@ hrtimer_cancel(&timer);  // 取消并等待完成
 
 - [进程调度算法深度](./02_Process_Scheduling_Deep.md)
 - [虚拟内存子系统](./03_Virtual_Memory_Subsystem.md)
-- [中断处理与软中断](./04_Interrupt_Handling.md)
+- 中断处理与软中断
 
 ### 参考
 

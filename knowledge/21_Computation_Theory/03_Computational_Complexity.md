@@ -3,7 +3,7 @@
 > **层级定位**: 21 Computation Theory / 基础层
 > **前置知识**: [图灵机](./01_Turing_Machines.md), [λ演算](./02_Lambda_Calculus.md)
 > **后续延伸**: [理论到物理桥梁](./04_Theory_to_Physical_Bridge.md)
-> **横向关联**: [算法分析](../09_Data_Structures_Algorithms), [性能优化](../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
+> **横向关联**: 算法分析, [性能优化](../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
 > **预计学习时间**: 5天
 > **核心问题**: 为什么有些问题"难以计算"？物理世界对计算有什么限制？
 
@@ -316,7 +316,7 @@ NP难问题可能不是"暂时困难"，
 - 在实际输入规模下的表现？
 
 相关阅读：
-→ [数据结构算法模块](../09_Data_Structures_Algorithms)
+→ 数据结构算法模块
 → [性能优化](../01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md)
 ```
 

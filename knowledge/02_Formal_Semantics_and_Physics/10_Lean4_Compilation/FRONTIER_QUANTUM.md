@@ -1111,13 +1111,13 @@ theorem teleportation_correct (ψ : QubitState) :
 
 ### 前置依赖
 
-- **[SEMANTIC_NOTATIONS.md](../../SEMANTIC_NOTATIONS.md)** — 符号标准
+- **SEMANTIC_NOTATIONS.md** — 符号标准
 - **[CATEGORICAL_SEMANTICS.md](./CATEGORICAL_SEMANTICS.md)** — 范畴论语义基础
 
 ### 横向关联
 
-- **[ADVANCED_SEMANTICS.md](../07_Advanced_Semantics/ADVANCED_SEMANTICS.md)** — 线性类型系统深化
-- **[SEMANTICS_UNIFIED_REVISED.md](../SEMANTICS_UNIFIED_REVISED.md)** — 统一语义框架
+- **ADVANCED_SEMANTICS.md** — 线性类型系统深化
+- **SEMANTICS_UNIFIED_REVISED.md** — 统一语义框架
 
 ### 后续扩展
 

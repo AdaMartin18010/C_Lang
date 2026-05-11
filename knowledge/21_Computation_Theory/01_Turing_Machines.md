@@ -5,7 +5,7 @@
 > **后续延伸**: [λ演算](./02_Lambda_Calculus.md) → [复杂性理论](./03_Computational_Complexity.md) → [理论到物理桥梁](./04_Theory_to_Physical_Bridge.md)
 > **横向关联**: [数字逻辑基础](../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/01_Digital_Logic_Foundations/README.md)（实现层面）
 > **预计学习时间**: 1周
-> **实践验证**: [图灵机模拟器](../../examples/turing_machine/tm_simulator.py)
+> **实践验证**: 图灵机模拟器
 
 ---
 
@@ -570,4 +570,4 @@ python examples/turing_machine/tm_simulator.py
 
 _文档创建: 2026-03-29_
 _状态: 完成，可立即使用_
-_配套代码: [tm_simulator.py](../../examples/turing_machine/tm_simulator.py)_
+_配套代码: tm_simulator.py_

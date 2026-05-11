@@ -2,7 +2,7 @@
 
 > **层级**: L5 (原理层) + L4 (方法论层)
 > **目标**: 系统性掌握内存安全漏洞原理、检测方法与防御体系
-> **关联**: [静态分析原理](../01_System_Programming/08_Static_Analysis_Principles.md) | [动态分析原理](../01_System_Programming/09_Dynamic_Analysis_Principles.md) | [调试原理](../01_System_Programming/10_Debugging_Principles_and_Framework.md)
+> **关联**: 静态分析原理 | 动态分析原理 | 调试原理
 
 ---
 

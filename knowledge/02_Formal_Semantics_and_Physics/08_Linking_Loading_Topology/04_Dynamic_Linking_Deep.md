@@ -604,7 +604,7 @@ readelf -V ./program
 
 - [静态链接深度解析](./03_Static_Linking_Deep.md)
 - ELF文件格式
-- [虚拟内存](../../03_System_Technology_Domains/01_System_Programming/05_Memory_Mapped_Files.md)
+- 虚拟内存
 
 ### 后续延伸
 

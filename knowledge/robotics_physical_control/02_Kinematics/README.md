@@ -85,11 +85,11 @@
 
 ## 目录
 
-1. [齐次变换矩阵](./01_Homogeneous_Transforms.md)
-2. [DH参数法](./02_DH_Parameters.md)
-3. [正向运动学](./03_Forward_Kinematics.md)
-4. [逆向运动学](./04_Inverse_Kinematics.md)
-5. [雅可比矩阵](./05_Jacobian.md)
+1. 齐次变换矩阵
+2. DH参数法
+3. 正向运动学
+4. 逆向运动学
+5. 雅可比矩阵
 
 ---
 

@@ -575,7 +575,7 @@ void vector_add_accel(uint64_t* a, uint64_t* b, uint64_t* c, size_t n) {
 abstract class Config site=>{
   def here: String = site.toString
   def up: Parameters
-  def find[T](key: Field[T]): Option[T]
+  def findT: Option[T]
   def alter(f: (View, View, View) => PartialFunction[Any,Any]): Parameters
 }
 

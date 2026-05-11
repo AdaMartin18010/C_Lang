@@ -186,7 +186,7 @@ return_type func(param_type x) {
 
 相关阅读：
 → [C函数与作用域](../01_Core_Knowledge_System/02_Core_Layer/04_Functions_Scope.md)
-→ [调用约定](../01_Core_Knowledge_System/25_C_Interfacing/01_Calling_Conventions.md)
+→ 调用约定
 ```
 
 ### 3.2 高阶函数的物理意义
@@ -214,7 +214,7 @@ int apply(func_t f, int x) {
 - 可以传递、返回、存储在数据结构中
 
 相关阅读：
-→ [函数指针](../01_Core_Knowledge_System/19_Advanced_Pointers/01_Function_Pointers.md)
+→ 函数指针
 ```
 
 ### 3.3 递归的物理实现

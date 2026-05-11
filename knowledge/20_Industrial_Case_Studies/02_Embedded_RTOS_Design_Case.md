@@ -527,5 +527,5 @@ int safe_add(int *p, int *q) {
 ## 关联导航
 
 - [实时系统设计](../03_System_Technology_Domains/03_Embedded_Systems/04_Real_Time_Systems.md)
-- [进程调度算法](../03_System_Technology_Domains/os_kernel/02_Process_Scheduling_Deep.md)
+- 进程调度算法
 - [形式化验证](../02_Formal_Semantics_and_Physics/13_Formal_Methods/01_Correctness_by_Construction.md)

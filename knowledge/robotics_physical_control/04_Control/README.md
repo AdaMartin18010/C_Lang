@@ -85,9 +85,9 @@
 
 ## 内容
 
-- [PID控制](./01_PID_Advanced.md)
-- [计算力矩控制](./02_Computed_Torque.md)
-- [模型预测控制(MPC)](./03_MPC_Introduction.md)
+- PID控制
+- 计算力矩控制
+- 模型预测控制(MPC)
 
 ---
 

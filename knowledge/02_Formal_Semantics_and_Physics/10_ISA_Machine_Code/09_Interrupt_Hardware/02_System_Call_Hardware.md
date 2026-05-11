@@ -651,9 +651,7 @@ long strncpy_from_user(char *dst, const char __user *src, long count)
 │   │            __secure_computing_strict(sys_call_nr);                │   │
 │   │                                                                   │   │
 │   │    12. 调用系统调用处理函数                                       │   │
-│   │        regs->ax = sys_call_table[sys_call_nr](                    │   │
-│   │                        regs->di, regs->si, regs->dx,              │   │
-│   │                        regs->r10, regs->r8, regs->r9);            │   │
+│   │        regs->ax = sys_call_tablesys_call_nr;            │   │
 │   │                                                                   │   │
 │   │    13. 处理返回值和信号                                           │   │
 │   │        syscall_exit_to_user_mode(regs);                           │   │
@@ -851,10 +849,7 @@ long do_syscall_64(struct pt_regs *regs)
     // 4. 系统调用分发
     if (likely(nr < NR_syscalls)) {
         // 调用系统调用处理函数
-        regs->ax = sys_call_table[nr](
-            regs->di, regs->si, regs->dx,
-            regs->r10, regs->r8, regs->r9
-        );
+        regs->ax = sys_call_tablenr;
     } else {
         regs->ax = -ENOSYS;  // 无效系统调用
     }
@@ -1619,10 +1614,7 @@ static __always_inline long do_syscall_64_fast(struct pt_regs *regs)
     // 编译器分支预测提示
     if (likely(nr < NR_syscalls)) {
         // 热路径: 直接调用
-        return sys_call_table[nr](
-            regs->di, regs->si, regs->dx,
-            regs->r10, regs->r8, regs->r9
-        );
+        return sys_call_tablenr;
     }
 
     // 冷路径: 无效系统调用

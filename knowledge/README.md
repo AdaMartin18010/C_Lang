@@ -2,7 +2,7 @@
 
 > **完成度**: **100%** ✅ | **文件数**: 483 | **总行数**: 271,000+ | **最后更新**: 2026-05-10
 > **状态**: 100%完成 | **新模块**: [形式语义基础](./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | [机器学习](./11_Machine_Learning_C/README.md)
-> **Zig语言**: [Zig知识库](./zig/README.md) ✅ 100%完成 (41文档/855KB)
+> **Zig语言**: Zig知识库 ✅ 100%完成 (41文档/855KB)
 
 ---
 
@@ -150,9 +150,9 @@
 
 | 角色 | 推荐文档 |
 |------|----------|
-| 初学者 | [zig/readme.md](./zig/README.md) → [Zig_Complete_Guide.md](./zig/Zig_Complete_Guide.md) |
-| 进阶开发者 | [Zig_C_Interoperability.md](./zig/Zig_C_Interoperability.md) → [Zig_Concurrency_Async.md](./zig/Zig_Concurrency_Async.md) |
-| 专家 | [Zig_Distributed_Systems.md](./zig/Zig_Distributed_Systems.md) → [Zig_Security_Cryptography.md](./zig/Zig_Security_Cryptography.md) |
+| 初学者 | zig/readme.md → Zig_Complete_Guide.md |
+| 进阶开发者 | Zig_C_Interoperability.md → Zig_Concurrency_Async.md |
+| 专家 | Zig_Distributed_Systems.md → Zig_Security_Cryptography.md |
 
 ### 📊 完成报告
 
@@ -1636,7 +1636,7 @@ Issue模板：
 
     ## 相关文档
 
-    - [返回知识库根目录](../README.md)
+    - 返回知识库根目录
     - [全局索引](00_INDEX.md)
 
     ## 参考

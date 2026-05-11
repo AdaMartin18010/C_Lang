@@ -569,7 +569,7 @@ jobs:
 
 ### 后续延伸
 
-- [动态分析工具](./05_Dynamic_Analysis_Tools.md)
+- 动态分析工具
 - [形式化验证](../02_Formal_Semantics_and_Physics/13_Formal_Methods/01_Correctness_by_Construction.md)
 
 ### 参考

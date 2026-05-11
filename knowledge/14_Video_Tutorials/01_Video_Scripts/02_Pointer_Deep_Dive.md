@@ -648,7 +648,7 @@ command_handler_t handlers[] = {
 };
 
 // 执行命令 (O(1) 查找)
-handlers[cmd](args);
+handlerscmd;
 ```
 
 ### 19:25 | 复杂函数指针：信号处理 | 画面：Unix信号处理机制的简化展示

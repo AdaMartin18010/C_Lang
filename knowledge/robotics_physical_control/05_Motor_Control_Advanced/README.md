@@ -85,10 +85,10 @@
 
 ## 目录
 
-1. [FOC理论基础](./01_FOC_Theory.md)
-2. [SVPWM实现](./02_SVPWM.md)
-3. [无感FOC](./03_Sensorless_FOC.md)
-4. [电机参数辨识](./04_Parameter_Identification.md)
+1. FOC理论基础
+2. SVPWM实现
+3. 无感FOC
+4. 电机参数辨识
 
 ---
 

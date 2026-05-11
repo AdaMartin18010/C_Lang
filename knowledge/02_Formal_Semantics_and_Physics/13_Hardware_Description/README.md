@@ -40,9 +40,9 @@
 | 主题 | 文件 | 难度 | 时间 | 状态 |
 |:-----|:-----|:----:|:----:|:----:|
 | Verilog基础 | [01_Verilog_Basics.md](./01_Verilog_Basics.md) | ⭐⭐⭐ | 3h | 🟡 |
-| Vivado HLS入门 | [02_Vivado_HLS_Introduction.md](./02_Vivado_HLS_Introduction.md) | ⭐⭐⭐⭐ | 4h | 🟡 |
-| C到硬件的Pragma | [03_C_to_Hardware_Pragma.md](./03_C_to_Hardware_Pragma.md) | ⭐⭐⭐⭐ | 3h | 🟡 |
-| HLS优化技术 | [04_HLS_Optimization.md](./04_HLS_Optimization.md) | ⭐⭐⭐⭐⭐ | 4h | 🟡 |
+| Vivado HLS入门 | 02_Vivado_HLS_Introduction.md | ⭐⭐⭐⭐ | 4h | 🟡 |
+| C到硬件的Pragma | 03_C_to_Hardware_Pragma.md | ⭐⭐⭐⭐ | 3h | 🟡 |
+| HLS优化技术 | 04_HLS_Optimization.md | ⭐⭐⭐⭐⭐ | 4h | 🟡 |
 | HLS实践案例 | [04_HLS_with_C/readme.md](./04_HLS_with_C/README.md) | ⭐⭐⭐⭐ | 3h | 🔴 |
 
 ### 实践资源
@@ -50,7 +50,7 @@
 - [Lab1: 组合电路设计](../18_FPGA_Labs/01_Lab1_Basic_Gates.md)
 - [Lab2: ALU实现](../18_FPGA_Labs/02_Lab2_ALU_Implementation.md)
 - [Lab3: 单周期CPU](../18_FPGA_Labs/03_Lab3_Single_Cycle_CPU.md)
-- [代码仓库](./code/) - Verilog和C示例
+- 代码仓库 - Verilog和C示例
 
 ---
 

@@ -10,7 +10,7 @@
 
 ### 接口基础
 
-- [接口基础理论](./00_Interface_Fundamentals/)
+- 接口基础理论
 
 ### 有线通信接口
 
@@ -19,22 +19,22 @@
 | **UART** | < 1Mbps | 短 | ⭐⭐ | [01_UART_Interfaces](./01_UART_Interfaces/README.md) |
 | **SPI** | < 50MHz | 短 | ⭐⭐ | [02_SPI_Interfaces](./02_SPI_Interfaces/README.md) |
 | **I2C** | < 3.4Mbps | 中 | ⭐⭐⭐ | [03_I2C_Interfaces](./03_I2C_Interfaces/README.md) |
-| **CAN** | < 8Mbps | 长 | ⭐⭐⭐⭐ | [04_CAN_Interfaces](./04_CAN_Interfaces/) |
-| **USB** | < 480Mbps | 中 | ⭐⭐⭐⭐⭐ | [05_USB_Interfaces](./05_USB_Interfaces/) |
-| **Ethernet** | < 1Gbps | 长 | ⭐⭐⭐⭐ | [06_Ethernet_Interfaces](./06_Ethernet_Interfaces/) |
+| **CAN** | < 8Mbps | 长 | ⭐⭐⭐⭐ | 04_CAN_Interfaces |
+| **USB** | < 480Mbps | 中 | ⭐⭐⭐⭐⭐ | 05_USB_Interfaces |
+| **Ethernet** | < 1Gbps | 长 | ⭐⭐⭐⭐ | 06_Ethernet_Interfaces |
 
 ### 无线接口
 
-- [无线接口](./07_Wireless_Interfaces/)
+- 无线接口
 
 ### 存储与模拟接口
 
-- [存储器接口](./08_Memory_Interfaces/)
-- [模拟接口](./09_Analog_Interfaces/)
+- 存储器接口
+- 模拟接口
 
 ### 高级接口
 
-- [高级接口](./10_Advanced_Interfaces/)
+- 高级接口
 
 ---
 

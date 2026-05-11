@@ -12,9 +12,9 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | 缓存架构、淘汰策略、一致性协议、缓存穿透/雪崩 |
-| **前置知识** | [内存管理](../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md)、[数据结构](../09_Data_Structures_Algorithms) |
-| **后续延伸** | [分布式缓存](07_Distributed_KV_Store_Case.md)、[内存数据库](../03_System_Technology_Domains/11_In_Memory_Database/) |
-| **横向关联** | [Linux内核](../03_System_Technology_Domains/os_kernel/)、[高性能服务器](../../15_Network_Programming/03_High_Performance_Server.md) |
+| **前置知识** | [内存管理](../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md)、数据结构 |
+| **后续延伸** | 分布式缓存、内存数据库 |
+| **横向关联** | Linux内核、高性能服务器 |
 | **权威来源** | Redis设计文档, Memcached源码, Linux Page Cache |
 
 ---

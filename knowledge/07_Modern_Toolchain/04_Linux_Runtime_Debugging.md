@@ -700,8 +700,8 @@ void setup_memory_watch(void *addr, size_t len) {
 
 ### 后续延伸
 
-- [动态分析工具](./05_Dynamic_Analysis_Tools.md)
-- [性能追踪技术](./06_Performance_Tracing.md)
+- 动态分析工具
+- 性能追踪技术
 
 ### 参考
 

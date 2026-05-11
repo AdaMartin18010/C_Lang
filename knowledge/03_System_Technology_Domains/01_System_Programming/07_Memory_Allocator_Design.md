@@ -393,14 +393,14 @@ void lockfree_push(lockfree_head_t *head, void *ptr) {
 
 ### 前置知识
 
-- [内存管理](../../../01_Core_Knowledge_System/02_Core_Layer/01_Memory_Model.md)
-- [内存对齐](../../../01_Core_Knowledge_System/02_Core_Layer/06_Memory_Alignment.md)
-- [jemalloc/tcmalloc实现](../08_Memory_Management/02_Advanced_Allocators.md)
+- 内存管理
+- 内存对齐
+- jemalloc/tcmalloc实现
 
 ### 后续延伸
 
-- [垃圾回收](./08_Garbage_Collection.md)
-- [内存池在嵌入式中的应用](../../../03_Embedded_Systems/04_Memory_Optimization.md)
+- 垃圾回收
+- 内存池在嵌入式中的应用
 
 ### 参考
 

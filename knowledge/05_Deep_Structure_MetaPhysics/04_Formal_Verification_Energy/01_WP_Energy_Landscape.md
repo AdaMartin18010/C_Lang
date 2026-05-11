@@ -61,8 +61,8 @@
 mindmap
   root((WP能量景观))
     谓词转换器
-      wp[S](Q)
-      sp[S](P)
+      wpS
+      spS
       对偶关系
     验证条件
       后向传播
@@ -123,27 +123,27 @@ typedef struct {
                           Predicate Q);
 } WP_Calculator;
 
-// WP[skip](Q) = Q
+// WPskip = Q
 Predicate wp_skip(Predicate Q) {
     return Q;
 }
 
-// WP[x := e](Q) = Q[x/e] （Q中x替换为e）
+// WPx := e = Q[x/e] （Q中x替换为e）
 Predicate wp_assign(char *var, char *expr, Predicate Q) {
     return substitute(Q, var, expr);
 }
 
-// WP[S1; S2](Q) = WP[S1](WP[S2](Q))
+// WPS1; S2 = WPS1)
 Predicate wp_seq(Predicate (*wp1)(Predicate),
                  Predicate (*wp2)(Predicate),
                  Predicate Q) {
     return wp1(wp2(Q));
 }
 
-// WP[if B then S1 else S2](Q) =
-//   (B ∧ WP[S1](Q)) ∨ (¬B ∧ WP[S2](Q))
+// WPif B then S1 else S2 =
+//   (B ∧ WPS1) ∨ (¬B ∧ WPS2)
 // 或等价地：
-//   (B ⇒ WP[S1](Q)) ∧ (¬B ⇒ WP[S2](Q))
+//   (B ⇒ WPS1) ∧ (¬B ⇒ WPS2)
 Predicate wp_if(Predicate B,
                 Predicate wp_then,
                 Predicate wp_else,
@@ -192,7 +192,7 @@ Predicate wp_if(Predicate B,
 后条件Q: y ≥ 0
 
 WP计算：
-  WP = (x > 0 ⇒ WP[y:=x](y ≥ 0)) ∧ (x ≤ 0 ⇒ WP[y:=-x](y ≥ 0))
+  WP = (x > 0 ⇒ WPy:=x) ∧ (x ≤ 0 ⇒ WPy:=-x)
      = (x > 0 ⇒ x ≥ 0) ∧ (x ≤ 0 ⇒ -x ≥ 0)
      = (x > 0 ⇒ x ≥ 0) ∧ (x ≤ 0 ⇒ x ≤ 0)
      = true ∧ true

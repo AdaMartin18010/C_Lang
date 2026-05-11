@@ -764,7 +764,7 @@ chan_t* pipeline(chan_t* input, stage_fn* stages, int n) {
     chan_t* current = input;
 
     for (int i = 0; i < n; i++) {
-        current = stages[i](current);
+        current = stagesi;
     }
 
     return current;

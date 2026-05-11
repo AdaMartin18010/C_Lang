@@ -568,7 +568,7 @@ void function_pointers(void) {
 
     // 函数指针数组
     operation_t ops[] = {add, sub};
-    printf("ops[0](3,2) = %d\n", ops[0](3, 2));
+    printf("ops0 = %d\n", ops0);
 }
 ```
 

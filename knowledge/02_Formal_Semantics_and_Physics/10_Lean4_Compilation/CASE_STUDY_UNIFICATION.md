@@ -791,11 +791,11 @@ def solveConstraints : StateT UnificationState MetaM Unit := do
 
 ## 10. 交叉引用
 
-- **[SEMANTIC_NOTATIONS.md](../../SEMANTIC_NOTATIONS.md)** - 语义学符号标准
+- **SEMANTIC_NOTATIONS.md** - 语义学符号标准
 - **[APPLIED_FUNCTIONAL.md](./APPLIED_FUNCTIONAL.md)** - ML类型系统与Hindley-Milner
 - **[LEAN4_SEMANTICS_MAPPING.md](./LEAN4_SEMANTICS_MAPPING.md)** - Lean 4语义实现映射
-- **[SEMANTICS_UNIFIED_REVISED.md](../SEMANTICS_UNIFIED_REVISED.md)** - 统一语义框架
-- **[BRIDGE_THEOREMS.md](../BRIDGE_THEOREMS.md)** - 桥梁定理集合
+- **SEMANTICS_UNIFIED_REVISED.md** - 统一语义框架
+- **BRIDGE_THEOREMS.md** - 桥梁定理集合
 
 ---
 

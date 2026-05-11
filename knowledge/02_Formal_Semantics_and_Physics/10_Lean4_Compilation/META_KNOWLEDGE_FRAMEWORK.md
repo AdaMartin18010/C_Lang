@@ -498,7 +498,7 @@ def generateDocTemplate (id : DocId) (title : String) (phase : String) : String 
 | 文档 | 关系 | 说明 |
 |:-----|:-----|:-----|
 | [SEMANTIC_NOTATIONS.md](./SEMANTIC_NOTATIONS.md) | 前置依赖 | 符号标准 |
-| [DOCUMENT_ONTOLOGY.md](./DOCUMENT_ONTOLOGY.md) | 横向关联 | 文档本体论 |
+| DOCUMENT_ONTOLOGY.md | 横向关联 | 文档本体论 |
 | [KNOWLEDGE_GRAPH.md](../../KNOWLEDGE_GRAPH.md) | 横向关联 | 知识图谱 |
 
 ### 层级引用

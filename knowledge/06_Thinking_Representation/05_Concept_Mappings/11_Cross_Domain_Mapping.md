@@ -125,7 +125,7 @@ typedef void (*handler_t)(int);
 handler_t handlers[256];  // 静态数组，动态填充
 
 void dispatch(int opcode) {
-    handlers[opcode](opcode);  // 动态调用
+    handlersopcode;  // 动态调用
 }
 
 // 2. void* 实现类型擦除

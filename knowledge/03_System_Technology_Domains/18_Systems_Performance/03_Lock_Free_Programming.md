@@ -12,8 +12,8 @@
 | 属性 | 内容 |
 |:-----|:-----|
 | **核心概念** | 原子操作、内存序、无锁数据结构、ABA问题、 hazard指针 |
-| **前置知识** | [内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md)、[并发编程](../../README.md)、[原子操作](../../01_Core_Knowledge_System/12_Advanced_Topics/02_Atomic_Operations_Deep.md) |
-| **后续延伸** | [高性能日志](../../03_System_Technology_Domains/09_High_Performance_Log/)、[内存数据库](../../03_System_Technology_Domains/11_In_Memory_Database/) |
+| **前置知识** | [内存模型](../../02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md)、[并发编程](../../README.md)、原子操作 |
+| **后续延伸** | 高性能日志、内存数据库 |
 | **横向关联** | [缓存一致性](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/03_Cache_Coherency_Protocols.md)、[CPU微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) |
 | **权威来源** | C11标准7.17节、Herb Sutter's articles、D. Vyukov's algorithms |
 

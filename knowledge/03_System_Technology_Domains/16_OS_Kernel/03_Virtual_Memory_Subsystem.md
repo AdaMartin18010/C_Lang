@@ -542,7 +542,7 @@ Elf64_Ehdr *elf = addr;
 ### 后续延伸
 
 - [内存分配器设计](../01_System_Programming/07_Memory_Allocator_Design.md)
-- [NUMA架构与优化](./04_NUMA_Architecture.md)
+- NUMA架构与优化
 
 ### 参考
 
