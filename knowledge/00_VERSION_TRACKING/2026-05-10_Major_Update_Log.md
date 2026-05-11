@@ -16,8 +16,8 @@
 
 **涉及文件**:
 
-- `knowledge/05_C_Language_Standards/C23_C2Y_SUPPORT_MATRIX.md`
-- `knowledge/05_C_Language_Standards/C23_C2Y_ROADMAP.md`
+- `knowledge/c_language_standards/C23_C2Y_SUPPORT_MATRIX.md`
+- `knowledge/c_language_standards/C23_C2Y_ROADMAP.md`
 
 ### 1.2 GCC 15/C23默认标准状态更新
 
@@ -27,7 +27,7 @@
 
 **涉及文件**:
 
-- `knowledge/05_C_Language_Standards/C23_C2Y_ROADMAP.md`
+- `knowledge/c_language_standards/C23_C2Y_ROADMAP.md`
 - `knowledge/00_VERSION_TRACKING/C23_to_C2y_Roadmap.md`
 - `knowledge/01_Core_Knowledge_System/07_Modern_C/C2y_Countof_Depth.md`
 - `knowledge/01_Core_Knowledge_System/07_Modern_C/C2y_If_Declaration_Depth.md`
@@ -42,8 +42,8 @@
 
 **涉及文件**:
 
-- `knowledge/05_C_Language_Standards/C23_C2Y_SUPPORT_MATRIX.md`
-- `knowledge/05_C_Language_Standards/C23_C2Y_ROADMAP.md`
+- `knowledge/c_language_standards/C23_C2Y_SUPPORT_MATRIX.md`
+- `knowledge/c_language_standards/C23_C2Y_ROADMAP.md`
 - `knowledge/01_Core_Knowledge_System/07_Modern_C/C2y_Preview/README.md`
 - `knowledge/01_Core_Knowledge_System/07_Modern_C/C2y_Preview/01_Defer_Keyword.md`
 
@@ -55,8 +55,8 @@
 
 **涉及文件**:
 
-- `knowledge/05_C_Language_Standards/C23_C2Y_SUPPORT_MATRIX.md`
-- `knowledge/05_C_Language_Standards/C23_C2Y_ROADMAP.md`
+- `knowledge/c_language_standards/C23_C2Y_SUPPORT_MATRIX.md`
+- `knowledge/c_language_standards/C23_C2Y_ROADMAP.md`
 - `knowledge/01_Core_Knowledge_System/07_Modern_C/C2y_Countof_Depth.md`
 - `examples/c23_c2y/20_compatibility_macros.c`
 
@@ -69,8 +69,8 @@
 **涉及文件**:
 
 - `examples/c23_c2y/04_constexpr_usage.c`
-- `knowledge/05_C_Language_Standards/C23_C2Y_SUPPORT_MATRIX.md`
-- `knowledge/05_C_Language_Standards/C23_C2Y_ROADMAP.md`
+- `knowledge/c_language_standards/C23_C2Y_SUPPORT_MATRIX.md`
+- `knowledge/c_language_standards/C23_C2Y_ROADMAP.md`
 
 ### 1.6 C2y标准编号错误修正
 
@@ -91,7 +91,7 @@
 
 **涉及文件**:
 
-- `knowledge/05_C_Language_Standards/C23_C2Y_ROADMAP.md`
+- `knowledge/c_language_standards/C23_C2Y_ROADMAP.md`
 
 ---
 

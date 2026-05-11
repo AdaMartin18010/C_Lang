@@ -182,7 +182,7 @@ $$\forall a \in A. \exists! b \in B. (a, b) \in f$$
 - **双射 (Bijective)**: 既是单射又是满射
 
 **定义 1.6 (函数更新)**: 给定函数 $f: A \to B$，点更新定义为：
-$$f[a \mapsto b [链接失效]](x) \triangleq \begin{cases} b & \text{if } x = a \\ f(x) & \text{otherwise} \end{cases}$$
+$$fa \mapsto b \triangleq \begin{cases} b & \text{if } x = a \\ f(x) & \text{otherwise} \end{cases}$$
 
 #### 1.1.3 有限序列
 
@@ -453,7 +453,7 @@ $$
   \frac{\overline{\langle 1, \sigma \rangle \Downarrow 1}}{\langle x := 1, \sigma \rangle \Downarrow \sigma[x \mapsto 1]}
   \quad
   \frac{
-    \frac{\sigma[x \mapsto 1 [链接失效]](x) = 1}{\langle x, \sigma[x \mapsto 1] \rangle \Downarrow 1}
+    \frac{\sigmax \mapsto 1 = 1}{\langle x, \sigma[x \mapsto 1] \rangle \Downarrow 1}
     \quad
     \frac{}{\langle 2, \sigma[x \mapsto 1] \rangle \Downarrow 2}
   }{\langle x + 2, \sigma[x \mapsto 1] \rangle \Downarrow 3}

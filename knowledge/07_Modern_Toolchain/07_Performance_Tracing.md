@@ -554,7 +554,7 @@ I/O分析：
 ### 后续延伸
 
 - [动态分析工具](./06_Dynamic_Analysis_Tools.md)
-- [内核性能调优](../03_System_Technology_Domains/16_OS_Kernel/06_Kernel_Performance_Tuning.md)
+- [内核性能调优](../03_System_Technology_Domains/os_kernel/06_Kernel_Performance_Tuning.md)
 
 ### 参考
 

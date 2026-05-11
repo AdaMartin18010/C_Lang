@@ -47,7 +47,7 @@ syscall(SYS_write, fd, buf, count);
 ## 与其他模块的关联
 
 - [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md)
-- [进程调度](../../16_OS_Kernel/02_Process_Scheduling_Deep.md)
+- [进程调度](../../os_kernel/02_Process_Scheduling_Deep.md)
 - [eBPF 深度探索](06_eBPF_Deep.md)
 
 ## 待补充内容

@@ -1,0 +1,11 @@
+{
+  "04_Standard_Library_Frameworks": "standard_library_frameworks",
+  "05_C_Language_Standards": "c_language_standards",
+  "06_Embedded_Bare_Metal": "embedded_bare_metal",
+  "09_Cross_Platform_Development": "cross_platform_development",
+  "11_Performance_Engineering": "performance_engineering",
+  "15_Memory_Safe_Languages": "memory_safe_languages",
+  "16_OS_Kernel": "os_kernel",
+  "18_Robotics_Physical_Control": "robotics_physical_control",
+  "20_Hardware_Interfaces_C": "hardware_interfaces_c"
+}

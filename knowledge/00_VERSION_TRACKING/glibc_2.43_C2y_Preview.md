@@ -266,7 +266,7 @@ glibc 2.43 包含多个安全修复，建议所有发行版升级：
 
 - [glibc 2.43 Release Notes](https://sourceware.org/pipermail/libc-alpha/)
 - [Phoronix glibc 2.43 Benchmarks](https://www.phoronix.com/)
-- [C23/C2y 标准演进路线图](../05_C_Language_Standards/C23_C2Y_ROADMAP.md)
+- [C23/C2y 标准演进路线图](../c_language_standards/C23_C2Y_ROADMAP.md)
 - [GCC 15 C23 默认标准迁移指南](C23_Default_Standard_Migration_Guide.md)
 - [musl 2.0 C23 支持对比](musl_2.0_C23.md)
 

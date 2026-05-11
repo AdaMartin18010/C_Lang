@@ -13,9 +13,9 @@
 |:-----|:-----|
 | **核心概念** | 运算符优先级、求值顺序、整数提升、类型转换 |
 | **前置知识** | [语法要素](./01_Syntax_Elements.md)、[数据类型系统](./02_Data_Type_System.md) |
-| **后续延伸** | [控制流与函数](./04_Control_Flow.md)、[指针算术 [链接失效]](../../02_Core_Layer/01_Pointer_Depth.md#指针运算)、[位运算 [链接失效]](./06_Bit_Operations.md) |
-| **横向关联** | [整数溢出案例 [链接失效]](../../09_Safety_Standards/Vulnerability_Cases/03_Integer_Overflow_Cases.md)、[未定义行为 [链接失效]](../../02_Formal_Semantics/00_Core_Semantics_Foundations/05_Undefined_Behavior_Semantics.md) |
-| **深层理论** | [表达式求值语义 [链接失效]](../../02_Formal_Semantics/00_Core_Semantics_Foundations/01_Operational_Semantics.md) |
+| **后续延伸** | [控制流与函数](./04_Control_Flow.md)、指针算术、位运算 |
+| **横向关联** | 整数溢出案例、未定义行为 |
+| **深层理论** | 表达式求值语义 |
 | **权威来源** | K&R Ch2.11-2.12, C11标准 6.5, CERT EXP系列 |
 
 ---

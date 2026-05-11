@@ -74,7 +74,7 @@ static int (*const operations[])(int, int) = {
 
 int calculator(operation_t op, int a, int b) {
     if (op >= OP_COUNT) return 0;
-    return operations[op [链接失效]](a, b);
+    return operationsop;
 }
 
 // 复杂函数指针：信号处理回调

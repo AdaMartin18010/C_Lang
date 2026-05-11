@@ -181,7 +181,7 @@ class Frame:
             if slot['value'] is not None:
                 return slot['value']
             if slot['if_needed']:
-                return slot['if_needed' [链接失效]](self)
+                return slot'if_needed'
         # 继承自父框架
         if self.parent:
             return self.parent.get_slot(slot_name)

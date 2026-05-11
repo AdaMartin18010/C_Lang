@@ -21,8 +21,8 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [动态链接 [链接失效]](../../03_System_Technology_Domains/01_System_Programming/03_Dynamic_Linking.md) | 运行时 | 动态链接器 |
-| [系统编程 [链接失效]](../../03_System_Technology_Domains/01_System_Programming/README.md) | 系统调用 | 加载器接口 |
+| 动态链接 | 运行时 | 动态链接器 |
+| [系统编程](../../03_System_Technology_Domains/01_System_Programming/README.md) | 系统调用 | 加载器接口 |
 | [形式化验证](../11_CompCert_Verification/README.md) | 正确性 | 链接正确性证明 |
 
 ### 关键概念链

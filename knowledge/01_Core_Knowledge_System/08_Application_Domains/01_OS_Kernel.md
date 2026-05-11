@@ -421,7 +421,7 @@ void do_interrupt_handler(struct pt_regs *regs) {
 
     // 调用注册的处理函数
     if (irq_handlers[irq]) {
-        irq_handlers[irq [链接失效]](regs);
+        irq_handlersirq;
     }
 }
 ```

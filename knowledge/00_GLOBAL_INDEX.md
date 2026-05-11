@@ -152,7 +152,7 @@
 
 | 路径 | 起点 | 终点 | 关键文档 |
 |:-----|:-----|:-----|:---------|
-| **系统编程** | [Linux内核模块](./03_System_Technology_Domains/16_OS_Kernel/01_Linux_Kernel_Module_Programming.md) | [eBPF深度](./03_System_Technology_Domains/01_System_Programming/06_eBPF_Deep.md) | 调度、内存、I/O |
+| **系统编程** | [Linux内核模块](./03_System_Technology_Domains/os_kernel/01_Linux_Kernel_Module_Programming.md) | [eBPF深度](./03_System_Technology_Domains/01_System_Programming/06_eBPF_Deep.md) | 调度、内存、I/O |
 | **编译器开发** | [AST与IR](./02_Formal_Semantics_and_Physics/11_Compiler_Internals/01_AST_and_IR.md) | [后端代码生成](./02_Formal_Semantics_and_Physics/11_Compiler_Internals/02_Backend_Code_Generation.md) | 优化Pass、LTO |
 | **性能工程** | [性能工程方法论](./01_Core_Knowledge_System/05_Engineering_Layer/06_Performance_Engineering.md) | [性能追踪技术](./07_Modern_Toolchain/07_Performance_Tracing.md) | perf、eBPF、Roofline |
 | **安全分析** | [密码学基础](./03_System_Technology_Domains/10_Security_Engineering/09_Cryptography_Fundamentals.md) | [逆向工程](./03_System_Technology_Domains/10_Security_Engineering/08_Reverse_Engineering_Basics.md) | 静/动态分析 |

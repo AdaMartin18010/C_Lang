@@ -271,12 +271,12 @@ outer: while (condition1) {
 
 // 基本闭包
 int multiplier = 10;
-auto fn = [ [链接失效]](int x) { return x * multiplier; };  // 捕获multiplier
+auto fn =  { return x * multiplier; };  // 捕获multiplier
 int result = fn(5);  // 50
 
 // 显式捕获
 int a = 1, b = 2;
-auto sum = `[a, b [链接失效]](void) { return a + b; };`
+auto sum = `a, b { return a + b; };`
 ```
 
 ### 语法规范
@@ -296,13 +296,13 @@ capture_list:
 ```c
 // 问题：闭包生命周期管理
 int* create_multiplier(int factor) {
-    auto fn = `[factor [链接失效]](int x) { return x * factor; };`
+    auto fn = `factor { return x * factor; };`
     return fn;  // 错误：factor在栈上，函数返回后失效
 }
 
 // 可能的解决方案：堆分配闭包
 int* create_multiplier_heap(int factor) {
-    auto fn = heap_closure `[factor [链接失效]](int x) { return x * factor; };`
+    auto fn = heap_closure `factor { return x * factor; };`
     return fn;  // 需要手动释放
 }
 ```

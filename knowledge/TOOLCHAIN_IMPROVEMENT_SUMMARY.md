@@ -291,7 +291,7 @@
 
 - 评估报告
 - [工具链模块主页](./07_Modern_Toolchain/README.md)
-- [可持续推进路线图 [链接失效]](../../SUSTAINABLE_ROADMAP_2026.md)
+- 可持续推进路线图
 - [IDE对比矩阵](./07_Modern_Toolchain/01_IDE_Editors/06_IDE_Comparison_Matrix.md)
 - [GitHub Actions指南](./07_Modern_Toolchain/03_CI_CD_DevOps/01_GitHub_Actions_C.md)
 

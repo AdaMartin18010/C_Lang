@@ -422,7 +422,7 @@ void indirect_branch_analysis(void) {
     printf("Ordered indirect calls:\n");
     clock_t start = clock();
     for (int i = 0; i < N; i++) {
-        funcs[i % 4 [链接失效]](i);  /* A-B-C-D-A-B-C-D模式 */
+        funcsi % 4;  /* A-B-C-D-A-B-C-D模式 */
     }
     printf("  Cycles: %ld\n\n", clock() - start);
 

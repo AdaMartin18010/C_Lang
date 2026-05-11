@@ -2,7 +2,7 @@
 
 > **层级定位**: 01_Core_Knowledge_System > 03_Construction_Layer
 > **难度级别**: L3-L4
-> **前置知识**: [语法要素 [链接失效]](../../01_Basic_Layer/01_Syntax_Elements.md)、[编译过程 [链接失效]](../../05_Engineering/01_Compilation_Build.md)
+> **前置知识**: 语法要素、编译过程
 
 ---
 
@@ -205,7 +205,7 @@ typedef struct {
 #define FLOAT 1.5e-10
 #define INVALID 0xGHI  // 预处理器认为是有效的预处理数字！
 
-// 预处理器数字定义：[0-9 [链接失效]]([a-zA-Z0-9._]*[a-zA-Z0-9_])?
+// 预处理器数字定义：0-9?
 // 注意：预处理器不进行语义验证，仅做语法识别
 ```
 

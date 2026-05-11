@@ -1675,7 +1675,7 @@ set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 
 ## 证明文档
 
-- [静态分析报告 [链接失效]](reports/static_analysis_2026_Q1.pdf)
+- 静态分析报告
 - [偏离记录](docs/DEVIATIONS.md)
 - [审计记录](docs/AUDIT_LOG.md)
 

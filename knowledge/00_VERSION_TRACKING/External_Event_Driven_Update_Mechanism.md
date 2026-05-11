@@ -152,5 +152,5 @@ jobs:
 
 ## 参考
 
-- [C23/C2y Roadmap](../05_C_Language_Standards/C23_C2Y_ROADMAP.md)
+- [C23/C2y Roadmap](../c_language_standards/C23_C2Y_ROADMAP.md)
 - [2026-05-10 Major Update Log](2026-05-10_Major_Update_Log.md)

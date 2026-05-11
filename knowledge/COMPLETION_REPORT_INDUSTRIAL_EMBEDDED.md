@@ -63,8 +63,8 @@
 | `knowledge/18_Industrial_Protocols_C/00_INDEX.md` | 索引 | 4.8KB | 快速导航索引 |
 | `knowledge/19_Embedded_Systems_C/README.md` | 入口 | 6.7KB | 嵌入式系统模块主入口 |
 | `knowledge/19_Embedded_Systems_C/00_INDEX.md` | 索引 | 2.3KB | 快速导航索引 |
-| `knowledge/20_Hardware_Interfaces_C/README.md` | 入口 | 7.6KB | 硬件接口模块主入口 |
-| `knowledge/20_Hardware_Interfaces_C/00_INDEX.md` | 索引 | 2.3KB | 快速导航索引 |
+| `knowledge/hardware_interfaces_c/README.md` | 入口 | 7.6KB | 硬件接口模块主入口 |
+| `knowledge/hardware_interfaces_c/00_INDEX.md` | 索引 | 2.3KB | 快速导航索引 |
 | `knowledge/00_INDUSTRIAL_EMBEDDED_INDEX.md` | 总索引 | 9.9KB | 三大模块整合索引 |
 
 ### 协议详细文档
@@ -86,7 +86,7 @@
 
 | 路径 | 类型 | 大小 | 描述 |
 |------|------|------|------|
-| `knowledge/20_Hardware_Interfaces_C/01_UART_Interfaces/README.md` | 入口 | 6.1KB | UART接口知识导航 |
+| `knowledge/hardware_interfaces_c/01_UART_Interfaces/README.md` | 入口 | 6.1KB | UART接口知识导航 |
 
 ---
 

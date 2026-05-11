@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-05-11T16:45:24.398701",
+  "markdown": {
+    "files": 1642,
+    "lines": 1046179
+  },
+  "c_code": {
+    "files": 4914,
+    "lines": 346903
+  },
+  "zig_code": {
+    "files": 633,
+    "lines": 36420
+  },
+  "examples": {
+    "c": 31,
+    "python": 2
+  },
+  "top_directories": {
+    "00_VERSION_TRACKING": 35,
+    "01_Core_Knowledge_System": 202,
+    "02_Formal_Semantics_and_Physics": 360,
+    "03_System_Technology_Domains": 189,
+    "04_Industrial_Scenarios": 116,
+    "04_Standard_Library_Frameworks": 7,
+    "05_C_Language_Standards": 7,
+    "05_Deep_Structure_MetaPhysics": 72,
+    "05_Engineering_Layer": 1,
+    "06_Embedded_Bare_Metal": 11,
+    "06_Thinking_Representation": 131,
+    "07_Modern_Toolchain": 105,
+    "08_Zig_C_Connection": 29,
+    "09_Cross_Platform_Development": 2,
+    "09_Data_Structures_Algorithms": 42,
+    "10_WebAssembly_C": 5,
+    "11_Machine_Learning_C": 9,
+    "11_Performance_Engineering": 8,
+    "12_Practice_Exercises": 23,
+    "14_Video_Tutorials": 21,
+    "15_Memory_Safe_Languages": 17,
+    "15_Network_Programming": 2,
+    "16_Embedded_AI_Agents": 20,
+    "16_OS_Kernel": 3,
+    "17_Ada_SPARK": 29,
+    "18_Industrial_Protocols_C": 15,
+    "18_Robotics_Physical_Control": 40,
+    "19_Embedded_Systems_C": 21,
+    "20_Hardware_Interfaces_C": 9,
+    "20_Industrial_Case_Studies": 46,
+    "21_Computation_Theory": 5,
+    "22_Assembler_Implementation": 5,
+    "23_VM_Implementation": 3,
+    "24_Complete_Chain": 4,
+    "templates": 2,
+    "Zig": 36
+  }
+}

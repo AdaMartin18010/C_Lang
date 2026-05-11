@@ -442,7 +442,7 @@ CompCert编译器验证：
 ## 关联导航
 
 - [形式化方法基础](./13_Formal_Methods/01_Correctness_by_Construction.md)
-- [Hoare逻辑 [链接失效]](./13_Formal_Methods/01_Correctness_by_Construction.md#推理规则)
+- Hoare逻辑
 - [C语言语义](./01_Game_Semantics/02_C11_Memory_Model.md)
 
 ## 参考

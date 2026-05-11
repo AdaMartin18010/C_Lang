@@ -381,13 +381,13 @@ conan lock create conanfile.py --update=pkg1 --lockfile-out=conan.lock
 
 ### 前置知识
 
-- [构建系统 [链接失效]](./02_Build_Systems/README.md)
-- [CMake详解 [链接失效]](../03_Modern_Toolchain/README.md)
+- 构建系统
+- CMake详解
 
 ### 后续延伸
 
-- [CI/CD实践 [链接失效]](../../../03_System_Technology_Domains/03_Embedded_Systems/06_CI_CD_for_Embedded.md)
-- [依赖安全 [链接失效]](../../../03_System_Technology_Domains/10_Security_Engineering/07_Dependency_Security.md)
+- CI/CD实践
+- 依赖安全
 
 ### 参考
 

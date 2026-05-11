@@ -323,7 +323,7 @@ int execute_op(int op_code, int a, int b, int *result)
         return ERROR_NOT_IMPLEMENTED;
     }
 
-    *result = operations[op_code [链接失效]](a, b);
+    *result = operationsop_code;
     return 0;
 }
 ```

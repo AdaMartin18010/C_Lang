@@ -654,13 +654,13 @@ void example(void) {
 
 ### 前置知识
 
-- [基础数据结构 [链接失效]](../01_Introduction/04_Data_Types_and_Memory_Layout.md)
-- [内存管理 [链接失效]](./01_Memory_Model.md)
+- 基础数据结构
+- [内存管理](./01_Memory_Model.md)
 
 ### 后续延伸
 
-- [并发数据结构 [链接失效]](../14_Concurrency_Parallelism/05_Lock_Free_Data_Structures.md)
-- [数据库索引实现 [链接失效]](../../04_Industrial_Scenarios/01_Database_Development/02_Index_Implementation.md)
+- 并发数据结构
+- 数据库索引实现
 
 ### 参考
 

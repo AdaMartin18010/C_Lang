@@ -31,7 +31,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [微架构](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 理论深化 | CPU微架构与优化 |
-| [缓存优化 [链接失效]](../../02_Formal_Semantics_and_Physics/09_Physical_Machine_Layer/05_Modern_CPU_Architectures_2024.md#缓存优化) | 硬件关联 | 缓存层次结构 |
+| 缓存优化 | 硬件关联 | 缓存层次结构 |
 
 ---
 

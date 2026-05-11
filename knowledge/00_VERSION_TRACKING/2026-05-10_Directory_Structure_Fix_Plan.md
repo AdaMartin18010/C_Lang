@@ -20,7 +20,7 @@
 |------|----------|
 | `knowledge/README.md` | 删除末尾多余fence |
 | `knowledge/11_Machine_Learning_C/03_Embedded_AI_Deployment.md` | 添加缺失的代码块闭合、删除末尾模板 |
-| `knowledge/05_C_Language_Standards/C23_C2Y_ROADMAP.md` | 修正LLVM 22→LLVM 20 |
+| `knowledge/c_language_standards/C23_C2Y_ROADMAP.md` | 修正LLVM 22→LLVM 20 |
 
 ---
 

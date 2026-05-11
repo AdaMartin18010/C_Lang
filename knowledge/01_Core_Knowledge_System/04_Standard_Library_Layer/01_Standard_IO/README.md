@@ -23,14 +23,14 @@
 |:-----|:---------|:-----|
 | [C11线程库](../10_Threads_C11.md) | 并发关联 | 线程安全的I/O操作 |
 | [POSIX系统编程](../../09_Safety_Standards/POSIX_1_2024/01_POSIX_System_Programming.md) | 系统扩展 | 更低层的I/O接口 |
-| [文件系统 [链接失效]](../../03_System_Technology_Domains/01_System_Programming/02_File_System_Operations.md) | 系统应用 | 系统级文件操作 |
+| 文件系统 | 系统应用 | 系统级文件操作 |
 
 ### 横向关联
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [状态机](../../../06_Thinking_Representation/09_State_Machines/README.md) | 实现机制 | FILE状态转换 |
-| [内存映射 [链接失效]](../../03_System_Technology_Domains/01_System_Programming/05_Memory_Mapped_Files.md) | 性能优化 | 替代方案对比 |
+| 内存映射 | 性能优化 | 替代方案对比 |
 
 ## 目录
 

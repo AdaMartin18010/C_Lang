@@ -511,8 +511,8 @@ ASIL等级 (Automotive Safety Integrity Level):
 
 ### 前置知识
 
-- [进程调度算法深度](../../16_OS_Kernel/02_Process_Scheduling_Deep.md)
-- [Linux内核模块编程](../../16_OS_Kernel/01_Linux_Kernel_Module_Programming.md)
+- [进程调度算法深度](../../os_kernel/02_Process_Scheduling_Deep.md)
+- [Linux内核模块编程](../../os_kernel/01_Linux_Kernel_Module_Programming.md)
 
 ### 后续延伸
 

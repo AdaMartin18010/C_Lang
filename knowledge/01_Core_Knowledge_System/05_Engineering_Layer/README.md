@@ -22,15 +22,15 @@
 | 文档 | 关系 | 说明 |
 |:-----|:-----|:-----|
 | [代码审查检查清单](../05_Engineering/08_Code_Review_Checklist.md) | 质量保障 | 人工审查流程 |
-| [性能优化 [链接失效]](../05_Engineering/03_Performance_Optimization.md) | 工程实践 | 优化工程化 |
-| [调试技术 [链接失效]](../05_Engineering/02_Debug_Techniques.md) | 开发支持 | 调试工程化 |
+| 性能优化 | 工程实践 | 优化工程化 |
+| 调试技术 | 开发支持 | 调试工程化 |
 
 ### 后续延伸
 
 | 文档 | 关系 | 说明 |
 |:-----|:-----|:-----|
 | [现代工具链](../../07_Modern_Toolchain/README.md) | 工具支持 | IDE、构建系统、CI/CD |
-| [持续集成 [链接失效]](../../03_System_Technology_Domains/13_DevOps_Toolchain/README.md) | 自动化 | 自动化构建部署 |
+| 持续集成 | 自动化 | 自动化构建部署 |
 | [MISRA C工具](../09_Safety_Standards/MISRA_C_2023/tools/01_MISRA_Toolchain_Guide.md) | 合规检查 | 静态分析工具链 |
 
 ### 工程实践体系
