@@ -27,6 +27,8 @@
   - [代码审查](#代码审查)
     - [代码审查清单](#代码审查清单)
     - [Gerrit/CodeReview 集成](#gerritcodereview-集成)
+  - [动态分析与安全检测](#动态分析与安全检测)
+    - [Sanitizer 与模糊测试](#sanitizer-与模糊测试)
   - [代码度量分析](#代码度量分析)
     - [圈复杂度计算](#圈复杂度计算)
     - [自定义度量工具](#自定义度量工具)
@@ -497,6 +499,24 @@ if [ -n "$FILES" ]; then
     echo "$FILES" | xargs git add
 fi
 ```
+
+## 动态分析与安全检测
+
+### Sanitizer 与模糊测试
+
+除了静态分析，运行时检测是发现内存错误和未定义行为的关键手段。
+
+| 工具 | 检测问题 | 用途 |
+|:-----|:---------|:-----|
+| **AddressSanitizer** | 堆/栈/全局溢出、UAF、double-free | 每次 CI 运行 |
+| **UndefinedBehaviorSanitizer** | 有符号溢出、空指针解引用、对齐违规 | 每次 CI 运行 |
+| **MemorySanitizer** | 未初始化内存读取 | 夜间构建 |
+| **ThreadSanitizer** | 数据竞争、死锁 | 并发测试阶段 |
+| **libFuzzer/AFL++** | 通过随机输入发现崩溃 | 持续运行 |
+
+完整指南请参考独立文档：[Sanitizer 与模糊测试完全指南](Sanitizer_Fuzzing_Guide.md)
+
+---
 
 ## 代码审查
 

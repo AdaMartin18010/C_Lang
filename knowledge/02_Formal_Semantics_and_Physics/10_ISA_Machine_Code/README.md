@@ -28,7 +28,7 @@
 
 | ISA | 文档 | 特点 |
 |:-----|:-----|:-----|
-| x86-64 | [x86实现](12_x86_Microarchitecture_Impl.md) | CISC复杂指令 |
+| x86-64 | [x86微架构](12_x86_Microarchitecture_Impl.md) / [系统编程指南](x86_64_Architecture_Guide.md) | CISC复杂指令，工业主流 |
 | ARM64 | [ARM64实现](11_ARM64_CPU_Implementation.md) | RISC定长指令 |
 | RISC-V | [RISC-V实现](08_RISCV_CPU_Complete/README.md) | 开源模块化 |
 
