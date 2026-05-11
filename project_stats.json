@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-05-11T20:26:30.175484",
+  "generated_at": "2026-05-11T20:44:29.598393",
   "markdown": {
-    "files": 1199,
-    "lines": 979272
+    "files": 1205,
+    "lines": 980293
   },
   "c_code": {
     "files": 4914,
@@ -20,7 +20,7 @@
     "00_VERSION_TRACKING": 35,
     "01_Core_Knowledge_System": 181,
     "02_Formal_Semantics_and_Physics": 200,
-    "03_System_Technology_Domains": 116,
+    "03_System_Technology_Domains": 122,
     "04_Industrial_Scenarios": 107,
     "05_Deep_Structure_MetaPhysics": 72,
     "06_Thinking_Representation": 121,

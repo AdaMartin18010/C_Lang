@@ -351,5 +351,40 @@ uint32_t mask = 0xFFFFFFFFU;  // 明确指定 unsigned
 
 ---
 
+## 8. 配套代码示例
+
+本节配套可编译代码位于 `examples/bit_manipulation/` 目录：
+
+| 示例文件 | 演示内容 | 编译命令 |
+|---------|---------|---------|
+| `bitmap_allocator.c` | 64位位图分配器，使用 `__builtin_ctzll` 快速查找空闲位 | `gcc -O2 -std=c11` |
+| `bit_flags.c` | 标志位枚举与位操作宏（SET/CLEAR/TOGGLE/CHECK） | `gcc -O2 -std=c11` |
+| `endianness.c` | 字节序检测与大小端转换 | `gcc -O2 -std=c11` |
+
+### 性能基准参考
+
+| 操作 | 软件实现 (cycles) | 内置函数 (cycles) | 加速比 |
+|------|------------------|------------------|--------|
+| 前导零计数 | ~15 | `__builtin_clz`: 1 | **15x** |
+| 尾随零计数 | ~12 | `__builtin_ctz`: 1 | **12x** |
+| 位反转 | ~20 | `__builtin_bswap`: 1 | **20x** |
+| popcount | ~32 | `__builtin_popcount`: 1 | **32x** |
+
+> 数据基于 x86-64 `POPCNT`/`LZCNT`/`TZCNT` 指令，实际性能因 CPU 微架构而异。
+
+---
+
+## 9. 常见错误模式
+
+| 错误 | 现象 | 检测方法 |
+|------|------|---------|
+| **有符号数右移** | 负数右移行为未定义 | 始终使用 `uintN_t` 进行位运算 |
+| **移位数 ≥ 类型宽度** | 未定义行为 | 移位前检查 `shift < sizeof(T)*8` |
+| **混合有符号/无符号** | 有符号数隐式提升为无符号 | 启用 `-Wsign-conversion` |
+| **位域布局依赖** | 不同编译器布局不同 | 使用掩码+移位替代位域 |
+| **忘记 `volatile`** | 寄存器读取被优化掉 | MMIO 访问必须标记 `volatile` |
+
+---
+
 > **最后更新**: 2026-05-11
 > **参考**: Hacker's Delight (Warren), Bit Twiddling Hacks (Stanford)

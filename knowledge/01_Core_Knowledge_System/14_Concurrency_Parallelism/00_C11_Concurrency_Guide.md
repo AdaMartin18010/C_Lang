@@ -24,16 +24,16 @@ int worker_thread(void *arg) {
 int main(void) {
     thrd_t t1, t2;
     int id1 = 1, id2 = 2;
-    
+
     // 创建线程
     thrd_create(&t1, worker_thread, &id1);
     thrd_create(&t2, worker_thread, &id2);
-    
+
     // 等待线程完成
     int result1, result2;
     thrd_join(t1, &result1);
     thrd_join(t2, &result2);
-    
+
     printf("Results: %d, %d\n", result1, result2);
     return 0;
 }
@@ -264,7 +264,7 @@ int pool_worker(void *arg) {
         pool->count--;
         cnd_signal(&pool->not_full);
         mtx_unlock(&pool->lock);
-        
+
         task.func(task.arg);  // 执行任务
     }
     return 0;
@@ -317,6 +317,41 @@ Instance *get_instance(void) {
 - [ ] 锁的获取和释放成对出现（考虑异常路径）
 - [ ] 避免在持有锁时调用可能阻塞的函数
 - [ ] 使用 `memory_order_seq_cst` 除非已理解更弱的内存序
+
+---
+
+## 7. 配套代码示例
+
+本节配套可编译代码位于 `examples/concurrency/` 目录：
+
+| 示例文件 | 演示内容 | 编译命令 |
+|---------|---------|---------|
+| `c11_threads.c` | `thrd_create`/`thrd_join` + `mtx_t` 互斥锁 | `gcc -O2 -std=c11` |
+| `producer_consumer.c` | `cnd_t` 条件变量实现有界缓冲区 | `gcc -O2 -std=c11` |
+| `atomic_operations.c` | `atomic_int` / `atomic_flag` 自旋锁 | `gcc -O2 -std=c11` |
+| `pthread_compat.c` | POSIX pthread 兼容版本（MinGW/无 C11 threads 时使用） | `gcc -O2 -lpthread` |
+
+### 同步原语性能对比（x86-64）
+
+| 原语 | 无竞争延迟 | 竞争时行为 | 适用场景 |
+|------|----------|-----------|---------|
+| `mtx_t` (mutex) | ~25 ns | 线程休眠 | 临界区 > 1μs |
+| `atomic_flag` (spinlock) | ~10 ns | 忙等待 | 临界区 < 1μs |
+| `atomic_*` (seq_cst) | ~15 ns | 硬件缓存一致性 | 计数器、标志位 |
+| `atomic_*` (relaxed) | ~5 ns | 无全局顺序 | 独立计数器 |
+
+---
+
+## 8. 常见错误模式
+
+| 错误模式 | 后果 | 修复方案 |
+|---------|------|---------|
+| **条件变量用 `if` 而非 `while`** | 虚假唤醒导致断言失败 | 始终 `while (!condition) cnd_wait(...)` |
+| **锁内调用可能阻塞的函数** | 死锁，性能暴跌 | 临界区内只做最少工作 |
+| **忘记解锁（异常路径）** | 死锁 | 使用 `goto cleanup` 确保成对释放 |
+| **数据竞争（非原子访问）** | 未定义行为，结果不可复现 | 所有共享变量用 `atomic` 或 mutex 保护 |
+| **错误的内存序** | 指令重排导致可见性问题 | 默认使用 `memory_order_seq_cst` |
+| **ABA 问题（无锁结构）** | 指针复用导致状态不一致 | 使用带标签指针或 hazard pointer |
 
 ---
 

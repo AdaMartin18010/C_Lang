@@ -255,5 +255,45 @@ struct alignas(64) CacheLine {
 
 ---
 
+## 6. 配套代码示例
+
+相关可编译代码示例：
+
+| 示例路径 | 演示内容 | 编译命令 |
+|---------|---------|---------|
+| `examples/bit_manipulation/endianness.c` | 字节序检测与大小端转换 | `gcc -O2 -std=c11` |
+| `examples/library_design/api_versioning.c` | API 版本控制与特性检测 | `gcc -O2 -std=c11` |
+| `examples/macros/stringify_concat.c` | 编译器特性检测宏 | `gcc -O2 -std=c11` |
+
+### 平台抽象层设计模板
+
+```c
+/* platform.h */
+#ifdef _WIN32
+    #include <windows.h>
+    #define sleep_ms(ms) Sleep(ms)
+    #define PATH_SEP '\\'
+#else
+    #include <unistd.h>
+    #define sleep_ms(ms) usleep((ms) * 1000)
+    #define PATH_SEP '/'
+#endif
+```
+
+---
+
+## 7. 常见错误模式
+
+| 错误模式 | 后果 | 修复方案 |
+|---------|------|---------|
+| **使用 `int` 表示指针差值** | 64位平台截断 | 使用 `ptrdiff_t` |
+| **假设 `sizeof(int) == 4`** | 16位/嵌入式平台错误 | 使用 `<stdint.h>` 固定宽度类型 |
+| **忽略字节序** | 跨平台数据交换失败 | 显式转换：`htonl` / `htons` |
+| **依赖未定义行为** | 换编译器后行为改变 | 启用 `-Wall -Wextra -pedantic` |
+| **硬编码路径分隔符** | Windows 路径解析失败 | 使用 `PATH_SEP` 宏或标准库函数 |
+| **忽略对齐要求** | ARM/MIPS 上总线错误 | 使用 `alignas` 或 `memcpy` 解包 |
+
+---
+
 > **最后更新**: 2026-05-11
 > **参考**: GNU Autoconf, CMake cross-compilation, SQLite portability layer

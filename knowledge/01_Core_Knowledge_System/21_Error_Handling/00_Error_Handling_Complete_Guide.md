@@ -147,22 +147,22 @@ int process_file_good(const char *path) {
         log_error("fopen failed: %s", path);
         return ERR_IO;
     }
-    
+
     char *buf = malloc(1024);
     if (buf == NULL) {
         fclose(fp);
         return ERR_OOM;
     }
-    
+
     size_t n = fread(buf, 1, 1024, fp);
     if (n == 0 && ferror(fp)) {
         free(buf);
         fclose(fp);
         return ERR_IO;
     }
-    
+
     ErrorCode err = process_buffer(buf, n);
-    
+
     free(buf);
     fclose(fp);
     return err;
@@ -177,27 +177,27 @@ int process_file_goto(const char *path) {
     FILE *fp = NULL;
     char *buf = NULL;
     ErrorCode result = ERR_OK;
-    
+
     fp = fopen(path, "r");
     if (fp == NULL) {
         result = ERR_IO;
         goto cleanup;
     }
-    
+
     buf = malloc(1024);
     if (buf == NULL) {
         result = ERR_OOM;
         goto cleanup;
     }
-    
+
     size_t n = fread(buf, 1, 1024, fp);
     if (n == 0 && ferror(fp)) {
         result = ERR_IO;
         goto cleanup;
     }
-    
+
     result = process_buffer(buf, n);
-    
+
 cleanup:
     free(buf);       // free(NULL) 是安全的
     if (fp) fclose(fp);
@@ -222,14 +222,14 @@ cleanup:
 ErrorCode process_pipeline(const char *input, const char *output) {
     TRY_PTR(input);
     TRY_PTR(output);
-    
+
     Data *data = data_parse(input);
     TRY_PTR(data);
-    
+
     TRY(data_validate(data));
     TRY(data_transform(data));
     TRY(data_save(data, output));
-    
+
     data_free(data);
     return ERR_OK;
 }
@@ -300,9 +300,9 @@ static inline void autoclose(FILE **pp) {
 void process_with_raii(void) {
     AUTO char *buf = malloc(1024);    // 函数退出时自动 free
     AUTOCLOSE FILE *fp = fopen("data", "r");  // 自动 fclose
-    
+
     if (!fp) return;  // buf 和 fp 都会被自动清理
-    
+
     fread(buf, 1, 1024, fp);
     // 正常退出也会自动清理
 }
@@ -392,16 +392,53 @@ TRY {
 ## 8. 检查清单
 
 ### 函数设计
+
 - [ ] 所有可能失败的函数都有明确的错误返回值
 - [ ] 错误码枚举包含 `OK = 0`
 - [ ] 提供 `error_string()` 转换函数
 - [ ] 文档说明每个错误条件的含义
 
 ### 调用方
+
 - [ ] 每个返回值都被检查或使用 `(void)` 显式忽略
 - [ ] 错误处理路径释放所有已分配资源
 - [ ] 错误日志包含足够的上下文信息
 - [ ] 不假设"这个调用不会失败"
+
+---
+
+## 9. 配套代码示例
+
+本节配套可编译代码位于 `examples/error_handling/` 目录：
+
+| 示例文件 | 演示内容 | 编译命令 |
+|---------|---------|---------|
+| `error_code_system.c` | 自定义错误码系统 + 安全检查函数 | `gcc -O2 -std=c11` |
+| `goto_cleanup.c` | `goto cleanup` 统一释放多资源模式 | `gcc -O2 -std=c11` |
+| `raii_simulation.c` | GCC `__attribute__((cleanup))` 模拟 RAII | `gcc -O2 -std=c11` |
+| `setjmp_example.c` | `setjmp/longjmp` 模拟 TRY/CATCH/THROW | `gcc -O2 -std=c11` |
+
+### 各模式适用场景对比
+
+| 模式 | 适用场景 | 资源安全 | 性能开销 | 可移植性 |
+|------|---------|---------|---------|---------|
+| 错误码返回 | 简单函数、库 API | ⚠️ 需调用方处理 | 无 | 最高 |
+| `goto cleanup` | 多资源分配函数 | ✅ 统一释放 | 无 | 高 |
+| `cleanup` 属性 | GCC/Clang 项目 | ✅ 自动释放 | 无 | 低（编译器绑定） |
+| `setjmp/longjmp` | 深调用链异常传播 | ❌ 可能泄漏 | 中 | 中 |
+
+---
+
+## 10. 常见错误模式
+
+| 错误模式 | 后果 | 修复方案 |
+|---------|------|---------|
+| **忽略返回值** | 错误静默传播 | 使用 `__attribute__((warn_unused_result))` |
+| **部分资源泄漏** | `goto` 跳过时部分分配的资源未释放 | 每个分配后立刻检查错误 |
+| **错误码吞没** | 内部错误被覆盖，丢失根因 | 使用链式错误码或结构化日志 |
+| `errno` 未立即保存 | 后续函数调用覆盖 errno | 出错后立即 `int saved = errno` |
+| **双重释放** | 未定义行为 / 崩溃 | `free(ptr); ptr = NULL;` |
+| **清理顺序错误** | 依赖已释放的资源 | 按分配逆序释放 |
 
 ---
 

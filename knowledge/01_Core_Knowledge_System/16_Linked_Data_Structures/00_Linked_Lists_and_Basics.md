@@ -337,5 +337,29 @@ if (!head) return;
 
 ---
 
+## 7. 配套代码示例
+
+本节配套可编译代码位于 `examples/data_structures/` 目录：
+
+| 示例文件 | 演示内容 | 编译命令 |
+|---------|---------|---------|
+| `intrusive_list.c` | Linux Kernel 风格侵入式链表，`container_of` 宏 | `gcc -O2 -std=c11` |
+| `list_algorithms.c` | 单链表算法：反转、Floyd判环、找中点、合并有序链表 | `gcc -O2 -std=c11` |
+| `hash_table.c` | 开放寻址法哈希表，FNV-1a 哈希函数 | `gcc -O2 -std=c11` |
+| `dynamic_array.c` | 泛型动态数组宏（类似 C++ vector） | `gcc -O2 -std=c11` |
+| `binary_tree.c` | 二叉搜索树：插入、查找、中序遍历、删除 | `gcc -O2 -std=c11` |
+
+### 数据结构性能对比
+
+| 结构 | 插入 | 查找 | 删除 | 空间 | 缓存友好 |
+|------|------|------|------|------|---------|
+| 单链表 | O(1) 头插 | O(n) | O(n) | 指针/节点 | ❌ |
+| 侵入式链表 | O(1) | O(n) | O(1) 已知节点 | 0 额外 | ❌ |
+| 动态数组 | O(1) 均摊 | O(1) 索引 | O(n) | 连续 | ✅ |
+| 哈希表 | O(1) 均摊 | O(1) 均摊 | O(1) 均摊 | ~2x 数据 | ✅ |
+| BST | O(h) | O(h) | O(h) | 指针/节点 | ❌ |
+
+---
+
 > **最后更新**: 2026-05-11
 > **参考**: Linux Kernel list.h, CSAPP Ch.3, K&R Ch.6

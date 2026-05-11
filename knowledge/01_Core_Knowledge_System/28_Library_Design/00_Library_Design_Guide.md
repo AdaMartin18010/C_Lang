@@ -3,7 +3,7 @@
 > **难度**: L3-L5
 > **核心目标**: 设计稳定、可维护、跨版本的 C 库接口
 
----
+
 
 ## 1. ABI 稳定性原则
 
@@ -55,7 +55,7 @@ typedef struct {
 } Config;
 ```
 
----
+
 
 ## 2. 版本控制策略
 
@@ -110,7 +110,7 @@ MYLIB_API int  lib_process(int x);
 void internal_helper(void);  // 不暴露
 ```
 
----
+
 
 ## 3. 不透明类型（Opaque Types）
 
@@ -150,7 +150,7 @@ typedef struct {
 MyContext *context_init_inplace(MyContextStorage *storage);
 ```
 
----
+
 
 ## 4. 错误处理与日志
 
@@ -193,7 +193,7 @@ typedef void (*MyLibLogCallback)(MyLibLogLevel level, const char *file,
 void mylib_set_log_callback(MyLibLogCallback cb);
 ```
 
----
+
 
 ## 5. 配置与扩展点
 
@@ -238,7 +238,7 @@ typedef struct {
 int mylib_register_plugin(MyContext *ctx, const MyLibPlugin *plugin);
 ```
 
----
+
 
 ## 6. 线程安全设计
 
@@ -262,7 +262,7 @@ int mylib_context_process(MyContext *ctx, ...);
 int mylib_global_init(void);  // 只能调用一次
 ```
 
----
+
 
 ## 7. 检查清单
 
@@ -274,6 +274,43 @@ int mylib_global_init(void);  // 只能调用一次
 - [ ] 文档说明每个函数的线程安全级别
 - [ ] Minor版本只添加，不改变现有ABI
 - [ ] 提供版本查询API（编译期和运行期）
+
+
+
+> **最后更新**: 2026-05-11
+> **参考**: libuv API design, SQLite API stability, GLib ABI policy
+## 8. 配套代码示例
+
+本节配套可编译代码位于 `examples/library_design/` 目录：
+
+| 示例文件 | 演示内容 | 编译命令 |
+|---------|---------|---------|
+| `opaque_pointer.c` | 不透明指针封装内部结构，隐藏实现细节 | `gcc -O2 -std=c11` |
+| `api_versioning.c` | API/ABI 版本控制、特性检测、向后兼容 | `gcc -O2 -std=c11` |
+| `plugin_system.c` | 跨平台动态加载插件框架 | `gcc -O2 -std=c11` |
+
+### ABI 兼容性矩阵
+
+| 变更类型 | 二进制兼容 | 需要操作 |
+|---------|-----------|---------|
+| 添加函数 | 兼容 | 无需 |
+| 添加字段（结构体末尾） | 仅新客户端可用 | 文档说明 |
+| 修改字段顺序 | 不兼容 | Major 版本升级 |
+| 删除/修改函数签名 | 不兼容 | Major 版本升级 |
+| 修改枚举值 | 不兼容 | Major 版本升级 |
+
+---
+
+## 9. 常见错误模式
+
+| 错误模式 | 后果 | 修复方案 |
+|---------|------|---------|
+| 头文件暴露私有结构 | 用户依赖实现细节 | 使用不透明指针 |
+| 缺少版本查询 API | 用户无法判断功能可用性 | 提供 lib_get_version() |
+| 全局状态无保护 | 多线程使用崩溃 | 所有状态放入上下文结构体 |
+| 错误码不一致 | 用户困惑 | 定义统一错误码枚举 |
+| 未声明 extern "C" | C++ 用户链接失败 | 头文件包裹条件编译 |
+| 缺少 const 修饰 | 用户意外修改只读数据 | 输入指针标记 const |
 
 ---
 
