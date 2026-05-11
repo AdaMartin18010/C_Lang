@@ -27,7 +27,7 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [虚拟机](../01_Virtual_Machine_Interpreter/README.md) | 实现技术 | 正则引擎VM实现 |
+| [虚拟机](../24_Virtual_Machine_Interpreter/README.md) | 实现技术 | 正则引擎VM实现 |
 | [字符串处理](../../01_Core_Knowledge_System/02_Core_Layer/03_String_Processing.md) | 基础操作 | 字符串匹配基础 |
 
 ---

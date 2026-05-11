@@ -1,4 +1,4 @@
-# 虚拟机实现 (VM Implementation)
+﻿# 虚拟机实现 (VM Implementation)
 
 > **模块定位**: Month 3 - 中间抽象层
 > **核心使命**: 理解虚拟机如何桥接高级语言和物理机器
@@ -74,7 +74,7 @@
 | 栈操作 | → [C控制流](../22_Assembler_Implementation/04_C_to_Assembly_Control.md) |
 | 词法分析 | → [编译器词法分析](../01_Core_Knowledge_System/15_Compiler_Basics/01_Lexical_Analysis.md) |
 | 语法分析 | → 编译器语法分析 |
-| C4解释器 | → [Nand2Tetris VM](../03_System_Technology_Domains/01_Virtual_Machine_Interpreter/README.md) |
+| C4解释器 | → [Nand2Tetris VM](../03_System_Technology_Domains/24_Virtual_Machine_Interpreter/README.md) |
 
 ---
 

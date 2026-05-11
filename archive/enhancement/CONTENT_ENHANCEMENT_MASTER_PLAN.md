@@ -1,4 +1,4 @@
-# C_Lang 知识库 - 全面内容深化主计划
+﻿# C_Lang 知识库 - 全面内容深化主计划
 
 > **计划版本**: v1.0
 > **创建时间**: 2026-03-19
@@ -275,7 +275,7 @@ templates/
 03_System_Technology_Domains/
 ├── 06_Security_Boot/
 │   └── README.md                  [现状: L1, 深化到L4]
-└── 07_Hardware_Security/
+└── 27_Hardware_Security/
     └── README.md                  [现状: L2, 深化到L4]
 ```
 

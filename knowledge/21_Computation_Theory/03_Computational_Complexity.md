@@ -1,4 +1,4 @@
-# 计算复杂性：计算的难度
+﻿# 计算复杂性：计算的难度
 
 > **层级定位**: 21 Computation Theory / 基础层
 > **前置知识**: [图灵机](./01_Turing_Machines.md), [λ演算](./02_Lambda_Calculus.md)
@@ -356,7 +356,7 @@ NP难问题可能不是"暂时困难"，
 - 需要基于其他困难问题（如量子计算）
 
 相关阅读：
-→ [密码学实现](../03_System_Technology_Domains/15_Security_Engineering/03_Cryptography_Implementation.md)
+→ [密码学实现](../03_System_Technology_Domains/31_Security_Engineering/03_Cryptography_Implementation.md)
 ```
 
 ---

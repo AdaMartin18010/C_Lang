@@ -1,6 +1,6 @@
 ﻿# 无线协议开发
 
-> **层级定位**: 03_System_Technology_Domains > 05_Wireless_Protocol
+> **层级定位**: 03_System_Technology_Domains > 26_Wireless_Protocol
 > **难度级别**: L4 分析 → L5 专家
 > **预估学习时间**: 20-25 小时
 
@@ -29,7 +29,7 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [硬件安全](../07_Hardware_Security/README.md) | 安全通信 | 无线安全、加密 |
+| [硬件安全](../27_Hardware_Security/README.md) | 安全通信 | 无线安全、加密 |
 | [安全启动](../06_Security_Boot/README.md) | 安全基础 | 固件安全 |
 | [计算机视觉](../03_Computer_Vision/README.md) | 边缘AI | 无线视频传输 |
 

@@ -1,6 +1,6 @@
-# Linux 系统性能调优深度指南
+﻿# Linux 系统性能调优深度指南
 
-> **层级定位**: 03_System_Technology_Domains / 18_Systems_Performance
+> **层级定位**: 03_System_Technology_Domains / 34_Systems_Performance
 > **难度级别**: L4 系统层
 > **对应标准**: POSIX, Linux Kernel
 > **最后更新**: 2026-03-28

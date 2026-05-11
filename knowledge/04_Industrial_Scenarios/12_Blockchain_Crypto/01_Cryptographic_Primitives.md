@@ -806,7 +806,7 @@ int secure_recv(SecureConnection* conn, void* buf, size_t len) {
 
 ---
 
-> **关联文档**: [区块链基础](./02_Blockchain_Basics.md) | [硬件安全](../../03_System_Technology_Domains/07_Hardware_Security/README.md) | Zig安全
+> **关联文档**: [区块链基础](./02_Blockchain_Basics.md) | [硬件安全](../../03_System_Technology_Domains/27_Hardware_Security/README.md) | Zig安全
 
 
 ---

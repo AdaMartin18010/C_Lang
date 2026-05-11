@@ -1,6 +1,6 @@
 ﻿# 图形渲染 (Graphics Rendering)
 
-> **层级定位**: 03_System_Technology_Domains > 17_Graphics_Rendering
+> **层级定位**: 03_System_Technology_Domains > 33_Graphics_Rendering
 > **难度级别**: L5 专家
 > **预估学习时间**: 20-25 小时
 

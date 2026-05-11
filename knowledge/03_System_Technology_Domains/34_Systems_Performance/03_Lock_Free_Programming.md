@@ -1,6 +1,6 @@
-# 无锁编程（Lock-Free Programming）深度指南
+﻿# 无锁编程（Lock-Free Programming）深度指南
 
-> **层级定位**: 03_System_Technology_Domains / 18_Systems_Performance
+> **层级定位**: 03_System_Technology_Domains / 34_Systems_Performance
 > **难度级别**: L5 专家级
 > **对应标准**: C11 Atomics, C++11 Memory Model
 > **最后更新**: 2026-03-28

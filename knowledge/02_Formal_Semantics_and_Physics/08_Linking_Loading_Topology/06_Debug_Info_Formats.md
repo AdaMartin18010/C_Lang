@@ -1,4 +1,4 @@
-# 调试信息格式深度解析
+﻿# 调试信息格式深度解析
 
 > **层级定位**: 02 Formal Semantics and Physics / 08 Linking Loading Topology
 > **参考标准**: DWARF 5, PDB, STABS
@@ -240,7 +240,7 @@ strip --strip-debug --strip-unneeded program
 objcopy --add-gnu-debuglink=program.debug program
 
 # 查看调试信息大小
-cd knowledge/03_System_Technology_Domains/16_OS_Kernel
+cd knowledge/03_System_Technology_Domains/20_OS_Kernel
 readelf --debug-dump=info program | head -50
 dwarfdump program | head -100
 ```

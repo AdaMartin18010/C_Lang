@@ -1,4 +1,4 @@
-# C_Lang 目录重命名方案
+﻿# C_Lang 目录重命名方案
 
 > **目标**: 消除编号重复，建立可维护的目录结构
 > **原则**: 最小化链接破坏，优先处理低风险目录
@@ -40,7 +40,7 @@
 | `07_Development_Methodology/` | 合并到 `07_Modern_Toolchain/07_Development_Methodology/` | 低 |
 | `08_Toolchain_Ecosystem/` | 合并到 `07_Modern_Toolchain/08_Toolchain_Ecosystem/` | 低 |
 | `10_Modern_C_Development/` | 合并到 `01_Core_Knowledge_System/07_Modern_C/` | 低 |
-| `21_OS_Internals/` | 合并到 `16_OS_Kernel/` 或 `04_Industrial_Scenarios/13_Linux_Kernel/` | 低 |
+| `21_OS_Internals/` | 合并到 `20_OS_Kernel/` 或 `04_Industrial_Scenarios/13_Linux_Kernel/` | 低 |
 
 ### 批次2：中风险（需要更新链接）
 
@@ -52,7 +52,7 @@
 | `09_Cross_Platform_Development/` | `cross_platform_development/` | 中 |
 | `11_Performance_Engineering/` | `performance_engineering/` | 中 |
 | `15_Memory_Safe_Languages/` | `memory_safe_languages/` | 中 |
-| `16_OS_Kernel/` | `os_kernel/` | 中 |
+| `20_OS_Kernel/` | `os_kernel/` | 中 |
 | `18_Robotics_Physical_Control/` | `robotics_physical_control/` | 中 |
 | `20_Hardware_Interfaces_C/` | `hardware_interfaces_c/` | 中 |
 

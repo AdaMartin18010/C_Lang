@@ -1,4 +1,4 @@
-
+﻿
 ---
 
 ## 🔗 全面知识关联体系
@@ -241,7 +241,7 @@
 
 - [11_Machine_Learning_C/](../11_Machine_Learning_C/README.md) - C语言机器学习基础
 - [04_Industrial_Scenarios/14_Embedded_IoT/](../04_Industrial_Scenarios/14_Embedded_IoT/README.md) - 嵌入式IoT场景
-- [03_System_Technology_Domains/17_Graphics_Rendering/](../03_System_Technology_Domains/17_Graphics_Rendering/README.md) - GPU内存管理
+- [03_System_Technology_Domains/33_Graphics_Rendering/](../03_System_Technology_Domains/33_Graphics_Rendering/README.md) - GPU内存管理
 - [15_Memory_Safe_Languages/](../memory_safe_languages/README.md) - Rust内存安全
 
 ---

@@ -1,8 +1,8 @@
-# 安全关键系统编程原理
+﻿# 安全关键系统编程原理
 
 > **层级**: L4 (方法论层) + L3 (系统层)
 > **目标**: 掌握安全关键系统 (Safety-Critical Systems) 的设计原则、编码标准与验证方法
-> **关联**: [内存安全](../02_Security/06_Memory_Security_Deep_Dive.md) | MISRA C | 形式化验证
+> **关联**: [内存安全](../25_Security/06_Memory_Security_Deep_Dive.md) | MISRA C | 形式化验证
 
 ---
 

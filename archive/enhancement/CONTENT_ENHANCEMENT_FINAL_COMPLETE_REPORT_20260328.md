@@ -1,4 +1,4 @@
-# C_Lang 知识库内容增强最终完成报告（完整版）
+﻿# C_Lang 知识库内容增强最终完成报告（完整版）
 
 > **报告日期**: 2026-03-28
 > **项目**: C_Lang C语言知识体系库全面增强
@@ -70,14 +70,14 @@
 
 1. ✅ `16_High_Performance_Computing/03_SIMD_Optimization.md` (34→500行)
 2. ✅ `16_High_Performance_Computing/02_OpenMP_Parallelism.md` (18→440行)
-3. ✅ `18_Systems_Performance/01_Linux_Performance_Tuning.md` (18→450行)
-4. ✅ `18_Systems_Performance/03_Lock_Free_Programming.md` (18→450行)
-5. ✅ `18_Systems_Performance/02_BPF_Performance_Tools.md` (18→380行)
+3. ✅ `34_Systems_Performance/01_Linux_Performance_Tuning.md` (18→450行)
+4. ✅ `34_Systems_Performance/03_Lock_Free_Programming.md` (18→450行)
+5. ✅ `34_Systems_Performance/02_BPF_Performance_Tools.md` (18→380行)
 6. ✅ `13_Machine_Learning/01_ML_Inference_Optimization.md` (15→550行)
 7. ✅ `19_Systems_Security/01_Reverse_Engineering.md` (18→280行)
 8. ✅ `19_Systems_Security/02_Binary_Exploitation.md` (18→430行)
 9. ✅ `23_Storage_Systems/02_SSD_Optimization.md` (17→290行)
-10. ✅ `15_Security_Engineering/03_Cryptography_Implementation.md` (34→1020行)
+10. ✅ `31_Security_Engineering/03_Cryptography_Implementation.md` (34→1020行)
 11. ✅ `21_OS_Internals/01_Kernel_Synchronization.md` (34→1438行)
 12. ✅ `22_Virtualization/01_KVM_Internals.md` (34→1633行)
 

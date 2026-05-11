@@ -1,4 +1,4 @@
-
+﻿
 ---
 
 ## 🔗 全面知识关联体系
@@ -117,7 +117,7 @@
 |:-----|:---------|:---------|
 | 链表 | LRU缓存、内存分配器 | 03_System_Technology_Domains/11_In_Memory_Database |
 | 栈 | 表达式求值、括号匹配 | 01_Core_Knowledge_System |
-| 队列 | BFS、任务调度 | 03_System_Technology_Domains/09_High_Performance_Log |
+| 队列 | BFS、任务调度 | 03_System_Technology_Domains/29_High_Performance_Log |
 | 哈希表 | 符号表、缓存 | 03_System_Technology_Domains/11_In_Memory_Database |
 | 树 | 数据库索引、文件系统 | 03_System_Technology_Domains/11_In_Memory_Database |
 | 堆 | 优先队列、TopK、调度 | 09_Data_Structures_Algorithms/05_Heap |

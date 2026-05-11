@@ -1,4 +1,4 @@
-
+﻿
 ---
 
 ## 🔗 全面知识关联体系
@@ -83,15 +83,15 @@
 
 ## 目录结构
 
-### 01_Virtual_Machine_Interpreter - 虚拟机解释器
+### 24_Virtual_Machine_Interpreter - 虚拟机解释器
 
 运行时系统实现技术。
 
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
-| [01_Bytecode_VM.md](./01_Virtual_Machine_Interpreter/01_Bytecode_VM.md) | 字节码VM | L4 | Lua VM, Python VM |
-| [02_Register_VM.md](./01_Virtual_Machine_Interpreter/02_Register_VM.md) | 寄存器VM | L4 | Dalvik VM, BEAM |
-| [03_JIT_Compilation.md](./01_Virtual_Machine_Interpreter/03_JIT_Compilation.md) | JIT编译 | L5 | V8, Java HotSpot ✅ |
+| [01_Bytecode_VM.md](./24_Virtual_Machine_Interpreter/01_Bytecode_VM.md) | 字节码VM | L4 | Lua VM, Python VM |
+| [02_Register_VM.md](./24_Virtual_Machine_Interpreter/02_Register_VM.md) | 寄存器VM | L4 | Dalvik VM, BEAM |
+| [03_JIT_Compilation.md](./24_Virtual_Machine_Interpreter/03_JIT_Compilation.md) | JIT编译 | L5 | V8, Java HotSpot ✅ |
 | [04_Garbage_Collection.md](04_Garbage_Collection.md) | 垃圾回收 | L5 | Go GC, .NET GC ✅ |
 
 **前置知识**: [01_Core_Knowledge_System](../01_Core_Knowledge_System/README.md)
@@ -135,14 +135,14 @@
 
 ---
 
-### 05_Wireless_Protocol - 无线协议
+### 26_Wireless_Protocol - 无线协议
 
 物联网通信协议。
 
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
-| [01_BLE_GATT.md](./05_Wireless_Protocol/01_BLE_GATT.md) | BLE GATT | L4 | Bluetooth Core Spec |
-| [02_LoRa_SX1276.md](./05_Wireless_Protocol/02_LoRa_SX1276.md) | LoRa驱动 | L4 | Semtech SX1276 |
+| [01_BLE_GATT.md](./26_Wireless_Protocol/01_BLE_GATT.md) | BLE GATT | L4 | Bluetooth Core Spec |
+| [02_LoRa_SX1276.md](./26_Wireless_Protocol/02_LoRa_SX1276.md) | LoRa驱动 | L4 | Semtech SX1276 |
 | [03_Zigbee_Stack.md](03_Zigbee_Stack.md) | Zigbee协议 | L5 | Zigbee Alliance ✅ |
 
 ---
@@ -159,14 +159,14 @@
 
 ---
 
-### 07_Hardware_Security - 硬件安全
+### 27_Hardware_Security - 硬件安全
 
 可信平台模块应用。
 
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
-| [01_TPM2_TSS.md](./07_Hardware_Security/01_TPM2_TSS.md) | TPM2 TSS | L5 | TCG TPM2 Spec |
-| [02_Key_Sealing.md](./07_Hardware_Security/02_Key_Sealing.md) | 密钥密封 | L5 | TPM 2.0 Key Sealing |
+| [01_TPM2_TSS.md](./27_Hardware_Security/01_TPM2_TSS.md) | TPM2 TSS | L5 | TCG TPM2 Spec |
+| [02_Key_Sealing.md](./27_Hardware_Security/02_Key_Sealing.md) | 密钥密封 | L5 | TPM 2.0 Key Sealing |
 | [03_HSM_Integration.md](03_HSM_Integration.md) | HSM集成 | L5 | PKCS#11 ✅ |
 
 ---
@@ -183,25 +183,25 @@
 
 ---
 
-### 09_High_Performance_Log - 高性能日志
+### 29_High_Performance_Log - 高性能日志
 
 无锁日志系统。
 
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
-| [01_LockFree_Ring_Log.md](./09_High_Performance_Log/01_LockFree_Ring_Log.md) | 无锁环形日志 | L4 | DPDK Ring, LMAX |
-| [02_Structured_Binary_Log.md](./09_High_Performance_Log/02_Structured_Binary_Log.md) | 结构化二进制日志 | L4 | protobuf |
-| [03_Lockless_Ring_Buffer_SPSC_MPMC.md](./09_High_Performance_Log/03_Lockless_Ring_Buffer_SPSC_MPMC.md) | 无锁环形缓冲(SPSC/MPMC) | L4 | DPDK Ring, LMAX |
+| [01_LockFree_Ring_Log.md](./29_High_Performance_Log/01_LockFree_Ring_Log.md) | 无锁环形日志 | L4 | DPDK Ring, LMAX |
+| [02_Structured_Binary_Log.md](./29_High_Performance_Log/02_Structured_Binary_Log.md) | 结构化二进制日志 | L4 | protobuf |
+| [03_Lockless_Ring_Buffer_SPSC_MPMC.md](./29_High_Performance_Log/03_Lockless_Ring_Buffer_SPSC_MPMC.md) | 无锁环形缓冲(SPSC/MPMC) | L4 | DPDK Ring, LMAX |
 
 ---
 
-### 16_Rust_Interoperability - Rust互操作
+### 32_Rust_Interoperability - Rust互操作
 
 跨语言FFI。
 
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
-| [01_C_ABI_Basics.md](./16_Rust_Interoperability/01_C_ABI_Basics.md) | C ABI基础 | L4 | Rust FFI Guide |
+| [01_C_ABI_Basics.md](./32_Rust_Interoperability/01_C_ABI_Basics.md) | C ABI基础 | L4 | Rust FFI Guide |
 | [02_Cbindgen_Usage.md](02_Cbindgen_Usage.md) | cbindgen | L4 | cbindgen Docs ✅ |
 | [03_Unsafe_Rust_Patterns.md](03_Unsafe_Rust_Patterns.md) | Unsafe模式 | L5 | The Rustonomicon ✅ |
 
@@ -219,15 +219,15 @@
 
 ---
 
-### 13_RDMA_Network - RDMA网络
+### 35_RDMA_Network - RDMA网络
 
 高性能网络编程。
 
 | 文件 | 主题 | 难度 | 参考来源 |
 |:-----|:-----|:----:|:---------|
-| [01_Verbs_API.md](./13_RDMA_Network/01_Verbs_API.md) | Verbs API | L5 | IBTA Spec |
-| [01_Verbs_API_Detailed.md](./13_RDMA_Network/01_Verbs_API_Detailed.md) | Verbs API 详细版 | L5 | IBTA Spec |
-| [02_One_Sided_RDMA.md](./13_RDMA_Network/02_One_Sided_RDMA.md) | 单边RDMA | L5 | Mellanox Docs |
+| [01_Verbs_API.md](./35_RDMA_Network/01_Verbs_API.md) | Verbs API | L5 | IBTA Spec |
+| [01_Verbs_API_Detailed.md](./35_RDMA_Network/01_Verbs_API_Detailed.md) | Verbs API 详细版 | L5 | IBTA Spec |
+| [02_One_Sided_RDMA.md](./35_RDMA_Network/02_One_Sided_RDMA.md) | 单边RDMA | L5 | Mellanox Docs |
 | [03_RDMA_Connection.md](03_RDMA_Connection.md) | 连接管理 | L5 | RDMA CM ✅ |
 
 ---

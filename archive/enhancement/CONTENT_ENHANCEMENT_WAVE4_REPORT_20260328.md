@@ -1,4 +1,4 @@
-# C_Lang 知识库内容增强第四波完成报告
+﻿# C_Lang 知识库内容增强第四波完成报告
 
 > **报告日期**: 2026-03-28
 > **增强阶段**: Wave 4 (系统技术域深度增强)
@@ -20,8 +20,8 @@
 
 | 序号 | 文件路径 | 原行数 | 增强后行数 | 新增内容 |
 |:-----|:---------|:------:|:----------:|:---------|
-| 1 | `18_Systems_Performance/03_Lock_Free_Programming.md` | 18 | ~450 | 无锁编程完整指南 |
-| 2 | `18_Systems_Performance/02_BPF_Performance_Tools.md` | 18 | ~380 | BPF工具完整指南 |
+| 1 | `34_Systems_Performance/03_Lock_Free_Programming.md` | 18 | ~450 | 无锁编程完整指南 |
+| 2 | `34_Systems_Performance/02_BPF_Performance_Tools.md` | 18 | ~380 | BPF工具完整指南 |
 | 3 | `19_Systems_Security/01_Reverse_Engineering.md` | 18 | ~280 | 逆向工程基础 |
 
 ---

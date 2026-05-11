@@ -28,7 +28,7 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [RDMA网络](../13_RDMA_Network/README.md) | 高性能通信 | 低延迟共识 |
+| [RDMA网络](../35_RDMA_Network/README.md) | 高性能通信 | 低延迟共识 |
 | [嵌入式系统](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | 应用场景 | 边缘设备共识 |
 | [状态机](../../06_Thinking_Representation/09_State_Machines/README.md) | 理论基础 | 复制状态机 |
 

@@ -1,4 +1,4 @@
-# 从图灵机到C语言：完整知识链条回顾
+﻿# 从图灵机到C语言：完整知识链条回顾
 
 > **层级定位**: 24 Complete Chain / 整合层
 > **前置知识**: [图灵机](../21_Computation_Theory/01_Turing_Machines.md), [RISC-V汇编器](../22_Assembler_Implementation/02_RISCV_Assembler.md), [C子集解释器](../23_VM_Implementation/02_C_Subset_Interpreter.md)
@@ -323,7 +323,7 @@ C代码 → 汇编 → 机器码 → CPU执行
 
 - [栈式虚拟机](../23_VM_Implementation/01_Stack_Based_VM.md)
 - [C子集解释器](../23_VM_Implementation/02_C_Subset_Interpreter.md)
-- [现有VM内容](../03_System_Technology_Domains/01_Virtual_Machine_Interpreter/README.md)
+- [现有VM内容](../03_System_Technology_Domains/24_Virtual_Machine_Interpreter/README.md)
 
 ### 2.6 Layer 6: C语言
 

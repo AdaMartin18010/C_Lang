@@ -1,4 +1,4 @@
-# C_Lang Knowledge 深度内容质量分析报告
+﻿# C_Lang Knowledge 深度内容质量分析报告
 
 > **生成日期**: 2026-03-16
 > **分析范围**: E:\_src\C_Lang\knowledge 目录及所有子目录
@@ -102,7 +102,7 @@
 | 5 | `Zig/README.md` | 6.3 | 3个TODO，Zig概述不完整 |
 | 6 | `Zig/Zig_Database_Advanced.md` | 9.3 | 2个TODO，数据库内容空洞 |
 | 7 | `Zig/Zig_Concurrency_Async.md` | 7.3 | 1个TODO，并发示例不足 |
-| 8 | `03_System_Technology_Domains/13_RDMA_Network/02_One_Sided_RDMA.md` | 2.3 | 2个TODO，RDMA代码缺失 |
+| 8 | `03_System_Technology_Domains/35_RDMA_Network/02_One_Sided_RDMA.md` | 2.3 | 2个TODO，RDMA代码缺失 |
 | 9 | `06_Thinking_Representation/02_Comparison_Matrices/02_Synchronization_Matrix.md` | 9.3 | 2个TODO，矩阵内容不完整 |
 | 10 | `04_Industrial_Scenarios/04_5G_Baseband/02_DMA_Offload.md` | 8.4 | 2个TODO，DMA实现缺失 |
 | 11 | `07_Modern_Toolchain/01_IDE_Editors/01_VS_Code_Setup.md` | 5.7 | 2个TODO，配置步骤不完整 |

@@ -1,4 +1,4 @@
-# C_Lang 知识体系库 — 全面批判性评审与修复计划
+﻿# C_Lang 知识体系库 — 全面批判性评审与修复计划
 
 > **评审日期**: 2026-05-11
 > **评审范围**: 项目全部内容 vs 国际权威C语言资源
@@ -87,7 +87,7 @@
 | `13_Linux_Kernel/` | ~1 | 完全为空壳 |
 | `16_High_Performance_Computing/` | ~1 | 与 `03_System_Technology_Domains/16_High_Performance_Computing/` 重复 |
 | `17_Distributed_Systems/` | ~1 | 完全为空壳 |
-| `18_Systems_Performance/` | ~1 | 完全为空壳 |
+| `34_Systems_Performance/` | ~1 | 完全为空壳 |
 | `19_Real_Time_Systems/` | ~1 | 完全为空壳 |
 
 **修复方向**：

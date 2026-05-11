@@ -12,7 +12,7 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [硬件安全](../07_Hardware_Security/README.md) | 安全基础 | TrustZone、TEE |
+| [硬件安全](../27_Hardware_Security/README.md) | 安全基础 | TrustZone、TEE |
 | [嵌入式开发](../../01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | 应用场景 | 嵌入式安全启动 |
 | [C与汇编映射](../../02_Formal_Semantics_and_Physics/06_C_Assembly_Mapping/README.md) | 底层基础 | Boot代码实现 |
 

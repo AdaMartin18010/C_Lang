@@ -114,7 +114,7 @@ C语言不仅是语法记忆，更是系统性工程能力的培养：
 ```
 knowledge/
 ├── 03_System_Technology_Domains/     # 技术应用
-│   ├── 01_Virtual_Machine_Interpreter/
+│   ├── 24_Virtual_Machine_Interpreter/
 │   ├── 14_Concurrency_Parallelism/
 │   └── 15_Network_Programming/
 │

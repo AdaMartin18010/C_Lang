@@ -1,4 +1,4 @@
-# C语言知识库全局索引 v4.6
+﻿# C语言知识库全局索引 v4.6
 
 > **版本**: 5.1 | **文件数**: 950+ | **总行数**: 800,000+ | **最后更新**: 2026-05-10
 > **新增**: "从图灵机到C语言"完整知识链条（模块21-24）⭐NEW
@@ -305,12 +305,12 @@
 |:-----|:-----|:---------|:------:|:---------|
 | 嵌入式开发 | [04_Industrial_Scenarios/01_Automotive_ABS](./04_Industrial_Scenarios/01_Automotive_ABS/README.md) | ABS, AUTOSAR, 硬实时 | 2 | 指针、内存、中断 |
 | 高性能计算 | [04_Industrial_Scenarios/04_5G_Baseband](./04_Industrial_Scenarios/04_5G_Baseband/README.md) | SIMD, NEON, DMA | 2 | 并发、向量化 |
-| 网络编程 | [03_System_Technology_Domains/13_RDMA_Network](./03_System_Technology_Domains/13_RDMA_Network/README.md) | Verbs API, Socket | 5 | 系统调用、内存 |
+| 网络编程 | [03_System_Technology_Domains/35_RDMA_Network](./03_System_Technology_Domains/35_RDMA_Network/README.md) | Verbs API, Socket | 5 | 系统调用、内存 |
 | 游戏开发 | [04_Industrial_Scenarios/05_Game_Engine](./04_Industrial_Scenarios/05_Game_Engine/README.md) | GPU内存, ECS架构 | 3 | 数据结构、并发 |
 | 安全启动 | [03_System_Technology_Domains/06_Security_Boot](./03_System_Technology_Domains/06_Security_Boot/README.md) | TrustZone, TPM2 | 5 | 系统编程、加密 |
 | 形式验证 | [05_Deep_Structure_MetaPhysics/03_Verification_Energy](./05_Deep_Structure_MetaPhysics/03_Verification_Energy/README.md) | Coq, 分离逻辑 | 2 | 形式语义、逻辑 |
 | 数据库 | [03_System_Technology_Domains/11_In_Memory_Database](./03_System_Technology_Domains/11_In_Memory_Database/README.md) | B+树, LRU, RESP | 3 | 数据结构、网络 |
-| 虚拟化 | [03_System_Technology_Domains/01_Virtual_Machine_Interpreter](./03_System_Technology_Domains/01_Virtual_Machine_Interpreter/README.md) | 字节码VM, 寄存器VM | 2 | 编译原理、汇编 |
+| 虚拟化 | [03_System_Technology_Domains/24_Virtual_Machine_Interpreter](./03_System_Technology_Domains/24_Virtual_Machine_Interpreter/README.md) | 字节码VM, 寄存器VM | 2 | 编译原理、汇编 |
 
 ### 2.3 按问题类型
 
@@ -677,7 +677,7 @@ graph TD
 | 读写锁 | [10_Threads_C11.md](./01_Core_Knowledge_System/04_Standard_Library_Layer/10_Threads_C11.md) | 读者写者问题 | ⭐⭐⭐⭐ |
 | 原子操作 | [02_Atomic_Operations.md](./04_Industrial_Scenarios/05_Game_Engine/02_Atomic_Operations.md) | C11 _Atomic | ⭐⭐⭐⭐ |
 | 内存序 | [02_C11_Memory_Model.md](./02_Formal_Semantics_and_Physics/01_Game_Semantics/02_C11_Memory_Model.md) | memory_order | ⭐⭐⭐⭐⭐ |
-| 无锁编程 | [03_Lockless_Ring_Buffer_SPSC_MPMC.md](./03_System_Technology_Domains/09_High_Performance_Log/03_Lockless_Ring_Buffer_SPSC_MPMC.md) | CAS/ABA问题 | ⭐⭐⭐⭐⭐ |
+| 无锁编程 | [03_Lockless_Ring_Buffer_SPSC_MPMC.md](./03_System_Technology_Domains/29_High_Performance_Log/03_Lockless_Ring_Buffer_SPSC_MPMC.md) | CAS/ABA问题 | ⭐⭐⭐⭐⭐ |
 | RCU机制 | [02_Cache_Coherence.md](./04_Industrial_Scenarios/13_Linux_Kernel/02_Cache_Coherence.md) | 读-复制-更新 | ⭐⭐⭐⭐⭐ |
 
 ### 5.5 系统编程
@@ -786,7 +786,7 @@ graph TD
 | 知识点 | 核心问题 | 参考文档 | 出现频率 |
 |:-------|:---------|:---------|:--------:|
 | 虚拟内存 | 页表/TLB/缺页中断 | [01_Page_Table_Operations.md](./04_Industrial_Scenarios/13_Linux_Kernel/01_Page_Table_Operations.md) | ⭐⭐⭐⭐⭐ |
-| 无锁编程 | CAS/ABA问题/内存序 | [03_Lockless_Ring_Buffer_SPSC_MPMC.md](./03_System_Technology_Domains/09_High_Performance_Log/03_Lockless_Ring_Buffer_SPSC_MPMC.md) | ⭐⭐⭐⭐⭐ |
+| 无锁编程 | CAS/ABA问题/内存序 | [03_Lockless_Ring_Buffer_SPSC_MPMC.md](./03_System_Technology_Domains/29_High_Performance_Log/03_Lockless_Ring_Buffer_SPSC_MPMC.md) | ⭐⭐⭐⭐⭐ |
 | 性能优化 | 缓存优化/向量化/分支预测 | [03_Performance_Optimization.md](./01_Core_Knowledge_System/05_Engineering_Layer/03_Performance_Optimization.md) | ⭐⭐⭐⭐⭐ |
 | 编译器优化 | 内联/循环展开/向量化 | [04_Auto_Vectorization.md](./02_Formal_Semantics_and_Physics/12_Compiler_Optimization/04_Auto_Vectorization.md) | ⭐⭐⭐⭐ |
 | 嵌入式系统 | 中断处理/内存布局/启动流程 | [02_Embedded_Systems.md](./01_Core_Knowledge_System/08_Application_Domains/02_Embedded_Systems.md) | ⭐⭐⭐⭐ |
@@ -805,7 +805,7 @@ graph TD
 | 实现简单内存池 | 内存管理、对齐 | ⭐⭐⭐⭐ | [02_Memory_Management.md](./01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) |
 | 生产者消费者模型 | 线程同步、条件变量 | ⭐⭐⭐⭐ | [10_Threads_C11.md](./01_Core_Knowledge_System/04_Standard_Library_Layer/10_Threads_C11.md) |
 | 实现简单的malloc | 系统调用、内存分配 | ⭐⭐⭐⭐⭐ | [01_Malloc_Physics.md](./05_Deep_Structure_MetaPhysics/06_Standard_Library_Physics/01_Malloc_Physics.md) |
-| 无锁队列实现 | 原子操作、内存序 | ⭐⭐⭐⭐⭐ | [03_Lockless_Ring_Buffer_SPSC_MPMC.md](./03_System_Technology_Domains/09_High_Performance_Log/03_Lockless_Ring_Buffer_SPSC_MPMC.md) |
+| 无锁队列实现 | 原子操作、内存序 | ⭐⭐⭐⭐⭐ | [03_Lockless_Ring_Buffer_SPSC_MPMC.md](./03_System_Technology_Domains/29_High_Performance_Log/03_Lockless_Ring_Buffer_SPSC_MPMC.md) |
 
 ---
 
@@ -836,10 +836,10 @@ graph TD
 
 | 项目名称 | 核心技能 | 难度 | 预计代码量 | 参考文档 |
 |:---------|:---------|:----:|:----------:|:---------|
-| **字节码虚拟机** | 编译原理、指令集设计 | ⭐⭐⭐⭐⭐ | 5000行 | [01_Bytecode_VM.md](./03_System_Technology_Domains/01_Virtual_Machine_Interpreter/01_Bytecode_VM.md) |
+| **字节码虚拟机** | 编译原理、指令集设计 | ⭐⭐⭐⭐⭐ | 5000行 | [01_Bytecode_VM.md](./03_System_Technology_Domains/24_Virtual_Machine_Interpreter/01_Bytecode_VM.md) |
 | **正则表达式引擎** | NFA/DFA、递归、动态内存 | ⭐⭐⭐⭐⭐ | 4000行 | [01_Thompson_NFA.md](./03_System_Technology_Domains/02_Regex_Engine/01_Thompson_NFA.md) |
 | **轻量级数据库** | B+树、事务、并发控制 | ⭐⭐⭐⭐⭐ | 8000行 | [01_B_Tree_Index.md](./03_System_Technology_Domains/11_In_Memory_Database/01_B_Tree_Index.md) |
-| **无锁日志系统** | 无锁编程、环形缓冲 | ⭐⭐⭐⭐⭐ | 3000行 | [03_Lockless_Ring_Buffer_SPSC_MPMC.md](./03_System_Technology_Domains/09_High_Performance_Log/03_Lockless_Ring_Buffer_SPSC_MPMC.md) |
+| **无锁日志系统** | 无锁编程、环形缓冲 | ⭐⭐⭐⭐⭐ | 3000行 | [03_Lockless_Ring_Buffer_SPSC_MPMC.md](./03_System_Technology_Domains/29_High_Performance_Log/03_Lockless_Ring_Buffer_SPSC_MPMC.md) |
 | **Redis客户端** | 协议解析、网络编程 | ⭐⭐⭐⭐ | 3500行 | [01_RESP_Protocol.md](./03_System_Technology_Domains/11_In_Memory_Database/01_RESP_Protocol.md) |
 | **简单操作系统内核** | 启动、中断、内存管理 | ⭐⭐⭐⭐⭐ | 10000行 | [01_OS_Kernel.md](./01_Core_Knowledge_System/08_Application_Domains/01_OS_Kernel.md) |
 
@@ -850,7 +850,7 @@ graph TD
 | **JIT编译器** | 代码生成、自修改代码 | ⭐⭐⭐⭐⭐ | 15000行 | [01_JIT_Basics.md](./05_Deep_Structure_MetaPhysics/12_Self_Modifying_Code/01_JIT_Basics.md) |
 | **Raft分布式共识** | 分布式系统、网络编程 | ⭐⭐⭐⭐⭐ | 12000行 | [01_Raft_Core.md](./03_System_Technology_Domains/08_Distributed_Consensus/01_Raft_Core.md) |
 | **H.264解码器** | 视频编解码、SIMD优化 | ⭐⭐⭐⭐⭐ | 20000行 | [01_H264_Decoding.md](./03_System_Technology_Domains/04_Video_Codec/01_H264_Decoding.md) |
-| **RDMA网络库** | 高性能网络、零拷贝 | ⭐⭐⭐⭐⭐ | 8000行 | [01_Verbs_API_Detailed.md](./03_System_Technology_Domains/13_RDMA_Network/01_Verbs_API_Detailed.md) |
+| **RDMA网络库** | 高性能网络、零拷贝 | ⭐⭐⭐⭐⭐ | 8000行 | [01_Verbs_API_Detailed.md](./03_System_Technology_Domains/35_RDMA_Network/01_Verbs_API_Detailed.md) |
 | **嵌入式RTOS** | 实时系统、任务调度 | ⭐⭐⭐⭐⭐ | 10000行 | [02_Hard_RealTime.md](./04_Industrial_Scenarios/01_Automotive_ABS/02_Hard_RealTime.md) |
 
 ---
@@ -948,8 +948,8 @@ graph TD
 |:---------|:-----|:---------|:---------|
 | **IEEE Std 1003.1-2017** | POSIX.1 System API | Unix/Linux编程 | [01_OS_Kernel.md](./01_Core_Knowledge_System/08_Application_Domains/01_OS_Kernel.md) |
 | **IEEE 754-2008** | Floating-Point Arithmetic | 浮点数运算 | [02_Data_Type_System.md](./01_Core_Knowledge_System/01_Basic_Layer/02_Data_Type_System.md) |
-| **IEEE 802.11** | Wireless LAN | WiFi开发 | [05_Wireless_Protocol/01_BLE_GATT.md](./03_System_Technology_Domains/05_Wireless_Protocol/01_BLE_GATT.md) |
-| **IEEE 802.15.4** | Low-Rate Wireless PAN | Zigbee/LoRa | [02_LoRa_SX1276.md](./03_System_Technology_Domains/05_Wireless_Protocol/02_LoRa_SX1276.md) |
+| **IEEE 802.11** | Wireless LAN | WiFi开发 | [26_Wireless_Protocol/01_BLE_GATT.md](./03_System_Technology_Domains/26_Wireless_Protocol/01_BLE_GATT.md) |
+| **IEEE 802.15.4** | Low-Rate Wireless PAN | Zigbee/LoRa | [02_LoRa_SX1276.md](./03_System_Technology_Domains/26_Wireless_Protocol/02_LoRa_SX1276.md) |
 
 ### 10.3 行业安全标准
 
@@ -1209,7 +1209,7 @@ graph TD
 
 ```text
 03_System_Technology_Domains/
-├── 01_Virtual_Machine_Interpreter/          # 虚拟机解释器
+├── 24_Virtual_Machine_Interpreter/          # 虚拟机解释器
 │   ├── 01_Bytecode_VM.md                    # 字节码VM
 │   ├── 02_Register_VM.md                    # 寄存器VM
 │   ├── 03_JIT_Compilation.md                # JIT编译 ⭐NEW
@@ -1229,7 +1229,7 @@ graph TD
 │   ├── 02_Custom_IO.md                      # 自定义IO
 │   ├── 03_Hardware_Acceleration.md          # 硬件加速
 │   └── README.md
-├── 05_Wireless_Protocol/                    # 无线协议
+├── 26_Wireless_Protocol/                    # 无线协议
 │   ├── 01_BLE_GATT.md                       # BLE GATT
 │   ├── 02_LoRa_SX1276.md                    # LoRa SX1276
 │   ├── 03_Zigbee_Stack.md                   # Zigbee协议栈 ⭐NEW
@@ -1239,7 +1239,7 @@ graph TD
 │   ├── 02_Secure_Boot_Chain.md              # 安全启动链
 │   ├── 03_Measured_Boot.md                  # 可信启动
 │   └── README.md
-├── 07_Hardware_Security/                    # 硬件安全
+├── 27_Hardware_Security/                    # 硬件安全
 │   ├── 01_TPM2_TSS.md                       # TPM2 TSS
 │   ├── 02_Key_Sealing.md                    # 密钥密封
 │   ├── 02_Secure_Element.md                 # 安全元件 ⭐NEW
@@ -1251,7 +1251,7 @@ graph TD
 │   ├── 02_Paxos_Implementation.md           # Paxos实现 ⭐NEW
 │   ├── 03_Multi_Raft.md                     # Multi-Raft ⭐NEW
 │   └── README.md
-├── 09_High_Performance_Log/                 # 高性能日志
+├── 29_High_Performance_Log/                 # 高性能日志
 │   ├── 01_LockFree_Ring_Log.md              # 无锁环形日志
 │   ├── 02_Structured_Binary_Log.md          # 结构化二进制日志
 │   ├── 03_Lockless_Ring_Buffer_SPSC_MPMC.md # 无锁环形缓冲
@@ -1267,7 +1267,7 @@ graph TD
 │   ├── 01_PMDK_Basics.md                    # PMDK基础
 │   ├── 02_PM_Optimized_DataStructures.md    # PM优化数据结构
 │   └── README.md
-├── 13_RDMA_Network/                         # RDMA网络
+├── 35_RDMA_Network/                         # RDMA网络
 │   ├── 01_Verbs_API.md                      # Verbs API
 │   ├── 01_Verbs_API_Detailed.md             # Verbs API详细
 │   ├── 02_One_Sided_RDMA.md                 # 单边RDMA
@@ -1279,13 +1279,13 @@ graph TD
 ├── 15_Network_Programming/                  # 网络编程
 │   ├── 01_Socket_Programming.md             # Socket编程 ⭐UPDATE
 │   └── README.md
-├── 16_Rust_Interoperability/                # Rust互操作
+├── 32_Rust_Interoperability/                # Rust互操作
 │   ├── 01_C_ABI_Basics.md                   # C ABI基础
 │   ├── 01_Rust_Call_C.md                    # Rust调用C
 │   ├── 02_C_Call_Rust.md                    # C调用Rust
 │   ├── 03_Unsafe_Rust_Patterns.md           # 不安全Rust模式 ⭐NEW
 │   └── README.md
-├── 17_Graphics_Rendering/                   # 图形渲染 ⭐NEW
+├── 33_Graphics_Rendering/                   # 图形渲染 ⭐NEW
 │   ├── 01_GPU_Memory_Management.md          # GPU内存管理
 │   └── README.md
 └── README.md                                # 模块说明
@@ -1933,7 +1933,7 @@ Week 4: 阅读24_完整链条整合
 
 - 编译器实现（01_Core_Knowledge_System/15_Compiler_Basics/）
 - 形式语义（02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/）
-- 虚拟机（03_System_Technology_Domains/01_Virtual_Machine_Interpreter/）
+- 虚拟机（03_System_Technology_Domains/24_Virtual_Machine_Interpreter/）
 
 ---
 

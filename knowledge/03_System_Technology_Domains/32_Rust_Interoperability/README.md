@@ -1,6 +1,6 @@
 ﻿# Rust 与 C 互操作
 
-> **层级定位**: 03_System_Technology_Domains > 16_Rust_Interoperability
+> **层级定位**: 03_System_Technology_Domains > 32_Rust_Interoperability
 > **难度级别**: L4 分析
 > **预估学习时间**: 15-20 小时
 

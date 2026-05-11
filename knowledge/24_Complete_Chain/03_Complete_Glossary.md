@@ -1,4 +1,4 @@
-# 完整术语表与学习路径指南
+﻿# 完整术语表与学习路径指南
 
 > **层级定位**: 24 Complete Chain / 参考层
 > **前置知识**: [从图灵机到C](./01_From_Turing_to_C.md), [层间桥梁](./02_Layer_Bridges.md)
@@ -95,7 +95,7 @@
 | 字节码 | Bytecode | 虚拟机执行的中间指令 | [01_Stack_Based_VM.md](../23_VM_Implementation/01_Stack_Based_VM.md) |
 | 操作数栈 | Operand Stack | 栈式VM中存储操作数的数据结构 | [01_Stack_Based_VM.md](../23_VM_Implementation/01_Stack_Based_VM.md) |
 | 解释器 | Interpreter | 直接执行源代码或中间代码的程序 | [02_C_Subset_Interpreter.md](../23_VM_Implementation/02_C_Subset_Interpreter.md) |
-| JIT编译 | Just-In-Time Compilation | 运行时编译字节码为机器码 | [JIT](../03_System_Technology_Domains/01_Virtual_Machine_Interpreter/03_JIT_Compilation.md) |
+| JIT编译 | Just-In-Time Compilation | 运行时编译字节码为机器码 | [JIT](../03_System_Technology_Domains/24_Virtual_Machine_Interpreter/03_JIT_Compilation.md) |
 | 词法分析 | Lexical Analysis | 将字符流转换为Token流的过程 | [02_C_Subset_Interpreter.md](../23_VM_Implementation/02_C_Subset_Interpreter.md) |
 | 语法分析 | Syntax Analysis | 将Token流转换为语法树的过程 | [02_C_Subset_Interpreter.md](../23_VM_Implementation/02_C_Subset_Interpreter.md) |
 | 递归下降 | Recursive Descent | 手工实现语法分析的方法 | [02_C_Subset_Interpreter.md](../23_VM_Implementation/02_C_Subset_Interpreter.md) |

@@ -1,4 +1,4 @@
----
+﻿---
 
 ## 🔗 文档关联
 
@@ -63,18 +63,18 @@
     - [ISA机器码 (10\_ISA\_Machine\_Code)](#isa机器码-10_isa_machine_code)
     - [微架构 (11\_Microarchitecture)](#微架构-11_microarchitecture)
   - [03 System Technology Domains - 系统技术领域 (33文件, 16,400+行)](#03-system-technology-domains---系统技术领域-33文件-16400行)
-    - [虚拟机解释器 (01\_Virtual\_Machine\_Interpreter)](#虚拟机解释器-01_virtual_machine_interpreter)
+    - [虚拟机解释器 (01\_Virtual\_Machine\_Interpreter)](#虚拟机解释器-24_Virtual_Machine_Interpreter)
     - [正则引擎 (02\_Regex\_Engine)](#正则引擎-02_regex_engine)
     - [计算机视觉 (03\_Computer\_Vision)](#计算机视觉-03_computer_vision)
     - [视频编解码 (04\_Video\_Codec)](#视频编解码-04_video_codec)
-    - [无线协议 (05\_Wireless\_Protocol)](#无线协议-05_wireless_protocol)
+    - [无线协议 (05\_Wireless\_Protocol)](#无线协议-26_Wireless_Protocol)
     - [安全启动 (06\_Security\_Boot)](#安全启动-06_security_boot)
-    - [硬件安全 (07\_Hardware\_Security)](#硬件安全-07_hardware_security)
+    - [硬件安全 (07\_Hardware\_Security)](#硬件安全-27_Hardware_Security)
     - [分布式共识 (08\_Distributed\_Consensus)](#分布式共识-08_distributed_consensus)
-    - [高性能日志 (09\_Performance\_Logging / 09\_High\_Performance\_Log)](#高性能日志-09_performance_logging--09_high_performance_log)
+    - [高性能日志 (09\_Performance\_Logging / 09\_High\_Performance\_Log)](#高性能日志-09_performance_logging--29_High_Performance_Log)
     - [Rust互操作 (11\_Rust\_Interoperability)](#rust互操作-11_rust_interoperability)
     - [内存数据库 (11\_In\_Memory\_Database)](#内存数据库-11_in_memory_database)
-    - [RDMA网络 (12\_RDMA\_Networking / 12\_RDMA\_Network / 13\_RDMA\_Network)](#rdma网络-12_rdma_networking--12_rdma_network--13_rdma_network)
+    - [RDMA网络 (12\_RDMA\_Networking / 12\_RDMA\_Network / 13\_RDMA\_Network)](#rdma网络-12_rdma_networking--12_rdma_network--35_RDMA_Network)
     - [并发并行 (14\_Concurrency\_Parallelism) ⭐新增](#并发并行-14_concurrency_parallelism-新增)
     - [网络编程 (15\_Network\_Programming) ⭐新增](#网络编程-15_network_programming-新增)
   - [04 Industrial Scenarios - 工业场景 (27+文件, 12,000+行)](#04-industrial-scenarios---工业场景-27文件-12000行)
@@ -285,7 +285,7 @@
 
 ### 03 System Technology Domains - 系统技术领域 (33文件, 16,400+行)
 
-#### 虚拟机解释器 (01_Virtual_Machine_Interpreter)
+#### 虚拟机解释器 (24_Virtual_Machine_Interpreter)
 
 | 文件 | 主题 | 难度 | 关键概念 | 行数 |
 |:-----|:-----|:----:|:---------|:----:|
@@ -318,7 +318,7 @@
 | 02_Custom_IO.md | 自定义IO | L4 | FFmpeg API | 200+ |
 | 03_Hardware_Acceleration.md | 硬件加速 | L5 | VA-API、VDPAU | 200+ |
 
-#### 无线协议 (05_Wireless_Protocol)
+#### 无线协议 (26_Wireless_Protocol)
 
 | 文件 | 主题 | 难度 | 关键概念 | 行数 |
 |:-----|:-----|:----:|:---------|:----:|
@@ -334,7 +334,7 @@
 | 02_Secure_Boot_Chain.md | 安全启动链 | L5 | U-Boot、UEFI | 200+ |
 | 03_Measured_Boot.md | 度量启动 | L5 | TPM 2.0 | 200+ |
 
-#### 硬件安全 (07_Hardware_Security)
+#### 硬件安全 (27_Hardware_Security)
 
 | 文件 | 主题 | 难度 | 关键概念 | 行数 |
 |:-----|:-----|:----:|:---------|:----:|
@@ -350,7 +350,7 @@
 | 02_Paxos_Implementation.md | Paxos实现 | L5 | Paxos Made Simple | 200+ |
 | 03_Multi_Raft.md | Multi-Raft | L5 | TiKV | 200+ |
 
-#### 高性能日志 (09_Performance_Logging / 09_High_Performance_Log)
+#### 高性能日志 (09_Performance_Logging / 29_High_Performance_Log)
 
 | 文件 | 主题 | 难度 | 关键概念 | 行数 |
 |:-----|:-----|:----:|:---------|:----:|
@@ -374,7 +374,7 @@
 | 02_LSM_Tree.md | LSM树 | L5 | LevelDB | 200+ |
 | 03_Hash_Index.md | 哈希索引 | L4 | Fast Path | 200+ |
 
-#### RDMA网络 (12_RDMA_Networking / 12_RDMA_Network / 13_RDMA_Network)
+#### RDMA网络 (12_RDMA_Networking / 12_RDMA_Network / 35_RDMA_Network)
 
 | 文件 | 主题 | 难度 | 关键概念 | 行数 |
 |:-----|:-----|:----:|:---------|:----:|
@@ -620,7 +620,7 @@
 
 - 01_Core_Knowledge_System/06_Advanced_Layer/*.md
 - 01_Core_Knowledge_System/07_Modern_C/*.md
-- 03_System_Technology_Domains/01_Virtual_Machine_Interpreter/*.md
+- 03_System_Technology_Domains/24_Virtual_Machine_Interpreter/*.md
 - 03_System_Technology_Domains/02_Regex_Engine/*.md
 - 03_System_Technology_Domains/08_Distributed_Consensus/*.md
 

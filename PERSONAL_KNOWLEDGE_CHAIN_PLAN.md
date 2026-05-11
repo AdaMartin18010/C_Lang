@@ -1,4 +1,4 @@
-# 个人知识梳理计划：从图灵机到C语言的完整链条
+﻿# 个人知识梳理计划：从图灵机到C语言的完整链条
 
 > **计划性质**: 个人知识体系建设
 > **核心目标**: 建立从计算理论→物理实现→汇编→C的完整认知链条
@@ -419,7 +419,7 @@ knowledge/
 │
 23_VM_Implementation/
 ├── 01_Stack_Based_VM.md
-│   └── → 03_System_Technology_Domains/01_Virtual_Machine_Interpreter/
+│   └── → 03_System_Technology_Domains/24_Virtual_Machine_Interpreter/
 │       # 与现有VM内容的对比
 ```
 

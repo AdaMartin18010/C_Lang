@@ -1,4 +1,4 @@
-# C_Lang 知识库可持续发展计划 2026
+﻿# C_Lang 知识库可持续发展计划 2026
 
 > **版本**: V2026.03.24
 > **执行周期**: 2026 Q2 - 2027 Q1
@@ -85,7 +85,7 @@ knowledge/00_VERSION_TRACKING/
 knowledge/01_Core_Knowledge_System/09_Safety_Standards/
 ├── CISA_CRA_Compliance/
 │   ├── 01_CRA_Overview.md          (新增，4h)
-│   ├── 02_Security_Requirements.md (新增，6h)
+│   ├── 25_Security_Requirements.md (新增，6h)
 │   ├── 03_Vulnerability_Management.md (新增，5h)
 │   ├── 04_SBOM_Practice.md         (新增，5h)
 │   └── 05_C_Code_Hardening.md      (新增，5h)

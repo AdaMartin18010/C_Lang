@@ -1,4 +1,4 @@
-# 安全启动 (Secure Boot) - 深度技术解析
+﻿# 安全启动 (Secure Boot) - 深度技术解析
 
 > **难度等级**: L5 | **预估学习时间**: 40-50小时 | **前置知识**: 嵌入式系统、ARM架构、密码学基础、UEFI规范
 
@@ -728,7 +728,7 @@ Non-Secure Application (受限制执行)
 | 目标 | 路径 |
 |:-----|:-----|
 | 返回上层 | [03_System_Technology_Domains](../README.md) |
-| 硬件安全 | [07_Hardware_Security](../07_Hardware_Security/README.md) |
+| 硬件安全 | [27_Hardware_Security](../27_Hardware_Security/README.md) |
 | 可信执行环境 | [TEE详解](./01_ARM_Trusted_Firmware.md) |
 
 ---

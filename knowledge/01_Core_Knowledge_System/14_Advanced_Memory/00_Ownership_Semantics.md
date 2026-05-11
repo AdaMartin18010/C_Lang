@@ -1,8 +1,8 @@
-# 所有权语义与生命周期文档化
+﻿# 所有权语义与生命周期文档化
 
 > **标准**: ISO/IEC 9899:2024 (C23), MISRA C:2023, CERT C  
 > **前置知识**: [Arena分配器](00_Arena_Allocators.md), [抽象状态机](../01_Basic_Layer/00_Abstract_State_Machine.md)  
-> **后续延伸**: [MISRA C安全标准](../09_Safety_Standards/MISRA_C_2023/README.md), [Rust互操作](../../03_System_Technology_Domains/16_Rust_Interoperability/README.md)  
+> **后续延伸**: [MISRA C安全标准](../09_Safety_Standards/MISRA_C_2023/README.md), [Rust互操作](../../03_System_Technology_Domains/32_Rust_Interoperability/README.md)  
 > **对标资源**: Rust Ownership, GSL (Guidelines Support Library), MISRA C:2012 Rule 22.x, CERT C EXP00-C  
 > **难度**: 4/5 | **预计学习时间**: 3-4 小时  
 

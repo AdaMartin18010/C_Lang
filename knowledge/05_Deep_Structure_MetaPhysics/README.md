@@ -1,4 +1,4 @@
-
+﻿
 ---
 
 ## 🔗 全面知识关联体系
@@ -144,7 +144,7 @@
 | [04_Sandboxing.md](04_Sandboxing.md) | 沙箱技术 | L5 | WebAssembly ✅ |
 
 **前置知识**: 汇编语言、编译原理
-**关联**: [03_System_Technology_Domains/01_Virtual_Machine_Interpreter](../03_System_Technology_Domains/01_Virtual_Machine_Interpreter/README.md)
+**关联**: [03_System_Technology_Domains/24_Virtual_Machine_Interpreter](../03_System_Technology_Domains/24_Virtual_Machine_Interpreter/README.md)
 
 ---
 

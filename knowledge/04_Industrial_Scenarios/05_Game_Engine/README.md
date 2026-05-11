@@ -30,7 +30,7 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [图形渲染](../../03_System_Technology_Domains/17_Graphics_Rendering/README.md) | 渲染系统 | GPU渲染管线 |
+| [图形渲染](../../03_System_Technology_Domains/33_Graphics_Rendering/README.md) | 渲染系统 | GPU渲染管线 |
 | [SIMD优化](../../02_Formal_Semantics_and_Physics/07_Microarchitecture/README.md) | 性能优化 | 向量化计算 |
 | [性能分析](../../02_Formal_Semantics_and_Physics/16_Performance_Analysis_Hardware/README.md) | 性能调优 | 游戏性能分析 |
 

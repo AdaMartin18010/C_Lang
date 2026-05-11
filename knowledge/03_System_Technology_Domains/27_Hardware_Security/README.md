@@ -1,6 +1,6 @@
-# 硬件安全 (Hardware Security)
+﻿# 硬件安全 (Hardware Security)
 
-> **层级定位**: 03_System_Technology_Domains > 07_Hardware_Security
+> **层级定位**: 03_System_Technology_Domains > 27_Hardware_Security
 > **难度级别**: ⭐⭐⭐⭐⭐ L5
 > **前置知识**: 计算机体系结构、密码学基础、硬件设计
 > **参考标准**: ARM TrustZone, Intel SGX, TPM 2.0 Specification

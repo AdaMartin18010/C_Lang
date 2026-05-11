@@ -1,4 +1,4 @@
-# C_Lang - C语言知识体系库
+﻿# C_Lang - C语言知识体系库
 
 > **完成度**: 全面重构中 | **文件数**: 1,642 Markdown | **总行数**: 1,046,179+ | **总大小**: 30+ MB | **最后更新**: 2026-05-11 | **模块**: 24+ | **C2y**: 完整追踪 | **链接**: 1,274个失效链接已修复 | **状态**: 结构治理完成+P0-P1内容补充完成
 > 📊 [项目状态](PROJECT_STATUS.md) | 🧭 [导航指南](NAVIGATION.md) | 📝 [更新记录](CHANGELOG.md) | 🤝 [贡献指南](CONTRIBUTING.md)
@@ -52,19 +52,19 @@ knowledge/
 │   ├── 09_Physical_Machine_Layer/   # 物理机器层
 │   └── 10_ISA_Machine_Code/         # ISA机器码
 ├── 03_System_Technology_Domains/    # ⚙️ 系统技术领域
-│   ├── 01_Virtual_Machine_Interpreter/  # 虚拟机
+│   ├── 24_Virtual_Machine_Interpreter/  # 虚拟机
 │   ├── 02_Regex_Engine/             # 正则引擎
 │   ├── 03_Computer_Vision/          # 计算机视觉
 │   ├── 04_Video_Codec/              # 视频编解码
-│   ├── 05_Wireless_Protocol/        # 无线协议
+│   ├── 26_Wireless_Protocol/        # 无线协议
 │   ├── 06_Security_Boot/            # 安全启动
-│   ├── 07_Hardware_Security/        # 硬件安全
+│   ├── 27_Hardware_Security/        # 硬件安全
 │   ├── 08_Distributed_Consensus/    # 分布式共识
-│   ├── 09_High_Performance_Log/     # 高性能日志
+│   ├── 29_High_Performance_Log/     # 高性能日志
 │   ├── 11_In_Memory_Database/       # 内存数据库
-│   ├── 16_Rust_Interoperability/    # Rust互操作
+│   ├── 32_Rust_Interoperability/    # Rust互操作
 │   ├── 12_Persistent_Memory/        # 持久内存
-│   ├── 13_RDMA_Network/             # RDMA网络
+│   ├── 35_RDMA_Network/             # RDMA网络
 │   ├── 14_Concurrency_Parallelism/  # 并发并行
 │   └── 15_Network_Programming/      # 网络编程
 ├── 04_Industrial_Scenarios/         # 🏭 工业场景

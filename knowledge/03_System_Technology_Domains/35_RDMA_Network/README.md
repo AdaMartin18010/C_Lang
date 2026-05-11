@@ -1,6 +1,6 @@
 ﻿# RDMA 网络编程
 
-> **层级定位**: 03_System_Technology_Domains > 13_RDMA_Network
+> **层级定位**: 03_System_Technology_Domains > 35_RDMA_Network
 > **难度级别**: L5 专家
 > **预估学习时间**: 20-25 小时
 
@@ -29,7 +29,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [分布式共识](../08_Distributed_Consensus/README.md) | 应用加速 | 低延迟共识协议 |
-| [高性能日志](../09_High_Performance_Log/README.md) | 存储加速 | 零拷贝日志写入 |
+| [高性能日志](../29_High_Performance_Log/README.md) | 存储加速 | 零拷贝日志写入 |
 | [内存数据库](../11_In_Memory_Database/README.md) | 数据库加速 | 分布式内存池 |
 
 ## 概述

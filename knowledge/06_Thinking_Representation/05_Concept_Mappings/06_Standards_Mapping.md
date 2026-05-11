@@ -1,4 +1,4 @@
-# 国际标准映射关系
+﻿# 国际标准映射关系
 
 ---
 
@@ -87,8 +87,8 @@
 |:-----|:-----|:---------|:---------|
 | IEEE Std 1003.1 | POSIX.1 | 系统编程 | 09_POSIX_API, 06_Advanced_Layer |
 | IEEE 754 | Floating-Point Arithmetic | 浮点运算 | 01_Data_Types |
-| IEEE 802.11 | Wi-Fi | 网络 | 05_Wireless_Protocol |
-| IEEE 802.15.4 | Zigbee PHY/MAC | 物联网 | 05_Wireless_Protocol |
+| IEEE 802.11 | Wi-Fi | 网络 | 26_Wireless_Protocol |
+| IEEE 802.15.4 | Zigbee PHY/MAC | 物联网 | 26_Wireless_Protocol |
 | IEEE 1588 | PTP | 时间同步 | 03_High_Frequency_Trading |
 
 ### 行业安全标准
@@ -109,7 +109,7 @@
 | 标准 | 全称 | 适用主题 | 相关文件 |
 |:-----|:-----|:---------|:---------|
 | 3GPP TS 38.xxx | 5G NR | 5G基带 | 04_5G_Baseband |
-| Bluetooth Core Spec | Bluetooth | BLE | 05_Wireless_Protocol |
+| Bluetooth Core Spec | Bluetooth | BLE | 26_Wireless_Protocol |
 | CAN ISO 11898 | CAN Bus | 汽车通信 | 02_Automotive_ECU |
 | ARINC 429 | Avionics Data Bus | 航空 | 02_Avionics_Systems |
 | ARINC 653 | Avionics Partitioning | 航空OS | 02_Avionics_Systems |
@@ -130,10 +130,10 @@
 
 | 标准 | 全称 | 适用主题 | 相关文件 |
 |:-----|:-----|:---------|:---------|
-| TCG TPM 2.0 | Trusted Platform Module | 硬件安全 | 06_Security_Boot, 07_Hardware_Security |
+| TCG TPM 2.0 | Trusted Platform Module | 硬件安全 | 06_Security_Boot, 27_Hardware_Security |
 | ARM TF-A | Trusted Firmware-A | 安全启动 | 06_Security_Boot |
-| GlobalPlatform | Secure Element | 安全元件 | 07_Hardware_Security |
-| PKCS#11 | Cryptographic Token Interface | HSM | 07_Hardware_Security |
+| GlobalPlatform | Secure Element | 安全元件 | 27_Hardware_Security |
+| PKCS#11 | Cryptographic Token Interface | HSM | 27_Hardware_Security |
 | FIPS 140-2/3 | Security Requirements | 加密模块 | 08_Cryptography |
 | Common Criteria | ISO/IEC 15408 | 安全评估 | 09_Security_Certification |
 

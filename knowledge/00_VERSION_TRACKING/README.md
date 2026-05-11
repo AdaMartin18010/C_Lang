@@ -1,4 +1,4 @@
-# 版本跟踪与知识库导航
+﻿# 版本跟踪与知识库导航
 
 > **层级定位**: 00_VERSION_TRACKING
 > **难度级别**: L1 入门
@@ -369,11 +369,11 @@ knowledge/
 │   └── ...
 │
 ├── 03_System_Technology_Domains/    # 系统技术领域
-│   ├── 01_Virtual_Machine_Interpreter/
+│   ├── 24_Virtual_Machine_Interpreter/
 │   ├── 02_Regex_Engine/
-│   ├── 05_Wireless_Protocol/     # 无线协议
-│   ├── 09_High_Performance_Log/  # 高性能日志
-│   ├── 16_Rust_Interoperability/ # Rust 互操作
+│   ├── 26_Wireless_Protocol/     # 无线协议
+│   ├── 29_High_Performance_Log/  # 高性能日志
+│   ├── 32_Rust_Interoperability/ # Rust 互操作
 │   └── ...
 │
 └── [其他领域...]
@@ -388,9 +388,9 @@ knowledge/
 | 系统编程 | `06_Advanced_Layer/README.md` | 系统调用、并发 | Shell 实现 |
 | 现代 C | `07_Modern_C/README.md` | C11/C17/C23 | 安全字符串处理 |
 | 形式语义 | `02_Formal_Semantics_and_Physics/README.md` | 博弈语义 | 验证工具 |
-| 无线协议 | `05_Wireless_Protocol/README.md` | BLE、WiFi | 协议分析器 |
-| 高性能日志 | `09_High_Performance_Log/README.md` | 零拷贝、MMAP | 日志库 |
-| Rust FFI | `16_Rust_Interoperability/README.md` | FFI、unsafe | 混合项目 |
+| 无线协议 | `26_Wireless_Protocol/README.md` | BLE、WiFi | 协议分析器 |
+| 高性能日志 | `29_High_Performance_Log/README.md` | 零拷贝、MMAP | 日志库 |
+| Rust FFI | `32_Rust_Interoperability/README.md` | FFI、unsafe | 混合项目 |
 
 ### 标签导航系统
 

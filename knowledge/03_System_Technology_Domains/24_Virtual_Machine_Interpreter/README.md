@@ -1,6 +1,6 @@
 ﻿# 虚拟机与解释器
 
-> **层级定位**: 03_System_Technology_Domains > 01_Virtual_Machine_Interpreter
+> **层级定位**: 03_System_Technology_Domains > 24_Virtual_Machine_Interpreter
 > **难度级别**: L4 分析
 > **预估学习时间**: 15-20 小时
 

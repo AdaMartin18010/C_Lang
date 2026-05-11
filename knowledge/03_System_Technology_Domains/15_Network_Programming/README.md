@@ -28,7 +28,7 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [RDMA网络](../13_RDMA_Network/README.md) | 高性能网络 | 零拷贝、内核旁路 |
+| [RDMA网络](../35_RDMA_Network/README.md) | 高性能网络 | 零拷贝、内核旁路 |
 | [分布式共识](../08_Distributed_Consensus/README.md) | 分布式系统 | 网络分区容错 |
 | DPDK | 高性能 | 数据平面开发 |
 

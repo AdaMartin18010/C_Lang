@@ -1,4 +1,4 @@
-# C_Lang 知识库内容增强第三波完成报告
+﻿# C_Lang 知识库内容增强第三波完成报告
 
 > **报告日期**: 2026-03-28
 > **增强阶段**: Wave 3 (系统技术域重点增强)
@@ -22,7 +22,7 @@
 | 序号 | 文件路径 | 原行数 | 增强后行数 | 新增内容 |
 |:-----|:---------|:------:|:----------:|:---------|
 | 1 | `16_High_Performance_Computing/03_SIMD_Optimization.md` | 34 | ~500 | 完整SIMD编程指南 |
-| 2 | `18_Systems_Performance/01_Linux_Performance_Tuning.md` | 18 | ~450 | CPU/内存/IO/网络调优 |
+| 2 | `34_Systems_Performance/01_Linux_Performance_Tuning.md` | 18 | ~450 | CPU/内存/IO/网络调优 |
 | 3 | `13_Machine_Learning/01_ML_Inference_Optimization.md` | 15 | ~550 | TinyML推理优化 |
 
 ### 新增专题文档

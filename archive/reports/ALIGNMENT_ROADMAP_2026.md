@@ -1,4 +1,4 @@
-# C语言知识库国际化对齐推进路线图 2026
+﻿# C语言知识库国际化对齐推进路线图 2026
 
 ## 执行摘要
 
@@ -168,7 +168,7 @@ knowledge/01_Core_Knowledge_System/09_Safety_Standards/EN_50128/
 
 | MIT实验 | 知识库对应 | 补充内容 |
 |---------|-----------|---------|
-| Lab 1: Xv6 and Unix utilities | `03_System_Technology_Domains/01_Virtual_Machine_Interpreter/` | 扩展xv6用户态程序 |
+| Lab 1: Xv6 and Unix utilities | `03_System_Technology_Domains/24_Virtual_Machine_Interpreter/` | 扩展xv6用户态程序 |
 | Lab 2: System calls | `01_Core_Knowledge_System/04_Standard_Library_Layer/` | 系统调用实现详解 |
 | Lab 3: Page tables | `02_Formal_Semantics_and_Physics/02_C_Assembly_Mapping/` | 页表代码实现 |
 | Lab 4: Traps | `02_Formal_Semantics_and_Physics/10_ISA_Machine_Code/` | 中断处理代码 |

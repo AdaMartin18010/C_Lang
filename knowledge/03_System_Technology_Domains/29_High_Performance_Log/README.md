@@ -1,6 +1,6 @@
 ﻿# 高性能日志系统
 
-> **层级定位**: 03_System_Technology_Domains > 09_High_Performance_Log
+> **层级定位**: 03_System_Technology_Domains > 29_High_Performance_Log
 > **难度级别**: L4 分析
 > **预估学习时间**: 12-15 小时
 
@@ -28,7 +28,7 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [RDMA网络](../13_RDMA_Network/README.md) | 远程日志 | 零拷贝网络传输 |
+| [RDMA网络](../35_RDMA_Network/README.md) | 远程日志 | 零拷贝网络传输 |
 | [持久内存](../12_Persistent_Memory/README.md) | 持久化 | 持久化日志 |
 | [内存数据库](../11_In_Memory_Database/README.md) | 存储 | 日志存储系统 |
 

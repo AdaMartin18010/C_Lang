@@ -29,9 +29,9 @@
 
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
-| [无线协议](../../03_System_Technology_Domains/05_Wireless_Protocol/README.md) | 通信技术 | IoT通信协议 |
+| [无线协议](../../03_System_Technology_Domains/26_Wireless_Protocol/README.md) | 通信技术 | IoT通信协议 |
 | [安全启动](../../03_System_Technology_Domains/06_Security_Boot/README.md) | 安全基础 | 设备安全启动 |
-| [硬件安全](../../03_System_Technology_Domains/07_Hardware_Security/README.md) | 安全加固 | 硬件安全机制 |
+| [硬件安全](../../03_System_Technology_Domains/27_Hardware_Security/README.md) | 安全加固 | 硬件安全机制 |
 
 > 真实硬件平台实战：ESP32、树莓派 Pico、Raspberry Pi、工控系统
 

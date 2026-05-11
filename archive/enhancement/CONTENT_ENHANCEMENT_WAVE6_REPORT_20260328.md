@@ -1,4 +1,4 @@
-# C_Lang 知识库内容增强第六波完成报告
+﻿# C_Lang 知识库内容增强第六波完成报告
 
 > **报告日期**: 2026-03-28
 > **增强阶段**: Wave 6 (批量深度增强)
@@ -24,7 +24,7 @@
 | 2 | `04_Standard_Library_Layer/02_C99_Library.md` | 305 | ~949 | C99标准库深度指南 |
 | 3 | `04_Standard_Library_Layer/03_C11_Library.md` | 358 | ~1,223 | C11标准库深度指南 |
 | 4 | `04_Standard_Library_Layer/04_C17_C23_Library.md` | 519 | ~1,253 | C17/C23标准库深度指南 |
-| 5 | `15_Security_Engineering/03_Cryptography_Implementation.md` | 34 | ~1,020 | 密码学实现安全 |
+| 5 | `31_Security_Engineering/03_Cryptography_Implementation.md` | 34 | ~1,020 | 密码学实现安全 |
 | 6 | `21_OS_Internals/01_Kernel_Synchronization.md` | 34 | ~1,438 | 内核同步机制 |
 | 7 | `22_Virtualization/01_KVM_Internals.md` | 34 | ~1,633 | KVM虚拟化内幕 |
 

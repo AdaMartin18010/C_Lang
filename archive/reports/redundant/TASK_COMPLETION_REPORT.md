@@ -1,4 +1,4 @@
-# 任务完成报告
+﻿# 任务完成报告
 
 ## 完成摘要
 
@@ -71,7 +71,7 @@
 
 ### 4.3 编写嵌入式零信任架构 ✅
 
-**文件**: `knowledge/03_System_Technology_Domains/07_Hardware_Security/04_Zero_Trust_Embedded_Architecture.md`
+**文件**: `knowledge/03_System_Technology_Domains/27_Hardware_Security/04_Zero_Trust_Embedded_Architecture.md`
 **大小**: 48.0 KB
 **内容**:
 
@@ -96,7 +96,7 @@
 | P1-2.4 | Linux内核Rust集成 | ✅ | `15_Memory_Safe_Languages/01_Rust_vs_C/03_Linux_Kernel_Rust_Integration.md` | 21.8 KB |
 | P1-2.5 | C vs Rust决策框架 | ✅ | `15_Memory_Safe_Languages/01_Rust_vs_C/04_C_vs_Rust_Decision_Framework.md` | 28.2 KB |
 | P1-4.1 | 安全启动深度指南 | ✅ | `03_System_Technology_Domains/06_Security_Boot/README.md` | 已存在 |
-| P1-4.3 | 嵌入式零信任架构 | ✅ | `03_System_Technology_Domains/07_Hardware_Security/04_Zero_Trust_Embedded_Architecture.md` | 48.0 KB |
+| P1-4.3 | 嵌入式零信任架构 | ✅ | `03_System_Technology_Domains/27_Hardware_Security/04_Zero_Trust_Embedded_Architecture.md` | 48.0 KB |
 
 **总计**: 5/5 任务完成 (100%)
 **新增内容**: ~123 KB 高质量技术文档
@@ -117,7 +117,7 @@ knowledge/
 └── 03_System_Technology_Domains/
     ├── 06_Security_Boot/
     │   └── README.md (已验证完整 ✅)
-    └── 07_Hardware_Security/
+    └── 27_Hardware_Security/
         ├── 01_TPM2_TSS.md (现有)
         ├── 02_Key_Sealing.md (现有)
         ├── 03_HSM_Integration.md (现有)

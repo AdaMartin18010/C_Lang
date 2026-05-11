@@ -1,4 +1,4 @@
-# C_Lang 知识库 - 100% 完成报告
+﻿# C_Lang 知识库 - 100% 完成报告
 
 > **报告日期**: 2026-03-19
 > **状态**: ✅ 100% 完成 - 所有任务已执行完毕
@@ -95,7 +95,7 @@ knowledge/
 ├── 06_Thinking_Representation/
 │   ├── 09_Bloom_Taxonomy/           [NEW]
 │   └── 10_Concept_Maps/             [EXPANDED]
-└── 07_Hardware_Security/            [EXPANDED]
+└── 27_Hardware_Security/            [EXPANDED]
 ```
 
 ---

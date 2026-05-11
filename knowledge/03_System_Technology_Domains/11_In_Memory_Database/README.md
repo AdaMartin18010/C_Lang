@@ -29,7 +29,7 @@
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [持久内存](../12_Persistent_Memory/README.md) | 持久化 | 内存数据库持久化 |
-| [RDMA网络](../13_RDMA_Network/README.md) | 分布式 | 远程内存访问 |
+| [RDMA网络](../35_RDMA_Network/README.md) | 分布式 | 远程内存访问 |
 | [分布式共识](../08_Distributed_Consensus/README.md) | 分布式 | 多副本一致性 |
 
 ---
@@ -177,7 +177,7 @@
 
 | 关联目录 | 关联内容 |
 |:---------|:---------|
-| `../07_Hardware_Security/` | 加密存储、安全密钥管理 |
+| `../27_Hardware_Security/` | 加密存储、安全密钥管理 |
 | `../../04_Industrial_Scenarios/` | 工业级数据库应用场景 |
 
 ---
@@ -246,7 +246,7 @@ NewSQL数据库 (Spanner、CockroachDB)
 ---
 
 > [← 返回上级目录](../README.md)
-> [→ 探索硬件安全](../07_Hardware_Security/README.md)
+> [→ 探索硬件安全](../27_Hardware_Security/README.md)
 
 
 ---

@@ -1,4 +1,4 @@
-# C语言知识库 v4.0 - 完整版
+﻿# C语言知识库 v4.0 - 完整版
 
 > **完成度**: **100%** ✅ | **文件数**: 483 | **总行数**: 271,000+ | **最后更新**: 2026-05-10
 > **状态**: 100%完成 | **新模块**: [形式语义基础](./02_Formal_Semantics_and_Physics/00_Core_Semantics_Foundations/README.md) | [机器学习](./11_Machine_Learning_C/README.md)
@@ -1076,19 +1076,19 @@ knowledge/
 │
 ├── 03_System_Technology_Domains/        # 系统技术领域 (16,400+行)
 │   ├── README.md
-│   ├── 01_Virtual_Machine_Interpreter/  # 虚拟机与解释器
+│   ├── 24_Virtual_Machine_Interpreter/  # 虚拟机与解释器
 │   ├── 02_Regex_Engine/                 # 正则表达式引擎
 │   ├── 03_Computer_Vision/              # 计算机视觉
 │   ├── 04_Video_Codec/                  # 视频编解码
-│   ├── 05_Wireless_Protocol/            # 无线协议
+│   ├── 26_Wireless_Protocol/            # 无线协议
 │   ├── 06_Security_Boot/                # 安全启动
-│   ├── 07_Hardware_Security/            # 硬件安全
+│   ├── 27_Hardware_Security/            # 硬件安全
 │   ├── 08_Distributed_Consensus/        # 分布式共识
-│   ├── 09_High_Performance_Log/         # 高性能日志
+│   ├── 29_High_Performance_Log/         # 高性能日志
 │   ├── 11_In_Memory_Database/           # 内存数据库
-│   ├── 16_Rust_Interoperability/        # Rust互操作
+│   ├── 32_Rust_Interoperability/        # Rust互操作
 │   ├── 12_Persistent_Memory/            # 持久内存
-│   ├── 13_RDMA_Network/                 # RDMA网络
+│   ├── 35_RDMA_Network/                 # RDMA网络
 │   ├── 14_Concurrency_Parallelism/      # 并发并行
 │   └── 15_Network_Programming/          # 网络编程
 │

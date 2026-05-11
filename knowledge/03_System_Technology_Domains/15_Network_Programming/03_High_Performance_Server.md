@@ -1,4 +1,4 @@
-# 高性能服务器设计与实现
+﻿# 高性能服务器设计与实现
 
 > **层级定位**: 03 System Technology Domains / 15 Network Programming
 > **难度级别**: L4-L5
@@ -411,7 +411,7 @@ void handle_read_et(int fd) {
 ### 后续延伸
 
 - DPDK高性能网络
-- [RDMA网络](../13_RDMA_Network/README.md)
+- [RDMA网络](../35_RDMA_Network/README.md)
 
 ### 参考
 
