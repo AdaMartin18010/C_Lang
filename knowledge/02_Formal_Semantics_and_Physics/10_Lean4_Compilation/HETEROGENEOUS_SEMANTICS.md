@@ -1657,14 +1657,14 @@ end HeterogeneousSystem
 
 | 文档 | 引用内容 | 章节 |
 |------|----------|------|
-| [SEMANTIC_NOTATIONS.md](./SEMANTIC_NOTATIONS.md) | 语义符号标准 | 全文档 |
+| SEMANTIC_NOTATIONS.md | 语义符号标准 | 全文档 |
 | [APPLIED_CONCURRENT.md](./APPLIED_CONCURRENT.md) | 并发语义、LTS、屏障同步 | §2.4, §3.4 |
 
 ### 横向关联
 
 | 文档 | 关联内容 | 关系 |
 |------|----------|------|
-| [FRONTIER_QUANTUM.md](./FRONTIER_QUANTUM.md) | 并行计算模型 | 互补 |
+| FRONTIER_QUANTUM.md | 并行计算模型 | 互补 |
 | [F3_SIMD_Vectorization.md](./F3_SIMD_Vectorization.md) | 向量化、SIMD | 扩展 |
 | [09_Physical_Machine_Layer/04_SIMD_Vectorization.md](../09_Physical_Machine_Layer/04_SIMD_Vectorization.md) | 硬件向量化 | 实现层 |
 

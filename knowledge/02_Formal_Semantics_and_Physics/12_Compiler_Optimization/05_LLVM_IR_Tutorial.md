@@ -352,13 +352,6 @@ struct MyPass : public llvm::PassInfoMixin<MyPass> {
 - **Writing an LLVM Pass**: <https://llvm.org/docs/WritingAnLLVMPass.html>
 - **LLVM IR Cheat Sheet**: <https://github.com/llvm/llvm-project/blob/main/llvm/docs/GettingStartedTutorials.rst>
 
-## 待补充内容
-
-- [ ] LLVM IR 中的异常处理 (`landingpad`, `invoke`)
-- [ ] 内联汇编在 LLVM IR 中的表示
-- [ ] Debug 信息生成 (`DIBuilder`)
-- [ ] MLIR 简介：LLVM IR 的下一代基础设施
-
 ---
 
 *最后更新: 2026-05-10*

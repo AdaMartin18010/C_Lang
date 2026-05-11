@@ -1171,11 +1171,92 @@ end RuntimeSystem
 
 ---
 
-## 9. 交叉引用
+## 9. 运行时系统形式化补充
 
-### 符号标准
+> 本附录提供更形式化的运行时组件定义，补充第2-5章的直观描述。
 
-- [SEMANTIC_NOTATIONS.md](./SEMANTIC_NOTATIONS.md) - 本文档严格遵循的符号标准
+### 9.1 运行时架构形式化
+
+```
+Runtime = {
+  Heap: Object → Status,
+  Stack: List<Frame>,
+  GC: Heap → Heap,
+  Scheduler: Threads → IO (),
+  Primitives: List<External>
+}
+```
+
+### 9.2 对象模型形式化
+
+**定义A.1 (对象)**:
+
+```
+Object = {
+  header: RC × Tag × Size,
+  data: Bytes
+}
+```
+
+**定理A.1 (对象对齐)**:
+
+```
+∀o ∈ Object. addr(o) ≡ 0 (mod 8)
+```
+
+**定理A.2 (RC正确性)**:
+
+```
+RC(o) = |{p | p指向o}|
+```
+
+**定理A.3 (RC无泄漏)**:
+
+```
+RC(o) = 0 ⟹ o可回收
+```
+
+### 9.3 堆管理形式化
+
+**不变式A.1 (堆一致性)**:
+
+```
+∀p ∈ Heap. valid(p) ⟹ allocated(p)
+```
+
+**定理A.4 (分配安全性)**: `alloc(n)` 返回未使用地址。
+
+**定理A.5 (释放安全性)**: `free(p)` 后 `p` 不被访问。
+
+### 9.4 垃圾回收形式化
+
+**定理A.6 (RC处理无环)**: 无环对象由RC正确回收。
+
+**定理A.7 (GC处理循环)**: 周期性GC标记清除循环引用。
+
+### 9.5 执行模型形式化
+
+**定理A.8 (应用语义)**:
+
+```
+apply(f, args) = f.code(f.env, args)
+```
+
+**定理A.9 (闭包调用)**:
+
+```
+closure_call(c, a) = c.code(c.env, a)
+```
+
+### 9.6 线程安全形式化
+
+**定理A.10 (原子更新)**: `RC++` 是原子操作。
+
+**定理A.11 (无数据竞争)**: 多线程RC操作正确。
+
+---
+
+## 10. 交叉引用
 
 ### 并发相关
 
@@ -1197,18 +1278,3 @@ end RuntimeSystem
   - 归约机制参照内核实现
   - 类型保持定理
   - 内存安全保证机制
-
-### 统一框架
-
-- [SEMANTICS_UNIFIED_REVISED.md](./SEMANTICS_UNIFIED_REVISED.md) - 语义学三元组统一框架
-
----
-
-**文档信息**
-
-- 创建日期: 2026-03-24
-- 难度级别: L6+++ (系统级元理论深度)
-- 状态: 符合 SEMANTIC_NOTATIONS.md
-- 字数统计: ~15,000字符
-- 代码示例: 8个完整Lean 4代码片段
-- 形式化定理: 5个，含完整证明

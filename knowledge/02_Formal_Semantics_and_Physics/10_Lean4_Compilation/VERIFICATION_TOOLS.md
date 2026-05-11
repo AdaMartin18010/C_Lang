@@ -1346,10 +1346,10 @@ theorem sort_sorted (xs : List Nat) : Sorted (sort xs) := by
 
 ### 文档引用
 
-- **[SEMANTIC_NOTATIONS.md](./SEMANTIC_NOTATIONS.md)** - 本文档严格遵循的符号标准
+- **SEMANTIC_NOTATIONS.md** - 本文档严格遵循的符号标准
 - **[LEAN4_SEMANTICS_MAPPING.md](./LEAN4_SEMANTICS_MAPPING.md)** - Lean 4语义实现详细映射
 - **[APPLIED_FUNCTIONAL.md](./APPLIED_FUNCTIONAL.md)** - 函数式语言语义框架
-- **[SEMANTICS_UNIFIED_REVISED.md](./SEMANTICS_UNIFIED_REVISED.md)** - 语义学三元组统一框架
+- **SEMANTICS_UNIFIED_REVISED.md** - 语义学三元组统一框架
 
 ### 相关主题
 

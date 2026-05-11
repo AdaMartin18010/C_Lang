@@ -582,14 +582,6 @@ program_hw_devices
 - **Berkeley CS61C**: RISC-V CPU project in Logisim/Verilog
 - **RVfpga**: RISC-V + FPGA 完整课程 (Imagination Technologies)
 
-## 待补充内容
-
-- [x] 64 位 (RV64I) 扩展设计
-- [x] 乘除法单元 (M 扩展) 实现
-- [ ] 浮点单元 (F/D 扩展) 概述
-- [ ] 特权模式与异常处理完整实现
-- [ ] 多核缓存一致性 (MESI) 协议
-
 ---
 
 *最后更新: 2026-05-10*

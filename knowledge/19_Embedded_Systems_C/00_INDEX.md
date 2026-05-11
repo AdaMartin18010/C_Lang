@@ -92,5 +92,5 @@ RTOS深入 → 内存管理 → 调试技术 → Bootloader → 低功耗设计
 ## 相关模块
 
 - [18_Industrial_Protocols_C](../18_Industrial_Protocols_C/README.md) - 工业通信协议
-- [20_Hardware_Interfaces_C](../hardware_interfaces_c/README.md) - 硬件接口驱动
+- 20_Hardware_Interfaces_C - 硬件接口驱动
 - [04_Industrial_Scenarios/14_Embedded_IoT](../04_Industrial_Scenarios/14_Embedded_IoT/README.md) - 实际项目案例

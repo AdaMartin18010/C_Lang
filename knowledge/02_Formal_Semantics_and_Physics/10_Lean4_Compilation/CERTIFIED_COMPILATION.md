@@ -1209,7 +1209,7 @@ lemma proofCompose {proofs : List PassProof} :
 
 ### 相关文档
 
-- [SEMANTIC_NOTATIONS.md](./SEMANTIC_NOTATIONS.md) - 语义学符号约定
+- SEMANTIC_NOTATIONS.md - 语义学符号约定
 - [BACKEND_SEMANTICS.md](./BACKEND_SEMANTICS.md) - 后端语义分析
 - [SAFETY_CRITICAL_SYSTEMS.md](./SAFETY_CRITICAL_SYSTEMS.md) - 安全关键系统
 

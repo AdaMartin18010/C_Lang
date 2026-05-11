@@ -97,5 +97,5 @@ Modbus → OPC UA → EtherCAT → TSN → 工业云网关
 ## 相关模块
 
 - [19_Embedded_Systems_C](../19_Embedded_Systems_C/README.md) - 嵌入式系统实现
-- [20_Hardware_Interfaces_C](../hardware_interfaces_c/README.md) - 底层硬件接口
+- 20_Hardware_Interfaces_C - 底层硬件接口
 - [04_Industrial_Scenarios](../04_Industrial_Scenarios/README.md) - 工业场景应用

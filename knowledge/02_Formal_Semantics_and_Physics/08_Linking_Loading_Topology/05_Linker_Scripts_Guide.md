@@ -265,13 +265,6 @@ riscv64-unknown-elf-objcopy -O binary firmware.elf firmware.bin
 - **RISC-V ELF psABI**: RISC-V 特定的 ELF 和链接约定
 - **"Embedded Systems Architecture"** (Tammy Noergaard): 嵌入式链接与加载
 
-## 待补充内容
-
-- [ ] ARM Cortex-M 链接器脚本示例
-- [ ] x86-64 内核链接器脚本 (Linux kernel linker script 分析)
-- [ ] 动态链接器脚本 (libc.so 的加载)
-- [ ] lld (LLVM linker) 脚本语法差异
-
 ---
 
 *最后更新: 2026-05-10*

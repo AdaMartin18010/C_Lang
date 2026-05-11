@@ -50,13 +50,6 @@ syscall(SYS_write, fd, buf, count);
 - 进程调度
 - [eBPF 深度探索](06_eBPF_Deep.md)
 
-## 待补充内容
-
-- [ ] 各架构系统调用 ABI 详细对比 (x86, x86-64, ARM64, RISC-V)
-- [ ] `strace` 使用和原理
-- [ ] 系统调用开销分析和优化策略
-- [ ] seccomp 和系统调用过滤
-
 ---
 
 *最后更新: 2026-05-10*

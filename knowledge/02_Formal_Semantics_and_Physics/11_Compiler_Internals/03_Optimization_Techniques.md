@@ -54,13 +54,6 @@ opt -passes="mem2reg,simplifycfg,gvn" input.bc -o output.bc
 | Os | `-Os` | 优化代码大小 |
 | Ofast | `-Ofast` | 不遵守严格标准，最大性能 |
 
-## 待补充内容
-
-- [ ] SSA 形式与优化
-- [ ] 数据流分析框架
-- [ ] 指针分析和别名分析深入
-- [ ] 自动并行化和 OpenMP 生成
-
 ---
 
 *最后更新: 2026-05-10*

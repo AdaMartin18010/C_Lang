@@ -226,13 +226,6 @@ Clight → Csharpminor → Cminor → CminorSel → RTL → LTL → Linear → M
 - **Engineering a Compiler** (Cooper & Torczon): Ch.12-13 (Instruction Selection, Scheduling, Register Allocation)
 - **Advanced Compiler Design and Implementation** (Muchnick): 经典后端教材
 
-## 待补充内容
-
-- [ ] 特定后端（x86-64 / ARM64 / RISC-V）的指令选择细节
-- [ ] LLVM MachineScheduler 的调度策略详解
-- [ ] 寄存器压力分析与 spills 优化
-- [ ] 链接时优化 (LTO) 和 全程序优化
-
 ---
 
 *最后更新: 2026-05-10*

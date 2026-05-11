@@ -149,7 +149,7 @@ source ~/.bashrc
 ESP32/
 ├── README.md                      # 本文件 - 平台概览与导航
 ├── 01_ESP32_Complete_Guide.md     # 完整开发指南
-└── examples/                      # 示例代码目录（待补充）
+└── examples/                      # 示例代码目录
     ├── wifi_sta_example/
     ├── ble_gatt_server/
     └── low_power_modes/

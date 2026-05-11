@@ -3391,8 +3391,8 @@ gcc -std=c2y -Wc23-c2y-compat source.c
 
 完整的C23到C2y演进路线图请参考：
 
-- [C23_C2Y_ROADMAP.md](../c_language_standards/C23_C2Y_ROADMAP.md)
-- [C23_C2Y_SUPPORT_MATRIX.md](../c_language_standards/C23_C2Y_SUPPORT_MATRIX.md)
+- C23_C2Y_ROADMAP.md
+- C23_C2Y_SUPPORT_MATRIX.md
 
 ---
 

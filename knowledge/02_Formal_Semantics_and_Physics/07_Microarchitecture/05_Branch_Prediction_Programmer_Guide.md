@@ -461,13 +461,6 @@ uint8_t safe_access(const uint8_t* array, size_t size, size_t idx) {
 - **Agner Fog's Microarchitecture Manual**: Branch prediction details for Intel/AMD/VIA
 - **"Computer Architecture: A Quantitative Approach"** (Hennessy & Patterson): Ch.3 (ILP)
 
-## 待补充内容
-
-- [x] 间接分支预测 (Indirect Branch Prediction) 与虚函数调用优化
-- [x] 返回地址栈 (Return Address Stack) 与函数调用优化
-- [x] 条件移动 (CMOV) 指令的编译器生成与手动使用
-- [x] 推测执行 (Speculative Execution) 与安全影响 (Spectre/Meltdown)
-
 ---
 
 *最后更新: 2026-05-10*

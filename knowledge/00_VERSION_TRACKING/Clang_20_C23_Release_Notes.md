@@ -85,4 +85,4 @@
 
 - [Clang 20 Release Notes](https://releases.llvm.org/20.1.0/tools/clang/docs/ReleaseNotes.html)
 - [Clang C Status](https://clang.llvm.org/c_status.html)
-- [C23/C2y Support Matrix](../c_language_standards/C23_C2Y_SUPPORT_MATRIX.md)
+- C23/C2y Support Matrix

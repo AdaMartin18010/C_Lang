@@ -266,13 +266,6 @@ entry:
 - **Engineering a Compiler** (Cooper & Torczon): 现代编译器工程
 - **LLVM Kaleidoscope Tutorial**: LLVM IR 生成入门
 
-## 待补充内容
-
-- [ ] 语义分析完整实现指南
-- [ ] IR 生成器设计与实现
-- [ ] 错误报告与恢复机制
-- [ ] 预处理器的词法分析特殊性 (`#define`, `#include`)
-
 ---
 
 *最后更新: 2026-05-10*

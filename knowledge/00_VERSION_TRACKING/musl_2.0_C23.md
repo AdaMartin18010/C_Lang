@@ -268,7 +268,7 @@ gcc -std=c23 -Wall -Wextra -o test_c23 test_c23.c
 - [C23 标准库扩展](../01_Core_Knowledge_System/04_Standard_Library_Layer/C23_Standard_Library/README.md)
 - [glibc 2.43 C23/C2y 支持对比](glibc_2.43_C2y_Preview.md)
 - [GCC 15 C23 默认标准迁移指南](C23_Default_Standard_Migration_Guide.md)
-- [C23/C2y 支持矩阵](../c_language_standards/C23_C2Y_SUPPORT_MATRIX.md)
+- C23/C2y 支持矩阵
 
 ---
 

@@ -250,13 +250,6 @@ sum0 = _mm256_add_ps(sum0, sum1);
 - **Agner Fog's Manual 1**: Instruction tables — 每条指令的延迟和吞吐
 - **"Modern Parallel Programming"** (Intel): SIMD 优化最佳实践
 
-## 待补充内容
-
-- [ ] AVX-512 掩码寄存器编程与向量化循环
-- [ ] ARM NEON/SVE intrinsics 对比
-- [ ] 自动向量化：如何编写编译器友好代码
-- [ ] 性能剖析：使用 Intel VTune 分析 SIMD 效率
-
 ---
 
 *最后更新: 2026-05-10*

@@ -340,13 +340,6 @@ Jack OS              Newlib / 裸机运行时
 - **RISC-V Reader**: 开源 ISA 的权威入门
 - **"Programming from the Ground Up"** (Jonathan Bartlett): x86 汇编与系统编程
 
-## 待补充内容
-
-- [ ] Verilog/VHDL 实现版本（用于 FPGA 验证）
-- [ ] RISC-V 版本的完整替代方案
-- [ ] 性能基准测试（Hack vs RISC-V）
-- [ ] 调试器实现（单步执行、断点）
-
 ---
 
 *最后更新: 2026-05-10*

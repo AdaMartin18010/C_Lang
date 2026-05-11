@@ -1864,7 +1864,7 @@ function attack() {
 
 | 文档 | 路径 | 关联内容 |
 |:-----|:-----|:---------|
-| **SEMANTIC_NOTATIONS.md** | [./SEMANTIC_NOTATIONS.md](./SEMANTIC_NOTATIONS.md) | 符号标准 |
+| **SEMANTIC_NOTATIONS.md** | ./SEMANTIC_NOTATIONS.md | 符号标准 |
 | **VERIFICATION_TOOLS.md** | [./VERIFICATION_TOOLS.md](./VERIFICATION_TOOLS.md) | 工具对比 |
 | **CASE_STUDY_TYPECHECKER.md** | [./CASE_STUDY_TYPECHECKER.md](./CASE_STUDY_TYPECHECKER.md) | 类型检查器验证 |
 | **APPLIED_CONCURRENT.md** | [./APPLIED_CONCURRENT.md](./APPLIED_CONCURRENT.md) | 并发语义 |

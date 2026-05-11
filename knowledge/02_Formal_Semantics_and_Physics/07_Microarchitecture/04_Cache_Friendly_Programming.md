@@ -222,13 +222,6 @@ for (int i = 0; i < n; i++)
 - **Intel 64 and IA-32 Optimization Reference Manual**: Cache optimization guidelines
 - **"What Every Programmer Should Know About Memory"** (Ulrich Drepper): 深入内存子系统
 
-## 待补充内容
-
-- [ ] NUMA 架构下的缓存友好编程
-- [ ] GPU 共享内存的缓存-like 优化
-- [ ] 非临时存储 (Non-temporal stores) 与流式数据
-- [ ] 缓存行大小探测与自适应算法
-
 ---
 
 *最后更新: 2026-05-10*

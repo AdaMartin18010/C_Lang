@@ -451,8 +451,8 @@ echo "=== 扫描完成，结果保存在当前目录 ==="
 - [GCC 15 Porting Guide](https://gcc.gnu.org/gcc-15/porting-to.html)
 - [GCC 15 Release Notes](https://gcc.gnu.org/gcc-15/changes.html)
 - [C23 标准 (ISO/IEC 9899:2024)](https://www.iso.org/standard/83616.html)
-- [C23/C2y 支持矩阵](../c_language_standards/C23_C2Y_SUPPORT_MATRIX.md)
-- [C23/C2y 标准演进路线图](../c_language_standards/C23_C2Y_ROADMAP.md)
+- C23/C2y 支持矩阵
+- C23/C2y 标准演进路线图
 - [glibc 2.43 C23/C2y 支持](glibc_2.43_C2y_Preview.md)
 - [musl 2.0 C23 支持](musl_2.0_C23.md)
 

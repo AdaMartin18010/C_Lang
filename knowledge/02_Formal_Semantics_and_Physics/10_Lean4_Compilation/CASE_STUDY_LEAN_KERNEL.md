@@ -1220,24 +1220,24 @@ def solveMetaVar : MetaM Unit := do
 
 ### 主要引用文档
 
-- **[SEMANTIC_NOTATIONS.md](./SEMANTIC_NOTATIONS.md)** - 语义学符号标准，本文档严格遵循的符号约定
-- **[SEMANTICS_UNIFIED_REVISED.md](./SEMANTICS_UNIFIED_REVISED.md)** - 三种语义学的统一框架
+- **SEMANTIC_NOTATIONS.md** - 语义学符号标准，本文档严格遵循的符号约定
+- **SEMANTICS_UNIFIED_REVISED.md** - 三种语义学的统一框架
 - **[LEAN4_SEMANTICS_MAPPING.md](./LEAN4_SEMANTICS_MAPPING.md)** - Lean 4语义映射详解
 - **[APPLIED_FUNCTIONAL.md](./APPLIED_FUNCTIONAL.md)** - 函数式语言应用语义
 - **[VERIFICATION_TOOLS.md](./VERIFICATION_TOOLS.md)** - 形式化验证工具
 
 ### 相关理论文档
 
-- **[Z1_MLTT_Complete.md](./Z1_MLTT_Complete.md)** - Martin-Löf类型理论完整理论
-- **[Z2_CoC_Complete.md](./Z2_CoC_Complete.md)** - 构造演算完整理论
+- **Z1_MLTT_Complete.md** - Martin-Löf类型理论完整理论
+- **Z2_CoC_Complete.md** - 构造演算完整理论
 - **[A1_Martin_Lof_Type_Theory.md](./A1_Martin_Lof_Type_Theory.md)** - Martin-Löf类型理论基础
 - **[A2_CoC_Proof_Erasure.md](./A2_CoC_Proof_Erasure.md)** - 构造演算与证明擦除
-- **[META_THEORY_FORMALIZATION.md](./META_THEORY_FORMALIZATION.md)** - 元理论形式化
+- **META_THEORY_FORMALIZATION.md** - 元理论形式化
 
 ### 应用文档
 
 - **[D1_Lean4_MetaM.md](./D1_Lean4_MetaM.md)** - MetaM元编程详解
-- **[Z8_MetaM_Monad_Architecture.md](./Z8_MetaM_Monad_Architecture.md)** - 元编程单子架构
+- **Z8_MetaM_Monad_Architecture.md** - 元编程单子架构
 - **[H1_Quotient_Types.md](./H1_Quotient_Types.md)** - 商类型深度分析
 - **[G2_Extraction_Verified_Code.md](./G2_Extraction_Verified_Code.md)** - 验证代码提取
 

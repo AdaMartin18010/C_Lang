@@ -1072,12 +1072,12 @@ handle₂(handle₁(op(p; κ)) with H₁) with H₂
 
 ### 前置依赖
 
-- **[SEMANTIC_NOTATIONS.md](./SEMANTIC_NOTATIONS.md)** — 符号标准与约定
-- **[CATEGORICAL_SEMANTICS.md](./CATEGORICAL_SEMANTICS.md)** — 范畴语义基础，特别是单子部分
+- **SEMANTIC_NOTATIONS.md** — 符号标准与约定
+- **CATEGORICAL_SEMANTICS.md** — 范畴语义基础，特别是单子部分
 
 ### 横向关联
 
-- **[SEMANTICS_UNIFIED_REVISED.md](./SEMANTICS_UNIFIED_REVISED.md)** — 统一语义框架
+- **SEMANTICS_UNIFIED_REVISED.md** — 统一语义框架
 - **[ADVANCED_SEMANTICS.md](./ADVANCED_SEMANTICS.md)** — 高级语义主题
 - **[BRIDGE_THEOREMS.md](./BRIDGE_THEOREMS.md)** — 桥梁定理
 

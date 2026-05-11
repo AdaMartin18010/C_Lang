@@ -485,8 +485,8 @@ theorem frame_rule {P Q R : HeapAssertion} {c : CCom}
 
 ## 8. 交叉引用
 
-- **[SEMANTIC_NOTATIONS.md](./SEMANTIC_NOTATIONS.md)** - 符号标准
-- **[SEMANTICS_UNIFIED_REVISED.md](./SEMANTICS_UNIFIED_REVISED.md)** - 统一语义框架
+- **SEMANTIC_NOTATIONS.md** - 符号标准
+- **SEMANTICS_UNIFIED_REVISED.md** - 统一语义框架
 - **[BRIDGE_THEOREMS.md](./BRIDGE_THEOREMS.md)** - 桥梁定理
 - **[EDGE_CASES.md](./EDGE_CASES.md)** - 边界情况
 

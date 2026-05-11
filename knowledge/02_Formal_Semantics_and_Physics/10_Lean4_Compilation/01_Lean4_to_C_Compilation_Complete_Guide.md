@@ -819,4 +819,109 @@ def myFunction := ...
 
 ---
 
+## 附录：编译案例研究
+
+> 以下案例展示 Lean 4 到 C 编译的具体形式和保持性。
+
+### 案例1：简单函数编译
+
+**Lean源程序**:
+
+```lean
+def add (x y : Nat) : Nat := x + y
+```
+
+**详细化结果**:
+
+```
+add : Nat → Nat → Nat
+add = λx:Nat. λy:Nat. Nat.add x y
+```
+
+**定理**: 编译后的C代码与Lean语义等价。
+
+**C输出**:
+
+```c
+lean_object* add(lean_object* x, lean_object* y) {
+    return lean_nat_add(x, y);
+}
+```
+
+### 案例2：依赖类型函数
+
+**Lean源程序**:
+
+```lean
+def vector_add {n : Nat} (v1 v2 : Vector Nat n) : Vector Nat n
+```
+
+**类型擦除**: 长度信息在运行时擦除，运行时表示与 `List` 相同。
+
+```c
+lean_object* vector_add(lean_object* v1, lean_object* v2) {
+    // 长度检查在编译时完成
+    return list_add(v1, v2);
+}
+```
+
+### 案例3：归纳证明提取
+
+**Lean源程序**:
+
+```lean
+theorem add_comm (n m : Nat) : n + m = m + n
+```
+
+**提取结果**: `Prop` 类型擦除，无代码生成。证明在编译时验证。
+
+### 案例4：高阶函数与闭包转换
+
+**Lean源程序**:
+
+```lean
+def map {α β : Type} (f : α → β) : List α → List β
+| [] => []
+| x::xs => f x :: map f xs
+```
+
+**定理**: 高阶函数转换为闭包表示。
+
+```c
+typedef struct {
+    lean_object* (*code)(lean_object* env, lean_object* arg);
+    lean_object* env;
+} closure_t;
+
+lean_object* map(closure_t* f, lean_object* xs) {
+    // 递归应用f
+}
+```
+
+### 案例5：FFI边界
+
+**Lean声明**:
+
+```lean
+@[extern "c_sqrt"]
+def sqrt (x : Float) : Float
+```
+
+**定理**: FFI调用保持类型安全。
+
+```c
+// C实现
+double c_sqrt(double x) {
+    return sqrt(x);
+}
+
+// Lean包装
+lean_object* lean_sqrt(lean_object* x) {
+    double r = c_sqrt(lean_float_to_double(x));
+    return lean_float_to_obj(r);
+}
+```
+
+---
+
 *Lean 4 的 C 代码生成机制使其成为连接形式化验证与系统级编程的桥梁，为高性能、高可靠性的软件开发提供了新的可能性。*

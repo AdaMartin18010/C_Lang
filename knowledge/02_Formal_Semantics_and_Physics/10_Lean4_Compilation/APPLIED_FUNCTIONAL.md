@@ -543,8 +543,8 @@ x ⇒ x                     M⇒M'    N⇒N'
 
 ## 8. 交叉引用
 
-- **[SEMANTIC_NOTATIONS.md](./SEMANTIC_NOTATIONS.md)** - 符号标准
-- **[SEMANTICS_UNIFIED_REVISED.md](./SEMANTICS_UNIFIED_REVISED.md)** - 统一框架
+- **SEMANTIC_NOTATIONS.md** - 符号标准
+- **SEMANTICS_UNIFIED_REVISED.md** - 统一框架
 - **[BRIDGE_THEOREMS.md](./BRIDGE_THEOREMS.md)** - 桥梁定理
 - **[LEAN4_SEMANTICS_MAPPING.md](./LEAN4_SEMANTICS_MAPPING.md)** - Lean映射
 - **[ADVANCED_SEMANTICS.md](./ADVANCED_SEMANTICS.md)** - 高级主题

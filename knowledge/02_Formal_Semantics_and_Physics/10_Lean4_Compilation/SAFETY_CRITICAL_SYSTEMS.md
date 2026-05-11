@@ -3,7 +3,7 @@
 > **层级定位**: 02 Formal Semantics and Physics / 10 Lean4 Compilation
 > **难度级别**: L6++++ (产业级安全认证深度)
 > **目标**: 建立安全关键领域的形式化语义框架，支持DO-178C、ISO 26262、IEC 62304等标准认证
-> **符号标准**: 严格遵循 [SEMANTIC_NOTATIONS.md](SEMANTIC_NOTATIONS.md)
+> **符号标准**: 严格遵循 SEMANTIC_NOTATIONS.md
 
 ---
 
@@ -1356,7 +1356,7 @@ def verify_system {System : Type}
 
 ### 符号标准
 
-- [SEMANTIC_NOTATIONS.md](SEMANTIC_NOTATIONS.md) - 本库语义学符号标准
+- SEMANTIC_NOTATIONS.md - 本库语义学符号标准
 - 本文档严格遵循上述符号标准中的操作语义和指称语义符号约定
 
 ### 运行时相关
@@ -1382,7 +1382,7 @@ def verify_system {System : Type}
 
 ### 形式化方法
 
-- [CASE_STUDIES_FORMALIZED.md](CASE_STUDIES_FORMALIZED.md) - 形式化案例研究
+- CASE_STUDIES_FORMALIZED.md - 形式化案例研究
 - [VERIFICATION_TOOLS.md](VERIFICATION_TOOLS.md) - 验证工具
 
 ---
