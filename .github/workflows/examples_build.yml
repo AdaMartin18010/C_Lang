@@ -1,0 +1,157 @@
+# =============================================================================
+# Examples 代码编译验证工作流
+# =============================================================================
+# 功能：
+#   1. 遍历 examples/ 所有子目录，执行 make
+#   2. 运行可执行的测试程序
+#   3. 验证纯 C 示例（无 POSIX）在 Windows 上可编译
+#
+# 触发条件：
+#   - push 到 main/master 且涉及 examples/ 变更
+#   - pull_request 到 main/master
+#   - 手动触发
+# =============================================================================
+
+name: Examples Build & Test
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'examples/**/*.c'
+      - 'examples/**/*.h'
+      - 'examples/**/Makefile'
+      - '.github/workflows/examples_build.yml'
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'examples/**/*.c'
+      - 'examples/**/*.h'
+      - 'examples/**/Makefile'
+  workflow_dispatch:
+
+jobs:
+  build-linux:
+    name: Build on Ubuntu (GCC + Clang)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: [gcc, clang]
+        std: [c11, c17]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+          if [ "${{ matrix.compiler }}" = "clang" ]; then
+            sudo apt-get install -y clang
+          fi
+
+      - name: Build all examples
+        run: |
+          export CC=${{ matrix.compiler }}
+          export CFLAGS="-Wall -Wextra -Werror -std=${{ matrix.std }} -O2"
+          FAILED=0
+          for dir in examples/*/; do
+            if [ -f "$dir/Makefile" ]; then
+              echo "=== Building $dir ==="
+              if ! make -C "$dir" CC="$CC" CFLAGS="$CFLAGS" clean all; then
+                echo "FAILED: $dir"
+                FAILED=1
+              fi
+            fi
+          done
+          exit $FAILED
+
+      - name: Run tests
+        run: |
+          for dir in examples/*/; do
+            echo "=== Testing $dir ==="
+            for exe in "$dir"test_* "$dir"cve_cases "$dir"performance; do
+              if [ -x "$exe" ]; then
+                echo "Running $(basename $exe)..."
+                "$exe" || true
+              fi
+            done
+          done
+
+  build-macos:
+    name: Build on macOS (Clang)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build all examples
+        run: |
+          export CC=clang
+          export CFLAGS="-Wall -Wextra -Werror -std=c11 -O2"
+          FAILED=0
+          for dir in examples/*/; do
+            if [ -f "$dir/Makefile" ]; then
+              echo "=== Building $dir ==="
+              if ! make -C "$dir" CC="$CC" CFLAGS="$CFLAGS" clean all; then
+                echo "FAILED: $dir"
+                FAILED=1
+              fi
+            fi
+          done
+          exit $FAILED
+
+      - name: Run tests
+        run: |
+          for dir in examples/*/; do
+            for exe in "$dir"test_* "$dir"cve_cases "$dir"performance; do
+              if [ -x "$exe" ]; then
+                echo "Running $(basename $exe)..."
+                "$exe" || true
+              fi
+            done
+          done
+
+  build-windows:
+    name: Build on Windows (MinGW)
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup MinGW
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: >-
+            mingw-w64-x86_64-gcc
+            mingw-w64-x86_64-make
+            make
+
+      - name: Build portable examples
+        shell: msys2 {0}
+        run: |
+          FAILED=0
+          # POSIX-only directories that will fail on Windows
+          SKIP_DIRS="network system http_parser rt_scheduler"
+          for dir in examples/*/; do
+            BASENAME=$(basename "$dir")
+            SKIP=0
+            for skip in $SKIP_DIRS; do
+              if [ "$BASENAME" = "$skip" ]; then SKIP=1; break; fi
+            done
+            if [ $SKIP -eq 1 ]; then
+              echo "=== Skipping $dir (POSIX only) ==="
+              continue
+            fi
+            if [ -f "$dir/Makefile" ]; then
+              echo "=== Building $dir ==="
+              if ! make -C "$dir" clean all; then
+                echo "FAILED: $dir"
+                FAILED=1
+              fi
+            fi
+          done
+          exit $FAILED

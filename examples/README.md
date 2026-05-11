@@ -17,6 +17,14 @@
 | `network/` | 网络编程 | 2 | select/epoll TCP服务器、客户端 |
 | `system/` | 系统编程 | 4 | mmap、信号、fork、epoll |
 | `misra_compliance/` | MISRA C:2023 | 4 | 类型安全、内存安全、控制流、函数安全 |
+| `arena_allocator/` | Arena 分配器 | 1 | 工业级内存池，bump-pointer 分配 |
+| `kv_store/` | KV 存储引擎 | 1 | 开放寻址哈希表，持久化，自动扩容 |
+| `http_parser/` | HTTP 协议解析器 | 1 | 状态机解析 + select HTTP 服务器 |
+| `rt_scheduler/` | 实时任务调度器 | 1 | RMS/EDF 调度 + 可调度性分析 |
+| `protocol_serializer/` | 协议序列化引擎 | 1 | VarInt + TLV 编码解码 |
+| `cve_cases/` | CVE 审计案例 | 1 | 缓冲区溢出、UAF、整数溢出 |
+| `performance/` | 性能优化案例 | 1 | 缓存行、分支预测、循环展开 |
+| `lock_free/` | 无锁数据结构 | 1 | SPSC Ring Buffer + 原子计数器 |
 | `assembler/` | 汇编 | - | 已有示例 |
 | `c23_c2y/` | C23/C2y | - | 已有示例 |
 | `interpreter/` | 解释器 | - | 已有示例 |

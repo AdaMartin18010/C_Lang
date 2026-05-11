@@ -45,7 +45,7 @@ Plugin *plugin_load_info(const char *path) {
         return NULL;
     }
     
-    PluginInfo *(*get_info)(void) = plugin_get_sym(h, "plugin_get_info");
+    PluginInfo *(*get_info)(void) = (PluginInfo *(*)(void))plugin_get_sym(h, "plugin_get_info");
     if (!get_info) {
         fprintf(stderr, "Missing plugin_get_info in %s\n", path);
         plugin_close(h);
