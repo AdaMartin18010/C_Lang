@@ -1,7 +1,7 @@
 # io_uring：现代Linux异步I/O深度指南
 
 > **标准**: Linux Kernel 5.1+ (基础), 6.10+ (send/recv bundles), 6.13+ (ring resizing, registered wait regions), 6.17+ (zero-copy RX)
-> **前置知识**: [POSIX网络编程](README.md), [C11原子操作](../../01_Core_Knowledge_System/14_Concurrency_Parallelism/README.md)
+> **前置知识**: [POSIX网络编程](04_DPDK_High_Performance_Networking.md), [C11原子操作](../../01_Core_Knowledge_System/14_Concurrency_Parallelism/README.md)
 > **后续延伸**: [DPDK内核旁路](../35_RDMA_Network/README.md), [高性能数据库I/O](../09_Database_Internals/01_B_Tree_Implementation_Case.md)
 > **对标资源**: Jens Axboe (io_uring作者), VLDB 2026, Linux Kernel文档, techbytes.app 2026
 > **难度**: 5/5 | **预计学习时间**: 6-8 小时

@@ -1,7 +1,7 @@
 # CN 验证工具链：基于分离逻辑的C程序形式化验证
 
 > **标准**: C11/C17/C23 (通过Cerberus语义), Separation Logic
-> **前置知识**: [分离逻辑基础](../11_CompCert_Verification/README.md), [Hoare逻辑](../../00_Core_Semantics_Foundations/03_Axiomatic_Semantics_Hoare.md), [操作语义](../00_Core_Semantics_Foundations/01_Operational_Semantics.md)
+> **前置知识**: [分离逻辑基础](../11_CompCert_Verification/README.md), [Hoare逻辑](../00_Core_Semantics_Foundations/03_Axiomatic_Semantics_Hoare.md), [操作语义](../00_Core_Semantics_Foundations/01_Operational_Semantics.md)
 > **后续延伸**: [Iris/CompCert C并发分离逻辑](../13_Formal_Methods/02_Coq_Proof_Assistant.md), [VST分离逻辑](../11_CompCert_Verification/02_VST_Separation_Logic_Practical.md)
 > **对标资源**: CN项目 (Imperial College), POPL 2023/2025/2026, PLDI 2026, Cerberus语义
 > **难度**: 6/5 | **预计学习时间**: 10-15 小时

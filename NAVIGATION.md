@@ -226,7 +226,7 @@
 
 #### 嵌入式开发
 
-→ [04_Industrial_Scenarios/01_Automotive_ECU/](knowledge/04_Industrial_Scenarios/01_Automotive_ECU/)
+→ [04_Industrial_Scenarios/02_Automotive_ECU/](knowledge/04_Industrial_Scenarios/02_Automotive_ECU/)
 
 #### 安全编码
 

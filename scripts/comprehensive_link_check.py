@@ -101,14 +101,34 @@ def scan_file(file_path: Path) -> List[LinkIssue]:
     lines = content.splitlines()
     rel_path = str(file_path.relative_to(PROJECT_ROOT))
 
+    # Track code block state
+    in_code_block = False
+
     # Find all markdown links
     for line_num, line in enumerate(lines, 1):
+        # Toggle code block state on fence lines
+        stripped = line.strip()
+        if stripped.startswith("```") or stripped.startswith("~~~"):
+            in_code_block = not in_code_block
+            continue
+        if stripped.startswith("    ") and not in_code_block:
+            # Indented code block (4 spaces), skip these lines
+            continue
+
+        # Skip links inside code blocks
+        if in_code_block:
+            continue
+
         for match in MD_LINK_PATTERN.finditer(line):
             link_text = match.group(1)
             link_target = match.group(2)
 
             # Skip external links (optional: could check HTTP status)
             if link_target.startswith(("http://", "https://", "mailto:", "tel:")):
+                continue
+
+            # Skip GitHub repository links (valid on GitHub but not locally)
+            if link_target.startswith(("../../issues", "../../discussions", "../../pulls")):
                 continue
 
             # Skip anchor-only links

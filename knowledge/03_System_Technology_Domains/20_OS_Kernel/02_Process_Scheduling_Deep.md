@@ -433,7 +433,7 @@ static int migrate_task(struct task_struct *p, int src_cpu, int dst_cpu)
 ### 后续延伸
 
 - [虚拟内存子系统](./03_Virtual_Memory_Subsystem.md)
-- [实时系统编程](../03_Embedded_Systems/04_Real_Time_Systems.md)
+- [实时系统编程](../../04_Industrial_Scenarios/01_Automotive_ABS/02_Hard_RealTime.md)
 
 ### 参考
 

@@ -18,6 +18,7 @@
 ## ✨ 主要特性
 
 ### 1. 交互式知识图谱
+
 - 使用 D3.js 力导向图可视化知识网络
 - 支持节点拖拽、缩放、平移
 - 点击查看节点详情
@@ -25,12 +26,14 @@
 - 关系线动画效果
 
 ### 2. 全文搜索与过滤
+
 - 实时搜索建议与自动完成
 - 支持按节点类型过滤（模块/主题/概念）
 - 支持按难度级别过滤（初级/中级/高级/专家）
 - 搜索结果高亮显示
 
 ### 3. 学习路径规划
+
 - 智能学习路径生成
 - 支持多种路径策略：
   - **最短路径**：最少节点到达目标
@@ -39,11 +42,13 @@
 - 路径可视化高亮
 
 ### 4. 响应式设计
+
 - 支持桌面端、平板、手机访问
 - 自适应布局
 - 深色/浅色主题切换
 
 ### 5. 现代化UI
+
 - 深色主题设计，护眼舒适
 - 流畅的动画过渡
 - 直观的操作反馈
@@ -54,6 +59,7 @@
 ### 本地运行
 
 #### 方式1：直接打开（最简单）
+
 ```bash
 # 进入项目目录
 cd e:\_src\C_Lang\web
@@ -63,6 +69,7 @@ cd e:\_src\C_Lang\web
 ```
 
 #### 方式2：使用本地服务器（推荐）
+
 使用 Python 启动本地服务器：
 
 ```bash
@@ -87,6 +94,7 @@ http-server -p 8080
 ```
 
 #### 方式3：使用 VS Code Live Server
+
 1. 在 VS Code 中安装 "Live Server" 扩展
 2. 右键点击 `index.html`
 3. 选择 "Open with Live Server"
@@ -96,6 +104,7 @@ http-server -p 8080
 ### 自动部署（推荐）
 
 1. **Fork 或克隆仓库到 GitHub**
+
    ```bash
    # 确保 web/ 目录在仓库根目录下
    git add web/
@@ -128,7 +137,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
@@ -174,6 +183,7 @@ web/
    - 更新元数据信息
 
 2. **节点数据结构**
+
    ```json
    {
      "id": "唯一标识符",
@@ -189,6 +199,7 @@ web/
    ```
 
 3. **关系数据结构**
+
    ```json
    {
      "source": "源节点ID",
@@ -220,11 +231,11 @@ python -m json.tool data/knowledge_graph.json > /dev/null && echo "Valid JSON"
   /* 背景色 */
   --bg-primary: #0d1117;
   --bg-secondary: #161b22;
-  
+
   /* 文字色 */
   --text-primary: #e6edf3;
   --text-secondary: #7d8590;
-  
+
   /* 节点颜色 */
   --color-module: #f78166;
   --color-topic: #a371f7;
@@ -273,7 +284,7 @@ python -m json.tool data/knowledge_graph.json > /dev/null && echo "Valid JSON"
 
 ## 📄 许可证
 
-本项目采用 [MIT 许可证](LICENSE)。
+本项目采用 [MIT 许可证](../LICENSE)。
 
 ## 🙏 致谢
 
@@ -291,5 +302,5 @@ python -m json.tool data/knowledge_graph.json > /dev/null && echo "Valid JSON"
 
 ---
 
-**知识库版本**: v4.0  
+**知识库版本**: v4.0
 **最后更新**: 2026-03-19

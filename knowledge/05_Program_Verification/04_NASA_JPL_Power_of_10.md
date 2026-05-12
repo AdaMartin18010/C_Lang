@@ -1,9 +1,9 @@
 # NASA JPL Power of 10：高可信C代码的10条铁律
 
-> **标准**: NASA JPL Laboratory for Reliable Software, 2006; 现代C23适配版  
-> **前置知识**: [静态分析基础](../../07_Modern_Toolchain/05_Static_Analysis_Tools.md), [错误处理](../../01_Core_Knowledge_System/21_Error_Handling/README.md)  
-> **后续延伸**: [形式化验证](../02_Formal_Semantics_and_Physics/05_Program_Verification/03_CN_Verification_Toolchain.md), [MISRA C](../../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md)  
-> **对标资源**: Gerard J. Holzmann "The Power of 10: Rules for Developing Safety-Critical Code" (IEEE Computer, 2006)  
+> **标准**: NASA JPL Laboratory for Reliable Software, 2006; 现代C23适配版
+> **前置知识**: [静态分析基础](../07_Modern_Toolchain/05_Static_Analysis_Tools.md), [错误处理](../01_Core_Knowledge_System/21_Error_Handling/README.md)
+> **后续延伸**: [形式化验证](../02_Formal_Semantics_and_Physics/05_Program_Verification/03_CN_Verification_Toolchain.md), [MISRA C](../01_Core_Knowledge_System/09_Safety_Standards/MISRA_C_2023/README.md)
+> **对标资源**: Gerard J. Holzmann "The Power of 10: Rules for Developing Safety-Critical Code" (IEEE Computer, 2006)
 > **难度**: 4/5 | **预计学习时间**: 4-6 小时
 
 ---
@@ -60,6 +60,7 @@
 **原文**：*Avoid complex flow constructs, such as goto and recursion.*
 
 **禁止**：
+
 - `goto`（错误处理除外）
 - `setjmp` / `longjmp`
 - 间接函数调用（函数指针）
@@ -76,16 +77,16 @@ int process_data(const char *filename) {
     FILE *fp = NULL;
     char *buffer = NULL;
     int result = -1;
-    
+
     fp = fopen(filename, "r");
     if (fp == NULL) goto cleanup;  // 允许：goto到单一退出点
-    
+
     buffer = malloc(BUF_SIZE);
     if (buffer == NULL) goto cleanup;
-    
+
     // 处理数据...
     result = 0;
-    
+
 cleanup:
     if (buffer) free(buffer);
     if (fp) fclose(fp);
@@ -134,6 +135,7 @@ int factorial_iterative(int n) {
 **原文**：*All loops must have a fixed upper bound. It must be trivially possible for a checking tool to prove that the bound is never exceeded.*
 
 **核心要求**：
+
 - 每个函数 ≤ 60行（Holzmann原始定义）
 - 所有循环必须有**固定上界**
 - 上界必须可以通过**静态分析**证明不会超限
@@ -184,7 +186,7 @@ static int validate_header(const packet_header_t *hdr) {
 static int process_payload(const uint8_t *data, size_t len) {
     assert(data != NULL);
     assert(len <= MAX_PACKET_SIZE);  // 规则6：断言
-    
+
     for (size_t i = 0; i < len; i++) {
         assert(i < len);  // 规则3：循环断言
         data[i] = transform_byte(data[i]);
@@ -194,10 +196,10 @@ static int process_payload(const uint8_t *data, size_t len) {
 
 int process_packet(const packet_t *pkt) {
     assert(pkt != NULL);  // 规则6
-    
+
     int rc = validate_header(&pkt->header);
     if (rc != 0) return rc;
-    
+
     return process_payload(pkt->data, pkt->header.length);
 }  // 每个函数都 ≤ 60行
 ```
@@ -209,6 +211,7 @@ int process_packet(const packet_t *pkt) {
 **原文**：*All loops must be formally verifiable. At least two assertions are required in every loop.*
 
 **断言类型**：
+
 1. **进入断言**（Entry assertion）：循环开始时必须为真的条件
 2. **退出断言**（Exit assertion）：循环结束时保证为真的条件
 
@@ -218,30 +221,30 @@ int find_first_positive(const int arr[], size_t n, size_t *result) {
     assert(arr != NULL);      // 前置条件
     assert(n <= MAX_ARRAY_SIZE);
     assert(result != NULL);
-    
+
     int found = 0;
     size_t i = 0;
-    
+
     // 进入断言：i从0开始，尚未找到正数
     assert(i == 0);
     assert(found == 0);
-    
+
     while (i < n) {  // 上界固定
         // 不变量：在[0, i)范围内没有找到正数
         assert(i <= n);           // 断言1：索引不越界
         assert(found == 0);       // 断言2：尚未找到
-        
+
         if (arr[i] > 0) {
             *result = i;
             found = 1;
             break;
         }
-        
+
         // 维护不变量
         assert(arr[i] <= 0);      // 当前元素非正
         i++;
     }
-    
+
     // 退出断言
     assert(i <= n);
     if (found) {
@@ -250,7 +253,7 @@ int find_first_positive(const int arr[], size_t n, size_t *result) {
     } else {
         assert(i == n);            // 遍历了所有元素
     }
-    
+
     return found;
 }
 ```
@@ -262,6 +265,7 @@ int find_first_positive(const int arr[], size_t n, size_t *result) {
 **原文**：*The data scope of each function should be as small as possible.*
 
 **要求**：
+
 - 变量声明在最内层作用域
 - 禁止使用全局变量（除非真正必要）
 - 静态局部变量视为全局变量（状态共享）
@@ -292,11 +296,11 @@ static const size_t MAX_CONNECTIONS = 1024;  // 配置常量
 void process_connection(state_t *state, int *id_counter) {
     assert(state != NULL);
     assert(id_counter != NULL);
-    
+
     int id = get_next_id(id_counter);
     assert(id >= 0);
     assert((size_t)id < MAX_CONNECTIONS);
-    
+
     state->connections[id].active = 1;
 }
 ```
@@ -308,6 +312,7 @@ void process_connection(state_t *state, int *id_counter) {
 **原文**：*No function should be longer than what can be printed on a single sheet of paper (60 lines). Functions should have a low number of parameters (ideally ≤ 4).*
 
 **扩展规则**：
+
 - 调用链深度 ≤ 10
 - 每个函数的参数 ≤ 4（理想情况）
 - 避免深层嵌套调用
@@ -322,16 +327,16 @@ void process(void) {
 void process_flat(void) {
     stream_t *s = open_stream("input.txt");
     assert(s != NULL);
-    
+
     buffer_t buf = read_file(s);
     assert(buf.data != NULL);
-    
+
     config_t cfg = parse_input(&buf);
     assert(cfg.valid);
-    
+
     int rc = configure(&cfg);
     assert(rc == 0);
-    
+
     rc = validate(&cfg);
     assert(rc == 0);
 }
@@ -382,26 +387,26 @@ int process_buffer(uint8_t *buf, size_t len, size_t offset) {
     assert(len > 0);                  // 前置条件 2
     assert(len <= MAX_BUFFER_SIZE);   // 边界检查 3
     assert(offset < len);             // 边界检查 4
-    
+
     size_t processed = 0;
-    
+
     for (size_t i = offset; i < len; i++) {
         assert(i < len);              // 循环不变量 5
         assert(processed <= i);       // 状态检查 6
-        
+
         uint8_t byte = buf[i];
         assert(byte == buf[i]);       // 读取一致性（看似冗余，但用于形式验证）
-        
+
         if (byte == DELIMITER) {
             assert(processed > 0);    // 后置条件 7
             break;
         }
-        
+
         buf[i] = transform(byte);
         assert(buf[i] == transform(byte));  // 写入验证 8
         processed++;
     }
-    
+
     assert(processed <= len - offset);  // 后置条件 9
     return (int)processed;
 }  // 约30行代码，9个断言 ≈ 30% 密度
@@ -427,6 +432,7 @@ int process_buffer(uint8_t *buf, size_t len, size_t offset) {
 **原文**：*The declaration of data objects should be as local as possible.*
 
 **要求**：
+
 - 每个模块（文件）的数据声明 ≤ 60行
 - 优先使用局部变量
 - 全局数据需要显式理由
@@ -462,12 +468,14 @@ static struct {
 **原文**：*The use of the preprocessor must be limited to the inclusion of header files and simple macro definitions.*
 
 **禁止**：
+
 - 带参数的宏（函数式宏）
 - 条件编译 `#ifdef` 业务逻辑
 - 多语句宏
 - `##` 和 `#` 操作符（除非必要）
 
 **允许**：
+
 - `#include`
 - 简单常量定义：`#define MAX_SIZE 1024`
 - 类型别名（C23中优先用 `typedef` / `using`）
@@ -518,11 +526,13 @@ static inline int init_buffer(void **buf, size_t size) {
 **原文**：*The use of pointers should be restricted. Specifically, no more than one level of dereferencing is allowed.*
 
 **禁止**：
+
 - 多级指针（`int **pp`）
 - 函数指针
 - 隐式别名（通过不同指针访问同一内存）
 
 **允许**：
+
 - 单级指针（`int *p`）
 - 数组（退化后等价于指针，但语义更清晰）
 - `const` 指针参数
@@ -541,7 +551,7 @@ void process_matrix(int **matrix, size_t rows, size_t cols) {
 void process_matrix_flat(int matrix[], size_t rows, size_t cols) {
     assert(matrix != NULL);
     assert(rows * cols <= MAX_MATRIX_SIZE);
-    
+
     for (size_t i = 0; i < rows; i++) {
         for (size_t j = 0; j < cols; j++) {
             size_t idx = i * cols + j;
@@ -551,7 +561,6 @@ void process_matrix_flat(int matrix[], size_t rows, size_t cols) {
     }
 }
 
-```c
 // ❌ 禁止：函数指针（动态分派不可静态验证）
 typedef int (*handler_t)(int, int);
 handler_t op_table[] = {add, sub, mul, div};
@@ -563,7 +572,7 @@ int compute(int opcode, int a, int b) {
         case OP_ADD: return add(a, b);
         case OP_SUB: return sub(a, b);
         case OP_MUL: return mul(a, b);
-        case OP_DIV: 
+        case OP_DIV:
             assert(b != 0);  // 除零检查
             return div(a, b);
         default:
@@ -689,6 +698,7 @@ void process_opcode(int opcode) {
 | **验证方式** | 形式验证 + 人工审查 | 静态分析工具 |
 
 **互补性**：
+
 - **Power of 10** 是**设计哲学**："让代码简单到可以被证明"
 - **MISRA C** 是**编码规范**："减少已知错误模式"
 - 建议：**Power of 10用于架构层**，**MISRA C用于实现层**
@@ -740,7 +750,7 @@ class PowerOf10Checker:
         self.content = self.filepath.read_text()
         self.lines = self.content.split('\n')
         self.issues = []
-    
+
     def check_rule_2_function_length(self):
         """规则2：函数 ≤ 60行"""
         func_pattern = re.compile(r'^[\w\s*]+\w+\s*\([^)]*\)\s*\{', re.MULTILINE)
@@ -756,7 +766,7 @@ class PowerOf10Checker:
             length = end_line - start_line + 1
             if length > 60:
                 self.issues.append(f"规则2违规：函数从第{start_line+1}行起，长度{length}行 > 60")
-    
+
     def check_rule_6_assert_density(self):
         """规则6：断言密度 ≥ 2%"""
         code_lines = [l for l in self.lines if l.strip() and not l.strip().startswith('//')]
@@ -765,7 +775,7 @@ class PowerOf10Checker:
         density = (asserts / total * 100) if total else 0
         if density < 2:
             self.issues.append(f"规则6违规：断言密度 {density:.1f}% < 2% ({asserts}/{total})")
-    
+
     def check_rule_8_macros(self):
         """规则8：禁止函数式宏"""
         macro_pattern = re.compile(r'#define\s+\w+\s*\([^)]*\)')
@@ -774,14 +784,14 @@ class PowerOf10Checker:
                 # 排除常见例外
                 if 'ARRAY_SIZE' not in line and 'CONTAINER_OF' not in line:
                     self.issues.append(f"规则8违规：第{i}行存在函数式宏")
-    
+
     def check_rule_9_pointers(self):
         """规则9：禁止多级指针"""
         for i, line in enumerate(self.lines, 1):
             # 匹配 int **p, char ***buf 等
             if re.search(r'\b\w+\s+\*\*\s*\w', line):
                 self.issues.append(f"规则9违规：第{i}行存在多级指针")
-    
+
     def run_all_checks(self):
         self.check_rule_2_function_length()
         self.check_rule_6_assert_density()
@@ -793,10 +803,10 @@ def main():
     if len(sys.argv) < 2:
         print(f"Usage: {sys.argv[0]} <c-file>")
         sys.exit(1)
-    
+
     checker = PowerOf10Checker(sys.argv[1])
     issues = checker.run_all_checks()
-    
+
     print(f"\n=== Power of 10 检查报告: {sys.argv[1]} ===")
     if issues:
         for issue in issues:
@@ -862,7 +872,7 @@ Phase 4: 形式化验证（可选）
 | 资源 | 说明 |
 |:-----|:-----|
 | Holzmann, G.J. "The Power of 10: Rules for Developing Safety-Critical Code." *IEEE Computer*, June 2006. | 原始论文 |
-| NASA/JPL Laboratory for Reliable Software | https://lars-lab.jpl.nasa.gov/ |
+| NASA/JPL Laboratory for Reliable Software | <https://lars-lab.jpl.nasa.gov/> |
 
 ### 8.2 现代应用
 

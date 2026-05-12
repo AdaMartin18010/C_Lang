@@ -300,7 +300,7 @@ knowledge/
 - [项目导航](NAVIGATION.md) - 详细导航指南
 - [版本历史](CHANGELOG.md) - 完整更新记录
 - [贡献指南](CONTRIBUTING.md) - 参与项目
-- [维护报告](maintenance_report.md) - 最新维护状态
+- [维护报告](#) - 最新维护状态
 - [历史报告存档](archive/reports/) - 过往报告
 
 ---
