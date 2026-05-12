@@ -38,7 +38,7 @@ jobs:
       fail-fast: false
       matrix:
         compiler: [gcc, clang]
-        std: [c11, c17]
+        std: [c11, c17, c23]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -69,15 +69,14 @@ jobs:
 
       - name: Run tests
         run: |
-          for dir in examples/*/; do
-            echo "=== Testing $dir ==="
-            for exe in "$dir"test_* "$dir"cve_cases "$dir"performance; do
-              if [ -x "$exe" ]; then
-                echo "Running $(basename $exe)..."
-                "$exe" || true
-              fi
-            done
-          done
+          python scripts/test_all_examples.py --report test_report_linux_${{ matrix.compiler }}_${{ matrix.std }}.json
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-linux-${{ matrix.compiler }}-${{ matrix.std }}
+          path: test_report_linux_*.json
 
   build-macos:
     name: Build on macOS (Clang)
