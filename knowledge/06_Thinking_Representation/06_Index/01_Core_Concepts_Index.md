@@ -1,8 +1,15 @@
+# 核心概念索引
+
+> **类型**: 索引文档
+> **位置**: `knowledge/06_Thinking_Representation/06_Index/01_Core_Concepts_Index.md`
+> **描述**: C语言核心概念按字母排序索引，包含概念定义、文档位置映射和相关概念交叉引用
+
 ---
 
 ## 🔗 文档关联
 
 ### 核心关联
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
@@ -12,6 +19,7 @@
 | [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
 
 ### 扩展阅读
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [软件工程](../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
@@ -19,52 +27,52 @@
 | [系统技术](../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
 | [工业场景](../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
 | [思维表征](../README.md) | 核心关联 | 思维表征基础 |
-﻿# 核心概念索引
 
-> **类型**: 索引文档
-> **位置**: `knowledge/06_Thinking_Representation/06_Index/01_Core_Concepts_Index.md`
-> **描述**: C语言核心概念按字母排序索引，包含概念定义、文档位置映射和相关概念交叉引用
 
 ---
 
 ## 索引目录
 
-- [索引目录](#索引目录)
-- [📑 目录](#-目录)
-- [A-D](#a-d)
-  - [数组 (Array)](#数组-array)
-  - [作用域 (Scope)](#作用域-scope)
-  - [常量 (Constant)](#常量-constant)
-  - [类型转换 (Type Conversion)](#类型转换-type-conversion)
-- [E-H](#e-h)
-  - [枚举 (Enumeration)](#枚举-enumeration)
-  - [表达式 (Expression)](#表达式-expression)
-  - [函数 (Function)](#函数-function)
-  - [头文件 (Header File)](#头文件-header-file)
-- [I-L](#i-l)
-  - [整型 (Integer)](#整型-integer)
-  - [生命周期 (Lifetime)](#生命周期-lifetime)
-  - [链接属性 (Linkage)](#链接属性-linkage)
-- [M-P](#m-p)
-  - [宏 (Macro)](#宏-macro)
-  - [内存对齐 (Memory Alignment)](#内存对齐-memory-alignment)
-  - [指针 (Pointer)](#指针-pointer)
-  - [结构体 (Structure)](#结构体-structure)
-- [Q-T](#q-t)
-  - [存储类 (Storage Class)](#存储类-storage-class)
-  - [类型限定符 (Type Qualifier)](#类型限定符-type-qualifier)
-  - [类型定义 (Typedef)](#类型定义-typedef)
-- [U-Z](#u-z)
-  - [联合体 (Union)](#联合体-union)
-  - [位域 (Bit Field)](#位域-bit-field)
-  - [变量 (Variable)](#变量-variable)
-- [概念关系图](#概念关系图)
-- [快速查找表](#快速查找表)
-- [学习路径建议](#学习路径建议)
-- [深入理解](#深入理解)
-  - [核心原理](#核心原理)
-  - [实践应用](#实践应用)
-  - [最佳实践](#最佳实践)
+- [核心概念索引](#核心概念索引)
+  - [🔗 文档关联](#-文档关联)
+    - [核心关联](#核心关联)
+    - [扩展阅读](#扩展阅读)
+  - [索引目录](#索引目录)
+  - [📑 目录](#-目录)
+  - [A-D](#a-d)
+    - [数组 (Array)](#数组-array)
+    - [作用域 (Scope)](#作用域-scope)
+    - [常量 (Constant)](#常量-constant)
+    - [类型转换 (Type Conversion)](#类型转换-type-conversion)
+  - [E-H](#e-h)
+    - [枚举 (Enumeration)](#枚举-enumeration)
+    - [表达式 (Expression)](#表达式-expression)
+    - [函数 (Function)](#函数-function)
+    - [头文件 (Header File)](#头文件-header-file)
+  - [I-L](#i-l)
+    - [整型 (Integer)](#整型-integer)
+    - [生命周期 (Lifetime)](#生命周期-lifetime)
+    - [链接属性 (Linkage)](#链接属性-linkage)
+  - [M-P](#m-p)
+    - [宏 (Macro)](#宏-macro)
+    - [内存对齐 (Memory Alignment)](#内存对齐-memory-alignment)
+    - [指针 (Pointer)](#指针-pointer)
+    - [结构体 (Structure)](#结构体-structure)
+  - [Q-T](#q-t)
+    - [存储类 (Storage Class)](#存储类-storage-class)
+    - [类型限定符 (Type Qualifier)](#类型限定符-type-qualifier)
+    - [类型定义 (Typedef)](#类型定义-typedef)
+  - [U-Z](#u-z)
+    - [联合体 (Union)](#联合体-union)
+    - [位域 (Bit Field)](#位域-bit-field)
+    - [变量 (Variable)](#变量-variable)
+  - [概念关系图](#概念关系图)
+  - [快速查找表](#快速查找表)
+  - [学习路径建议](#学习路径建议)
+  - [深入理解](#深入理解)
+    - [核心原理](#核心原理)
+    - [实践应用](#实践应用)
+    - [最佳实践](#最佳实践)
 
 ---
 
@@ -73,42 +81,46 @@
 
 ## 📑 目录
 
-- [索引目录](#索引目录)
-- [📑 目录](#-目录)
-- [A-D](#a-d)
-  - [数组 (Array)](#数组-array)
-  - [作用域 (Scope)](#作用域-scope)
-  - [常量 (Constant)](#常量-constant)
-  - [类型转换 (Type Conversion)](#类型转换-type-conversion)
-- [E-H](#e-h)
-  - [枚举 (Enumeration)](#枚举-enumeration)
-  - [表达式 (Expression)](#表达式-expression)
-  - [函数 (Function)](#函数-function)
-  - [头文件 (Header File)](#头文件-header-file)
-- [I-L](#i-l)
-  - [整型 (Integer)](#整型-integer)
-  - [生命周期 (Lifetime)](#生命周期-lifetime)
-  - [链接属性 (Linkage)](#链接属性-linkage)
-- [M-P](#m-p)
-  - [宏 (Macro)](#宏-macro)
-  - [内存对齐 (Memory Alignment)](#内存对齐-memory-alignment)
-  - [指针 (Pointer)](#指针-pointer)
-  - [结构体 (Structure)](#结构体-structure)
-- [Q-T](#q-t)
-  - [存储类 (Storage Class)](#存储类-storage-class)
-  - [类型限定符 (Type Qualifier)](#类型限定符-type-qualifier)
-  - [类型定义 (Typedef)](#类型定义-typedef)
-- [U-Z](#u-z)
-  - [联合体 (Union)](#联合体-union)
-  - [位域 (Bit Field)](#位域-bit-field)
-  - [变量 (Variable)](#变量-variable)
-- [概念关系图](#概念关系图)
-- [快速查找表](#快速查找表)
-- [学习路径建议](#学习路径建议)
-- [深入理解](#深入理解)
-  - [核心原理](#核心原理)
-  - [实践应用](#实践应用)
-  - [最佳实践](#最佳实践)
+- [核心概念索引](#核心概念索引)
+  - [🔗 文档关联](#-文档关联)
+    - [核心关联](#核心关联)
+    - [扩展阅读](#扩展阅读)
+  - [索引目录](#索引目录)
+  - [📑 目录](#-目录)
+  - [A-D](#a-d)
+    - [数组 (Array)](#数组-array)
+    - [作用域 (Scope)](#作用域-scope)
+    - [常量 (Constant)](#常量-constant)
+    - [类型转换 (Type Conversion)](#类型转换-type-conversion)
+  - [E-H](#e-h)
+    - [枚举 (Enumeration)](#枚举-enumeration)
+    - [表达式 (Expression)](#表达式-expression)
+    - [函数 (Function)](#函数-function)
+    - [头文件 (Header File)](#头文件-header-file)
+  - [I-L](#i-l)
+    - [整型 (Integer)](#整型-integer)
+    - [生命周期 (Lifetime)](#生命周期-lifetime)
+    - [链接属性 (Linkage)](#链接属性-linkage)
+  - [M-P](#m-p)
+    - [宏 (Macro)](#宏-macro)
+    - [内存对齐 (Memory Alignment)](#内存对齐-memory-alignment)
+    - [指针 (Pointer)](#指针-pointer)
+    - [结构体 (Structure)](#结构体-structure)
+  - [Q-T](#q-t)
+    - [存储类 (Storage Class)](#存储类-storage-class)
+    - [类型限定符 (Type Qualifier)](#类型限定符-type-qualifier)
+    - [类型定义 (Typedef)](#类型定义-typedef)
+  - [U-Z](#u-z)
+    - [联合体 (Union)](#联合体-union)
+    - [位域 (Bit Field)](#位域-bit-field)
+    - [变量 (Variable)](#变量-variable)
+  - [概念关系图](#概念关系图)
+  - [快速查找表](#快速查找表)
+  - [学习路径建议](#学习路径建议)
+  - [深入理解](#深入理解)
+    - [核心原理](#核心原理)
+    - [实践应用](#实践应用)
+    - [最佳实践](#最佳实践)
 
 
 ---

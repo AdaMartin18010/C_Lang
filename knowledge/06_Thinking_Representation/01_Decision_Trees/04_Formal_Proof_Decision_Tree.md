@@ -1,8 +1,11 @@
+# 公理定理证明推理决策树
+
 ---
 
 ## 🔗 文档关联
 
 ### 核心关联
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [内存管理](../../01_Core_Knowledge_System/02_Core_Layer/02_Memory_Management.md) | 核心关联 | 内存管理基础 |
@@ -12,6 +15,7 @@
 | [数组与指针](../../01_Core_Knowledge_System/02_Core_Layer/05_Arrays_Pointers.md) | 核心关联 | 数组与指针基础 |
 
 ### 扩展阅读
+
 | 文档 | 关系类型 | 说明 |
 |:-----|:---------|:-----|
 | [软件工程](../../01_Core_Knowledge_System/05_Engineering_Layer/README.md) | 核心关联 | 软件工程基础 |
@@ -19,7 +23,7 @@
 | [系统技术](../../03_System_Technology_Domains/README.md) | 核心关联 | 系统技术基础 |
 | [工业场景](../../04_Industrial_Scenarios/README.md) | 核心关联 | 工业场景基础 |
 | [思维表征](../README.md) | 核心关联 | 思维表征基础 |
-﻿# 公理定理证明推理决策树
+
 
 ## 1. 决策树使用指南
 

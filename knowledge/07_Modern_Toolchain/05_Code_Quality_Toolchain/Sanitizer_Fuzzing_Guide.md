@@ -126,6 +126,7 @@ allocated by thread T0 here:
 ```
 
 **关键信息**:
+
 - 错误类型: `heap-buffer-overflow`
 - 操作: `WRITE of size 4`
 - 位置: `main.c:42:5`
@@ -291,8 +292,9 @@ clang -fsanitize=thread -g -O1 threaded_program.c -o threaded_program -pthread
 ### 5.3 与 ASan 的关系
 
 > ⚠️ **TSan 和 ASan 不能同时使用！**
-> 
+>
 > 建议分开运行：
+>
 > - 开发阶段：ASan + UBSan（单线程测试）
 > - 并发测试：TSan（专门阶段）
 
@@ -313,7 +315,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Build with ASan + UBSan
         run: |
           export CC=clang
@@ -322,7 +324,7 @@ jobs:
                          -fno-sanitize-recover=all \
                          -g -O1"
           make clean && make
-      
+
       - name: Run tests
         run: |
           ASAN_OPTIONS=detect_leaks=1:abort_on_error=1 \
@@ -333,13 +335,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Build with TSan
         run: |
           export CC=clang
           export CFLAGS="-fsanitize=thread -g -O1"
           make clean && make
-      
+
       - name: Run threaded tests
         run: make test-threaded
 ```
@@ -435,7 +437,7 @@ afl-fuzz -i in -o out -S worker2 ./fuzz_parser &
 // 自定义变异器示例：确保输入是有效的 TLV 结构
 extern "C" size_t LLVMFuzzerCustomMutator(
     uint8_t *data, size_t max_size, unsigned int seed) {
-    
+
     // 1. 尝试解析现有输入
     TLV tlv;
     if (tlv_parse(data, max_size, &tlv)) {
@@ -443,7 +445,7 @@ extern "C" size_t LLVMFuzzerCustomMutator(
         tlv_mutate(&tlv, seed);
         return tlv_serialize(&tlv, data, max_size);
     }
-    
+
     // 3. 回退：生成最小合法输入
     return tlv_generate_minimal(data, max_size);
 }
